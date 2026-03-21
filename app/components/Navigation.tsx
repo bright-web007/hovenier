@@ -34,8 +34,23 @@ export default function Navigation({ locale, translations = {} }: NavigationProp
   
   const toggleLanguage = (newLocale: string) => {
     if (newLocale !== locale) {
-      const path = window.location.pathname;
-      const newPath = path.replace(`/${locale}`, `/${newLocale}`);
+      const currentPath = window.location.pathname;
+      let newPath = '';
+      
+      if (locale === 'nl') {
+        // Currently on Dutch (no prefix), switching to English
+        newPath = newLocale === 'en' ? `/en${currentPath}` : currentPath;
+      } else {
+        // Currently on English (/en prefix), switching to Dutch
+        if (newLocale === 'nl') {
+          // Remove /en prefix for Dutch
+          newPath = currentPath.replace(/^\/en/, '') || '/';
+        } else {
+          // Switch to another non-default locale
+          newPath = currentPath.replace(`/${locale}`, `/${newLocale}`);
+        }
+      }
+      
       router.push(newPath);
     }
   };

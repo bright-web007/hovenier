@@ -172,6 +172,7 @@ export default async function HomePage({ params }: Props) {
               <ServiceCard
                 title="Groendaken"
                 description="Duurzame groendaken voor een betere leefomgeving. Isolatie, waterberging en biodiversiteit in één."
+                imageUrl="/images/green-roof.png"
                 href="/services/groendaken"
                 features={[
                   'Waterafvoer optimalisering',

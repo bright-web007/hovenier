@@ -1,3 +1,5 @@
+'use client';
+
 export default function OfflinePage() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
@@ -81,10 +83,4 @@ export default function OfflinePage() {
       </div>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  return {
-    props: {},
-  };
 }

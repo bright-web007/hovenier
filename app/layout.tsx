@@ -90,17 +90,12 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-  params
+  children
 }: {
   children: React.ReactNode;
-  params: { locale: string };
 }) {
-  const locale = params?.locale || defaultLocale;
-  if (!locales.includes(locale)) notFound();
-  
   return (
-    <html lang={locale}>
+    <html lang="nl">
       <head>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || ''} />
         

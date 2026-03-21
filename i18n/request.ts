@@ -12,6 +12,7 @@ export default getRequestConfig(async ({ locale }) => {
   
   try {
     return {
+      locale: locale as string,
       messages: (await import(`../locales/${locale}/common.json`)).default,
       timeZone: 'Europe/Amsterdam',
       now: new Date(),
@@ -29,6 +30,7 @@ export default getRequestConfig(async ({ locale }) => {
     // Fallback to empty messages if locale file doesn't exist  
     console.error(`Failed to load messages for locale ${locale}:`, error);
     return {
+      locale: locale as string,
       messages: {},
       timeZone: 'Europe/Amsterdam',
       now: new Date()

@@ -171,8 +171,6 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality 
             onSuccess={setTurnstileToken}
             onError={() => setTurnstileToken(null)}
             onExpire={() => setTurnstileToken(null)}
-            theme="light"
-            size="normal"
           />
         </div>
         

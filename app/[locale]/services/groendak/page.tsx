@@ -177,11 +177,11 @@ export default async function GroendakPage({ params }: Props) {
             <div className="service-hero">
               <div className="service-hero-content">
                 <div className="service-hero-image">
-                  <div className="service-hero-image-placeholder">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="service-hero-icon">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                    </svg>
-                  </div>
+                  <img 
+                    src="/images/green-roof.png" 
+                    alt="Professioneel groendak aangelegd in Friesland"
+                    className="service-hero-image-photo"
+                  />
                 </div>
                 <div className="service-hero-text">
                   <h1 className="service-hero-title">Groendaken in Friesland</h1>

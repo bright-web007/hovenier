@@ -4,11 +4,11 @@ import Navigation from '../../components/Navigation';
 
 export default function ServicesPage({ params }: { params: { locale: string } }) {
   const locale = params?.locale || defaultLocale;
-  if (!locales.includes(locale)) notFound();
-  const t = getTranslator(locale);
+  if (!locales.includes(locale as any)) notFound();
+  const t = getTranslator(locale as "nl" | "en");
   return (
     <main>
-      <Navigation t={t} locale={locale} />
+      <Navigation locale={locale as "nl" | "en"} />
       <h1>{t('services')}</h1>
       <p>Service overview and cards will go here.</p>
     </main>

@@ -15,6 +15,19 @@ export const metadata: Metadata = {
 
 export default function TuinonderhoudKostenPage({ params: { locale } }: Props) {
   setRequestLocale(locale)
+  
+  // Simple translations for the form
+  const formTranslations = {
+    form_eyebrow: "Gratis Offerte",
+    form_title: "Vraag direct een offerte aan",
+    form_subtitle: "Ontvang binnen 24 uur contact van lokale tuinspecialisten",
+    your_name: "Uw naam",
+    municipality: "Gemeente",
+    service: "Gewenste dienst",
+    phone_number: "Telefoonnummer",
+    send_request: "Verstuur aanvraag",
+    form_note: "Door het versturen van dit formulier gaat u akkoord met onze voorwaarden."
+  }
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-sage-50 to-forest-50">
@@ -350,8 +363,8 @@ export default function TuinonderhoudKostenPage({ params: { locale } }: Props) {
               Krijg binnen 24 uur contact van tot 3 hoveniers voor een passend onderhoudscontract
             </p>
             <NewLeadForm 
-              initialService="tuinonderhoud"
-              className="space-y-4"
+              translations={formTranslations}
+              locale={locale}
             />
           </div>
         </section>

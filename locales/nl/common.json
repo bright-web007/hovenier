@@ -1,0 +1,120 @@
+{
+  "welcome": "Welkom bij Hovenier!",
+  "lead_form": "Leadformulier",
+  "services": "Diensten",
+  "articles": "Artikelen",
+  "gardeners": "Hoveniers",
+  "regions": "Regio's",
+  "inspiration": "Inspiratie",
+  "request_quote": "Offerte aanvragen",
+  "name": "Naam",
+  "email": "E-mail",
+  "message": "Bericht",
+  "submit": "Verzenden",
+  "form_success": "Bedankt! Je bericht is ontvangen.",
+  "hero_eyebrow": "Friesland's hoveniersgids",
+  "hero_title": "Uw droomtuin begint met de juiste hovenier",
+  "hero_subtitle": "Vakkundige hoveniers in uw regio, zorgvuldig geselecteerd. Van tuinonderhoud tot complete herinrichting — vergelijk offertes en kies met vertrouwen.",
+  "free_quote": "Gratis offerte",
+  "no_obligations": "Geen verplichtingen",
+  "certified_gardeners": "Gecertificeerde hoveniers",
+  "form_eyebrow": "Gratis & vrijblijvend",
+  "form_title": "Vraag een offerte aan",
+  "form_subtitle": "Ontvang binnen 24 uur reacties van hoveniers in uw regio.",
+  "your_name": "Uw naam",
+  "municipality": "Gemeente",
+  "service": "Dienst",
+  "phone_number": "Telefoonnummer",
+  "send_request": "Verstuur aanvraag",
+  "form_note": "Volledig gratis · geen spam · AVG-conform",
+  "meta": {
+    "homepage_title": "Betrouwbare Hoveniers in Friesland | Offerte Aanvragen | Hovenier.frl",
+    "homepage_description": "Vind de beste hoveniers in Friesland. Vergelijk offertes voor tuinonderhoud, tuinontwerp en groendaken. 150+ gecertificeerde hoveniers, 2300+ projecten."
+  },
+  "sections": {
+    "services_eyebrow": "ONZE DIENSTEN",
+    "services_title": "Professionele Hovendiensten",
+    "services_subtitle": "Van tuinonderhoud tot complete tuinontwerpen. Onze gecertificeerde hoveniers staan voor u klaar.",
+    "articles_eyebrow": "TUININSPIRATIE",
+    "articles_title": "Tips & Inspiratie",
+    "articles_subtitle": "Praktische tips van experts en inspiratie voor uw droomtuin."
+  },
+  "buttons": {
+    "view_all_services": "Alle Diensten Bekijken",
+    "all_articles": "Alle artikelen",
+    "request_quote": "Gratis Offerte",
+    "view_services": "Bekijk Diensten"
+  },
+  "regions_content": {
+    "homepage_title": "Hoveniers in elke Friese gemeente"
+  },
+  "cta": {
+    "title": "Klaar om uw tuin te transformeren?",
+    "subtitle": "Ontvang gratis offertes van betrouwbare hoveniers in uw buurt. Vergelijk prijzen en kies de beste hovenier voor uw project."
+  },
+  "trustbar": {
+    "gardeners": "Hoveniers",
+    "projects": "Projecten",
+    "satisfied": "Tevreden klanten",
+    "cities": "Gemeenten",
+    "verified": "Geverifieerde hoveniers",
+    "secure": "100% veilig & betrouwbaar",
+    "reviews": "Beoordeeld door klanten"
+  },
+  "services_data": {
+    "tuinonderhoud": {
+      "title": "Tuinonderhoud",
+      "subtitle": "Vakkundig onderhoud",
+      "description": "Professioneel tuinonderhoud door ervaren hoveniers. Van seizoensgebonden taken tot structureel onderhoud.",
+      "price_from": "Vanaf €45/uur",
+      "features": [
+        "Gazononderhoud en maaien",
+        "Snoei van bomen en struiken",
+        "Onkruidbestrijding",
+        "Seizoensgebonden plantwerk"
+      ]
+    },
+    "tuinontwerp": {
+      "title": "Tuinontwerp",
+      "subtitle": "Op maat gemaakt",
+      "description": "Unieke tuinontwerpen die perfect passen bij uw wensen en de eigenschappen van uw buitenruimte.",
+      "price_from": "Vanaf €750",
+      "features": [
+        "Persoonlijk ontwerpadvies",
+        "3D visualisatie",
+        "Plantenkeuze op maat",
+        "Duurzame oplossingen"
+      ]
+    },
+    "groendak": {
+      "title": "Groendak",
+      "subtitle": "Duurzaam & innovatief",
+      "description": "Professionele groendak installatie en onderhoud. Verhoog de waarde van uw eigendom met een groendak.",
+      "price_from": "Vanaf €85/m²",
+      "features": [
+        "Extensieve groendaken",
+        "Intensieve groendaken",
+        "Onderhoud & nazorg",
+        "Subsidie-advies"
+      ]
+    }
+  },
+  "seo": {
+    "default": {
+      "title": "Hoveniers in Friesland | Vergelijk offertes | Hovenier.frl",
+      "description": "Vind de beste hovenier in uw regio. Vergelijk offertes van gecertificeerde hoveniers in Friesland. Gratis & vrijblijvend. ✓ Tuinonderhoud ✓ Tuinaanleg ✓ Herinrichting"
+    },
+    "services": {
+      "title": "Hoveniersdiensten in Friesland | Professionele tuin experts",
+      "description": "Complete overzicht van hoveniersdiensten in Friesland. Van tuinonderhoud tot herinrichting. Vraag gratis offertes aan bij gecertificeerde hoveniers."
+    }
+  },
+  "thank_you_page_title": "Bedankt voor uw aanvraag!",
+  "thank_you_page_subtitle": "Wij hebben uw aanvraag ontvangen en nemen binnen 24 uur contact met u op.",
+  "thank_you_page_what_happens_next": "Wat gebeurt er nu?",
+  "thank_you_page_step_1": "Binnen 24 uur nemen wij contact met u op",
+  "thank_you_page_step_2": "Wij koppelen u aan de beste hovenier in uw regio",
+  "thank_you_page_step_3": "U ontvangt binnen 48 uur een offerte op maat",
+  "thank_you_page_back_home": "Terug naar home",
+  "thank_you_page_view_services": "Bekijk onze diensten"
+}

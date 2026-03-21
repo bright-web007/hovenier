@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Block admin and internal pages
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /_next/
+Disallow: /api/
+
+# Allow important pages explicitly
+Allow: /
+Allow: /bedankt
+Allow: /services/
+Allow: /gemeente/
+Allow: /samenwerking
+Allow: /articles/
+
+# Sitemap locations
+Sitemap: https://hovenier.frl/sitemap.xml
+Sitemap: https://hovenier.frl/sitemap-0.xml
+
+# Crawl delay (be respectful to server resources)
+Crawl-delay: 1

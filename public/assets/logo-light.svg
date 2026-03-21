@@ -1,0 +1,22 @@
+<svg width="220" height="64" viewBox="0 0 220 64" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="30" cy="32" r="28" fill="#2a3e20"/>
+  <g transform="translate(30,32)">
+    <path d="M0,-18 C5,-16 10,-10 11,-3 C12,4 10,11 7,15 C5,18 2,20 0,20 C-2,20 -5,18 -7,15 C-10,11 -12,4 -11,-3 C-10,-10 -5,-16 0,-18Z" fill="#c8e8a0"/>
+    <path d="M0,-18 C3,-16 6,-10 7,-3 C8,4 6,11 4,15 C2,18 1,20 0,20 C-1,20 -2,18 -4,15 C-6,11 -8,4 -7,-3 C-6,-10 -3,-16 0,-18Z" fill="#a8d878"/>
+    <line x1="0" y1="-17" x2="0" y2="19" stroke="#4a7a28" stroke-width="0.9" stroke-linecap="round"/>
+    <line x1="0" y1="-10" x2="5" y2="-5" stroke="#4a7a28" stroke-width="0.55" stroke-linecap="round" opacity="0.7"/>
+    <line x1="0" y1="-10" x2="-5" y2="-5" stroke="#4a7a28" stroke-width="0.55" stroke-linecap="round" opacity="0.7"/>
+    <line x1="0" y1="-3" x2="7" y2="2" stroke="#4a7a28" stroke-width="0.55" stroke-linecap="round" opacity="0.7"/>
+    <line x1="0" y1="-3" x2="-7" y2="2" stroke="#4a7a28" stroke-width="0.55" stroke-linecap="round" opacity="0.7"/>
+    <line x1="0" y1="5" x2="7" y2="9" stroke="#4a7a28" stroke-width="0.55" stroke-linecap="round" opacity="0.7"/>
+    <line x1="0" y1="5" x2="-7" y2="9" stroke="#4a7a28" stroke-width="0.55" stroke-linecap="round" opacity="0.7"/>
+    <line x1="0" y1="12" x2="4" y2="15" stroke="#4a7a28" stroke-width="0.5" stroke-linecap="round" opacity="0.6"/>
+    <line x1="0" y1="12" x2="-4" y2="15" stroke="#4a7a28" stroke-width="0.5" stroke-linecap="round" opacity="0.6"/>
+    <line x1="0" y1="20" x2="0" y2="27" stroke="#8ab87a" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="0" y1="25" x2="-4" y2="29" stroke="#8ab87a" stroke-width="0.8" stroke-linecap="round"/>
+    <line x1="0" y1="25" x2="4" y2="29" stroke="#8ab87a" stroke-width="0.8" stroke-linecap="round"/>
+  </g>
+  <text x="68" y="28" font-family="Cormorant Garamond, Georgia, serif" font-size="26" font-weight="500" fill="#1a3210" letter-spacing="-0.01em">Hovenier</text>
+  <text x="69" y="44" font-family="DM Sans, system-ui, sans-serif" font-size="9" font-weight="300" fill="#7a9a68" letter-spacing="0.24em">.FRL · FRIESLAND</text>
+  <line x1="68" y1="48" x2="216" y2="48" stroke="#c8d8b0" stroke-width="0.5"/>
+</svg>

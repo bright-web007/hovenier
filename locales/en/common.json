@@ -1,0 +1,120 @@
+{
+  "welcome": "Welcome to Hovenier!",
+  "lead_form": "Lead Form",
+  "services": "Services",
+  "articles": "Articles", 
+  "gardeners": "Gardeners",
+  "regions": "Regions",
+  "inspiration": "Inspiration",
+  "request_quote": "Request Quote",
+  "name": "Name",
+  "email": "Email",
+  "message": "Message",
+  "submit": "Submit",
+  "form_success": "Thank you! Your message has been received.",
+  "hero_eyebrow": "Friesland's gardener guide",
+  "hero_title": "Your dream garden starts with the right gardener",
+  "hero_subtitle": "Professional gardeners in your region, carefully selected. From garden maintenance to complete redesign — compare quotes and choose with confidence.",
+  "free_quote": "Free quote",
+  "no_obligations": "No obligations",
+  "certified_gardeners": "Certified gardeners",
+  "form_eyebrow": "Free & non-binding",
+  "form_title": "Request a quote",
+  "form_subtitle": "Receive responses from gardeners in your region within 24 hours.",
+  "your_name": "Your name",
+  "municipality": "Municipality",
+  "service": "Service",
+  "phone_number": "Phone number",
+  "send_request": "Send request",
+  "form_note": "Completely free · no spam · GDPR compliant",
+  "meta": {
+    "homepage_title": "Reliable Gardeners in Friesland | Request Quote | Hovenier.frl",
+    "homepage_description": "Find the best gardeners in Friesland. Compare quotes for garden maintenance, garden design and green roofs. 150+ certified gardeners, 2300+ projects."
+  },
+  "sections": {
+    "services_eyebrow": "OUR SERVICES",
+    "services_title": "Professional Garden Services", 
+    "services_subtitle": "From garden maintenance to complete garden design. Our certified gardeners are ready for you.",
+    "articles_eyebrow": "GARDEN INSPIRATION",
+    "articles_title": "Tips & Inspiration",
+    "articles_subtitle": "Practical tips from experts and inspiration for your dream garden."
+  },
+  "buttons": {
+    "view_all_services": "View All Services",
+    "all_articles": "All articles",
+    "request_quote": "Free Quote",
+    "view_services": "View Services"
+  },
+  "regions_content": {
+    "homepage_title": "Gardeners in every Frisian municipality"
+  },
+  "cta": {
+    "title": "Ready to transform your garden?",
+    "subtitle": "Receive free quotes from reliable gardeners in your area. Compare prices and choose the best gardener for your project."
+  },
+  "trustbar": {
+    "gardeners": "Gardeners",
+    "projects": "Projects",
+    "satisfied": "Satisfied customers",
+    "cities": "Cities",
+    "verified": "Verified gardeners",
+    "secure": "100% safe & reliable",
+    "reviews": "Reviewed by customers"
+  },
+  "services_data": {
+    "tuinonderhoud": {
+      "title": "Garden Maintenance",
+      "subtitle": "Professional maintenance",
+      "description": "Professional garden maintenance by experienced gardeners. From seasonal tasks to structural maintenance.",
+      "price_from": "From €45/hour",
+      "features": [
+        "Lawn care and mowing",
+        "Tree and shrub pruning", 
+        "Weed control",
+        "Seasonal planting work"
+      ]
+    },
+    "tuinontwerp": {
+      "title": "Garden Design",
+      "subtitle": "Custom made",
+      "description": "Unique garden designs that perfectly match your wishes and the characteristics of your outdoor space.",
+      "price_from": "From €750",
+      "features": [
+        "Personal design advice",
+        "3D visualization",
+        "Custom plant selection",
+        "Sustainable solutions"
+      ]
+    },
+    "groendak": {
+      "title": "Green Roof",
+      "subtitle": "Sustainable & innovative",
+      "description": "Professional green roof installation and maintenance. Increase the value of your property with a green roof.",
+      "price_from": "From €85/m²",
+      "features": [
+        "Extensive green roofs",
+        "Intensive green roofs",
+        "Maintenance & aftercare",
+        "Subsidy advice"
+      ]
+    }
+  },
+  "seo": {
+    "default": {
+      "title": "Gardeners in Friesland | Compare Quotes | Hovenier.frl",
+      "description": "Find the best gardener in your region. Compare quotes from certified gardeners in Friesland. Free & non-binding. ✓ Garden maintenance ✓ Landscaping ✓ Redesign"
+    },
+    "services": {
+      "title": "Gardening Services in Friesland | Professional Garden Experts",
+      "description": "Complete overview of gardening services in Friesland. From garden maintenance to redesign. Request free quotes from certified gardeners."
+    }
+  },
+  "thank_you_page_title": "Thank you for your request!",
+  "thank_you_page_subtitle": "We have received your request and will contact you within 24 hours.",
+  "thank_you_page_what_happens_next": "What happens next?",
+  "thank_you_page_step_1": "We will contact you within 24 hours",
+  "thank_you_page_step_2": "We will connect you with the best gardener in your region",
+  "thank_you_page_step_3": "You will receive a customized quote within 48 hours",
+  "thank_you_page_back_home": "Back to home",
+  "thank_you_page_view_services": "View our services"
+}

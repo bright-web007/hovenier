@@ -1,0 +1,289 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+
+interface CookieConsentProps {
+  locale?: string;
+}
+
+interface ConsentPreferences {
+  necessary: boolean;
+  analytics: boolean;
+  marketing: boolean;
+  preferences: boolean;
+}
+
+const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) => {
+  const [showBanner, setShowBanner] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+  const [preferences, setPreferences] = useState<ConsentPreferences>({
+    necessary: true, // Always required
+    analytics: false,
+    marketing: false,
+    preferences: false,
+  });
+
+  useEffect(() => {
+    // Check if user has already given consent
+    const consentGiven = localStorage.getItem('cookie_consent_given');
+    if (!consentGiven) {
+      setShowBanner(true);
+    } else {
+      // Load saved preferences
+      const savedPreferences = localStorage.getItem('cookie_consent_preferences');
+      if (savedPreferences) {
+        setPreferences(JSON.parse(savedPreferences));
+      }
+    }
+  }, []);
+
+  const handleAcceptAll = () => {
+    const allAccepted: ConsentPreferences = {
+      necessary: true,
+      analytics: true,
+      marketing: true,
+      preferences: true,
+    };
+    
+    saveConsent(allAccepted);
+    initializeServices(allAccepted);
+    setShowBanner(false);
+  };
+
+  const handleDeclineAll = () => {
+    const onlyNecessary: ConsentPreferences = {
+      necessary: true,
+      analytics: false,
+      marketing: false,
+      preferences: false,
+    };
+    
+    saveConsent(onlyNecessary);
+    initializeServices(onlyNecessary);
+    setShowBanner(false);
+  };
+
+  const handleSavePreferences = () => {
+    saveConsent(preferences);
+    initializeServices(preferences);
+    setShowBanner(false);
+  };
+
+  const saveConsent = (prefs: ConsentPreferences) => {
+    localStorage.setItem('cookie_consent_given', 'true');
+    localStorage.setItem('cookie_consent_preferences', JSON.stringify(prefs));
+    localStorage.setItem('cookie_consent_timestamp', new Date().toISOString());
+    
+    // Set consent cookie for server-side access
+    document.cookie = `cookie_consent=${JSON.stringify(prefs)}; path=/; max-age=31536000; SameSite=Lax`;
+  };
+
+  const initializeServices = (prefs: ConsentPreferences) => {
+    // Initialize Google Analytics if analytics consent given
+    if (prefs.analytics && typeof window !== 'undefined' && window.gtag) {
+      window.gtag('consent', 'update', {
+        analytics_storage: 'granted',
+        ad_storage: prefs.marketing ? 'granted' : 'denied',
+        personalization_storage: prefs.preferences ? 'granted' : 'denied',
+      });
+    }
+    
+    // Initialize other services based on consent
+    console.log('Cookie consent preferences:', prefs);
+  };
+
+  const handlePreferenceChange = (type: keyof ConsentPreferences, value: boolean) => {
+    if (type === 'necessary') return; // Cannot disable necessary cookies
+    setPreferences(prev => ({
+      ...prev,
+      [type]: value
+    }));
+  };
+
+  const translations = {
+    nl: {
+      title: 'Cookie Voorkeuren',
+      description: 'We gebruiken cookies om uw ervaring te verbeteren en onze diensten te analyseren. U kunt uw voorkeuren hieronder aanpassen.',
+      acceptAll: 'Alles Accepteren',
+      declineAll: 'Alleen Noodzakelijke',
+      savePreferences: 'Voorkeuren Opslaan',
+      customize: 'Aanpassen',
+      backToBasic: 'Terug',
+      necessary: 'Noodzakelijke Cookies',
+      analytics: 'Analytische Cookies',
+      marketing: 'Marketing Cookies', 
+      preferences: 'Voorkeur Cookies',
+      necessaryDesc: 'Deze cookies zijn nodig voor de basisfunctionaliteit van de website.',
+      analyticsDesc: 'Helpen ons te begrijpen hoe bezoekers onze website gebruiken via Google Analytics.',
+      marketingDesc: 'Gebruikt voor gerichte reclame en het volgen van conversies.',
+      preferencesDesc: 'Onthouden uw voorkeuren zoals taal en regio-instellingen.',
+      cookiePolicy: 'Cookie Beleid',
+      privacyPolicy: 'Privacy Beleid'
+    },
+    en: {
+      title: 'Cookie Preferences',
+      description: 'We use cookies to improve your experience and analyze our services. You can adjust your preferences below.',
+      acceptAll: 'Accept All',
+      declineAll: 'Only Necessary',
+      savePreferences: 'Save Preferences',
+      customize: 'Customize',
+      backToBasic: 'Back',
+      necessary: 'Necessary Cookies',
+      analytics: 'Analytics Cookies',
+      marketing: 'Marketing Cookies',
+      preferences: 'Preference Cookies',
+      necessaryDesc: 'These cookies are required for basic website functionality.',
+      analyticsDesc: 'Help us understand how visitors use our website via Google Analytics.',
+      marketingDesc: 'Used for targeted advertising and conversion tracking.',
+      preferencesDesc: 'Remember your preferences like language and region settings.',
+      cookiePolicy: 'Cookie Policy',
+      privacyPolicy: 'Privacy Policy'
+    }
+  };
+
+  const t = translations[locale as keyof typeof translations] || translations.nl;
+
+  if (!showBanner) return null;
+
+  return (
+    <div className="cookie-consent-overlay">
+      <div className="cookie-consent-banner">
+        <div className="cookie-consent-content">
+          {!showDetails ? (
+            // Basic consent banner
+            <div className="cookie-consent-basic">
+              <div className="cookie-consent-text">
+                <h3 className="cookie-consent-title">{t.title}</h3>
+                <p className="cookie-consent-description">{t.description}</p>
+              </div>
+              
+              <div className="cookie-consent-actions">
+                <button 
+                  onClick={handleAcceptAll}
+                  className="cookie-consent-btn cookie-consent-btn-primary"
+                >
+                  {t.acceptAll}
+                </button>
+                
+                <button 
+                  onClick={handleDeclineAll}
+                  className="cookie-consent-btn cookie-consent-btn-secondary"
+                >
+                  {t.declineAll}
+                </button>
+                
+                <button 
+                  onClick={() => setShowDetails(true)}
+                  className="cookie-consent-btn cookie-consent-btn-outline"
+                >
+                  {t.customize}
+                </button>
+              </div>
+              
+              <div className="cookie-consent-links">
+                <Link href="/privacy-beleid" className="cookie-consent-link">{t.privacyPolicy}</Link>
+                <span>•</span>
+                <Link href="/cookie-beleid" className="cookie-consent-link">{t.cookiePolicy}</Link>
+              </div>
+            </div>
+          ) : (
+            // Detailed preferences
+            <div className="cookie-consent-details">
+              <div className="cookie-consent-header">
+                <h3 className="cookie-consent-title">{t.title}</h3>
+                <button 
+                  onClick={() => setShowDetails(false)}
+                  className="cookie-consent-back"
+                >
+                  ← {t.backToBasic}
+                </button>
+              </div>
+              
+              <div className="cookie-consent-categories">
+                <div className="cookie-category">
+                  <div className="cookie-category-header">
+                    <label className="cookie-category-label">
+                      <input 
+                        type="checkbox" 
+                        checked={preferences.necessary}
+                        disabled={true}
+                        className="cookie-category-checkbox"
+                      />
+                      <span className="cookie-category-name">{t.necessary}</span>
+                      <span className="cookie-category-required">(Vereist)</span>
+                    </label>
+                  </div>
+                  <p className="cookie-category-description">{t.necessaryDesc}</p>
+                </div>
+
+                <div className="cookie-category">
+                  <div className="cookie-category-header">
+                    <label className="cookie-category-label">
+                      <input 
+                        type="checkbox" 
+                        checked={preferences.analytics}
+                        onChange={(e) => handlePreferenceChange('analytics', e.target.checked)}
+                        className="cookie-category-checkbox"
+                      />
+                      <span className="cookie-category-name">{t.analytics}</span>
+                    </label>
+                  </div>
+                  <p className="cookie-category-description">{t.analyticsDesc}</p>
+                </div>
+
+                <div className="cookie-category">
+                  <div className="cookie-category-header">
+                    <label className="cookie-category-label">
+                      <input 
+                        type="checkbox" 
+                        checked={preferences.marketing}
+                        onChange={(e) => handlePreferenceChange('marketing', e.target.checked)}
+                        className="cookie-category-checkbox"
+                      />
+                      <span className="cookie-category-name">{t.marketing}</span>
+                    </label>
+                  </div>
+                  <p className="cookie-category-description">{t.marketingDesc}</p>
+                </div>
+
+                <div className="cookie-category">
+                  <div className="cookie-category-header">
+                    <label className="cookie-category-label">
+                      <input 
+                        type="checkbox" 
+                        checked={preferences.preferences}
+                        onChange={(e) => handlePreferenceChange('preferences', e.target.checked)}
+                        className="cookie-category-checkbox"
+                      />
+                      <span className="cookie-category-name">{t.preferences}</span>
+                    </label>
+                  </div>
+                  <p className="cookie-category-description">{t.preferencesDesc}</p>
+                </div>
+              </div>
+              
+              <div className="cookie-consent-actions">
+                <button 
+                  onClick={handleSavePreferences}
+                  className="cookie-consent-btn cookie-consent-btn-primary"
+                >
+                  {t.savePreferences}
+                </button>
+                
+                <button 
+                  onClick={handleAcceptAll}
+                  className="cookie-consent-btn cookie-consent-btn-secondary"
+                >
+                  {t.acceptAll}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CookieConsentBanner;

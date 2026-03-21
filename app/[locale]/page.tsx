@@ -159,6 +159,7 @@ export default async function HomePage({ params }: Props) {
               <ServiceCard
                 title="Tuinontwerp"
                 description="Complete herinrichting van uw tuin met professioneel ontwerp. Van concept tot realisatie, uw droomtuin wordt werkelijkheid."
+                imageUrl="/images/tuinontwerp-hero.jpg"
                 href="/services/tuinontwerp"
                 features={[
                   'Persoonlijk tuinontwerp',

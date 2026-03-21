@@ -1,12 +1,11 @@
 import { Metadata } from 'next'
-import { useTranslations } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
-import Navigation from '../../components/Navigation'
-import Footer from '../../components/Footer'
+import Navigation from '../../components/Navigation';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import GardenerCard from '../../components/GardenerCard'
 
 type Props = {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }
 
 export const metadata: Metadata = {
@@ -84,39 +83,57 @@ const sampleGardeners = [
   }
 ]
 
-export default function HoveniersDirectoryPage({ params: { locale } }: Props) {
+export default async function HoveniersDirectoryPage({ params }: Props) {
+  const { locale } = await params
   setRequestLocale(locale)
+
+  // Breadcrumb items  
+  const breadcrumbItems = [
+    { label: 'Home', href: '/' },
+    { label: locale === 'en' ? 'Gardeners' : 'Hoveniers' }
+  ];
 
   return (
     <>
       <Navigation locale={locale} />
+      <Breadcrumbs items={breadcrumbItems} />
       
-      <main className="min-h-screen bg-gradient-to-br from-sage-50 to-forest-50">
-        <div className="container mx-auto px-4 py-16">
-          {/* Hero Section */}
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-forest-900 mb-6">
-              Hoveniers Directory
-            </h1>
-            <p className="text-xl text-forest-700 mb-8 max-w-2xl mx-auto">
-              Vind de perfecte tuinspecialist voor uw project. Alle hoveniers zijn geverifieerd en beoordeeld door echte klanten.
-            </p>
-          </div>
+      <main>
+        <div className="section">
+          <div className="section-inner">
+            {/* Hero Section */}
+            <div className="section-centered">
+              <div className="section-eyebrow section-eyebrow-centered">
+                <span>Hoveniers</span>
+              </div>
+              <h1 className="section-title section-title-centered">
+                Hoveniers Directory
+              </h1>
+              <p className="section-sub section-sub-centered">
+                Vind de perfecte tuinspecialist voor uw project. Alle hoveniers zijn geverifieerd en beoordeeld door echte klanten.
+              </p>
+            </div>
 
-          {/* Search & Filters */}
-          <section className="max-w-6xl mx-auto mb-16">
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-forest-900 mb-6 text-center">
+            {/* Search & Filters */}
+            <div style={{ background: 'var(--white)', borderRadius: '6px', padding: '2rem', marginBottom: '3rem', border: '0.5px solid var(--border)' }}>
+              <h2 style={{ 
+                fontFamily: 'var(--serif)', 
+                fontSize: '28px', 
+                fontWeight: '600', 
+                color: 'var(--forest-deep)', 
+                marginBottom: '1.5rem',
+                textAlign: 'center'
+              }}>
                 Zoek & Filter Hoveniers
               </h2>
-              <div className="grid md:grid-cols-4 gap-4 mb-6">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
                 <div>
-                  <label htmlFor="gemeente" className="block text-sm font-medium text-forest-700 mb-2">
+                  <label htmlFor="gemeente" className="form-label">
                     Gemeente
                   </label>
                   <select
                     id="gemeente"
-                    className="w-full px-4 py-2 border border-sage-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-sage-500"
+                    className="form-select"
                   >
                     <option value="">Alle gemeenten</option>
                     <option value="leeuwarden">Leeuwarden</option>
@@ -133,12 +150,12 @@ export default function HoveniersDirectoryPage({ params: { locale } }: Props) {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="service" className="block text-sm font-medium text-forest-700 mb-2">
+                  <label htmlFor="service" className="form-label">
                     Service Type
                   </label>
                   <select
                     id="service"
-                    className="w-full px-4 py-2 border border-sage-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-sage-500"
+                    className="form-select"
                   >
                     <option value="">Alle diensten</option>
                     <option value="tuinonderhoud">Tuinonderhoud</option>
@@ -149,12 +166,12 @@ export default function HoveniersDirectoryPage({ params: { locale } }: Props) {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="rating" className="block text-sm font-medium text-forest-700 mb-2">
+                  <label htmlFor="rating" className="form-label">
                     Minimale Rating
                   </label>
                   <select
                     id="rating"
-                    className="w-full px-4 py-2 border border-sage-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-sage-500"
+                    className="form-select"
                   >
                     <option value="">Alle ratings</option>
                     <option value="4.5">4.5+ sterren</option>
@@ -163,12 +180,12 @@ export default function HoveniersDirectoryPage({ params: { locale } }: Props) {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="availability" className="block text-sm font-medium text-forest-700 mb-2">
+                  <label htmlFor="availability" className="form-label">
                     Beschikbaarheid
                   </label>
                   <select
                     id="availability"
-                    className="w-full px-4 py-2 border border-sage-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-sage-500"
+                    className="form-select"
                   >
                     <option value="">Alle</option>
                     <option value="immediate">Direct beschikbaar</option>
@@ -177,26 +194,26 @@ export default function HoveniersDirectoryPage({ params: { locale } }: Props) {
                   </select>
                 </div>
               </div>
-              <div className="text-center">
+              <div style={{ textAlign: 'center' }}>
                 <button 
                   type="button"
-                  className="bg-sage-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-sage-700 transition-colors"
+                  className="form-btn"
                 >
                   Zoeken
                 </button>
               </div>
             </div>
-          </section>
 
-          {/* Results Summary */}
-          <section className="max-w-6xl mx-auto mb-8">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-              <p className="text-forest-700">
-                <span className="font-semibold">{sampleGardeners.length}</span> hoveniers gevonden in <span className="font-semibold">Alle gemeenten</span>
+            {/* Results Grid */}
+
+            {/* Results Summary */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
+              <p style={{ color: 'var(--text-mid)', fontSize: '14px' }}>
+                <span style={{ fontWeight: '500' }}>{sampleGardeners.length}</span> hoveniers gevonden in <span style={{ fontWeight: '500' }}>Alle gemeenten</span>
               </p>
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-forest-600">Sorteer op:</span>
-                <select className="px-3 py-1 border border-sage-300 rounded text-sm">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span style={{ fontSize: '13px', color: 'var(--text-mid)' }}>Sorteer op:</span>
+                <select className="form-select" style={{ width: 'auto', minWidth: '150px' }}>
                   <option>Relevantie</option>
                   <option>Rating (hoog-laag)</option>
                   <option>Afstand</option>
@@ -204,11 +221,14 @@ export default function HoveniersDirectoryPage({ params: { locale } }: Props) {
                 </select>
               </div>
             </div>
-          </section>
 
-          {/* Directory Results */}
-          <section className="max-w-6xl mx-auto mb-16">
-            <div className="grid gap-6">
+            {/* Directory Results */}
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
+              gap: '1.5rem', 
+              marginBottom: '3rem' 
+            }}>
               {sampleGardeners.map((gardener, index) => (
                 <GardenerCard
                   key={`${gardener.slug}-${index}`}
@@ -226,24 +246,34 @@ export default function HoveniersDirectoryPage({ params: { locale } }: Props) {
                 />
               ))}
             </div>
-          </section>
 
-          {/* CTA Section */}
-          <section className="max-w-4xl mx-auto text-center bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-forest-900 mb-4">
-              Geen passende hovenier gevonden?
-            </h2>
-            <p className="text-forest-600 mb-8">
-              Vraag een gratis offerte aan en wij verbinden u met de beste hoveniers in uw regio.
-            </p>
-            <button className="bg-sage-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-sage-700 transition-colors">
-              Gratis Offerte Aanvragen
-            </button>
-          </section>
+            {/* CTA Section */}
+            <div style={{ 
+              background: 'var(--white)', 
+              borderRadius: '6px', 
+              padding: '2rem', 
+              textAlign: 'center',
+              border: '0.5px solid var(--border)'
+            }}>
+              <h2 style={{ 
+                fontFamily: 'var(--serif)', 
+                fontSize: '28px', 
+                fontWeight: '600', 
+                color: 'var(--forest-deep)', 
+                marginBottom: '1rem'
+              }}>
+                Geen passende hovenier gevonden?
+              </h2>
+              <p style={{ color: 'var(--text-mid)', marginBottom: '2rem', fontSize: '14px' }}>
+                Vraag een gratis offerte aan en wij verbinden u met de beste hoveniers in uw regio.
+              </p>
+              <button className="form-btn" style={{ width: 'auto', padding: '14px 28px' }}>
+                Gratis Offerte Aanvragen
+              </button>
+            </div>
+          </div>
         </div>
       </main>
-
-      <Footer locale={locale} />
     </>
   )
 }

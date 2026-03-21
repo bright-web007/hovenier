@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
+import Navigation from '../../components/Navigation'
+import Breadcrumbs from '../../components/Breadcrumbs'
 
 type Props = {
   params: { locale: string }
@@ -16,8 +18,17 @@ export default function ContactPage({ params: { locale } }: Props) {
   setRequestLocale(locale)
   const t = useTranslations('pages.contact')
 
+  // Breadcrumb items
+  const breadcrumbItems = [
+    { label: 'Home', href: '/' },
+    { label: locale === 'en' ? 'Contact' : 'Contact' }
+  ];
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-sage-50 to-forest-50">
+    <>
+      <Navigation locale={locale} />
+      <Breadcrumbs items={breadcrumbItems} />
+      <main className="min-h-screen bg-gradient-to-br from-sage-50 to-forest-50">
       <div className="container mx-auto px-4 py-16">
         {/* Hero Section */}
         <div className="max-w-4xl mx-auto text-center mb-16">
@@ -209,5 +220,6 @@ export default function ContactPage({ params: { locale } }: Props) {
         </div>
       </div>
     </main>
+    </>
   )
 }

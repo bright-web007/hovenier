@@ -100,11 +100,6 @@ const nextConfig = {
   async redirects() {
     return [
       // SEO redirects for old paths
-      {
-        source: '/services',
-        destination: '/services/tuinonderhoud',
-        permanent: false,
-      },
     ];
   },
 };

@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
+import Navigation from '../../../components/Navigation'
+import Breadcrumbs from '../../../components/Breadcrumbs'
 
 type Props = {
   params: { locale: string }
@@ -47,8 +49,17 @@ export default function HovenierPerUurPage({ params: { locale } }: Props) {
     ]
   }
 
+  // Breadcrumb items
+  const breadcrumbItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Kosten', href: '/kosten' },
+    { label: 'Hovenier per Uur' }
+  ];
+
   return (
     <>
+      <Navigation locale={locale} />
+      <Breadcrumbs items={breadcrumbItems} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

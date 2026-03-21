@@ -121,7 +121,17 @@ export default async function HomePage({ params }: Props) {
       <main>
         <Hero translations={translations} locale={validLocale} />
         
-        <TrustBar />
+        <TrustBar 
+          trustBarTranslations={{
+            gardeners: t('trustbar.gardeners'),
+            projects: t('trustbar.projects'),
+            satisfied: t('trustbar.satisfied'),
+            cities: t('trustbar.cities'),
+            verified: t('trustbar.verified'),
+            secure: t('trustbar.secure'),
+            reviews: t('trustbar.reviews')
+          }}
+        />
         
         {/* Services Section */}
         <section className="section section-services">

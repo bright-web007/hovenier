@@ -59,7 +59,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
           <div className="footer-brand">
             <div className="footer-logo">
               <Link href="/" className="footer-logo-link">
-                <img src="/assets/logo-light.svg" alt="Hovenier.frl" width="160" height="36" className="footer-logo-image" />
+                <img src="/assets/logo-dark.svg" alt="Hovenier.frl" width="160" height="36" className="footer-logo-image" />
               </Link>
               <p className="footer-description">
                 Dé plek om betrouwbare hoveniers in Friesland te vinden. Vergelijk offertes, 

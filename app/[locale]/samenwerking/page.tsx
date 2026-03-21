@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Navigation from '../../components/Navigation';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import NewLeadForm from "@/app/components/NewLeadForm"
 
 export const locales = ['en', 'nl'] as const;
@@ -189,9 +190,16 @@ export default async function SamenwerkingPage({ params }: Props) {
     form_note: t('form_note')
   };
 
+  // Breadcrumb items
+  const breadcrumbItems = [
+    { label: validLocale === 'en' ? 'Home' : 'Home', href: '/' },
+    { label: validLocale === 'en' ? 'Partnership' : 'Samenwerking' }
+  ];
+
   return (
     <>
       <Navigation locale={validLocale} />
+      <Breadcrumbs items={breadcrumbItems} />
       
       <main>
         {/* Hero Section */}

@@ -1,6 +1,5 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -35,21 +34,19 @@ export default function GardenerCard({
   availability = 'available',
   className = ''
 }: GardenerCardProps) {
-  const t = useTranslations();
-  
   const gardenerHref = `/hovenier/${slug}`;
   
   const availabilityConfig = {
-    available: { color: 'text-green-600', bg: 'bg-green-50', text: t('cards.available') || 'Beschikbaar' },
-    busy: { color: 'text-yellow-600', bg: 'bg-yellow-50', text: t('cards.busy') || 'Beperkt beschikbaar' },
-    unavailable: { color: 'text-red-600', bg: 'bg-red-50', text: t('cards.unavailable') || 'Niet beschikbaar' }
+    available: { color: 'text-green-600', bg: 'bg-green-50', text: 'Beschikbaar' },
+    busy: { color: 'text-yellow-600', bg: 'bg-yellow-50', text: 'Beperkt beschikbaar' },
+    unavailable: { color: 'text-red-600', bg: 'bg-red-50', text: 'Niet beschikbaar' }
   };
   
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
       <svg
         key={i}
-        className={`w-4 h-4 ${i < Math.floor(rating) ? 'text-yellow-400' : 'text-neutral-300'}`}
+        style={{ width: '16px', height: '16px', color: i < Math.floor(rating) ? 'var(--gold)' : 'var(--text-faint)' }}
         fill="currentColor"
         viewBox="0 0 20 20"
       >
@@ -59,22 +56,41 @@ export default function GardenerCard({
   };
 
   return (
-    <div className={`group relative bg-white rounded-lg shadow-sm border border-neutral-200 hover:shadow-md transition-all duration-200 overflow-hidden ${className}`}>
+    <div className={`group relative bg-white rounded-lg shadow-sm border border-neutral-200 hover:shadow-md transition-all duration-200 overflow-hidden ${className}`} style={{ 
+      background: 'var(--white)', 
+      border: '0.5px solid var(--border)',
+      borderRadius: '6px',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+    }}>
       {/* Verified Badge */}
       {verified && (
-        <div className="absolute top-3 right-3 z-10 bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded flex items-center gap-1">
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div style={{
+          position: 'absolute',
+          top: '12px',
+          right: '12px',
+          zIndex: 10,
+          background: 'var(--forest)',
+          color: 'var(--cream)',
+          fontSize: '11px',
+          fontWeight: '500',
+          padding: '4px 8px',
+          borderRadius: '3px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4px'
+        }}>
+          <svg style={{ width: '12px', height: '12px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          {t('cards.verified') || 'Geverifieerd'}
+          Geverifieerd
         </div>
       )}
       
       {/* Header with Profile */}
-      <div className="p-6 pr-16"> {/* Extra padding for badge */}
-        <div className="flex items-start gap-4">
+      <div style={{ padding: '1.5rem', paddingRight: '4rem' }}> {/* Extra padding for badge */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
           {/* Profile Image */}
-          <div className="relative w-16 h-16 flex-shrink-0">
+          <div style={{ position: 'relative', width: '64px', height: '64px', flexShrink: 0 }}>
             {profileImage ? (
               <Image
                 src={profileImage}
@@ -84,27 +100,57 @@ export default function GardenerCard({
                 sizes="64px"
               />
             ) : (
-              <div className="w-16 h-16 bg-neutral-200 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div style={{ 
+                width: '64px', 
+                height: '64px', 
+                background: 'var(--sage-light)', 
+                borderRadius: '50%', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center' 
+              }}>
+                <svg style={{ width: '32px', height: '32px', color: 'var(--text-muted)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </div>
             )}
             
             {/* Availability Indicator */}
-            <div className={`absolute -bottom-1 -right-1 w-5 h-5 ${availabilityConfig[availability].bg} border-2 border-white rounded-full flex items-center justify-center`}>
-              <div className={`w-2 h-2 ${availability === 'available' ? 'bg-green-500' : availability === 'busy' ? 'bg-yellow-500' : 'bg-red-500'} rounded-full`} />
+            <div style={{
+              position: 'absolute',
+              bottom: '-2px',
+              right: '-2px',
+              width: '20px',
+              height: '20px',
+              background: 'var(--cream)',
+              border: '2px solid var(--white)',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <div style={{
+                width: '8px',
+                height: '8px',
+                background: availability === 'available' ? 'var(--sage)' : availability === 'busy' ? 'var(--gold)' : 'var(--text-muted)',
+                borderRadius: '50%'
+              }} />
             </div>
           </div>
           
           {/* Profile Info */}
-          <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-neutral-900 group-hover:text-primary-700 transition-colors">
+          <div style={{ flex: '1', minWidth: '0' }}>
+            <h3 style={{ 
+              fontWeight: '600', 
+              color: 'var(--forest-deep)', 
+              fontSize: '16px',
+              marginBottom: '4px' 
+            }}>
               {name}
             </h3>
-            <p className="text-sm text-neutral-600 mb-1">{company}</p>
-            <p className="text-xs text-neutral-500 flex items-center gap-1">
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <p style={{ fontSize: '13px', color: 'var(--text-mid)', marginBottom: '4px' }}>{company}</p>
+            <p style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <svg style={{ width: '12px', height: '12px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -115,29 +161,44 @@ export default function GardenerCard({
         
         {/* Rating */}
         {rating && (
-          <div className="flex items-center gap-2 mt-3">
-            <div className="flex">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '12px' }}>
+            <div style={{ display: 'flex' }}>
               {renderStars(rating)}
             </div>
-            <span className="text-sm font-medium text-neutral-900">{rating.toFixed(1)}</span>
-            <span className="text-xs text-neutral-500">({reviewCount} {t('cards.reviews') || 'reviews'})</span>
+            <span style={{ fontSize: '14px', fontWeight: '500', color: 'var(--forest-deep)' }}>{rating.toFixed(1)}</span>
+            <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>({reviewCount} reviews)</span>
           </div>
         )}
       </div>
       
       {/* Specialties */}
-      <div className="px-6 pb-4">
-        <div className="flex flex-wrap gap-1">
+      <div style={{ padding: '0 1.5rem 1rem 1.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
           {specialties.slice(0, 3).map((specialty, index) => (
             <span 
               key={index}
-              className="inline-block px-2 py-1 bg-primary-50 text-primary-700 text-xs rounded font-medium"
+              style={{
+                display: 'inline-block',
+                padding: '4px 8px',
+                background: 'var(--sage)',
+                color: 'var(--white)',
+                fontSize: '11px',
+                borderRadius: '3px',
+                fontWeight: '500'
+              }}
             >
               {specialty}
             </span>
           ))}
           {specialties.length > 3 && (
-            <span className="inline-block px-2 py-1 bg-neutral-100 text-neutral-600 text-xs rounded">
+            <span style={{
+              display: 'inline-block',
+              padding: '4px 8px',
+              background: 'var(--cream-dark)',
+              color: 'var(--text-mid)',
+              fontSize: '11px',
+              borderRadius: '3px'
+            }}>
               +{specialties.length - 3}
             </span>
           )}
@@ -145,42 +206,67 @@ export default function GardenerCard({
       </div>
       
       {/* Footer */}
-      <div className="px-6 py-4 bg-neutral-50 border-t border-neutral-100">
-        <div className="flex items-center justify-between text-sm">
-          <div className="space-y-1">
+      <div style={{ 
+        padding: '1rem 1.5rem', 
+        background: 'var(--cream-dark)', 
+        borderTop: '0.5px solid var(--border)' 
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '13px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
             {responseTime && (
-              <div className="flex items-center gap-1 text-neutral-600">
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--text-mid)' }}>
+                <svg style={{ width: '12px', height: '12px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span className="text-xs">{responseTime}</span>
+                <span style={{ fontSize: '12px' }}>{responseTime}</span>
               </div>
             )}
             {startingPrice && (
-              <div className="text-neutral-900">
-                <span className="text-xs text-neutral-500">{t('cards.from') || 'Vanaf'}</span>
-                <span className="font-semibold ml-1">€{startingPrice}</span>
+              <div style={{ color: 'var(--forest-deep)' }}>
+                <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Vanaf</span>
+                <span style={{ fontWeight: '600', marginLeft: '4px' }}>€{startingPrice}</span>
               </div>
             )}
           </div>
           
-          <div className="flex gap-2">
+          <div style={{ display: 'flex', gap: '8px' }}>
             <Link
               href={gardenerHref}
-              className="px-3 py-1.5 text-primary-600 hover:text-primary-700 border border-primary-200 hover:border-primary-300 rounded text-xs font-medium transition-colors"
+              style={{
+                padding: '6px 12px',
+                color: 'var(--forest)',
+                border: '0.5px solid var(--forest)',
+                borderRadius: '3px',
+                fontSize: '12px',
+                fontWeight: '500',
+                textDecoration: 'none',
+                transition: 'all 0.2s'
+              }}
             >
-              {t('cards.view_profile') || 'Profiel'}
+              Profiel
             </Link>
-            <button className="px-3 py-1.5 bg-primary-600 hover:bg-primary-700 text-white rounded text-xs font-medium transition-colors">
-              {t('cards.contact') || 'Contact'}
+            <button style={{
+              padding: '6px 12px',
+              background: 'var(--forest)',
+              color: 'var(--cream)',
+              border: 'none',
+              borderRadius: '3px',
+              fontSize: '12px',
+              fontWeight: '500',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}>
+              Contact
             </button>
           </div>
         </div>
       </div>
       
       {/* Link Overlay */}
-      <Link href={gardenerHref} className="absolute inset-0 z-0">
-        <span className="sr-only">{t('cards.view_gardener', { name }) || `Bekijk profiel van ${name}`}</span>
+      <Link href={gardenerHref} style={{ position: 'absolute', inset: '0', zIndex: '0' }}>
+        <span style={{ position: 'absolute', width: '1px', height: '1px', padding: '0', margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', border: '0' }}>
+          Bekijk profiel van {name}
+        </span>
       </Link>
     </div>
   );

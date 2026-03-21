@@ -8,7 +8,7 @@ interface NavigationProps {
     gardeners?: string;
     services?: string;
     regions?: string;
-    inspiration?: string;
+    costs?: string;
     request_quote?: string;
   };
 }
@@ -21,7 +21,7 @@ export default function Navigation({ locale, translations = {} }: NavigationProp
     gardeners: translations.gardeners || (locale === 'nl' ? 'Hoveniers' : 'Gardeners'),
     services: translations.services || (locale === 'nl' ? 'Diensten' : 'Services'),
     regions: translations.regions || (locale === 'nl' ? 'Regio\'s' : 'Regions'),
-    inspiration: translations.inspiration || (locale === 'nl' ? 'Inspiratie' : 'Inspiration'),
+    costs: translations.costs || (locale === 'nl' ? 'Kosten' : 'Costs'),
     request_quote: translations.request_quote || (locale === 'nl' ? 'Offerte aanvragen' : 'Request Quote')
   };
   
@@ -65,7 +65,7 @@ export default function Navigation({ locale, translations = {} }: NavigationProp
           <Link href={`/${locale}/hoveniers`} className="nav-link">{t.gardeners}</Link>
           <Link href={`/${locale}/services`} className="nav-link">{t.services}</Link>
           <Link href={`/${locale}/regio`} className="nav-link">{t.regions}</Link>
-          <Link href={`/${locale}/articles`} className="nav-link">{t.inspiration}</Link>
+          <Link href={`/${locale}/kosten`} className="nav-link">{t.costs}</Link>
           <div className="lang-toggle" role="group" aria-label="Taal selectie">
             <button 
               className={`lang-btn ${locale === 'nl' ? 'active' : 'inactive'}`} 

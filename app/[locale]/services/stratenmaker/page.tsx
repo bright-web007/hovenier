@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
-import { useTranslations } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
+import Navigation from '../../../components/Navigation'
+import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from "@/app/components/NewLeadForm"
 
 type Props = {
@@ -13,10 +14,9 @@ export const metadata: Metadata = {
   keywords: 'stratenmaker, bestrating, oprit, terras, hardscaping, Friesland, straatklinkers, tuinpaden',
 }
 
-export default function StratenmakerPage({ params: { locale } }: Props) {
+export default async function StratenmakerPage({ params }: Props) {
+  const { locale } = await params;
   setRequestLocale(locale)
-  const t = useTranslations('services.paving')
-  
   // Simple translations for the form
   const formTranslations = {
     form_eyebrow: "Gratis Offerte",
@@ -30,8 +30,19 @@ export default function StratenmakerPage({ params: { locale } }: Props) {
     form_note: "Door het versturen van dit formulier gaat u akkoord met onze voorwaarden."
   }
 
+  // Breadcrumb items
+  const breadcrumbItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Diensten', href: '/services' },
+    { label: 'Stratenmaker' }
+  ];
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-sage-50 to-forest-50">
+    <>
+      <Navigation locale={locale} />
+      <Breadcrumbs items={breadcrumbItems} />
+      
+      <main className="min-h-screen bg-gradient-to-br from-sage-50 to-forest-50">
       <div className="container mx-auto px-4 py-16">
         {/* Hero Section */}
         <div className="max-w-4xl mx-auto text-center mb-16">
@@ -365,5 +376,6 @@ export default function StratenmakerPage({ params: { locale } }: Props) {
         </section>
       </div>
     </main>
+    </>
   )
 }

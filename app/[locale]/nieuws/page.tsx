@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
-import { unstable_setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 
 type Props = {
   params: { locale: string }
@@ -54,7 +54,7 @@ const categories = [
 ]
 
 export default function NieuwsHubPage({ params: { locale } }: Props) {
-  unstable_setRequestLocale(locale)
+  setRequestLocale(locale)
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-sage-50 to-forest-50">

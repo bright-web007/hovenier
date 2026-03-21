@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Navigation from '../../../components/Navigation';
-import NewLeadForm from '../../../components/NewLeadForm';
+import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../components/RelatedArticles';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';

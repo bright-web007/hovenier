@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
-import { unstable_setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 
 type Props = {
   params: { locale: string }
@@ -27,7 +27,7 @@ const frieslanders = [
 ]
 
 export default function RegioHubPage({ params: { locale } }: Props) {
-  unstable_setRequestLocale(locale)
+  setRequestLocale(locale)
   const t = useTranslations('pages.regions')
 
   return (

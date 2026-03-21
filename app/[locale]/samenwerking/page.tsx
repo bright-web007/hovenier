@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Navigation from '../../components/Navigation';
-import NewLeadForm from '../../components/NewLeadForm';
+import NewLeadForm from "@/app/components/NewLeadForm"
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';

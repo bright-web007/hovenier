@@ -144,7 +144,7 @@ export default async function HomePage({ params }: Props) {
               <ServiceCard
                 title="Tuinonderhoud"
                 description="Professioneel onderhoud van uw tuin, van snoeien tot onkruidbestrijding. Houd uw tuin het hele jaar door in topconditie."
-                imageUrl="/assets/tuinonderhoud-hero.jpg"
+                imageUrl="/images/garden-maintenance.png"
                 href="/services/tuinonderhoud"
                 price={{ from: 35, unit: 'uur' }}
                 features={[

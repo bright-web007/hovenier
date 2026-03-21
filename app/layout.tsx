@@ -3,9 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { locales, defaultLocale } from "../i18n";
 import { notFound } from "next/navigation";
-import WhatsAppButton from "./components/WhatsAppButton";
 import GoogleAnalytics from "./components/GoogleAnalytics";
-import CookieConsentBanner from "./components/CookieConsentBanner";
 import PerformanceInitializer from "./components/PerformanceInitializer";
 
 const geistSans = Geist({
@@ -138,8 +136,6 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <PerformanceInitializer />
         {children}
-        <WhatsAppButton />
-        <CookieConsentBanner />
       </body>
     </html>
   );

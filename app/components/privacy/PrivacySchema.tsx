@@ -78,7 +78,6 @@ const PrivacySchema = () => {
         name: 'Hovenier.frl',
         url: 'https://hovenier.frl',
         email: 'privacy@hovenier.frl',
-        telephone: '+31-515-123456',
         description: 'Leading platform connecting customers with professional gardeners in the Netherlands',
         address: {
           '@type': 'PostalAddress',
@@ -87,7 +86,6 @@ const PrivacySchema = () => {
         },
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: '+31-515-123456',
           email: 'privacy@hovenier.frl',
           contactType: 'Privacy Officer',
           areaServed: 'NL',

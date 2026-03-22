@@ -234,7 +234,6 @@ export default async function TermsPage({ params }: Props) {
                   <address className="legal-contact">
                     <strong>Hovenier.frl</strong><br />
                     E-mail: info@hovenier.frl<br />
-                    Telefoon: +31 (0)515-123456<br />
                     Website: <a href="https://hovenier.frl" className="legal-link">https://hovenier.frl</a>
                   </address>
                 </section>

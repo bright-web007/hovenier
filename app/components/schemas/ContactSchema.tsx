@@ -16,9 +16,8 @@ export default function ContactSchema({ locale, url }: ContactSchemaProps) {
     "contactPoint": [
       {
         "@type": "ContactPoint",
-        "telephone": "+31-000-000-000",
-        "contactType": "customer service",
         "email": "info@hovenier.frl",
+        "contactType": "customer service",
         "availableLanguage": ["Dutch", "English"],
         "areaServed": "Friesland",
         "hoursAvailable": {

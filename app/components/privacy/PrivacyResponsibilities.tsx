@@ -10,8 +10,7 @@ const PrivacyResponsibilities = () => {
       </p>
       <address className={styles.legalContact}>
         <strong>Hovenier.frl</strong><br />
-        E-mail: privacy@hovenier.frl<br />
-        Telefoon: +31 (0)515-123456
+        E-mail: privacy@hovenier.frl
       </address>
     </section>
   );

@@ -188,9 +188,8 @@ export function OrganizationSchema() {
     "logo": "https://hovenier.frl/assets/logo-light.svg",
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+31-515-123456",
-      "contactType": "Customer Service",
       "email": "info@hovenier.frl",
+      "contactType": "Customer Service",
       "availableLanguage": ["Dutch", "English"],
       "areaServed": "NL"
     },

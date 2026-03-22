@@ -260,7 +260,6 @@ export default async function CookiePolicyPage({ params }: Props) {
                   <address className="legal-contact">
                     <strong>Hovenier.frl</strong><br />
                     E-mail: privacy@hovenier.frl<br />
-                    Telefoon: +31 (0)515-123456<br />
                     Website: <a href="https://hovenier.frl" className="legal-link">https://hovenier.frl</a>
                   </address>
                 </section>

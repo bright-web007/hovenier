@@ -148,7 +148,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
             type="tel" 
             id="telefoon" 
             name="telefoon" 
-            placeholder="+31 6 00 00 00 00" 
+            placeholder="Uw telefoonnummer" 
             value={telefoon}
             onChange={(e) => setTelefoon(e.target.value)}
             required 

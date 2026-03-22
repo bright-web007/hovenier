@@ -107,7 +107,7 @@ export function getOrganizationSchema(locale: string = 'nl') {
       ? "Professionele hoveniersdiensten in Nederland"
       : "Professional landscaping services in the Netherlands",
     url: BASE_URL,
-    telephone: "+31-20-123-4567",
+    email: "info@hovenier.frl",
     address: {
       "@type": "PostalAddress",
       addressCountry: "NL",

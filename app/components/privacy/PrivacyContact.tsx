@@ -12,7 +12,6 @@ const PrivacyContact = () => {
         <h3>Privacy Officer</h3>
         <address>
           E-mail: <a href="mailto:privacy@hovenier.frl">privacy@hovenier.frl</a><br />
-          Telefoon: <a href="tel:+31515123456">+31 (0)515-123456</a><br />
           Website: <a href="https://hovenier.frl">https://hovenier.frl</a>
         </address>
       </div>

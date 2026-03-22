@@ -32,7 +32,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
     { href: '/over-ons', label: 'Over ons' },
     { href: '/samenwerking', label: 'Samenwerking' },
     { href: '/contact', label: 'Contact' },
-    { href: '/articles', label: 'Blog' }
+    { href: '/nieuws', label: 'Blog' }
   ];
   
   const legalLinks = [

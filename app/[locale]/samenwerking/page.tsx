@@ -2,7 +2,15 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';
-import NewLeadForm from "@/app/components/NewLeadForm"
+import PartnershipHero from '../../components/PartnershipHero';
+import PartnershipBenefits from '../../components/PartnershipBenefits';
+import PartnershipProcess from '../../components/PartnershipProcess';
+import PartnershipRequirements from '../../components/PartnershipRequirements';
+import PartnershipTestimonials from '../../components/PartnershipTestimonials';
+import PartnershipFAQ from '../../components/PartnershipFAQ';
+import PartnershipCTA from '../../components/PartnershipCTA';
+import PartnershipSchema from '../../components/schemas/PartnershipSchema';
+import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -74,7 +82,11 @@ export default async function SamenwerkingPage({ params }: Props) {
   const t = createTranslator(validLocale);
 
   // Partner benefits data
-  const benefits = [
+  const benefits: Array<{
+    title: string;
+    description: string;
+    icon: 'users' | 'money' | 'location' | 'badge';
+  }> = [
     {
       title: "Meer klanten",
       description: "Krijg toegang tot klanten in heel Friesland die op zoek zijn naar betrouwbare hoveniers.",
@@ -196,244 +208,32 @@ export default async function SamenwerkingPage({ params }: Props) {
     { label: validLocale === 'en' ? 'Partnership' : 'Samenwerking' }
   ];
 
+  // Transform breadcrumbs for schema
+  const breadcrumbSchemaItems = breadcrumbItems.map(item => ({
+    name: item.label,
+    url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl/${validLocale}/samenwerking`
+  }));
+
   return (
     <>
       <Navigation locale={validLocale} />
       <Breadcrumbs items={breadcrumbItems} />
+      <BreadcrumbSchema items={breadcrumbSchemaItems} />
       
       <main>
-        {/* Hero Section */}
-        <section className="section partnership-hero">
-          <div className="section-inner">
-            <div className="partnership-hero-content">
-              <div className="partnership-hero-text">
-                <div className="partnership-hero-badge">
-                  <span className="partnership-badge-text">Voor professionals</span>
-                </div>
-                <h1 className="partnership-hero-title">
-                  Word partner van Hovenier.frl
-                </h1>
-                <p className="partnership-hero-description">
-                  Sluit je aan bij ons netwerk van gekwalificeerde hoveniers en krijg toegang tot 
-                  klanten in heel Friesland. Zonder commissiekosten, met volledige transparantie.
-                </p>
-                <div className="partnership-hero-stats">
-                  <div className="partnership-stat">
-                    <span className="partnership-stat-number">150+</span>
-                    <span className="partnership-stat-label">Tevreden klanten</span>
-                  </div>
-                  <div className="partnership-stat">
-                    <span className="partnership-stat-number">25+</span>
-                    <span className="partnership-stat-label">Partner hoveniers</span>
-                  </div>
-                  <div className="partnership-stat">
-                    <span className="partnership-stat-number">0%</span>
-                    <span className="partnership-stat-label">Commissie</span>
-                  </div>
-                </div>
-              </div>
-              <div className="partnership-hero-image">
-                <div className="partnership-hero-placeholder">
-                  <svg className="partnership-hero-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Benefits Section */}
-        <section className="section section-alt">
-          <div className="section-inner">
-            <div className="section-header-row section-centered">
-              <h2 className="section-title">Waarom partner worden?</h2>
-              <p className="section-sub">De voordelen van samenwerken met Hovenier.frl</p>
-            </div>
-            
-            <div className="partnership-benefits-grid">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="partnership-benefit-card">
-                  <div className="partnership-benefit-icon">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      {benefit.icon === 'users' && (
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                      )}
-                      {benefit.icon === 'money' && (
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                      )}
-                      {benefit.icon === 'location' && (
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      )}
-                      {benefit.icon === 'badge' && (
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      )}
-                    </svg>
-                  </div>
-                  <h3 className="partnership-benefit-title">{benefit.title}</h3>
-                  <p className="partnership-benefit-description">{benefit.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Process Section */}
-        <section className="section">
-          <div className="section-inner">
-            <div className="section-header-row section-centered">
-              <h2 className="section-title">Hoe werkt het?</h2>
-              <p className="section-sub">In 4 stappen partner worden</p>
-            </div>
-            
-            <div className="partnership-process-grid">
-              {processSteps.map((step, index) => (
-                <div key={index} className="partnership-process-step">
-                  <div className="partnership-process-number">{step.step}</div>
-                  <h3 className="partnership-process-title">{step.title}</h3>
-                  <p className="partnership-process-description">{step.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Requirements Section */}
-        <section className="section section-alt">
-          <div className="section-inner">
-            <div className="partnership-requirements">
-              <div className="partnership-requirements-content">
-                <h2 className="partnership-requirements-title">Partner vereisten</h2>
-                <p className="partnership-requirements-description">
-                  Wij werken alleen samen met professionele hoveniers die voldoen aan onze kwaliteitseisen.
-                </p>
-                
-                <div className="partnership-requirements-list">
-                  {requirements.map((requirement, index) => (
-                    <div key={index} className="partnership-requirement-item">
-                      <div className="partnership-requirement-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <span className="partnership-requirement-text">{requirement}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Success Stories Section */}
-        <section className="section">
-          <div className="section-inner">
-            <div className="section-header-row section-centered">
-              <h2 className="section-title">Succesverhalen</h2>
-              <p className="section-sub">Wat onze partners zeggen</p>
-            </div>
-            
-            <div className="partnership-testimonials-grid">
-              {successStories.map((story, index) => (
-                <div key={index} className="partnership-testimonial-card">
-                  <div className="partnership-testimonial-content">
-                    <p className="partnership-testimonial-quote">"{story.quote}"</p>
-                    <div className="partnership-testimonial-author">
-                      <div className="partnership-testimonial-info">
-                        <h4 className="partnership-testimonial-name">{story.name}</h4>
-                        <p className="partnership-testimonial-company">{story.company}</p>
-                        <p className="partnership-testimonial-years">{story.years}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="section section-alt">
-          <div className="section-inner">
-            <div className="section-header-row section-centered">
-              <h2 className="section-title">Veelgestelde vragen</h2>
-            </div>
-            
-            <div className="faq-grid">
-              {faqs.map((faq, index) => (
-                <div key={index} className="faq-item">
-                  <h3 className="faq-question">{faq.question}</h3>
-                  <p className="faq-answer">{faq.answer}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="section">
-          <div className="section-inner">
-            <div className="partnership-cta">
-              <div className="partnership-cta-content">
-                <h2 className="partnership-cta-title">Klaar om partner te worden?</h2>
-                <p className="partnership-cta-description">
-                  Meld je vandaag nog aan en begin binnen een week met het ontvangen van kiesbrieven.
-                </p>
-                <div className="partnership-form-container">
-                  <NewLeadForm 
-                    translations={{
-                      ...translations,
-                      form_title: "Partner aanmelding",
-                      form_subtitle: "Laat je gegevens achter en we nemen binnen 24 uur contact op."
-                    }}
-                    locale={validLocale} 
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <PartnershipHero locale={validLocale} />
+        <PartnershipBenefits benefits={benefits} />
+        <PartnershipProcess processSteps={processSteps} />
+        <PartnershipRequirements requirements={requirements} />
+        <PartnershipTestimonials successStories={successStories} />
+        <PartnershipFAQ faqs={faqs} />
+        <PartnershipCTA translations={translations} locale={validLocale} />
       </main>
 
-      {/* FAQ Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": faqs.map(faq => ({
-              "@type": "Question",
-              "name": faq.question,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.answer
-              }
-            }))
-          }),
-        }}
-      />
-
-      {/* Organization Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "Hovenier.frl Partner Network",
-            "description": "Professioneel netwerk van gecertificeerde hoveniers in Friesland",
-            "url": "https://hovenier.frl/samenwerking",
-            "areaServed": {
-              "@type": "State",
-              "name": "Friesland",
-              "containedInPlace": {
-                "@type": "Country",
-                "name": "Nederland"
-              }
-            }
-          }),
-        }}
+      <PartnershipSchema 
+        locale={validLocale}
+        faqs={faqs}
+        url={`https://hovenier.frl/${validLocale}/samenwerking`}
       />
     </>
   );

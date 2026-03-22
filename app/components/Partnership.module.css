@@ -1,0 +1,396 @@
+/* Partnership Page Styles */
+
+.main {
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.heroSection {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--forest) 100%);
+  color: var(--white);
+  padding: 80px 0;
+}
+
+.heroContent {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 60px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--section-padding);
+}
+
+.heroText {
+  max-width: 600px;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.heroTitle {
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 20px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.heroDescription {
+  font-size: 18px;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin: 0 0 40px 0;
+}
+
+.heroStats {
+  display: flex;
+  gap: 40px;
+}
+
+.heroStat {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.heroStatNumber {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.heroStatLabel {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.heroImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroPlaceholder {
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.heroIcon {
+  width: 80px;
+  height: 80px;
+  opacity: 0.7;
+}
+
+/* Benefits Section */
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.benefitCard {
+  background: var(--white);
+  padding: 40px 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--gray-light);
+}
+
+.benefitCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+}
+
+.benefitIcon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px auto;
+  color: var(--primary);
+}
+
+.benefitTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0 0 15px 0;
+}
+
+.benefitDescription {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray);
+  margin: 0;
+}
+
+/* Process Section */
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.processStep {
+  text-align: center;
+  position: relative;
+}
+
+.processNumber {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary), var(--forest));
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 auto 20px auto;
+}
+
+.processTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0 0 15px 0;
+}
+
+.processDescription {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray);
+  margin: 0;
+}
+
+/* Requirements Section */
+.requirements {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.requirementsTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.requirementsDescription {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--gray);
+  text-align: center;
+  margin: 0 0 40px 0;
+}
+
+.requirementsList {
+  display: grid;
+  gap: 20px;
+}
+
+.requirementItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 20px;
+  background: var(--white);
+  border-radius: 8px;
+  border: 1px solid var(--gray-light);
+}
+
+.requirementIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--success);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.requirementText {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--dark);
+  margin: 0;
+}
+
+/* Testimonials Section */
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.testimonialCard {
+  background: var(--white);
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--gray-light);
+  position: relative;
+}
+
+.testimonialCard::before {
+  content: '"';
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  font-size: 60px;
+  color: var(--primary);
+  opacity: 0.3;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+.testimonialQuote {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--dark);
+  margin: 0 0 25px 0;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+
+.testimonialAuthor {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.testimonialName {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0;
+}
+
+.testimonialCompany {
+  font-size: 14px;
+  color: var(--primary);
+  margin: 4px 0 0 0;
+}
+
+.testimonialYears {
+  font-size: 14px;
+  color: var(--gray);
+  margin: 2px 0 0 0;
+}
+
+/* FAQ Section */
+.faqGrid {
+  display: grid;
+  gap: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.faqItem {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid var(--gray-light);
+}
+
+.faqQuestion {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0 0 15px 0;
+}
+
+.faqAnswer {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray);
+  margin: 0;
+}
+
+/* CTA Section */
+.cta {
+  background: gradient;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.ctaContent {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 20px 0;
+}
+
+.ctaDescription {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--gray);
+  margin: 0 0 40px 0;
+}
+
+.formContainer {
+  background: var(--white);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--gray-light);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .heroContent {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  
+  .heroStats {
+    justify-content: center;
+  }
+  
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .processGrid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .testimonialsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .formContainer {
+    padding: 30px;
+  }
+}

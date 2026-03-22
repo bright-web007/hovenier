@@ -1,0 +1,276 @@
+/* Gardener Profile Page Styles */
+
+.main {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, var(--cream-light), var(--sage-light));
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header Section */
+.header {
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.headerContent {
+  max-width: 64rem;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profileImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem auto;
+  background: var(--sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  font-weight: bold;
+}
+
+.name {
+  font-size: 3rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.company {
+  font-size: 1.5rem;
+  color: var(--sage);
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.location {
+  font-size: 1.125rem;
+  color: var(--forest-mid);
+}
+
+/* Stats Section */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.statCard {
+  text-align: center;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--sage);
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: var(--forest-mid);
+  margin-top: 0.5rem;
+}
+
+/* Main Content Layout */
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 3rem;
+  padding-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Left Column */
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--forest);
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: var(--forest-mid);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Services List */
+.servicesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.serviceItem {
+  padding: 0.75rem 0;
+  color: var(--forest-mid);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.serviceItem:not(:last-child) {
+  border-bottom: 1px solid var(--cream);
+}
+
+.serviceIcon {
+  color: var(--sage);
+  font-weight: bold;
+}
+
+/* Right Sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sidebarSection {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.sidebarTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--forest);
+  margin-bottom: 1.5rem;
+}
+
+.contactInfo {
+  margin-bottom: 2rem;
+}
+
+.contactItem {
+  margin: 0.5rem 0;
+  color: var(--forest-mid);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quoteButton {
+  width: 100%;
+  background: var(--sage);
+  color: white;
+  padding: 0.875rem 1rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.quoteButton:hover {
+  background: var(--forest);
+}
+
+/* Badges */
+.badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badgeVerified {
+  background: var(--sage);
+  color: white;
+}
+
+.badgeAvailable {
+  background: var(--forest-light);
+  color: var(--forest);
+}
+
+.badgeBusy {
+  background: var(--cream);
+  color: var(--forest-mid);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .name {
+    font-size: 2.5rem;
+  }
+  
+  .company {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding-top: 2rem;
+  }
+  
+  .name {
+    font-size: 2rem;
+  }
+  
+  .company {
+    font-size: 1.125rem;
+  }
+  
+  .statsGrid {
+    grid-template-columns: 1fr;
+    max-width: 300px;
+  }
+  
+  .contentGrid {
+    padding-bottom: 2rem;
+  }
+  
+  .section,
+  .sidebarSection {
+    padding: 1.5rem;
+  }
+}

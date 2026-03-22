@@ -1,0 +1,391 @@
+/* Gardener Directory Styles */
+
+/* Main Layout */
+.main {
+  min-height: 100vh;
+}
+
+.section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+}
+
+.sectionInner {
+  max-width: 100%;
+}
+
+/* Hero Section */
+.sectionCentered {
+  text-align: center;
+  margin-bottom: 4rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sectionEyebrow {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sage);
+  background: var(--sage-light);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.sectionTitle {
+  font-family: var(--serif);
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.sectionSub {
+  font-size: 1.125rem;
+  color: var(--forest-mid);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Search Section */
+.searchSection {
+  background: white;
+  border-radius: 6px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  border: 0.5px solid var(--border);
+}
+
+.searchTitle {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--forest-deep);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.filterGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.filterLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--forest);
+  margin-bottom: 0.5rem;
+}
+
+.filterSelect {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background: white;
+  color: var(--forest);
+}
+
+.searchButton {
+  width: 100%;
+  background: var(--sage);
+  color: white;
+  padding: 0.875rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.searchButton:hover {
+  background: var(--forest);
+}
+
+/* Results Section */
+.resultsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.resultsCount {
+  font-size: 1rem;
+  color: var(--forest-mid);
+}
+
+.sortSelect {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background: white;
+  color: var(--forest);
+}
+
+/* Gardener Grid */
+.gardenersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.gardenerCard {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.gardenerCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px -1px rgb(0 0 0 / 0.15);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cardImage {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.cardInfo {
+  flex: 1;
+}
+
+.cardName {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 0.25rem;
+}
+
+.cardCompany {
+  font-size: 0.875rem;
+  color: var(--sage);
+  font-weight: 500;
+}
+
+.cardBadges {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badgeVerified {
+  background: var(--sage);
+  color: white;
+}
+
+.badgeAvailable {
+  background: var(--forest-light);
+  color: var(--forest);
+}
+
+.badgeBusy {
+  background: var(--cream);
+  color: var(--forest-mid);
+}
+
+.cardMeta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: var(--cream-light);
+  border-radius: 8px;
+}
+
+.metaItem {
+  text-align: center;
+}
+
+.metaValue {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--forest);
+}
+
+.metaLabel {
+  font-size: 0.75rem;
+  color: var(--forest-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+
+.cardSpecialties {
+  margin-bottom: 1rem;
+}
+
+.specialtiesLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--forest);
+  margin-bottom: 0.5rem;
+}
+
+.specialtiesList {
+  font-size: 0.875rem;
+  color: var(--forest-mid);
+  line-height: 1.4;
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.viewButton {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--sage);
+  background: transparent;
+  color: var(--sage);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.viewButton:hover {
+  background: var(--sage);
+  color: white;
+}
+
+.contactButton {
+  flex: 1;
+  padding: 0.75rem;
+  background: var(--forest);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.contactButton:hover {
+  background: var(--forest-mid);
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.emptyStateTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 1rem;
+}
+
+.emptyStateText {
+  font-size: 1rem;
+  color: var(--forest-mid);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .section {
+    padding: 3rem 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 2rem 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  
+  .sectionSub {
+    font-size: 1rem;
+  }
+  
+  .searchSection {
+    padding: 1.5rem;
+  }
+  
+  .filterGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .resultsHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .gardenersGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .gardenerCard {
+    padding: 1.5rem;
+  }
+  
+  .cardActions {
+    flex-direction: column;
+  }
+}

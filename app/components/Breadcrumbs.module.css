@@ -1,0 +1,99 @@
+/* Breadcrumbs.module.css */
+
+
+/* Subtle breadcrumb bar */
+.breadcrumbs {
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0 1.25rem 0;
+}
+
+/* Subtle container, less height */
+.breadcrumbContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+}
+
+.breadcrumbList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumbItem {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.breadcrumbLink {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  transition: color 0.2s;
+  opacity: 0.85;
+}
+
+.breadcrumbLink:hover {
+  color: var(--forest);
+  text-decoration: underline;
+  opacity: 1;
+}
+
+.breadcrumbCurrent {
+  color: var(--sage);
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+.breadcrumbSeparator {
+  color: var(--sage);
+  display: flex;
+  align-items: center;
+  margin: 0 0.25rem;
+  opacity: 0.7;
+}
+
+.breadcrumbIcon {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 1023px) {
+  .breadcrumbContainer {
+    padding: 0 1rem;
+  }
+  .breadcrumbLink,
+  .breadcrumbCurrent {
+    font-size: 12px;
+  }
+  .breadcrumbIcon {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .breadcrumbContainer {
+    padding: 0 0.5rem;
+    min-height: 32px;
+  }
+  .breadcrumbLink,
+  .breadcrumbCurrent {
+    font-size: 11px;
+  }
+  .breadcrumbIcon {
+    width: 10px;
+    height: 10px;
+  }
+}

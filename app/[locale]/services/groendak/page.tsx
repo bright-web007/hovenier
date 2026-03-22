@@ -9,6 +9,14 @@ import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/Struc
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
 
+// ISR: Never revalidate (static service content, changes only with deployments)
+export const revalidate = false;
+
+// Generate static params for both locales to enable ISR
+export async function generateStaticParams() {
+  return [{ locale: 'nl' }, { locale: 'en' }];
+}
+
 type Props = {
   params: Promise<{ locale: string }>;
 };

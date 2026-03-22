@@ -1,0 +1,147 @@
+/* Price Cards Grid Component */
+.priceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.priceCard {
+  background: #fff;
+  border: 0.5px solid #c8d8b0;
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.priceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(74, 140, 42, 0.15);
+  border-color: #4a8c2a;
+}
+
+.priceCardIcon {
+  width: 48px;
+  height: 48px;
+  background: #e8f5d8;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+.cardIcon {
+  width: 20px;
+  height: 20px;
+  stroke: #2a3e20;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.priceCardName {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a3210;
+  margin-bottom: 8px;
+}
+
+.priceCardPrice {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 500;
+  color: #2a3e20;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.priceCardUnit {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: #9aaa90;
+  margin-bottom: 12px;
+}
+
+.priceCardRange {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: #7a8a70;
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.priceCardLink {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: #4a8c2a;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: auto;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.priceCardLink:hover {
+  color: #2a3e20;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .priceGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .priceGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .priceCard {
+    padding: 1.5rem;
+  }
+  
+  .priceCardIcon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1rem;
+  }
+  
+  .cardIcon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .priceCardPrice {
+    font-size: 28px;
+  }
+  
+  .priceCardName {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .priceCard {
+    padding: 1.25rem;
+  }
+  
+  .priceCardPrice {
+    font-size: 24px;
+  }
+}

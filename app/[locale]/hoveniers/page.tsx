@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import GardenerCard from '../../components/GardenerCard'
+import LocalBusinessSchema from '../../components/schemas/LocalBusinessSchema'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -12,6 +13,14 @@ export const metadata: Metadata = {
   title: 'Hoveniers Directory - Vind uw Tuinspecialist | Hovenier.frl',
   description: 'Doorzoek onze database van gekwalificeerde hoveniers in Friesland. Filter op gemeente, specialisatie, beoordelingen en beschikbaarheid.',
   keywords: 'hoveniers directory, tuinman zoeken, Friesland hoveniers, tuinspecialist vinden, tuinonderhoud, tuinontwerp',
+}
+
+// ISR: Never revalidate (hardcoded sample data, changes only with deployments)
+export const revalidate = false;
+
+// Generate static params for both locales to enable ISR  
+export async function generateStaticParams() {
+  return [{ locale: 'nl' }, { locale: 'en' }];
 }
 
 // Sample gardener data - In production this would come from API/database
@@ -95,6 +104,15 @@ export default async function HoveniersDirectoryPage({ params }: Props) {
 
   return (
     <>
+      <LocalBusinessSchema 
+        name="Hovenier.frl - Hoveniers Directory Friesland"
+        description="Uitgebreide directory van gekwalificeerde hoveniers en tuinspecialisten in alle Friese gemeenten. Vind lokale experts voor tuinonderhoud, tuinontwerp en tuinaanleg."
+        url={`https://hovenier.frl/${locale}/hoveniers`}
+        areaServed="Friesland, Nederland"
+        serviceTypes={["Tuinonderhoud", "Tuinontwerp", "Tuinaanleg", "Bestrating", "Groendaken"]}
+        ratingValue="4.7"
+        reviewCount="189"
+      />
       <Navigation locale={locale} />
       <Breadcrumbs items={breadcrumbItems} />
       

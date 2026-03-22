@@ -59,7 +59,7 @@ export default function Navigation({ locale, translations = {} }: NavigationProp
     <nav className="nav" role="navigation" aria-label="Hoofdnavigatie">
       <div className="nav-inner">
         <Link href={`/${locale}`} className="nav-logo" aria-label="Hovenier.frl homepage">
-          <img src="/assets/logo-light.svg" alt="Hovenier.frl" width="180" height="40" className="nav-logo-image" />
+          <img src="/assets/logo-light.svg" alt="Hovenier.frl - Vind de beste hovenier in Friesland" width="180" height="40" className="nav-logo-image" />
         </Link>
         <div className="nav-links">
           <Link href={`/${locale}/hoveniers`} className="nav-link">{t.gardeners}</Link>

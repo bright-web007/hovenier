@@ -14,6 +14,14 @@ export const metadata: Metadata = {
   keywords: 'tuin aanleggen kosten, tuinaanleg prijzen, nieuwe tuin kosten, hovenier prijzen, Friesland tuinaanleg',
 }
 
+// ISR: Never revalidate (static pricing content, changes only with deployments)
+export const revalidate = false;
+
+// Generate static params for both locales to enable ISR
+export async function generateStaticParams() {
+  return [{ locale: 'nl' }, { locale: 'en' }];
+}
+
 export default async function TuinAanleggenKostenPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)

@@ -78,6 +78,9 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['@sentry/nextjs'],
   },
 
+  // Production optimization
+  output: 'standalone',
+
   // Bundle analyzer (uncomment for analysis)
   // bundleAnalyzer: {
   //   enabled: process.env.ANALYZE === 'true',

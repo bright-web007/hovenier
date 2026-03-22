@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import { useTranslations } from 'next-intl'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from "@/app/components/NewLeadForm"
@@ -15,10 +14,17 @@ export const metadata: Metadata = {
   keywords: 'tuin aanleggen, nieuwe tuin, tuinaanleg, hovenier, Friesland, tuinontwerp realisatie',
 }
 
+// ISR: Never revalidate (static service content, changes only with deployments)
+export const revalidate = false;
+
+// Generate static params for both locales to enable ISR
+export async function generateStaticParams() {
+  return [{ locale: 'nl' }, { locale: 'en' }];
+}
+
 export default async function TuinAanleggenPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale)
-  const t = useTranslations('services.garden-installation')
   
   // Simple translations for the form
   const formTranslations = {
@@ -48,7 +54,7 @@ export default async function TuinAanleggenPage({ params }: Props) {
       <main className="min-h-screen bg-gradient-to-br from-sage-50 to-forest-50">
       <div className="container mx-auto px-4 py-16">
         {/* Hero Section */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
+        <div className="max-w-screen-xl mx-auto text-center mb-16 px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-forest-900 mb-6">
             Tuin Aanleggen
           </h1>
@@ -58,7 +64,7 @@ export default async function TuinAanleggenPage({ params }: Props) {
         </div>
 
         {/* Service Description */}
-        <section className="max-w-4xl mx-auto mb-16">
+        <section className="max-w-screen-xl mx-auto mb-16 px-4">
           <div className="bg-white rounded-xl shadow-lg p-8">
             <h2 className="text-3xl font-bold text-forest-900 mb-6">
               Complete Tuinaanleg van A tot Z
@@ -79,7 +85,7 @@ export default async function TuinAanleggenPage({ params }: Props) {
         </section>
 
         {/* What's Included */}
-        <section className="max-w-6xl mx-auto mb-16">
+        <section className="max-w-screen-xl mx-auto mb-16 px-4">
           <h2 className="text-3xl font-bold text-forest-900 mb-12 text-center">
             Wat is inbegrepen bij tuinaanleg?
           </h2>
@@ -159,7 +165,7 @@ export default async function TuinAanleggenPage({ params }: Props) {
         </section>
 
         {/* Process Timeline */}
-        <section className="max-w-4xl mx-auto mb-16">
+        <section className="max-w-screen-xl mx-auto mb-16 px-4">
           <div className="bg-forest-50 rounded-xl p-8">
             <h2 className="text-3xl font-bold text-forest-900 mb-8 text-center">
               Het Tuinaanleg Proces
@@ -229,7 +235,7 @@ export default async function TuinAanleggenPage({ params }: Props) {
         </section>
 
         {/* Cost Information */}
-        <section className="max-w-4xl mx-auto mb-16">
+        <section className="max-w-screen-xl mx-auto mb-16 px-4">
           <div className="bg-white rounded-xl shadow-lg p-8">
             <h2 className="text-3xl font-bold text-forest-900 mb-6 text-center">
               Kosten van Tuinaanleg
@@ -263,7 +269,7 @@ export default async function TuinAanleggenPage({ params }: Props) {
         </section>
 
         {/* FAQ Section */}
-        <section className="max-w-4xl mx-auto mb-16">
+        <section className="max-w-screen-xl mx-auto mb-16 px-4">
           <h2 className="text-3xl font-bold text-forest-900 mb-8 text-center">
             Veelgestelde Vragen
           </h2>
@@ -317,7 +323,7 @@ export default async function TuinAanleggenPage({ params }: Props) {
         </section>
 
         {/* Lead Form */}
-        <section className="max-w-2xl mx-auto">
+        <section className="max-w-4xl mx-auto px-4">
           <div className="bg-white rounded-xl shadow-lg p-8">
             <h2 className="text-2xl font-bold text-forest-900 mb-6 text-center">
               Gratis Offertes voor Tuinaanleg

@@ -14,6 +14,14 @@ export const metadata: Metadata = {
   keywords: 'stratenmaker, bestrating, oprit, terras, hardscaping, Friesland, straatklinkers, tuinpaden',
 }
 
+// ISR: Never revalidate (static service content, changes only with deployments)
+export const revalidate = false;
+
+// Generate static params for both locales to enable ISR
+export async function generateStaticParams() {
+  return [{ locale: 'nl' }, { locale: 'en' }];
+}
+
 export default async function StratenmakerPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale)

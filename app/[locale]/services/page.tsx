@@ -4,6 +4,15 @@ import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import NewLeadForm from '@/app/components/NewLeadForm';
 import Link from 'next/link';
+import ServiceSchema from '../../components/schemas/ServiceSchema';
+
+// ISR: Never revalidate (static service listings, changes only with deployments)
+export const revalidate = false;
+
+// Generate static params for both locales to enable ISR
+export async function generateStaticParams() {
+  return [{ locale: 'nl' }, { locale: 'en' }];
+}
 
 export default async function ServicesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -101,6 +110,41 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
 
   return (
     <>
+      <ServiceSchema 
+        name="Tuinonderhoud"
+        description="Professioneel tuinonderhoud voor het hele jaar door in Friesland. Gras maaien, hagen knippen, onkruidbestrijding en seizoensklussen door ervaren tuinspecialisten."
+        provider={{ name: "Hovenier.frl", url: "https://hovenier.frl" }}
+        areaServed="Friesland, Nederland"
+        priceRange="€35-€50"
+      />
+      <ServiceSchema 
+        name="Tuinontwerp"
+        description="Creatieve tuinontwerpen op maat in Friesland. 3D visualisaties, plantenschema's en complete tuinconcepten die perfect aansluiten bij uw wensen en budget."
+        provider={{ name: "Hovenier.frl", url: "https://hovenier.frl" }}
+        areaServed="Friesland, Nederland"
+        priceRange="€750-€2500"
+      />
+      <ServiceSchema 
+        name="Tuin Aanleggen"
+        description="Complete tuinaanleg van A tot Z in Friesland. Van concept tot realisatie met kwalitatieve materialen, grondwerkzaamheden, beplanting en verharding."
+        provider={{ name: "Hovenier.frl", url: "https://hovenier.frl" }}
+        areaServed="Friesland, Nederland"
+        priceRange="€8000-€35000"
+      />
+      <ServiceSchema 
+        name="Bestrating"
+        description="Duurzame bestratingswerken in Friesland. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat door vakkundige stratenmakers."
+        provider={{ name: "Hovenier.frl", url: "https://hovenier.frl" }}
+        areaServed="Friesland, Nederland"
+        priceRange="€45-€85"
+      />
+      <ServiceSchema 
+        name="Groendaken"
+        description="Extensieve en intensieve groendaken in Friesland. Duurzame dakoverdekking met expertise in waterafvoer, isolatie en beplanting voor een groenere leefomgeving."
+        provider={{ name: "Hovenier.frl", url: "https://hovenier.frl" }}
+        areaServed="Friesland, Nederland"
+        priceRange="€85-€150"
+      />
       <Navigation locale={validLocale as "nl" | "en"} />
       <Breadcrumbs items={breadcrumbItems} />
       

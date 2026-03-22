@@ -1,0 +1,121 @@
+/* General Section Layout for Kosten Page */
+.page {
+  font-family: 'DM Sans', sans-serif;
+  background: #f4f0e8;
+}
+
+.section {
+  padding: 4rem 2rem;
+}
+
+.sectionInner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.sectionAlt {
+  background: #fff;
+}
+
+.sectionCream {
+  background: #f4f0e8;
+}
+
+.sectionEyebrow {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #4a8c2a;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.sectionTitle {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 500;
+  color: #1a3210;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.sectionTitle em {
+  font-style: italic;
+  color: #4a8c2a;
+}
+
+.sectionTitleCentered {
+  text-align: center;
+}
+
+.sectionSubtitle {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: #7a8a70;
+  line-height: 1.65;
+  font-weight: 300;
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+
+.sectionSubtitleCentered {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.serviceFormContainer {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.serviceFormHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.serviceFormContent {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 0.5px solid #c8d8b0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section {
+    padding: 2.5rem 1.5rem;
+  }
+  
+  .sectionTitle {
+    font-size: 30px;
+  }
+  
+  .sectionSubtitle {
+    font-size: 14px;
+    margin-bottom: 2rem;
+  }
+  
+  .serviceFormContent {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 2rem 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 26px;
+  }
+  
+  .sectionSubtitle {
+    font-size: 13px;
+  }
+  
+  .serviceFormContent {
+    padding: 1.25rem;
+  }
+}

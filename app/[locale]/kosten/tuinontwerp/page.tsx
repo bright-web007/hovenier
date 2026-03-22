@@ -14,6 +14,14 @@ export const metadata: Metadata = {
   keywords: 'tuinontwerp kosten, tuinarchitect prijzen, tuinplan kosten, 3D tuinontwerp, tuinadvies tarieven, Friesland tuinontwerp',
 }
 
+// ISR: Never revalidate (static pricing content, changes only with deployments)
+export const revalidate = false;
+
+// Generate static params for both locales to enable ISR
+export async function generateStaticParams() {
+  return [{ locale: 'nl' }, { locale: 'en' }];
+}
+
 export default async function TuinontwerpKostenPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)

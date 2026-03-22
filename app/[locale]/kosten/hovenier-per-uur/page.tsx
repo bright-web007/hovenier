@@ -14,6 +14,14 @@ export const metadata: Metadata = {
   keywords: 'hovenier per uur, uurtarieven, tuinonderhoud kosten, hovenier prijzen, Friesland tarieven',
 }
 
+// ISR: Never revalidate (static pricing content, changes only with deployments)
+export const revalidate = false;
+
+// Generate static params for both locales to enable ISR
+export async function generateStaticParams() {
+  return [{ locale: 'nl' }, { locale: 'en' }];
+}
+
 export default async function HovenierPerUurPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)

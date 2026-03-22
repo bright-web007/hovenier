@@ -1,0 +1,134 @@
+/* Hero Section for Kosten Page */
+.heroSection {
+  background: #2a3e20;
+  padding: 3.5rem 2rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: 
+    repeating-linear-gradient(0deg, #fff 0, #fff 1px, transparent 1px, transparent 32px),
+    repeating-linear-gradient(90deg, #fff 0, #fff 1px, transparent 1px, transparent 32px);
+  background-size: 32px 32px;
+}
+
+.heroInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8ab87a;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 0.5px;
+  background: #8ab87a;
+  display: block;
+}
+
+.heroTitle {
+  font-family: var(--serif);
+  font-size: 48px;
+  line-height: 1.08;
+  color: #f4f0e8;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.heroTitle em {
+  color: #8ab87a;
+  font-style: italic;
+}
+
+.heroAnswer {
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 2px solid #8ab87a;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0;
+}
+
+.heroAnswer p {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: #c8dfc0;
+  line-height: 1.65;
+  font-weight: 300;
+  margin: 0;
+}
+
+.heroAnswer strong {
+  color: #f4f0e8;
+  font-weight: 500;
+}
+
+.heroStats {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.statNumber {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 500;
+  color: #f4f0e8;
+  line-height: 1;
+}
+
+.statLabel {
+  font-family: var(--sans);
+  font-size: 10px;
+  color: #6a8a60;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 2rem 1.5rem;
+  }
+  
+  .heroTitle {
+    font-size: 36px;
+  }
+  
+  .heroStats {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroStats {
+    gap: 1rem;
+  }
+  
+  .stat {
+    min-width: calc(50% - 0.5rem);
+  }
+}

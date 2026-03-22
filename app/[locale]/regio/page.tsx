@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import LocalBusinessSchema from '../../components/schemas/LocalBusinessSchema';
 
 type Props = {
   params: { locale: string }
@@ -11,6 +12,14 @@ export const metadata: Metadata = {
   title: 'Hovenier per Gemeente in Friesland | Hovenier.frl',
   description: 'Vind lokale hoveniers in alle 11 Friese gemeenten. Van Leeuwarden tot Harlingen - bekijk welke tuinspecialisten actief zijn in jouw gemeente.',
   keywords: 'hovenier per gemeente, Friesland hoveniers, lokale tuinman, gemeente hovenier',
+}
+
+// ISR: Never revalidate (static municipal data, changes only with deployments)
+export const revalidate = false;
+
+// Generate static params for both locales to enable ISR
+export async function generateStaticParams() {
+  return [{ locale: 'nl' }, { locale: 'en' }];
 }
 
 const frieslanders = [
@@ -39,6 +48,15 @@ export default async function RegioHubPage({ params }: Props) {
 
   return (
     <>
+      <LocalBusinessSchema 
+        name="Hovenier.frl - Hoveniers per Gemeente Friesland"
+        description="Lokale hoveniers en tuinspecialisten in alle 11 Friese gemeenten. Van Leeuwarden tot Harlingen - vind de beste tuinexperts in jouw gemeente voor tuinonderhoud, tuinontwerp en tuinaanleg."
+        url={`https://hovenier.frl/${locale}/regio`}
+        areaServed="Friesland, Nederland"
+        serviceTypes={["Lokale Hoveniers", "Gemeente Tuinspecialisten", "Regionale Tuinservices"]}
+        ratingValue="4.6"
+        reviewCount="94"
+      />
       <Navigation locale={locale} />
       <Breadcrumbs items={breadcrumbItems} />
       

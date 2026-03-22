@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
 
 interface FooterProps {
   locale?: string;
@@ -9,6 +10,7 @@ interface FooterProps {
 
 export default function Footer({ locale = 'nl' }: FooterProps) {
   const [emailInput, setEmailInput] = useState('');
+  const currentLocale = locale as SupportedLocale;
   
   // Simple translation function
   function t(key: string): string {
@@ -81,33 +83,33 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
   const currentYear = new Date().getFullYear();
   
   const serviceLinks = [
-    { href: `/${locale}/services/tuinonderhoud`, label: t('footer.links.services.tuinonderhoud') },
-    { href: `/${locale}/services/tuinontwerp`, label: t('footer.links.services.tuinontwerp') },
-    { href: `/${locale}/services/groendak`, label: t('footer.links.services.groendak') },
-    { href: `/${locale}/services/bestrating`, label: t('footer.links.services.bestrating') }
+    { href: localizePath('/services/tuinonderhoud', currentLocale), label: t('footer.links.services.tuinonderhoud') },
+    { href: localizePath('/services/tuinontwerp', currentLocale), label: t('footer.links.services.tuinontwerp') },
+    { href: localizePath('/services/groendak', currentLocale), label: t('footer.links.services.groendak') },
+    { href: localizePath('/services/stratenmaker', currentLocale), label: t('footer.links.services.bestrating') }
   ];
   
   const gemeenteLinks = [
-    { href: `/${locale}/gemeente/leeuwarden`, label: t('footer.links.gemeenten.leeuwarden') },
-    { href: `/${locale}/gemeente/heerenveen`, label: t('footer.links.gemeenten.heerenveen') },
-    { href: `/${locale}/gemeente/smallingerland`, label: t('footer.links.gemeenten.smallingerland') },
-    { href: `/${locale}/gemeente/sudwest-fryslan`, label: t('footer.links.gemeenten.sudwest_fryslan') },
-    { href: `/${locale}/gemeente/waadhoeke`, label: t('footer.links.gemeenten.waadhoeke') },
-    { href: `/${locale}/gemeente/harlingen`, label: t('footer.links.gemeenten.harlingen') }
+    { href: localizePath('/gemeente/leeuwarden', currentLocale), label: t('footer.links.gemeenten.leeuwarden') },
+    { href: localizePath('/gemeente/heerenveen', currentLocale), label: t('footer.links.gemeenten.heerenveen') },
+    { href: localizePath('/gemeente/smallingerland', currentLocale), label: t('footer.links.gemeenten.smallingerland') },
+    { href: localizePath('/gemeente/sudwest-fryslan', currentLocale), label: t('footer.links.gemeenten.sudwest_fryslan') },
+    { href: localizePath('/gemeente/waadhoeke', currentLocale), label: t('footer.links.gemeenten.waadhoeke') },
+    { href: localizePath('/gemeente/harlingen', currentLocale), label: t('footer.links.gemeenten.harlingen') }
   ];
   
   const companyLinks = [
-    { href: `/${locale}/over-ons`, label: t('footer.links.company.over_ons') },
-    { href: `/${locale}/samenwerking`, label: t('footer.links.company.samenwerking') },
-    { href: `/${locale}/contact`, label: t('footer.links.company.contact') },
-    { href: `/${locale}/nieuws`, label: t('footer.links.company.nieuws') }
+    { href: localizePath('/over-ons', currentLocale), label: t('footer.links.company.over_ons') },
+    { href: localizePath('/samenwerking', currentLocale), label: t('footer.links.company.samenwerking') },
+    { href: localizePath('/contact', currentLocale), label: t('footer.links.company.contact') },
+    { href: localizePath('/nieuws', currentLocale), label: t('footer.links.company.nieuws') }
   ];
   
   const legalLinks = [
-    { href: `/${locale}/privacy-beleid`, label: t('footer.links.legal.privacy_beleid') },
-    { href: `/${locale}/algemene-voorwaarden`, label: t('footer.links.legal.algemene_voorwaarden') },
-    { href: `/${locale}/cookie-beleid`, label: t('footer.links.legal.cookie_beleid') },
-    { href: `/${locale}/aansprakelijkheid`, label: t('footer.links.legal.aansprakelijkheid') }
+    { href: localizePath('/privacy-beleid', currentLocale), label: t('footer.links.legal.privacy_beleid') },
+    { href: localizePath('/algemene-voorwaarden', currentLocale), label: t('footer.links.legal.algemene_voorwaarden') },
+    { href: localizePath('/cookie-beleid', currentLocale), label: t('footer.links.legal.cookie_beleid') },
+    { href: localizePath('/aansprakelijkheid', currentLocale), label: t('footer.links.legal.aansprakelijkheid') }
   ];
   
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -126,7 +128,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
           {/* Brand Section */}
           <div className="footer-brand">
             <div className="footer-logo">
-              <Link href="/" className="footer-logo-link">
+              <Link href={localizePath('/', currentLocale)} className="footer-logo-link">
                 <img src="/assets/logo-dark.svg" alt="Hovenier.frl - Friese hoveniers directory en tuinspecialisten" width="160" height="36" className="footer-logo-image" />
               </Link>
               <p className="footer-description">

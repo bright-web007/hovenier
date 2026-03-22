@@ -11,6 +11,7 @@ import PartnershipFAQ from '../../components/PartnershipFAQ';
 import PartnershipCTA from '../../components/PartnershipCTA';
 import PartnershipSchema from '../../components/schemas/PartnershipSchema';
 import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema';
+import { getAbsoluteUrl, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -57,6 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: 'Word Partner | Hovenier.frl - Voor Professionele Hoveniers',
       description: 'Sluit je aan bij Hovenier.frl en krijg toegang tot klanten in heel Friesland. Voor gecertificeerde hoveniers met ervaring. Vergroot je klantenkring!',
       keywords: ['hovenier partner', 'samenwerking', 'friesland', 'klanten', 'hoveniersbedrijf'],
+      alternates: getLocaleAlternates('/samenwerking', validLocale as SupportedLocale),
     };
   } catch (error) {
     return {
@@ -211,7 +213,7 @@ export default async function SamenwerkingPage({ params }: Props) {
   // Transform breadcrumbs for schema
   const breadcrumbSchemaItems = breadcrumbItems.map(item => ({
     name: item.label,
-    url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl/${validLocale}/samenwerking`
+    url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/samenwerking', validLocale as SupportedLocale)
   }));
 
   return (
@@ -233,7 +235,7 @@ export default async function SamenwerkingPage({ params }: Props) {
       <PartnershipSchema 
         locale={validLocale}
         faqs={faqs}
-        url={`https://hovenier.frl/${validLocale}/samenwerking`}
+        url={getAbsoluteUrl('/samenwerking', validLocale as SupportedLocale)}
       />
     </>
   );

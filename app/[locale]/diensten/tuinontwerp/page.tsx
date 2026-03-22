@@ -4,6 +4,7 @@ import Navigation from '../../../components/Navigation';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../components/RelatedArticles';
+import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -115,6 +116,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: 'Tuinontwerp Friesland | Professionele Landschapsarchitect | Hovenier.frl',
       description: 'Professionele tuinontwerpen in Friesland. 3D visualisatie, plantenkeuze en complete realisatie. Vanaf €750. Vraag gratis offerte.',
       keywords: ['tuinontwerp', 'landschapsarchitect', 'tuinarchitect', 'friesland', '3d visualisatie'],
+      alternates: getLocaleAlternates('/diensten/tuinontwerp', validLocale as SupportedLocale),
     };
   } catch (error) {
     return {
@@ -164,7 +166,7 @@ export default async function TuinontwerpPage({ params }: Props) {
   // Breadcrumb items
   const breadcrumbItems = [
     { label: validLocale === 'nl' ? 'Home' : 'Home', href: '/' },
-    { label: validLocale === 'nl' ? 'Diensten' : 'Services', href: '/services' },
+    { label: validLocale === 'nl' ? 'Diensten' : 'Services', href: localizePath('/services', validLocale as SupportedLocale) },
     { label: validLocale === 'nl' ? 'Tuinontwerp' : 'Garden Design' }
   ];
 

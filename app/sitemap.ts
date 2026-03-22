@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { localizePath } from '@/lib/locale-utils'
  
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl'
@@ -28,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Service pages
   const services = ['tuinonderhoud', 'tuinontwerp', 'groendak', 'tuin-aanleggen', 'stratenmaker']
   const servicePages = services.map(service => ({
-    url: `${baseUrl}/services/${service}`,
+    url: `${baseUrl}${localizePath(`/diensten/${service}`, 'nl')}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.9,
@@ -43,7 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/services`,
+      url: `${baseUrl}${localizePath('/diensten', 'nl')}`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.9,
@@ -128,21 +129,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
   
-  // Localized pages (both nl and en)
+  // Localized pages
   const allPages = [...staticPages, ...mainPages, ...servicePages, ...kostenPages, ...gemeentePages, ...gardenerPages, ...newsCategoryPages]
   const localizedPages = []
   
   for (const page of allPages) {
-    // Add Dutch version (default)
     localizedPages.push({
       ...page,
-      url: page.url.replace(baseUrl, `${baseUrl}/nl`),
-    })
-    
-    // Add English version
-    localizedPages.push({
-      ...page,
-      url: page.url.replace(baseUrl, `${baseUrl}/en`),
+      url: `${baseUrl}${localizePath(page.url.replace(baseUrl, ''), 'en')}`,
       priority: page.priority * 0.8, // Lower priority for English pages
     })
   }

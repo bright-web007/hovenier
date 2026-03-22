@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import Navigation from '../../../components/Navigation';
 import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../components/RelatedArticles';
+import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -133,6 +134,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `Hovenier ${gemeente.displayName} | Tuinonderhoud & Tuinontwerp | Hovenier.frl`,
       description: `Professionele hoveniersdiensten in ${gemeente.displayName} ✓ Tuinonderhoud ✓ Tuinontwerp ✓ Groendaken ✓ Lokale specialisten ✓ Gratis offerte`,
       keywords: ['hovenier', gemeente.name.toLowerCase(), 'tuinonderhoud', 'tuinontwerp', 'friesland'],
+      alternates: getLocaleAlternates(`/gemeente/${slug}`, validLocale as SupportedLocale),
     };
   } catch (error) {
     return {

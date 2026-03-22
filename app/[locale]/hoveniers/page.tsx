@@ -7,15 +7,21 @@ import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema'
 import GardenerCard from '../../components/GardenerCard'
 import { gardeners } from '../../../lib/gardeners-data'
 import styles from '../../components/GardenerDirectory.module.css'
+import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
   params: Promise<{ locale: string }>
 }
 
-export const metadata: Metadata = {
-  title: 'Hoveniers Directory - Vind uw Tuinspecialist | Hovenier.frl',
-  description: 'Doorzoek onze database van gekwalificeerde hoveniers in Friesland. Filter op gemeente, specialisatie, beoordelingen en beschikbaarheid.',
-  keywords: 'hoveniers directory, tuinman zoeken, Friesland hoveniers, tuinspecialist vinden, tuinonderhoud, tuinontwerp',
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+
+  return {
+    title: 'Hoveniers Directory - Vind uw Tuinspecialist | Hovenier.frl',
+    description: 'Doorzoek onze database van gekwalificeerde hoveniers in Friesland. Filter op gemeente, specialisatie, beoordelingen en beschikbaarheid.',
+    keywords: 'hoveniers directory, tuinman zoeken, Friesland hoveniers, tuinspecialist vinden, tuinonderhoud, tuinontwerp',
+    alternates: getLocaleAlternates('/hoveniers', locale as SupportedLocale),
+  }
 }
 
 // ISR: Never revalidate (hardcoded sample data, changes only with deployments)
@@ -38,15 +44,15 @@ export default async function HoveniersDirectoryPage({ params }: Props) {
 
   // Breadcrumb schema items (needs full URLs)
   const breadcrumbSchemaItems = [
-    { name: 'Home', url: `https://hovenier.frl/${locale}` },
-    { name: locale === 'en' ? 'Gardeners' : 'Hoveniers', url: `https://hovenier.frl/${locale}/hoveniers` }
+    { name: 'Home', url: getAbsoluteUrl('/', locale as SupportedLocale) },
+    { name: locale === 'en' ? 'Gardeners' : 'Hoveniers', url: getAbsoluteUrl('/hoveniers', locale as SupportedLocale) }
   ];
 
   return (
     <>
       <GardenerDirectorySchema 
         gardeners={gardeners}
-        url={`https://hovenier.frl/${locale}/hoveniers`}
+        url={getAbsoluteUrl('/hoveniers', locale as SupportedLocale)}
         locale={locale}
       />
       <BreadcrumbSchema items={breadcrumbSchemaItems} />

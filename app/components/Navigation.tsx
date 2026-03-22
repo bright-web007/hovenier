@@ -1,6 +1,13 @@
 'use client';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
+import {
+  getPathLocale,
+  localizePath,
+  setCookieLocale,
+  switchLocalePath,
+  type SupportedLocale
+} from '@/lib/locale-utils';
 
 interface NavigationProps {
   locale: string;
@@ -16,19 +23,9 @@ interface NavigationProps {
 export default function Navigation({ locale, translations = {} }: NavigationProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const currentLocale = getPathLocale(pathname || localizePath('/', locale as SupportedLocale));
   
-  // Detect actual locale from URL path for more reliable detection
-  const actualLocale = pathname.startsWith('/en') ? 'en' : 'nl';
-  const currentLocale = actualLocale; // Use URL-based detection instead of prop
-  
-  console.log('Navigation rendered:', { 
-    propLocale: locale, 
-    actualLocale, 
-    pathname, 
-    using: currentLocale 
-  });
-  
-  // Default fallback values using actual locale
+  // Default fallback values using current locale
   const t = {
     gardeners: translations.gardeners || (currentLocale === 'nl' ? 'Hoveniers' : 'Gardeners'),
     services: translations.services || (currentLocale === 'nl' ? 'Diensten' : 'Services'),
@@ -44,50 +41,26 @@ export default function Navigation({ locale, translations = {} }: NavigationProp
     }
   };
   
-  const switchToNL = () => {
-    console.log('=== NL BUTTON CLICKED ===');
-    console.log('Current locale:', currentLocale);
-    console.log('Current pathname:', pathname);
-    
-    let newPath = pathname;
-    if (pathname.startsWith('/en')) {
-      newPath = pathname.replace(/^\/en/, '') || '/';
-    }
-    
-    console.log('Switching to NL:', { from: pathname, to: newPath });
-    router.push(newPath);
-  };
-  
-  const switchToEN = () => {
-    console.log('=== EN BUTTON CLICKED ===');
-    console.log('Current locale:', currentLocale);
-    console.log('Current pathname:', pathname);
-    
-    let newPath = pathname;
-    if (!pathname.startsWith('/en')) {
-      newPath = `/en${pathname}`;
-    }
-    
-    console.log('Switching to EN:', { from: pathname, to: newPath });
-    router.push(newPath);
+  const switchLocale = (nextLocale: SupportedLocale) => {
+    setCookieLocale(nextLocale);
+    router.push(switchLocalePath(pathname, nextLocale));
   };
 
   return (
     <nav className="nav" role="navigation" aria-label="Hoofdnavigatie">
       <div className="nav-inner">
-        <Link href={currentLocale === 'nl' ? '/' : '/en'} className="nav-logo" aria-label="Hovenier.frl homepage">
+        <Link href={localizePath('/', currentLocale)} className="nav-logo" aria-label="Hovenier.frl homepage">
           <img src="/assets/logo-light.svg" alt="Hovenier.frl - Vind de beste hovenier in Friesland" width="180" height="40" className="nav-logo-image" />
         </Link>
         <div className="nav-links">
-          <Link href={currentLocale === 'nl' ? '/hoveniers' : '/en/hoveniers'} className="nav-link">{t.gardeners}</Link>
-          <Link href={currentLocale === 'nl' ? '/services' : '/en/services'} className="nav-link">{t.services}</Link>
-          <Link href={currentLocale === 'nl' ? '/regio' : '/en/regio'} className="nav-link">{t.regions}</Link>
-          <Link href={currentLocale === 'nl' ? '/kosten' : '/en/kosten'} className="nav-link">{t.costs}</Link>
+          <Link href={localizePath('/hoveniers', currentLocale)} className="nav-link">{t.gardeners}</Link>
+          <Link href={localizePath('/services', currentLocale)} className="nav-link">{t.services}</Link>
+          <Link href={localizePath('/regio', currentLocale)} className="nav-link">{t.regions}</Link>
+          <Link href={localizePath('/kosten', currentLocale)} className="nav-link">{t.costs}</Link>
           <div className="lang-toggle" role="group" aria-label="Taal selectie">
             <button 
               className={`lang-btn ${currentLocale === 'nl' ? 'active' : 'inactive'}`} 
-              onClick={switchToNL}
-              onMouseDown={(e) => console.log('NL mousedown')}
+              onClick={() => switchLocale('nl')}
               aria-pressed={currentLocale === 'nl'}
               type="button"
               data-testid="nl-button"
@@ -96,8 +69,7 @@ export default function Navigation({ locale, translations = {} }: NavigationProp
             </button>
             <button 
               className={`lang-btn ${currentLocale === 'en' ? 'active' : 'inactive'}`} 
-              onClick={switchToEN}
-              onMouseDown={(e) => console.log('EN mousedown')} 
+              onClick={() => switchLocale('en')}
               aria-pressed={currentLocale === 'en'}
               type="button"
               data-testid="en-button"

@@ -113,6 +113,7 @@ function generateBreadcrumbsFromPath(pathname: string, t: any): BreadcrumbItem[]
 function getSegmentLabel(segment: string, t: any): string {
   const segmentMap: Record<string, string> = {
     'services': t('breadcrumb.services') || 'Diensten',
+    'diensten': t('breadcrumb.services') || 'Diensten',
     'artikelen': t('breadcrumb.articles') || 'Artikelen',
     'articles': t('breadcrumb.articles') || 'Articles',
     'regio': t('breadcrumb.region') || 'Regio',

@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../../components/Navigation'
 import Breadcrumbs from '../../../../components/Breadcrumbs'
 import { notFound } from 'next/navigation'
+import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
   params: Promise<{ locale: string; categorie: string }>
@@ -94,6 +95,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${category.name} - Tuinnieuws & Tips | Hovenier.frl`,
     description: `${category.description} Ontdek artikelen over ${category.name.toLowerCase()} in onze blog.`,
     keywords: `${category.name}, tuinnieuws, tuintips, hovenier blog, ${category.slug}, Friesland`,
+    alternates: getLocaleAlternates(`/nieuws/categorie/${categorie}`, locale as SupportedLocale),
   }
 }
 

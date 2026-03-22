@@ -3,15 +3,21 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from '@/app/components/NewLeadForm'
+import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
   params: Promise<{ locale: string }>
 }
 
-export const metadata: Metadata = {
-  title: 'Tuinontwerp Kosten - Wat Kost een Tuinarchitect? | Hovenier.frl',
-  description: 'Wat kost professioneel tuinontwerp in Friesland? Ontdek alle prijzen voor tuinadvies, tekeningen, 3D visualisaties en complete tuinplannen.',
-  keywords: 'tuinontwerp kosten, tuinarchitect prijzen, tuinplan kosten, 3D tuinontwerp, tuinadvies tarieven, Friesland tuinontwerp',
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+
+  return {
+    title: 'Tuinontwerp Kosten - Wat Kost een Tuinarchitect? | Hovenier.frl',
+    description: 'Wat kost professioneel tuinontwerp in Friesland? Ontdek alle prijzen voor tuinadvies, tekeningen, 3D visualisaties en complete tuinplannen.',
+    keywords: 'tuinontwerp kosten, tuinarchitect prijzen, tuinplan kosten, 3D tuinontwerp, tuinadvies tarieven, Friesland tuinontwerp',
+    alternates: getLocaleAlternates('/kosten/tuinontwerp', locale as SupportedLocale),
+  }
 }
 
 // ISR: Never revalidate (static pricing content, changes only with deployments)

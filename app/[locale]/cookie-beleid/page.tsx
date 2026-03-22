@@ -17,6 +17,7 @@ import CookieSecurity from '../../components/cookie/CookieSecurity';
 import CookieChanges from '../../components/cookie/CookieChanges';
 import CookieContact from '../../components/cookie/CookieContact';
 import CookieSchema from '../../components/cookie/CookieSchema';
+import { getLocaleAlternates, getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -36,7 +37,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       robots: {
         index: true,
         follow: true
-      }
+      },
+      alternates: getLocaleAlternates('/cookie-beleid', validLocale as SupportedLocale),
     };
   } catch (error) {
     return {
@@ -67,8 +69,8 @@ export default async function CookiePolicyPage({ params }: Props) {
 
   // Breadcrumb data for schema
   const breadcrumbSchemaData = [
-    { name: 'Home', url: 'https://hovenier.frl' },
-    { name: 'Cookiebeleid', url: 'https://hovenier.frl/nl/cookie-beleid' }
+    { name: 'Home', url: getAbsoluteUrl('/', validLocale as SupportedLocale) },
+    { name: 'Cookiebeleid', url: getAbsoluteUrl('/cookie-beleid', validLocale as SupportedLocale) }
   ];
 
   return (

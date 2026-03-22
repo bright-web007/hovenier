@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { locales, defaultLocale } from "../i18n";
-import { notFound } from "next/navigation";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import PerformanceInitializer from "./components/PerformanceInitializer";
 
@@ -76,7 +74,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://hovenier.frl',
     languages: {
-      'nl-NL': 'https://hovenier.frl/nl',
+      'nl-NL': 'https://hovenier.frl',
       'en-US': 'https://hovenier.frl/en',
     },
   },
@@ -125,7 +123,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Prefetch next page resources */}
-        <link rel="prefetch" href="/services/tuinonderhoud" />
+        <link rel="prefetch" href="/diensten/tuinonderhoud" />
         <link rel="prefetch" href="/gemeente/leeuwarden" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>

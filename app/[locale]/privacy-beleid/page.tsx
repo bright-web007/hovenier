@@ -19,6 +19,7 @@ import PrivacyComplaints from '../../components/privacy/PrivacyComplaints';
 import PrivacyChanges from '../../components/privacy/PrivacyChanges';
 import PrivacyContact from '../../components/privacy/PrivacyContact';
 import PrivacySchema from '../../components/privacy/PrivacySchema';
+import { getLocaleAlternates, getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
 
 import styles from '../../styles/Privacy.module.css';
 
@@ -46,13 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         index: true,
         follow: true
       },
-      alternates: {
-        canonical: `https://hovenier.frl/${validLocale}/privacy-beleid`,
-        languages: {
-          'nl': 'https://hovenier.frl/nl/privacy-beleid',
-          'en': 'https://hovenier.frl/en/privacy-beleid'
-        }
-      }
+      alternates: getLocaleAlternates('/privacy-beleid', validLocale as SupportedLocale)
     };
   } catch (error) {
     return {
@@ -83,8 +78,8 @@ export default async function PrivacyPolicyPage({ params }: Props) {
   ];
 
   const breadcrumbSchemaItems = [
-    { name: 'Home', url: 'https://hovenier.frl/' },
-    { name: isEnglish ? 'Privacy Policy' : 'Privacybeleid', url: `https://hovenier.frl/${validLocale}/privacy-beleid` }
+    { name: 'Home', url: getAbsoluteUrl('/', validLocale as SupportedLocale) },
+    { name: isEnglish ? 'Privacy Policy' : 'Privacybeleid', url: getAbsoluteUrl('/privacy-beleid', validLocale as SupportedLocale) }
   ];
 
   return (

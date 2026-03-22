@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { Turnstile } from '@marsidev/react-turnstile';
 import { trackLeadFormSubmission } from './GoogleAnalytics';
 import { submitLeadToPrometheus } from '../services/prometheus';
+import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
 
 interface LeadFormProps {
   translations: {
@@ -77,17 +78,17 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
       if (result.success) {
         console.log('Lead submitted successfully:', result.leadId);
         // Redirect to thank you page
-        router.push(`/${locale}/bedankt`);
+        router.push(localizePath('/bedankt', locale as SupportedLocale));
       } else {
         // Show error but still redirect (service handles fallbacks)
         console.warn('Lead submission had issues:', result.error);
-        router.push(`/${locale}/bedankt`);
+        router.push(localizePath('/bedankt', locale as SupportedLocale));
       }
       
     } catch (error) {
       console.error('Form submission error:', error);
       // Still redirect to thank you page - service handles error cases
-      router.push(`/${locale}/bedankt`);
+      router.push(localizePath('/bedankt', locale as SupportedLocale));
     }
   }
 

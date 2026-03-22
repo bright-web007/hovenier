@@ -3,15 +3,21 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from '@/app/components/NewLeadForm'
+import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
   params: Promise<{ locale: string }>
 }
 
-export const metadata: Metadata = {
-  title: 'Kosten Tuin Aanleggen - Complete Prijsgids 2024 | Hovenier.frl',
-  description: 'Wat kost het om een nieuwe tuin aan te leggen in Friesland? Complete kostenoverzicht van tuinaanleg inclusief grondwerk, beplanting en materialen.',
-  keywords: 'tuin aanleggen kosten, tuinaanleg prijzen, nieuwe tuin kosten, hovenier prijzen, Friesland tuinaanleg',
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+
+  return {
+    title: 'Kosten Tuin Aanleggen - Complete Prijsgids 2024 | Hovenier.frl',
+    description: 'Wat kost het om een nieuwe tuin aan te leggen in Friesland? Complete kostenoverzicht van tuinaanleg inclusief grondwerk, beplanting en materialen.',
+    keywords: 'tuin aanleggen kosten, tuinaanleg prijzen, nieuwe tuin kosten, hovenier prijzen, Friesland tuinaanleg',
+    alternates: getLocaleAlternates('/kosten/tuin-aanleggen', locale as SupportedLocale),
+  }
 }
 
 // ISR: Never revalidate (static pricing content, changes only with deployments)

@@ -5,6 +5,7 @@ import Breadcrumbs from '../../components/Breadcrumbs';
 import NewLeadForm from '@/app/components/NewLeadForm';
 import Link from 'next/link';
 import ServiceSchema from '../../components/schemas/ServiceSchema';
+import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
 
 // ISR: Never revalidate (static service listings, changes only with deployments)
 export const revalidate = false;
@@ -290,7 +291,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                           </span>
                         </div>
                         <Link 
-                          href={`/${validLocale}/services/${service.id}`}
+                          href={localizePath(`/services/${service.id}`, validLocale as SupportedLocale)}
                           style={{ 
                             display: 'inline-flex',
                             alignItems: 'center',

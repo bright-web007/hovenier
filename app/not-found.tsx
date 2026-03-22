@@ -2,6 +2,7 @@ import Link from 'next/link';
 import NewLeadForm from './components/NewLeadForm';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
+import { localizePath } from '@/lib/locale-utils';
 
 export const metadata = {
   title: 'Pagina niet gevonden | Hovenier.frl',
@@ -145,7 +146,7 @@ export default function NotFound() {
                 }}>
                   Ontdek alle tuindiensten van onze gecertificeerde hoveniers
                 </p>
-                <Link href="/nl/services" style={{ 
+                <Link href={localizePath('/services', 'nl')} style={{ 
                   color: 'var(--sage)', 
                   fontSize: '14px', 
                   fontWeight: '500',
@@ -196,7 +197,7 @@ export default function NotFound() {
                 }}>
                   Vind betrouwbare hoveniers in uw gemeente in Friesland
                 </p>
-                <Link href="/nl/regio" style={{ 
+                <Link href="/regio" style={{ 
                   color: 'var(--sage)', 
                   fontSize: '14px', 
                   fontWeight: '500',
@@ -245,7 +246,7 @@ export default function NotFound() {
                 }}>
                   Lees onze tuinartikelen met tips van professionals
                 </p>
-                <Link href="/nl/nieuws" style={{ 
+                <Link href="/nieuws" style={{ 
                   color: 'var(--sage)', 
                   fontSize: '14px', 
                   fontWeight: '500',

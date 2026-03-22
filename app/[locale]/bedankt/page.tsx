@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import Navigation from '../../components/Navigation';
+import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -54,6 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: 'Bedankt - Uw aanvraag is ontvangen | Hovenier.frl',
       description: 'Bedankt voor uw aanvraag. Wij nemen binnen 24 uur contact met u op en koppelen u aan de beste hovenier in uw regio.',
       robots: 'noindex, nofollow', // Don't index thank you pages
+      alternates: getLocaleAlternates('/bedankt', validLocale as SupportedLocale),
     };
   } catch (error) {
     return {
@@ -134,11 +136,11 @@ export default async function BedanktPage({ params }: Props) {
             </div>
 
             <div className="thank-you-actions section-centered">
-              <Link href={`/${validLocale}`} className="nav-cta nav-cta-large">
+              <Link href={localizePath('/', validLocale as SupportedLocale)} className="nav-cta nav-cta-large">
                 {t('thank_you_page_back_home') || 'Terug naar home'}
               </Link>
               
-              <Link href={`/${validLocale}/services`} className="nav-cta nav-cta-outline">
+              <Link href={localizePath('/services', validLocale as SupportedLocale)} className="nav-cta nav-cta-outline">
                 {t('thank_you_page_view_services') || 'Bekijk onze diensten'}
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

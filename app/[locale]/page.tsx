@@ -7,6 +7,7 @@ import Navigation from '../components/Navigation';
 import ServiceCard from '../components/ServiceCard';
 import RegionStrip from '../components/RegionStrip';
 import { OrganizationSchema, WebsiteSchema } from '../components/StructuredData';
+import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -65,6 +66,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: 'Hovenier.frl - Betrouwbare Hoveniers in Friesland | Offerte Aanvragen',
       description: 'Vind de beste hoveniers in Friesland. Vergelijk offertes voor tuinonderhoud, tuinontwerp en groendaken. 150+ gecertificeerde hoveniers, 2300+ projecten.',
       keywords: ['hovenier friesland', 'tuin onderhoud', 'tuinontwerp', 'groendak', 'leeuwarden', 'heerenveen'],
+      alternates: getLocaleAlternates('/', validLocale as SupportedLocale),
     };
   } catch (error) {
     return {
@@ -163,7 +165,7 @@ export default async function HomePage({ params }: Props) {
                 title="Tuinonderhoud"
                 description="Professioneel onderhoud van uw tuin, van snoeien tot onkruidbestrijding. Houd uw tuin het hele jaar door in topconditie."
                 imageUrl="/images/garden-maintenance.png"
-                href="/services/tuinonderhoud"
+                href={localizePath('/services/tuinonderhoud', validLocale as SupportedLocale)}
                 price={{ from: 35, unit: 'uur' }}
                 features={[
                   'Gras maaien en verzorging',
@@ -178,7 +180,7 @@ export default async function HomePage({ params }: Props) {
                 title="Tuinontwerp"
                 description="Complete herinrichting van uw tuin met professioneel ontwerp. Van concept tot realisatie, uw droomtuin wordt werkelijkheid."
                 imageUrl="/images/tuinontwerp-hero.jpg"
-                href="/services/tuinontwerp"
+                href={localizePath('/services/tuinontwerp', validLocale as SupportedLocale)}
                 features={[
                   'Persoonlijk tuinontwerp',
                   'Planten selectie en advies',
@@ -191,7 +193,7 @@ export default async function HomePage({ params }: Props) {
                 title="Groendaken"
                 description="Duurzame groendaken voor een betere leefomgeving. Isolatie, waterberging en biodiversiteit in één."
                 imageUrl="/images/green-roof.png"
-                href="/services/groendaken"
+                href={localizePath('/services/groendak', validLocale as SupportedLocale)}
                 features={[
                   'Waterafvoer optimalisering',
                   'Isolatie verbetering',
@@ -202,7 +204,7 @@ export default async function HomePage({ params }: Props) {
             </div>
             
             <div className="section-centered">
-              <Link href="/services" className="nav-cta nav-cta-large">
+              <Link href={localizePath('/services', validLocale as SupportedLocale)} className="nav-cta nav-cta-large">
                 {translations.buttons_view_all_services || 'Alle Diensten Bekijken'}
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

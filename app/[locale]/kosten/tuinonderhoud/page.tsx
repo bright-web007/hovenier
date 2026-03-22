@@ -3,15 +3,21 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from "@/app/components/NewLeadForm"
+import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
   params: Promise<{ locale: string }>
 }
 
-export const metadata: Metadata = {
-  title: 'Kosten Tuinonderhoud - Wat Kost Tuin Onderhoud? | Hovenier.frl',
-  description: 'Wat kost tuinonderhoud per maand of jaar? Ontdek alle kosten voor regelmatig tuinonderhoud door professionals in Friesland.',
-  keywords: 'tuinonderhoud kosten, tuin onderhoud prijzen, hovenier onderhoud, maandelijks tuinonderhoud, Friesland',
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+
+  return {
+    title: 'Kosten Tuinonderhoud - Wat Kost Tuin Onderhoud? | Hovenier.frl',
+    description: 'Wat kost tuinonderhoud per maand of jaar? Ontdek alle kosten voor regelmatig tuinonderhoud door professionals in Friesland.',
+    keywords: 'tuinonderhoud kosten, tuin onderhoud prijzen, hovenier onderhoud, maandelijks tuinonderhoud, Friesland',
+    alternates: getLocaleAlternates('/kosten/tuinonderhoud', locale as SupportedLocale),
+  }
 }
 
 // ISR: Never revalidate (static pricing content, changes only with deployments)

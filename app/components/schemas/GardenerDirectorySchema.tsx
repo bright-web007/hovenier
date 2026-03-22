@@ -1,5 +1,6 @@
 import React from 'react';
 import { Gardener } from '../../../lib/gardeners-data';
+import { getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
 
 interface GardenerDirectorySchemaProps {
   gardeners: Gardener[];
@@ -24,10 +25,10 @@ export default function GardenerDirectorySchema({
       "position": index + 1,
       "item": {
         "@type": ["LocalBusiness", "LandscapingBusiness"],
-        "@id": `https://hovenier.frl/${locale}/hoveniers/${gardener.slug}`,
+        "@id": getAbsoluteUrl(`/hoveniers/${gardener.slug}`, locale as SupportedLocale),
         "name": `${gardener.name} - ${gardener.company}`,
         "description": gardener.description,
-        "url": `https://hovenier.frl/${locale}/hoveniers/${gardener.slug}`,
+        "url": getAbsoluteUrl(`/hoveniers/${gardener.slug}`, locale as SupportedLocale),
         "serviceType": gardener.specialties,
         "areaServed": {
           "@type": "AdministrativeArea",
@@ -58,7 +59,7 @@ export default function GardenerDirectorySchema({
           "name": "Hoveniersdiensten",
           "itemListElement": gardener.services.map((service, serviceIndex) => ({
             "@type": "Offer",
-            "@id": `https://hovenier.frl/${locale}/hoveniers/${gardener.slug}#service-${serviceIndex}`,
+            "@id": `${getAbsoluteUrl(`/hoveniers/${gardener.slug}`, locale as SupportedLocale)}#service-${serviceIndex}`,
             "name": service,
             "description": `Professionele ${service.toLowerCase()} in ${gardener.location}`,
             "provider": {

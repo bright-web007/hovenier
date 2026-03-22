@@ -14,6 +14,7 @@ import DisclaimerUsage from '../../components/disclaimer/DisclaimerUsage';
 import DisclaimerExternal from '../../components/disclaimer/DisclaimerExternal';
 import DisclaimerContact from '../../components/disclaimer/DisclaimerContact';
 import DisclaimerSchema from '../../components/disclaimer/DisclaimerSchema';
+import { getLocaleAlternates, getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -33,7 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       robots: {
         index: true,
         follow: true
-      }
+      },
+      alternates: getLocaleAlternates('/aansprakelijkheid', validLocale as SupportedLocale),
     };
   } catch (error) {
     return {
@@ -64,8 +66,8 @@ export default async function DisclaimerPage({ params }: Props) {
 
   // Breadcrumb data for schema
   const breadcrumbSchemaData = [
-    { name: 'Home', url: 'https://hovenier.frl' },
-    { name: 'Aansprakelijkheid', url: 'https://hovenier.frl/nl/aansprakelijkheid' }
+    { name: 'Home', url: getAbsoluteUrl('/', validLocale as SupportedLocale) },
+    { name: 'Aansprakelijkheid', url: getAbsoluteUrl('/aansprakelijkheid', validLocale as SupportedLocale) }
   ];
 
   return (

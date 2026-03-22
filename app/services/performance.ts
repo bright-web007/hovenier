@@ -236,7 +236,7 @@ export function generateResourceHints() {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     
     <!-- Prefetch next page resources -->
-    <link rel="prefetch" href="/services/tuinonderhoud" />
+    <link rel="prefetch" href="/diensten/tuinonderhoud" />
     <link rel="prefetch" href="/gemeente/leeuwarden" />
     
     <!-- Critical CSS inline -->

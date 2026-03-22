@@ -3,15 +3,21 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from "@/app/components/NewLeadForm"
+import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
   params: { locale: string }
 }
 
-export const metadata: Metadata = {
-  title: 'Tuin Aanleggen - Professionele Tuinaanleg | Hovenier.frl',
-  description: 'Laat je nieuwe tuin professioneel aanleggen door ervaren hoveniers in Friesland. Van ontwerp tot realisatie - krijg offertes van gekwalificeerde tuinspecialisten.',
-  keywords: 'tuin aanleggen, nieuwe tuin, tuinaanleg, hovenier, Friesland, tuinontwerp realisatie',
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  return {
+    title: 'Tuin Aanleggen - Professionele Tuinaanleg | Hovenier.frl',
+    description: 'Laat je nieuwe tuin professioneel aanleggen door ervaren hoveniers in Friesland. Van ontwerp tot realisatie - krijg offertes van gekwalificeerde tuinspecialisten.',
+    keywords: 'tuin aanleggen, nieuwe tuin, tuinaanleg, hovenier, Friesland, tuinontwerp realisatie',
+    alternates: getLocaleAlternates('/diensten/tuin-aanleggen', locale as SupportedLocale),
+  }
 }
 
 // ISR: Never revalidate (static service content, changes only with deployments)
@@ -42,7 +48,7 @@ export default async function TuinAanleggenPage({ params }: Props) {
   // Breadcrumb items
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: 'Diensten', href: '/services' },
+    { label: 'Diensten', href: localizePath('/services', locale as SupportedLocale) },
     { label: 'Tuin Aanleggen' }
   ];
 

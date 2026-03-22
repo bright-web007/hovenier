@@ -9,15 +9,21 @@ import BlogSidebar from '../../components/BlogSidebar'
 import BlogSchema from '../../components/schemas/BlogSchema'
 import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema'
 import styles from '../../components/Blog.module.css'
+import { getAbsoluteUrl, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
   params: Promise<{ locale: string }>
 }
 
-export const metadata: Metadata = {
-  title: 'Tuinnieuws & Tips - Blog | Hovenier.frl',
-  description: 'Ontdek de nieuwste tuintrends, seizoenstips en expert advies. Blijf op de hoogte van alles over tuinonderhoud en landschapsdesign in Friesland.',
-  keywords: 'tuinnieuws, tuintips, hovenier blog, seizoen tuinadvies, tuinonderhoud tips, Friesland',
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+
+  return {
+    title: 'Tuinnieuws & Tips - Blog | Hovenier.frl',
+    description: 'Ontdek de nieuwste tuintrends, seizoenstips en expert advies. Blijf op de hoogte van alles over tuinonderhoud en landschapsdesign in Friesland.',
+    keywords: 'tuinnieuws, tuintips, hovenier blog, seizoen tuinadvies, tuinonderhoud tips, Friesland',
+    alternates: getLocaleAlternates('/nieuws', locale as SupportedLocale),
+  }
 }
 
 const exampleArticles = [
@@ -74,7 +80,7 @@ export default async function NieuwsHubPage({ params }: Props) {
   // Transform breadcrumbs for schema
   const breadcrumbSchemaItems = breadcrumbItems.map(item => ({
     name: item.label,
-    url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl/${locale}/nieuws`
+    url: item.href ? getAbsoluteUrl(item.href, locale as SupportedLocale) : getAbsoluteUrl('/nieuws', locale as SupportedLocale)
   }));
 
   // Get featured article
@@ -106,7 +112,7 @@ export default async function NieuwsHubPage({ params }: Props) {
       <BlogSchema 
         locale={locale}
         articles={exampleArticles}
-        url={`https://hovenier.frl/${locale}/nieuws`}
+        url={getAbsoluteUrl('/nieuws', locale as SupportedLocale)}
       />
     </>
   )

@@ -10,7 +10,8 @@ Disallow: /api/
 # Allow important pages explicitly
 Allow: /
 Allow: /bedankt
-Allow: /services/
+Allow: /diensten/
+Allow: /en/diensten/
 Allow: /gemeente/
 Allow: /samenwerking
 Allow: /articles/

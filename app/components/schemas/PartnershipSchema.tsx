@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
 
 interface FAQ {
   question: string;
@@ -80,7 +81,7 @@ export default function PartnershipSchema({ locale, faqs, url }: PartnershipSche
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": `https://hovenier.frl/${locale}/hoveniers?search={search_term_string}`
+        "urlTemplate": `${getAbsoluteUrl('/hoveniers', locale as SupportedLocale)}?search={search_term_string}`
       },
       "query-input": "required name=search_term_string"
     }

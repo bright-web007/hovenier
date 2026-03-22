@@ -3,15 +3,21 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from "@/app/components/NewLeadForm"
+import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
   params: { locale: string }
 }
 
-export const metadata: Metadata = {
-  title: 'Stratenmaker - Bestrating & Hardscaping | Hovenier.frl',
-  description: 'Professionele bestratingswerken in Friesland. Van opritten tot terrassen - vind ervaren stratenmakers voor al je hardscaping projecten.',
-  keywords: 'stratenmaker, bestrating, oprit, terras, hardscaping, Friesland, straatklinkers, tuinpaden',
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  return {
+    title: 'Stratenmaker - Bestrating & Hardscaping | Hovenier.frl',
+    description: 'Professionele bestratingswerken in Friesland. Van opritten tot terrassen - vind ervaren stratenmakers voor al je hardscaping projecten.',
+    keywords: 'stratenmaker, bestrating, oprit, terras, hardscaping, Friesland, straatklinkers, tuinpaden',
+    alternates: getLocaleAlternates('/diensten/stratenmaker', locale as SupportedLocale),
+  }
 }
 
 // ISR: Never revalidate (static service content, changes only with deployments)
@@ -41,7 +47,7 @@ export default async function StratenmakerPage({ params }: Props) {
   // Breadcrumb items
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: 'Diensten', href: '/services' },
+    { label: 'Diensten', href: localizePath('/services', locale as SupportedLocale) },
     { label: 'Stratenmaker' }
   ];
 

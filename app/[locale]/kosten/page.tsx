@@ -6,6 +6,7 @@ import Breadcrumbs from '../../components/Breadcrumbs';
 import NewLeadForm from '@/app/components/NewLeadForm';
 import { useParams } from 'next/navigation';
 import ServiceSchema from '../../components/schemas/ServiceSchema';
+import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
 
 // CSS Module imports
 import heroStyles from '../../components/KostenHero.module.css';
@@ -121,7 +122,7 @@ export default function KostenPage() {
                   <div className={priceCardStyles.priceCardPrice}>€35–50</div>
                   <div className={priceCardStyles.priceCardUnit}>per uur</div>
                   <div className={priceCardStyles.priceCardRange}>Maandelijks onderhoud 50m² tuin: €140–280/bezoek. Inclusief maaien, snoeien en onkruid.</div>
-                  <Link href={`/${locale}/services/tuinonderhoud`} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
+                  <Link href={localizePath('/services/tuinonderhoud', locale as SupportedLocale)} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
                 </div>
                 <div className={priceCardStyles.priceCard}>
                   <div className={priceCardStyles.priceCardIcon}>
@@ -134,7 +135,7 @@ export default function KostenPage() {
                   <div className={priceCardStyles.priceCardPrice}>€500–3.500</div>
                   <div className={priceCardStyles.priceCardUnit}>per project</div>
                   <div className={priceCardStyles.priceCardRange}>Afhankelijk van tuingrootte en complexiteit. Inclusief tekeningen en plantplan.</div>
-                  <Link href={`/${locale}/kosten/tuinontwerp`} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
+                  <Link href={localizePath('/kosten/tuinontwerp', locale as SupportedLocale)} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
                 </div>
                 <div className={priceCardStyles.priceCard}>
                   <div className={priceCardStyles.priceCardIcon}>
@@ -147,7 +148,7 @@ export default function KostenPage() {
                   <div className={priceCardStyles.priceCardPrice}>€45–65</div>
                   <div className={priceCardStyles.priceCardUnit}>per uur</div>
                   <div className={priceCardStyles.priceCardRange}>Complete tuinaanleg 100m²: €4.500–12.000. Inclusief grondwerk, bestrating en beplanting.</div>
-                  <Link href={`/${locale}/kosten/tuin-aanleggen`} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
+                  <Link href={localizePath('/kosten/tuin-aanleggen', locale as SupportedLocale)} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
                 </div>
                 <div className={priceCardStyles.priceCard}>
                   <div className={priceCardStyles.priceCardIcon}>
@@ -159,7 +160,7 @@ export default function KostenPage() {
                   <div className={priceCardStyles.priceCardPrice}>€40–90</div>
                   <div className={priceCardStyles.priceCardUnit}>per m²</div>
                   <div className={priceCardStyles.priceCardRange}>Sedum dak 30m²: €1.200–2.700. Subsidie mogelijk via gemeente. Lage onderhoudskosten.</div>
-                  <Link href={`/${locale}/kosten/groendak`} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
+                  <Link href={localizePath('/kosten/groendak', locale as SupportedLocale)} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
                 </div>
                 <div className={priceCardStyles.priceCard}>
                   <div className={priceCardStyles.priceCardIcon}>
@@ -189,7 +190,7 @@ export default function KostenPage() {
                   <div className={priceCardStyles.priceCardPrice}>€50–80</div>
                   <div className={priceCardStyles.priceCardUnit}>per m²</div>
                   <div className={priceCardStyles.priceCardRange}>Oprit of terras betegelen per m²: €50–80. Inclusief zandbed en voegzand. Excl. materiaal.</div>
-                  <Link href={`/${locale}/services/stratenmaker`} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
+                  <Link href={localizePath('/services/stratenmaker', locale as SupportedLocale)} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
                 </div>
               </div>
             </div>

@@ -2,15 +2,21 @@ import { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../components/Navigation'
 import Breadcrumbs from '../../components/Breadcrumbs'
+import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
   params: Promise<{ locale: string }>
 }
 
-export const metadata: Metadata = {
-  title: 'Over Ons - Hovenier.frl | Friesland\'s Tuinier Directory',
-  description: 'Ontdek wat hovenier.frl is en hoe ons platform werkt voor huiseigenaren. Leer hoe je in 3 stappen gratis offertes krijgt van lokale hoveniers in Friesland.',
-  keywords: 'over ons, hovenier platform, Friesland, tuiniers directory, gratis offertes',
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+
+  return {
+    title: 'Over Ons - Hovenier.frl | Friesland\'s Tuinier Directory',
+    description: 'Ontdek wat hovenier.frl is en hoe ons platform werkt voor huiseigenaren. Leer hoe je in 3 stappen gratis offertes krijgt van lokale hoveniers in Friesland.',
+    keywords: 'over ons, hovenier platform, Friesland, tuiniers directory, gratis offertes',
+    alternates: getLocaleAlternates('/over-ons', locale as SupportedLocale),
+  }
 }
 
 // ISR: Never revalidate (static about page content)

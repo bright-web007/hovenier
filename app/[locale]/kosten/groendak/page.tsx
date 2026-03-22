@@ -3,15 +3,21 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from '@/app/components/NewLeadForm'
+import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
   params: Promise<{ locale: string }>
 }
 
-export const metadata: Metadata = {
-  title: 'Groendak Kosten & Subsidies - Complete Prijsgids 2024 | Hovenier.frl',
-  description: 'Wat kost een groendak in Friesland? Ontdek alle kosten, mogelijke subsidies en bespaar tot 40% op uw groendak project. Inclusief onderhoudskosten.',
-  keywords: 'groendak kosten, groendak subsidie, sedumdak prijzen, extensief groendak, intensief groendak, Friesland groendak',
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+
+  return {
+    title: 'Groendak Kosten & Subsidies - Complete Prijsgids 2024 | Hovenier.frl',
+    description: 'Wat kost een groendak in Friesland? Ontdek alle kosten, mogelijke subsidies en bespaar tot 40% op uw groendak project. Inclusief onderhoudskosten.',
+    keywords: 'groendak kosten, groendak subsidie, sedumdak prijzen, extensief groendak, intensief groendak, Friesland groendak',
+    alternates: getLocaleAlternates('/kosten/groendak', locale as SupportedLocale),
+  }
 }
 
 // ISR: Never revalidate (static pricing content, changes only with deployments)

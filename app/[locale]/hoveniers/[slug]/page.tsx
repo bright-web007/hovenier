@@ -7,6 +7,7 @@ import BreadcrumbSchema from '../../../components/schemas/BreadcrumbSchema'
 import GardenerProfile from '../../../components/GardenerProfile'
 import { getGardenerBySlug, getAllGardenerSlugs } from '../../../../lib/gardeners-data'
 import { notFound } from 'next/navigation'
+import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>
@@ -49,6 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${gardener.name} - ${gardener.company} | Hovenier in ${gardener.location}`,
     description: `${gardener.description} Beoordeeld met ${gardener.rating}/5 sterren door ${gardener.reviewCount} klanten. Vanaf €${gardener.startingPrice}/uur.`,
     keywords: `${gardener.name}, ${gardener.company}, hovenier ${gardener.location}, ${gardener.specialties.join(', ')}, tuinman ${gardener.location}`,
+    alternates: getLocaleAlternates(`/hoveniers/${slug}`, locale as SupportedLocale),
   }
 }
 
@@ -66,15 +68,15 @@ export default async function GardenerProfilePage({ params }: Props) {
   // Breadcrumb items
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: locale === 'en' ? 'Gardeners' : 'Hoveniers', href: '/hoveniers' },
+    { label: locale === 'en' ? 'Gardeners' : 'Hoveniers', href: localizePath('/hoveniers', locale as SupportedLocale) },
     { label: gardener.name }
   ]
 
   // Breadcrumb schema items (needs full URLs)
   const breadcrumbSchemaItems = [
-    { name: 'Home', url: `https://hovenier.frl/${locale}` },
-    { name: locale === 'en' ? 'Gardeners' : 'Hoveniers', url: `https://hovenier.frl/${locale}/hoveniers` },
-    { name: gardener.name, url: `https://hovenier.frl/${locale}/hoveniers/${slug}` }
+    { name: 'Home', url: getAbsoluteUrl('/', locale as SupportedLocale) },
+    { name: locale === 'en' ? 'Gardeners' : 'Hoveniers', url: getAbsoluteUrl('/hoveniers', locale as SupportedLocale) },
+    { name: gardener.name, url: getAbsoluteUrl(`/hoveniers/${slug}`, locale as SupportedLocale) }
   ]
 
   return (
@@ -82,7 +84,7 @@ export default async function GardenerProfilePage({ params }: Props) {
       <LocalBusinessSchema 
         name={`${gardener.name} - ${gardener.company}`}
         description={gardener.description}
-        url={`https://hovenier.frl/${locale}/hoveniers/${slug}`}
+        url={getAbsoluteUrl(`/hoveniers/${slug}`, locale as SupportedLocale)}
         areaServed={`${gardener.location}, Friesland`}
         serviceTypes={gardener.specialties}
         ratingValue={gardener.rating.toString()}

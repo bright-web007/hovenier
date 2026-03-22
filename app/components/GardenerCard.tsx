@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Gardener } from '../../lib/gardeners-data'
 import styles from './GardenerDirectory.module.css'
+import { localizePath, type SupportedLocale } from '@/lib/locale-utils'
 
 interface GardenerCardProps {
   gardener: Gardener
@@ -53,7 +54,7 @@ export default function GardenerCard({ gardener, locale }: GardenerCardProps) {
 
       <div className={styles.cardActions}>
         <Link 
-          href={`/${locale}/hoveniers/${gardener.slug}`}
+          href={localizePath(`/hoveniers/${gardener.slug}`, locale as SupportedLocale)}
           className={styles.viewButton}
         >
           Bekijk Profiel

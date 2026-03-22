@@ -20,6 +20,7 @@ import TermsChanges from '../../components/terms/TermsChanges';
 import TermsLaw from '../../components/terms/TermsLaw';
 import TermsContact from '../../components/terms/TermsContact';
 import TermsSchema from '../../components/terms/TermsSchema';
+import { getLocaleAlternates, getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -45,13 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         index: true,
         follow: true
       },
-      alternates: {
-        canonical: `https://hovenier.frl/${validLocale}/algemene-voorwaarden`,
-        languages: {
-          'nl': 'https://hovenier.frl/nl/algemene-voorwaarden', 
-          'en': 'https://hovenier.frl/en/algemene-voorwaarden'
-        }
-      }
+      alternates: getLocaleAlternates('/algemene-voorwaarden', validLocale as SupportedLocale)
     };
   } catch (error) {
     return {
@@ -82,8 +77,8 @@ export default async function TermsPage({ params }: Props) {
   ];
 
   const breadcrumbSchemaItems = [
-    { name: 'Home', url: 'https://hovenier.frl/' },
-    { name: isEnglish ? 'Terms and Conditions' : 'Algemene Voorwaarden', url: `https://hovenier.frl/${validLocale}/algemene-voorwaarden` }
+    { name: 'Home', url: getAbsoluteUrl('/', validLocale as SupportedLocale) },
+    { name: isEnglish ? 'Terms and Conditions' : 'Algemene Voorwaarden', url: getAbsoluteUrl('/algemene-voorwaarden', validLocale as SupportedLocale) }
   ];
 
   return (

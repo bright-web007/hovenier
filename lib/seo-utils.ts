@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { getAbsoluteUrl, localizePath, type SupportedLocale } from './locale-utils';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl';
 
@@ -25,25 +26,17 @@ export interface SEOConfig {
  * Generate canonical URL for a given path and locale
  */
 export function getCanonicalUrl(path: string, locale: string = 'nl'): string {
-  // Remove leading/trailing slashes and normalize
-  const cleanPath = path.replace(/^\/+|\/+$/g, '');
-  
-  if (locale === 'nl') {
-    return cleanPath ? `${BASE_URL}/${cleanPath}` : BASE_URL;
-  }
-  
-  return cleanPath ? `${BASE_URL}/${locale}/${cleanPath}` : `${BASE_URL}/${locale}`;
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  return getAbsoluteUrl(normalizedPath === '/' ? '' : normalizedPath, locale as SupportedLocale);
 }
 
 /**
  * Generate alternate URLs for all supported locales
  */
 export function getAlternateUrls(path: string): Array<{ locale: string; url: string }> {
-  const cleanPath = path.replace(/^\/+|\/+$/g, '');
-  
   return [
-    { locale: 'nl', url: cleanPath ? `${BASE_URL}/${cleanPath}` : BASE_URL },
-    { locale: 'en', url: cleanPath ? `${BASE_URL}/en/${cleanPath}` : `${BASE_URL}/en` }
+    { locale: 'nl', url: getCanonicalUrl(path, 'nl') },
+    { locale: 'en', url: getCanonicalUrl(path, 'en') }
   ];
 }
 

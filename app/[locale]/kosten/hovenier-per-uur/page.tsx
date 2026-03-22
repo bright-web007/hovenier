@@ -3,15 +3,21 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from "@/app/components/NewLeadForm"
+import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
   params: Promise<{ locale: string }>
 }
 
-export const metadata: Metadata = {
-  title: 'Wat kost een hovenier per uur? (2026) | Hovenier.frl',
-  description: 'Wat kost een hovenier per uur in Friesland? Ontdek alle uurtarieven, regionale verschillen en factoren die de kosten van tuinonderhoud beïnvloeden.',
-  keywords: 'hovenier per uur, uurtarieven, tuinonderhoud kosten, hovenier prijzen, Friesland tarieven',
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+
+  return {
+    title: 'Wat kost een hovenier per uur? (2026) | Hovenier.frl',
+    description: 'Wat kost een hovenier per uur in Friesland? Ontdek alle uurtarieven, regionale verschillen en factoren die de kosten van tuinonderhoud beïnvloeden.',
+    keywords: 'hovenier per uur, uurtarieven, tuinonderhoud kosten, hovenier prijzen, Friesland tarieven',
+    alternates: getLocaleAlternates('/kosten/hovenier-per-uur', locale as SupportedLocale),
+  }
 }
 
 // ISR: Never revalidate (static pricing content, changes only with deployments)

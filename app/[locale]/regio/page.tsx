@@ -3,15 +3,21 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import LocalBusinessSchema from '../../components/schemas/LocalBusinessSchema';
+import { getAbsoluteUrl, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils';
 
 type Props = {
   params: { locale: string }
 }
 
-export const metadata: Metadata = {
-  title: 'Hovenier per Gemeente in Friesland | Hovenier.frl',
-  description: 'Vind lokale hoveniers in alle 11 Friese gemeenten. Van Leeuwarden tot Harlingen - bekijk welke tuinspecialisten actief zijn in jouw gemeente.',
-  keywords: 'hovenier per gemeente, Friesland hoveniers, lokale tuinman, gemeente hovenier',
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  return {
+    title: 'Hovenier per Gemeente in Friesland | Hovenier.frl',
+    description: 'Vind lokale hoveniers in alle 11 Friese gemeenten. Van Leeuwarden tot Harlingen - bekijk welke tuinspecialisten actief zijn in jouw gemeente.',
+    keywords: 'hovenier per gemeente, Friesland hoveniers, lokale tuinman, gemeente hovenier',
+    alternates: getLocaleAlternates('/regio', locale as SupportedLocale),
+  }
 }
 
 // ISR: Never revalidate (static municipal data, changes only with deployments)
@@ -51,7 +57,7 @@ export default async function RegioHubPage({ params }: Props) {
       <LocalBusinessSchema 
         name="Hovenier.frl - Hoveniers per Gemeente Friesland"
         description="Lokale hoveniers en tuinspecialisten in alle 11 Friese gemeenten. Van Leeuwarden tot Harlingen - vind de beste tuinexperts in jouw gemeente voor tuinonderhoud, tuinontwerp en tuinaanleg."
-        url={`https://hovenier.frl/${locale}/regio`}
+        url={getAbsoluteUrl('/regio', locale as SupportedLocale)}
         areaServed="Friesland, Nederland"
         serviceTypes={["Lokale Hoveniers", "Gemeente Tuinspecialisten", "Regionale Tuinservices"]}
         ratingValue="4.6"

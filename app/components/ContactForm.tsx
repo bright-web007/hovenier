@@ -9,13 +9,17 @@ interface ContactFormProps {
 export default function ContactForm({ locale }: ContactFormProps) {
   return (
     <div className={styles.form}>
-      <h2 className={styles.formTitle}>
+      <div className="form-eyebrow">Gratis & vrijblijvend</div>
+      <h2 className="form-title">
         Stuur ons een bericht
       </h2>
-      <form className={styles.formGrid}>
-        <div className={styles.formRow}>
-          <div className={styles.formField}>
-            <label htmlFor="firstName" className={styles.formLabel}>
+      <p className="form-sub">
+        We nemen binnen 24 uur contact met je op.
+      </p>
+      <form>
+        <div className="form-row">
+          <div className="form-field">
+            <label htmlFor="firstName" className="form-label">
               Voornaam *
             </label>
             <input
@@ -23,11 +27,11 @@ export default function ContactForm({ locale }: ContactFormProps) {
               id="firstName"
               name="firstName"
               required
-              className={styles.formInput}
+              className="form-input"
             />
           </div>
-          <div className={styles.formField}>
-            <label htmlFor="lastName" className={styles.formLabel}>
+          <div className="form-field">
+            <label htmlFor="lastName" className="form-label">
               Achternaam *
             </label>
             <input
@@ -35,13 +39,13 @@ export default function ContactForm({ locale }: ContactFormProps) {
               id="lastName"
               name="lastName"
               required
-              className={styles.formInput}
+              className="form-input"
             />
           </div>
         </div>
         
-        <div className={styles.formField}>
-          <label htmlFor="email" className={styles.formLabel}>
+        <div className="form-field">
+          <label htmlFor="email" className="form-label">
             Email *
           </label>
           <input
@@ -49,19 +53,19 @@ export default function ContactForm({ locale }: ContactFormProps) {
             id="email"
             name="email"
             required
-            className={styles.formInput}
+            className="form-input"
           />
         </div>
 
-        <div className={styles.formField}>
-          <label htmlFor="subject" className={styles.formLabel}>
+        <div className="form-field">
+          <label htmlFor="subject" className="form-label">
             Onderwerp *
           </label>
           <select
             id="subject"
             name="subject"
             required
-            className={styles.formSelect}
+            className="form-select"
           >
             <option value="">Selecteer onderwerp...</option>
             <option value="general">Algemene vraag</option>
@@ -73,29 +77,29 @@ export default function ContactForm({ locale }: ContactFormProps) {
           </select>
         </div>
 
-        <div className={styles.formField}>
-          <label htmlFor="message" className={styles.formLabel}>
+        <div className="form-field">
+          <label htmlFor="message" className="form-label">
             Bericht *
           </label>
           <textarea
             id="message"
             name="message"
-            rows={6}
+            rows={4}
             required
-            className={styles.formTextarea}
+            className="form-input"
             placeholder="Beschrijf je vraag of opmerking..."
           ></textarea>
         </div>
 
         <button
           type="submit"
-          className={styles.formButton}
+          className="form-btn"
         >
           Verstuur Bericht
         </button>
       </form>
 
-      <p className={styles.formNote}>
+      <p className="form-note">
         * Verplichte velden. We respecteren je privacy - zie ons{' '}
         <a href="/privacy-beleid">privacybeleid</a>.
       </p>

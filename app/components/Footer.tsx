@@ -39,7 +39,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
     { href: '/privacy-beleid', label: 'Privacybeleid' },
     { href: '/algemene-voorwaarden', label: 'Algemene voorwaarden' },
     { href: '/cookie-beleid', label: 'Cookiebeleid' },
-    { href: '/disclaimer', label: 'Disclaimer' }
+    { href: '/aansprakelijkheid', label: 'Aansprakelijkheid' }
   ];
   
   const handleNewsletterSubmit = (e: React.FormEvent) => {

@@ -1,0 +1,239 @@
+/* Cookie Policy Page CSS Module - Following Privacy Policy Pattern */
+
+.cookiePage {
+  background: var(--cream);
+  min-height: 100vh;
+}
+
+.legalContent {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.legalHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.legalTitle {
+  font-family: var(--serif);
+  font-size: 42px;
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.legalSubtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.legalSections {
+  margin-bottom: 2rem;
+}
+
+.legalSection {
+  margin-bottom: 3rem;
+}
+
+.legalSectionTitle {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.legalSubsectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--forest);
+  margin: 1.5rem 0 1rem;
+}
+
+.legalText {
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+  text-align: justify;
+}
+
+.legalList {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.legalList li {
+  margin-bottom: 0.75rem;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.legalList li strong {
+  color: var(--forest);
+  font-weight: 600;
+}
+
+.legalContact {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 1.5rem 0;
+}
+
+.legalLink {
+  color: var(--sage);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.legalLink:hover {
+  color: var(--forest-light);
+}
+
+/* Cookie specific enhancements */
+.cookieIntroText {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--forest-mid);
+  margin-bottom: 2rem;
+  text-align: center;
+  font-style: italic;
+}
+
+.cookieTypesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.cookieTypeCard {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  transition: border-color 0.3s ease;
+}
+
+.cookieTypeCard:hover {
+  border-color: var(--sage);
+}
+
+.cookieTypeTitle {
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 0.5rem;
+  font-size: 16px;
+}
+
+.cookieTypeDescription {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+.cookieTable {
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+
+.cookieEntry {
+  background: var(--white);
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  border-left: 3px solid var(--sage);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cookieEntry:last-child {
+  margin-bottom: 0;
+}
+
+.cookieEntry strong {
+  color: var(--forest);
+}
+
+.contactHighlight {
+  background: linear-gradient(135deg, var(--sage) 0%, var(--sage-light) 100%);
+  color: var(--white);
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.contactHighlight h3 {
+  font-family: var(--serif);
+  font-size: 24px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.contactHighlight a {
+  color: var(--white);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 767px) {
+  .legalContent {
+    padding: 0 1rem;
+  }
+  
+  .legalTitle {
+    font-size: 32px;
+  }
+  
+  .legalSubtitle {
+    font-size: 14px;
+  }
+  
+  .legalSectionTitle {
+    font-size: 24px;
+  }
+  
+  .legalSubsectionTitle {
+    font-size: 18px;
+  }
+  
+  .legalText,
+  .legalList li {
+    font-size: 15px;
+    text-align: left;
+  }
+  
+  .cookieIntroText {
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .cookieTypesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contactHighlight {
+    padding: 1.5rem;
+  }
+  
+  .contactHighlight h3 {
+    font-size: 20px;
+  }
+}

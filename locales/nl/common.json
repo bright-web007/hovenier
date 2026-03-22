@@ -48,6 +48,46 @@
   "regions_content": {
     "homepage_title": "Hoveniers in elke Friese gemeente"
   },
+  "footer": {
+    "description": "Dé plek om betrouwbare hoveniers in Friesland te vinden. Vergelijk offertes, lees reviews en kies met vertrouwen voor de beste hovenier in jouw gemeente.",
+    "newsletter_title": "Tuintips & updates",
+    "newsletter_placeholder": "Je e-mailadres",
+    "newsletter_button": "Aanmelden",
+    "newsletter_privacy": "Maandelijkse tuintips en geen spam. Je kunt altijd uitschrijven.",
+    "services_title": "Diensten",
+    "gemeenten_title": "Gemeenten",
+    "company_title": "Bedrijf",
+    "copyright": "Alle rechten voorbehouden.",
+    "newsletter_success": "Bedankt voor je aanmelding! We nemen contact met je op.",
+    "links": {
+      "services": {
+        "tuinonderhoud": "Tuinonderhoud",
+        "tuinontwerp": "Tuinontwerp",
+        "groendak": "Groendaken",
+        "bestrating": "Bestrating"
+      },
+      "gemeenten": {
+        "leeuwarden": "Leeuwarden",
+        "heerenveen": "Heerenveen",
+        "smallingerland": "Smallingerland",
+        "sudwest_fryslan": "Súdwest-Fryslân",
+        "waadhoeke": "Waadhoeke",
+        "harlingen": "Harlingen"
+      },
+      "company": {
+        "over_ons": "Over ons",
+        "samenwerking": "Samenwerking",
+        "contact": "Contact",
+        "nieuws": "Blog"
+      },
+      "legal": {
+        "privacy_beleid": "Privacybeleid",
+        "algemene_voorwaarden": "Algemene voorwaarden",
+        "cookie_beleid": "Cookiebeleid",
+        "aansprakelijkheid": "Aansprakelijkheid"
+      }
+    }
+  },
   "cta": {
     "title": "Klaar om uw tuin te transformeren?",
     "subtitle": "Ontvang gratis offertes van betrouwbare hoveniers in uw buurt. Vergelijk prijzen en kies de beste hovenier voor uw project."

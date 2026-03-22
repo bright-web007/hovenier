@@ -10,36 +10,104 @@ interface FooterProps {
 export default function Footer({ locale = 'nl' }: FooterProps) {
   const [emailInput, setEmailInput] = useState('');
   
+  // Simple translation function
+  function t(key: string): string {
+    const translations: Record<string, Record<string, string>> = {
+      nl: {
+        'footer.description': 'Dé plek om betrouwbare hoveniers in Friesland te vinden. Vergelijk offertes, lees reviews en kies met vertrouwen voor de beste hovenier in jouw gemeente.',
+        'footer.newsletter_title': 'Tuintips & updates',
+        'footer.newsletter_placeholder': 'Je e-mailadres',
+        'footer.newsletter_button': 'Aanmelden',
+        'footer.newsletter_privacy': 'Maandelijkse tuintips en geen spam. Je kunt altijd uitschrijven.',
+        'footer.services_title': 'Diensten',
+        'footer.gemeenten_title': 'Gemeenten',
+        'footer.company_title': 'Bedrijf',
+        'footer.copyright': 'Alle rechten voorbehouden.',
+        'footer.newsletter_success': 'Bedankt voor je aanmelding! We nemen contact met je op.',
+        'footer.links.services.tuinonderhoud': 'Tuinonderhoud',
+        'footer.links.services.tuinontwerp': 'Tuinontwerp',
+        'footer.links.services.groendak': 'Groendaken',
+        'footer.links.services.bestrating': 'Bestrating',
+        'footer.links.gemeenten.leeuwarden': 'Leeuwarden',
+        'footer.links.gemeenten.heerenveen': 'Heerenveen',
+        'footer.links.gemeenten.smallingerland': 'Smallingerland',
+        'footer.links.gemeenten.sudwest_fryslan': 'Súdwest-Fryslân',
+        'footer.links.gemeenten.waadhoeke': 'Waadhoeke',
+        'footer.links.gemeenten.harlingen': 'Harlingen',
+        'footer.links.company.over_ons': 'Over ons',
+        'footer.links.company.samenwerking': 'Samenwerking',
+        'footer.links.company.contact': 'Contact',
+        'footer.links.company.nieuws': 'Blog',
+        'footer.links.legal.privacy_beleid': 'Privacybeleid',
+        'footer.links.legal.algemene_voorwaarden': 'Algemene voorwaarden',
+        'footer.links.legal.cookie_beleid': 'Cookiebeleid',
+        'footer.links.legal.aansprakelijkheid': 'Aansprakelijkheid'
+      },
+      en: {
+        'footer.description': 'The place to find reliable gardeners in Friesland. Compare quotes, read reviews and choose with confidence for the best gardener in your municipality.',
+        'footer.newsletter_title': 'Garden tips & updates',
+        'footer.newsletter_placeholder': 'Your email address',
+        'footer.newsletter_button': 'Subscribe',
+        'footer.newsletter_privacy': 'Monthly garden tips and no spam. You can always unsubscribe.',
+        'footer.services_title': 'Services',
+        'footer.gemeenten_title': 'Municipalities',
+        'footer.company_title': 'Company',
+        'footer.copyright': 'All rights reserved.',
+        'footer.newsletter_success': 'Thank you for signing up! We will contact you.',
+        'footer.links.services.tuinonderhoud': 'Garden Maintenance',
+        'footer.links.services.tuinontwerp': 'Garden Design',
+        'footer.links.services.groendak': 'Green Roofs',
+        'footer.links.services.bestrating': 'Paving',
+        'footer.links.gemeenten.leeuwarden': 'Leeuwarden',
+        'footer.links.gemeenten.heerenveen': 'Heerenveen',
+        'footer.links.gemeenten.smallingerland': 'Smallingerland',
+        'footer.links.gemeenten.sudwest_fryslan': 'Súdwest-Fryslân',
+        'footer.links.gemeenten.waadhoeke': 'Waadhoeke',
+        'footer.links.gemeenten.harlingen': 'Harlingen',
+        'footer.links.company.over_ons': 'About Us',
+        'footer.links.company.samenwerking': 'Partnership',
+        'footer.links.company.contact': 'Contact',
+        'footer.links.company.nieuws': 'Blog',
+        'footer.links.legal.privacy_beleid': 'Privacy Policy',
+        'footer.links.legal.algemene_voorwaarden': 'Terms & Conditions',
+        'footer.links.legal.cookie_beleid': 'Cookie Policy',
+        'footer.links.legal.aansprakelijkheid': 'Liability'
+      }
+    };
+    
+    return translations[locale as keyof typeof translations]?.[key] || translations.nl[key] || key;
+  }
+  
   const currentYear = new Date().getFullYear();
   
   const serviceLinks = [
-    { href: '/services/tuinonderhoud', label: 'Tuinonderhoud' },
-    { href: '/services/tuinontwerp', label: 'Tuinontwerp' },
-    { href: '/services/groendak', label: 'Groendaken' },
-    { href: '/services/bestrating', label: 'Bestrating' }
+    { href: '/services/tuinonderhoud', label: t('footer.links.services.tuinonderhoud') },
+    { href: '/services/tuinontwerp', label: t('footer.links.services.tuinontwerp') },
+    { href: '/services/groendak', label: t('footer.links.services.groendak') },
+    { href: '/services/bestrating', label: t('footer.links.services.bestrating') }
   ];
   
   const gemeenteLinks = [
-    { href: '/gemeente/leeuwarden', label: 'Leeuwarden' },
-    { href: '/gemeente/heerenveen', label: 'Heerenveen' },
-    { href: '/gemeente/smallingerland', label: 'Smallingerland' },
-    { href: '/gemeente/sudwest-fryslan', label: 'Súdwest-Fryslân' },
-    { href: '/gemeente/waadhoeke', label: 'Waadhoeke' },
-    { href: '/gemeente/harlingen', label: 'Harlingen' }
+    { href: '/gemeente/leeuwarden', label: t('footer.links.gemeenten.leeuwarden') },
+    { href: '/gemeente/heerenveen', label: t('footer.links.gemeenten.heerenveen') },
+    { href: '/gemeente/smallingerland', label: t('footer.links.gemeenten.smallingerland') },
+    { href: '/gemeente/sudwest-fryslan', label: t('footer.links.gemeenten.sudwest_fryslan') },
+    { href: '/gemeente/waadhoeke', label: t('footer.links.gemeenten.waadhoeke') },
+    { href: '/gemeente/harlingen', label: t('footer.links.gemeenten.harlingen') }
   ];
   
   const companyLinks = [
-    { href: '/over-ons', label: 'Over ons' },
-    { href: '/samenwerking', label: 'Samenwerking' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/nieuws', label: 'Blog' }
+    { href: '/over-ons', label: t('footer.links.company.over_ons') },
+    { href: '/samenwerking', label: t('footer.links.company.samenwerking') },
+    { href: '/contact', label: t('footer.links.company.contact') },
+    { href: '/nieuws', label: t('footer.links.company.nieuws') }
   ];
   
   const legalLinks = [
-    { href: '/privacy-beleid', label: 'Privacybeleid' },
-    { href: '/algemene-voorwaarden', label: 'Algemene voorwaarden' },
-    { href: '/cookie-beleid', label: 'Cookiebeleid' },
-    { href: '/aansprakelijkheid', label: 'Aansprakelijkheid' }
+    { href: '/privacy-beleid', label: t('footer.links.legal.privacy_beleid') },
+    { href: '/algemene-voorwaarden', label: t('footer.links.legal.algemene_voorwaarden') },
+    { href: '/cookie-beleid', label: t('footer.links.legal.cookie_beleid') },
+    { href: '/aansprakelijkheid', label: t('footer.links.legal.aansprakelijkheid') }
   ];
   
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -47,7 +115,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
     // TODO: Implement newsletter signup
     console.log('Newsletter signup:', emailInput);
     setEmailInput('');
-    alert('Bedankt voor je aanmelding! We nemen contact met je op.');
+    alert(t('footer.newsletter_success'));
   };
 
   return (
@@ -62,22 +130,21 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
                 <img src="/assets/logo-dark.svg" alt="Hovenier.frl - Friese hoveniers directory en tuinspecialisten" width="160" height="36" className="footer-logo-image" />
               </Link>
               <p className="footer-description">
-                Dé plek om betrouwbare hoveniers in Friesland te vinden. Vergelijk offertes, 
-                lees reviews en kies met vertrouwen voor de beste hovenier in jouw gemeente.
+                {t('footer.description')}
               </p>
             </div>
             
             {/* Newsletter Signup */}
             <div className="footer-newsletter">
               <h4 className="footer-section-title">
-                Tuintips & updates
+                {t('footer.newsletter_title')}
               </h4>
               <form onSubmit={handleNewsletterSubmit} className="newsletter-form">
                 <input 
                   type="email"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
-                  placeholder="Je e-mailadres"
+                  placeholder={t('footer.newsletter_placeholder')}
                   className="newsletter-input"
                   required
                 />
@@ -85,11 +152,11 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
                   type="submit"
                   className="newsletter-button"
                 >
-                  Aanmelden
+                  {t('footer.newsletter_button')}
                 </button>
               </form>
               <p className="newsletter-privacy">
-                Maandelijkse tuintips en geen spam. Je kunt altijd uitschrijven.
+                {t('footer.newsletter_privacy')}
               </p>
             </div>
           </div>
@@ -97,7 +164,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
           {/* Services Column */}
           <div className="footer-column">
             <h4 className="footer-section-title">
-              Diensten
+              {t('footer.services_title')}
             </h4>
             <ul className="footer-links">
               {serviceLinks.map((link) => (
@@ -116,7 +183,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
           {/* Gemeenten Column */}
           <div className="footer-column">
             <h4 className="footer-section-title">
-              Gemeenten
+              {t('footer.gemeenten_title')}
             </h4>
             <ul className="footer-links">
               {gemeenteLinks.map((link) => (
@@ -135,7 +202,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
           {/* Company Column */}
           <div className="footer-column">
             <h4 className="footer-section-title">
-              Bedrijf
+              {t('footer.company_title')}
             </h4>
             <ul className="footer-links">
               {companyLinks.map((link) => (
@@ -188,7 +255,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
         <div className="footer-bottom">
           <div className="footer-bottom-content">
             <div className="footer-copyright">
-              © {currentYear} Hovenier.frl. Alle rechten voorbehouden.
+              © {currentYear} Hovenier.frl. {t('footer.copyright')}
             </div>
             
             <div className="footer-legal">

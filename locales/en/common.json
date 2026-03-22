@@ -48,6 +48,46 @@
   "regions_content": {
     "homepage_title": "Gardeners in every Frisian municipality"
   },
+  "footer": {
+    "description": "The place to find reliable gardeners in Friesland. Compare quotes, read reviews and choose with confidence for the best gardener in your municipality.",
+    "newsletter_title": "Garden tips & updates",
+    "newsletter_placeholder": "Your email address",
+    "newsletter_button": "Subscribe",
+    "newsletter_privacy": "Monthly garden tips and no spam. You can always unsubscribe.",
+    "services_title": "Services",
+    "gemeenten_title": "Municipalities",
+    "company_title": "Company",
+    "copyright": "All rights reserved.",
+    "newsletter_success": "Thank you for signing up! We will contact you.",
+    "links": {
+      "services": {
+        "tuinonderhoud": "Garden Maintenance",
+        "tuinontwerp": "Garden Design",
+        "groendak": "Green Roofs",
+        "bestrating": "Paving"
+      },
+      "gemeenten": {
+        "leeuwarden": "Leeuwarden",
+        "heerenveen": "Heerenveen",
+        "smallingerland": "Smallingerland",
+        "sudwest_fryslan": "Súdwest-Fryslân",
+        "waadhoeke": "Waadhoeke",
+        "harlingen": "Harlingen"
+      },
+      "company": {
+        "over_ons": "About Us",
+        "samenwerking": "Partnership",
+        "contact": "Contact",
+        "nieuws": "Blog"
+      },
+      "legal": {
+        "privacy_beleid": "Privacy Policy",
+        "algemene_voorwaarden": "Terms & Conditions",
+        "cookie_beleid": "Cookie Policy",
+        "aansprakelijkheid": "Liability"
+      }
+    }
+  },
   "cta": {
     "title": "Ready to transform your garden?",
     "subtitle": "Receive free quotes from reliable gardeners in your area. Compare prices and choose the best gardener for your project."

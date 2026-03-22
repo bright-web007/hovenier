@@ -81,33 +81,33 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
   const currentYear = new Date().getFullYear();
   
   const serviceLinks = [
-    { href: '/services/tuinonderhoud', label: t('footer.links.services.tuinonderhoud') },
-    { href: '/services/tuinontwerp', label: t('footer.links.services.tuinontwerp') },
-    { href: '/services/groendak', label: t('footer.links.services.groendak') },
-    { href: '/services/bestrating', label: t('footer.links.services.bestrating') }
+    { href: `/${locale}/services/tuinonderhoud`, label: t('footer.links.services.tuinonderhoud') },
+    { href: `/${locale}/services/tuinontwerp`, label: t('footer.links.services.tuinontwerp') },
+    { href: `/${locale}/services/groendak`, label: t('footer.links.services.groendak') },
+    { href: `/${locale}/services/bestrating`, label: t('footer.links.services.bestrating') }
   ];
   
   const gemeenteLinks = [
-    { href: '/gemeente/leeuwarden', label: t('footer.links.gemeenten.leeuwarden') },
-    { href: '/gemeente/heerenveen', label: t('footer.links.gemeenten.heerenveen') },
-    { href: '/gemeente/smallingerland', label: t('footer.links.gemeenten.smallingerland') },
-    { href: '/gemeente/sudwest-fryslan', label: t('footer.links.gemeenten.sudwest_fryslan') },
-    { href: '/gemeente/waadhoeke', label: t('footer.links.gemeenten.waadhoeke') },
-    { href: '/gemeente/harlingen', label: t('footer.links.gemeenten.harlingen') }
+    { href: `/${locale}/gemeente/leeuwarden`, label: t('footer.links.gemeenten.leeuwarden') },
+    { href: `/${locale}/gemeente/heerenveen`, label: t('footer.links.gemeenten.heerenveen') },
+    { href: `/${locale}/gemeente/smallingerland`, label: t('footer.links.gemeenten.smallingerland') },
+    { href: `/${locale}/gemeente/sudwest-fryslan`, label: t('footer.links.gemeenten.sudwest_fryslan') },
+    { href: `/${locale}/gemeente/waadhoeke`, label: t('footer.links.gemeenten.waadhoeke') },
+    { href: `/${locale}/gemeente/harlingen`, label: t('footer.links.gemeenten.harlingen') }
   ];
   
   const companyLinks = [
-    { href: '/over-ons', label: t('footer.links.company.over_ons') },
-    { href: '/samenwerking', label: t('footer.links.company.samenwerking') },
-    { href: '/contact', label: t('footer.links.company.contact') },
-    { href: '/nieuws', label: t('footer.links.company.nieuws') }
+    { href: `/${locale}/over-ons`, label: t('footer.links.company.over_ons') },
+    { href: `/${locale}/samenwerking`, label: t('footer.links.company.samenwerking') },
+    { href: `/${locale}/contact`, label: t('footer.links.company.contact') },
+    { href: `/${locale}/nieuws`, label: t('footer.links.company.nieuws') }
   ];
   
   const legalLinks = [
-    { href: '/privacy-beleid', label: t('footer.links.legal.privacy_beleid') },
-    { href: '/algemene-voorwaarden', label: t('footer.links.legal.algemene_voorwaarden') },
-    { href: '/cookie-beleid', label: t('footer.links.legal.cookie_beleid') },
-    { href: '/aansprakelijkheid', label: t('footer.links.legal.aansprakelijkheid') }
+    { href: `/${locale}/privacy-beleid`, label: t('footer.links.legal.privacy_beleid') },
+    { href: `/${locale}/algemene-voorwaarden`, label: t('footer.links.legal.algemene_voorwaarden') },
+    { href: `/${locale}/cookie-beleid`, label: t('footer.links.legal.cookie_beleid') },
+    { href: `/${locale}/aansprakelijkheid`, label: t('footer.links.legal.aansprakelijkheid') }
   ];
   
   const handleNewsletterSubmit = (e: React.FormEvent) => {

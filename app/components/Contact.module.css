@@ -1,0 +1,345 @@
+/* Contact Page Component Styles */
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: var(--color-forest);
+  font-family: var(--font-serif);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  color: var(--color-text-mid);
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* Main Layout */
+.layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Contact Form */
+.form {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 16px -6px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+}
+
+.formTitle {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: var(--color-forest);
+  font-family: var(--font-serif);
+  margin-bottom: 1.5rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .formRow {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+}
+
+.formLabel {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-forest);
+  margin-bottom: 0.25rem;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-cream);
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: white;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: var(--color-forest);
+  box-shadow: 0 0 0 3px rgba(34, 139, 34, 0.1);
+}
+
+.formSelect {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-cream);
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: white;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.formSelect:focus {
+  outline: none;
+  border-color: var(--color-forest);
+  box-shadow: 0 0 0 3px rgba(34, 139, 34, 0.1);
+}
+
+.formTextarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-cream);
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: white;
+  resize: vertical;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.formTextarea:focus {
+  outline: none;
+  border-color: var(--color-forest);
+  box-shadow: 0 0 0 3px rgba(34, 139, 34, 0.1);
+}
+
+.formButton {
+  background-color: var(--color-forest);
+  color: white;
+  padding: 0.875rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.formButton:hover {
+  background-color: var(--color-forest-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 139, 34, 0.15);
+}
+
+.formNote {
+  font-size: 0.875rem;
+  color: var(--color-text-mid);
+  margin-top: 1rem;
+}
+
+.formNote a {
+  color: var(--color-forest);
+  text-decoration: none;
+}
+
+.formNote a:hover {
+  text-decoration: underline;
+}
+
+/* Contact Information */
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contactCard {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 16px -6px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+}
+
+.contactCardTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--color-forest);
+  font-family: var(--font-serif);
+  margin-bottom: 1rem;
+}
+
+.contactItems {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.contactIcon {
+  background-color: var(--color-cream-dark);
+  padding: 0.75rem;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.contactIcon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-forest);
+}
+
+.contactDetails h4 {
+  font-weight: 500;
+  color: var(--color-forest);
+  margin: 0 0 0.25rem 0;
+}
+
+.contactDetails p {
+  color: var(--color-text-mid);
+  margin: 0;
+}
+
+.contactDetails .contactSubtext {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+}
+
+/* FAQ Section */
+.faqCard {
+  background-color: var(--color-cream-dark);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.faqItems {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faqItem h4 {
+  font-weight: 500;
+  color: var(--color-forest);
+  margin: 0 0 0.25rem 0;
+}
+
+.faqItem p {
+  font-size: 0.875rem;
+  color: var(--color-text-mid);
+  margin: 0 0 0.25rem 0;
+}
+
+.faqItem a {
+  font-size: 0.875rem;
+  color: var(--color-forest);
+  text-decoration: none;
+}
+
+.faqItem a:hover {
+  text-decoration: underline;
+}
+
+/* Response Time */
+.responseCard {
+  background-color: var(--color-cream-dark);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.responseItems {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.responseItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.responseLabel {
+  color: var(--color-text-mid);
+}
+
+.responseTime {
+  font-weight: 500;
+  color: var(--color-forest);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 767px) {
+  .hero {
+    margin-bottom: 2rem;
+  }
+  
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.125rem;
+  }
+  
+  .layout {
+    gap: 2rem;
+  }
+  
+  .form,
+  .contactCard,
+  .faqCard,
+  .responseCard {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 2rem;
+  }
+  
+  .form,
+  .contactCard,
+  .faqCard,
+  .responseCard {
+    padding: 1rem;
+  }
+}

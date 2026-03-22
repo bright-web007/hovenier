@@ -1,11 +1,10 @@
 import { Metadata } from 'next'
-import { useTranslations } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../components/Navigation'
 import Breadcrumbs from '../../components/Breadcrumbs'
 
 type Props = {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }
 
 export const metadata: Metadata = {
@@ -14,9 +13,9 @@ export const metadata: Metadata = {
   keywords: 'contact, hovenier.frl, partnership, pers, technische ondersteuning, Friesland',
 }
 
-export default function ContactPage({ params: { locale } }: Props) {
+export default async function ContactPage({ params }: Props) {
+  const { locale } = await params
   setRequestLocale(locale)
-  const t = useTranslations('pages.contact')
 
   // Breadcrumb items
   const breadcrumbItems = [
@@ -28,14 +27,14 @@ export default function ContactPage({ params: { locale } }: Props) {
     <>
       <Navigation locale={locale} />
       <Breadcrumbs items={breadcrumbItems} />
-      <main className="min-h-screen bg-gradient-to-br from-sage-50 to-forest-50">
-      <div className="container mx-auto px-4 py-16">
+      <main className="section section-alt">
+      <div className="section-inner">
         {/* Hero Section */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-forest-900 mb-6">
+        <div className="section-centered mb-16">
+          <h1 className="hero-h1 text-forest">
             Contact
           </h1>
-          <p className="text-xl text-forest-700 mb-8">
+          <p className="section-sub section-sub-centered">
             Vragen, feedback of samenwerking? We horen graag van je!
           </p>
         </div>
@@ -43,13 +42,13 @@ export default function ContactPage({ params: { locale } }: Props) {
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16">
           {/* Contact Form */}
           <div className="bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-forest-900 mb-6">
+            <h2 className="section-title">
               Stuur ons een bericht
             </h2>
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-forest-700 mb-2">
+                  <label htmlFor="firstName" className="form-label">
                     Voornaam *
                   </label>
                   <input
@@ -57,11 +56,11 @@ export default function ContactPage({ params: { locale } }: Props) {
                     id="firstName"
                     name="firstName"
                     required
-                    className="w-full px-4 py-2 border border-sage-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-sage-500"
+                    className="form-input"
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-forest-700 mb-2">
+                  <label htmlFor="lastName" className="form-label">
                     Achternaam *
                   </label>
                   <input
@@ -69,13 +68,13 @@ export default function ContactPage({ params: { locale } }: Props) {
                     id="lastName"
                     name="lastName"
                     required
-                    className="w-full px-4 py-2 border border-sage-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-sage-500"
+                    className="form-input"
                   />
                 </div>
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-forest-700 mb-2">
+                <label htmlFor="email" className="form-label">
                   Email *
                 </label>
                 <input
@@ -83,19 +82,19 @@ export default function ContactPage({ params: { locale } }: Props) {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-2 border border-sage-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-sage-500"
+                  className="form-input"
                 />
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-forest-700 mb-2">
+                <label htmlFor="subject" className="form-label">
                   Onderwerp *
                 </label>
                 <select
                   id="subject"
                   name="subject"
                   required
-                  className="w-full px-4 py-2 border border-sage-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-sage-500"
+                  className="form-select"
                 >
                   <option value="">Selecteer onderwerp...</option>
                   <option value="general">Algemene vraag</option>
@@ -108,7 +107,7 @@ export default function ContactPage({ params: { locale } }: Props) {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-forest-700 mb-2">
+                <label htmlFor="message" className="form-label">
                   Bericht *
                 </label>
                 <textarea
@@ -116,22 +115,22 @@ export default function ContactPage({ params: { locale } }: Props) {
                   name="message"
                   rows={6}
                   required
-                  className="w-full px-4 py-2 border border-sage-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-sage-500"
+                  className="form-input"
                   placeholder="Beschrijf je vraag of opmerking..."
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-sage-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-sage-700 transition-colors"
+                className="form-btn"
               >
                 Verstuur Bericht
               </button>
             </form>
 
-            <p className="text-sm text-forest-600 mt-4">
+            <p className="text-sm mt-4 text-text-mid">
               * Verplichte velden. We respecteren je privacy - zie ons 
-              <a href="/privacy-beleid" className="text-sage-600 hover:underline"> privacybeleid</a>.
+              <a href="/privacy-beleid" className="hover:underline text-forest"> privacybeleid</a>.
             </p>
           </div>
 
@@ -139,80 +138,80 @@ export default function ContactPage({ params: { locale } }: Props) {
           <div className="space-y-8">
             {/* Contact Cards */}
             <div className="bg-white rounded-xl shadow-lg p-6">
-              <h3 className="text-xl font-bold text-forest-900 mb-4">
+              <h3 className="text-xl font-bold mb-4 text-forest font-serif">
                 Direct Contact
               </h3>
               <div className="space-y-4">
                 <div className="flex items-start space-x-4">
-                  <div className="bg-sage-100 p-3 rounded-lg">
-                    <svg className="w-5 h-5 text-sage-600" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="p-3 rounded-lg bg-cream-dark">
+                    <svg className="w-5 h-5 text-forest" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                       <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                     </svg>
                   </div>
                   <div>
-                    <p className="font-medium text-forest-900">Email</p>
-                    <p className="text-forest-700">info@hovenier.frl</p>
-                    <p className="text-sm text-forest-600">We reageren binnen 24 uur</p>
+                    <p className="font-medium text-forest">Email</p>
+                    <p className="text-text-mid">info@hovenier.frl</p>
+                    <p className="text-sm text-text-muted">We reageren binnen 24 uur</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-sage-100 p-3 rounded-lg">
-                    <svg className="w-5 h-5 text-sage-600" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="p-3 rounded-lg bg-cream-dark">
+                    <svg className="w-5 h-5 text-forest" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg>
                   </div>
                   <div>
-                    <p className="font-medium text-forest-900">Locatie</p>
-                    <p className="text-forest-700">Friesland, Nederland</p>
-                    <p className="text-sm text-forest-600">Lokaal gevestigd in Friesland</p>
+                    <p className="font-medium text-forest">Locatie</p>
+                    <p className="text-text-mid">Friesland, Nederland</p>
+                    <p className="text-sm text-text-muted">Lokaal gevestigd in Friesland</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* FAQ Quick Links */}
-            <div className="bg-forest-50 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-forest-900 mb-4">
+            <div className="rounded-xl p-6 bg-cream-dark">
+              <h3 className="text-xl font-bold mb-4 text-forest font-serif">
                 Veelgestelde Vragen
               </h3>
               <div className="space-y-3">
                 <div>
-                  <p className="font-medium text-forest-900">Voor Huiseigenaren:</p>
-                  <p className="text-sm text-forest-700">Hoe werkt de matching service?</p>
-                  <a href="/over-ons" className="text-sage-600 text-sm hover:underline">→ Lees meer</a>
+                  <p className="font-medium text-forest">Voor Huiseigenaren:</p>
+                  <p className="text-sm text-text-mid">Hoe werkt de matching service?</p>
+                  <a href="/over-ons" className="text-sm hover:underline text-forest">→ Lees meer</a>
                 </div>
                 <div>
-                  <p className="font-medium text-forest-900">Voor Hoveniers:</p>
-                  <p className="text-sm text-forest-700">Hoe word ik lid van het platform?</p>
-                  <a href="/samenwerking" className="text-sage-600 text-sm hover:underline">→ Partnership info</a>
+                  <p className="font-medium text-forest">Voor Hoveniers:</p>
+                  <p className="text-sm text-text-mid">Hoe word ik lid van het platform?</p>
+                  <a href="/samenwerking" className="text-sm hover:underline text-forest">→ Partnership info</a>
                 </div>
                 <div>
-                  <p className="font-medium text-forest-900">Kosten & Prijzen:</p>
-                  <p className="text-sm text-forest-700">Wat kosten hovenier diensten?</p>
-                  <a href="/kosten" className="text-sage-600 text-sm hover:underline">→ Kostengids</a>
+                  <p className="font-medium text-forest">Kosten & Prijzen:</p>
+                  <p className="text-sm text-text-mid">Wat kosten hovenier diensten?</p>
+                  <a href="/kosten" className="text-sm hover:underline text-forest">→ Kostengids</a>
                 </div>
               </div>
             </div>
 
             {/* Response Time */}
-            <div className="bg-sage-50 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-forest-900 mb-3">
+            <div className="rounded-xl p-6 bg-cream-dark">
+              <h3 className="text-xl font-bold mb-3 text-forest font-serif">
                 Reactietijd
               </h3>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-forest-700">Email</span>
-                  <span className="font-medium text-forest-900">&lt; 24 uur</span>
+                  <span className="text-text-mid">Email</span>
+                  <span className="font-medium text-forest">&lt; 24 uur</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-forest-700">Partnership vragen</span>
-                  <span className="font-medium text-forest-900">&lt; 48 uur</span>
+                  <span className="text-text-mid">Partnership vragen</span>
+                  <span className="font-medium text-forest">&lt; 48 uur</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-forest-700">Technische problemen</span>
-                  <span className="font-medium text-forest-900">&lt; 12 uur</span>
+                  <span className="text-text-mid">Technische problemen</span>
+                  <span className="font-medium text-forest">&lt; 12 uur</span>
                 </div>
               </div>
             </div>

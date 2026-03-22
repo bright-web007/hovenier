@@ -1,12 +1,11 @@
 import { Metadata } from 'next'
-import { useTranslations } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from "@/app/components/NewLeadForm"
 
 type Props = {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }
 
 export const metadata: Metadata = {
@@ -15,7 +14,8 @@ export const metadata: Metadata = {
   keywords: 'tuinonderhoud kosten, tuin onderhoud prijzen, hovenier onderhoud, maandelijks tuinonderhoud, Friesland',
 }
 
-export default function TuinonderhoudKostenPage({ params: { locale } }: Props) {
+export default async function TuinonderhoudKostenPage({ params }: Props) {
+  const { locale } = await params
   setRequestLocale(locale)
   
   // Simple translations for the form

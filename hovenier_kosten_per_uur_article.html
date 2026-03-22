@@ -1,0 +1,255 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.pg{background:#f4f0e8;font-family:'DM Sans',sans-serif}
+.nav{height:56px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;background:#f4f0e8;border-bottom:0.5px solid rgba(42,62,32,0.1)}
+.nlogo{display:flex;align-items:center;gap:8px;font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:#1a3210}
+.nlinks{display:flex;gap:1.5rem;align-items:center}
+.nlink{font-size:12px;color:#5a6a50}
+.ncta{background:#2a3e20;color:#f4f0e8;font-size:12px;font-weight:500;padding:7px 16px;border-radius:3px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.bc{padding:0.75rem 2rem;font-size:11px;color:#9aaa90;display:flex;gap:6px;align-items:center;border-bottom:0.5px solid #e0eccc;background:#f4f0e8}
+.bc-cur{color:#4a8c2a;font-weight:500}
+
+.layout{display:grid;grid-template-columns:1fr 280px;gap:0;max-width:1100px;margin:0 auto;padding:0 2rem}
+.article{padding:2.5rem 3rem 3rem 0;border-right:0.5px solid #e0eccc}
+.sidebar{padding:2rem 0 3rem 2rem}
+
+.art-eyebrow{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#4a8c2a;font-weight:500;margin-bottom:0.75rem;display:flex;align-items:center;gap:8px}
+.art-eyebrow::before{content:'';width:18px;height:0.5px;background:#4a8c2a;display:block}
+.art-h1{font-family:'Cormorant Garamond',serif;font-size:40px;line-height:1.08;color:#1a3210;font-weight:500;margin-bottom:1rem}
+.art-h1 em{font-style:italic;color:#4a8c2a}
+.art-meta{display:flex;gap:1rem;align-items:center;font-size:11px;color:#9aaa90;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:0.5px solid #e0eccc}
+.meta-dot{width:3px;height:3px;border-radius:50%;background:#c8d8b0}
+
+.answer-box{background:#2a3e20;border-radius:8px;padding:1.25rem 1.5rem;margin-bottom:2rem}
+.ab-label{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#8ab87a;font-weight:500;margin-bottom:0.5rem}
+.ab-text{font-size:14px;color:#c8dfc0;line-height:1.65;font-weight:300}
+.ab-text strong{color:#f4f0e8;font-weight:500}
+
+.art-h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;color:#1a3210;margin:2rem 0 0.75rem;line-height:1.15}
+.art-h2 em{font-style:italic;color:#4a8c2a}
+.art-h3{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;color:#1a3210;margin:1.25rem 0 0.5rem}
+.art-p{font-size:14px;color:#4a5a40;line-height:1.75;margin-bottom:1rem;font-weight:300}
+.art-p strong{font-weight:500;color:#1a3210}
+
+.rate-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1.25rem 0 2rem}
+.rc{background:#fff;border:0.5px solid #c8d8b0;border-radius:8px;padding:1rem;text-align:center}
+.rc-type{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#9aaa90;margin-bottom:6px}
+.rc-rate{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:#1a3210;line-height:1}
+.rc-unit{font-size:11px;color:#9aaa90;margin-top:3px}
+.rc-note{font-size:11px;color:#7a8a70;margin-top:6px;line-height:1.4}
+
+.price-tbl{width:100%;border-collapse:collapse;margin:1.25rem 0 2rem;font-size:13px}
+.price-tbl thead th{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#9aaa90;padding:9px 12px;text-align:left;border-bottom:0.5px solid #e0eccc;background:#f9f8f5;font-weight:500}
+.price-tbl tbody td{padding:10px 12px;border-bottom:0.5px solid #f0f4ec;color:#3a4a30;font-size:13px}
+.price-tbl tbody tr:hover td{background:#f9fcf6}
+.price-tbl tbody tr:last-child td{border-bottom:none}
+.pc{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:#1a3210}
+.tip-box{background:#eaf3de;border-left:2px solid #4a8c2a;padding:1rem 1.25rem;margin:1.5rem 0;border-radius:0}
+.tip-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#27500A;font-weight:500;margin-bottom:4px}
+.tip-text{font-size:13px;color:#27500A;line-height:1.6}
+
+.faq-wrap{margin:1.5rem 0}
+.faq-item{border-bottom:0.5px solid #e0eccc}
+.faq-q{font-size:14px;font-weight:500;color:#1a3210;padding:1rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;user-select:none}
+.faq-ico{width:16px;height:16px;stroke:#4a8c2a;fill:none;stroke-width:2;flex-shrink:0;transition:transform 0.2s}
+.faq-a{font-size:13px;color:#5a6a50;line-height:1.65;padding-bottom:1rem;display:none}
+.faq-a.open{display:block}
+.faq-ico.open{transform:rotate(180deg)}
+
+.art-related{margin-top:2.5rem;padding-top:2rem;border-top:0.5px solid #e0eccc}
+.rel-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#4a8c2a;font-weight:500;margin-bottom:1rem}
+.rel-links{display:flex;flex-direction:column;gap:8px}
+.rel-link{font-size:13px;color:#2a3e20;font-weight:500;display:flex;align-items:center;gap:6px}
+.rel-link::before{content:'';width:4px;height:4px;border-radius:50%;background:#4a8c2a;flex-shrink:0}
+
+.sb-card{background:#2a3e20;border-radius:8px;padding:1.5rem;margin-bottom:1rem}
+.sb-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:#f4f0e8;margin-bottom:0.5rem;line-height:1.2}
+.sb-sub{font-size:12px;color:#8ab87a;margin-bottom:1.25rem;line-height:1.55;font-weight:300}
+.sb-input{width:100%;padding:8px 11px;background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.18);border-radius:3px;font-size:12px;color:#f4f0e8;font-family:'DM Sans',sans-serif;margin-bottom:8px;outline:none}
+.sb-input::placeholder{color:rgba(255,255,255,0.3)}
+.sb-btn{width:100%;background:#4a8c2a;color:#fff;border:none;border-radius:3px;padding:10px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:2px}
+.sb-note{font-size:10px;color:#6a8a60;text-align:center;margin-top:6px}
+
+.sb-nav{background:#fff;border:0.5px solid #c8d8b0;border-radius:8px;padding:1.25rem;margin-bottom:1rem}
+.sb-nav-title{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#9aaa90;font-weight:500;margin-bottom:0.75rem}
+.sb-nav-links{display:flex;flex-direction:column;gap:6px}
+.sb-nav-link{font-size:12px;color:#2a3e20;font-weight:500;padding:6px 8px;border-radius:4px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.sb-nav-link:hover{background:#f0f8e8}
+.sb-nav-link.active{background:#eaf3de;color:#27500A}
+.sb-nav-dot{width:4px;height:4px;border-radius:50%;background:#4a8c2a;flex-shrink:0}
+
+.sb-tip{background:#f9f8f5;border:0.5px solid #e0eccc;border-radius:8px;padding:1.25rem;margin-bottom:1rem}
+.sb-tip-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#9aaa90;font-weight:500;margin-bottom:0.5rem}
+.sb-tip-text{font-size:12px;color:#5a6a50;line-height:1.6}
+</style>
+
+<div class="pg">
+<div class="nav">
+  <div class="nlogo">
+    <svg width="22" height="22" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="30" cy="30" r="28" fill="#2a3e20"/>
+      <g transform="translate(30,30)">
+        <path d="M0,-17 C5,-15 9,-9 10,-2 C11,5 9,12 6,15 C4,17 2,18 0,18 C-2,18 -4,17 -6,15 C-9,12 -11,5 -10,-2 C-9,-9 -5,-15 0,-17Z" fill="#c8e8a0"/>
+        <path d="M0,-17 C3,-15 5,-9 6,-2 C7,5 5,12 3,15 C2,17 1,18 0,18 C-1,18 -2,17 -3,15 C-5,12 -7,5 -6,-2 C-5,-9 -3,-15 0,-17Z" fill="#a8d878"/>
+        <line x1="0" y1="-15" x2="0" y2="17" stroke="#4a7a28" stroke-width="0.9" stroke-linecap="round"/>
+        <line x1="0" y1="18" x2="0" y2="24" stroke="#8ab87a" stroke-width="1.2" stroke-linecap="round"/>
+      </g>
+    </svg>
+    Hovenier.frl
+  </div>
+  <div class="nlinks">
+    <span class="nlink">Hoveniers</span>
+    <span class="nlink">Diensten</span>
+    <span class="nlink">Regio's</span>
+    <span class="nlink" style="color:#2a3e20;font-weight:500">Kosten</span>
+    <span class="nlink">Nieuws</span>
+    <button class="ncta">Offerte aanvragen</button>
+  </div>
+</div>
+
+<div class="bc">
+  <span>Home</span><span>›</span>
+  <span>Kosten</span><span>›</span>
+  <span class="bc-cur">Wat kost een hovenier per uur?</span>
+</div>
+
+<div style="background:#f4f0e8;padding:0 2rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="layout" style="padding:0">
+      <div class="article">
+        <div class="art-eyebrow">Kostengids · 2026</div>
+        <h1 class="art-h1">Wat kost een hovenier<br>per uur? <em>(2026)</em></h1>
+        <div class="art-meta">
+          <span>Bijgewerkt: maart 2026</span>
+          <span class="meta-dot"></span>
+          <span>6 min lezen</span>
+          <span class="meta-dot"></span>
+          <span>Door redactie Hovenier.frl</span>
+        </div>
+
+        <div class="answer-box">
+          <div class="ab-label">Direct antwoord</div>
+          <p class="ab-text">Een hovenier kost gemiddeld <strong>€35 tot €75 per uur</strong> (inclusief btw). Voor standaard tuinonderhoud betaalt u €35–€60 per uur. Gespecialiseerd werk zoals bomen snoeien of groendakken aanleggen kost €50–€75 per uur. Voor een volledige werkdag (8 uur) betaalt u gemiddeld <strong>€280 tot €520</strong>.</p>
+        </div>
+
+        <div class="rate-cards">
+          <div class="rc">
+            <div class="rc-type">Startend</div>
+            <div class="rc-rate">€35–45</div>
+            <div class="rc-unit">per uur</div>
+            <div class="rc-note">ZZP hovenier, minder ervaring</div>
+          </div>
+          <div class="rc" style="border-color:#4a8c2a">
+            <div class="rc-type" style="color:#4a8c2a">Gemiddeld</div>
+            <div class="rc-rate" style="color:#2a3e20">€45–60</div>
+            <div class="rc-unit">per uur</div>
+            <div class="rc-note">Ervaren hovenier, gecertificeerd</div>
+          </div>
+          <div class="rc">
+            <div class="rc-type">Specialist</div>
+            <div class="rc-rate">€60–75</div>
+            <div class="rc-unit">per uur</div>
+            <div class="rc-note">Tuinontwerp, groendak, bomen</div>
+          </div>
+        </div>
+
+        <h2 class="art-h2">Uurtarieven per type <em>werkzaamheid</em></h2>
+        <p class="art-p">Het uurtarief van een hovenier verschilt sterk per type werk. Standaard onderhoud is het goedkoopst; specialistisch werk zoals het aanleggen van een groendak of het snoeien van grote bomen vraagt meer vakkennis en daarmee een hoger tarief.</p>
+
+        <table class="price-tbl">
+          <thead><tr><th>Werkzaamheid</th><th>Tarief per uur</th><th>Gemiddelde klus</th></tr></thead>
+          <tbody>
+            <tr><td>Gras maaien</td><td class="pc">€35–45</td><td>1–2 uur</td></tr>
+            <tr><td>Onkruid verwijderen</td><td class="pc">€35–50</td><td>2–4 uur</td></tr>
+            <tr><td>Hagen knippen</td><td class="pc">€38–55</td><td>2–5 uur</td></tr>
+            <tr><td>Snoeien struiken</td><td class="pc">€40–58</td><td>3–6 uur</td></tr>
+            <tr><td>Bomen snoeien</td><td class="pc">€50–70</td><td>4–8 uur</td></tr>
+            <tr><td>Tuin aanleggen</td><td class="pc">€50–65</td><td>Meerdere dagen</td></tr>
+            <tr><td>Groendak aanleggen</td><td class="pc">€55–75</td><td>2–5 dagen</td></tr>
+          </tbody>
+        </table>
+
+        <h2 class="art-h2">Wat kost een hovenier <em>per dag?</em></h2>
+        <p class="art-p">Voor een volledige werkdag van 8 uur rekent een hovenier gemiddeld <strong>€280 tot €520</strong>. Veel hoveniers bieden een dagprijs aan die iets voordeliger uitvalt dan het losse uurtarief. Bij een vaste onderhoudsafspraak kunt u vaak een korting bedingen.</p>
+
+        <div class="tip-box">
+          <div class="tip-label">Tip: bespaar op de kosten</div>
+          <p class="tip-text">Sluit een vast onderhoudscontract af voor meerdere bezoeken per jaar. Hoveniers bieden hier vaak 10–20% korting op ten opzichte van eenmalige opdrachten. Vergelijk altijd minimaal 3 offertes via Hovenier.frl.</p>
+        </div>
+
+        <h2 class="art-h2">Hovenier vs tuinman — <em>wat is het verschil?</em></h2>
+        <p class="art-p">Een hovenier heeft een vakgerichte opleiding gevolgd en is doorgaans gecertificeerd via VHG (Vereniging van Hoveniers en Groenvoorzieners). Een tuinman is een algemene term zonder opleidingsvereiste. Het uurtarief van een hovenier ligt daardoor gemiddeld <strong>€5–€15 hoger</strong> dan dat van een tuinman, maar de kwaliteit en garanties zijn ook navenant beter.</p>
+
+        <h2 class="art-h2">Veelgestelde vragen over <em>kosten</em></h2>
+        <div class="faq-wrap">
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Wat kost een ZZP hovenier per uur?<svg class="faq-ico" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+            <div class="faq-a">Een ZZP hovenier rekent gemiddeld €35–€55 per uur, iets minder dan een hoveniersbedrijf. Voordeel: directe communicatie, flexibeler. Nadeel: bij ziekte of drukte minder beschikbaar. Vraag altijd naar een KvK-inschrijving en verzekering.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Wat betaal je een tuinman per uur?<svg class="faq-ico" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+            <div class="faq-a">Een tuinman kost gemiddeld €25–€50 per uur. Dit is goedkoper dan een gecertificeerde hovenier, maar de vakkennis en garanties zijn ook minder. Voor eenvoudig onderhoud kan een tuinman een goede keuze zijn.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Waarom is een hovenier zo duur?<svg class="faq-ico" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+            <div class="faq-a">Het uurtarief van een hovenier omvat meer dan alleen arbeid: verzekeringen, gereedschap, bedrijfskosten, opleiding en certificeringen tellen allemaal mee. Een hovenier met VHG-certificering biedt ook garantie op het werk en is aansprakelijk bij schade.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Wat is het verschil tussen een tuinman en een hovenier?<svg class="faq-ico" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+            <div class="faq-a">Een hovenier heeft een officiële vakopleidingen (MBO Hovenier) gevolgd en is doorgaans aangesloten bij VHG. Een tuinman is een informele term voor iemand die tuinwerkzaamheden uitvoert zonder specifieke opleiding. Voor complexe klussen kiest u beter voor een gecertificeerde hovenier.</div>
+          </div>
+        </div>
+
+        <div class="art-related">
+          <div class="rel-label">Gerelateerde kostengidsen</div>
+          <div class="rel-links">
+            <span class="rel-link">Wat kost tuinonderhoud per maand?</span>
+            <span class="rel-link">Wat kost een complete tuinaanleg?</span>
+            <span class="rel-link">Wat kost een groendak in Friesland?</span>
+            <span class="rel-link">Hovenier Leeuwarden — tarieven en aanbieders</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <div class="sb-card">
+          <div class="sb-title">Gratis offerte aanvragen</div>
+          <p class="sb-sub">Vergelijk tarieven van hoveniers in uw gemeente. Binnen 24 uur reactie.</p>
+          <input class="sb-input" type="text" placeholder="Uw gemeente">
+          <input class="sb-input" type="tel" placeholder="Telefoonnummer">
+          <button class="sb-btn">Verstuur aanvraag →</button>
+          <div class="sb-note">Gratis · vrijblijvend · veilig</div>
+        </div>
+
+        <div class="sb-nav">
+          <div class="sb-nav-title">Op deze pagina</div>
+          <div class="sb-nav-links">
+            <div class="sb-nav-link active"><span class="sb-nav-dot"></span>Uurtarieven per type</div>
+            <div class="sb-nav-link"><span class="sb-nav-dot"></span>Kosten per dag</div>
+            <div class="sb-nav-link"><span class="sb-nav-dot"></span>Hovenier vs tuinman</div>
+            <div class="sb-nav-link"><span class="sb-nav-dot"></span>Veelgestelde vragen</div>
+          </div>
+        </div>
+
+        <div class="sb-tip">
+          <div class="sb-tip-label">Wist u dat?</div>
+          <p class="sb-tip-text">Hoveniers in Friesland rekenen gemiddeld <strong>€5–€10 minder per uur</strong> dan in de Randstad. Een goede reden om lokaal te kiezen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+function toggleFaq(el) {
+  const ans = el.nextElementSibling;
+  const ico = el.querySelector('.faq-ico');
+  const open = ans.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-ico').forEach(i => i.classList.remove('open'));
+  if(!open){ ans.classList.add('open'); ico.classList.add('open'); }
+}
+</script>

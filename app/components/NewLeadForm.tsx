@@ -19,6 +19,7 @@ interface LeadFormProps {
   };
   locale: string;
   prefillMunicipality?: string;
+  serviceType?: string;
 }
 
 const gemeenten = [
@@ -31,10 +32,10 @@ const services = [
   "Tuinonderhoud", "Tuinontwerp", "Groendak", "Beplanting", "Snoeien", "Anders"
 ];
 
-export default function NewLeadForm({ translations, locale, prefillMunicipality }: LeadFormProps) {
+export default function NewLeadForm({ translations, locale, prefillMunicipality, serviceType }: LeadFormProps) {
   const [naam, setNaam] = useState("");
   const [gemeente, setGemeente] = useState(prefillMunicipality || "");
-  const [dienst, setDienst] = useState("");
+  const [dienst, setDienst] = useState(serviceType === "groendak" ? "Groendak" : "");
   const [telefoon, setTelefoon] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);

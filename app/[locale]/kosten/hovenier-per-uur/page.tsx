@@ -1,22 +1,22 @@
 import { Metadata } from 'next'
-import { useTranslations } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
+import NewLeadForm from "@/app/components/NewLeadForm"
 
 type Props = {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }
 
 export const metadata: Metadata = {
-  title: 'Wat Kost een Hovenier per Uur? - Uurtarieven 2024 | Hovenier.frl',
+  title: 'Wat kost een hovenier per uur? (2026) | Hovenier.frl',
   description: 'Wat kost een hovenier per uur in Friesland? Ontdek alle uurtarieven, regionale verschillen en factoren die de kosten van tuinonderhoud beïnvloeden.',
   keywords: 'hovenier per uur, uurtarieven, tuinonderhoud kosten, hovenier prijzen, Friesland tarieven',
 }
 
-export default function HovenierPerUurPage({ params: { locale } }: Props) {
+export default async function HovenierPerUurPage({ params }: Props) {
+  const { locale } = await params
   setRequestLocale(locale)
-  const t = useTranslations('pages.hourly-rates')
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -53,7 +53,7 @@ export default function HovenierPerUurPage({ params: { locale } }: Props) {
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
     { label: 'Kosten', href: '/kosten' },
-    { label: 'Hovenier per Uur' }
+    { label: 'Wat kost een hovenier per uur?' }
   ];
 
   return (
@@ -64,438 +64,286 @@ export default function HovenierPerUurPage({ params: { locale } }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <main className="min-h-screen bg-gradient-to-br from-sage-50 to-forest-50">
-        <div className="container mx-auto px-4 py-16">
-          {/* Hero Section */}
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-forest-900 mb-6">
-              Wat Kost een Hovenier per Uur?
-            </h1>
-            <p className="text-xl text-forest-700 mb-8">
-              Complete gids voor uurtarieven van hoveniers in Friesland
-            </p>
+      <main className="section section-alt article-section">
+        <div className="section-inner">
+          <div className="article-grid">
+            {/* Main Article Content */}
+            <div className="article-content">
+              {/* Eyebrow */}
+              <div className="text-xs uppercase tracking-wider text-sage font-medium mb-4">
+                KOSTENGIDS • 2026
+              </div>
+              
+              {/* Title */}
+              <h1 className="article-title mb-6">
+                Wat kost een hovenier<br />per uur? <em className="text-sage font-serif italic">(2026)</em>
+              </h1>
+              
+              {/* Meta */}
+              <div className="text-xs text-text-mid mb-6 flex items-center gap-4">
+                <span>Bijgewerkt: maart 2026</span>
+                <div className="w-1 h-1 rounded-full bg-sage"></div>
+                <span>6 min lezen</span>
+                <div className="w-1 h-1 rounded-full bg-sage"></div>
+                <span>Door redactie Hovenier.frl</span>
+              </div>
+
+              {/* Direct Answer Box */}
+              <div className="bg-forest rounded-lg p-6 mb-8 text-cream">
+                <div className="text-xs uppercase tracking-wider text-sage mb-2 font-medium">DIRECT ANTWOORD</div>
+                <p className="text-sm leading-relaxed font-light">
+                  Een hovenier kost gemiddeld <strong className="text-cream font-medium">€35 tot €75 per uur</strong> (inclusief btw). Voor standaard tuinonderhoud betaalt u €35–€60 per uur. Gespecialiseerd werk zoals bomen snoeien of groendaken aanleggen kost €50–€75 per uur. Voor een volledige werkdag (8 uur) betaalt u gemiddeld <strong className="text-cream font-medium">€280 tot €520</strong>.
+                </p>
+              </div>
+
+              {/* Pricing Cards */}
+              <div className="rate-cards mb-10">
+                <div className="rate-card">
+                  <div className="rate-card-header">STARTEND</div>
+                  <div className="rate-card-price">€35–<br />45</div>
+                  <div className="rate-card-unit">per uur</div>
+                  <div className="rate-card-desc">ZZP hovenier, minder ervaring</div>
+                </div>
+                <div className="rate-card rate-card-popular">
+                  <div className="rate-card-badge">Populair</div>
+                  <div className="rate-card-header">GEMIDDELD</div>
+                  <div className="rate-card-price">€45–<br />60</div>
+                  <div className="rate-card-unit">per uur</div>
+                  <div className="rate-card-desc">Ervaren hovenier, gecertificeerd</div>
+                </div>
+                <div className="rate-card">
+                  <div className="rate-card-header">SPECIALIST</div>
+                  <div className="rate-card-price">€60–<br />75</div>
+                  <div className="rate-card-unit">per uur</div>
+                  <div className="rate-card-desc">Tuinontwerp, groendak, bomen</div>
+                </div>
+              </div>
+
+              {/* Uurtarieven per type werkzaamheid */}
+              <h2 className="article-section-title mt-10">
+                Uurtarieven per type <em className="text-sage font-serif">werkzaamheid</em>
+              </h2>
+              <p className="text-sm text-text-mid leading-relaxed mb-6 max-w-3xl">
+                Het uurtarief van een hovenier verschilt sterk per type werk. Standaard onderhoud is het goedkoopst; specialistisch werk zoals het aanleggen van een groendak of het snoeien van grote bomen vraagt meer vakkennis en daarmee een hoger tarief.
+              </p>
+              
+              <div className="bg-white rounded-lg shadow-sm border border-sage-light overflow-hidden mb-10">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-cream-dark">
+                      <th className="text-xs uppercase tracking-wider text-text-mid p-4 text-left font-semibold">Werkzaamheid</th>
+                      <th className="text-xs uppercase tracking-wider text-text-mid p-4 text-left font-semibold">Tarief per uur</th>
+                      <th className="text-xs uppercase tracking-wider text-text-mid p-4 text-left font-semibold">Gemiddelde klus</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-sage-light hover:bg-cream transition-colors">
+                      <td className="p-4 text-text font-medium">Gras maaien</td>
+                      <td className="p-4 font-serif text-lg font-semibold text-forest">€35–45</td>
+                      <td className="p-4 text-text-mid">1–2 uur</td>
+                    </tr>
+                    <tr className="border-b border-sage-light hover:bg-cream transition-colors">
+                      <td className="p-4 text-text font-medium">Onkruid verwijderen</td>
+                      <td className="p-4 font-serif text-lg font-semibold text-forest">€35–50</td>
+                      <td className="p-4 text-text-mid">2–4 uur</td>
+                    </tr>
+                    <tr className="border-b border-sage-light hover:bg-cream transition-colors">
+                      <td className="p-4 text-text font-medium">Hagen knippen</td>
+                      <td className="p-4 font-serif text-lg font-semibold text-forest">€38–55</td>
+                      <td className="p-4 text-text-mid">2–5 uur</td>
+                    </tr>
+                    <tr className="border-b border-sage-light hover:bg-cream transition-colors">
+                      <td className="p-4 text-text font-medium">Snoeien struiken</td>
+                      <td className="p-4 font-serif text-lg font-semibold text-forest">€40–58</td>
+                      <td className="p-4 text-text-mid">3–6 uur</td>
+                    </tr>
+                    <tr className="border-b border-sage-light hover:bg-cream transition-colors">
+                      <td className="p-4 text-text font-medium">Bomen snoeien</td>
+                      <td className="p-4 font-serif text-lg font-semibold text-forest">€50–70</td>
+                      <td className="p-4 text-text-mid">4–8 uur</td>
+                    </tr>
+                    <tr className="border-b border-sage-light hover:bg-cream transition-colors">
+                      <td className="p-4 text-text font-medium">Tuin aanleggen</td>
+                      <td className="p-4 font-serif text-lg font-semibold text-forest">€50–65</td>
+                      <td className="p-4 text-text-mid">Meerdere dagen</td>
+                    </tr>
+                    <tr className="hover:bg-cream transition-colors">
+                      <td className="p-4 text-text font-medium">Groendak aanleggen</td>
+                      <td className="p-4 font-serif text-lg font-semibold text-forest">€55–75</td>
+                      <td className="p-4 text-text-mid">2–5 dagen</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Wat kost een hovenier per dag */}
+              <h2 className="text-2xl font-serif font-semibold text-forest-deep mb-4 mt-10">
+                Wat kost een hovenier <em className="text-sage font-serif">per dag?</em>
+              </h2>
+              <p className="text-sm text-text-mid leading-relaxed mb-8 max-w-3xl">
+                Voor een volledige werkdag van 8 uur rekent een hovenier gemiddeld <strong className="text-forest">€280 tot €520</strong>. Veel hoveniers bieden een dagprijs aan die iets voordeliger uitvalt dan het losse uurtarief. Bij een vaste onderhoudsafspraak kunt u vaak een korting bedingen.
+              </p>
+
+              {/* Tip Box */}
+              <div className="bg-sage-light/20 border border-sage-light rounded-lg p-6 mb-10">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-5 h-5 rounded-full bg-forest flex items-center justify-center">
+                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </div>
+                  <div className="text-sm font-semibold text-forest-deep">Tip: bespaar op de kosten</div>
+                </div>
+                <p className="text-sm text-forest-deep leading-relaxed">
+                  Sluit een vast onderhoudscontract af voor meerdere bezoeken per jaar. Hoveniers bieden hier vaak 10–20% korting op ten opzichte van eenmalige opdrachten. Vergelijk altijd minimaal 3 offertes via Hovenier.frl.
+                </p>
+              </div>
+
+              {/* Hovenier vs tuinman */}
+              <h2 className="text-2xl font-serif font-semibold text-forest-deep mb-4 mt-10">
+                Hovenier vs tuinman — <em className="text-sage font-serif">wat is het verschil?</em>
+              </h2>
+              <p className="text-sm text-text-mid leading-relaxed mb-8 max-w-3xl">
+                Een hovenier heeft een vakgerichte opleiding gevolgd en is doorgaans gecertificeerd via VHG (Vereniging van Hoveniers en Groenvoorzieners). Een tuinman is een algemene term zonder opleidingsvereiste. Het uurtarief van een hovenier ligt daardoor gemiddeld <strong className="text-forest">€5–€15 hoger</strong> dan dat van een tuinman, maar de kwaliteit en garanties zijn ook navenant beter.
+              </p>
+
+              {/* FAQ */}
+              <h2 className="text-2xl font-serif font-semibold text-forest-deep mb-6 mt-12">
+                Veelgestelde vragen over <em className="text-sage font-serif">kosten</em>
+              </h2>
+              <div className="bg-white rounded-lg shadow-sm border border-sage-light overflow-hidden mb-10">
+                <div className="divide-y divide-sage-light">
+                  <div className="p-6">
+                    <h3 className="text-base font-semibold text-forest mb-3">Wat kost een ZZP hovenier per uur?</h3>
+                    <p className="text-sm text-text-mid leading-relaxed">
+                      Een ZZP hovenier rekent gemiddeld €35–€55 per uur, iets minder dan een hoveniersbedrijf. Voordeel: directe communicatie, flexibeler. Nadeel: bij ziekte of drukte minder beschikbaar. Vraag altijd naar een KvK-inschrijving en verzekering.
+                    </p>
+                  </div>
+                  
+                  <div className="p-6">
+                    <h3 className="text-base font-semibold text-forest mb-3">Wat betaal je een tuinman per uur?</h3>
+                    <p className="text-sm text-text-mid leading-relaxed">
+                      Een tuinman kost gemiddeld €25–€50 per uur. Dit is goedkoper dan een gecertificeerde hovenier, maar de vakkennis en garanties zijn ook minder. Voor eenvoudig onderhoud kan een tuinman een goede keuze zijn.
+                    </p>
+                  </div>
+                  
+                  <div className="p-6">
+                    <h3 className="text-base font-semibold text-forest mb-3">Waarom is een hovenier zo duur?</h3>
+                    <p className="text-sm text-text-mid leading-relaxed">
+                      Het uurtarief van een hovenier omvat meer dan alleen arbeid: verzekeringen, gereedschap, bedrijfskosten, opleiding en certificeringen tellen allemaal mee. Een hovenier met VHG-certificering biedt ook garantie op het werk en is aansprakelijk bij schade.
+                    </p>
+                  </div>
+                  
+                  <div className="p-6">
+                    <h3 className="text-base font-semibold text-forest mb-3">Wat is het verschil tussen een tuinman en een hovenier?</h3>
+                    <p className="text-sm text-text-mid leading-relaxed">
+                      Een hovenier heeft een officiële vakopleidingen (MBO Hovenier) gevolgd en is doorgaans aangesloten bij VHG. Een tuinman is een informele term voor iemand die tuinwerkzaamheden uitvoert zonder specifieke opleiding. Voor complexe klussen kiest u beter voor een gecertificeerde hovenier.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Related Articles */}
+              <div className="mt-16 pt-10 border-t border-sage-light">
+                <h3 className="text-sm font-semibold text-forest-deep mb-6">Gerelateerde kostengidsen</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <a href="/kosten/tuinonderhoud" className="bg-white border border-sage-light rounded-lg p-4 hover:shadow-md transition-all group">
+                    <div className="flex items-center mb-2">
+                      <div className="w-2 h-2 rounded-full bg-forest mr-3 group-hover:bg-sage transition-colors"></div>
+                      <span className="text-sm font-medium text-forest group-hover:text-sage transition-colors">Tuinonderhoud kosten</span>
+                    </div>
+                    <p className="text-xs text-text-mid leading-relaxed">Wat kost tuinonderhoud per maand?</p>
+                  </a>
+                  <a href="/kosten/tuin-aanleggen" className="bg-white border border-sage-light rounded-lg p-4 hover:shadow-md transition-all group">
+                    <div className="flex items-center mb-2">
+                      <div className="w-2 h-2 rounded-full bg-forest mr-3 group-hover:bg-sage transition-colors"></div>
+                      <span className="text-sm font-medium text-forest group-hover:text-sage transition-colors">Tuin aanleggen</span>
+                    </div>
+                    <p className="text-xs text-text-mid leading-relaxed">Wat kost een complete tuinaanleg?</p>
+                  </a>
+                  <a href="/kosten/groendak" className="bg-white border border-sage-light rounded-lg p-4 hover:shadow-md transition-all group">
+                    <div className="flex items-center mb-2">
+                      <div className="w-2 h-2 rounded-full bg-forest mr-3 group-hover:bg-sage transition-colors"></div>
+                      <span className="text-sm font-medium text-forest group-hover:text-sage transition-colors">Groendak kosten</span>
+                    </div>
+                    <p className="text-xs text-text-mid leading-relaxed">Wat kost een groendak in Friesland?</p>
+                  </a>
+                  <a href="/hoveniers/leeuwarden" className="bg-white border border-sage-light rounded-lg p-4 hover:shadow-md transition-all group">
+                    <div className="flex items-center mb-2">
+                      <div className="w-2 h-2 rounded-full bg-forest mr-3 group-hover:bg-sage transition-colors"></div>
+                      <span className="text-sm font-medium text-forest group-hover:text-sage transition-colors">Hovenier Leeuwarden</span>
+                    </div>
+                    <p className="text-xs text-text-mid leading-relaxed">Tarieven en aanbieders in de regio</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <aside className="article-sidebar">
+              {/* Quote Form */}
+              <div className="sidebar-form bg-forest rounded-lg p-6 shadow-lg">
+                <h3 className="text-xl font-serif font-medium text-cream mb-2">Gratis offerte aanvragen</h3>
+                <p className="text-sm text-sage-light mb-6 leading-relaxed">
+                  Vergelijk tarieven van hoveniers in uw gemeente. Binnen 24 uur reactie.
+                </p>
+                <div className="space-y-4">
+                  <input 
+                    type="text" 
+                    placeholder="Uw gemeente" 
+                    className="w-full p-3 bg-forest-deep/30 border border-forest-mid/30 rounded text-sm text-cream placeholder-sage-light/60 focus:outline-none focus:border-sage focus:bg-forest-deep/50 transition-all" 
+                  />
+                  <input 
+                    type="tel" 
+                    placeholder="Telefoonnummer" 
+                    className="w-full p-3 bg-forest-deep/30 border border-forest-mid/30 rounded text-sm text-cream placeholder-sage-light/60 focus:outline-none focus:border-sage focus:bg-forest-deep/50 transition-all" 
+                  />
+                  <button className="w-full bg-sage text-white p-3 rounded text-sm font-medium hover:bg-sage-light transition-colors shadow-sm">
+                    Verstuur aanvraag →
+                  </button>
+                </div>
+                <p className="text-xs text-sage-light text-center mt-3">Gratis · vrijblijvend · veilig</p>
+              </div>
+
+              {/* Table of Contents */}
+              <div className="sidebar-section bg-white border border-sage-light rounded-lg p-6 shadow-sm">
+                <h4 className="sidebar-title mb-4">Op deze pagina</h4>
+                <nav className="space-y-2">
+                  <a href="#uurtarieven" className="sidebar-link">
+                    <div className="sidebar-link-dot"></div>
+                    Uurtarieven per type
+                  </a>
+                  <a href="#per-dag" className="sidebar-link">
+                    <div className="sidebar-link-dot"></div>
+                    Kosten per dag
+                  </a>
+                  <a href="#verschil" className="sidebar-link">
+                    <div className="sidebar-link-dot"></div>
+                    Hovenier vs tuinman
+                  </a>
+                  <a href="#faq" className="sidebar-link">
+                    <div className="sidebar-link-dot"></div>
+                    Veelgestelde vragen
+                  </a>
+                </nav>
+              </div>
+
+              {/* Did You Know Box */}
+              <div className="sidebar-section bg-cream-dark border border-sage-light rounded-lg p-6 shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-5 h-5 rounded-full bg-gold flex items-center justify-center">
+                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                  </div>
+                  <h4 className="text-sm font-semibold text-forest-deep">Wist u dat?</h4>
+                </div>
+                <p className="text-sm text-forest-deep leading-relaxed">
+                  Hoveniers in Friesland rekenen gemiddeld <strong className="text-forest">€5–€10 minder per uur</strong> dan in de Randstad. Een goede reden om lokaal te kiezen.
+                </p>
+              </div>
+            </aside>
           </div>
-
-          {/* Direct Answer Box - AEO Optimized */}
-          <section className="max-w-4xl mx-auto mb-16">
-            <div className="bg-sage-600 text-white rounded-xl p-8">
-              <h2 className="text-2xl font-bold mb-4">Direct Antwoord:</h2>
-              <p className="text-lg leading-relaxed">
-                Een hovenier kost gemiddeld tussen <strong>€35 en €55 per uur</strong> in Friesland. 
-                Startende hoveniers rekenen €35-42 per uur, ervaren professionals €42-48 per uur, 
-                en gespecialiseerde experts tot €55 per uur. Dit is exclusief materialen en btw.
-              </p>
-            </div>
-          </section>
-
-          {/* Detailed Price Breakdown */}
-          <section className="max-w-6xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold text-forest-900 mb-12 text-center">
-              Uurtarieven per Ervaring & Specialisatie
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="bg-gray-100 w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
-                  <svg className="w-6 h-6 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-forest-900 mb-3 text-center">Beginner</h3>
-                <div className="text-center mb-4">
-                  <p className="text-2xl font-bold text-sage-600">€35 - €42</p>
-                  <p className="text-sm text-forest-600">per uur</p>
-                </div>
-                <ul className="text-sm text-forest-700 space-y-1">
-                  <li>• 0-3 jaar ervaring</li>
-                  <li>• Basis tuinonderhoud</li>
-                  <li>• Maaien, wieden, snoeien</li>
-                  <li>• Onder supervisie</li>
-                </ul>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="bg-sage-100 w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
-                  <svg className="w-6 h-6 text-sage-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9 12a1 1 0 102 0V6.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 6.414V12z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-forest-900 mb-3 text-center">Ervaren</h3>
-                <div className="text-center mb-4">
-                  <p className="text-2xl font-bold text-sage-600">€42 - €48</p>
-                  <p className="text-sm text-forest-600">per uur</p>
-                </div>
-                <ul className="text-sm text-forest-700 space-y-1">
-                  <li>• 3-8 jaar ervaring</li>
-                  <li>• Zelfstandig werken</li>
-                  <li>• Tuinontwerp & aanleg</li>
-                  <li>• Klantencontact</li>
-                </ul>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="bg-forest-100 w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
-                  <svg className="w-6 h-6 text-forest-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-forest-900 mb-3 text-center">Expert</h3>
-                <div className="text-center mb-4">
-                  <p className="text-2xl font-bold text-forest-600">€48 - €55</p>
-                  <p className="text-sm text-forest-600">per uur</p>
-                </div>
-                <ul className="text-sm text-forest-700 space-y-1">
-                  <li>• 8+ jaar ervaring</li>
-                  <li>• Specialisaties</li>
-                  <li>• Complexe projecten</li>
-                  <li>• Bedrijfsleiding</li>
-                </ul>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="bg-amber-100 w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
-                  <svg className="w-6 h-6 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-forest-900 mb-3 text-center">Specialist</h3>
-                <div className="text-center mb-4">
-                  <p className="text-2xl font-bold text-amber-600">€55 - €75</p>
-                  <p className="text-sm text-forest-600">per uur</p>
-                </div>
-                <ul className="text-sm text-forest-700 space-y-1">
-                  <li>• Groendaken</li>
-                  <li>• Boomverzorging</li>
-                  <li>• Landschapsarchitect</li>
-                  <li>• Unieke expertise</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          {/* Regional Differences */}
-          <section className="max-w-4xl mx-auto mb-16">
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-3xl font-bold text-forest-900 mb-8 text-center">
-                Regionale Tariefverschillen in Friesland
-              </h2>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center bg-forest-50 rounded-lg p-6">
-                  <h3 className="font-semibold text-forest-900 mb-3">Leeuwarden Regio</h3>
-                  <p className="text-2xl font-bold text-forest-600 mb-3">€40 - €55</p>
-                  <ul className="text-sm text-forest-700 space-y-1">
-                    <li>• Grootste vraag</li>
-                    <li>• Meeste concurrentie</li>
-                    <li>• Hoogste gemiddelde inkomen</li>
-                    <li>• Premium diensten</li>
-                  </ul>
-                </div>
-                <div className="text-center bg-sage-50 rounded-lg p-6">
-                  <h3 className="font-semibold text-forest-900 mb-3">Grote Gemeenten</h3>
-                  <p className="text-2xl font-bold text-sage-600 mb-3">€37 - €50</p>
-                  <ul className="text-sm text-forest-700 space-y-1">
-                    <li>• Heerenveen, Smallingerland</li>
-                    <li>• Goede bereikbaarheid</li>
-                    <li>• Stabiele vraag</li>
-                    <li>• Gemiddelde tarieven</li>
-                  </ul>
-                </div>
-                <div className="text-center bg-emerald-50 rounded-lg p-6">
-                  <h3 className="font-semibold text-forest-900 mb-3">Landelijke Gebieden</h3>
-                  <p className="text-2xl font-bold text-emerald-600 mb-3">€35 - €48</p>
-                  <ul className="text-sm text-forest-700 space-y-1">
-                    <li>• Lagere vraag</li>
-                    <li>• Meer reistijd</li>
-                    <li>• Lokale concurrentie</li>
-                    <li>• Lagere kosten</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Cost Factors */}
-          <section className="max-w-6xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold text-forest-900 mb-12 text-center">
-              Factoren die Uurtarieven Beïnvloeden
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-forest-900 mb-3">Seizoen & Timing</h3>
-                <ul className="text-sm text-forest-700 space-y-1">
-                  <li>• Voorjaar: +10-15% (druk seizoen)</li>
-                  <li>• Zomer: Standaard tarieven</li>
-                  <li>• Herfst: +5-10% (veel werk)</li>
-                  <li>• Winter: -5-10% (minder vraag)</li>
-                </ul>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-forest-900 mb-3">Type Werkzaamheden</h3>
-                <ul className="text-sm text-forest-700 space-y-1">
-                  <li>• Onderhoud: Standaard tarief</li>
-                  <li>• Tuinaanleg: +€5-10/uur</li>
-                  <li>• Specialistisch: +€10-20/uur</li>
-                  <li>• Noodgeval: +€15-25/uur</li>
-                </ul>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-forest-900 mb-3">Projectomvang</h3>
-                <ul className="text-sm text-forest-700 space-y-1">
-                  <li>• Eenmalig: Standaard tarief</li>
-                  <li>• Halve dag: Geen toeslag</li>
-                  <li>• Hele dag: Vaak korting</li>
-                  <li>• Jaarcontract: -5-15%</li>
-                </ul>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="bg-red-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-forest-900 mb-3">Locatie & Toegang</h3>
-                <ul className="text-sm text-forest-700 space-y-1">
-                  <li>• Gemakkelijk bereikbaar: Standaard</li>
-                  <li>• Slechte toegang: +€3-8/uur</li>
-                  <li>• Veel trappen: +€2-5/uur</li>
-                  <li>• Parkeerprobleem: +€2-4/uur</li>
-                </ul>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="bg-yellow-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-forest-900 mb-3">Minimale Boekingen</h3>
-                <ul className="text-sm text-forest-700 space-y-1">
-                  <li>• Minimum 2-4 uur gebruikelijk</li>
-                  <li>• Korter = toeslag of geen acceptatie</li>
-                  <li>• Aanrijdkosten bij kleine klussen</li>
-                  <li>• Voorrijkosten: €15-35</li>
-                </ul>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-forest-900 mb-3">Kwalificaties & Verzekering</h3>
-                <ul className="text-sm text-forest-700 space-y-1">
-                  <li>• VCA certificaat: +€2-5/uur</li>
-                  <li>• Specialistische cursussen</li>
-                  <li>• WA-verzekering verplicht</li>
-                  <li>• Bedrijfsvergunning</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          {/* What's Included/Excluded */}
-          <section className="max-w-4xl mx-auto mb-16">
-            <div className="bg-forest-50 rounded-xl p-8">
-              <h2 className="text-3xl font-bold text-forest-900 mb-8 text-center">
-                Wat is Wel & Niet Inbegrepen?
-              </h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-xl font-semibold text-green-700 mb-4 flex items-center">
-                    <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    Inbegrepen in Uurtarief
-                  </h3>
-                  <ul className="space-y-2 text-forest-700">
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-green-600 rounded-full mr-3"></span>
-                      Arbeidstijd en vakkennis
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-green-600 rounded-full mr-3"></span>
-                      Gebruik van handgereedschap
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-green-600 rounded-full mr-3"></span>
-                      Basis werkkleding en uitrusting
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-green-600 rounded-full mr-3"></span>
-                      Opruimen van eigen gereedschap
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-green-600 rounded-full mr-3"></span>
-                      Advies en expertise
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-red-700 mb-4 flex items-center">
-                    <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                    Niet Inbegrepen (Extra Kosten)
-                  </h3>
-                  <ul className="space-y-2 text-forest-700">
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-red-600 rounded-full mr-3"></span>
-                      Planten, zaden en andere materialen
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-red-600 rounded-full mr-3"></span>
-                      Grond, compost en meststoffen
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-red-600 rounded-full mr-3"></span>
-                      Machinegebruik (grasmaaier, heggenschaar)
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-red-600 rounded-full mr-3"></span>
-                      Transport en brandstofkosten
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-red-600 rounded-full mr-3"></span>
-                      Afvoer tuinafval (€15-40 per kuub)
-                    </li>
-                    <li className="flex items-center">
-                      <span className="w-2 h-2 bg-red-600 rounded-full mr-3"></span>
-                      BTW (21% bovenop alle kosten)
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* FAQ Section */}
-          <section className="max-w-4xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold text-forest-900 mb-8 text-center">
-              Veelgestelde Vragen over Uurtarieven
-            </h2>
-            <div className="space-y-4">
-              <details className="bg-white rounded-lg p-6 shadow-sm">
-                <summary className="font-semibold text-forest-900 cursor-pointer">
-                  Waarom rekent de ene hovenier €40 en de andere €50 per uur?
-                </summary>
-                <p className="mt-3 text-forest-700">
-                  Het verschil zit in ervaring, specialisatie, overhead kosten, en positionering. 
-                  Een ervaren hovenier met specialistische kennis (bv. groendaken) kan hogere 
-                  tarieven rekenen. Ook speelt de regio een rol - in Leeuwarden zijn tarieven 
-                  gemiddeld hoger dan in kleinere gemeenten.
-                </p>
-              </details>
-
-              <details className="bg-white rounded-lg p-6 shadow-sm">
-                <summary className="font-semibold text-forest-900 cursor-pointer">
-                  Zijn materialen en planten inbegrepen in het uurtarief?
-                </summary>
-                <p className="mt-3 text-forest-700">
-                  Nee, het uurtarief is alleen voor arbeid. Materialen zoals planten, grond, 
-                  zaden en kunstmest worden apart berekend. Sommige hoveniers hanteren een 
-                  opslag van 15-25% op materialen voor inkoop en transport. Vraag altijd 
-                  een gespecificeerde offerte.
-                </p>
-              </details>
-
-              <details className="bg-white rounded-lg p-6 shadow-sm">
-                <summary className="font-semibold text-forest-900 cursor-pointer">
-                  Kan ik onderhandelen over het uurtarief?
-                </summary>
-                <p className="mt-3 text-forest-700">
-                  Bij grote projecten of jaarcontracten is vaak onderhandelingsruimte. 
-                  Voor kleine klusjes zijn de prijzen meestal vast. Beter is het om te 
-                  vragen naar pakketdeals - bijvoorbeeld "4 keer per jaar onderhoud voor 
-                  €X totaal" in plaats van per uur te onderhandelen.
-                </p>
-              </details>
-
-              <details className="bg-white rounded-lg p-6 shadow-sm">
-                <summary className="font-semibold text-forest-900 cursor-pointer">
-                  Hoeveel uur werk kan ik verwachten voor mijn tuin?
-                </summary>
-                <p className="mt-3 text-forest-700">
-                  Voor onderhoudsbeurt gemiddelde tuin (200m²): 3-5 uur. Voor tuinaanleg: 
-                  rekening met 0,5-2 dagen per 100m² afhankelijk van complexiteit. 
-                  Een ervaren hovenier kan een realistische tijdsinschatting geven 
-                  na het bekijken van uw tuin.
-                </p>
-              </details>
-
-              <details className="bg-white rounded-lg p-6 shadow-sm">
-                <summary className="font-semibold text-forest-900 cursor-pointer">
-                  Wat als het werk langer duurt dan geschat?
-                </summary>
-                <p className="mt-3 text-forest-700">
-                  Serieuze hoveniers maken realistische inschattingen of werken met 
-                  een vaste prijs. Bij onvoorziene omstandigheden (zeer harde grond, 
-                  meer onkruid dan verwacht) wordt dit vooraf besproken. Vraag naar 
-                  een maximum aantal uren of vaste prijs voor duidelijkheid.
-                </p>
-              </details>
-            </div>
-          </section>
-
-          {/* Price Comparison Tool */}
-          <section className="max-w-4xl mx-auto">
-            <div className="bg-sage-50 rounded-xl p-8">
-              <h2 className="text-3xl font-bold text-forest-900 mb-6 text-center">
-                Krijg Gratis Offertes
-              </h2>
-              <p className="text-center text-forest-700 mb-8">
-                Vergelijk uurtarieven van tot 3 hoveniers in jouw gemeente voor het beste prijsadvies
-              </p>
-              <div className="grid md:grid-cols-3 gap-6 mb-8">
-                <div className="text-center">
-                  <div className="bg-sage-600 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
-                    <span className="font-bold">1</span>
-                  </div>
-                  <h3 className="font-semibold text-forest-900 mb-2">Beschrijf je Project</h3>
-                  <p className="text-sm text-forest-700">Gemeente, type werk, tuingrootte</p>
-                </div>
-                <div className="text-center">
-                  <div className="bg-sage-600 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
-                    <span className="font-bold">2</span>
-                  </div>
-                  <h3 className="font-semibold text-forest-900 mb-2">Ontvang Passende Matches</h3>
-                  <p className="text-sm text-forest-700">Tot 3 lokale hoveniers nemen contact op</p>
-                </div>
-                <div className="text-center">
-                  <div className="bg-sage-600 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
-                    <span className="font-bold">3</span>
-                  </div>
-                  <h3 className="font-semibold text-forest-900 mb-2">Vergelijk & Kies</h3>
-                  <p className="text-sm text-forest-700">Uurtarieven, ervaring, reviews</p>
-                </div>
-              </div>
-              <div className="text-center">
-                <a 
-                  href="/#lead-form" 
-                  className="inline-block bg-sage-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-sage-700 transition-colors"
-                >
-                  Start Gratis Offerte Aanvraag →
-                </a>
-              </div>
-            </div>
-          </section>
         </div>
       </main>
     </>

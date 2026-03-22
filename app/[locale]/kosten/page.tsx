@@ -609,7 +609,7 @@ export default function KostenPage() {
                   <div className="price-card-price">€500–3.500</div>
                   <div className="price-card-unit">per project</div>
                   <div className="price-card-range">Afhankelijk van tuingrootte en complexiteit. Inclusief tekeningen en plantplan.</div>
-                  <Link href={`/${locale}/services/tuinontwerp`} className="price-card-link">Lees meer →</Link>
+                  <Link href={`/${locale}/kosten/tuinontwerp`} className="price-card-link">Lees meer →</Link>
                 </div>
                 <div className="price-card">
                   <div className="price-card-icon">
@@ -622,7 +622,7 @@ export default function KostenPage() {
                   <div className="price-card-price">€45–65</div>
                   <div className="price-card-unit">per uur</div>
                   <div className="price-card-range">Complete tuinaanleg 100m²: €4.500–12.000. Inclusief grondwerk, bestrating en beplanting.</div>
-                  <Link href={`/${locale}/services/tuin-aanleggen`} className="price-card-link">Lees meer →</Link>
+                  <Link href={`/${locale}/kosten/tuin-aanleggen`} className="price-card-link">Lees meer →</Link>
                 </div>
                 <div className="price-card">
                   <div className="price-card-icon">
@@ -634,7 +634,7 @@ export default function KostenPage() {
                   <div className="price-card-price">€40–90</div>
                   <div className="price-card-unit">per m²</div>
                   <div className="price-card-range">Sedum dak 30m²: €1.200–2.700. Subsidie mogelijk via gemeente. Lage onderhoudskosten.</div>
-                  <Link href={`/${locale}/services/groendak`} className="price-card-link">Lees meer →</Link>
+                  <Link href={`/${locale}/kosten/groendak`} className="price-card-link">Lees meer →</Link>
                 </div>
                 <div className="price-card">
                   <div className="price-card-icon">

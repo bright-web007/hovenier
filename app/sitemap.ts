@@ -26,12 +26,84 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
   
   // Service pages
-  const services = ['tuinonderhoud', 'tuinontwerp', 'groendak']
+  const services = ['tuinonderhoud', 'tuinontwerp', 'groendak', 'tuin-aanleggen', 'stratenmaker']
   const servicePages = services.map(service => ({
     url: `${baseUrl}/services/${service}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.9,
+  }))
+
+  // Main navigation pages
+  const mainPages = [
+    {
+      url: `${baseUrl}/hoveniers`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/services`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/regio`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/kosten`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/nieuws`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/over-ons`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+  ]
+
+  // Kosten sub-pages
+  const kostenPages = ['hovenier-per-uur', 'tuin-aanleggen', 'tuinonderhoud', 'tuinontwerp', 'groendak'].map(page => ({
+    url: `${baseUrl}/kosten/${page}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  // Individual gardener profiles
+  const gardenerSlugs = ['tuinservice-friesland'] // In production, fetch from database
+  const gardenerPages = gardenerSlugs.map(slug => ({
+    url: `${baseUrl}/hoveniers/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }))
+
+  // News categories
+  const newsCategories = ['kosten', 'seizoen', 'tips', 'groendak', 'tuinontwerp']
+  const newsCategoryPages = newsCategories.map(category => ({
+    url: `${baseUrl}/nieuws/categorie/${category}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
   }))
   
   // Municipality/gemeente pages
@@ -57,7 +129,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
   
   // Localized pages (both nl and en)
-  const allPages = [...staticPages, ...servicePages, ...gemeentePages]
+  const allPages = [...staticPages, ...mainPages, ...servicePages, ...kostenPages, ...gemeentePages, ...gardenerPages, ...newsCategoryPages]
   const localizedPages = []
   
   for (const page of allPages) {

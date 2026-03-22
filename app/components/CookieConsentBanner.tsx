@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import styles from './CookieConsentBanner.module.css';
 
 interface CookieConsentProps {
   locale?: string;
@@ -147,60 +148,55 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
   if (!showBanner) return null;
 
   return (
-    <div className="cookie-consent-overlay">
-      <div className="cookie-consent-banner">
-        <div className="cookie-consent-content">
+    <div className={styles.cookieConsentOverlay}>
+      <div className={styles.cookieConsentBanner}>
+        <div className={styles.cookieConsentContent}>
           {!showDetails ? (
             // Basic consent banner
-            <div className="cookie-consent-basic">
-              <div className="cookie-consent-text">
-                <h3 className="cookie-consent-title">{t.title}</h3>
-                <p className="cookie-consent-description">{t.description}</p>
+            <div className={styles.cookieConsentBasic}>
+              <div className={styles.cookieConsentText}>
+                <h3 className={styles.cookieConsentTitle}>{t.title}</h3>
+                <p className={styles.cookieConsentDescription}>{t.description}</p>
               </div>
-              
-              <div className="cookie-consent-actions">
+              <div className={styles.cookieConsentActions}>
                 <button 
                   onClick={handleAcceptAll}
-                  className="cookie-consent-btn cookie-consent-btn-primary"
+                  className={`${styles.cookieConsentBtn} ${styles.cookieConsentBtnPrimary}`}
                 >
                   {t.acceptAll}
                 </button>
-                
                 <button 
                   onClick={handleDeclineAll}
-                  className="cookie-consent-btn cookie-consent-btn-secondary"
+                  className={`${styles.cookieConsentBtn} ${styles.cookieConsentBtnSecondary}`}
                 >
                   {t.declineAll}
                 </button>
-                
                 <button 
                   onClick={() => setShowDetails(true)}
-                  className="cookie-consent-btn cookie-consent-btn-outline"
+                  className={`${styles.cookieConsentBtn} ${styles.cookieConsentBtnOutline}`}
                 >
                   {t.customize}
                 </button>
               </div>
-              
-              <div className="cookie-consent-links">
-                <Link href="/privacy-beleid" className="cookie-consent-link">{t.privacyPolicy}</Link>
+              <div className={styles.cookieConsentLinks}>
+                <Link href="/privacy-beleid" className={styles.cookieConsentLink}>{t.privacyPolicy}</Link>
                 <span>•</span>
-                <Link href="/cookie-beleid" className="cookie-consent-link">{t.cookiePolicy}</Link>
+                <Link href="/cookie-beleid" className={styles.cookieConsentLink}>{t.cookiePolicy}</Link>
               </div>
             </div>
           ) : (
             // Detailed preferences
-            <div className="cookie-consent-details">
-              <div className="cookie-consent-header">
-                <h3 className="cookie-consent-title">{t.title}</h3>
+            <div className={styles.cookieConsentDetails}>
+              <div className={styles.cookieConsentHeader}>
+                <h3 className={styles.cookieConsentTitle}>{t.title}</h3>
                 <button 
                   onClick={() => setShowDetails(false)}
-                  className="cookie-consent-back"
+                  className={styles.cookieConsentBack}
                 >
                   ← {t.backToBasic}
                 </button>
               </div>
-              
-              <div className="cookie-consent-categories">
+              <div className={styles.cookieConsentCategories}>
                 <div className="cookie-category">
                   <div className="cookie-category-header">
                     <label className="cookie-category-label">
@@ -216,7 +212,6 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
                   </div>
                   <p className="cookie-category-description">{t.necessaryDesc}</p>
                 </div>
-
                 <div className="cookie-category">
                   <div className="cookie-category-header">
                     <label className="cookie-category-label">
@@ -231,7 +226,6 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
                   </div>
                   <p className="cookie-category-description">{t.analyticsDesc}</p>
                 </div>
-
                 <div className="cookie-category">
                   <div className="cookie-category-header">
                     <label className="cookie-category-label">
@@ -246,7 +240,6 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
                   </div>
                   <p className="cookie-category-description">{t.marketingDesc}</p>
                 </div>
-
                 <div className="cookie-category">
                   <div className="cookie-category-header">
                     <label className="cookie-category-label">
@@ -262,18 +255,16 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
                   <p className="cookie-category-description">{t.preferencesDesc}</p>
                 </div>
               </div>
-              
-              <div className="cookie-consent-actions">
+              <div className={styles.cookieConsentActions}>
                 <button 
                   onClick={handleSavePreferences}
-                  className="cookie-consent-btn cookie-consent-btn-primary"
+                  className={`${styles.cookieConsentBtn} ${styles.cookieConsentBtnPrimary}`}
                 >
                   {t.savePreferences}
                 </button>
-                
                 <button 
                   onClick={handleAcceptAll}
-                  className="cookie-consent-btn cookie-consent-btn-secondary"
+                  className={`${styles.cookieConsentBtn} ${styles.cookieConsentBtnSecondary}`}
                 >
                   {t.acceptAll}
                 </button>

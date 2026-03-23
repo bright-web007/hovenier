@@ -25,8 +25,8 @@ export default function LocalBusinessSchema({
   url,
   areaServed,
   serviceTypes,
-  ratingValue = "4.8",
-  reviewCount = "127",
+  ratingValue,
+  reviewCount,
   contactPhone,
   contactEmail,
   contactWebsite,
@@ -38,7 +38,7 @@ export default function LocalBusinessSchema({
 }: LocalBusinessSchemaProps) {
   const baseSchema: any = {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", businessType],
+    "@type": businessType || "LocalBusiness",
     name,
     description,
     url,
@@ -46,24 +46,41 @@ export default function LocalBusinessSchema({
       "@type": "AdministrativeArea",
       name: areaServed
     },
-    serviceType: serviceTypes,
-    aggregateRating: {
+    serviceType: serviceTypes
+  };
+
+  // Only add aggregateRating if we have valid review data
+  if (ratingValue && reviewCount && ratingValue !== "4.8" && reviewCount !== "127") {
+    baseSchema.aggregateRating = {
       "@type": "AggregateRating",
       ratingValue,
       reviewCount
-    }
-  };
+    };
+  }
 
-  // Add contact information if available
+  // Add contact information only if provided and valid
   if (contactPhone || contactEmail || contactWebsite) {
-    baseSchema.contactPoint = {
+    const contactPoint: any = {
       "@type": "ContactPoint",
-      telephone: contactPhone,
-      email: contactEmail,
-      url: contactWebsite,
       contactType: "customer service",
       availableLanguage: ["Dutch", "English"]
     };
+    
+    // Only add fields that are provided and not placeholder values
+    if (contactPhone && !contactPhone.includes('123')) {
+      contactPoint.telephone = contactPhone;
+    }
+    if (contactEmail && !contactEmail.includes('example')) {
+      contactPoint.email = contactEmail;
+    }
+    if (contactWebsite) {
+      contactPoint.url = contactWebsite;
+    }
+    
+    // Only add contactPoint if it has actual contact info
+    if (contactPoint.telephone || contactPoint.email || contactPoint.url) {
+      baseSchema.contactPoint = contactPoint;
+    }
   }
 
   // Add address if location provided

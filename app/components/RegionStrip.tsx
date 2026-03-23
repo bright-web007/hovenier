@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { getRegionSlugByGemeenteSlug, gemeentesData } from '@/lib/regions-hierarchy';
 
 interface Region {
   name: string;
@@ -15,27 +16,43 @@ interface RegionStripProps {
   className?: string;
 }
 
-const defaultRegions: Region[] = [
+// Generate regions from the actual gemeente data
+function generateRegionsFromGemeenten(): Region[] {
+  return gemeentesData
+    .map((gemeente) => ({
+      name: gemeente.name,
+      slug: gemeente.slug,
+      // Estimate hoveniers based on population (roughly 1 per 2000 residents, min 3, max 30)
+      count: Math.max(3, Math.min(30, Math.round(gemeente.population / 2000)))
+    }))
+    // Sort by population (largest first) to show major cities first
+    .sort((a, b) => (b.count || 0) - (a.count || 0));
+}
+
+// Fallback for when gemeente data is not available
+const fallbackRegions: Region[] = [
   { name: 'Leeuwarden', slug: 'leeuwarden', count: 28 },
   { name: 'Heerenveen', slug: 'heerenveen', count: 19 },
   { name: 'Smallingerland', slug: 'smallingerland', count: 15 },
   { name: 'Súdwest-Fryslân', slug: 'sudwest-fryslan', count: 12 },
-  { name: 'Achtkarspelen', slug: 'achtkarspelen', count: 8 },
-  { name: 'Tietjerksteradiel', slug: 'tietjerksteradiel', count: 7 },
-  { name: 'Dantumadiel', slug: 'dantumadiel', count: 6 },
   { name: 'De Fryske Marren', slug: 'de-fryske-marren', count: 11 },
-  { name: 'Waadhoeke', slug: 'waadhoeke', count: 5 },
   { name: 'Noardeast-Fryslân', slug: 'noardeast-fryslan', count: 9 },
+  { name: 'Achtkarspelen', slug: 'achtkarspelen', count: 8 },
+  { name: 'Tietjerksteradeel', slug: 'tietjerksteradeel', count: 7 },
+  { name: 'Dantumadeel', slug: 'dantumadeel', count: 6 },
+  { name: 'Waadhoeke', slug: 'waadhoeke', count: 5 },
   { name: 'Harlingen', slug: 'harlingen', count: 4 }
 ];
 
 export default function RegionStrip({
   title,
-  regions = defaultRegions,
+  regions,
   showCounts = true,
   className = ''
 }: RegionStripProps) {
   
+  // Use provided regions, or generate from gemeente data, or use fallback
+  const displayRegions = regions || (gemeentesData.length > 0 ? generateRegionsFromGemeenten() : fallbackRegions);
   const displayTitle = title || 'Hoveniers in elke Friese gemeente';
 
   return (
@@ -56,31 +73,41 @@ export default function RegionStrip({
         
         {/* Regions Grid */}
         <div className="region-grid">
-          {regions.map((region) => (
-            <Link
-              key={region.slug}
-              href={`/regio/${region.slug}`}
-              className="region-card"
-            >
-              <div className="region-card-icon">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              
-              <div className="region-card-content">
-                <h3 className="region-card-name">
-                  {region.name}
-                </h3>
-                {showCounts && region.count && (
-                  <p className="region-card-count">
-                    {region.count} hoveniers
-                  </p>
-                )}
-              </div>
-            </Link>
-          ))}
+          {displayRegions.map((region) => {
+            const regionSlug = getRegionSlugByGemeenteSlug(region.slug);
+            const href = regionSlug ? `/regio/${regionSlug}/${region.slug}` : `/regio/${region.slug}`;
+            
+            // Debug logging for development
+            if (process.env.NODE_ENV === 'development' && !regionSlug) {
+              console.warn(`⚠️  No region found for gemeente: ${region.slug} (${region.name})`);
+            }
+            
+            return (
+              <Link
+                key={region.slug}
+                href={href}
+                className="region-card"
+              >
+                <div className="region-card-icon">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                
+                <div className="region-card-content">
+                  <h3 className="region-card-name">
+                    {region.name}
+                  </h3>
+                  {showCounts && region.count && (
+                    <p className="region-card-count">
+                      {region.count} hoveniers
+                    </p>
+                  )}
+                </div>
+              </Link>
+            );
+          })}
         </div>
         
         {/* Call to Action */}

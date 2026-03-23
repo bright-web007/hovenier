@@ -48,15 +48,8 @@ export function LocalBusinessSchema({
     "name": name,
     "description": description,
     "url": url,
-    "telephone": "+31-515-123456",
-    "email": "info@hovenier.frl",
     "priceRange": priceRange,
     "currenciesAccepted": "EUR",
-    "paymentAccepted": "Cash, Credit Card, Bank Transfer",
-    "openingHours": [
-      "Mo-Fr 08:00-18:00",
-      "Sa 08:00-16:00"
-    ],
     "areaServed": areaServed ? {
       "@type": areaServed.type,
       "name": areaServed.name,
@@ -100,13 +93,6 @@ export function LocalBusinessSchema({
           "name": service
         }
       }))
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "127",
-      "bestRating": "5",
-      "worstRating": "1"
     }
   };
 

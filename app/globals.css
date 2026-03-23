@@ -577,12 +577,12 @@ a { text-decoration: none; color: inherit; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--forest-600);
+  color: var(--forest);
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
   padding: 10px 16px;
-  border: 1px solid var(--forest-600);
+  border: 1px solid var(--forest);
   border-radius: 8px;
   transition: all 0.2s ease;
   white-space: nowrap;
@@ -590,7 +590,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .service-card:hover .service-card-link {
-  background: var(--forest-600);
+  background: var(--forest);
   color: white;
   transform: translateY(-1px);
 }

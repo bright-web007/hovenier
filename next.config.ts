@@ -41,7 +41,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https://www.google-analytics.com https://ssl.gstatic.com",
-              "connect-src 'self' https://www.google-analytics.com https://vitals.vercel-analytics.com",
+              "connect-src 'self' https://www.google-analytics.com https://challenges.cloudflare.com https://vitals.vercel-analytics.com",
               "frame-src 'self' https://challenges.cloudflare.com",
             ].join('; ')
           }

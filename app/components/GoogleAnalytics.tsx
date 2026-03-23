@@ -32,11 +32,15 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
 
   useEffect(() => {
     if (!gaId) {
-      console.warn('GoogleAnalytics: No GA ID provided');
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('GoogleAnalytics: No GA ID provided');
+      }
       return;
     }
 
-    console.log('GoogleAnalytics: Initializing with ID:', gaId);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('GoogleAnalytics: Initializing with ID:', gaId);
+    }
 
     // Initialize dataLayer if not exists
     if (!window.dataLayer) {
@@ -57,7 +61,9 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
     const isDevelopment = process.env.NODE_ENV === 'development' && process.env.ENABLE_ANALYTICS_IN_DEV === 'true';
     const hasAnalyticsConsent = isDevelopment || checkAnalyticsConsent();
     
-    console.log('GoogleAnalytics: Consent status -', { isDevelopment, hasAnalyticsConsent });
+    if (process.env.NODE_ENV === 'development') {
+      console.log('GoogleAnalytics: Consent status -', { isDevelopment, hasAnalyticsConsent });
+    }
     
     // Set initial consent state
     gtag('consent', 'default', {
@@ -84,7 +90,9 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       }
     });
 
-    console.log('GoogleAnalytics: Initialization complete');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('GoogleAnalytics: Initialization complete');
+    }
 
   }, [gaId]);
 
@@ -113,7 +121,10 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
     return null;
   }
 
-  console.log('GoogleAnalytics: Rendering script for GA ID:', gaId);
+  // Only log in development to avoid console spam in production
+  if (process.env.NODE_ENV === 'development') {
+    console.log('GoogleAnalytics: Rendering script for GA ID:', gaId);
+  }
 
   // Always render in production (consent is handled via gtag consent API)
   return (
@@ -124,7 +135,7 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       <script
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-        onLoad={() => console.log('GoogleAnalytics: Script loaded successfully')}
+        onLoad={() => process.env.NODE_ENV === 'development' && console.log('GoogleAnalytics: Script loaded successfully')}
         onError={(e) => console.error('GoogleAnalytics: Script failed to load', e)}
       />
     </>
@@ -257,13 +268,17 @@ export const trackArticleView = (articleTitle: string, category?: string) => {
 
 // Update consent function (called from cookie banner)
 export const updateAnalyticsConsent = (granted: boolean) => {
-  console.log('GoogleAnalytics: Updating consent to', granted);
+  if (process.env.NODE_ENV === 'development') {
+    console.log('GoogleAnalytics: Updating consent to', granted);
+  }
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('consent', 'update', {
       analytics_storage: granted ? 'granted' : 'denied'
     });
-    console.log('GoogleAnalytics: Consent updated successfully');
-  } else {
+    if (process.env.NODE_ENV === 'development') {
+      console.log('GoogleAnalytics: Consent updated successfully');
+    }
+  } else if (process.env.NODE_ENV === 'development') {
     console.warn('GoogleAnalytics: gtag not available for consent update');
   }
 };

@@ -16,6 +16,13 @@ interface LocalBusinessSchemaProps {
     longitude: string;
   };
   priceRange?: string;
+  address?: {
+    streetAddress?: string;
+    addressLocality: string;
+    postalCode?: string;
+    addressRegion: string;
+    addressCountry: string;
+  };
 }
 
 interface WebsiteSchemaProps {
@@ -40,7 +47,8 @@ export function LocalBusinessSchema({
   areaServed,
   services,
   coordinates,
-  priceRange = "€35-250"
+  priceRange = "€35-250",
+  address
 }: LocalBusinessSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
@@ -50,6 +58,13 @@ export function LocalBusinessSchema({
     "url": url,
     "priceRange": priceRange,
     "currenciesAccepted": "EUR",
+    "address": address || {
+      "@type": "PostalAddress",
+      "addressLocality": "Leeuwarden", 
+      "postalCode": "8900",
+      "addressRegion": "Friesland",
+      "addressCountry": "NL"
+    },
     "areaServed": areaServed ? {
       "@type": areaServed.type,
       "name": areaServed.name,

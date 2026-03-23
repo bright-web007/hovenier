@@ -182,6 +182,12 @@ export default async function StratenmakerPage({ params }: Props) {
           latitude: "53.2012",
           longitude: "5.7999"
         }}
+        address={{
+          addressLocality: "Leeuwarden",
+          postalCode: "8900",
+          addressRegion: "Friesland",
+          addressCountry: "NL"
+        }}
         priceRange="€45-150"
       />
       

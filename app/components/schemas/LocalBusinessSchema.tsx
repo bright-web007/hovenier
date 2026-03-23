@@ -83,15 +83,15 @@ export default function LocalBusinessSchema({
     }
   }
 
-  // Add address if location provided
-  if (location) {
-    baseSchema.address = {
-      "@type": "PostalAddress",
-      addressLocality: location,
-      addressRegion: "Friesland",
-      addressCountry: "NL"
-    };
-  }
+  // Always add address - use location param or default to Leeuwarden as regional center
+  const addressLocality = location || "Leeuwarden";
+  baseSchema.address = {
+    "@type": "PostalAddress",
+    addressLocality,
+    postalCode: location === "Leeuwarden" ? "8900" : "8000-9999",
+    addressRegion: "Friesland", 
+    addressCountry: "NL"
+  };
 
   // Add price range if available
   if (priceRange) {

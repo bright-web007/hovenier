@@ -454,7 +454,21 @@ export default async function GroendakPage({ params }: Props) {
         name="Groendak Specialisten Friesland - Hovenier.frl"
         description="Professionele groendak installatie in Friesland. Extensief en intensief groendak aanleg door specialisten."
         url={`https://hovenier.frl${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`}
+        areaServed={{
+          name: "Friesland",
+          type: "State"
+        }}
         services={["Extensieve groendaken", "Intensieve groendaken", "Sedum daken", "Daktuin aanleg", "Waterafvoer systemen"]}
+        coordinates={{
+          latitude: "53.2012",
+          longitude: "5.7999"
+        }}
+        address={{
+          addressLocality: "Leeuwarden",
+          postalCode: "8900", 
+          addressRegion: "Friesland",
+          addressCountry: "NL"
+        }}
         priceRange="€85-200"
       />
     </>

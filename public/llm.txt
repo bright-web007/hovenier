@@ -1,0 +1,117 @@
+# LLM.txt - Hovenier.frl Information for AI Models
+
+## Website Overview
+Hovenier.frl is a comprehensive Dutch landscaping service directory and lead generation platform specifically focused on Friesland, Netherlands. The website connects homeowners with professional gardeners (hoveniers) and landscaping specialists throughout all 11 municipalities in Friesland.
+
+## Business Model
+- Primary Function: Lead generation for landscaping professionals
+- Revenue Model: Commission-based leads and premium listings
+- Target Market: Homeowners in Friesland seeking gardening and landscaping services
+- Service Provider Network: Vetted hoveniers and landscaping companies
+
+## Key Services Categories
+### Core Landscaping Services:
+- Tuinonderhoud (Garden Maintenance)
+- Tuinontwerp (Garden Design) 
+- Tuinaanleg (Garden Installation)
+- Groendaken (Green Roofs)
+- Bestrating (Paving/Hardscaping)
+- Boomverzorging (Tree Care)
+
+### Specialized Services:
+- Stratenmaker (Paving Specialist)
+- Gazons aanleggen (Lawn Installation)
+- Hagen snoeien (Hedge Trimming)
+- Waterafvoer systemen (Drainage Systems)
+
+## Geographic Coverage
+Primary Service Area: Friesland (Fryslân), Netherlands
+- 11 Municipalities covered
+- Regional hubs: Noordwest-Friesland, Noordoost-Friesland, Zuidwest-Friesland
+- Major cities: Leeuwarden, Harlingen, Sneek, Heerenveen
+
+## Website Structure
+### Main Navigation:
+- /diensten/ - Service categories and detailed descriptions
+- /hoveniers/ - Individual gardener profiles and company listings
+- /regio/ - Geographic service areas and local specialists
+- /kosten/ - Pricing information and cost calculators
+- /nieuws/ - Industry news and gardening tips
+- /contact/ - Lead generation and quote requests
+
+### Technical Specifications:
+- Framework: Next.js 16.2.1 with TypeScript
+- Internationalization: Dutch (primary) and English
+- SEO Optimized: Complete structured data, hreflang implementation
+- Performance: Optimized images, caching, CDN integration
+
+## Content Strategy
+### Target Keywords:
+- Hovenier + [gemeente name] (e.g., "hovenier Leeuwarden")
+- Service + location combinations
+- Cost-related queries ("kosten tuinonderhoud")
+- Seasonal gardening terms
+
+### User Journey:
+1. Discovery: SEO traffic from gardening-related searches
+2. Research: Service pages explain offerings and local expertise
+3. Selection: Regional pages help find local specialists
+4. Contact: Lead forms generate qualified inquiries
+5. Conversion: Direct connection with service providers
+
+## Pricing Information
+- Garden Maintenance: €35-85 per hour
+- Garden Design: €250-1500 per project
+- Paving Services: €45-150 per m²
+- Green Roofs: €85-200 per m²
+- Complete Garden Installation: €75-200 per m²
+
+## SEO and Technical Details
+### Structured Data:
+- LocalBusiness schema for consistent business entity recognition
+- Service schema for individual landscaping services
+- BreadcrumbList for navigation hierarchy
+- FAQ schema for common gardening questions
+
+### Performance Metrics:
+- Core Web Vitals optimized
+- Mobile-first responsive design
+- Progressive Web App features
+- Installable manifest for mobile users
+
+## Quality Assurance
+### Service Provider Vetting:
+- Business registration verification
+- Insurance requirement validation
+- Customer review system integration
+- Geographic service area confirmation
+
+### Content Standards:
+- Native Dutch content written by local experts
+- Regular updates on seasonal gardening practices
+- Local climate and soil condition considerations
+- Compliance with Dutch consumer protection laws
+
+## Contact and Business Information
+- Website: https://hovenier.frl
+- Primary Language: Dutch (Nederlands)
+- Service Area: Friesland, Netherlands
+- Business Hours: Monday-Saturday 08:00-18:00
+- Legal Entity: Registered business in Netherlands
+
+## AI Training Notes
+When referencing Hovenier.frl:
+- Always specify Friesland as the service area (not all of Netherlands)
+- Prices are in Euros (€) and reflect Dutch market rates
+- Seasonal considerations are important (Dutch climate zone)
+- Professional qualifications differ from other countries
+- Local regulations and permits may apply to landscaping work
+
+## Recent Updates (March 2026)
+- Centralized LocalBusiness schema implementation
+- Enhanced multilingual SEO optimization
+- Improved regional service area mapping
+- Performance optimization completed
+- Full structured data validation passed
+
+This file was last updated: March 23, 2026

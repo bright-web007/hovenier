@@ -40,16 +40,24 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
 
     if (process.env.NODE_ENV === 'development') {
       console.log('GoogleAnalytics: Initializing with ID:', gaId);
+      console.log('GoogleAnalytics: Environment:', process.env.NODE_ENV);
+      console.log('GoogleAnalytics: Analytics enabled in dev:', process.env.ENABLE_ANALYTICS_IN_DEV);
     }
 
     // Initialize dataLayer if not exists
     if (!window.dataLayer) {
       window.dataLayer = [];
+      if (process.env.NODE_ENV === 'development') {
+        console.log('GoogleAnalytics: dataLayer initialized');
+      }
     }
 
     // Initialize gtag function
     function gtag(...args: any[]) {
       window.dataLayer.push(args);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('GoogleAnalytics: gtag called with:', args);
+      }
     }
 
     window.gtag = gtag;
@@ -81,6 +89,7 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       anonymize_ip: true, // GDPR compliance
       allow_google_signals: hasAnalyticsConsent,
       allow_ad_personalization_signals: false, // Default to false
+      debug_mode: process.env.NODE_ENV === 'development', // Enable debug mode in development
     });
 
     // Setup enhanced ecommerce and conversion tracking
@@ -92,6 +101,15 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
 
     if (process.env.NODE_ENV === 'development') {
       console.log('GoogleAnalytics: Initialization complete');
+      
+      // Test event to verify it's working
+      setTimeout(() => {
+        gtag('event', 'page_view_test', {
+          event_category: 'development',
+          event_label: 'initialization_test'
+        });
+        console.log('GoogleAnalytics: Test event sent');
+      }, 1000);
     }
 
   }, [gaId]);
@@ -285,24 +303,60 @@ export const updateAnalyticsConsent = (granted: boolean) => {
 
 // Debug function to check GA status
 export const debugGA = () => {
-  console.log('=== Google Analytics Debug ===');
+  console.log('=== Google Analytics Debug Info ===');
+  console.log('Environment:', process.env.NODE_ENV);
+  console.log('Analytics in dev enabled:', process.env.ENABLE_ANALYTICS_IN_DEV);
   console.log('dataLayer exists:', typeof window.dataLayer !== 'undefined');
-  console.log('gtag function exists:', typeof window.gtag !== 'undefined');
+  console.log('gtag function exists:', typeof window.gtag !== 'undefined'); 
+  console.log('dataLayer length:', window.dataLayer?.length || 0);
   console.log('dataLayer contents:', window.dataLayer);
+  
+  // Check script loading
+  const script = document.querySelector('script[src*="googletagmanager.com/gtag"]');
+  console.log('GA script element found:', !!script);
+  if (script) {
+    console.log('GA script src:', script.getAttribute('src'));
+    console.log('GA script loaded:', script.hasAttribute('defer') ? 'deferred' : 'loaded');
+  }
+  
+  // Check consent status
+  const consent = localStorage.getItem('cookie_consent_preferences');
+  console.log('Cookie consent stored:', !!consent);
+  if (consent) {
+    try {
+      const parsed = JSON.parse(consent);
+      console.log('Analytics consent granted:', parsed.analytics);
+    } catch (e) {
+      console.log('Error parsing consent:', e);
+    }
+  }
   
   // Test if we can send a test event
   if (window.gtag) {
     window.gtag('event', 'debug_test', {
       event_category: 'debug',
-      event_label: 'console_test'
+      event_label: 'console_test_' + Date.now()
     });
-    console.log('Test event sent');
+    console.log('✅ Test event sent successfully');
+  } else {
+    console.log('❌ gtag function not available - cannot send test event');
   }
   
-  // Check script loading
-  const script = document.querySelector('script[src*="googletagmanager.com/gtag"]');
-  console.log('GA script element:', script);
-  console.log('GA script loaded:', script ? 'YES' : 'NO');
+  // Test various GA endpoints
+  const testUrls = [
+    'https://www.google-analytics.com',
+    'https://ssl.google-analytics.com', 
+    'https://www.googletagmanager.com'
+  ];
+  
+  console.log('Testing GA endpoint connectivity...');
+  testUrls.forEach(url => {
+    fetch(url, { mode: 'no-cors' })
+      .then(() => console.log(`✅ ${url} - reachable`))
+      .catch(err => console.log(`❌ ${url} - error:`, err.message));
+  });
+  
+  console.log('=== End Debug Info ===');
 };
 
 // Make debug function globally available in development/production

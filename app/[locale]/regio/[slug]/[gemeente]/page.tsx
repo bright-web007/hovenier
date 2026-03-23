@@ -199,17 +199,8 @@ export default async function GemeentePage({ params }: Props) {
   return (
     <div className="page-container">
       <LocalBusinessSchema 
-        name={`Hoveniers in ${gemeenteData.name}`}
-        description={`Lokale hoveniers en tuinspecialisten in ${gemeenteData.name}, ${regionHub.name}. ${gemeenteData.intro}`}
         url={`https://hovenier.frl${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`}
-        areaServed={{
-          name: gemeenteData.name,
-          type: "City",
-          containedIn: {
-            name: regionHub.name,
-            type: "State"
-          }
-        }}
+        nameContext={`Hoveniers in ${gemeenteData.name}`}
         services={[
           "Tuinonderhoud",
           "Tuinontwerp", 
@@ -218,11 +209,6 @@ export default async function GemeentePage({ params }: Props) {
           "Groendaken",
           "Tuinaanleg"
         ]}
-        coordinates={{
-          latitude: gemeenteData.lat.toString(),
-          longitude: gemeenteData.lng.toString()
-        }}
-        priceRange="€35-150"
       />
       
       <BreadcrumbSchema 

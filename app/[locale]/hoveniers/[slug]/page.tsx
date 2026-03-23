@@ -2,8 +2,7 @@ import { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
-import LocalBusinessSchema from '../../../components/schemas/LocalBusinessSchema'
-import BreadcrumbSchema from '../../../components/schemas/BreadcrumbSchema'
+import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData'
 import GardenerProfile from '../../../components/GardenerProfile'
 import { getGardenerBySlug, getAllGardenerSlugs } from '../../../../lib/gardeners-data'
 import { notFound } from 'next/navigation'
@@ -72,31 +71,20 @@ export default async function GardenerProfilePage({ params }: Props) {
     { label: gardener.name }
   ]
 
-  // Breadcrumb schema items (needs full URLs)
+  // Breadcrumb schema items (needs full URLs and position)
   const breadcrumbSchemaItems = [
-    { name: 'Home', url: getAbsoluteUrl('/', locale as SupportedLocale) },
-    { name: locale === 'en' ? 'Gardeners' : 'Hoveniers', url: getAbsoluteUrl('/hoveniers', locale as SupportedLocale) },
-    { name: gardener.name, url: getAbsoluteUrl(`/hoveniers/${slug}`, locale as SupportedLocale) }
+    { position: 1, name: 'Home', url: getAbsoluteUrl('/', locale as SupportedLocale) },
+    { position: 2, name: locale === 'en' ? 'Gardeners' : 'Hoveniers', url: getAbsoluteUrl('/hoveniers', locale as SupportedLocale) },
+    { position: 3, name: gardener.name, url: getAbsoluteUrl(`/hoveniers/${slug}`, locale as SupportedLocale) }
   ]
 
   return (
     <>
       <LocalBusinessSchema 
-        name={`${gardener.name} - ${gardener.company}`}
-        description={gardener.description}
+        serviceType="gardener"
         url={getAbsoluteUrl(`/hoveniers/${slug}`, locale as SupportedLocale)}
-        areaServed={`${gardener.location}, Friesland`}
-        serviceTypes={gardener.specialties}
-        ratingValue={gardener.rating.toString()}
-        reviewCount={gardener.reviewCount.toString()}
-        contactPhone={gardener.contact.phone}
-        contactEmail={gardener.contact.email}
-        contactWebsite={gardener.contact.website}
-        personName={gardener.name}
-        priceRange={`€${gardener.startingPrice}-€${gardener.startingPrice + 20}`}
+        nameContext={`${gardener.name} - ${gardener.company}`}
         services={gardener.services}
-        location={gardener.location}
-        businessType="LandscapingBusiness"
       />
       <BreadcrumbSchema items={breadcrumbSchemaItems} />
       <Navigation locale={locale} />

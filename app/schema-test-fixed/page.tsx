@@ -1,6 +1,6 @@
 import React from 'react';
 import ServiceSchema from '../components/schemas/ServiceSchema';
-import LocalBusinessSchema from '../components/schemas/LocalBusinessSchema';
+import { LocalBusinessSchema } from '../components/StructuredData';
 import BreadcrumbSchema from '../components/schemas/BreadcrumbSchema';
 import FAQSchema from '../components/schemas/FAQSchema';
 import ContactSchema from '../components/schemas/ContactSchema';
@@ -58,16 +58,8 @@ export default function SchemaTestPage() {
       />
       
       <LocalBusinessSchema
-        name="Test Hovenier"
-        description="Professional landscaping business in Friesland"
         url="https://hovenier.frl/test"
-        areaServed="Friesland"
-        serviceTypes={['Tuinonderhoud', 'Tuinontwerp', 'Bestrating']}
-        priceRange="€35-€85"
-        contactPhone="+31612345678"
-        contactEmail="test@hovenier.frl"
-        location="Leeuwarden"
-        businessType="LandscapingBusiness"
+        nameContext="Test Hovenier"
       />
       
       <BreadcrumbSchema items={breadcrumbItems} />

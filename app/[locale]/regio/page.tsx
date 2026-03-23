@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';
-import LocalBusinessSchema from '../../components/schemas/LocalBusinessSchema';
+import { LocalBusinessSchema } from '../../components/StructuredData';
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { regionHubs, standaloneRegions } from '@/lib/regions-hierarchy';
 import Link from 'next/link';
@@ -43,13 +43,8 @@ export default async function RegioLandingPage({ params }: Props) {
   return (
     <>
       <LocalBusinessSchema 
-        name="Hovenier.frl - Hoveniers per Gemeente Friesland"
-        description="Lokale hoveniers en tuinspecialisten in alle 11 Friese gemeenten. Van Leeuwarden tot Harlingen - vind de beste tuinexperts in jouw gemeente voor tuinonderhoud, tuinontwerp en tuinaanleg."
         url={getAbsoluteUrl('/regio', locale as SupportedLocale)}
-        areaServed="Friesland, Nederland"
-        serviceTypes={["Lokale Hoveniers", "Gemeente Tuinspecialisten", "Regionale Tuinservices"]}
-        ratingValue="4.6"
-        reviewCount="94"
+        nameContext="Hoveniers per Gemeente Friesland"
       />
       <Navigation locale={locale} />
       <Breadcrumbs items={breadcrumbItems} />

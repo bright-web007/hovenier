@@ -71,17 +71,8 @@ export default async function RegionHubPage({ params }: Props) {
   return (
     <div className="page-container">
       <LocalBusinessSchema 
-        name={`Hoveniers in ${regionHub.name}`}
-        description={`Lokale hoveniers en tuinspecialisten in ${regionHub.name}, ${regionHub.description.toLowerCase()}`}
         url={`https://hovenier.frl${localizePath(`/regio/${slug}`, validLocale)}`}
-        areaServed={{
-          name: regionHub.name,
-          type: "State",
-          containedIn: {
-            name: "Friesland",
-            type: "State"
-          }
-        }}
+        nameContext={`Hoveniers in ${regionHub.name}`}
         services={[
           "Tuinonderhoud",
           "Tuinontwerp", 
@@ -90,11 +81,6 @@ export default async function RegionHubPage({ params }: Props) {
           "Groendaken",
           "Tuinaanleg"
         ]}
-        coordinates={{
-          latitude: "53.2012",
-          longitude: "5.7999"
-        }}
-        priceRange="€35-150"
       />
       
       <BreadcrumbSchema 

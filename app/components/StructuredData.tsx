@@ -1,28 +1,14 @@
+import { getBusinessConfig, ServiceType, type LocalBusinessConfig } from '@/lib/business-config';
+
 interface LocalBusinessSchemaProps {
-  name: string;
-  description: string;
+  /** Service type to get specific config, omit for general business config */
+  serviceType?: ServiceType;
+  /** Page URL for this specific page */
   url: string;
-  areaServed?: {
-    name: string;
-    type: 'City' | 'State' | 'Country';
-    containedIn?: {
-      name: string;
-      type: 'State' | 'Country';
-    };
-  };
+  /** Override specific services for this page (optional) */
   services?: string[];
-  coordinates?: {
-    latitude: string;
-    longitude: string;
-  };
-  priceRange?: string;
-  address?: {
-    streetAddress?: string;
-    addressLocality: string;
-    postalCode?: string;
-    addressRegion: string;
-    addressCountry: string;
-  };
+  /** Additional context for the business name (optional) */
+  nameContext?: string;
 }
 
 interface WebsiteSchemaProps {
@@ -41,42 +27,48 @@ interface BreadcrumbSchemaProps {
 }
 
 export function LocalBusinessSchema({
-  name,
-  description,
+  serviceType,
   url,
-  areaServed,
   services,
-  coordinates,
-  priceRange = "€35-250",
-  address
+  nameContext
 }: LocalBusinessSchemaProps) {
+  const config = getBusinessConfig(serviceType);
+  
+  // Build business name with optional context
+  const businessName = nameContext 
+    ? `${nameContext} - ${config.name}`
+    : config.name;
+  
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": name,
-    "description": description,
+    "@id": config.contactInfo.website,
+    "name": businessName,
+    "legalName": config.legalName,
+    "description": config.description,
     "url": url,
-    "priceRange": priceRange,
-    "currenciesAccepted": "EUR",
-    "address": address || {
+    "sameAs": [config.contactInfo.website],
+    "priceRange": config.priceRange,
+    "currenciesAccepted": config.currenciesAccepted,
+    "paymentAccepted": config.paymentAccepted,
+    "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Leeuwarden", 
-      "postalCode": "8900",
-      "addressRegion": "Friesland",
-      "addressCountry": "NL"
-    },
-    "areaServed": areaServed ? {
-      "@type": areaServed.type,
-      "name": areaServed.name,
-      ...(areaServed.containedIn && {
-        "containedInPlace": {
-          "@type": areaServed.containedIn.type,
-          "name": areaServed.containedIn.name
-        }
+      "addressLocality": config.address.addressLocality,
+      "postalCode": config.address.postalCode,
+      "addressRegion": config.address.addressRegion,
+      "addressCountry": config.address.addressCountry,
+      ...(config.address.streetAddress && {
+        "streetAddress": config.address.streetAddress
       })
-    } : {
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": config.location.latitude,
+      "longitude": config.location.longitude
+    },
+    "areaServed": {
       "@type": "State",
-      "name": "Friesland",
+      "name": config.serviceArea.name,
       "containedInPlace": {
         "@type": "Country",
         "name": "Nederland"
@@ -86,26 +78,30 @@ export function LocalBusinessSchema({
       "@type": "GeoCircle",
       "geoMidpoint": {
         "@type": "GeoCoordinates",
-        "latitude": coordinates?.latitude || "53.2",
-        "longitude": coordinates?.longitude || "5.8"
+        "latitude": config.location.latitude,
+        "longitude": config.location.longitude
       },
-      "geoRadius": "50000"
+      "geoRadius": config.serviceArea.radius
     },
+    ...(config.businessHours && {
+      "openingHours": config.businessHours.dayOfWeek.map(day => 
+        `${day} ${config.businessHours!.opens}-${config.businessHours!.closes}`
+      )
+    }),
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Hoveniersdiensten",
-      "itemListElement": (services || [
-        "Tuinonderhoud",
-        "Tuinontwerp", 
-        "Groendaken",
-        "Bestrating",
-        "Boomverzorging",
-        "Hagen snoeien"
-      ]).map((service, index) => ({
+      "itemListElement": (services || config.coreServices).map((service, index) => ({
         "@type": "Offer",
+        "@id": `${url}#service-${index}`,
         "itemOffered": {
           "@type": "Service",
-          "name": service
+          "name": service,
+          "provider": {
+            "@type": "LocalBusiness",
+            "@id": config.contactInfo.website,
+            "name": config.legalName
+          }
         }
       }))
     }
@@ -115,7 +111,7 @@ export function LocalBusinessSchema({
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(schema),
+        __html: JSON.stringify(schema, null, 2),
       }}
     />
   );

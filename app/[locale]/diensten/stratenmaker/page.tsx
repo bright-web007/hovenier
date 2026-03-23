@@ -163,32 +163,8 @@ export default async function StratenmakerPage({ params }: Props) {
   return (
     <>
       <LocalBusinessSchema 
-        name="Stratenmaker & Bestrating Service"
-        description="Professionele bestratingswerken en hardscaping diensten in Friesland"
+        serviceType="stratenmaker"
         url={`https://hovenier.frl${localizePath('/diensten/stratenmaker', validLocale as SupportedLocale)}`}
-        areaServed={{
-          name: "Friesland",
-          type: "State"
-        }}
-        services={[
-          "Bestrating & tegels",
-          "Opritten & parkeerplaatsen", 
-          "Tuinpaden & terrassen",
-          "Keerwanden & borders",
-          "Drainage & afwatering",
-          "Natuursteen verwerking"
-        ]}
-        coordinates={{
-          latitude: "53.2012",
-          longitude: "5.7999"
-        }}
-        address={{
-          addressLocality: "Leeuwarden",
-          postalCode: "8900",
-          addressRegion: "Friesland",
-          addressCountry: "NL"
-        }}
-        priceRange="€45-150"
       />
       
       <BreadcrumbSchema 

@@ -23,11 +23,23 @@ export default function MetadataManager({
   openGraph = {}
 }: MetadataManagerProps) {
   const locale = useLocale();
+
+  const buildAlternateUrl = (targetLocale: 'nl' | 'en') => {
+    const isAbsolute = canonicalUrl.startsWith('http://') || canonicalUrl.startsWith('https://');
+    const url = new URL(canonicalUrl, 'https://hovenier.frl');
+    const strippedPath = url.pathname.replace(/^\/en(?=\/|$)/, '') || '/';
+
+    url.pathname = targetLocale === 'en'
+      ? strippedPath === '/' ? '/en' : `/en${strippedPath}`
+      : strippedPath;
+
+    return isAbsolute ? url.toString() : `${url.pathname}${url.search}${url.hash}`;
+  };
   
   // Default alternate URLs for supported locales
   const defaultAlternates = [
-    { locale: 'en', url: canonicalUrl.replace(/\/nl\//, '/en/').replace(/\/en\//, '/') },
-    { locale: 'nl', url: canonicalUrl.replace(/\/en\//, '/nl/').replace(/^\/$/, '/nl/') }
+    { locale: 'nl', url: buildAlternateUrl('nl') },
+    { locale: 'en', url: buildAlternateUrl('en') }
   ];
   
   const allAlternates = alternateUrls.length > 0 ? alternateUrls : defaultAlternates;

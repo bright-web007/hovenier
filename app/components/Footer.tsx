@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { regionHubs, standaloneRegions } from '@/lib/regions-hierarchy';
 
 interface FooterProps {
   locale?: string;
@@ -22,7 +23,31 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
         'footer.newsletter_button': 'Aanmelden',
         'footer.newsletter_privacy': 'Maandelijkse tuintips en geen spam. Je kunt altijd uitschrijven.',
         'footer.services_title': 'Diensten',
+        'footer.regions_title': 'Regio\'s',
+        'footer.links.regions.noordwest_friesland': 'Noordwest-Friesland',
+        'footer.links.regions.noordoost_friesland': 'Noordoost-Friesland',
+        'footer.links.regions.centraal_friesland': 'Centraal-Friesland',
+        'footer.links.regions.zuidwest_friesland': 'Zuidwest-Friesland',
+        'footer.standalone_title': 'Stad',
         'footer.gemeenten_title': 'Gemeenten',
+        'footer.links.gemeenten.leeuwarden': 'Leeuwarden',
+        'footer.links.gemeenten.heerenveen': 'Heerenveen',
+        'footer.links.gemeenten.smallingerland': 'Smallingerland',
+        'footer.links.gemeenten.sudwest_fryslan': 'Súdwest-Fryslân',
+        'footer.links.gemeenten.waadhoeke': 'Waadhoeke',
+        'footer.links.gemeenten.harlingen': 'Harlingen',
+        'footer.links.gemeenten.vlieland': 'Vlieland',
+        'footer.links.gemeenten.terschelling': 'Terschelling',
+        'footer.links.gemeenten.noardeast_fryslan': 'Noardeast-Fryslân',
+        'footer.links.gemeenten.achtkarspelen': 'Achtkarspelen',
+        'footer.links.gemeenten.dantumadeel': 'Dantumadeel',
+        'footer.links.gemeenten.ameland': 'Ameland',
+        'footer.links.gemeenten.schiermonnikoog': 'Schiermonnikoog',
+        'footer.links.gemeenten.opsterland': 'Opsterland',
+        'footer.links.gemeenten.ooststellingwerf': 'Ooststellingwerf',
+        'footer.links.gemeenten.weststellingwerf': 'Weststellingwerf',
+        'footer.links.gemeenten.de_fryske_marren': 'De Fryske Marren',
+        'footer.links.gemeenten.tietjerksteradeel': 'Tietjerksteradeel',
         'footer.company_title': 'Bedrijf',
         'footer.copyright': 'Alle rechten voorbehouden.',
         'footer.newsletter_success': 'Bedankt voor je aanmelding! We nemen contact met je op.',
@@ -30,12 +55,6 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
         'footer.links.services.tuinontwerp': 'Tuinontwerp',
         'footer.links.services.groendak': 'Groendaken',
         'footer.links.services.bestrating': 'Bestrating',
-        'footer.links.gemeenten.leeuwarden': 'Leeuwarden',
-        'footer.links.gemeenten.heerenveen': 'Heerenveen',
-        'footer.links.gemeenten.smallingerland': 'Smallingerland',
-        'footer.links.gemeenten.sudwest_fryslan': 'Súdwest-Fryslân',
-        'footer.links.gemeenten.waadhoeke': 'Waadhoeke',
-        'footer.links.gemeenten.harlingen': 'Harlingen',
         'footer.links.company.over_ons': 'Over ons',
         'footer.links.company.samenwerking': 'Samenwerking',
         'footer.links.company.contact': 'Contact',
@@ -52,7 +71,31 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
         'footer.newsletter_button': 'Subscribe',
         'footer.newsletter_privacy': 'Monthly garden tips and no spam. You can always unsubscribe.',
         'footer.services_title': 'Services',
+        'footer.regions_title': 'Regions',
+        'footer.links.regions.noordwest_friesland': 'Northwest Friesland',
+        'footer.links.regions.noordoost_friesland': 'Northeast Friesland',
+        'footer.links.regions.centraal_friesland': 'Central Friesland',
+        'footer.links.regions.zuidwest_friesland': 'Southwest Friesland',
+        'footer.standalone_title': 'Major Cities',
         'footer.gemeenten_title': 'Municipalities',
+        'footer.links.gemeenten.leeuwarden': 'Leeuwarden',
+        'footer.links.gemeenten.heerenveen': 'Heerenveen',
+        'footer.links.gemeenten.smallingerland': 'Smallingerland',
+        'footer.links.gemeenten.sudwest_fryslan': 'Súdwest-Fryslân',
+        'footer.links.gemeenten.waadhoeke': 'Waadhoeke',
+        'footer.links.gemeenten.harlingen': 'Harlingen',
+        'footer.links.gemeenten.vlieland': 'Vlieland',
+        'footer.links.gemeenten.terschelling': 'Terschelling',
+        'footer.links.gemeenten.noardeast_fryslan': 'Noardeast-Fryslân',
+        'footer.links.gemeenten.achtkarspelen': 'Achtkarspelen',
+        'footer.links.gemeenten.dantumadeel': 'Dantumadeel',
+        'footer.links.gemeenten.ameland': 'Ameland',
+        'footer.links.gemeenten.schiermonnikoog': 'Schiermonnikoog',
+        'footer.links.gemeenten.opsterland': 'Opsterland',
+        'footer.links.gemeenten.ooststellingwerf': 'Ooststellingwerf',
+        'footer.links.gemeenten.weststellingwerf': 'Weststellingwerf',
+        'footer.links.gemeenten.de_fryske_marren': 'De Fryske Marren',
+        'footer.links.gemeenten.tietjerksteradeel': 'Tietjerksteradeel',
         'footer.company_title': 'Company',
         'footer.copyright': 'All rights reserved.',
         'footer.newsletter_success': 'Thank you for signing up! We will contact you.',
@@ -60,12 +103,6 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
         'footer.links.services.tuinontwerp': 'Garden Design',
         'footer.links.services.groendak': 'Green Roofs',
         'footer.links.services.bestrating': 'Paving',
-        'footer.links.gemeenten.leeuwarden': 'Leeuwarden',
-        'footer.links.gemeenten.heerenveen': 'Heerenveen',
-        'footer.links.gemeenten.smallingerland': 'Smallingerland',
-        'footer.links.gemeenten.sudwest_fryslan': 'Súdwest-Fryslân',
-        'footer.links.gemeenten.waadhoeke': 'Waadhoeke',
-        'footer.links.gemeenten.harlingen': 'Harlingen',
         'footer.links.company.over_ons': 'About Us',
         'footer.links.company.samenwerking': 'Partnership',
         'footer.links.company.contact': 'Contact',
@@ -83,20 +120,50 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
   const currentYear = new Date().getFullYear();
   
   const serviceLinks = [
-    { href: localizePath('/services/tuinonderhoud', currentLocale), label: t('footer.links.services.tuinonderhoud') },
-    { href: localizePath('/services/tuinontwerp', currentLocale), label: t('footer.links.services.tuinontwerp') },
-    { href: localizePath('/services/groendak', currentLocale), label: t('footer.links.services.groendak') },
-    { href: localizePath('/services/stratenmaker', currentLocale), label: t('footer.links.services.bestrating') }
+    { href: localizePath('/diensten/tuinonderhoud', currentLocale), label: t('footer.links.services.tuinonderhoud') },
+    { href: localizePath('/diensten/tuinontwerp', currentLocale), label: t('footer.links.services.tuinontwerp') },
+    { href: localizePath('/diensten/groendak', currentLocale), label: t('footer.links.services.groendak') },
+    { href: localizePath('/diensten/stratenmaker', currentLocale), label: t('footer.links.services.bestrating') }
   ];
   
-  const gemeenteLinks = [
-    { href: localizePath('/gemeente/leeuwarden', currentLocale), label: t('footer.links.gemeenten.leeuwarden') },
-    { href: localizePath('/gemeente/heerenveen', currentLocale), label: t('footer.links.gemeenten.heerenveen') },
-    { href: localizePath('/gemeente/smallingerland', currentLocale), label: t('footer.links.gemeenten.smallingerland') },
-    { href: localizePath('/gemeente/sudwest-fryslan', currentLocale), label: t('footer.links.gemeenten.sudwest_fryslan') },
-    { href: localizePath('/gemeente/waadhoeke', currentLocale), label: t('footer.links.gemeenten.waadhoeke') },
-    { href: localizePath('/gemeente/harlingen', currentLocale), label: t('footer.links.gemeenten.harlingen') }
-  ];
+  // Create gemeente translation key mapping
+  const gemeenteTranslationKeys: Record<string, string> = {
+    'leeuwarden': 'footer.links.gemeenten.leeuwarden',
+    'heerenveen': 'footer.links.gemeenten.heerenveen',
+    'smallingerland': 'footer.links.gemeenten.smallingerland',
+    'sudwest-fryslan': 'footer.links.gemeenten.sudwest_fryslan',
+    'waadhoeke': 'footer.links.gemeenten.waadhoeke',
+    'harlingen': 'footer.links.gemeenten.harlingen',
+    'vlieland': 'footer.links.gemeenten.vlieland',
+    'terschelling': 'footer.links.gemeenten.terschelling',
+    'noardeast-fryslan': 'footer.links.gemeenten.noardeast_fryslan',
+    'achtkarspelen': 'footer.links.gemeenten.achtkarspelen',
+    'dantumadeel': 'footer.links.gemeenten.dantumadeel',
+    'ameland': 'footer.links.gemeenten.ameland',
+    'schiermonnikoog': 'footer.links.gemeenten.schiermonnikoog',
+    'opsterland': 'footer.links.gemeenten.opsterland',
+    'ooststellingwerf': 'footer.links.gemeenten.ooststellingwerf',
+    'weststellingwerf': 'footer.links.gemeenten.weststellingwerf',
+    'de-fryske-marren': 'footer.links.gemeenten.de_fryske_marren',
+    'tietjerksteradeel': 'footer.links.gemeenten.tietjerksteradeel'
+  };
+
+  // Generate region hub links with their gemeentes
+  const regionLinks = regionHubs.map(hub => ({
+    name: hub.name,
+    href: localizePath(`/regio/${hub.slug}`, currentLocale),
+    translationKey: `footer.links.regions.${hub.slug.replace(/-/g, '_')}`,
+    gemeentes: hub.gemeentes.map(gemeente => ({
+      href: localizePath(`/regio/${hub.slug}/${gemeente.slug}`, currentLocale),
+      label: t(gemeenteTranslationKeys[gemeente.slug] || gemeente.name)
+    }))
+  }));
+
+  // Standalone regions (like Leeuwarden)
+  const standaloneLinks = standaloneRegions.map(gemeente => ({
+    href: localizePath(`/regio/leeuwarden/${gemeente.slug}`, currentLocale),
+    label: t(gemeenteTranslationKeys[gemeente.slug] || gemeente.name)
+  }));
   
   const companyLinks = [
     { href: localizePath('/over-ons', currentLocale), label: t('footer.links.company.over_ons') },
@@ -182,23 +249,49 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
             </ul>
           </div>
           
-          {/* Gemeenten Column */}
-          <div className="footer-column">
+          {/* Regions Column */}
+          <div className="footer-column footer-regions">
             <h4 className="footer-section-title">
-              {t('footer.gemeenten_title')}
+              {t('footer.regions_title')}
             </h4>
-            <ul className="footer-links">
-              {gemeenteLinks.map((link) => (
-                <li key={link.href} className="footer-link-item">
-                  <Link 
-                    href={link.href}
-                    className="footer-link"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
+            <div className="footer-regions-grid">
+              {regionLinks.map((region) => (
+                <div key={region.href} className="footer-region-group">
+                  <h5 className="footer-region-title">
+                    <Link href={region.href} className="footer-region-link">
+                      {t(region.translationKey)}
+                    </Link>
+                  </h5>
+                  <ul className="footer-region-links">
+                    {region.gemeentes.map((gemeente) => (
+                      <li key={gemeente.href} className="footer-link-item">
+                        <Link href={gemeente.href} className="footer-link footer-gemeente-link">
+                          {gemeente.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+              
+              {/* Standalone regions */}
+              {standaloneLinks.length > 0 && (
+                <div className="footer-region-group">
+                  <h5 className="footer-region-title">
+                    {t('footer.standalone_title')}
+                  </h5>
+                  <ul className="footer-region-links">
+                    {standaloneLinks.map((gemeente) => (
+                      <li key={gemeente.href} className="footer-link-item">
+                        <Link href={gemeente.href} className="footer-link footer-gemeente-link">
+                          {gemeente.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           </div>
           
           {/* Company Column */}

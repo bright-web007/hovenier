@@ -107,30 +107,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
   
-  // Municipality/gemeente pages
-  const gemeenten = [
-    'leeuwarden',
-    'sudwest-fryslan', 
-    'smallingerland',
-    'heerenveen',
-    'achtkarspelen',
-    'tietjerksteradeel',
-    'dantumadiel',
-    'de-fryske-marren',
-    'waadhoeke',
-    'noardeast-fryslan',
-    'harlingen',
-  ]
-  
-  const gemeentePages = gemeenten.map(gemeente => ({
-    url: `${baseUrl}/gemeente/${gemeente}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }))
+  // Municipality/gemeente pages are now handled by hierarchical /regio/[slug]/[gemeente] structure
   
   // Localized pages
-  const allPages = [...staticPages, ...mainPages, ...servicePages, ...kostenPages, ...gemeentePages, ...gardenerPages, ...newsCategoryPages]
+  const allPages = [...staticPages, ...mainPages, ...servicePages, ...kostenPages, ...gardenerPages, ...newsCategoryPages]
   const localizedPages = []
   
   for (const page of allPages) {

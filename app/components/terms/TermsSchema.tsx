@@ -6,7 +6,7 @@ export default function TermsSchema() {
     "@type": "WebPage",
     "name": "Algemene Voorwaarden - Hovenier.frl",
     "description": "Algemene voorwaarden voor het gebruik van Hovenier.frl platform en dienstverlening.",
-    "url": "https://hovenier.frl/nl/algemene-voorwaarden", 
+    "url": "https://hovenier.frl/algemene-voorwaarden", 
     "inLanguage": "nl-NL",
     "isPartOf": {
       "@type": "WebSite",

@@ -6,7 +6,7 @@ export default function CookieSchema() {
     "@type": "WebPage",
     "name": "Cookiebeleid - Hovenier.frl",
     "description": "Cookiebeleid van Hovenier.frl. Informatie over welke cookies wij gebruiken en hoe u uw cookie-instellingen kunt beheren.",
-    "url": "https://hovenier.frl/nl/cookie-beleid",
+    "url": "https://hovenier.frl/cookie-beleid",
     "inLanguage": "nl-NL",
     "isPartOf": {
       "@type": "WebSite",

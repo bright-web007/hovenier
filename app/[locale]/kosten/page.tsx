@@ -122,7 +122,7 @@ export default function KostenPage() {
                   <div className={priceCardStyles.priceCardPrice}>€35–50</div>
                   <div className={priceCardStyles.priceCardUnit}>per uur</div>
                   <div className={priceCardStyles.priceCardRange}>Maandelijks onderhoud 50m² tuin: €140–280/bezoek. Inclusief maaien, snoeien en onkruid.</div>
-                  <Link href={localizePath('/services/tuinonderhoud', locale as SupportedLocale)} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
+                  <Link href={localizePath('/diensten/tuinonderhoud', locale as SupportedLocale)} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
                 </div>
                 <div className={priceCardStyles.priceCard}>
                   <div className={priceCardStyles.priceCardIcon}>
@@ -190,7 +190,7 @@ export default function KostenPage() {
                   <div className={priceCardStyles.priceCardPrice}>€50–80</div>
                   <div className={priceCardStyles.priceCardUnit}>per m²</div>
                   <div className={priceCardStyles.priceCardRange}>Oprit of terras betegelen per m²: €50–80. Inclusief zandbed en voegzand. Excl. materiaal.</div>
-                  <Link href={localizePath('/services/stratenmaker', locale as SupportedLocale)} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
+                  <Link href={localizePath('/diensten/stratenmaker', locale as SupportedLocale)} className={priceCardStyles.priceCardLink}>Lees meer →</Link>
                 </div>
               </div>
             </div>

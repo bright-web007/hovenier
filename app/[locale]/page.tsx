@@ -165,7 +165,7 @@ export default async function HomePage({ params }: Props) {
                 title="Tuinonderhoud"
                 description="Professioneel onderhoud van uw tuin, van snoeien tot onkruidbestrijding. Houd uw tuin het hele jaar door in topconditie."
                 imageUrl="/images/garden-maintenance.png"
-                href={localizePath('/services/tuinonderhoud', validLocale as SupportedLocale)}
+                href={localizePath('/diensten/tuinonderhoud', validLocale as SupportedLocale)}
                 price={{ from: 35, unit: 'uur' }}
                 features={[
                   'Gras maaien en verzorging',
@@ -180,7 +180,7 @@ export default async function HomePage({ params }: Props) {
                 title="Tuinontwerp"
                 description="Complete herinrichting van uw tuin met professioneel ontwerp. Van concept tot realisatie, uw droomtuin wordt werkelijkheid."
                 imageUrl="/images/tuinontwerp-hero.jpg"
-                href={localizePath('/services/tuinontwerp', validLocale as SupportedLocale)}
+                href={localizePath('/diensten/tuinontwerp', validLocale as SupportedLocale)}
                 features={[
                   'Persoonlijk tuinontwerp',
                   'Planten selectie en advies',
@@ -193,7 +193,7 @@ export default async function HomePage({ params }: Props) {
                 title="Groendaken"
                 description="Duurzame groendaken voor een betere leefomgeving. Isolatie, waterberging en biodiversiteit in één."
                 imageUrl="/images/green-roof.png"
-                href={localizePath('/services/groendak', validLocale as SupportedLocale)}
+                href={localizePath('/diensten/groendak', validLocale as SupportedLocale)}
                 features={[
                   'Waterafvoer optimalisering',
                   'Isolatie verbetering',

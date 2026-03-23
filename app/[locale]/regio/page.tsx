@@ -3,24 +3,26 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import LocalBusinessSchema from '../../components/schemas/LocalBusinessSchema';
-import { getAbsoluteUrl, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils';
+import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { regionHubs, standaloneRegions } from '@/lib/regions-hierarchy';
+import Link from 'next/link';
 
 type Props = {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   return {
-    title: 'Hovenier per Gemeente in Friesland | Hovenier.frl',
-    description: 'Vind lokale hoveniers in alle 11 Friese gemeenten. Van Leeuwarden tot Harlingen - bekijk welke tuinspecialisten actief zijn in jouw gemeente.',
-    keywords: 'hovenier per gemeente, Friesland hoveniers, lokale tuinman, gemeente hovenier',
+    title: 'Hoveniers per Regio in Friesland | Hovenier.frl',
+    description: 'Vind lokale hoveniers in alle regio\'s van Friesland. Van Noordwest-Friesland tot Zuidwest-Friesland - ontdek welke tuinspecialisten actief zijn in jouw regio.',
+    keywords: 'hovenier per regio, Friesland hoveniers, lokale tuinman, regio hovenier, Friese gemeenten',
     alternates: getLocaleAlternates('/regio', locale as SupportedLocale),
   }
 }
 
-// ISR: Never revalidate (static municipal data, changes only with deployments)
+// ISR: Never revalidate (static regional data, changes only with deployments)
 export const revalidate = false;
 
 // Generate static params for both locales to enable ISR
@@ -28,28 +30,14 @@ export async function generateStaticParams() {
   return [{ locale: 'nl' }, { locale: 'en' }];
 }
 
-const frieslanders = [
-  { name: 'Leeuwarden', slug: 'leeuwarden', population: '123.000', description: 'Hoofdstad van Friesland met diverse tuinspecialisten' },
-  { name: 'Súdwest-Fryslân', slug: 'sudwest-fryslan', population: '89.000', description: 'Grootste gemeente van Friesland, veel landelijke tuinen' },
-  { name: 'Smallingerland', slug: 'smallingerland', population: '56.000', description: 'Rond Drachten, mix van stedelijk en landelijk' },
-  { name: 'Heerenveen', slug: 'heerenveen', population: '50.000', description: 'Sportstad met mooie woonwijken en tuinen' },
-  { name: 'Achtkarspelen', slug: 'achtkarspelen', population: '28.000', description: 'Landelijke gemeente, veel boerderiatapijten' },
-  { name: 'Tietjerksteradiel', slug: 'tietjerksteradiel', population: '25.000', description: 'Groene gemeente tussen Leeuwarden en Groningen' },
-  { name: 'Dantumadiel', slug: 'dantumadiel', population: '19.000', description: 'Kleinste gemeente, persoonlijke service' },
-  { name: 'De Fryske Marren', slug: 'de-fryske-marren', population: '51.000', description: 'Waterrijke gemeente, unieke tuin uitdagingen' },
-  { name: 'Waadhoeke', slug: 'waadhoeke', population: '46.000', description: 'Kustgemeente, speciale klimatologische omstandigheden' },
-  { name: 'Noardeast-Fryslân', slug: 'noardeast-fryslan', population: '45.000', description: 'Noordoosthoek, traditionele Friese tuinen' },
-  { name: 'Harlingen', slug: 'harlingen', population: '16.000', description: 'Historische havenstad, klassieke stadstuinen' },
-]
-
-export default async function RegioHubPage({ params }: Props) {
+export default async function RegioLandingPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale)
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
-    { label: locale === 'en' ? 'Regions' : 'Regio' }
+    { label: 'Home', href: localizePath('/', locale as SupportedLocale) },
+    { label: locale === 'en' ? 'Regions' : 'Regio\'s', href: localizePath('/regio', locale as SupportedLocale) }
   ];
 
   return (
@@ -72,10 +60,10 @@ export default async function RegioHubPage({ params }: Props) {
           {/* Hero Section */}
           <div style={{ maxWidth: '64rem', margin: '0 auto', textAlign: 'center', marginBottom: '4rem' }}>
             <h1 style={{ fontSize: '3rem', fontFamily: 'var(--serif)', fontWeight: '600', color: 'var(--forest)', marginBottom: '1.5rem', lineHeight: '1.1' }}>
-              Hoveniers per Gemeente
+              Hoveniers per Regio in Friesland
             </h1>
             <p style={{ fontSize: '1.25rem', color: 'var(--forest-mid)', marginBottom: '2rem', lineHeight: '1.6' }}>
-              Vind lokale tuinspecialisten in alle 11 Friese gemeenten
+              Ontdek hoveniers georganiseerd per Friese regio. Van de kust tot het binnenland.
             </p>
           </div>
 
@@ -144,46 +132,132 @@ export default async function RegioHubPage({ params }: Props) {
             </div>
           </section>
 
-          {/* Gemeente Grid */}
+          {/* Regional Hubs Grid */}
           <section style={{ maxWidth: '80rem', margin: '0 auto', marginBottom: '4rem' }}>
             <h2 style={{ fontSize: '2rem', fontFamily: 'var(--serif)', fontWeight: '600', color: 'var(--forest)', marginBottom: '3rem', textAlign: 'center' }}>
-              Kies uw Gemeente
+              Kies uw Regio
             </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
-              {frieslanders.map((gemeente) => (
-                <div key={gemeente.slug} style={{ 
-                  background: 'var(--white)', 
-                  borderRadius: '12px', 
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', 
-                  overflow: 'hidden',
-                  transition: 'box-shadow 0.3s ease'
-                }}>
-                  <div style={{ padding: '1.5rem' }}>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '0.5rem' }}>
-                      {gemeente.name}
-                    </h3>
-                    <p style={{ fontSize: '14px', color: 'var(--forest-mid)', marginBottom: '0.75rem' }}>{gemeente.population} inwoners</p>
-                    <p style={{ color: 'var(--forest-mid)', fontSize: '14px', marginBottom: '1rem', lineHeight: '1.5' }}>{gemeente.description}</p>
-                    <a 
-                      href={`/regio/${gemeente.slug}`}
-                      style={{ 
-                        display: 'block', 
-                        width: '100%', 
-                        textAlign: 'center', 
-                        background: 'var(--sage)', 
-                        color: 'var(--white)', 
-                        padding: '0.75rem 1rem', 
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
+              {/* Region Hubs */}
+              {regionHubs.map((hub) => (
+                <Link key={hub.slug} href={localizePath(`/regio/${hub.slug}`, locale as SupportedLocale)}>
+                  <div className="region-hub-card" style={{ padding: '2rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem' }}>
+                        <div style={{ 
+                          background: 'var(--sage-light)', 
+                          width: '48px', 
+                          height: '48px', 
+                          borderRadius: '8px', 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          justifyContent: 'center', 
+                          marginRight: '1rem' 
+                        }}>
+                          <svg style={{ width: '24px', height: '24px', color: 'var(--sage)' }} fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div>
+                          <h3 style={{ fontSize: '1.5rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '0.25rem', fontFamily: 'var(--serif)' }}>
+                            {hub.name}
+                          </h3>
+                          <p style={{ fontSize: '14px', color: 'var(--forest-mid)', margin: '0' }}>{hub.gemeentes.length} gemeenten</p>
+                        </div>
+                      </div>
+                      <p style={{ color: 'var(--forest-mid)', fontSize: '15px', marginBottom: '1.5rem', lineHeight: '1.6' }}>{hub.description}</p>
+                      <div style={{ marginBottom: '1.5rem' }}>
+                        <p style={{ fontSize: '14px', color: 'var(--forest)', fontWeight: '600', marginBottom: '0.5rem' }}>Gemeenten in deze regio:</p>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                          {hub.gemeentes.slice(0, 4).map((gemeente) => (
+                            <span key={gemeente.slug} style={{ 
+                              background: 'var(--cream-light)', 
+                              color: 'var(--forest-mid)', 
+                              padding: '0.25rem 0.75rem', 
+                              borderRadius: '12px', 
+                              fontSize: '12px',
+                              fontWeight: '500'
+                            }}>
+                              {gemeente.name}
+                            </span>
+                          ))}
+                          {hub.gemeentes.length > 4 && (
+                            <span style={{ 
+                              color: 'var(--forest-mid)', 
+                              fontSize: '12px',
+                              fontWeight: '500',
+                              padding: '0.25rem 0.5rem'
+                            }}>
+                              +{hub.gemeentes.length - 4} meer
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      <div style={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'space-between',
+                        padding: '1rem', 
+                        background: 'var(--sage-light)', 
                         borderRadius: '8px', 
-                        fontSize: '14px',
-                        fontWeight: '500', 
-                        textDecoration: 'none',
-                        transition: 'background-color 0.2s ease'
-                      }}
-                    >
-                      Bekijk Hoveniers →
-                    </a>
+                        marginTop: 'auto'
+                      }}>
+                        <span style={{ color: 'var(--sage)', fontWeight: '600', fontSize: '14px' }}>
+                          Ontdek hoveniers →
+                        </span>
+                        <span style={{ fontSize: '12px', color: 'var(--sage)', fontWeight: '500' }}>
+                          {hub.totalPopulation.toLocaleString()} inwoners
+                        </span>
+
+                    </div>
                   </div>
-                </div>
+                </Link>
+              ))}
+              
+              {/* Standalone Leeuwarden */}
+              {standaloneRegions.map((gemeente) => (
+                <Link key={gemeente.slug} href={localizePath(`/regio/leeuwarden/${gemeente.slug}`, locale as SupportedLocale)}>
+                  <div className="region-standalone-card" style={{ padding: '2rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem' }}>
+                        <div style={{ 
+                          background: 'var(--forest-light)', 
+                          width: '48px', 
+                          height: '48px', 
+                          borderRadius: '8px', 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          justifyContent: 'center', 
+                          marginRight: '1rem' 
+                        }}>
+                          <svg style={{ width: '24px', height: '24px', color: 'var(--forest)' }} fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm3 2a1 1 0 011-1h4a1 1 0 011 1v6a1 1 0 01-1 1H8a1 1 0 01-1-1V6z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div>
+                          <h3 style={{ fontSize: '1.5rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '0.25rem', fontFamily: 'var(--serif)' }}>
+                            {gemeente.name}
+                          </h3>
+                          <p style={{ fontSize: '14px', color: 'var(--forest-mid)', margin: '0' }}>Hoofdstad van Friesland</p>
+                        </div>
+                      </div>
+                      <p style={{ color: 'var(--forest-mid)', fontSize: '15px', marginBottom: '1.5rem', lineHeight: '1.6' }}>{gemeente.intro}</p>
+                      <div style={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'space-between',
+                        padding: '1rem', 
+                        background: 'var(--forest-light)', 
+                        borderRadius: '8px', 
+                        marginTop: 'auto'
+                      }}>
+                        <span style={{ color: 'var(--forest)', fontWeight: '600', fontSize: '14px' }}>
+                          Bekijk hoveniers →
+                        </span>
+                        <span style={{ fontSize: '12px', color: 'var(--forest)', fontWeight: '500' }}>
+                          {gemeente.population.toLocaleString()} inwoners
+                      </span>
+                    </div>  
+                  </div>
+                </Link>
               ))}
             </div>
           </section>
@@ -196,8 +270,44 @@ export default async function RegioHubPage({ params }: Props) {
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
                 <div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>Stedelijke Gemeenten</h3>
-                  <p style={{ color: 'var(--forest-mid)', fontSize: '14px', marginBottom: '0.75rem' }}>(Leeuwarden, Heerenveen, Smallingerland)</p>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>Kustgebieden</h3>
+                  <p style={{ color: 'var(--forest-mid)', fontSize: '14px', marginBottom: '0.75rem' }}>(Noordwest & Noordoost-Friesland)</p>
+                  <ul style={{ listStyle: 'none', padding: '0', margin: '0' }}>
+                    <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--forest-mid)' }}>
+                      <span style={{ width: '8px', height: '8px', background: 'var(--sage)', borderRadius: '50%', marginRight: '0.75rem', flexShrink: '0' }}></span>
+                      Zoutbestendige beplanting
+                    </li>
+                    <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--forest-mid)' }}>
+                      <span style={{ width: '8px', height: '8px', background: 'var(--sage)', borderRadius: '50%', marginRight: '0.75rem', flexShrink: '0' }}></span>
+                      Windschermen & haagaanleg
+                    </li>
+                    <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--forest-mid)' }}>
+                      <span style={{ width: '8px', height: '8px', background: 'var(--sage)', borderRadius: '50%', marginRight: '0.75rem', flexShrink: '0' }}></span>
+                      Kusttuinen & natuurlijke uitstraling
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>Binnenland</h3>
+                  <p style={{ color: 'var(--forest-mid)', fontSize: '14px', marginBottom: '0.75rem' }}>(Centraal & Zuidwest-Friesland)</p>
+                  <ul style={{ listStyle: 'none', padding: '0', margin: '0' }}>
+                    <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--forest-mid)' }}>
+                      <span style={{ width: '8px', height: '8px', background: 'var(--sage)', borderRadius: '50%', marginRight: '0.75rem', flexShrink: '0' }}></span>
+                      Landelijke & natuurlijke tuinen
+                    </li>
+                    <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--forest-mid)' }}>
+                      <span style={{ width: '8px', height: '8px', background: 'var(--sage)', borderRadius: '50%', marginRight: '0.75rem', flexShrink: '0' }}></span>
+                      Boomgaarden & fruittuin aanleg
+                    </li>
+                    <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--forest-mid)' }}>
+                      <span style={{ width: '8px', height: '8px', background: 'var(--sage)', borderRadius: '50%', marginRight: '0.75rem', flexShrink: '0' }}></span>
+                      Waterpartijen & natuurvijvers
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>Stedelijke Gebieden</h3>
+                  <p style={{ color: 'var(--forest-mid)', fontSize: '14px', marginBottom: '0.75rem' }}>(Leeuwarden & Heerenveen)</p>
                   <ul style={{ listStyle: 'none', padding: '0', margin: '0' }}>
                     <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--forest-mid)' }}>
                       <span style={{ width: '8px', height: '8px', background: 'var(--sage)', borderRadius: '50%', marginRight: '0.75rem', flexShrink: '0' }}></span>
@@ -210,32 +320,6 @@ export default async function RegioHubPage({ params }: Props) {
                     <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--forest-mid)' }}>
                       <span style={{ width: '8px', height: '8px', background: 'var(--sage)', borderRadius: '50%', marginRight: '0.75rem', flexShrink: '0' }}></span>
                       Groendaken & duurzaamheid
-                    </li>
-                    <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--forest-mid)' }}>
-                      <span style={{ width: '8px', height: '8px', background: 'var(--sage)', borderRadius: '50%', marginRight: '0.75rem', flexShrink: '0' }}></span>
-                      Bestrating & terrassen
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>Landelijke Gemeenten</h3>
-                  <p style={{ color: 'var(--forest-mid)', fontSize: '14px', marginBottom: '0.75rem' }}>(Súdwest-Fryslân, Achtkarspelen, etc.)</p>
-                  <ul style={{ listStyle: 'none', padding: '0', margin: '0' }}>
-                    <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--forest-mid)' }}>
-                      <span style={{ width: '8px', height: '8px', background: 'var(--forest)', borderRadius: '50%', marginRight: '0.75rem', flexShrink: '0' }}></span>
-                      Grote tuinen & landschappen
-                    </li>
-                    <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--forest-mid)' }}>
-                      <span style={{ width: '8px', height: '8px', background: 'var(--forest)', borderRadius: '50%', marginRight: '0.75rem', flexShrink: '0' }}></span>
-                      Boomverzorging & heggen
-                    </li>
-                    <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--forest-mid)' }}>
-                      <span style={{ width: '8px', height: '8px', background: 'var(--forest)', borderRadius: '50%', marginRight: '0.75rem', flexShrink: '0' }}></span>
-                      Traditioneel tuinbeheer
-                    </li>
-                    <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--forest-mid)' }}>
-                      <span style={{ width: '8px', height: '8px', background: 'var(--forest)', borderRadius: '50%', marginRight: '0.75rem', flexShrink: '0' }}></span>
-                      Ecologisch tuinbeheer
                     </li>
                   </ul>
                 </div>

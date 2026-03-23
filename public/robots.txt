@@ -12,7 +12,7 @@ Allow: /
 Allow: /bedankt
 Allow: /diensten/
 Allow: /en/diensten/
-Allow: /gemeente/
+Allow: /regio/
 Allow: /samenwerking
 Allow: /articles/
 

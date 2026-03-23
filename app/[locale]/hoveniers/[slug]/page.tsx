@@ -36,7 +36,7 @@ export async function generateStaticParams() {
 export const revalidate = false
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale, slug } = await params
+  const { locale, slug } = await params;
   const gardener = getGardenerBySlug(slug)
   
   if (!gardener) {
@@ -55,8 +55,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function GardenerProfilePage({ params }: Props) {
-  const { locale, slug } = await params
-  setRequestLocale(locale)
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   
   // Find gardener by slug
   const gardener = getGardenerBySlug(slug)

@@ -291,7 +291,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                           </span>
                         </div>
                         <Link 
-                          href={localizePath(`/services/${service.id}`, validLocale as SupportedLocale)}
+                          href={localizePath(`/diensten/${service.id}`, validLocale as SupportedLocale)}
                           style={{ 
                             display: 'inline-flex',
                             alignItems: 'center',

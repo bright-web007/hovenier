@@ -6,7 +6,7 @@ export default function DisclaimerSchema() {
     "@type": "WebPage",
     "name": "Disclaimer - Hovenier.frl",
     "description": "Disclaimer en aansprakelijkheidsbeperkingen voor het gebruik van Hovenier.frl platform en diensten.",
-    "url": "https://hovenier.frl/nl/aansprakelijkheid",
+    "url": "https://hovenier.frl/aansprakelijkheid",
     "inLanguage": "nl-NL",
     "isPartOf": {
       "@type": "WebSite",

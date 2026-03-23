@@ -54,7 +54,7 @@ export default function Navigation({ locale, translations = {} }: NavigationProp
         </Link>
         <div className="nav-links">
           <Link href={localizePath('/hoveniers', currentLocale)} className="nav-link">{t.gardeners}</Link>
-          <Link href={localizePath('/services', currentLocale)} className="nav-link">{t.services}</Link>
+          <Link href={localizePath('/diensten', currentLocale)} className="nav-link">{t.services}</Link>
           <Link href={localizePath('/regio', currentLocale)} className="nav-link">{t.regions}</Link>
           <Link href={localizePath('/kosten', currentLocale)} className="nav-link">{t.costs}</Link>
           <div className="lang-toggle" role="group" aria-label="Taal selectie">

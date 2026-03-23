@@ -55,6 +55,8 @@
     "newsletter_button": "Subscribe",
     "newsletter_privacy": "Monthly garden tips and no spam. You can always unsubscribe.",
     "services_title": "Services",
+    "regions_title": "Regions",
+    "standalone_title": "Major Cities",
     "gemeenten_title": "Municipalities",
     "company_title": "Company",
     "copyright": "All rights reserved.",
@@ -66,13 +68,31 @@
         "groendak": "Green Roofs",
         "bestrating": "Paving"
       },
+      "regions": {
+        "noordwest_friesland": "Northwest Friesland",
+        "noordoost_friesland": "Northeast Friesland",
+        "centraal_friesland": "Central Friesland",
+        "zuidwest_friesland": "Southwest Friesland"
+      },
       "gemeenten": {
         "leeuwarden": "Leeuwarden",
         "heerenveen": "Heerenveen",
         "smallingerland": "Smallingerland",
         "sudwest_fryslan": "Súdwest-Fryslân",
         "waadhoeke": "Waadhoeke",
-        "harlingen": "Harlingen"
+        "harlingen": "Harlingen",
+        "vlieland": "Vlieland",
+        "terschelling": "Terschelling",
+        "noardeast_fryslan": "Noardeast-Fryslân",
+        "achtkarspelen": "Achtkarspelen",
+        "dantumadeel": "Dantumadeel",
+        "ameland": "Ameland",
+        "schiermonnikoog": "Schiermonnikoog",
+        "opsterland": "Opsterland",
+        "ooststellingwerf": "Ooststellingwerf",
+        "weststellingwerf": "Weststellingwerf",
+        "de_fryske_marren": "De Fryske Marren",
+        "tietjerksteradeel": "Tietjerksteradeel"
       },
       "company": {
         "over_ons": "About Us",

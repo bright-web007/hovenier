@@ -430,7 +430,7 @@ export default async function GroendakPage({ params }: Props) {
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
-          url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl${localizePath('/services/groendak', validLocale as SupportedLocale)}`
+          url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`
         }))}
       />
 
@@ -438,7 +438,7 @@ export default async function GroendakPage({ params }: Props) {
       <LocalBusinessSchema
         name="Groendak Specialisten Friesland - Hovenier.frl"
         description="Professionele groendak installatie in Friesland. Extensief en intensief groendak aanleg door specialisten."
-        url={`https://hovenier.frl${localizePath('/services/groendak', validLocale as SupportedLocale)}`}
+        url={`https://hovenier.frl${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`}
         services={["Extensieve groendaken", "Intensieve groendaken", "Sedum daken", "Daktuin aanleg", "Waterafvoer systemen"]}
         priceRange="€85-200"
       />

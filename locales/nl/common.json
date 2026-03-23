@@ -55,6 +55,8 @@
     "newsletter_button": "Aanmelden",
     "newsletter_privacy": "Maandelijkse tuintips en geen spam. Je kunt altijd uitschrijven.",
     "services_title": "Diensten",
+    "regions_title": "Regio's",
+    "standalone_title": "Hoofdstad",
     "gemeenten_title": "Gemeenten",
     "company_title": "Bedrijf",
     "copyright": "Alle rechten voorbehouden.",
@@ -66,13 +68,31 @@
         "groendak": "Groendaken",
         "bestrating": "Bestrating"
       },
+      "regions": {
+        "noordwest_friesland": "Noordwest-Friesland",
+        "noordoost_friesland": "Noordoost-Friesland",
+        "centraal_friesland": "Centraal-Friesland",
+        "zuidwest_friesland": "Zuidwest-Friesland"
+      },
       "gemeenten": {
         "leeuwarden": "Leeuwarden",
         "heerenveen": "Heerenveen",
         "smallingerland": "Smallingerland",
         "sudwest_fryslan": "Súdwest-Fryslân",
         "waadhoeke": "Waadhoeke",
-        "harlingen": "Harlingen"
+        "harlingen": "Harlingen",
+        "vlieland": "Vlieland",
+        "terschelling": "Terschelling",
+        "noardeast_fryslan": "Noardeast-Fryslân",
+        "achtkarspelen": "Achtkarspelen",
+        "dantumadeel": "Dantumadeel",
+        "ameland": "Ameland",
+        "schiermonnikoog": "Schiermonnikoog",
+        "opsterland": "Opsterland",
+        "ooststellingwerf": "Ooststellingwerf",
+        "weststellingwerf": "Weststellingwerf",
+        "de_fryske_marren": "De Fryske Marren",
+        "tietjerksteradeel": "Tietjerksteradeel"
       },
       "company": {
         "over_ons": "Over ons",

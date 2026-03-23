@@ -852,6 +852,55 @@ a { text-decoration: none; color: inherit; }
   }
 }
 
+/* Region Hub Card Hover Effects */
+.region-hub-card {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.region-hub-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.region-standalone-card {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.region-standalone-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Back to regions button hover */
+.back-to-regions-btn:hover {
+  background: var(--forest) !important;
+  color: var(--white) !important;
+  transform: translateY(-1px);
+}
+
+/* Complete missing mobile styles */
+@media (max-width: 768px) {
+  .region-card-count {
+    font-size: 11px;
+  }
+}
+
 @media (max-width: 480px) {
   /* Extra small mobile adjustments */
   .nav-inner { padding: 0 1rem; }
@@ -1533,298 +1582,6 @@ a { text-decoration: none; color: inherit; }
   }
 }
 
-/* GEMEENTE PAGES STYLES */
-.gemeente-hero {
-  padding: 3rem 0;
-  background: linear-gradient(135deg, var(--cream) 0%, #faf9f6 100%);
-  border-bottom: 1px solid var(--border);
-}
-
-.gemeente-hero-content {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-.gemeente-hero-badge {
-  display: inline-flex;
-  margin-bottom: 1rem;
-}
-
-.gemeente-hero-badge-text {
-  background: var(--sage);
-  color: var(--white);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.25px;
-}
-
-.gemeente-hero-title {
-  font-family: var(--serif);
-  font-size: 48px;
-  font-weight: 600;
-  color: var(--forest);
-  margin-bottom: 1.5rem;
-  line-height: 1.1;
-}
-
-.gemeente-hero-description {
-  font-size: 20px;
-  color: var(--text-mid);
-  line-height: 1.6;
-  max-width: 700px;
-  margin: 0 auto 2rem;
-}
-
-.gemeente-hero-highlights {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
-}
-
-.gemeente-hero-highlight {
-  background: var(--white);
-  color: var(--forest);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.gemeente-hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-}
-
-.gemeente-stat {
-  text-align: center;
-}
-
-.gemeente-stat-number {
-  display: block;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--sage);
-  margin-bottom: 4px;
-}
-
-.gemeente-stat-label {
-  font-size: 14px;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* Gemeente Services Grid */
-.gemeente-services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.gemeente-service-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2rem;
-  text-align: center;
-  transition: all 0.2s ease;
-}
-
-.gemeente-service-card:hover {
-  border-color: var(--sage);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(42, 62, 32, 0.08);
-}
-
-.gemeente-service-icon {
-  width: 60px;
-  height: 60px;
-  background: var(--sage);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1rem;
-  color: var(--white);
-}
-
-.gemeente-service-icon svg {
-  width: 28px;
-  height: 28px;
-}
-
-.gemeente-service-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--forest);
-}
-
-/* Gemeente Benefits Section */
-.gemeente-benefits {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.gemeente-benefits-title {
-  font-family: var(--serif);
-  font-size: 36px;
-  color: var(--forest);
-  margin-bottom: 3rem;
-  text-align: center;
-}
-
-.gemeente-benefits-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-
-.gemeente-benefit {
-  display: flex;
-  gap: 1.5rem;
-  align-items: flex-start;
-  padding: 2rem;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  transition: all 0.2s ease;
-}
-
-.gemeente-benefit:hover {
-  border-color: var(--sage);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(42, 62, 32, 0.08);
-}
-
-.gemeente-benefit-icon {
-  flex-shrink: 0;
-  width: 60px;
-  height: 60px;
-  background: var(--sage);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-}
-
-.gemeente-benefit-icon svg {
-  width: 28px;
-  height: 28px;
-}
-
-.gemeente-benefit-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--forest);
-  margin-bottom: 0.5rem;
-}
-
-.gemeente-benefit-description {
-  font-size: 16px;
-  color: var(--text-mid);
-  line-height: 1.6;
-}
-
-/* Gemeente Form Section */
-.gemeente-form-container {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.gemeente-form-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.gemeente-form-content {
-  background: var(--white);
-  padding: 2.5rem;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  box-shadow: 0 2px 8px rgba(42, 62, 32, 0.08);
-}
-
-/* Gemeente responsive design */
-@media (max-width: 768px) {
-  .gemeente-hero {
-    padding: 2rem 0;
-  }
-  
-  .gemeente-hero-title {
-    font-size: 32px;
-  }
-  
-  .gemeente-hero-description {
-    font-size: 16px;
-    margin-bottom: 1.5rem;
-  }
-  
-  .gemeente-hero-highlights {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  
-  .gemeente-hero-stats {
-    gap: 2rem;
-  }
-  
-  .gemeente-stat-number {
-    font-size: 24px;
-  }
-  
-  .gemeente-services-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .gemeente-service-card {
-    padding: 1.5rem;
-  }
-  
-  .gemeente-benefits-title {
-    font-size: 28px;
-  }
-  
-  .gemeente-benefit {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.5rem;
-  }
-  
-  .gemeente-form-content {
-    padding: 1.5rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .gemeente-services-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .gemeente-benefits-list {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .gemeente-services-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-}
-
 /* FOOTER STYLES */
 .footer {
   background: var(--forest);
@@ -1973,6 +1730,74 @@ a { text-decoration: none; color: inherit; }
   color: var(--sage);
 }
 
+/* Regional hierarchy styles */
+.footer-regions {
+  min-width: 300px;
+}
+
+.footer-regions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 100%;
+}
+
+.footer-region-group {
+  margin-bottom: 1.5rem;
+}
+
+.footer-region-title {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+  text-transform: none;
+  letter-spacing: 0.25px;
+}
+
+.footer-region-link {
+  color: var(--white);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-region-link:hover {
+  color: var(--sage);
+}
+
+.footer-region-links,
+.footer-gemeente-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 0.5rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-region-links .footer-link-item,
+.footer-gemeente-links .footer-link-item {
+  margin-bottom: 0.4rem;
+}
+
+.footer-region-links .footer-link,
+.footer-gemeente-links .footer-link {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  padding-left: 0.5rem;
+}
+
+.footer-region-links .footer-gemeente-link,
+.footer-gemeente-links .footer-link:hover {
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.2s ease;
+}
+
+.footer-region-links .footer-gemeente-link:hover,
+.footer-gemeente-links .footer-link:hover {
+  color: var(--sage);
+}
+
 .footer-contact {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 2rem;
@@ -2098,8 +1923,13 @@ a { text-decoration: none; color: inherit; }
   }
   
   .footer-grid {
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1.2fr 1fr;
     gap: 3rem;
+  }
+  
+  .footer-regions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 2rem;
   }
   
   .newsletter-form {
@@ -2120,7 +1950,27 @@ a { text-decoration: none; color: inherit; }
   }
 }
 
+@media (min-width: 1024px) {
+  .footer-regions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 2.5rem;
+  }
+  
+  .footer-region-group {
+    margin-bottom: 1rem;
+  }
+}
+
 @media (max-width: 767px) {
+  .footer-regions-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .footer-region-group {
+    margin-bottom: 2rem;
+  }
+  
   .footer-contact {
     flex-direction: column;
     align-items: flex-start;

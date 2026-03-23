@@ -1,4 +1,3 @@
-import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
 import {
   DEFAULT_LOCALE,
@@ -9,25 +8,17 @@ import {
   type SupportedLocale
 } from './lib/locale-utils';
 
-const intlMiddleware = createMiddleware({
-  locales: ['en', 'nl'],
-  defaultLocale: 'nl',
-  localePrefix: 'as-needed',
-  localeDetection: false
-});
-
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const requestLocale = getPathLocale(pathname);
   const normalizedPathname = stripLocalePrefix(pathname);
   const internalPathname = getInternalPath(pathname);
   const canonicalPublicPath = localizePath(pathname, requestLocale);
-  const internalLocalizedPath =
-    requestLocale === DEFAULT_LOCALE
-      ? internalPathname
-      : internalPathname === '/'
-        ? '/en'
-        : `/en${internalPathname}`;
+  
+  // For the internal rewrite, we always need the locale prefix since all pages are under [locale]
+  const internalLocalizedPath = requestLocale === DEFAULT_LOCALE
+    ? `/nl${internalPathname === '/' ? '' : internalPathname}`
+    : `/en${internalPathname === '/' ? '' : internalPathname}`;
 
   const noindexRoutes = [
     '/api',
@@ -57,7 +48,7 @@ export default function proxy(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
-  const response = intlMiddleware(request);
+  const response = NextResponse.next();
 
   if (shouldNoindex) {
     response.headers.set('X-Robots-Tag', 'noindex, nofollow');

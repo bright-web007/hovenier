@@ -1,8 +1,26 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
+// Static translations for breadcrumbs
+function getBreadcrumbTranslation(key: string): string {
+  const translations: Record<string, string> = {
+    'breadcrumb.label': 'Breadcrumb navigatie',
+    'breadcrumb.home': 'Home',
+    'breadcrumb.services': 'Diensten',
+    'breadcrumb.articles': 'Artikelen',
+    'breadcrumb.region': 'Regio',
+    'breadcrumb.gardener': 'Hovenier',
+    'breadcrumb.contact': 'Contact',
+    'breadcrumb.about': 'Over ons',
+    'breadcrumb.privacy': 'Privacybeleid',
+    'services.maintenance': 'Tuinonderhoud',
+    'services.design': 'Tuinontwerp',
+    'services.green_roof': 'Groendak'
+  };
+  return translations[key] || key;
+}
 
 interface BreadcrumbItem {
   label: string;
@@ -21,11 +39,10 @@ export default function Breadcrumb({
   separator, 
   className = '' 
 }: BreadcrumbProps) {
-  const t = useTranslations();
   const pathname = usePathname();
   
   // Auto-generate breadcrumbs from pathname if items not provided
-  const breadcrumbItems = items || generateBreadcrumbsFromPath(pathname, t);
+  const breadcrumbItems = items || generateBreadcrumbsFromPath(pathname);
   
   const defaultSeparator = (
     <svg className="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -39,7 +56,7 @@ export default function Breadcrumb({
 
   return (
     <nav 
-      aria-label={t('breadcrumb.label') || 'Breadcrumb navigatie'}
+      aria-label={getBreadcrumbTranslation('breadcrumb.label')}
       className={`${className}`}
     >
       <ol className="flex items-center space-x-2 text-sm">
@@ -74,13 +91,13 @@ export default function Breadcrumb({
 }
 
 // Helper function to generate breadcrumbs from pathname
-function generateBreadcrumbsFromPath(pathname: string, t: any): BreadcrumbItem[] {
+function generateBreadcrumbsFromPath(pathname: string): BreadcrumbItem[] {
   const segments = pathname.split('/').filter(Boolean);
   const breadcrumbs: BreadcrumbItem[] = [];
   
   // Always start with home
   breadcrumbs.push({
-    label: t('breadcrumb.home') || 'Home',
+    label: getBreadcrumbTranslation('breadcrumb.home'),
     href: '/'
   });
   
@@ -97,7 +114,7 @@ function generateBreadcrumbsFromPath(pathname: string, t: any): BreadcrumbItem[]
     const isLast = index === segments.length - 1;
     
     // Map common segments to readable labels
-    const label = getSegmentLabel(segment, t);
+    const label = getSegmentLabel(segment);
     
     breadcrumbs.push({
       label,
@@ -110,27 +127,27 @@ function generateBreadcrumbsFromPath(pathname: string, t: any): BreadcrumbItem[]
 }
 
 // Helper function to map segments to readable labels
-function getSegmentLabel(segment: string, t: any): string {
+function getSegmentLabel(segment: string): string {
   const segmentMap: Record<string, string> = {
-    'services': t('breadcrumb.services') || 'Diensten',
-    'diensten': t('breadcrumb.services') || 'Diensten',
-    'artikelen': t('breadcrumb.articles') || 'Artikelen',
-    'articles': t('breadcrumb.articles') || 'Articles',
-    'regio': t('breadcrumb.region') || 'Regio',
-    'region': t('breadcrumb.region') || 'Region',
-    'hovenier': t('breadcrumb.gardener') || 'Hovenier',
-    'gardener': t('breadcrumb.gardener') || 'Gardener',
-    'contact': t('breadcrumb.contact') || 'Contact',
-    'over-ons': t('breadcrumb.about') || 'Over ons',
-    'about': t('breadcrumb.about') || 'About',
-    'privacy-beleid': t('breadcrumb.privacy') || 'Privacybeleid',
-    'privacy-policy': t('breadcrumb.privacy') || 'Privacy Policy',
-    'tuinonderhoud': t('services.maintenance') || 'Tuinonderhoud',
-    'garden-maintenance': t('services.maintenance') || 'Garden Maintenance',
-    'tuinontwerp': t('services.design') || 'Tuinontwerp',
-    'garden-design': t('services.design') || 'Garden Design',
-    'groendak': t('services.green_roof') || 'Groendak',
-    'green-roof': t('services.green_roof') || 'Green Roof'
+    'services': getBreadcrumbTranslation('breadcrumb.services'),
+    'diensten': getBreadcrumbTranslation('breadcrumb.services'),
+    'artikelen': getBreadcrumbTranslation('breadcrumb.articles'),
+    'articles': 'Articles',
+    'regio': getBreadcrumbTranslation('breadcrumb.region'),
+    'region': 'Region',
+    'hovenier': getBreadcrumbTranslation('breadcrumb.gardener'),
+    'gardener': 'Gardener',
+    'contact': getBreadcrumbTranslation('breadcrumb.contact'),
+    'over-ons': getBreadcrumbTranslation('breadcrumb.about'),
+    'about': 'About',
+    'privacy-beleid': getBreadcrumbTranslation('breadcrumb.privacy'),
+    'privacy-policy': 'Privacy Policy',
+    'tuinonderhoud': getBreadcrumbTranslation('services.maintenance'),
+    'garden-maintenance': 'Garden Maintenance',
+    'tuinontwerp': getBreadcrumbTranslation('services.design'),
+    'garden-design': 'Garden Design',
+    'groendak': getBreadcrumbTranslation('services.green_roof'),
+    'green-roof': 'Green Roof'
   };
   
   return segmentMap[segment] || formatSegmentName(segment);

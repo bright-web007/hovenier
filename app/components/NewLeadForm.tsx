@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Turnstile } from '@marsidev/react-turnstile';
 import { trackLeadFormSubmission } from './GoogleAnalytics';
@@ -68,7 +68,16 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
   const [privacy, setPrivacy] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [isDevelopment, setIsDevelopment] = useState(false);
   const router = useRouter();
+
+  // Set development mode on client side
+  useEffect(() => {
+    setIsDevelopment(process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost');
+    if (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost') {
+      console.log('Development mode detected, Turnstile will be bypassed');
+    }
+  }, []);
 
   const {
     handleSubmit,
@@ -127,7 +136,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
       bedrijf,
       privacy,
       honeypot,
-      turnstileToken: turnstileToken || '',
+      turnstileToken: turnstileToken || (isDevelopment ? 'dev-bypass' : ''),
     };
 
     await handleSubmit(formData);
@@ -351,18 +360,24 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
           fieldName="turnstileToken"
           error={getError('turnstileToken')}
         >
-          <Turnstile
-            siteKey={securityKeys.turnstile.siteKey}
-            onSuccess={setTurnstileToken}
-            onError={() => setTurnstileToken(null)}
-            onExpire={() => setTurnstileToken(null)}
-          />
+          {isDevelopment ? (
+            <div className="p-3 bg-yellow-50 border border-yellow-200 rounded text-sm text-yellow-800">
+              ⚠️ Development mode: Turnstile CAPTCHA bypassed for testing
+            </div>
+          ) : (
+            <Turnstile
+              siteKey={securityKeys.turnstile.siteKey}
+              onSuccess={setTurnstileToken}
+              onError={() => setTurnstileToken(null)}
+              onExpire={() => setTurnstileToken(null)}
+            />
+          )}
         </FormField>
         
         <button 
           type="submit" 
           className="form-btn" 
-          disabled={isValidating || !turnstileToken}
+          disabled={isValidating || (!turnstileToken && !isDevelopment)}
         >
           {isValidating ? (
             <span className="flex items-center justify-center gap-2">

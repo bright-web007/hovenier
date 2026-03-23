@@ -1,25 +1,31 @@
 import {notFound} from 'next/navigation';
-import {getRequestConfig} from 'next-intl/server';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
 
-export default getRequestConfig(async ({locale}) => {
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale as any)) notFound();
- 
-  return {
-    locale: locale as string, // Assert as string since we validated above
-    messages: (await import(`./locales/${locale}/common.json`)).default
+// Simple translation function that loads from static JSON
+export function createTranslator(locale: string) {
+  let messages: Record<string, any> = {};
+  
+  try {
+    if (locale === 'nl') {
+      messages = require(`./locales/nl/common.json`);
+    } else {
+      messages = require(`./locales/en/common.json`);
+    }
+  } catch (error) {
+    console.error(`Could not load messages for locale ${locale}:`, error);
+    messages = {};
+  }
+  
+  return (key: string) => {
+    const keys = key.split('.');
+    let value = messages;
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    return typeof value === 'string' ? value : key;
   };
-});
-
-export function getTranslator(locale: string) {
-  const { createTranslator } = require('next-intl');
-  return createTranslator({
-    locale,
-    messages: require(`./locales/${locale}/common.json`)
-  });
 }
 
 export async function getMessages(locale: string) {

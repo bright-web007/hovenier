@@ -141,7 +141,7 @@ a { text-decoration: none; color: inherit; }
 .form-title { font-family: var(--serif); font-size: 28px; font-weight: 600; color: var(--forest-deep); margin-bottom: 6px; line-height: 1.2; }
 .form-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 1.75rem; line-height: 1.65; }
 .form-field { margin-bottom: 11px; }
-.form-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-mid); font-weight: 500; display: block; margin-bottom: 5px; }
+.form-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-mid); font-weight: 500; display: block; margin-bottom: 5px; }
 .form-checkbox-text { font-size: 13px; color: var(--text); line-height: 1.5; }
 .form-checkbox-text a { color: var(--forest); text-decoration: underline; transition: color 0.15s; }
 .form-checkbox-text a:hover { color: var(--forest-deep); }

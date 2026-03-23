@@ -1,4 +1,10 @@
-import { useLocale } from 'next-intl';
+'use client';
+import { usePathname } from 'next/navigation';
+
+// Helper function to detect locale from pathname
+function getLocaleFromPathname(pathname: string): string {
+  return pathname.startsWith('/en') ? 'en' : 'nl';
+}
 
 interface MetadataManagerProps {
   canonicalUrl: string;
@@ -22,7 +28,8 @@ export default function MetadataManager({
   alternateUrls = [],
   openGraph = {}
 }: MetadataManagerProps) {
-  const locale = useLocale();
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
 
   const buildAlternateUrl = (targetLocale: 'nl' | 'en') => {
     const isAbsolute = canonicalUrl.startsWith('http://') || canonicalUrl.startsWith('https://');

@@ -1,7 +1,24 @@
-import { getTranslations } from 'next-intl/server';
 import { getAbsoluteUrl, localizePath, type SupportedLocale } from './locale-utils';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl';
+
+// Create translator function for SEO utilities
+function createSeoTranslator(locale: string) {
+  try {
+    const translations = require(`../locales/${locale}/common.json`);
+    return (key: string) => {
+      const keys = key.split('.');
+      let result = translations;
+      for (const k of keys) {
+        result = result?.[k];
+      }
+      return result || key;
+    };
+  } catch (error) {
+    console.warn(`Could not load translations for locale: ${locale}`);
+    return (key: string) => key;
+  }
+}
 
 export interface SEOConfig {
   title: string;
@@ -69,15 +86,15 @@ export function generateBreadcrumbs(
 /**
  * Get default SEO config for pages
  */
-export async function getDefaultSEOConfig(
+export function getDefaultSEOConfig(
   locale: string,
   path: string = ''
-): Promise<Partial<SEOConfig>> {
-  const t = await getTranslations({ locale, namespace: 'seo' });
+): Partial<SEOConfig> {
+  const t = createSeoTranslator(locale);
   
   return {
-    title: t('default.title'),
-    description: t('default.description'),
+    title: t('seo.default.title'),
+    description: t('seo.default.description'),
     canonicalUrl: getCanonicalUrl(path, locale),
     alternateUrls: getAlternateUrls(path),
     openGraph: {

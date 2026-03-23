@@ -1,6 +1,5 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -36,8 +35,7 @@ export default function ArticleCard({
   featured = false,
   className = ''
 }: ArticleCardProps) {
-  const t = useTranslations();
-  
+
   const articleHref = `/artikelen/${slug}`;
   const categoryHref = category ? `/categorie/${category.slug}` : '#';
   
@@ -53,7 +51,7 @@ export default function ArticleCard({
       {/* Featured Badge */}
       {featured && (
         <div className="absolute top-3 left-3 z-10 bg-primary-600 text-white text-xs font-medium px-2 py-1 rounded">
-          {t('cards.featured') || 'Uitgelicht'}
+          Uitgelicht
         </div>
       )}
       
@@ -133,7 +131,7 @@ export default function ArticleCard({
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                {readingTime} {t('cards.min_read') || 'min'}
+                {readingTime} min
               </span>
             )}
           </div>
@@ -142,7 +140,7 @@ export default function ArticleCard({
             href={articleHref}
             className="text-primary-600 hover:text-primary-700 font-medium transition-colors flex items-center gap-1"
           >
-            {t('cards.read_more') || 'Lees meer'}
+            Lees meer
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

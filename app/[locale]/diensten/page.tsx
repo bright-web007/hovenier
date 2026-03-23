@@ -1,4 +1,3 @@
-import { getTranslator, locales, defaultLocale } from '../../../i18n';
 import { notFound } from 'next/navigation';
 import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';
@@ -6,6 +5,34 @@ import NewLeadForm from '@/app/components/NewLeadForm';
 import Link from 'next/link';
 import ServiceSchema from '../../components/schemas/ServiceSchema';
 import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
+
+export const locales = ['en', 'nl'] as const;
+export const defaultLocale = 'nl';
+
+// Simple translation function that loads from static JSON
+function createTranslator(locale: string) {
+  let messages: Record<string, any> = {};
+  
+  try {
+    if (locale === 'nl') {
+      messages = require(`../../../locales/nl/common.json`);
+    } else {
+      messages = require(`../../../locales/en/common.json`);
+    }
+  } catch (error) {
+    console.error(`Could not load messages for locale ${locale}:`, error);
+    messages = {};
+  }
+  
+  return (key: string) => {
+    const keys = key.split('.');
+    let value = messages;
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    return typeof value === 'string' ? value : key;
+  };
+}
 
 // ISR: Never revalidate (static service listings, changes only with deployments)
 export const revalidate = false;
@@ -19,7 +46,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
   const { locale } = await params;
   const validLocale = locale || defaultLocale;
   if (!locales.includes(validLocale as any)) notFound();
-  const t = getTranslator(validLocale as "nl" | "en");
+  const t = createTranslator(validLocale);
 
   // Service data
   const services = [

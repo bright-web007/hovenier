@@ -1,4 +1,3 @@
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
@@ -10,9 +9,17 @@ export const metadata = {
 };
 
 export default function Error500() {
+  // Navigation translations
+  const navTranslations = {
+    gardeners: 'Hoveniers',
+    services: 'Diensten',
+    regions: 'Regio\'s',
+    inspiration: 'Inspiratie',
+    request_quote: 'Offerte aanvragen'
+  };
   return (
     <>
-      <Navigation locale="nl" />
+      <Navigation locale="nl" translations={navTranslations} />
       <main className="min-h-screen bg-white">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto text-center">

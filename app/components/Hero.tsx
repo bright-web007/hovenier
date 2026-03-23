@@ -79,11 +79,7 @@ export default function Hero({ translations, locale }: HeroProps) {
       </div>
 
       <div className="hero-right" id="quote-form">
-        {/* <NewLeadForm translations={translations} locale={locale} /> */}
-        <div className="form" style={{ padding: '2rem', background: 'white', borderRadius: '8px' }}>
-          <h2>Lead Form Temporarily Disabled</h2>
-          <p>Testing NextIntl module resolution...</p>
-        </div>
+        <NewLeadForm translations={translations} locale={locale} />
       </div>
     </section>
   );

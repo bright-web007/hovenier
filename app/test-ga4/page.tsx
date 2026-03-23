@@ -71,7 +71,7 @@ export default function GA4TestPage() {
   };
 
   const testCustomEvent = () => {
-    if (typeof window !== 'undefined' && window.gtag) {
+    if (typeof window !== 'undefined' && window.gtag && typeof window.gtag === 'function') {
       window.gtag('event', 'custom_test_event', {
         event_category: 'testing',
         event_label: 'custom_manual_test',
@@ -79,6 +79,8 @@ export default function GA4TestPage() {
         value: 42
       });
       logEvent('Custom gtag event fired');
+    } else {
+      logEvent('Custom gtag event failed - gtag not available');
     }
   };
 
@@ -221,8 +223,8 @@ export default function GA4TestPage() {
           <div>Analytics in Dev: {process.env.ENABLE_ANALYTICS_IN_DEV || 'false'}</div>
           <div>Base URL: {process.env.NEXT_PUBLIC_BASE_URL || 'not set'}</div>
           <div>User Agent: {typeof window !== 'undefined' ? window.navigator.userAgent.substring(0, 80) + '...' : 'Server'}</div>
-          <div>gtag available: {typeof window !== 'undefined' && window.gtag ? '✅ Yes' : '❌ No'}</div>
-          <div>dataLayer: {typeof window !== 'undefined' && window.dataLayer ? `✅ ${window.dataLayer.length} items` : '❌ No'}</div>
+          <div>gtag available: {typeof window !== 'undefined' && window.gtag && typeof window.gtag === 'function' ? '✅ Yes' : '❌ No'}</div>
+          <div>dataLayer: {typeof window !== 'undefined' && window.dataLayer && Array.isArray(window.dataLayer) ? `✅ ${window.dataLayer.length} items` : '❌ No'}</div>
         </div>
       </div>
 

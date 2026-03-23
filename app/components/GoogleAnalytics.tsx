@@ -31,7 +31,12 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!gaId) return;
+    if (!gaId) {
+      console.warn('GoogleAnalytics: No GA ID provided');
+      return;
+    }
+
+    console.log('GoogleAnalytics: Initializing with ID:', gaId);
 
     // Initialize dataLayer if not exists
     if (!window.dataLayer) {
@@ -45,11 +50,16 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
 
     window.gtag = gtag;
 
-    // Check cookie consent before initializing
-    const hasAnalyticsConsent = checkAnalyticsConsent();
-    
-    // Initialize GA4 with consent settings
+    // Always initialize gtag, but with consent settings
     gtag('js', new Date());
+    
+    // Check consent for production, allow in development
+    const isDevelopment = process.env.NODE_ENV === 'development' && process.env.ENABLE_ANALYTICS_IN_DEV === 'true';
+    const hasAnalyticsConsent = isDevelopment || checkAnalyticsConsent();
+    
+    console.log('GoogleAnalytics: Consent status -', { isDevelopment, hasAnalyticsConsent });
+    
+    // Set initial consent state
     gtag('consent', 'default', {
       analytics_storage: hasAnalyticsConsent ? 'granted' : 'denied',
       ad_storage: 'denied', // Start with denied, update after consent
@@ -58,6 +68,7 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       security_storage: 'granted',
     });
 
+    // Configure GA4 - this should always run to set up the measurement
     gtag('config', gaId, {
       page_title: document.title,
       page_location: window.location.href,
@@ -73,14 +84,17 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       }
     });
 
+    console.log('GoogleAnalytics: Initialization complete');
+
   }, [gaId]);
 
   // Track page views on route change
   useEffect(() => {
     if (!gaId || !window.gtag) return;
     
-    // Only track if analytics consent is given
-    if (checkAnalyticsConsent()) {
+    // Only track if analytics consent is given (or in development)
+    const isDevelopment = process.env.NODE_ENV === 'development' && process.env.ENABLE_ANALYTICS_IN_DEV === 'true';
+    if (isDevelopment || checkAnalyticsConsent()) {
       window.gtag('config', gaId, {
         page_path: pathname,
         page_title: document.title,
@@ -88,11 +102,20 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
     }
   }, [pathname, gaId]);
 
-  // Don't render anything in development unless explicitly enabled
-  if (process.env.NODE_ENV === 'development' && !process.env.ENABLE_ANALYTICS_IN_DEV) {
+  // Don't render in development unless explicitly enabled, but always render in production
+  if (process.env.NODE_ENV === 'development' && process.env.ENABLE_ANALYTICS_IN_DEV !== 'true') {
     return null;
   }
 
+  // Don't render if no GA ID
+  if (!gaId) {
+    console.warn('GoogleAnalytics: No GA ID provided, skipping render');
+    return null;
+  }
+
+  console.log('GoogleAnalytics: Rendering script for GA ID:', gaId);
+
+  // Always render in production (consent is handled via gtag consent API)
   return (
     <>
       {/* Google Analytics 4 (GA4) - Direct Implementation via gtag.js 
@@ -101,6 +124,8 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       <script
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+        onLoad={() => console.log('GoogleAnalytics: Script loaded successfully')}
+        onError={(e) => console.error('GoogleAnalytics: Script failed to load', e)}
       />
     </>
   );
@@ -123,7 +148,7 @@ function checkAnalyticsConsent(): boolean {
   return false;
 }
 
-// Utility functions for tracking events (with consent check)
+// Utility functions for tracking events (with consent check, bypassed in development)
 export const trackEvent = (
   eventName: string,
   parameters: {
@@ -133,13 +158,16 @@ export const trackEvent = (
     [key: string]: any;
   }
 ) => {
-  if (typeof window !== 'undefined' && window.gtag && checkAnalyticsConsent()) {
-    window.gtag('event', eventName, {
-      ...parameters,
-      // Add privacy-conscious settings
-      send_page_view: false,
-      anonymize_ip: true
-    });
+  if (typeof window !== 'undefined' && window.gtag) {
+    const isDevelopment = process.env.NODE_ENV === 'development' && process.env.ENABLE_ANALYTICS_IN_DEV === 'true';
+    if (isDevelopment || checkAnalyticsConsent()) {
+      window.gtag('event', eventName, {
+        ...parameters,
+        // Add privacy-conscious settings
+        send_page_view: false,
+        anonymize_ip: true
+      });
+    }
   }
 };
 
@@ -229,11 +257,42 @@ export const trackArticleView = (articleTitle: string, category?: string) => {
 
 // Update consent function (called from cookie banner)
 export const updateAnalyticsConsent = (granted: boolean) => {
+  console.log('GoogleAnalytics: Updating consent to', granted);
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('consent', 'update', {
       analytics_storage: granted ? 'granted' : 'denied'
     });
+    console.log('GoogleAnalytics: Consent updated successfully');
+  } else {
+    console.warn('GoogleAnalytics: gtag not available for consent update');
   }
 };
+
+// Debug function to check GA status
+export const debugGA = () => {
+  console.log('=== Google Analytics Debug ===');
+  console.log('dataLayer exists:', typeof window.dataLayer !== 'undefined');
+  console.log('gtag function exists:', typeof window.gtag !== 'undefined');
+  console.log('dataLayer contents:', window.dataLayer);
+  
+  // Test if we can send a test event
+  if (window.gtag) {
+    window.gtag('event', 'debug_test', {
+      event_category: 'debug',
+      event_label: 'console_test'
+    });
+    console.log('Test event sent');
+  }
+  
+  // Check script loading
+  const script = document.querySelector('script[src*="googletagmanager.com/gtag"]');
+  console.log('GA script element:', script);
+  console.log('GA script loaded:', script ? 'YES' : 'NO');
+};
+
+// Make debug function globally available in development/production
+if (typeof window !== 'undefined') {
+  (window as any).debugGA = debugGA;
+}
 
 export default GoogleAnalytics;

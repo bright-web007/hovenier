@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { updateAnalyticsConsent } from './GoogleAnalytics';
 import styles from './CookieConsentBanner.module.css';
 
 interface CookieConsentProps {
@@ -81,6 +82,9 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
   };
 
   const initializeServices = (prefs: ConsentPreferences) => {
+    // Update Google Analytics consent
+    updateAnalyticsConsent(prefs.analytics);
+    
     // Initialize Google Analytics if analytics consent given
     if (prefs.analytics && typeof window !== 'undefined' && window.gtag) {
       window.gtag('consent', 'update', {
@@ -91,7 +95,7 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
     }
     
     // Initialize other services based on consent
-    console.log('Cookie consent preferences:', prefs);
+    console.log('Cookie consent preferences updated:', prefs);
   };
 
   const handlePreferenceChange = (type: keyof ConsentPreferences, value: boolean) => {

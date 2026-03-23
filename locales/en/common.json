@@ -48,6 +48,35 @@
   "regions_content": {
     "homepage_title": "Gardeners in every Frisian municipality"
   },
+  "stats": {
+    "gardeners": "Gardeners",
+    "municipalities": "Municipalities",
+    "rating": "Rating",
+    "projects": "Projects",
+    "satisfied": "Satisfied",
+    "municipalities": "Municipalities"
+  },
+  "form": {
+    "select_municipality": "Select municipality",
+    "what_do_you_need": "What do you need?",
+    "your_company": "Your company",
+    "loading": "Loading...",
+    "privacy_agreement": "I agree to the",
+    "privacy_link": "privacy policy",
+    "privacy_consent": "and consent to processing my data.",
+    "services": {
+      "tuinonderhoud": "Garden Maintenance",
+      "tuinontwerp": "Garden Design",
+      "tuin-aanleggen": "Garden Installation",
+      "stratenmaker": "Paving",
+      "groendak": "Green Roof",
+      "overig": "Other"
+    }
+  },
+  "cta": {
+    "contact_us": "Contact us",
+    "municipality_not_listed": "Don't see your municipality? We're happy to help."
+  },
   "footer": {
     "description": "The place to find reliable gardeners in Friesland. Compare quotes, read reviews and choose with confidence for the best gardener in your municipality.",
     "newsletter_title": "Garden tips & updates",
@@ -116,7 +145,7 @@
     "gardeners": "Gardeners",
     "projects": "Projects",
     "satisfied": "Satisfied customers",
-    "cities": "Cities",
+    "municipalities": "Municipalities",
     "verified": "Verified gardeners",
     "secure": "100% safe & reliable",
     "reviews": "Reviewed by customers"

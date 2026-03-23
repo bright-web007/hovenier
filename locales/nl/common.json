@@ -48,6 +48,35 @@
   "regions_content": {
     "homepage_title": "Hoveniers in elke Friese gemeente"
   },
+  "stats": {
+    "gardeners": "Hoveniers",
+    "municipalities": "Gemeenten", 
+    "rating": "Beoordeling",
+    "projects": "Projecten",
+    "satisfied": "Tevreden",
+    "cities": "Steden"
+  },
+  "form": {
+    "select_municipality": "Selecteer gemeente",
+    "what_do_you_need": "Wat heeft u nodig?",
+    "your_company": "Uw bedrijf",
+    "loading": "Bezig...",
+    "privacy_agreement": "Ik ga akkoord met de",
+    "privacy_link": "privacyverklaring",
+    "privacy_consent": "en geef toestemming voor het verwerken van mijn gegevens.",
+    "services": {
+      "tuinonderhoud": "Tuinonderhoud",
+      "tuinontwerp": "Tuinontwerp",
+      "tuin-aanleggen": "Tuin aanleggen",
+      "stratenmaker": "Stratenmaker",
+      "groendak": "Groendak",
+      "overig": "Anders"
+    }
+  },
+  "cta": {
+    "contact_us": "Neem contact op",
+    "municipality_not_listed": "Niet uw gemeente erbij? We helpen u graag verder."
+  },
   "footer": {
     "description": "Dé plek om betrouwbare hoveniers in Friesland te vinden. Vergelijk offertes, lees reviews en kies met vertrouwen voor de beste hovenier in jouw gemeente.",
     "newsletter_title": "Tuintips & updates",

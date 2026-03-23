@@ -117,11 +117,30 @@ export default async function HomePage({ params }: Props) {
     phone_number: t('phone_number'),
     send_request: t('send_request'),
     form_note: t('form_note'),
+    select_municipality: t('form.select_municipality'),
+    what_do_you_need: t('form.what_do_you_need'),
+    your_company: t('form.your_company'),
+    loading: t('form.loading'),
+    privacy_agreement: t('form.privacy_agreement'),
+    privacy_link: t('form.privacy_link'),
+    privacy_consent: t('form.privacy_consent'),
+    services: {
+      tuinonderhoud: t('form.services.tuinonderhoud'),
+      tuinontwerp: t('form.services.tuinontwerp'),
+      'tuin-aanleggen': t('form.services.tuin-aanleggen'),
+      stratenmaker: t('form.services.stratenmaker'),
+      groendak: t('form.services.groendak'),
+      overig: t('form.services.overig')
+    },
+    stats_gardeners: t('stats.gardeners'),
+    stats_municipalities: t('stats.municipalities'),
+    stats_rating: t('stats.rating'),
     buttons_view_all_services: t('buttons.view_all_services'),
     sections_services_eyebrow: t('sections.services_eyebrow'),
     sections_services_title: t('sections.services_title'),
     sections_services_subtitle: t('sections.services_subtitle'),
-    regions_homepage_title: t('regions_content.homepage_title')
+    regions_homepage_title: t('regions_content.homepage_title'),
+    contact_us: t('cta.contact_us')
   };
   
   return (
@@ -214,7 +233,12 @@ export default async function HomePage({ params }: Props) {
           </div>
         </section>
         
-        <RegionStrip title={translations.regions_homepage_title} />
+        <RegionStrip 
+          title={translations.regions_homepage_title} 
+          translations={{
+            contact_us: translations.contact_us
+          }}
+        />
       </main>
 
       {/* Structured Data for SEO */}

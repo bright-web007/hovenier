@@ -33,7 +33,7 @@ export default function TrustBar({
     gardeners: 150,
     projects: 2300,
     satisfied: 98,
-    cities: 11
+    cities: 18
   },
   className = ''
 }: TrustBarProps) {

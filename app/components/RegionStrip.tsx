@@ -14,6 +14,9 @@ interface RegionStripProps {
   regions?: Region[];
   showCounts?: boolean;
   className?: string;
+  translations?: {
+    contact_us: string;
+  };
 }
 
 // Generate regions from the actual gemeente data
@@ -48,7 +51,8 @@ export default function RegionStrip({
   title,
   regions,
   showCounts = true,
-  className = ''
+  className = '',
+  translations
 }: RegionStripProps) {
   
   // Use provided regions, or generate from gemeente data, or use fallback
@@ -122,7 +126,7 @@ export default function RegionStrip({
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
-            Neem contact op
+            {translations?.contact_us || 'Contact us'}
           </Link>
         </div>
       </div>

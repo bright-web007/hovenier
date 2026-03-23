@@ -1,9 +1,9 @@
 // Service Worker for caching and offline functionality
 // Implements precaching, runtime caching, and background sync
 
-const CACHE_NAME = 'hovenier-v1';
-const STATIC_CACHE = 'hovenier-static-v1';
-const DYNAMIC_CACHE = 'hovenier-dynamic-v1';
+const CACHE_NAME = 'hovenier-v2';
+const STATIC_CACHE = 'hovenier-static-v2';
+const DYNAMIC_CACHE = 'hovenier-dynamic-v2';
 
 // Files to precache
 const STATIC_ASSETS = [

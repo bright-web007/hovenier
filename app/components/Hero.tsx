@@ -17,6 +17,24 @@ interface HeroProps {
     phone_number: string;
     send_request: string;
     form_note: string;
+    select_municipality: string;
+    what_do_you_need: string;
+    your_company: string;
+    loading: string;
+    privacy_agreement: string;
+    privacy_link: string;
+    privacy_consent: string;
+    services: {
+      tuinonderhoud: string;
+      tuinontwerp: string;
+      'tuin-aanleggen': string;
+      stratenmaker: string;
+      groendak: string;
+      overig: string;
+    };
+    stats_gardeners: string;
+    stats_municipalities: string;
+    stats_rating: string;
   };
   locale: string;
 }
@@ -54,14 +72,18 @@ export default function Hero({ translations, locale }: HeroProps) {
           </div>
         </div>
         <div className="hero-stats" aria-label="Statistieken">
-          <div><div className="stat-num">30+</div><div className="stat-label">Hoveniers</div></div>
-          <div><div className="stat-num">11</div><div className="stat-label">Gemeenten</div></div>
-          <div><div className="stat-num">4.8</div><div className="stat-label">Beoordeling</div></div>
+          <div><div className="stat-num">150+</div><div className="stat-label">{translations.stats_gardeners}</div></div>
+          <div><div className="stat-num">18</div><div className="stat-label">{translations.stats_municipalities}</div></div>
+          <div><div className="stat-num">4.8</div><div className="stat-label">{translations.stats_rating}</div></div>
         </div>
       </div>
 
       <div className="hero-right" id="quote-form">
-        <NewLeadForm translations={translations} locale={locale} />
+        {/* <NewLeadForm translations={translations} locale={locale} /> */}
+        <div className="form" style={{ padding: '2rem', background: 'white', borderRadius: '8px' }}>
+          <h2>Lead Form Temporarily Disabled</h2>
+          <p>Testing NextIntl module resolution...</p>
+        </div>
       </div>
     </section>
   );

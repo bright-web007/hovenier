@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { useTranslations } from 'next-intl';
 
 // Common validation patterns
 const phoneRegex = /^(\+31|0)\s?[1-9]\s?[0-9]{8}$/; // Dutch phone format

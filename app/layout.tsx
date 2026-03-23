@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     default: 'Hovenier.frl - Betrouwbare Hoveniers in Friesland | Gratis Offertes',
     template: '%s | Hovenier.frl'
   },
-  description: 'Vind de beste hovenier in Friesland ✓ Tuinonderhoud ✓ Tuinontwerp ✓ Groendaken ✓ Vergelijk offertes ✓ Gratis & vrijblijvend ✓ 11 gemeenten',
+  description: 'Vind de beste hovenier in Friesland ✓ Tuinonderhoud ✓ Tuinontwerp ✓ Groendaken ✓ Vergelijk offertes ✓ Gratis & vrijblijvend ✓ 18 gemeenten',
   keywords: [
     'hovenier friesland',
     'tuinonderhoud',

@@ -21,6 +21,21 @@ interface LeadFormProps {
     phone_number: string;
     send_request: string;
     form_note: string;
+    select_municipality: string;
+    what_do_you_need: string;
+    your_company: string;
+    loading: string;
+    privacy_agreement: string;
+    privacy_link: string;
+    privacy_consent: string;
+    services: {
+      tuinonderhoud: string;
+      tuinontwerp: string;
+      'tuin-aanleggen': string;
+      stratenmaker: string;
+      groendak: string;
+      overig: string;
+    };
   };
   locale: string;
   prefillMunicipality?: string;
@@ -33,16 +48,16 @@ const gemeenten = [
   "Waadhoeke", "Noardeast-Fryslân", "Harlingen"
 ];
 
-const services = [
-  { value: "tuinonderhoud", label: "Tuinonderhoud" },
-  { value: "tuinontwerp", label: "Tuinontwerp" }, 
-  { value: "tuin-aanleggen", label: "Tuin aanleggen" },
-  { value: "stratenmaker", label: "Stratenmaker" },
-  { value: "groendak", label: "Groendak" },
-  { value: "overig", label: "Anders" }
-];
-
 export default function NewLeadForm({ translations, locale, prefillMunicipality, serviceType }: LeadFormProps) {
+  const services = [
+    { value: "tuinonderhoud", label: translations.services.tuinonderhoud },
+    { value: "tuinontwerp", label: translations.services.tuinontwerp }, 
+    { value: "tuin-aanleggen", label: translations.services['tuin-aanleggen'] },
+    { value: "stratenmaker", label: translations.services.stratenmaker },
+    { value: "groendak", label: translations.services.groendak },
+    { value: "overig", label: translations.services.overig }
+  ];
+  
   const [naam, setNaam] = useState("");
   const [gemeente, setGemeente] = useState(prefillMunicipality || "");
   const [dienst, setDienst] = useState(serviceType === 'groendak' ? 'groendak' : '');
@@ -181,7 +196,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
               aria-invalid={hasError('gemeente')}
               aria-describedby={hasError('gemeente') ? 'gemeente-error' : undefined}
             >
-              <option value="" disabled>Selecteer gemeente</option>
+              <option value="" disabled>{translations.select_municipality}</option>
               {gemeenten.map(g => <option key={g} value={g}>{g}</option>)}
             </select>
           </FormField>
@@ -203,7 +218,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
               aria-invalid={hasError('dienst')}
               aria-describedby={hasError('dienst') ? 'dienst-error' : undefined}
             >
-              <option value="" disabled>Wat heeft u nodig?</option>
+              <option value="" disabled>{translations.what_do_you_need}</option>
               {services.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
             </select>
           </FormField>
@@ -282,7 +297,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
               type="text" 
               id="bedrijf" 
               name="bedrijf" 
-              placeholder="Uw bedrijf" 
+              placeholder={translations.your_company} 
               value={bedrijf}
               onChange={(e) => updateField('bedrijf', e.target.value)}
               autoComplete="organization"
@@ -308,15 +323,14 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
               aria-invalid={hasError('privacy')}
               aria-describedby={hasError('privacy') ? 'privacy-error' : undefined}
             />
-            <span className={`text-sm ${hasError('privacy') ? 'text-red-600' : 'text-gray-700'}`}>
-              Ik ga akkoord met de{' '}
+            <span className={`form-checkbox-text ${hasError('privacy') ? 'text-red-600' : ''}`}>
+              {translations.privacy_agreement}{' '}
               <a href={localizePath('/privacy-beleid', locale as SupportedLocale)} 
-                 className="text-blue-600 underline hover:text-blue-800" 
                  target="_blank" 
                  rel="noopener noreferrer">
-                privacyverklaring
+                {translations.privacy_link}
               </a>
-              {' '}en geef toestemming voor het verwerken van mijn gegevens.
+              {' '}{translations.privacy_consent}
             </span>
           </label>
         </FormField>
@@ -353,7 +367,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
           {isValidating ? (
             <span className="flex items-center justify-center gap-2">
               <FormLoadingSpinner size="sm" />
-              Bezig...
+              {translations.loading}
             </span>
           ) : (
             `${translations.send_request} →`

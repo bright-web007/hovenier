@@ -57,11 +57,11 @@ Covers hard landscaping: patios, paths, driveways. Complementary to gardening se
 ### `/regio/` — Region Index
 Overview of all Frisian municipalities covered. Map or pill-based navigation to each gemeente page. Short intro copy about Friesland gardening market.
 
-### `/regio/[gemeente]/` — Individual Gemeente Page (×11)
-One page per Frisian municipality. Contains: localised intro copy, featured local gardeners, lead form, links to service combo pages, and FAQ schema. Targets "[gemeente] hovenier" search queries. The 11 municipalities are: Leeuwarden, Súdwest-Fryslân, Smallingerland, Heerenveen, Achtkarspelen, Tietjerksteradeel, Dantumadiel, De Fryske Marren, Waadhoeke, Noardeast-Fryslân, Harlingen.
+### `/regio/[gemeente]/` — Individual Gemeente Page (×18)
+One page per Frisian municipality. Contains: localised intro copy, featured local gardeners, lead form, links to service combo pages, and FAQ schema. Targets "[gemeente] hovenier" search queries. The 18 municipalities include major centers like Leeuwarden, Súdwest-Fryslân, Smallingerland, Heerenveen, and others across all regions of Friesland.
 
-### `/regio/[gemeente]/[dienst]/` — Gemeente × Service Combo Pages (×55)
-High-intent combination pages targeting queries like "tuinonderhoud leeuwarden". One page per municipality × service type (11 × 5 = 55 pages). Generated from data — not hand-built. Each contains localised content, a lead form, and LocalBusiness schema. These are the highest-converting SEO pages on the site.
+### `/regio/[gemeente]/[dienst]/` — Gemeente × Service Combo Pages (×90)
+High-intent combination pages targeting queries like "tuinonderhoud leeuwarden". One page per municipality × service type (18 × 5 = 90 pages). Generated from data — not hand-built. Each contains localised content, a lead form, and LocalBusiness schema. These are the highest-converting SEO pages on the site.
 
 ---
 

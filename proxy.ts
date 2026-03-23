@@ -2,8 +2,6 @@ import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
 import {
   DEFAULT_LOCALE,
-  getServerAcceptLanguage,
-  getServerCookieLocale,
   getInternalPath,
   getPathLocale,
   localizePath,
@@ -17,18 +15,6 @@ const intlMiddleware = createMiddleware({
   localePrefix: 'as-needed',
   localeDetection: false
 });
-
-function detectPreferredLocale(request: NextRequest): SupportedLocale {
-  const cookieHeader = request.headers.get('cookie');
-  const acceptLangHeader = request.headers.get('accept-language');
-
-  const cookieLocale = getServerCookieLocale(cookieHeader);
-  if (cookieLocale) {
-    return cookieLocale;
-  }
-
-  return getServerAcceptLanguage(acceptLangHeader);
-}
 
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -58,16 +44,6 @@ export default function proxy(request: NextRequest) {
     normalizedPathname.includes('/search?') ||
     normalizedPathname.includes('/tag/')
   );
-
-  if (pathname === '/') {
-    const preferredLocale = detectPreferredLocale(request);
-
-    if (preferredLocale !== DEFAULT_LOCALE) {
-      const url = request.nextUrl.clone();
-      url.pathname = localizePath(pathname, preferredLocale);
-      return NextResponse.redirect(url);
-    }
-  }
 
   if (pathname !== canonicalPublicPath) {
     const url = request.nextUrl.clone();

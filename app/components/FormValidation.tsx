@@ -43,7 +43,7 @@ export function FormField({
       {label && (
         <label 
           htmlFor={fieldName}
-          className={`block text-sm font-medium mb-2 ${error ? 'text-red-600' : 'text-gray-700'}`}
+          className={`form-label ${error ? 'text-red-600' : ''}`}
         >
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}

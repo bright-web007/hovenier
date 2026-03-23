@@ -160,7 +160,22 @@ export default async function TuinonderhoudPage({ params }: Props) {
     service: t('service'),
     phone_number: t('phone_number'),
     send_request: t('send_request'),
-    form_note: t('form_note')
+    form_note: t('form_note'),
+    select_municipality: t('form.select_municipality'),
+    what_do_you_need: t('form.what_do_you_need'),
+    your_company: t('form.your_company'),
+    loading: t('form.loading'),
+    privacy_agreement: t('form.privacy_agreement'),
+    privacy_link: t('form.privacy_link'),
+    privacy_consent: t('form.privacy_consent'),
+    services: {
+      tuinonderhoud: t('form.services.tuinonderhoud'),
+      tuinontwerp: t('form.services.tuinontwerp'),
+      'tuin-aanleggen': t('form.services.tuin-aanleggen'),
+      stratenmaker: t('form.services.stratenmaker'),
+      groendak: t('form.services.groendak'),
+      overig: t('form.services.overig')
+    }
   };
 
   // Breadcrumb items

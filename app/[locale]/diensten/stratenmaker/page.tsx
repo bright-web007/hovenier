@@ -135,7 +135,22 @@ export default async function StratenmakerPage({ params }: Props) {
     service: t('service') || "Gewenste dienst",
     phone_number: t('phone_number') || "Telefoonnummer",
     send_request: t('send_request') || "Verstuur aanvraag",
-    form_note: t('form_note') || "Door het versturen van dit formulier gaat u akkoord met onze voorwaarden."
+    form_note: t('form_note') || "Door het versturen van dit formulier gaat u akkoord met onze voorwaarden.",
+    select_municipality: t('form.select_municipality') || 'Selecteer gemeente',
+    what_do_you_need: t('form.what_do_you_need') || 'Wat heeft u nodig?',
+    your_company: t('form.your_company') || 'Uw bedrijf',
+    loading: t('form.loading') || 'Versturen...',
+    privacy_agreement: t('form.privacy_agreement') || 'Ik ga akkoord met het',
+    privacy_link: t('form.privacy_link') || 'privacybeleid',
+    privacy_consent: t('form.privacy_consent') || 'en geef toestemming voor het verwerken van mijn gegevens.',
+    services: {
+      tuinonderhoud: t('form.services.tuinonderhoud') || 'Tuinonderhoud',
+      tuinontwerp: t('form.services.tuinontwerp') || 'Tuinontwerp',
+      'tuin-aanleggen': t('form.services.tuin-aanleggen') || 'Tuin Aanleggen',
+      stratenmaker: t('form.services.stratenmaker') || 'Bestrating',
+      groendak: t('form.services.groendak') || 'Groendak',
+      overig: t('form.services.overig') || 'Overig'
+    }
   }
 
   // Breadcrumb items 

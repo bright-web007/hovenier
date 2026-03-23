@@ -140,7 +140,22 @@ export default async function GemeentePage({ params }: Props) {
     service: t('service'),
     phone_number: t('phone_number'),
     send_request: t('send_request'),
-    form_note: t('form_note')
+    form_note: t('form_note'),
+    select_municipality: validLocale === 'en' ? 'Select municipality' : 'Selecteer gemeente',
+    what_do_you_need: validLocale === 'en' ? 'What do you need?' : 'Wat heeft u nodig?',
+    your_company: validLocale === 'en' ? 'Your company' : 'Uw bedrijf',
+    loading: validLocale === 'en' ? 'Loading...' : 'Versturen...',
+    privacy_agreement: validLocale === 'en' ? 'I agree to the' : 'Ik ga akkoord met het',
+    privacy_link: validLocale === 'en' ? 'privacy policy' : 'privacybeleid',
+    privacy_consent: validLocale === 'en' ? 'and consent to processing my data.' : 'en geef toestemming voor het verwerken van mijn gegevens.',
+    services: {
+      tuinonderhoud: validLocale === 'en' ? 'Garden Maintenance' : 'Tuinonderhoud',
+      tuinontwerp: validLocale === 'en' ? 'Garden Design' : 'Tuinontwerp',
+      'tuin-aanleggen': validLocale === 'en' ? 'Garden Installation' : 'Tuin Aanleggen',
+      stratenmaker: validLocale === 'en' ? 'Paving' : 'Bestrating',
+      groendak: validLocale === 'en' ? 'Green Roof' : 'Groendak',
+      overig: validLocale === 'en' ? 'Other' : 'Overig'
+    }
   };
 
   // Sample related articles data

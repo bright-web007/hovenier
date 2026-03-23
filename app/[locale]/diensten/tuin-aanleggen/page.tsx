@@ -42,7 +42,22 @@ export default async function TuinAanleggenPage({ params }: Props) {
     service: "Gewenste dienst",
     phone_number: "Telefoonnummer",
     send_request: "Verstuur aanvraag",
-    form_note: "Door het versturen van dit formulier gaat u akkoord met onze voorwaarden."
+    form_note: "Door het versturen van dit formulier gaat u akkoord met onze voorwaarden.",
+    select_municipality: 'Selecteer gemeente',
+    what_do_you_need: 'Wat heeft u nodig?',
+    your_company: 'Uw bedrijf',
+    loading: 'Versturen...',
+    privacy_agreement: 'Ik ga akkoord met het',
+    privacy_link: 'privacybeleid',
+    privacy_consent: 'en geef toestemming voor het verwerken van mijn gegevens.',
+    services: {
+      tuinonderhoud: 'Tuinonderhoud',
+      tuinontwerp: 'Tuinontwerp',
+      'tuin-aanleggen': 'Tuin Aanleggen',
+      stratenmaker: 'Bestrating',
+      groendak: 'Groendak',
+      overig: 'Overig'
+    }
   }
 
   // Breadcrumb items

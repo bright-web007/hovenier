@@ -100,7 +100,22 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
     service: validLocale === 'nl' ? 'Gewenste dienst' : 'Desired service',
     phone_number: validLocale === 'nl' ? 'Telefoonnummer' : 'Phone number',
     send_request: validLocale === 'nl' ? 'Verstuur aanvraag' : 'Send request',
-    form_note: validLocale === 'nl' ? 'Door dit formulier te versturen gaat u akkoord met onze voorwaarden' : 'By submitting this form you agree to our terms'
+    form_note: validLocale === 'nl' ? 'Door dit formulier te versturen gaat u akkoord met onze voorwaarden' : 'By submitting this form you agree to our terms',
+    select_municipality: validLocale === 'nl' ? 'Selecteer gemeente' : 'Select municipality',
+    what_do_you_need: validLocale === 'nl' ? 'Wat heeft u nodig?' : 'What do you need?',
+    your_company: validLocale === 'nl' ? 'Uw bedrijf' : 'Your company',
+    loading: validLocale === 'nl' ? 'Versturen...' : 'Loading...',
+    privacy_agreement: validLocale === 'nl' ? 'Ik ga akkoord met het' : 'I agree to the',
+    privacy_link: validLocale === 'nl' ? 'privacybeleid' : 'privacy policy',
+    privacy_consent: validLocale === 'nl' ? 'en geef toestemming voor het verwerken van mijn gegevens.' : 'and consent to processing my data.',
+    services: {
+      tuinonderhoud: validLocale === 'nl' ? 'Tuinonderhoud' : 'Garden Maintenance',
+      tuinontwerp: validLocale === 'nl' ? 'Tuinontwerp' : 'Garden Design',
+      'tuin-aanleggen': validLocale === 'nl' ? 'Tuin Aanleggen' : 'Garden Installation',
+      stratenmaker: validLocale === 'nl' ? 'Bestrating' : 'Paving',
+      groendak: validLocale === 'nl' ? 'Groendak' : 'Green Roof',
+      overig: validLocale === 'nl' ? 'Overig' : 'Other'
+    }
   };
 
   // Breadcrumb items

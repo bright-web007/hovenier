@@ -418,7 +418,22 @@ export default async function GroendakKostenPage({ params }: Props) {
                     service: locale === 'en' ? 'Service' : 'Dienst',
                     phone_number: locale === 'en' ? 'Phone number' : 'Telefoonnummer',
                     send_request: locale === 'en' ? 'Send Request' : 'Verstuur aanvraag',
-                    form_note: locale === 'en' ? 'Completely free · no spam · GDPR compliant' : 'Volledig gratis · geen spam · AVG-conform'
+                    form_note: locale === 'en' ? 'Completely free · no spam · GDPR compliant' : 'Volledig gratis · geen spam · AVG-conform',
+                    select_municipality: locale === 'en' ? 'Select municipality' : 'Selecteer gemeente',
+                    what_do_you_need: locale === 'en' ? 'What do you need?' : 'Wat heeft u nodig?',
+                    your_company: locale === 'en' ? 'Your company' : 'Uw bedrijf',
+                    loading: locale === 'en' ? 'Loading...' : 'Versturen...',
+                    privacy_agreement: locale === 'en' ? 'I agree to the' : 'Ik ga akkoord met het',
+                    privacy_link: locale === 'en' ? 'privacy policy' : 'privacybeleid',
+                    privacy_consent: locale === 'en' ? 'and consent to processing my data.' : 'en geef toestemming voor het verwerken van mijn gegevens.',
+                    services: {
+                      tuinonderhoud: locale === 'en' ? 'Garden Maintenance' : 'Tuinonderhoud',
+                      tuinontwerp: locale === 'en' ? 'Garden Design' : 'Tuinontwerp',
+                      'tuin-aanleggen': locale === 'en' ? 'Garden Installation' : 'Tuin Aanleggen',
+                      stratenmaker: locale === 'en' ? 'Paving' : 'Bestrating',
+                      groendak: locale === 'en' ? 'Green Roof' : 'Groendak',
+                      overig: locale === 'en' ? 'Other' : 'Overig'
+                    }
                   }}
                 />
               </div>

@@ -73,7 +73,7 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       console.log('GoogleAnalytics: Consent status -', { isDevelopment, hasAnalyticsConsent });
     }
     
-    // Set initial consent state
+    // Set initial consent state - GRANT consent in development
     gtag('consent', 'default', {
       analytics_storage: hasAnalyticsConsent ? 'granted' : 'denied',
       ad_storage: 'denied', // Start with denied, update after consent
@@ -90,6 +90,7 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       allow_google_signals: hasAnalyticsConsent,
       allow_ad_personalization_signals: false, // Default to false
       debug_mode: process.env.NODE_ENV === 'development', // Enable debug mode in development
+      send_page_view: true, // Ensure page views are sent
     });
 
     // Setup enhanced ecommerce and conversion tracking
@@ -102,6 +103,25 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
     if (process.env.NODE_ENV === 'development') {
       console.log('GoogleAnalytics: Initialization complete');
       
+      // Monitor network requests to GA4 in development
+      const originalFetch = window.fetch;
+      window.fetch = function(...args) {
+        const url = args[0];
+        if (typeof url === 'string' && (url.includes('google-analytics.com') || url.includes('googletagmanager.com'))) {
+          console.log('GA4 Network Request:', url);
+          return originalFetch.apply(this, args)
+            .then(response => {
+              console.log('GA4 Response:', response.status, response.statusText, url);
+              return response;
+            })
+            .catch(error => {
+              console.error('GA4 Request Failed:', error, url);
+              throw error;
+            });
+        }
+        return originalFetch.apply(this, args);
+      };
+      
       // Test event to verify it's working
       setTimeout(() => {
         gtag('event', 'page_view_test', {
@@ -109,6 +129,14 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
           event_label: 'initialization_test'
         });
         console.log('GoogleAnalytics: Test event sent');
+        
+        // Force a page view event
+        gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: window.location.href,
+          page_path: window.location.pathname
+        });
+        console.log('GoogleAnalytics: Manual page_view event sent');
       }, 1000);
     }
 
@@ -125,6 +153,16 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
         page_path: pathname,
         page_title: document.title,
       });
+      
+      // In development, also send explicit page_view event
+      if (process.env.NODE_ENV === 'development') {
+        window.gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: window.location.href,
+          page_path: pathname
+        });
+        console.log('GoogleAnalytics: Page view sent for:', pathname);
+      }
     }
   }, [pathname, gaId]);
 
@@ -306,6 +344,7 @@ export const debugGA = () => {
   console.log('=== Google Analytics Debug Info ===');
   console.log('Environment:', process.env.NODE_ENV);
   console.log('Analytics in dev enabled:', process.env.ENABLE_ANALYTICS_IN_DEV);
+  console.log('GA4 Measurement ID:', process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID);
   console.log('dataLayer exists:', typeof window.dataLayer !== 'undefined');
   console.log('gtag function exists:', typeof window.gtag !== 'undefined'); 
   console.log('dataLayer length:', window.dataLayer?.length || 0);
@@ -331,22 +370,43 @@ export const debugGA = () => {
     }
   }
   
-  // Test if we can send a test event
+  // Force send test events to verify network connectivity
   if (window.gtag) {
+    const testId = Date.now();
+    // Send multiple test events
     window.gtag('event', 'debug_test', {
       event_category: 'debug',
-      event_label: 'console_test_' + Date.now()
+      event_label: 'console_test_' + testId,
+      debug_mode: true
     });
-    console.log('✅ Test event sent successfully');
+    
+    // Send a page view
+    window.gtag('event', 'page_view', {
+      page_title: document.title,
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+      debug_mode: true
+    });
+    
+    // Send a custom event 
+    window.gtag('event', 'manual_test_event', {
+      event_category: 'test',
+      event_label: 'manual_debug_' + testId,
+      value: 1
+    });
+    
+    console.log('✅ Multiple test events sent with ID:', testId);
+    console.log('Check Network tab for requests to google-analytics.com');
+    console.log('Check GA4 Real-time reports in 30-60 seconds');
   } else {
     console.log('❌ gtag function not available - cannot send test event');
   }
   
   // Test various GA endpoints
   const testUrls = [
-    'https://www.google-analytics.com',
-    'https://ssl.google-analytics.com', 
-    'https://www.googletagmanager.com'
+    'https://www.google-analytics.com/g/collect',
+    'https://analytics.google.com/analytics/web/',
+    'https://www.googletagmanager.com/gtag/js?id=' + (process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-WZ41C9EYC0')
   ];
   
   console.log('Testing GA endpoint connectivity...');
@@ -357,6 +417,7 @@ export const debugGA = () => {
   });
   
   console.log('=== End Debug Info ===');
+  console.log('Run this again in 60 seconds to check if events appeared in GA4');
 };
 
 // Make debug function globally available in development/production

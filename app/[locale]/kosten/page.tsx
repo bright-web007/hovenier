@@ -1,12 +1,10 @@
-'use client';
-
 import Link from 'next/link';
+import { Metadata } from 'next';
 import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import NewLeadForm from '@/app/components/NewLeadForm';
-import { useParams } from 'next/navigation';
 import ServiceSchema from '../../components/schemas/ServiceSchema';
-import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { localizePath, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils';
 
 // CSS Module imports
 import heroStyles from '../../components/KostenHero.module.css';
@@ -17,14 +15,30 @@ import factorsStyles from '../../components/KostenFactors.module.css';
 import faqStyles from '../../components/KostenFAQ.module.css';
 import layoutStyles from '../../components/KostenLayout.module.css';
 
-export default function KostenPage() {
-  const params = useParams();
-  const locale = params.locale as string;
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const validLocale = locale || 'nl';
+  
+  return {
+    title: validLocale === 'nl' ? 'Hovenier Kosten Friesland | Prijzen & Tarieven 2024 | Hovenier.frl' : 'Garden Costs Friesland | Prices & Rates 2024 | Hovenier.frl',
+    description: validLocale === 'nl' ? 'Wat kost een hovenier in Friesland? Transparant kostenoverzicht: tuinonderhoud €35-50/uur, tuinaanleg €45-65/uur. Gratis offertes van lokale specialisten.' : 'What does a gardener cost in Friesland? Transparent cost overview: garden maintenance €35-50/hour, garden design €45-65/hour. Free quotes from local specialists.',
+    keywords: validLocale === 'nl' ? ['hovenier kosten', 'hovenier prijzen', 'tuinonderhoud kosten', 'tuinaanleg kosten', 'friesland'] : ['gardener costs', 'gardener prices', 'garden maintenance costs', 'garden design costs', 'friesland'],
+    alternates: getLocaleAlternates('/kosten', validLocale as SupportedLocale),
+  };
+}
+
+export default async function KostenPage({ params }: Props) {
+  const { locale } = await params;
+  const validLocale = locale || 'nl';
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: locale === 'en' ? 'Home' : 'Home', href: '/' },
-    { label: locale === 'en' ? 'Costs' : 'Kosten' }
+    { label: validLocale === 'en' ? 'Home' : 'Home', href: '/' },
+    { label: validLocale === 'en' ? 'Costs' : 'Kosten' }
   ];
 
   return (
@@ -36,7 +50,7 @@ export default function KostenPage() {
         areaServed="Friesland, Nederland"
         priceRange="€35-€65"
       />
-      <Navigation locale={locale} />
+      <Navigation locale={validLocale} />
       <Breadcrumbs items={breadcrumbItems} />
       <main>
 

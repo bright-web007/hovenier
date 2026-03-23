@@ -193,12 +193,19 @@ export function getAbsoluteUrl(pathname: string, locale: SupportedLocale): strin
 }
 
 export function getLocaleAlternates(pathname: string, locale: SupportedLocale) {
+  const alternates: { [key: string]: string } = {};
+  
+  // Add all language versions (including self-referencing)
+  SUPPORTED_LOCALES.forEach(loc => {
+    const hrefLangCode = loc === 'nl' ? 'nl-NL' : 'en-US';
+    alternates[hrefLangCode] = getAbsoluteUrl(pathname, loc);
+  });
+  
+  // Add x-default (pointing to default locale)
+  alternates['x-default'] = getAbsoluteUrl(pathname, DEFAULT_LOCALE);
+
   return {
     canonical: getAbsoluteUrl(pathname, locale),
-    languages: {
-      'nl-NL': getAbsoluteUrl(pathname, 'nl'),
-      'en-US': getAbsoluteUrl(pathname, 'en'),
-      'x-default': getAbsoluteUrl(pathname, 'nl'),
-    },
+    languages: alternates,
   };
 }

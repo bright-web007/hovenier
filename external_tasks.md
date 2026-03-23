@@ -15,9 +15,9 @@ This document contains all remaining external tasks that require setup with thir
 - [ ] 🔶 **EXTERNAL** - Set up CI for lint/test/build
 
 ### Monitoring & Analytics Verification
+- [x] ✅ **COMPLETE** - GA4 direct implementation via gtag.js (not GTM)
+- [ ] 🔶 **EXTERNAL** - Verify GA4 tracking is working in production dashboard
 - [ ] 🔶 **EXTERNAL** - Verify Sentry test error appears in dashboard
-- [ ] 🔶 **EXTERNAL** - Create GA4 property, install via gtag in Next.js
-- [ ] 🔶 **EXTERNAL** - Confirm GA4 tracking is working properly
 
 ---
 

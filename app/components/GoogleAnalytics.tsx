@@ -3,6 +3,19 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
+/**
+ * Google Analytics 4 (GA4) Direct Implementation
+ * 
+ * This component implements GA4 directly using gtag.js (NOT Google Tag Manager).
+ * The gtag.js script from googletagmanager.com is GA4's official library.
+ * 
+ * Features:
+ * - GDPR compliant with consent management
+ * - Privacy-focused (anonymize_ip, etc.)
+ * - Enhanced ecommerce tracking
+ * - Custom conversion tracking for leads
+ */
+
 declare global {
   interface Window {
     gtag: (command: string, targetId: string, config?: object) => void;
@@ -82,7 +95,9 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
 
   return (
     <>
-      {/* Google Analytics gtag.js */}
+      {/* Google Analytics 4 (GA4) - Direct Implementation via gtag.js 
+          Note: This is NOT Google Tag Manager (GTM) - it's GA4's official gtag library
+          GTM would use a different URL pattern: gtm.js?id=GTM-XXXX */}
       <script
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}

@@ -90,7 +90,7 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       allow_google_signals: hasAnalyticsConsent,
       allow_ad_personalization_signals: false, // Default to false
       debug_mode: process.env.NODE_ENV === 'development', // Enable debug mode in development
-      send_page_view: true, // Ensure page views are sent
+      send_page_view: false, // Disable automatic page views for SPA - we'll handle manually
     });
 
     // Setup enhanced ecommerce and conversion tracking
@@ -142,25 +142,24 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
 
   }, [gaId]);
 
-  // Track page views on route change
+  // Track page views on route change  
   useEffect(() => {
     if (!gaId || !window.gtag) return;
     
     // Only track if analytics consent is given (or in development)
     const isDevelopment = process.env.NODE_ENV === 'development' && process.env.ENABLE_ANALYTICS_IN_DEV === 'true';
     if (isDevelopment || checkAnalyticsConsent()) {
-      window.gtag('config', gaId, {
-        page_path: pathname,
+      
+      // Send explicit page_view event for SPA navigation
+      window.gtag('event', 'page_view', {
         page_title: document.title,
+        page_location: window.location.href,
+        page_path: pathname,
+        // Add custom parameters for better tracking
+        custom_parameter_1: 'spa_navigation'
       });
       
-      // In development, also send explicit page_view event
       if (process.env.NODE_ENV === 'development') {
-        window.gtag('event', 'page_view', {
-          page_title: document.title,
-          page_location: window.location.href,
-          page_path: pathname
-        });
         console.log('GoogleAnalytics: Page view sent for:', pathname);
       }
     }

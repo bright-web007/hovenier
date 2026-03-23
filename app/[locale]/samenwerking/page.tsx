@@ -201,7 +201,22 @@ export default async function SamenwerkingPage({ params }: Props) {
     service: t('service'),
     phone_number: t('phone_number'),
     send_request: t('send_request'),
-    form_note: t('form_note')
+    form_note: t('form_note'),
+    select_municipality: t('form.select_municipality'),
+    what_do_you_need: t('form.what_do_you_need'),
+    your_company: t('form.your_company'),
+    loading: t('form.loading'),
+    privacy_agreement: t('form.privacy_agreement'),
+    privacy_link: t('form.privacy_link'),
+    privacy_consent: t('form.privacy_consent'),
+    services: {
+      tuinonderhoud: validLocale === 'nl' ? 'Tuinonderhoud' : 'Garden Maintenance',
+      tuinontwerp: validLocale === 'nl' ? 'Tuinontwerp' : 'Garden Design',
+      'tuin-aanleggen': validLocale === 'nl' ? 'Tuin Aanleggen' : 'Garden Installation',
+      stratenmaker: validLocale === 'nl' ? 'Bestrating' : 'Paving',
+      groendak: validLocale === 'nl' ? 'Groendak' : 'Green Roof',
+      overig: validLocale === 'nl' ? 'Overig' : 'Other'
+    }
   };
 
   // Breadcrumb items

@@ -41,6 +41,8 @@ export interface LocalBusinessConfig {
   };
   coreServices: readonly string[];
   priceRange: string;
+  lowPrice: number;
+  highPrice: number;
   currenciesAccepted: string;
   paymentAccepted: readonly string[];
 }
@@ -84,6 +86,8 @@ export const HOVENIER_BUSINESS_CONFIG: LocalBusinessConfig = {
     "Gazons aanleggen"
   ],
   priceRange: "€35-250",
+  lowPrice: 35,
+  highPrice: 250,
   currenciesAccepted: "EUR",
   paymentAccepted: ["Cash", "Credit Card", "Bank Transfer"]
 };
@@ -101,7 +105,9 @@ export const SERVICE_SPECIFIC_CONFIGS = {
       "Daktuin aanleg",
       "Waterafvoer systemen"
     ],
-    priceRange: "€85-200"
+    priceRange: "€85-200",
+    lowPrice: 85,
+    highPrice: 200
   },
   stratenmaker: {
     ...HOVENIER_BUSINESS_CONFIG,
@@ -115,7 +121,9 @@ export const SERVICE_SPECIFIC_CONFIGS = {
       "Drainage & afwatering",
       "Natuursteen verwerking"
     ],
-    priceRange: "€45-150"
+    priceRange: "€45-150",
+    lowPrice: 45,
+    highPrice: 150
   },
   tuinonderhoud: {
     ...HOVENIER_BUSINESS_CONFIG,
@@ -129,7 +137,9 @@ export const SERVICE_SPECIFIC_CONFIGS = {
       "Borders onderhouden",
       "Seizoensonderhoud"
     ],
-    priceRange: "€35-85"
+    priceRange: "€35-85",
+    lowPrice: 35,
+    highPrice: 85
   },
   tuinontwerp: {
     ...HOVENIER_BUSINESS_CONFIG,
@@ -143,7 +153,9 @@ export const SERVICE_SPECIFIC_CONFIGS = {
       "Besteksvoorbereiding",
       "Projectbegeleiding"
     ],
-    priceRange: "€250-1500"
+    priceRange: "€250-1500",
+    lowPrice: 250,
+    highPrice: 1500
   },
   "tuin-aanleggen": {
     ...HOVENIER_BUSINESS_CONFIG,
@@ -157,25 +169,46 @@ export const SERVICE_SPECIFIC_CONFIGS = {
       "Water features",
       "Verlichting installeren"
     ],
-    priceRange: "€75-200"
+    priceRange: "€75-200",
+    lowPrice: 75,
+    highPrice: 200
   },
   // Configuration for individual gardener profile pages
   gardener: {
     ...HOVENIER_BUSINESS_CONFIG,
     name: "Hovenier.frl - Erkende Hoveniers",
     description: "Ervaren hoveniers in Friesland voor al uw tuinonderhoud, tuinontwerp en tuinaanleg.",
-    priceRange: "€45-120"
+    priceRange: "€45-120",
+    lowPrice: 45,
+    highPrice: 120
   }
 } as const;
 
 export type ServiceType = keyof typeof SERVICE_SPECIFIC_CONFIGS;
 
+// Helper function to parse price range string into low/high prices
+function parsePriceRange(priceRange: string): { lowPrice: number; highPrice: number } {
+  // Remove currency symbol and extract numbers
+  const numbers = priceRange.replace(/€/g, '').split('-').map(price => parseInt(price.trim()));
+  return {
+    lowPrice: numbers[0] || 35,
+    highPrice: numbers[1] || 250
+  };
+}
+
 // Helper function to get business config for specific service or general
 export function getBusinessConfig(serviceType?: ServiceType): LocalBusinessConfig {
-  if (serviceType && SERVICE_SPECIFIC_CONFIGS[serviceType]) {
-    return SERVICE_SPECIFIC_CONFIGS[serviceType];
-  }
-  return HOVENIER_BUSINESS_CONFIG;
+  const baseConfig = serviceType && SERVICE_SPECIFIC_CONFIGS[serviceType] 
+    ? SERVICE_SPECIFIC_CONFIGS[serviceType] 
+    : HOVENIER_BUSINESS_CONFIG;
+    
+  const { lowPrice, highPrice } = parsePriceRange(baseConfig.priceRange);
+  
+  return {
+    ...baseConfig,
+    lowPrice,
+    highPrice
+  };
 }
 
 // Helper function to get localized business URL

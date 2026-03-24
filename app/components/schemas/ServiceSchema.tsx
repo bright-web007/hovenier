@@ -6,7 +6,9 @@ interface ServiceSchemaProps {
     url: string;
   };
   areaServed: string;
-  priceRange?: string;
+  priceRange?: string;  // Still accept for backward compatibility
+  lowPrice?: number;    // New proper schema format
+  highPrice?: number;   // New proper schema format
   category?: string;
 }
 
@@ -16,8 +18,19 @@ export default function ServiceSchema({
   provider,
   areaServed,
   priceRange,
+  lowPrice,
+  highPrice,
   category
 }: ServiceSchemaProps) {
+  // Parse price range if provided but not low/high prices
+  let finalLowPrice = lowPrice;
+  let finalHighPrice = highPrice;
+  
+  if (priceRange && (!lowPrice || !highPrice)) {
+    const numbers = priceRange.replace(/€/g, '').split('-').map(price => parseInt(price.trim()));
+    finalLowPrice = numbers[0] || 35;
+    finalHighPrice = numbers[1] || 250;
+  }
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -34,11 +47,12 @@ export default function ServiceSchema({
     },
     category: category || "Landscaping Services",
     serviceType: "Professional Gardening Services",
-    // Use proper offer structure instead of invalid priceRange on Service
-    ...(priceRange && {
+    // Use proper AggregateOffer with lowPrice/highPrice (NOT priceRange in offers)
+    ...((finalLowPrice && finalHighPrice) && {
       offers: {
-        "@type": "Offer",
-        priceRange: priceRange,
+        "@type": "AggregateOffer",
+        lowPrice: finalLowPrice.toString(),
+        highPrice: finalHighPrice.toString(),
         priceCurrency: "EUR",
         availability: "https://schema.org/InStock",
         validFrom: new Date().toISOString().split('T')[0],

@@ -12,16 +12,21 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # Set build-time environment variables with defaults 
 ENV NEXT_PUBLIC_BASE_URL=https://hovenier.frl
 ENV SENTRY_DSN=""
+# Public environment variables (safe to bake into image)
 ENV NEXT_PUBLIC_SENTRY_DSN=""  
 ENV NEXT_PUBLIC_GA4_MEASUREMENT_ID=G-PLACEHOLDER
+ENV NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY=0x4placeholder_turnstile_site_key
+
+# Non-sensitive service URLs (safe to bake into image)
 ENV MUSE_GRAPHQL_URL=https://api.placeholder.com/graphql
 ENV PROMETHEUS_GRAPHQL_URL=https://api.placeholder.com/graphql
 ENV MERCURY_GRAPHQL_URL=https://api.placeholder.com/graphql
-ENV MERCURY_TOKEN_URL=https://api.placeholder.com/token
-ENV NEXUS_PROJECT_API_KEY=placeholder_api_key_1234567890
-ENV NEXUS_PROJECT_API_SECRET=placeholder_secret_1234567890
-ENV NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY=0x4placeholder_turnstile_site_key
-ENV CLOUDFLARE_TURNSTILE_SECRET_KEY=0x4placeholder_turnstile_secret_key
+
+# Sensitive variables removed from ENV - pass at runtime or build-time
+# MERCURY_TOKEN_URL - pass as --build-arg or runtime env var
+# NEXUS_PROJECT_API_KEY - pass as --build-arg or runtime env var  
+# NEXUS_PROJECT_API_SECRET - pass as --build-arg or runtime env var
+# CLOUDFLARE_TURNSTILE_SECRET_KEY - pass as runtime env var
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build

@@ -4,11 +4,17 @@ import { z } from 'zod';
 const urlSchema = z.string().url('Must be a valid URL');
 const optionalUrlSchema = z.string().url('Must be a valid URL').optional();
 
-// API Key validation - should not be empty or contain placeholder text
+// API Key validation - should not be empty or contain placeholder text, but allow placeholders for builds
 const apiKeySchema = z.string()
   .min(10, 'API key too short')
   .refine(
-    (val) => !val.includes('your_') && !val.includes('example_') && !val.includes('_here'),
+    (val) => {
+      // If we're in Docker build env, allow placeholder values
+      if (process.env.NODE_ENV === 'production' && !process.env.DATABASE_URL) {
+        return true; // Likely Docker build, allow any value
+      }
+      return !val.includes('your_') && !val.includes('example_') && !val.includes('_here');
+    },
     'API key contains placeholder text'
   );
 
@@ -24,20 +30,33 @@ const booleanFromString = z
   .transform((val) => val === 'true' || val === '1')
   .pipe(z.boolean());
 
-// Sentry DSN validation - specific format for Sentry URLs
+// Sentry DSN validation - specific format for Sentry URLs, optional for builds
 const sentryDsnSchema = z.string()
-  .regex(/^https:\/\/[a-f0-9]+@[^\/]+\/[0-9]+$/, 'Invalid Sentry DSN format');
+  .regex(/^https:\/\/[a-f0-9]+@[^\/]+\/[0-9]+$/, 'Invalid Sentry DSN format')
+  .or(z.string().length(0)) // Allow empty string for builds
 
 // Google Analytics ID validation
 const ga4IdSchema = z.string()
   .regex(/^G-[A-Z0-9]+$/, 'Invalid GA4 Measurement ID format (should be G-XXXXXXXXXX)');
 
-// Turnstile key validation (Cloudflare specific format)
+// Turnstile key validation (Cloudflare specific format), lenient for builds
 const turnstileSiteKeySchema = z.string()
-  .regex(/^0x4[A-Za-z0-9_-]+$/, 'Invalid Turnstile site key format');
+  .refine((val) => {
+    // If we're in Docker build env, allow placeholder values
+    if (process.env.NODE_ENV === 'production' && !process.env.DATABASE_URL) {
+      return val.startsWith('0x4'); // Just check basic format for builds
+    }
+    return /^0x4[A-Za-z0-9_-]+$/.test(val);
+  }, 'Invalid Turnstile site key format');
 
 const turnstileSecretKeySchema = z.string()
-  .regex(/^0x4[A-Za-z0-9_-]+$/, 'Invalid Turnstile secret key format');
+  .refine((val) => {
+    // If we're in Docker build env, allow placeholder values
+    if (process.env.NODE_ENV === 'production' && !process.env.DATABASE_URL) {
+      return val.startsWith('0x4'); // Just check basic format for builds 
+    }
+    return /^0x4[A-Za-z0-9_-]+$/.test(val);
+  }, 'Invalid Turnstile secret key format');
 
 // Define the complete environment schema
 export const envSchema = z.object({
@@ -46,8 +65,8 @@ export const envSchema = z.object({
   NEXT_PUBLIC_BASE_URL: urlSchema,
   
   // Analytics & Monitoring
-  SENTRY_DSN: sentryDsnSchema,
-  NEXT_PUBLIC_SENTRY_DSN: sentryDsnSchema,
+  SENTRY_DSN: sentryDsnSchema.optional().default(""),
+  NEXT_PUBLIC_SENTRY_DSN: sentryDsnSchema.optional().default(""),
   NEXT_PUBLIC_GA4_MEASUREMENT_ID: ga4IdSchema,
   
   // CMS & API Services

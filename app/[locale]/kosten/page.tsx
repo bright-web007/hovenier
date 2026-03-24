@@ -4,6 +4,8 @@ import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import NewLeadForm from '@/app/components/NewLeadForm';
 import ServiceSchema from '../../components/schemas/ServiceSchema';
+import KostenCalculatorCta from '../../components/KostenCalculatorCta';
+import KostenFAQClient from '../../components/KostenFAQClient';
 import { localizePath, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils';
 
 // CSS Module imports
@@ -106,14 +108,7 @@ export default async function KostenPage({ params }: Props) {
                     <div className={calculatorStyles.resultPrice} id="calcOut">€175 – €350</div>
                     <div className={calculatorStyles.resultNote} id="calcNote">Per bezoek · gemiddeld 4–7 uur werk</div>
                   </div>
-                  <button 
-                    className={calculatorStyles.calculatorCta}
-                    onClick={() => {
-                      document.querySelector('.cta-band')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                  >
-                    Vraag gratis offerte aan →
-                  </button>
+                  <KostenCalculatorCta />
                 </div>
               </div>
             </div>
@@ -296,110 +291,7 @@ export default async function KostenPage({ params }: Props) {
             <div className={layoutStyles.sectionInner}>
               <div className={layoutStyles.sectionEyebrow}>Veelgestelde vragen</div>
               <h2 className={layoutStyles.sectionTitle}>Veelgestelde vragen over <em>kosten</em></h2>
-              <div className={faqStyles.faqList} suppressHydrationWarning>
-                {[
-                  {
-                    q: "Wat kost een hovenier gemiddeld per uur in Friesland?",
-                    a: "Een hovenier in Friesland kost gemiddeld €35 tot €65 per uur. Voor standaard onderhoud betaalt u €35–50/uur. Voor specialistisch werk zoals bomen snoeien of groendakken rekent een hovenier €50–65/uur."
-                  },
-                  {
-                    q: "Wat kost tuinonderhoud per maand?",
-                    a: "Voor maandelijks tuinonderhoud betaalt u gemiddeld €80–250 per maand, afhankelijk van de tuingrootte. Een kleine stadstuin (tot 50m²) kost €80–120/maand. Een grotere tuin (150m²+) kost €200–350/maand."
-                  },
-                  {
-                    q: "Is een offerte aanvragen gratis?",
-                    a: "Ja, via Hovenier.frl kunt u volledig gratis en vrijblijvend offertes aanvragen bij meerdere hoveniers in uw regio. U betaalt niets en bent nergens toe verplicht."
-                  },
-                  {
-                    q: "Wat kost een complete tuinaanleg?",
-                    a: "Een complete tuinaanleg in Friesland kost gemiddeld €4.500–15.000 voor een middelgrote tuin (100–150m²). Dit is inclusief ontwerp, grondwerk, beplanting en bestrating. Heb je een specifieke wens? Vraag een offerte aan voor een nauwkeurige prijsopgave."
-                  },
-                  {
-                    q: "Zijn er subsidies beschikbaar voor groendaken?",
-                    a: "Ja, diverse Friese gemeenten bieden subsidie voor groendaken, variërend van €15–35 per m². Leeuwarden, Smallingerland en Súdwest-Fryslân hebben actieve subsidieregelingen. Uw hovenier kan u hierbij adviseren."
-                  }
-                ].map((faq, index) => (
-                  <div key={index} className={faqStyles.faqItem}>
-                    <div 
-                      className={faqStyles.faqQuestion} 
-                      onClick={(e) => {
-                        const faqItem = e.currentTarget.parentElement;
-                        if (!faqItem) return;
-                        const answer = faqItem.querySelector(`.${faqStyles.faqAnswer}`) as HTMLElement;
-                        const arrow = e.currentTarget.querySelector(`.${faqStyles.faqToggle}`) as HTMLElement;
-                        const isOpen = answer?.style.maxHeight && answer.style.maxHeight !== '0px';
-                        
-                        // Close all FAQ items first
-                        document.querySelectorAll(`.${faqStyles.faqItem}`).forEach(item => {
-                          const otherAnswer = item.querySelector(`.${faqStyles.faqAnswer}`) as HTMLElement;
-                          const otherArrow = item.querySelector(`.${faqStyles.faqToggle}`) as HTMLElement;
-                          if (item !== faqItem && otherAnswer && otherArrow) {
-                            otherAnswer.style.maxHeight = '0px';
-                            otherAnswer.style.opacity = '0';
-                            otherAnswer.style.padding = '0';
-                            otherAnswer.style.borderTop = 'none';
-                            otherAnswer.style.marginTop = '0';
-                            otherAnswer.classList.remove('expanded');
-                            otherArrow.style.transform = 'rotate(0deg)';
-                          }
-                        });
-                        
-                        // Toggle current FAQ
-                        if (isOpen) {
-                          if (answer) {
-                            answer.style.maxHeight = '0px';
-                            answer.style.opacity = '0';
-                            answer.style.padding = '0';
-                            answer.style.borderTop = 'none';
-                            answer.style.marginTop = '0';
-                            answer.classList.remove('expanded');
-                          }
-                          if (arrow) {
-                            arrow.style.transform = 'rotate(0deg)';
-                          }
-                        } else {
-                          if (answer) {
-                            answer.style.maxHeight = '200px';
-                            answer.style.opacity = '1';
-                            answer.style.padding = '0.75rem 0 0.25rem 0';
-                            answer.style.borderTop = '1px solid #f0f4ec';
-                            answer.style.marginTop = '0.5rem';
-                            answer.classList.add('expanded');
-                          }
-                          if (arrow) {
-                            arrow.style.transform = 'rotate(180deg)';
-                          }
-                        }
-                      }}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      {faq.q}
-                      <svg 
-                        className={faqStyles.faqToggle} 
-                        viewBox="0 0 24 24"
-                        style={{
-                          transform: 'rotate(0deg)',
-                          transition: 'transform 0.3s ease'
-                        }}
-                      >
-                        <path d="M6 9l6 6 6-6" />
-                      </svg>
-                    </div>
-                    <div 
-                      className={faqStyles.faqAnswer}
-                      style={{
-                        maxHeight: '0px',
-                        opacity: 0,
-                        padding: '0',
-                        margin: '0',
-                        transition: 'max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease'
-                      }}
-                    >
-                      {faq.a}
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <KostenFAQClient />
             </div>
           </div>
 

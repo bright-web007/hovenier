@@ -1,9 +1,11 @@
+import { HOVENIER_BUSINESS_CONFIG } from '@/lib/business-config';
+
 interface ServiceSchemaProps {
   name: string;
   description: string;
-  provider: {
-    name: string;
-    url: string;
+  provider?: {  // Made optional since we use centralized config
+    name?: string;
+    url?: string;
   };
   areaServed: string;
   priceRange?: string;  // Still accept for backward compatibility
@@ -38,8 +40,18 @@ export default function ServiceSchema({
     description,
     provider: {
       "@type": "LocalBusiness",
-      name: provider.name,
-      url: provider.url
+      name: provider?.name || HOVENIER_BUSINESS_CONFIG.name,
+      url: provider?.url || HOVENIER_BUSINESS_CONFIG.contactInfo.website,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: HOVENIER_BUSINESS_CONFIG.address.addressLocality,
+        postalCode: HOVENIER_BUSINESS_CONFIG.address.postalCode,
+        addressRegion: HOVENIER_BUSINESS_CONFIG.address.addressRegion,
+        addressCountry: HOVENIER_BUSINESS_CONFIG.address.addressCountry,
+        ...(HOVENIER_BUSINESS_CONFIG.address.streetAddress && {
+          streetAddress: HOVENIER_BUSINESS_CONFIG.address.streetAddress
+        })
+      }
     },
     areaServed: {
       "@type": "AdministrativeArea",

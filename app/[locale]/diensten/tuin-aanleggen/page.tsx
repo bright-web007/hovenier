@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from "@/app/components/NewLeadForm"
+import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData'
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
@@ -69,6 +70,19 @@ export default async function TuinAanleggenPage({ params }: Props) {
 
   return (
     <>
+      <LocalBusinessSchema 
+        serviceType="tuin-aanleggen"
+        url={`https://hovenier.frl${localizePath('/diensten/tuin-aanleggen', locale as SupportedLocale)}`}
+      />
+      
+      <BreadcrumbSchema 
+        items={breadcrumbItems.map((item, index) => ({
+          position: index + 1,
+          name: item.label,
+          url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl${localizePath('/diensten/tuin-aanleggen', locale as SupportedLocale)}`
+        }))}
+      />
+      
       <Navigation locale={locale} />
       <Breadcrumbs items={breadcrumbItems} />
       

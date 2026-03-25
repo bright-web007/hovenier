@@ -4,6 +4,7 @@ import Navigation from '../../../components/Navigation';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../components/RelatedArticles';
+import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 
 export const locales = ['en', 'nl'] as const;
@@ -187,6 +188,19 @@ export default async function TuinontwerpPage({ params }: Props) {
 
   return (
     <>
+      <LocalBusinessSchema 
+        serviceType="tuinontwerp"
+        url={`https://hovenier.frl${localizePath('/diensten/tuinontwerp', validLocale as SupportedLocale)}`}
+      />
+      
+      <BreadcrumbSchema 
+        items={breadcrumbItems.map((item, index) => ({
+          position: index + 1,
+          name: item.label,
+          url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl${localizePath('/diensten/tuinontwerp', validLocale as SupportedLocale)}`
+        }))}
+      />
+      
       <Navigation locale={validLocale} translations={navTranslations} />
       <Breadcrumbs items={breadcrumbItems} />
       

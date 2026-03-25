@@ -371,9 +371,16 @@ export default async function TuinonderhoudPage({ params }: Props) {
             "name": "Tuinonderhoud",
             "description": "Professionele tuinonderhoud diensten in Friesland door gecertificeerde hoveniers",
             "provider": {
-              "@type": "Organization",
+              "@type": "LocalBusiness",
               "name": "Hovenier.frl",
-              "url": "https://hovenier.frl"
+              "url": "https://hovenier.frl",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Leeuwarden",
+                "postalCode": "8900",
+                "addressRegion": "Friesland",
+                "addressCountry": "NL"
+              }
             },
             "areaServed": {
               "@type": "State",

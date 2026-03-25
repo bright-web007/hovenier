@@ -413,9 +413,16 @@ export default async function GroendakPage({ params }: Props) {
             "name": "Groendaken",
             "description": "Professionele groendak aanleg in Friesland door gecertificeerde specialisten",
             "provider": {
-              "@type": "Organization",
+              "@type": "LocalBusiness",
               "name": "Hovenier.frl",
-              "url": "https://hovenier.frl"
+              "url": "https://hovenier.frl",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Leeuwarden",
+                "postalCode": "8900",
+                "addressRegion": "Friesland",
+                "addressCountry": "NL"
+              }
             },
             "areaServed": {
               "@type": "State",

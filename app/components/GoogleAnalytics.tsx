@@ -405,7 +405,7 @@ export const debugGA = () => {
   const testUrls = [
     'https://www.google-analytics.com/g/collect',
     'https://analytics.google.com/analytics/web/',
-    'https://www.googletagmanager.com/gtag/js?id=' + (process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-WZ41QPEYC0')
+    'https://www.googletagmanager.com/gtag/js?id=' + (process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-WZ41C9EYC0')
   ];
   
   console.log('Testing GA endpoint connectivity...');

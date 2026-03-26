@@ -154,26 +154,6 @@ export default async function TuinAanleggenKostenPage({ params }: Props) {
               </ul>
             </div>
           </section>
-                  </tr>
-                  <tr className="border-b border-sage-100">
-                    <td className="py-4 px-6">
-                      <div className="font-semibold">Tuinverlichting</div>
-                      <div className="text-sm text-gray-600">LED spots, padverlichting</div>
-                    </td>
-                    <td className="text-right py-4 px-6 font-semibold">€10 - €25</td>
-                    <td className="text-right py-4 px-6 font-semibold">€1.000 - €2.500</td>
-                  </tr>
-                  <tr className="bg-sage-50">
-                    <td className="py-4 px-6 font-bold">
-                      <div>Totaal Basis Tuin</div>
-                    </td>
-                    <td className="text-right py-4 px-6 font-bold text-lg">€75 - €150</td>
-                    <td className="text-right py-4 px-6 font-bold text-lg">€7.500 - €15.000</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
 
           {/* Garden Types Pricing */}
           <section className="max-w-6xl mx-auto mb-16">

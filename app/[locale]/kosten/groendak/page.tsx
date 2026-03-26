@@ -60,18 +60,6 @@ export default async function GroendakKostenPage({ params }: Props) {
           "text": "Een goed aangelegd groendak gaat 30-50 jaar mee en beschermt de dakbedekking tegen weersinvloeden. Jaarlijks onderhoud kost €1–€3 per m²."
         }
       }
-          "@type": "Answer",
-          "text": "Ja, verschillende Friese gemeenten bieden subsidies tot €25-50 per m² voor groendaken. Ook zijn er provinciale en rijkssubsidies beschikbaar. Check altijd de actuele regelingen bij uw gemeente."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Hoeveel onderhoud kost een groendak?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Een extensief groendak kost €3-8 per m² per jaar aan onderhoud. Intensieve groendaken kosten €15-25 per m² per jaar, afhankelijk van de beplanting en complexiteit."
-        }
-      }
     ]
   }
 

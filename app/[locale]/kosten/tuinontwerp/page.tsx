@@ -60,18 +60,6 @@ export default async function TuinontwerpKostenPage({ params }: Props) {
           "text": "Nee — ontwerp en aanleg worden doorgaans apart geprijsd. Vraag altijd een gecombineerde offerte voor ontwerp + aanleg voor de beste prijs."
         }
       }
-          "@type": "Answer",
-          "text": "Een volledig tuinontwerp bevat: verkennend gesprek, schetsontwerp, plantenschema, materiaalspecificatie, kostenraming en vaak ook 3D visualisaties."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Hoeveel kost tuinadvies per uur?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Tuinadvies en -ontwerp kost €65-125 per uur, afhankelijk van ervaring en specialisatie van de tuonarchitect. Veel ontwerpers werken met vaste pakketten."
-        }
-      }
     ]
   }
 

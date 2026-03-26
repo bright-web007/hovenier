@@ -116,36 +116,20 @@ export function validateEnvironment(): Env {
   if (typeof window !== 'undefined') {
     // Client-side: only validate public variables
     const clientResult = clientEnvSchema.safeParse(process.env);
-    if (!clientResult.success) {
-      console.warn('⚠️ Client environment validation issues:', clientResult.error.format());
-    }
     // Return a partial env for client-side usage
     return createFallbackEnv();
   }
   
-  console.log('🔍 Validating server environment variables with Zod...\n');
-  
   const result = envSchema.safeParse(process.env);
   
   if (!result.success) {
-    console.error('❌ Environment validation failed:\n');
-    
-    result.error.issues.forEach((issue) => {
-      const path = issue.path.join('.');
-      console.error(`  • ${path}: ${issue.message}`);
-    });
-    
-    console.error('\n💡 Please check your .env.local file and fix the above issues.\n');
-    
     if (process.env.NODE_ENV === 'production') {
       throw new Error('Environment validation failed in production');
     } else {
-      console.error('⚠️  Continuing in development mode with fallback values...\n');
       return createFallbackEnv();
     }
   }
 
-  console.log('✅ Environment validation successful!\n');
   return result.data;
 }
 
@@ -219,11 +203,3 @@ export const analytics = {
   },
   enableInDev: env.ENABLE_ANALYTICS_IN_DEV,
 } as const;
-
-// Run validation when script is executed directly
-if (typeof process !== 'undefined' && process.argv && process.argv[1]?.includes('env.ts')) {
-  // This runs when the file is executed directly (e.g., via tsx lib/env.ts)
-  console.log('Environment validation completed successfully!');
-  console.log(`Environment: ${env.NODE_ENV}`);
-  console.log(`Base URL: ${env.NEXT_PUBLIC_BASE_URL}`);
-}

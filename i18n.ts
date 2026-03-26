@@ -14,7 +14,6 @@ export function createTranslator(locale: string) {
       messages = require(`./locales/en/common.json`);
     }
   } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
     messages = {};
   }
   
@@ -32,7 +31,6 @@ export async function getMessages(locale: string) {
   try {
     return require(`./locales/${locale}/common.json`);
   } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
     return {};
   }
 }

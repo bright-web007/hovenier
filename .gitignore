@@ -46,4 +46,4 @@ next-env.d.ts
 test-env.js
 verify_ga4_network.js
 debug_ga4_race_condition.js
-quick_ga4_check.js
+quick_ga4_check.jsdebug_archive/

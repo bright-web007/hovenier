@@ -132,7 +132,6 @@ export class PrometheusClient {
       return result.data;
 
     } catch (error) {
-      console.error('❌ Prometheus GraphQL execution error:', error);
       throw error;
     }
   }

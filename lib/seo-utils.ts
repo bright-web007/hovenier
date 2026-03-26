@@ -15,7 +15,6 @@ function createSeoTranslator(locale: string) {
       return result || key;
     };
   } catch (error) {
-    console.warn(`Could not load translations for locale: ${locale}`);
     return (key: string) => key;
   }
 }

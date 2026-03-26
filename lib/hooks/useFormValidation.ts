@@ -117,7 +117,7 @@ export function useFormValidation<T>({
       try {
         await onSuccess?.(result.data);
       } catch (error) {
-        console.error('Form submission error:', error);
+        // Silent error handling
       }
     } else {
       onError?.(result.errors);

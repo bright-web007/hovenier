@@ -237,7 +237,7 @@ export function generateResourceHints() {
     
     <!-- Prefetch next page resources -->
     <link rel="prefetch" href="/diensten/tuinonderhoud" />
-    <link rel="prefetch" href="/regio/leeuwarden/leeuwarden" />
+    <link rel="prefetch" href="/regio/leeuwarden" />
     
     <!-- Critical CSS inline -->
     <style>${criticalCSS}</style>

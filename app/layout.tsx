@@ -124,7 +124,7 @@ export default function RootLayout({
         
         {/* Prefetch next page resources */}
         <link rel="prefetch" href="/diensten/tuinonderhoud" />
-        <link rel="prefetch" href="/regio/leeuwarden/leeuwarden" />
+        <link rel="prefetch" href="/regio/leeuwarden" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <PerformanceInitializer />

@@ -37,11 +37,11 @@ const nextConfig: NextConfig = {
             value: [
               "default-src 'self'",
               // GA4 and related services require multiple domains
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://googletagmanager.com https://challenges.cloudflare.com https://region1.google-analytics.com",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://analytics.google.com https://challenges.cloudflare.com https://region1.google-analytics.com https://stats.g.doubleclick.net",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https://www.google-analytics.com https://ssl.google-analytics.com https://ssl.gstatic.com https://www.gstatic.com https://googletagmanager.com https://www.googletagmanager.com https://region1.google-analytics.com",
-              "connect-src 'self' https://www.google-analytics.com https://ssl.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://googletagmanager.com https://challenges.cloudflare.com https://vitals.vercel-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com/gtm.js",
+              "connect-src 'self' https://www.google-analytics.com https://ssl.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://googletagmanager.com https://challenges.cloudflare.com https://vitals.vercel-analytics.com https://region1.google-analytics.com https://www.google.com https://www.google.nl",
               "frame-src 'self' https://challenges.cloudflare.com",
             ].join('; ')
           }

@@ -45,3 +45,5 @@ next-env.d.ts
 # temporary test files
 test-env.js
 verify_ga4_network.js
+debug_ga4_race_condition.js
+quick_ga4_check.js

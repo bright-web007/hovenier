@@ -44,7 +44,7 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       console.log('GoogleAnalytics: Analytics enabled in dev:', process.env.ENABLE_ANALYTICS_IN_DEV);
     }
 
-    // Initialize dataLayer if not exists
+    // Initialize dataLayer if not exists (this must come first)
     if (!window.dataLayer) {
       window.dataLayer = [];
       if (process.env.NODE_ENV === 'development') {
@@ -52,17 +52,18 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       }
     }
 
-    // Initialize gtag function
+    // Initialize gtag stub function (this must come second)  
     function gtag(...args: any[]) {
       window.dataLayer.push(args);
       if (process.env.NODE_ENV === 'development') {
-        console.log('GoogleAnalytics: gtag called with:', args);
+        console.log('GoogleAnalytics: gtag stub called with:', args);
       }
     }
 
+    // Set gtag on window (this must come third)
     window.gtag = gtag;
 
-    // Always initialize gtag, but with consent settings
+    // Queue the initialization (this must come fourth)
     gtag('js', new Date());
     
     // Check consent for production, allow in development
@@ -73,7 +74,7 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       console.log('GoogleAnalytics: Consent status -', { isDevelopment, hasAnalyticsConsent });
     }
     
-    // Set initial consent state - GRANT consent in development
+    // Queue consent configuration
     gtag('consent', 'default', {
       analytics_storage: hasAnalyticsConsent ? 'granted' : 'denied',
       ad_storage: 'denied', // Start with denied, update after consent
@@ -82,7 +83,7 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       security_storage: 'granted',
     });
 
-    // Configure GA4 - this should always run to set up the measurement
+    // Queue GA4 configuration
     gtag('config', gaId, {
       page_title: document.title,
       page_location: window.location.href,
@@ -91,17 +92,11 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       allow_ad_personalization_signals: false, // Default to false
       debug_mode: process.env.NODE_ENV === 'development', // Enable debug mode in development
       send_page_view: false, // Disable automatic page views for SPA - we'll handle manually
-    });
-
-    // Setup enhanced ecommerce and conversion tracking
-    gtag('config', gaId, {
-      custom_map: {
-        'custom_parameter_1': 'lead_type'
-      }
+      custom_map: { 'custom_parameter_1': 'lead_type' } // Combine custom_map into main config
     });
 
     if (process.env.NODE_ENV === 'development') {
-      console.log('GoogleAnalytics: Initialization complete');
+      console.log('GoogleAnalytics: All gtag calls queued in dataLayer');
       
       // Monitor network requests to GA4 in development
       const originalFetch = window.fetch;
@@ -122,13 +117,18 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
         return originalFetch.apply(this, args);
       };
       
-      // Test event to verify it's working
+      // Test events after giving gtag.js time to load and process the queue
       setTimeout(() => {
+        console.log('GoogleAnalytics: Checking gtag function after delay...');
+        console.log('GoogleAnalytics: gtag function length:', window.gtag.toString().length);
+        console.log('GoogleAnalytics: dataLayer length before event:', window.dataLayer.length);
+        
         gtag('event', 'page_view_test', {
           event_category: 'development',
           event_label: 'initialization_test'
         });
         console.log('GoogleAnalytics: Test event sent');
+        console.log('GoogleAnalytics: dataLayer length after test:', window.dataLayer.length);
         
         // Force a page view event
         gtag('event', 'page_view', {
@@ -137,7 +137,7 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
           page_path: window.location.pathname
         });
         console.log('GoogleAnalytics: Manual page_view event sent');
-      }, 1000);
+      }, 3000); // Increased delay to 3 seconds
     }
 
   }, [gaId]);
@@ -190,8 +190,23 @@ const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
       <script
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-        onLoad={() => process.env.NODE_ENV === 'development' && console.log('GoogleAnalytics: Script loaded successfully')}
-        onError={(e) => console.error('GoogleAnalytics: Script failed to load', e)}
+        onLoad={() => {
+          if (process.env.NODE_ENV === 'development') {
+            console.log('GoogleAnalytics: Script loaded successfully');
+            console.log('GoogleAnalytics: gtag function length after load:', window.gtag?.toString().length);
+            // Give it a moment to process the queued commands
+            setTimeout(() => {
+              console.log('GoogleAnalytics: gtag function type after processing:', typeof window.gtag);
+              console.log('GoogleAnalytics: dataLayer length after processing:', window.dataLayer?.length);
+            }, 500);
+          }
+        }}
+        onError={(e) => {
+          console.error('GoogleAnalytics: Script failed to load', e);
+          if (process.env.NODE_ENV === 'development') {
+            console.error('GoogleAnalytics: This will prevent all GA4 tracking from working');
+          }
+        }}
       />
     </>
   );

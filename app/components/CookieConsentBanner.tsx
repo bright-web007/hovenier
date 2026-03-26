@@ -82,17 +82,8 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
   };
 
   const initializeServices = (prefs: ConsentPreferences) => {
-    // Update Google Analytics consent
+    // Update Google Analytics consent (react-ga4 handles all gtag calls)
     updateAnalyticsConsent(prefs.analytics);
-    
-    // Initialize Google Analytics if analytics consent given
-    if (prefs.analytics && typeof window !== 'undefined' && window.gtag) {
-      window.gtag('consent', 'update', {
-        analytics_storage: 'granted',
-        ad_storage: prefs.marketing ? 'granted' : 'denied',
-        personalization_storage: prefs.preferences ? 'granted' : 'denied',
-      });
-    }
     
     // Initialize other services based on consent
     console.log('Cookie consent preferences updated:', prefs);

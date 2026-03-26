@@ -1,6 +1,8 @@
 // Performance optimization utilities for Core Web Vitals
 // Implements best practices for LCP, CLS, INP improvements
 
+import ReactGA from 'react-ga4';
+
 // Preload critical resources
 export function preloadCriticalResources() {
   if (typeof window === 'undefined') return;
@@ -93,8 +95,8 @@ export function measureCoreWebVitals() {
     console.log('CLS:', clsValue);
     
     // Send to analytics if consent given
-    if (window.gtag && checkAnalyticsConsent()) {
-      window.gtag('event', 'web-vital', {
+    if (checkAnalyticsConsent()) {
+      ReactGA.event('web-vital', {
         event_category: 'performance',
         event_label: 'CLS',
         value: Math.round(clsValue * 1000)
@@ -112,8 +114,8 @@ export function measureCoreWebVitals() {
     
     console.log('LCP:', lcpValue);
     
-    if (window.gtag && checkAnalyticsConsent()) {
-      window.gtag('event', 'web-vital', {
+    if (checkAnalyticsConsent()) {
+      ReactGA.event('web-vital', {
         event_category: 'performance',
         event_label: 'LCP',
         value: Math.round(lcpValue)
@@ -131,8 +133,8 @@ export function measureCoreWebVitals() {
     
     console.log('FID:', fidValue);
     
-    if (window.gtag && checkAnalyticsConsent()) {
-      window.gtag('event', 'web-vital', {
+    if (checkAnalyticsConsent()) {
+      ReactGA.event('web-vital', {
         event_category: 'performance',
         event_label: 'FID',
         value: Math.round(fidValue)

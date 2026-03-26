@@ -161,7 +161,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
 
   // Standalone regions (like Leeuwarden)
   const standaloneLinks = standaloneRegions.map(gemeente => ({
-    href: localizePath(`/regio/leeuwarden/${gemeente.slug}`, currentLocale),
+    href: localizePath(`/regio/${gemeente.slug}`, currentLocale),
     label: t(gemeenteTranslationKeys[gemeente.slug] || gemeente.name)
   }));
   

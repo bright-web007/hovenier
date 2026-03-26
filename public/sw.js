@@ -9,11 +9,9 @@ const DYNAMIC_CACHE = 'hovenier-dynamic-v2';
 const STATIC_ASSETS = [
   '/',
   '/offline',
-  '/static/css/globals.css',
-  '/static/js/main.js',
-  '/assets/logo-light.svg',
-  '/images/hero-bg.webp',
-  '/manifest.json'
+  '/manifest.json',
+  '/assets/logo-light.svg'
+  // Note: Next.js generates dynamic asset paths, so we keep minimal static assets
 ];
 
 // Install event - precache static assets

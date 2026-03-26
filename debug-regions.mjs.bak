@@ -1,0 +1,29 @@
+// Debug script to check generateStaticParams for regions
+import { regionHubs, standaloneRegions } from './lib/regions-hierarchy.js';
+
+console.log('=== Region Static Params Debug ===');
+
+// Include both region hubs and standalone regions
+const hubParams = regionHubs.flatMap(hub => 
+  ['nl', 'en'].map(locale => ({
+    locale,
+    slug: hub.slug
+  }))
+);
+
+const standaloneParams = standaloneRegions.flatMap(region => 
+  ['nl', 'en'].map(locale => ({
+    locale,  
+    slug: region.slug
+  }))
+);
+
+const allParams = [...hubParams, ...standaloneParams];
+
+console.log('Hub Params:', hubParams);
+console.log('Standalone Params:', standaloneParams);
+console.log('All Params:', allParams);
+
+console.log('\n=== Checking Leeuwarden ===');
+console.log('Standalone regions:', standaloneRegions);
+console.log('Leeuwarden found:', standaloneRegions.find(r => r.slug === 'leeuwarden'));

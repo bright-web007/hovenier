@@ -96,6 +96,12 @@ export async function generateStaticParams() {
     }
   }
   
+  // Special case: Add leeuwarden as both region and gemeente
+  params.push(
+    { locale: 'nl', slug: 'leeuwarden', gemeente: 'leeuwarden' },
+    { locale: 'en', slug: 'leeuwarden', gemeente: 'leeuwarden' }
+  );
+  
   return params;
 }
 

@@ -11,16 +11,16 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 # Set build-time environment variables with defaults 
 ENV NEXT_PUBLIC_BASE_URL=https://hovenier.frl
-ENV SENTRY_DSN=""
+ENV SENTRY_DSN=https://d965e01199456b90991949398b8207d0@sentry.wazobia.tech/23
 # Public environment variables (safe to bake into image)
-ENV NEXT_PUBLIC_SENTRY_DSN=""  
-ENV NEXT_PUBLIC_GA4_MEASUREMENT_ID=G-PLACEHOLDER
-ENV NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY=0x4placeholder_turnstile_site_key
+ENV NEXT_PUBLIC_SENTRY_DSN=https://d965e01199456b90991949398b8207d0@sentry.wazobia.tech/23
+ENV NEXT_PUBLIC_GA4_MEASUREMENT_ID=G-WZ41C9EYC0
+ENV NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY=0x4AAAAAACuIFK9BaNa9z817
 
 # Non-sensitive service URLs (safe to bake into image)
-ENV MUSE_GRAPHQL_URL=https://api.placeholder.com/graphql
-ENV PROMETHEUS_GRAPHQL_URL=https://api.placeholder.com/graphql
-ENV MERCURY_GRAPHQL_URL=https://api.placeholder.com/graphql
+ENV MUSE_GRAPHQL_URL=https://muse.hivedeck.com/graphql
+ENV PROMETHEUS_GRAPHQL_URL=https://prometheus.hivedeck.com/graphql
+ENV MERCURY_GRAPHQL_URL=https://mercury.hivedeck.com/graphql
 
 # Sensitive variables removed from ENV - pass at runtime or build-time
 # MERCURY_TOKEN_URL - pass as --build-arg or runtime env var

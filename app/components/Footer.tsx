@@ -1,7 +1,4 @@
-'use client';
-
 import Link from 'next/link';
-import { useState } from 'react';
 import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { regionHubs, standaloneRegions } from '@/lib/regions-hierarchy';
 
@@ -10,7 +7,6 @@ interface FooterProps {
 }
 
 export default function Footer({ locale = 'nl' }: FooterProps) {
-  const [emailInput, setEmailInput] = useState('');
   const currentLocale = locale as SupportedLocale;
   
   // Simple translation function
@@ -153,17 +149,21 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
     name: hub.name,
     href: localizePath(`/regio/${hub.slug}`, currentLocale),
     translationKey: `footer.links.regions.${hub.slug.replace(/-/g, '_')}`,
-    gemeentes: hub.gemeentes.map(gemeente => ({
-      href: localizePath(`/regio/${hub.slug}/${gemeente.slug}`, currentLocale),
-      label: t(gemeenteTranslationKeys[gemeente.slug] || gemeente.name)
-    }))
+    gemeentes: hub.gemeentes
+      .filter(gemeente => gemeente.slug !== 'leeuwarden') // Exclude leeuwarden from hub gemeentes to avoid duplicates
+      .map(gemeente => ({
+        href: localizePath(`/regio/${hub.slug}/${gemeente.slug}`, currentLocale),
+        label: t(gemeenteTranslationKeys[gemeente.slug] || gemeente.name)
+      }))
   }));
 
-  // Standalone regions (like Leeuwarden)
-  const standaloneLinks = standaloneRegions.map(gemeente => ({
-    href: localizePath(`/regio/${gemeente.slug}`, currentLocale),
-    label: t(gemeenteTranslationKeys[gemeente.slug] || gemeente.name)
-  }));
+  // Standalone regions (like Leeuwarden) - ensure consistent filtering
+  const standaloneLinks = standaloneRegions
+    .filter(gemeente => gemeente.slug === 'leeuwarden') // Explicitly filter for leeuwarden only
+    .map(gemeente => ({
+      href: localizePath(`/regio/${gemeente.slug}`, currentLocale),
+      label: t(gemeenteTranslationKeys[gemeente.slug] || gemeente.name)
+    }));
   
   const companyLinks = [
     { href: localizePath('/over-ons', currentLocale), label: t('footer.links.company.over_ons') },
@@ -178,14 +178,6 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
     { href: localizePath('/cookie-beleid', currentLocale), label: t('footer.links.legal.cookie_beleid') },
     { href: localizePath('/aansprakelijkheid', currentLocale), label: t('footer.links.legal.aansprakelijkheid') }
   ];
-  
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement newsletter signup
-    console.log('Newsletter signup:', emailInput);
-    setEmailInput('');
-    alert(t('footer.newsletter_success'));
-  };
 
   return (
     <footer className="footer">
@@ -208,22 +200,21 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
               <h4 className="footer-section-title">
                 {t('footer.newsletter_title')}
               </h4>
-              <form onSubmit={handleNewsletterSubmit} className="newsletter-form">
+              <div className="newsletter-form">
                 <input 
                   type="email"
-                  value={emailInput}
-                  onChange={(e) => setEmailInput(e.target.value)}
                   placeholder={t('footer.newsletter_placeholder')}
                   className="newsletter-input"
-                  required
+                  disabled
                 />
                 <button 
-                  type="submit"
+                  type="button"
                   className="newsletter-button"
+                  disabled
                 >
                   {t('footer.newsletter_button')}
                 </button>
-              </form>
+              </div>
               <p className="newsletter-privacy">
                 {t('footer.newsletter_privacy')}
               </p>

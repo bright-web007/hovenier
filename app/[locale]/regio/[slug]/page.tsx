@@ -5,7 +5,7 @@ import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
-import { regionHubs, getRegionHubBySlug, type RegionHub } from '@/lib/regions-hierarchy'
+import { regionHubs, getRegionHubBySlug, type RegionHub, standaloneRegions, getGemeenteBySlug, type Gemeente } from '@/lib/regions-hierarchy'
 import Link from 'next/link'
 
 type Props = {
@@ -14,65 +14,110 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
+  
+  // Check for region hub first
   const regionHub = getRegionHubBySlug(slug);
   
-  if (!regionHub) {
+  // If not a region hub, check for standalone region
+  const standaloneRegion = regionHub ? null : getGemeenteBySlug(slug);
+  
+  if (!regionHub && !standaloneRegion) {
     return {
       title: 'Regio niet gevonden | Hovenier.frl'
     };
   }
 
-  const title = `Hoveniers in ${regionHub.name} | Hovenier.frl`;
-  const description = `Vind lokale hoveniers in ${regionHub.name} met ${regionHub.gemeentes.length} gemeenten. ${regionHub.description}. Vergelijk lokale tuinspecialisten.`;
-  
-  return {
-    title,
-    description,
-    keywords: `hovenier ${regionHub.name.toLowerCase()}, ${regionHub.gemeentes.map(g => g.name).join(', ')}, lokale tuinman, Friesland hoveniers`,
-    alternates: getLocaleAlternates(`/regio/${slug}`, locale as SupportedLocale),
-    openGraph: {
+  if (regionHub) {
+    // Handle region hub
+    const title = `Hoveniers in ${regionHub.name} | Hovenier.frl`;
+    const description = `Vind lokale hoveniers in ${regionHub.name} met ${regionHub.gemeentes.length} gemeenten. ${regionHub.description}. Vergelijk lokale tuinspecialisten.`;
+    
+    return {
       title,
       description,
-      url: getAbsoluteUrl(`/regio/${slug}`, locale as SupportedLocale),
-      siteName: 'Hovenier.frl',
-      locale: locale,
-      type: 'website',
-    },
+      keywords: `hovenier ${regionHub.name.toLowerCase()}, ${regionHub.gemeentes.map(g => g.name).join(', ')}, lokale tuinman, Friesland hoveniers`,
+      alternates: getLocaleAlternates(`/regio/${slug}`, locale as SupportedLocale),
+      openGraph: {
+        title,
+        description,
+        url: getAbsoluteUrl(`/regio/${slug}`, locale as SupportedLocale),
+        siteName: 'Hovenier.frl',
+        locale: locale,
+        type: 'website',
+      },
+    }
+  } else if (standaloneRegion) {
+    // Handle standalone region
+    const title = `Hovenier ${standaloneRegion.name} | Lokale Tuinspecialisten`;
+    const description = `Vind professionele hoveniers in ${standaloneRegion.name}. ${standaloneRegion.intro} Vergelijk lokale tuinspecialisten en vraag offertes aan.`;
+    
+    return {
+      title,
+      description,
+      keywords: `hovenier ${standaloneRegion.name.toLowerCase()}, tuinman ${standaloneRegion.name.toLowerCase()}, lokale hovenier, Friesland hoveniers`,
+      alternates: getLocaleAlternates(`/regio/${slug}`, locale as SupportedLocale),
+      openGraph: {
+        title,
+        description,
+        url: getAbsoluteUrl(`/regio/${slug}`, locale as SupportedLocale),
+        siteName: 'Hovenier.frl',
+        locale: locale,
+        type: 'website',
+      },
+    }
   }
 }
 
 export async function generateStaticParams() {
-  return regionHubs.flatMap(hub => 
+  // Include both region hubs and standalone regions
+  const hubParams = regionHubs.flatMap(hub => 
     ['nl', 'en'].map(locale => ({
       locale,
       slug: hub.slug
     }))
   );
+  
+  const standaloneParams = standaloneRegions.flatMap(region => 
+    ['nl', 'en'].map(locale => ({
+      locale,
+      slug: region.slug
+    }))
+  );
+  
+  return [...hubParams, ...standaloneParams];
 }
 
 export default async function RegionHubPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
   
+  // Check for region hub first
   const regionHub = getRegionHubBySlug(slug);
   
-  if (!regionHub) {
+  // If not a region hub, check for standalone region
+  const standaloneRegion = regionHub ? null : getGemeenteBySlug(slug);
+  
+  if (!regionHub && !standaloneRegion) {
     notFound();
   }
 
   const validLocale = locale as SupportedLocale;
   
+  // Set up data based on type
+  const displayName = regionHub ? regionHub.name : standaloneRegion!.name;
+  const isStandalone = !regionHub && standaloneRegion;
+  
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
     { label: 'Regio\'s', href: '/regio' },
-    { label: regionHub.name, href: `/regio/${slug}` }
+    { label: displayName, href: `/regio/${slug}` }
   ];
 
   return (
     <div className="page-container">
       <LocalBusinessSchema 
         url={`https://hovenier.frl${localizePath(`/regio/${slug}`, validLocale)}`}
-        nameContext={`Hoveniers in ${regionHub.name}`}
+        nameContext={`Hoveniers in ${displayName}`}
         services={[
           "Tuinonderhoud",
           "Tuinontwerp", 

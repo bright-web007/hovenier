@@ -133,7 +133,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Default: try cache first, then network
+  // Default: only handle same-origin requests
+  // Skip external/cross-origin requests (like Google Analytics)
+  if (url.origin !== self.location.origin) {
+    return; // Let the browser handle external requests natively
+  }
+  
   event.respondWith(
     caches.match(request)
       .then((cachedResponse) => {

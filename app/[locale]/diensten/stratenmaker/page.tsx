@@ -111,9 +111,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const validLocale = locale || defaultLocale;
 
   return {
-    title: 'Stratenmaker - Bestrating & Hardscaping | Hovenier.frl',
-    description: 'Professionele bestratingswerken in Friesland. Van opritten tot terrassen - vind ervaren stratenmakers voor al je hardscaping projecten.',
-    keywords: 'stratenmaker, bestrating, oprit, terras, hardscaping, Friesland, straatklinkers, tuinpaden',
+    title: 'Stratenmaker Friesland | Bestrating & Terras Aanleggen | Hovenier.frl',
+    description: 'Stratenmaker nodig in Friesland? Vakkundige bestrating voor terrassen, opritten en tuinpaden. Keramisch, natuursteen of beton — gratis offertes van lokale specialisten.',
+    keywords: 'stratenmaker friesland, hovenier stratenmaker friesland, stratenmaker gezocht friesland, bestrating aanleggen friesland, terras aanleggen friesland',
     alternates: getLocaleAlternates('/diensten/stratenmaker', validLocale as SupportedLocale),
   }
 }

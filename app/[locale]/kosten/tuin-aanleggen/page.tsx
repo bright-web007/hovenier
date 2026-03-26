@@ -13,9 +13,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
 
   return {
-    title: 'Kosten Tuin Aanleggen - Complete Prijsgids 2024 | Hovenier.frl',
-    description: 'Wat kost het om een nieuwe tuin aan te leggen in Friesland? Complete kostenoverzicht van tuinaanleg inclusief grondwerk, beplanting en materialen.',
-    keywords: 'tuin aanleggen kosten, tuinaanleg prijzen, nieuwe tuin kosten, hovenier prijzen, Friesland tuinaanleg',
+    title: 'Tuin Aanleggen Kosten 2026 | Prijs per m² | Hovenier.frl',
+    description: 'Wat kost een tuin aanleggen? Gemiddeld €45–€120 per m². Volledig kostenoverzicht voor tuinaanleg in Friesland, inclusief materialen en arbeid. Gratis offertes vergelijken.',
+    keywords: 'tuin aanleggen kosten, kosten tuin aanleggen, wat kost een tuin aanleggen, wat kost het aanleggen van een tuin, wat kost aanleggen tuin, tuin aanleggen kosten m2',
     alternates: getLocaleAlternates('/kosten/tuin-aanleggen', locale as SupportedLocale),
   }
 }
@@ -38,26 +38,26 @@ export default async function TuinAanleggenKostenPage({ params }: Props) {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Wat kost het om een tuin aan te leggen?",
+        "name": "Wat kost een tuin aanleggen per m²?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Een nieuwe tuin aanleggen kost gemiddeld tussen €75 en €150 per m² in Friesland. Voor een complete tuin van 100m² betaal je tussen €7.500 en €15.000, afhankelijk van complexiteit en materialen."
+          "text": "Een tuin aanleggen kost gemiddeld €45–€120 per m² inclusief materialen en arbeid. Voor eenvoudige tuinen €45–€70/m², midrange €70–€100/m², en luxe tuinen €100–€180/m²."
         }
       },
       {
         "@type": "Question",
-        "name": "Welke kosten zijn er bij tuinaanleg?",
+        "name": "Wat is inbegrepen bij tuinaanleg?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Bij tuinaanleg komen kosten voor grondwerk (€15-25/m²), beplanting (€20-50/m²), verharding (€40-80/m²), gazon (€8-15/m²) en arbeidskosten (€40-55/uur)."
+          "text": "Bij tuinaanleg zijn grondwerk, materialen, beplanting, grasaanleg, bestrating en arbeid inbegrepen. Irrigatie en verlichting zijn meestal optioneel en kosten extra."
         }
       },
       {
         "@type": "Question",
-        "name": "Hoelang duurt het om een tuin aan te leggen?",
+        "name": "Hoe lang duurt het aanleggen van een tuin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Een gemiddelde tuin van 100m² aanleggen duurt 1-3 weken, afhankelijk van complexiteit, weersomstandigheden en beschikbaarheid van materialen."
+          "text": "Het aanleggen van een gemiddelde tuin van 100m² duurt 1-3 weken, afhankelijk van complexiteit, weersomstandigheden en beschikbaarheid van materialen."
         }
       }
     ]
@@ -83,7 +83,7 @@ export default async function TuinAanleggenKostenPage({ params }: Props) {
           {/* Hero Section */}
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-forest-900 mb-6">
-              Kosten Tuin Aanleggen in Friesland
+              Tuin Aanleggen Kosten 2026 — Wat Kost het Aanleggen van een Tuin?
             </h1>
             <p className="text-xl text-forest-700 mb-8">
               Complete kostengids voor het aanleggen van een nieuwe tuin
@@ -95,9 +95,9 @@ export default async function TuinAanleggenKostenPage({ params }: Props) {
             <div className="bg-sage-600 text-white rounded-xl p-8">
               <h2 className="text-2xl font-bold mb-4">Direct Antwoord:</h2>
               <p className="text-lg leading-relaxed">
-                Een nieuwe tuin aanleggen kost gemiddeld tussen <strong>€75 en €150 per m²</strong> in Friesland. 
-                Voor een gemiddelde achtertuin van 100m² betaal je <strong>€7.500 tot €15.000</strong>, 
-                inclusief grondwerk, beplanting, gazon en basis verharding. Luxe tuinen kunnen tot €250/m² kosten.
+                Een tuin aanleggen kost gemiddeld <strong>€45 tot €120 per m²</strong>, inclusief materialen en arbeid. 
+                Voor een complete tuinaanleg van 100 m² betaalt u doorgaans <strong>€4.500–€12.000</strong>. 
+                De prijs hangt sterk af van de materialen, grondwerk, beplanting en eventuele bestrating.
               </p>
             </div>
           </section>
@@ -105,49 +105,55 @@ export default async function TuinAanleggenKostenPage({ params }: Props) {
           {/* Cost Breakdown Table */}
           <section className="max-w-6xl mx-auto mb-16">
             <h2 className="text-3xl font-bold text-forest-900 mb-12 text-center">
-              Kostenoverzicht per Onderdeel
+              Tuin Aanleggen Kosten per m² — Gedetailleerd Overzicht
             </h2>
             <div className="bg-white rounded-xl overflow-hidden shadow-lg">
               <table className="w-full">
                 <thead className="bg-sage-100">
                   <tr>
-                    <th className="text-left py-4 px-6 font-bold text-forest-900">Onderdeel</th>
+                    <th className="text-left py-4 px-6 font-bold text-forest-900">Type Tuin</th>
                     <th className="text-right py-4 px-6 font-bold text-forest-900">Kosten per m²</th>
-                    <th className="text-right py-4 px-6 font-bold text-forest-900">Kosten 100m²</th>
+                    <th className="text-right py-4 px-6 font-bold text-forest-900">Voorbeeld 100 m²</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="border-b border-sage-100">
                     <td className="py-4 px-6">
-                      <div className="font-semibold">Grondwerk & Egaliseren</div>
-                      <div className="text-sm text-gray-600">Afgraven, niveleren, drainage</div>
+                      <div className="font-semibold">Eenvoudig</div>
+                      <div className="text-sm text-gray-600">Gras, borders, paden</div>
                     </td>
-                    <td className="text-right py-4 px-6 font-semibold">€15 - €25</td>
-                    <td className="text-right py-4 px-6 font-semibold">€1.500 - €2.500</td>
+                    <td className="text-right py-4 px-6 font-semibold">€45 – €70</td>
+                    <td className="text-right py-4 px-6 font-semibold">€4.500 – €7.000</td>
                   </tr>
                   <tr className="border-b border-sage-100">
                     <td className="py-4 px-6">
-                      <div className="font-semibold">Gazon Aanleggen</div>
-                      <div className="text-sm text-gray-600">Grond voorbereiden + zaaien/leggen</div>
+                      <div className="font-semibold">Midrange</div>
+                      <div className="text-sm text-gray-600">Bestrating, beplanting, verlichting</div>
                     </td>
-                    <td className="text-right py-4 px-6 font-semibold">€8 - €15</td>
-                    <td className="text-right py-4 px-6 font-semibold">€800 - €1.500</td>
+                    <td className="text-right py-4 px-6 font-semibold">€70 – €100</td>
+                    <td className="text-right py-4 px-6 font-semibold">€7.000 – €10.000</td>
                   </tr>
                   <tr className="border-b border-sage-100">
                     <td className="py-4 px-6">
-                      <div className="font-semibold">Beplanting & Struiken</div>
-                      <div className="text-sm text-gray-600">Planten, grond, mulch</div>
+                      <div className="font-semibold">Luxe</div>
+                      <div className="text-sm text-gray-600">Hardwood, waterelement, volledige aanleg</div>
                     </td>
-                    <td className="text-right py-4 px-6 font-semibold">€20 - €50</td>
-                    <td className="text-right py-4 px-6 font-semibold">€2.000 - €5.000</td>
+                    <td className="text-right py-4 px-6 font-semibold">€100 – €180</td>
+                    <td className="text-right py-4 px-6 font-semibold">€10.000 – €18.000</td>
                   </tr>
-                  <tr className="border-b border-sage-100">
-                    <td className="py-4 px-6">
-                      <div className="font-semibold">Verharding (Basis)</div>
-                      <div className="text-sm text-gray-600">Tegels, klinkers, grind paden</div>
-                    </td>
-                    <td className="text-right py-4 px-6 font-semibold">€40 - €80</td>
-                    <td className="text-right py-4 px-6 font-semibold">€1.200 - €2.400</td>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mt-8 bg-cream border-l-4 border-sage p-6 rounded-r-lg">
+              <h3 className="font-semibold text-forest-deep mb-3">Totaalprijs per tuingrootte:</h3>
+              <ul className="space-y-2 text-sm text-forest-deep">
+                <li>• Klein 50 m²: €2.500–€6.000</li>
+                <li>• Middelgroot 100 m²: €4.500–€12.000</li>
+                <li>• Groot 200 m²: €9.000–€25.000+</li>
+              </ul>
+            </div>
+          </section>
                   </tr>
                   <tr className="border-b border-sage-100">
                     <td className="py-4 px-6">

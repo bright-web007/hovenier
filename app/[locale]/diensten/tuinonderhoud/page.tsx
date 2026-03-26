@@ -56,24 +56,24 @@ function createTranslator(locale: string) {
 
 const faqs = [
   {
-    question: "Wat kost tuinonderhoud in Friesland?",
-    answer: "De kosten voor tuinonderhoud variëren tussen €35-50 per uur, afhankelijk van het type werkzaamheden en de grootte van uw tuin. Voor een gemiddelde tuin rekent u op €150-300 per bezoek."
+    question: "Wat kost tuinonderhoud per maand?",
+    answer: "Een tuinonderhoud abonnement kost €60–€200 per maand, afhankelijk van tuingrootte en frequentie. Deze vaste prijs is 10–20% voordeliger dan losse bezoeken en zorgt voor optimaal tuinonderhoud het hele jaar door."
   },
   {
-    question: "Hoe vaak heeft mijn tuin onderhoud nodig?",
-    answer: "Dit hangt af van het seizoen en type tuin. Gemiddeld adviseren we maandelijks onderhoud tijdens het groeiseizoen (maart-oktober) en minder frequent in de winter."
+    question: "Hoe vaak moet ik mijn tuin laten onderhouden?",
+    answer: "Voor een verzorgde tuin adviseren we maandelijks onderhoud tijdens het groeiseizoen (maart–oktober) en 2–3x per jaar in de winterperiode voor seizoensklussen."
+  },
+  {
+    question: "Wat zijn de voordelen van een tuinonderhoud abonnement?",
+    answer: "Vaste lagere prijs per bezoek (10–20% korting), geen gedoe met planning, uw tuin is altijd verzorgd, en flexibele bezoekfrequentie afgestemd op seizoen en behoeften."
   },
   {
     question: "Welke werkzaamheden vallen onder tuinonderhoud?",
-    answer: "Gras maaien, hagen knippen, onkruid wieden, bladeren harken, snoeien van bomen en struiken, en seizoensklussen zoals winterklaar maken."
+    answer: "Gras maaien en randjes steken, hagen knippen, onkruid verwijderen, snoeiwerk, bladeren opruimen, winterklaar maken, mestgift en seizoensplanting."
   },
   {
-    question: "Zijn jullie hoveniers verzekerd?",
-    answer: "Ja, alle hoveniers in ons netwerk hebben een geldige AVB verzekering (aansprakelijkheidsverzekering voor bedrijven) en zijn waar nodig gecertificeerd."
-  },
-  {
-    question: "Kan ik een vast onderhoudcontract afsluiten?",
-    answer: "Absoluut! Veel van onze hoveniers bieden jaarcontracten met vaste tarieven. Dit zorgt voor optimale tuincondities en vaak betere prijzen."
+    question: "Doen jullie ook tuinonderhoud voor bedrijven?",
+    answer: "Ja, onze hoveniers verzorgen groenonderhoud voor bedrijfsterreinen, VvE's en gemeentelijk groen. Vraag een offerte aan voor een maatwerkcontract."
   }
 ];
 
@@ -114,9 +114,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const validLocale = locale || defaultLocale;
     
     return {
-      title: 'Tuinonderhoud Friesland | Professionele Hovenier | Hovenier.frl',
-      description: 'Betrouwbare tuinonderhoud in Friesland. Vakkundige hoveniers voor gras maaien, snoeien, onkruidbestrijding. Vanaf €35/uur. Vraag gratis offerte.',
-      keywords: ['tuinonderhoud', 'hovenier friesland', 'gras maaien', 'snoeien', 'tuinverzorging'],
+      title: 'Tuinonderhoud Friesland | Professioneel & Betrouwbaar | Hovenier.frl',
+      description: 'Professioneel tuinonderhoud in Friesland door gecertificeerde hoveniers. Maandelijkse abonnementen of eenmalige klussen. Vanaf €35/uur — gratis offerte aanvragen.',
+      keywords: ['tuinonderhoud', 'tuinonderhoud friesland', 'tuinonderhoud abonnement', 'abonnement tuinonderhoud', 'tuinonderhoud bedrijven', 'tuinonderhoud particulier'],
       alternates: getLocaleAlternates('/diensten/tuinonderhoud', validLocale as SupportedLocale),
     };
   } catch (error) {

@@ -13,9 +13,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
 
   return {
-    title: 'Groendak Kosten & Subsidies - Complete Prijsgids 2024 | Hovenier.frl',
-    description: 'Wat kost een groendak in Friesland? Ontdek alle kosten, mogelijke subsidies en bespaar tot 40% op uw groendak project. Inclusief onderhoudskosten.',
-    keywords: 'groendak kosten, groendak subsidie, sedumdak prijzen, extensief groendak, intensief groendak, Friesland groendak',
+    title: 'Groendak Kosten 2026 | Prijs per m² + Subsidie Overzicht | Hovenier.frl',
+    description: 'Wat kost een groendak? Extensief sedumdak €40–€90/m². Volledig kostenoverzicht per type groendak, inclusief Friesland subsidies. Gratis offertes vergelijken.',
+    keywords: 'groendak kosten, kosten groendak, wat kost een groendak, groendak aanleggen kosten, kosten groendak per m2, groendak kosten per m2, subsidie groendak friesland',
     alternates: getLocaleAlternates('/kosten/groendak', locale as SupportedLocale),
   }
 }
@@ -41,13 +41,25 @@ export default async function GroendakKostenPage({ params }: Props) {
         "name": "Wat kost een groendak per m²?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Een extensief groendak kost €85-120 per m² inclusief installatie. Een intensief groendak kost €150-250 per m². Dit is inclusief waterafvoer, isolatie, groendaksubstraat en sedum/beplanting."
+          "text": "Een extensief sedumdak kost €40–€60 per m², semi-intensief €60–€90 per m², en intensief €80–€150 per m². Voor een sedumdak van 30 m² betaalt u €1.200–€1.800 inclusief aanleg."
         }
       },
       {
         "@type": "Question",
-        "name": "Zijn er subsidies voor groendaken?",
+        "name": "Welke subsidie is er voor een groendak?",
         "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Leeuwarden biedt tot €15 per m² groendak subsidie. Súdwest-Fryslân heeft klimaatadaptatie subsidie (bedrag varieert per aanvraagperiode). Smallingerland heeft incidentele subsidieronden."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Hoe lang gaat een groendak mee?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Een goed aangelegd groendak gaat 30-50 jaar mee en beschermt de dakbedekking tegen weersinvloeden. Jaarlijks onderhoud kost €1–€3 per m²."
+        }
+      }
           "@type": "Answer",
           "text": "Ja, verschillende Friese gemeenten bieden subsidies tot €25-50 per m² voor groendaken. Ook zijn er provinciale en rijkssubsidies beschikbaar. Check altijd de actuele regelingen bij uw gemeente."
         }

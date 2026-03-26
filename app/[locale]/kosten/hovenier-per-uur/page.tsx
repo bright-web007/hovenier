@@ -13,9 +13,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
 
   return {
-    title: 'Wat kost een hovenier per uur? (2026) | Hovenier.frl',
-    description: 'Wat kost een hovenier per uur in Friesland? Ontdek alle uurtarieven, regionale verschillen en factoren die de kosten van tuinonderhoud beïnvloeden.',
-    keywords: 'hovenier per uur, uurtarieven, tuinonderhoud kosten, hovenier prijzen, Friesland tarieven',
+    title: 'Wat Kost een Hovenier per Uur? Tarieven 2026 | Hovenier.frl',
+    description: 'Een hovenier kost gemiddeld €35–€65 per uur in Friesland (2026). Bekijk actuele tarieven per dienst, regionale verschillen en tips om te besparen. Gratis offertes vergelijken.',
+    keywords: 'wat kost een hovenier per uur, wat kost hovenier per uur, kosten hovenier per uur, hovenier per uur, uurtarieven hovenier Friesland',
     alternates: getLocaleAlternates('/kosten/hovenier-per-uur', locale as SupportedLocale),
   }
 }
@@ -38,26 +38,26 @@ export default async function HovenierPerUurPage({ params }: Props) {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Wat kost een hovenier per uur?",
+        "name": "Wat kost een hovenier per uur gemiddeld?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Een hovenier kost gemiddeld tussen €35 en €55 per uur in Friesland. De exacte prijs hangt af van ervaring, specialisatie, regio en type werkzaamheden."
+          "text": "Gemiddeld €35–€65 per uur, afhankelijk van het type werk en de regio. Voor standaard tuinonderhoud betaal je aan de onderkant van deze range, voor specialistische werkzaamheden zoals boomchirurgie of tuinarchitectuur aan de bovenkant."
         }
       },
       {
         "@type": "Question",
-        "name": "Waarom verschillen uurtarieven van hoveniers?",
+        "name": "Is een goedkopere hovenier ook minder goed?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Uurtarieven verschillen door ervaring, specialisaties, regio, seizoen, complexiteit van het werk en beschikbaarheid van de hovenier."
+          "text": "Niet per se. Vergelijk altijd beoordelingen en certificeringen naast de prijs. Een startende hovenier kan uitstekend werk leveren tegen een lager tarief. Let wel op: extreem lage prijzen kunnen duiden op gebrek aan verzekering of vakkennis."
         }
       },
       {
         "@type": "Question",
-        "name": "Zijn materialen inbegrepen in het uurtarief?",
+        "name": "Kan ik korting krijgen op het uurtarief?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Nee, materialen, planten, gereedschap en transport worden meestal apart berekend bovenop het uurtarief voor arbeid."
+          "text": "Ja — bij een vast onderhoudscontract bieden de meeste hoveniers 10–20% korting. Ook voor grotere projecten (20+ uur) kun je vaak een lagere prijs onderhandelen. Vraag altijd naar seizoerskortingen in de winter maanden."
         }
       }
     ]
@@ -90,7 +90,7 @@ export default async function HovenierPerUurPage({ params }: Props) {
               
               {/* Title */}
               <h1 className="article-title mb-6">
-                Wat kost een hovenier<br />per uur? <em className="text-sage font-serif italic">(2026)</em>
+                Wat Kost een Hovenier per Uur? <em className="text-sage font-serif italic">(2026)</em>
               </h1>
               
               {/* Meta */}
@@ -106,7 +106,7 @@ export default async function HovenierPerUurPage({ params }: Props) {
               <div className="bg-forest rounded-lg p-6 mb-8 text-cream">
                 <div className="text-xs uppercase tracking-wider text-sage mb-2 font-medium">DIRECT ANTWOORD</div>
                 <p className="text-sm leading-relaxed font-light">
-                  Een hovenier kost gemiddeld <strong className="text-cream font-medium">€35 tot €75 per uur</strong> (inclusief btw). Voor standaard tuinonderhoud betaalt u €35–€60 per uur. Gespecialiseerd werk zoals bomen snoeien of groendaken aanleggen kost €50–€75 per uur. Voor een volledige werkdag (8 uur) betaalt u gemiddeld <strong className="text-cream font-medium">€280 tot €520</strong>.
+                  Een hovenier kost gemiddeld <strong className="text-cream font-medium">€35 tot €65 per uur</strong> in Friesland. Voor regulier tuinonderhoud betaalt u €35–€50/uur; voor aanleg en specialistisch werk €45–€65/uur. De exacte prijs hangt af van het type werk, de ervaring van de hovenier en uw gemeente.
                 </p>
               </div>
 
@@ -127,15 +127,15 @@ export default async function HovenierPerUurPage({ params }: Props) {
                 </div>
                 <div className="rate-card">
                   <div className="rate-card-header">SPECIALIST</div>
-                  <div className="rate-card-price">€60–<br />75</div>
+                  <div className="rate-card-price">€60–<br />65</div>
                   <div className="rate-card-unit">per uur</div>
                   <div className="rate-card-desc">Tuinontwerp, groendak, bomen</div>
                 </div>
               </div>
 
-              {/* Uurtarieven per type werkzaamheid */}
+              {/* Hovenier uurtarieven per type werkzaamheid (2026) */}
               <h2 className="article-section-title mt-10">
-                Uurtarieven per type <em className="text-sage font-serif">werkzaamheid</em>
+                Hovenier uurtarieven per type <em className="text-sage font-serif">werkzaamheid (2026)</em>
               </h2>
               <p className="text-sm text-text-mid leading-relaxed mb-6 max-w-3xl">
                 Het uurtarief van een hovenier verschilt sterk per type werk. Standaard onderhoud is het goedkoopst; specialistisch werk zoals het aanleggen van een groendak of het snoeien van grote bomen vraagt meer vakkennis en daarmee een hoger tarief.
@@ -221,6 +221,20 @@ export default async function HovenierPerUurPage({ params }: Props) {
                 Een hovenier heeft een vakgerichte opleiding gevolgd en is doorgaans gecertificeerd via VHG (Vereniging van Hoveniers en Groenvoorzieners). Een tuinman is een algemene term zonder opleidingsvereiste. Het uurtarief van een hovenier ligt daardoor gemiddeld <strong className="text-forest">€5–€15 hoger</strong> dan dat van een tuinman, maar de kwaliteit en garanties zijn ook navenant beter.
               </p>
 
+              {/* Friesland specific section */}
+              <h2 className="text-2xl font-serif font-semibold text-forest-deep mb-4 mt-10">
+                Hoeveel kost een hovenier per uur <em className="text-sage font-serif">in Friesland?</em>
+              </h2>
+              <p className="text-sm text-text-mid leading-relaxed mb-6 max-w-3xl">
+                In <strong className="text-forest">Friesland</strong> liggen de tarieven iets lager dan in de Randstad. Verwacht <strong className="text-forest">€32–€58 per uur</strong> voor een gekwalificeerde hovenier. In Leeuwarden en Heerenveen betaal je aan de bovenkant van deze range, in kleinere gemeenten zoals Súdwest-Fryslân of Achtkarspelen ligt het tarief doorgaans €3–€5 lager.
+              </p>
+              <div className="bg-cream border-l-4 border-sage p-5 rounded-r-lg mb-8">
+                <p className="text-sm text-forest-deep font-medium mb-2">💡 Lokaal voordeel</p>
+                <p className="text-sm text-text-mid leading-relaxed">
+                  Kies een hovenier binnen 15 km van je locatie. Dit scheelt in reiskosten en veel Friese hoveniers bieden korting voor klanten in de buurt.
+                </p>
+              </div>
+
               {/* FAQ */}
               <h2 className="text-2xl font-serif font-semibold text-forest-deep mb-6 mt-12">
                 Veelgestelde vragen over <em className="text-sage font-serif">kosten</em>
@@ -228,30 +242,23 @@ export default async function HovenierPerUurPage({ params }: Props) {
               <div className="bg-white rounded-lg shadow-sm border border-sage-light overflow-hidden mb-10">
                 <div className="divide-y divide-sage-light">
                   <div className="p-6">
-                    <h3 className="text-base font-semibold text-forest mb-3">Wat kost een ZZP hovenier per uur?</h3>
+                    <h3 className="text-base font-semibold text-forest mb-3">Wat kost een hovenier per uur gemiddeld?</h3>
                     <p className="text-sm text-text-mid leading-relaxed">
-                      Een ZZP hovenier rekent gemiddeld €35–€55 per uur, iets minder dan een hoveniersbedrijf. Voordeel: directe communicatie, flexibeler. Nadeel: bij ziekte of drukte minder beschikbaar. Vraag altijd naar een KvK-inschrijving en verzekering.
+                      Gemiddeld €35–€65 per uur, afhankelijk van het type werk en de regio. Voor standaard tuinonderhoud betaal je aan de onderkant van deze range, voor specialistische werkzaamheden zoals boomchirurgie of tuinarchitectuur aan de bovenkant.
                     </p>
                   </div>
                   
                   <div className="p-6">
-                    <h3 className="text-base font-semibold text-forest mb-3">Wat betaal je een tuinman per uur?</h3>
+                    <h3 className="text-base font-semibold text-forest mb-3">Is een goedkopere hovenier ook minder goed?</h3>
                     <p className="text-sm text-text-mid leading-relaxed">
-                      Een tuinman kost gemiddeld €25–€50 per uur. Dit is goedkoper dan een gecertificeerde hovenier, maar de vakkennis en garanties zijn ook minder. Voor eenvoudig onderhoud kan een tuinman een goede keuze zijn.
+                      Niet per se. Vergelijk altijd beoordelingen en certificeringen naast de prijs. Een startende hovenier kan uitstekend werk leveren tegen een lager tarief. Let wel op: extreem lage prijzen kunnen duiden op gebrek aan verzekering of vakkennis.
                     </p>
                   </div>
                   
                   <div className="p-6">
-                    <h3 className="text-base font-semibold text-forest mb-3">Waarom is een hovenier zo duur?</h3>
+                    <h3 className="text-base font-semibold text-forest mb-3">Kan ik korting krijgen op het uurtarief?</h3>
                     <p className="text-sm text-text-mid leading-relaxed">
-                      Het uurtarief van een hovenier omvat meer dan alleen arbeid: verzekeringen, gereedschap, bedrijfskosten, opleiding en certificeringen tellen allemaal mee. Een hovenier met VHG-certificering biedt ook garantie op het werk en is aansprakelijk bij schade.
-                    </p>
-                  </div>
-                  
-                  <div className="p-6">
-                    <h3 className="text-base font-semibold text-forest mb-3">Wat is het verschil tussen een tuinman en een hovenier?</h3>
-                    <p className="text-sm text-text-mid leading-relaxed">
-                      Een hovenier heeft een officiële vakopleidingen (MBO Hovenier) gevolgd en is doorgaans aangesloten bij VHG. Een tuinman is een informele term voor iemand die tuinwerkzaamheden uitvoert zonder specifieke opleiding. Voor complexe klussen kiest u beter voor een gecertificeerde hovenier.
+                      Ja — bij een vast onderhoudscontract bieden de meeste hoveniers 10–20% korting. Ook voor grotere projecten (20+ uur) kun je vaak een lagere prijs onderhandelen. Vraag altijd naar seizoerskortingen in de winter maanden.
                     </p>
                   </div>
                 </div>

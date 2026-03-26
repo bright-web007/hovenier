@@ -13,9 +13,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
 
   return {
-    title: 'Tuinontwerp Kosten - Wat Kost een Tuinarchitect? | Hovenier.frl',
-    description: 'Wat kost professioneel tuinontwerp in Friesland? Ontdek alle prijzen voor tuinadvies, tekeningen, 3D visualisaties en complete tuinplannen.',
-    keywords: 'tuinontwerp kosten, tuinarchitect prijzen, tuinplan kosten, 3D tuinontwerp, tuinadvies tarieven, Friesland tuinontwerp',
+    title: 'Kosten Tuinontwerp 2026 | Wat Kost een Tuinarchitect? | Hovenier.frl',
+    description: 'Wat kost een tuinontwerp? Gemiddeld €500–€3.500 afhankelijk van tuingrootte. Bekijk tarieven per type, inclusief 3D-ontwerp en plantplan. Gratis offertes in Friesland.',
+    keywords: 'kosten tuinontwerp, tuinontwerp kosten, wat kost een tuinontwerp, wat kost tuinontwerp, tuinontwerp laten maken kosten',
     alternates: getLocaleAlternates('/kosten/tuinontwerp', locale as SupportedLocale),
   }
 }
@@ -38,16 +38,28 @@ export default async function TuinontwerpKostenPage({ params }: Props) {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Wat kost een professioneel tuinontwerp?",
+        "name": "Wat kost een tuinontwerp gemiddeld?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Een professioneel tuinontwerp kost €750-2500 in Friesland, afhankelijk van tuingrootte en complexiteit. Een basis schetsontwerp kost €350-750, een uitgewerkt tuinplan €1200-2500."
+          "text": "Gemiddeld €500–€3.500, afhankelijk van tuingrootte en type ontwerp. Een schetsontwerp voor kleine tuin begint rond €300–€500, volledig 3D-ontwerp kan oplopen tot €5.000."
         }
       },
       {
         "@type": "Question",
-        "name": "Wat krijg ik bij een tuinontwerp?",
+        "name": "Is een 3D-tuinontwerp altijd nodig?",
         "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nee — voor kleinere tuinen volstaat een 2D-schetsontwerp. Voor complexe tuinen of als u het eindresultaat vooraf wilt zien is een 3D-ontwerp de investering waard."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Zit de aanleg bij de ontwerp kosten inbegrepen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nee — ontwerp en aanleg worden doorgaans apart geprijsd. Vraag altijd een gecombineerde offerte voor ontwerp + aanleg voor de beste prijs."
+        }
+      }
           "@type": "Answer",
           "text": "Een volledig tuinontwerp bevat: verkennend gesprek, schetsontwerp, plantenschema, materiaalspecificatie, kostenraming en vaak ook 3D visualisaties."
         }

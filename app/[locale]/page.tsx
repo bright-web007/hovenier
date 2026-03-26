@@ -63,9 +63,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const validLocale = locale || defaultLocale;
     
     return {
-      title: 'Hovenier.frl - Betrouwbare Hoveniers in Friesland | Offerte Aanvragen',
-      description: 'Vind de beste hoveniers in Friesland. Vergelijk offertes voor tuinonderhoud, tuinontwerp en groendaken. 150+ gecertificeerde hoveniers, 2300+ projecten.',
-      keywords: ['hovenier friesland', 'tuin onderhoud', 'tuinontwerp', 'groendak', 'leeuwarden', 'heerenveen'],
+      title: 'Betrouwbare Hoveniers in Friesland Vinden | Gratis Offertes | Hovenier.frl',
+      description: 'Vind een gecertificeerde hovenier in Friesland. Vergelijk gratis offertes voor tuinonderhoud, tuinaanleg en groendaken. 150+ geverifieerde hoveniers — reactie binnen 24 uur.',
+      keywords: ['hovenier friesland', 'hoveniers in friesland', 'hoveniers friesland', 'hovenier in friesland', 'tuinaanleg friesland', 'hovenier gezocht friesland'],
       alternates: getLocaleAlternates('/', validLocale as SupportedLocale),
     };
   } catch (error) {

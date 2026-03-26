@@ -26,9 +26,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const validLocale = locale || 'nl';
   
   return {
-    title: validLocale === 'nl' ? 'Hovenier Kosten Friesland | Prijzen & Tarieven 2024 | Hovenier.frl' : 'Garden Costs Friesland | Prices & Rates 2024 | Hovenier.frl',
-    description: validLocale === 'nl' ? 'Wat kost een hovenier in Friesland? Transparant kostenoverzicht: tuinonderhoud €35-50/uur, tuinaanleg €45-65/uur. Gratis offertes van lokale specialisten.' : 'What does a gardener cost in Friesland? Transparent cost overview: garden maintenance €35-50/hour, garden design €45-65/hour. Free quotes from local specialists.',
-    keywords: validLocale === 'nl' ? ['hovenier kosten', 'hovenier prijzen', 'tuinonderhoud kosten', 'tuinaanleg kosten', 'friesland'] : ['gardener costs', 'gardener prices', 'garden maintenance costs', 'garden design costs', 'friesland'],
+    title: validLocale === 'nl' ? 'Hovenier Kosten 2026 | Wat Kost een Hovenier? | Hovenier.frl' : 'Garden Costs Friesland | Prices & Rates 2026 | Hovenier.frl',
+    description: validLocale === 'nl' ? 'Wat kost een hovenier? Gemiddeld €35–€65 per uur in Friesland. Transparante prijzen voor tuinonderhoud, tuinaanleg, groendaken en bestrating. Gratis offertes vergelijken.' : 'What does a gardener cost in Friesland? Transparent cost overview: garden maintenance €35-50/hour, garden design €45-65/hour. Free quotes from local specialists.',
+    keywords: validLocale === 'nl' ? ['hovenier kosten', 'kosten hovenier', 'wat kost een hovenier', 'hovenier kosten friesland', 'kosten hovenier tuinaanleg'] : ['gardener costs', 'gardener prices', 'garden maintenance costs', 'garden design costs', 'friesland'],
     alternates: getLocaleAlternates('/kosten', validLocale as SupportedLocale),
   };
 }

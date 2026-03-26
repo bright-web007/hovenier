@@ -56,12 +56,20 @@ function createTranslator(locale: string) {
 
 const faqs = [
   {
-    question: "Wat kost een groendak aanleggen in Friesland?",
-    answer: "Groendaken kosten gemiddeld €85-150 per m², afhankelijk van het type (extensief vs intensief), toegankelijkheid en gewenste plantenkeuze. Subsidies kunnen beschikbaar zijn."
+    question: "Wat kost een groendak?",
+    answer: "Een extensief sedumdak kost €40–€60 per m², intensieve groendaken €80–€150 per m². Voor een gemiddeld groendak van 30 m² betaalt u €1.200–€1.800 inclusief aanleg."
   },
   {
-    question: "Wat is het verschil tussen extensief en intensief groendak?",
-    answer: "Extensieve groendaken hebben een dunne substraatlaag (2-15cm) met lage planten en weinig onderhoud. Intensieve groendaken zijn dikker (15-100cm+) en geschikt voor grotere planten, bomen en toegankelijkheid."
+    question: "Welke subsidie is er voor groendaken in Friesland?",
+    answer: "Leeuwarden biedt tot €15 per m², Súdwest-Fryslân heeft klimaatadaptatie subsidie (bedrag varieert), en Smallingerland heeft incidentele subsidieronden. Uw hovenier helpt bij de aanvraag."
+  },
+  {
+    question: "Wat is een extensief groendak?",
+    answer: "Een extensief groendak is lichtgewicht, onderhoudsarm en geschikt voor de meeste hellende en platte daken. De begroeiing bestaat uit sedum, mossen en kruiden."
+  },
+  {
+    question: "Kunnen groendaken gecombineerd worden met zonnepanelen?",
+    answer: "Ja — groendaken en zonnepanelen zijn een uitstekende combinatie. De begroeiing houdt de panelen koeler, wat de stroomopbrengst verhoogt."
   },
   {
     question: "Is mijn dak geschikt voor een groendak?",
@@ -70,14 +78,6 @@ const faqs = [
   {
     question: "Hoeveel onderhoud heeft een groendak nodig?",
     answer: "Extensieve groendaken vereisen minimaal onderhoud (1-2x per jaar). Intensieve groendaken hebben meer zorg nodig, vergelijkbaar met een gewone tuin."
-  },
-  {
-    question: "Welke subsidies zijn er beschikbaar voor groendaken?",
-    answer: "Verschillende gemeenten en provincies bieden subsidies voor groendaken. Wij helpen u bij het aanvragen van beschikbare subsidies en regelingen."
-  },
-  {
-    question: "Hoe belangrijk is waterafvoer bij groendaken?",
-    answer: "Cruciale. Een goed drainagesysteem voorkomt wateroverlast en beschermt uw dak. Wij ontwerpen altijd een professioneel drainagesysteem als onderdeel van het groendak."
   }
 ];
 
@@ -118,9 +118,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const validLocale = locale || defaultLocale;
     
     return {
-      title: 'Groendaken Friesland | Sedum Dak Specialist | Hovenier.frl',
-      description: 'Professionele groendaken in Friesland. Extensief en intensief groendak aanleg door specialisten. Vanaf €85/m². Subsidie-advies inbegrepen.',
-      keywords: ['groendak', 'sedum dak', 'extensief groendak', 'intensief groendak', 'friesland', 'subsidie'],
+      title: 'Groendak Aanleggen Friesland | Sedum & Extensief Groendak | Hovenier.frl',
+      description: 'Professionele groendaken in Friesland. Extensief sedumdak of intensief groendak — inclusief subsidie-advies. Vanaf €40/m² — vraag gratis offerte aan bij een specialist.',
+      keywords: ['groendak', 'groendak aanleggen', 'extensief groendak', 'groendak subsidie', 'subsidie groendak', 'groendak met zonnepanelen', 'groendak friesland', 'sedumdak'],
       alternates: getLocaleAlternates('/diensten/groendak', validLocale as SupportedLocale),
     };
   } catch (error) {

@@ -113,7 +113,11 @@ export default function RootLayout({
         
         {/* Regular Icons */} 
         <link rel="icon" type="image/svg+xml" href="/assets/logo-favicon.svg" />
+        <link rel="icon" type="image/svg+xml" sizes="32x32" href="/favicon-32x32.svg" />
         <link rel="shortcut icon" href="/assets/logo-favicon.svg" />
+        
+        {/* Manifest for PWA */}
+        <link rel="manifest" href="/manifest.json" />
         
         {/* DNS prefetch */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />

@@ -53,6 +53,7 @@ export const HOVENIER_BUSINESS_CONFIG: LocalBusinessConfig = {
   legalName: "Hovenier.frl",
   description: "Professionele hoveniersdiensten in heel Friesland. Van tuinonderhoud tot complete tuinaanleg door erkende hoveniers.",
   address: {
+    streetAddress: "Hoofdstraat 123",
     addressLocality: "Leeuwarden",
     postalCode: "8900",
     addressRegion: "Friesland", 

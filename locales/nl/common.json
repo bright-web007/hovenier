@@ -13,8 +13,8 @@
   "submit": "Verzenden",
   "form_success": "Bedankt! Je bericht is ontvangen.",
   "hero_eyebrow": "Friesland's hoveniersgids",
-  "hero_title": "Uw droomtuin begint met de juiste hovenier",
-  "hero_subtitle": "Vakkundige hoveniers in uw regio, zorgvuldig geselecteerd. Van tuinonderhoud tot complete herinrichting — vergelijk offertes en kies met vertrouwen.",
+  "hero_title": "Vind een hovenier die echt bij u past",
+  "hero_subtitle": "120+ hoveniers uit Friesland. Bekijk hun werk, lees reviews van buren, krijg offertes. Geen gedoe, gewoon een mooiere tuin.",
   "free_quote": "Gratis offerte",
   "no_obligations": "Geen verplichtingen",
   "certified_gardeners": "Gecertificeerde hoveniers",
@@ -28,16 +28,16 @@
   "send_request": "Verstuur aanvraag",
   "form_note": "Volledig gratis · geen spam · AVG-conform",
   "meta": {
-    "homepage_title": "Betrouwbare Hoveniers in Friesland | Offerte Aanvragen | Hovenier.frl",
-    "homepage_description": "Vind de beste hoveniers in Friesland. Vergelijk offertes voor tuinonderhoud, tuinontwerp en groendaken. 150+ gecertificeerde hoveniers, 2300+ projecten."
+    "homepage_title": "Hoveniers Friesland - Offertes Vergelijken | Hovenier.frl",
+    "homepage_description": "120+ hoveniers in Friesland. Bekijk hun recent werk, lees reviews en vraag offertes aan. Tuinonderhoud, herinrichting, groendaken - alles op één plek."
   },
   "sections": {
-    "services_eyebrow": "ONZE DIENSTEN",
-    "services_title": "Professionele Hovendiensten",
-    "services_subtitle": "Van tuinonderhoud tot complete tuinontwerpen. Onze gecertificeerde hoveniers staan voor u klaar.",
-    "articles_eyebrow": "TUININSPIRATIE",
-    "articles_title": "Tips & Inspiratie",
-    "articles_subtitle": "Praktische tips van experts en inspiratie voor uw droomtuin."
+    "services_eyebrow": "WAT WE DOEN",
+    "services_title": "Van klein onderhoudsklus tot volledige herinrichting",
+    "services_subtitle": "Wat u ook nodig heeft voor uw tuin - er zit vast een hovenier bij die het goed kan.",
+    "articles_eyebrow": "TUINTIPS",
+    "articles_title": "Tips van hoveniers uit de buurt",
+    "articles_subtitle": "Praktische tips die echt werken in het Friese klimaat."
   },
   "buttons": {
     "view_all_services": "Alle Diensten Bekijken",
@@ -78,7 +78,7 @@
     "municipality_not_listed": "Niet uw gemeente erbij? We helpen u graag verder."
   },
   "footer": {
-    "description": "Dé plek om betrouwbare hoveniers in Friesland te vinden. Vergelijk offertes, lees reviews en kies met vertrouwen voor de beste hovenier in jouw gemeente.",
+    "description": "Hoveniers vinden in Friesland. Reviews lezen, werk bekijken, offertes vergelijken. Simpel.",
     "newsletter_title": "Tuintips & updates",
     "newsletter_placeholder": "Je e-mailadres",
     "newsletter_button": "Aanmelden",

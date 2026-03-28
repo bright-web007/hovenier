@@ -51,7 +51,7 @@ export interface LocalBusinessConfig {
 export const HOVENIER_BUSINESS_CONFIG: LocalBusinessConfig = {
   name: "Hovenier.frl - Hoveniers in Friesland",
   legalName: "Hovenier.frl",
-  description: "Professionele hoveniersdiensten in heel Friesland. Van tuinonderhoud tot complete tuinaanleg door erkende hoveniers.",
+  description: "Hoveniers uit heel Friesland - van snel onkruid wieden tot complete tuinmakeovers. Bekijk wie er bij u in de buurt werkt.",
   address: {
     streetAddress: "Hoofdstraat 123",
     addressLocality: "Leeuwarden",
@@ -98,7 +98,7 @@ export const SERVICE_SPECIFIC_CONFIGS = {
   groendak: {
     ...HOVENIER_BUSINESS_CONFIG,
     name: "Groendak Specialisten Friesland - Hovenier.frl",
-    description: "Professionele groendak installatie in Friesland. Extensief en intensief groendak aanleg door specialisten.",
+    description: "Groendakken in Friesland - van simpele sedum tot complete daktuinen. Specialists die weten hoe het klimaat hier werkt.",
     coreServices: [
       "Extensieve groendaken",
       "Intensieve groendaken", 
@@ -113,7 +113,7 @@ export const SERVICE_SPECIFIC_CONFIGS = {
   stratenmaker: {
     ...HOVENIER_BUSINESS_CONFIG,
     name: "Stratenmaker & Bestrating Friesland - Hovenier.frl",
-    description: "Professionele bestratingswerken en hardscaping diensten door erkende stratenmakers in Friesland.",
+    description: "Bestrating, tegels, opritten - Friese stratenmakers die weten hoe ze het waterdicht krijgen, ook bij ons weer.",
     coreServices: [
       "Bestrating & tegels",
       "Opritten & parkeerplaatsen",
@@ -129,7 +129,7 @@ export const SERVICE_SPECIFIC_CONFIGS = {
   tuinonderhoud: {
     ...HOVENIER_BUSINESS_CONFIG,
     name: "Tuinonderhoud Friesland - Hovenier.frl",
-    description: "Professioneel tuinonderhoud in Friesland. Regelmatig onderhoud door ervaren hoveniers voor een perfect verzorgde tuin.",
+    description: "Tuinonderhoud in Friesland - wekelijks, maandelijks of seizoensklussen. Hoveniers die uw tuin het hele jaar door mooi houden.",
     coreServices: [
       "Gazon maaien",
       "Hagen snoeien",
@@ -145,7 +145,7 @@ export const SERVICE_SPECIFIC_CONFIGS = {
   tuinontwerp: {
     ...HOVENIER_BUSINESS_CONFIG,
     name: "Tuinontwerp Friesland - Hovenier.frl", 
-    description: "Professioneel tuinontwerp in Friesland. Complete tuinplannen door ervaren tuinarchitecten en hoveniers.",
+    description: "Tuinontwerp in Friesland - van schets op papier tot 3D plan. Ontwerpers die begrijpen wat er groeit in ons klimaat.",
     coreServices: [
       "Tuinplannen maken",
       "3D visualisaties",
@@ -161,7 +161,7 @@ export const SERVICE_SPECIFIC_CONFIGS = {
   "tuin-aanleggen": {
     ...HOVENIER_BUSINESS_CONFIG,
     name: "Tuin Aanleggen Friesland - Hovenier.frl",
-    description: "Complete tuinaanleg in Friesland. Van ontwerp tot realisatie door professionele hoveniers.",
+    description: "Nieuwe tuin aanleggen in Friesland - van kale grond tot klaar voor de eerste zomer. Hoveniers die het van A tot Z doen.",
     coreServices: [
       "Complete tuinaanleg", 
       "Gazons aanleggen",
@@ -178,7 +178,7 @@ export const SERVICE_SPECIFIC_CONFIGS = {
   gardener: {
     ...HOVENIER_BUSINESS_CONFIG,
     name: "Hovenier.frl - Erkende Hoveniers",
-    description: "Ervaren hoveniers in Friesland voor al uw tuinonderhoud, tuinontwerp en tuinaanleg.",
+    description: "Hoveniers in Friesland voor al uw tuinklusjes - onderhoud, herinrichting, nieuwe aanleg. Bekijk wie er in uw gemeente werkt.",
     priceRange: "€45-120",
     lowPrice: 45,
     highPrice: 120

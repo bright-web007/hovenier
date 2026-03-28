@@ -13,8 +13,8 @@
   "submit": "Submit",
   "form_success": "Thank you! Your message has been received.",
   "hero_eyebrow": "Friesland's gardener guide",
-  "hero_title": "Your dream garden starts with the right gardener",
-  "hero_subtitle": "Professional gardeners in your region, carefully selected. From garden maintenance to complete redesign — compare quotes and choose with confidence.",
+  "hero_title": "Find a gardener who gets your garden",
+  "hero_subtitle": "120+ gardeners across Friesland. See their work, read neighbor reviews, get quotes. No fuss, just better gardens.",
   "free_quote": "Free quote",
   "no_obligations": "No obligations",
   "certified_gardeners": "Certified gardeners",
@@ -28,16 +28,16 @@
   "send_request": "Send request",
   "form_note": "Completely free · no spam · GDPR compliant",
   "meta": {
-    "homepage_title": "Reliable Gardeners in Friesland | Request Quote | Hovenier.frl",
-    "homepage_description": "Find the best gardeners in Friesland. Compare quotes for garden maintenance, garden design and green roofs. 150+ certified gardeners, 2300+ projects."
+    "homepage_title": "Friesland Gardeners - Compare Quotes | Hovenier.frl",
+    "homepage_description": "120+ gardeners across Friesland. See their recent work, read reviews and request quotes. Garden maintenance, redesign, green roofs - all in one place."
   },
   "sections": {
-    "services_eyebrow": "OUR SERVICES",
-    "services_title": "Professional Garden Services", 
-    "services_subtitle": "From garden maintenance to complete garden design. Our certified gardeners are ready for you.",
-    "articles_eyebrow": "GARDEN INSPIRATION",
-    "articles_title": "Tips & Inspiration",
-    "articles_subtitle": "Practical tips from experts and inspiration for your dream garden."
+    "services_eyebrow": "WHAT WE DO",
+    "services_title": "From quick fixes to complete makeovers",
+    "services_subtitle": "Whatever your garden needs - there's probably a gardener here who does it well.",
+    "articles_eyebrow": "GARDEN TIPS",
+    "articles_title": "Tips from local gardeners",
+    "articles_subtitle": "Practical advice that actually works in Frisian weather."
   },
   "buttons": {
     "view_all_services": "View All Services",

@@ -1,5 +1,4 @@
-'use client';
-import NewLeadForm from './NewLeadForm';
+import HeroLeadForm from './HeroLeadForm';
 
 interface HeroProps {
   translations: {
@@ -79,7 +78,7 @@ export default function Hero({ translations, locale }: HeroProps) {
       </div>
 
       <div className="hero-right" id="quote-form">
-        <NewLeadForm translations={translations} locale={locale} />
+        <HeroLeadForm translations={translations} locale={locale} />
       </div>
     </section>
   );

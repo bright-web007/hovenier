@@ -1,8 +1,6 @@
 // Prometheus service integration for lead form submissions
 // This is a stub implementation - replace with actual Prometheus API endpoints
 
-import ReactGA from 'react-ga4';
-
 interface LeadData {
   naam: string;
   gemeente: string;
@@ -129,9 +127,12 @@ export async function sendLeadNotification(leadData: LeadData): Promise<void> {
 
 // Lead analytics tracking
 export function trackLeadSubmission(leadData: LeadData) {
-  // Track with GA4 using react-ga4 library
-  if (typeof window !== 'undefined') {
-    ReactGA.event('lead_submission', {
+  const analytics = typeof window !== 'undefined'
+    ? (window as Window & { gtag?: (...args: unknown[]) => void }).gtag
+    : undefined;
+
+  if (typeof analytics === 'function') {
+    analytics('event', 'lead_submission', {
       event_category: 'engagement',
       gemeente: leadData.gemeente,
       service: leadData.dienst,

@@ -1,7 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Turnstile } from '@marsidev/react-turnstile';
 import { trackLeadFormSubmission } from './GoogleAnalytics';
 import { submitLeadToPrometheus } from '../services/prometheus';
 import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
@@ -48,6 +47,11 @@ const gemeenten = [
   "Waadhoeke", "Noardeast-Fryslân", "Harlingen"
 ];
 
+const TurnstileWidget = lazy(async () => {
+  const module = await import('@marsidev/react-turnstile');
+  return { default: module.Turnstile };
+});
+
 export default function NewLeadForm({ translations, locale, prefillMunicipality, serviceType }: LeadFormProps) {
   const services = [
     { value: "tuinonderhoud", label: translations.services.tuinonderhoud },
@@ -85,7 +89,6 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
     getError,
     hasError,
     isValidating,
-    hasAnyErrors,
     errors
   } = useFormValidation<NewLeadFormData>({
     schema: newLeadFormSchema,
@@ -143,17 +146,17 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
   };
 
   // Update field change handlers to include validation
-  const updateField = (field: string, value: any) => {
+  const updateField = (field: string, value: string | boolean) => {
     handleFieldChange(field, value);
     switch (field) {
-      case 'naam': setNaam(value); break;
-      case 'gemeente': setGemeente(value); break;
-      case 'dienst': setDienst(value); break;
-      case 'telefoon': setTelefoon(value); break;
-      case 'bericht': setBericht(value); break;
-      case 'postcode': setPostcode(value); break;
-      case 'bedrijf': setBedrijf(value); break;
-      case 'privacy': setPrivacy(value); break;
+      case 'naam': setNaam(String(value)); break;
+      case 'gemeente': setGemeente(String(value)); break;
+      case 'dienst': setDienst(String(value)); break;
+      case 'telefoon': setTelefoon(String(value)); break;
+      case 'bericht': setBericht(String(value)); break;
+      case 'postcode': setPostcode(String(value)); break;
+      case 'bedrijf': setBedrijf(String(value)); break;
+      case 'privacy': setPrivacy(Boolean(value)); break;
     }
   };
 
@@ -320,7 +323,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
           fieldName="privacy" 
           error={getError('privacy')}
         >
-          <label className="flex items-start gap-3">
+          <label className="form-checkbox-row">
             <input 
               type="checkbox" 
               id="privacy" 
@@ -328,7 +331,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
               checked={privacy}
               onChange={(e) => updateField('privacy', e.target.checked)}
               required
-              className="mt-1 flex-shrink-0"
+              className="form-checkbox"
               aria-invalid={hasError('privacy')}
               aria-describedby={hasError('privacy') ? 'privacy-error' : undefined}
             />
@@ -365,12 +368,14 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
               ⚠️ Development mode: Turnstile CAPTCHA bypassed for testing
             </div>
           ) : (
-            <Turnstile
-              siteKey={securityKeys.turnstile.siteKey}
-              onSuccess={setTurnstileToken}
-              onError={() => setTurnstileToken(null)}
-              onExpire={() => setTurnstileToken(null)}
-            />
+            <Suspense fallback={<div className="form-note">Beveiligingscontrole laden...</div>}>
+              <TurnstileWidget
+                siteKey={securityKeys.turnstile.siteKey}
+                onSuccess={setTurnstileToken}
+                onError={() => setTurnstileToken(null)}
+                onExpire={() => setTurnstileToken(null)}
+              />
+            </Suspense>
           )}
         </FormField>
         

@@ -219,7 +219,7 @@ export default function GA4TestPage() {
           <div>Analytics in Dev: {process.env.ENABLE_ANALYTICS_IN_DEV || 'false'}</div>
           <div>Base URL: {process.env.NEXT_PUBLIC_BASE_URL || 'not set'}</div>
           <div>User Agent: {typeof window !== 'undefined' ? window.navigator.userAgent.substring(0, 80) + '...' : 'Server'}</div>
-          <div>gtag available: {typeof window !== 'undefined' && typeof (window as any).gtag === 'function' ? '✅ Yes' : '❌ No (now using react-ga4)'}</div>
+          <div>gtag available: {typeof window !== 'undefined' && typeof (window as any).gtag === 'function' ? '✅ Yes' : '❌ No'}</div>
           <div>dataLayer: {typeof window !== 'undefined' && (window as any).dataLayer && Array.isArray((window as any).dataLayer) ? `✅ ${(window as any).dataLayer.length} items` : '❌ No'}</div>
         </div>
       </div>

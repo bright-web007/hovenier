@@ -82,7 +82,7 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
   };
 
   const initializeServices = (prefs: ConsentPreferences) => {
-    // Update Google Analytics consent (react-ga4 handles all gtag calls)
+    // Update Google Analytics consent state for the lightweight loader.
     updateAnalyticsConsent(prefs.analytics);
     
     // Initialize other services based on consent

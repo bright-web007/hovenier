@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap');
-
 :root {
   --forest: #2a3e20;
   --forest-deep: #1c3a12;
@@ -19,8 +17,8 @@
   --white: #ffffff;
   --border: rgba(42,62,32,0.12);
   --border-med: rgba(42,62,32,0.2);
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'DM Sans', system-ui, sans-serif;
+  --serif: var(--font-serif), Georgia, serif;
+  --sans: var(--font-sans), system-ui, sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; height: 100%; }
@@ -116,8 +114,8 @@ a { text-decoration: none; color: inherit; }
   position: absolute; right: 60px; bottom: 60px; width: 120px; height: 120px;
   border-radius: 50%; border: 25px solid rgba(138,184,122,0.02);
 }
-.hero-eyebrow { position: relative; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); font-weight: 500; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
-.hero-eyebrow::before { content: ''; width: 28px; height: 0.5px; background: var(--sage); display: block; flex-shrink: 0; }
+.hero-eyebrow { position: relative; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #b8d6ad; font-weight: 500; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
+.hero-eyebrow::before { content: ''; width: 28px; height: 0.5px; background: #b8d6ad; display: block; flex-shrink: 0; }
 .hero-h1 { position: relative; font-family: var(--serif); font-size: 58px; line-height: 1.05; color: var(--cream); font-weight: 600; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
 .hero-h1 em { color: var(--sage); font-style: italic; }
 .hero-sub { position: relative; font-size: 15px; color: var(--sage-light); line-height: 1.6; max-width: 420px; font-weight: 300; margin-bottom: 2rem; }
@@ -126,7 +124,7 @@ a { text-decoration: none; color: inherit; }
 .badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
 .hero-stats { position: relative; display: flex; gap: 3rem; padding-top: 2.5rem; border-top: 0.5px solid rgba(255,255,255,0.07); }
 .stat-num { font-family: var(--serif); font-size: 36px; font-weight: 600; color: var(--cream); line-height: 1; }
-.stat-label { font-size: 10px; color: #6a8a60; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 5px; }
+.stat-label { font-size: 10px; color: #b8d6ad; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 5px; }
 
 /* FORM PANEL */
 .hero-right {
@@ -142,7 +140,19 @@ a { text-decoration: none; color: inherit; }
 .form-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 1.75rem; line-height: 1.65; }
 .form-field { margin-bottom: 11px; }
 .form-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-mid); font-weight: 500; display: block; margin-bottom: 5px; }
-.form-checkbox-text { font-size: 13px; color: var(--text); line-height: 1.5; }
+.form-checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 0.875rem 0;
+}
+.form-checkbox {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.1875rem;
+  flex-shrink: 0;
+}
+.form-checkbox-text { font-size: 13px; color: var(--text); line-height: 1.6; }
 .form-checkbox-text a { color: var(--forest); text-decoration: underline; transition: color 0.15s; }
 .form-checkbox-text a:hover { color: var(--forest-deep); }
 .form-input, .form-select {
@@ -164,7 +174,7 @@ a { text-decoration: none; color: inherit; }
   transition: background 0.2s;
 }
 .form-btn:hover { background: var(--forest-mid); }
-.form-note { font-size: 10px; color: var(--text-faint); text-align: center; margin-top: 10px; letter-spacing: 0.04em; }
+.form-note { font-size: 10px; color: #66735c; text-align: center; margin-top: 10px; letter-spacing: 0.04em; }
 
 /* TRUST STRIP */
 .trust-strip {
@@ -240,6 +250,10 @@ a { text-decoration: none; color: inherit; }
 .see-all { font-size: 12px; color: var(--forest); letter-spacing: 0.06em; border-bottom: 0.5px solid var(--forest); padding-bottom: 2px; cursor: pointer; white-space: nowrap; }
 
 .section-services { background: var(--white); }
+.section-deferred {
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
+}
 
 .section-centered {
   text-align: center;

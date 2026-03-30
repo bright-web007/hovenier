@@ -2,108 +2,25 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import ReactGA from 'react-ga4';
-
-/**
- * Google Analytics 4 (GA4) using react-ga4 library
- * 
- * Proven library that handles:
- * - Race conditions
- * - Consent management
- * - Cross-origin requests
- * - All edge cases
- */
 
 interface GoogleAnalyticsProps {
   gaId: string;
 }
 
-const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
-  const pathname = usePathname();
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+  }
+}
 
-  useEffect(() => {
-    if (!gaId) {
-      if (process.env.NODE_ENV === 'development') {
-        console.warn('🚨 GA4: No measurement ID provided');
-      }
-      return;
-    }
+const ANALYTICS_CONSENT_EVENT = 'analytics-consent-changed';
+let analyticsLoaded = false;
+let analyticsInitialized = false;
 
-    // Check consent
-    const isDevelopment = process.env.NODE_ENV === 'development';
-    const hasAnalyticsConsent = isDevelopment || checkAnalyticsConsent();
-
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🔧 GA4 Setup:', {
-        measurementId: gaId,
-        isDevelopment,
-        hasAnalyticsConsent,
-        consentStatus: hasAnalyticsConsent ? 'GRANTED' : 'DENIED'
-      });
-    }
-
-    // Initialize react-ga4
-    ReactGA.initialize(gaId, {
-      gtagOptions: {
-        anonymize_ip: true,
-        allow_google_signals: hasAnalyticsConsent,
-        allow_ad_personalization_signals: false,
-        debug_mode: process.env.NODE_ENV === 'development',
-        send_page_view: false, // We'll handle page views manually
-      }
-    });
-
-    // Set consent
-    ReactGA.gtag('consent', 'default', {
-      analytics_storage: hasAnalyticsConsent ? 'granted' : 'denied',
-      ad_storage: 'denied',
-      personalization_storage: 'denied',
-      functionality_storage: 'granted',
-      security_storage: 'granted',
-    });
-
-    if (process.env.NODE_ENV === 'development') {
-      console.log('✅ GA4 Initialized with react-ga4');
-      
-      // Test event
-      ReactGA.event('test_event', {
-        event_category: 'development',
-        event_label: 'initialization_test',
-        value: 1
-      });
-      
-      console.log('🧪 GA4 Test event sent via react-ga4');
-    }
-
-  }, [gaId]);
-
-  // Track page views on route change  
-  useEffect(() => {
-    if (!gaId) return;
-    
-    const isDevelopment = process.env.NODE_ENV === 'development';
-    const hasConsent = isDevelopment || checkAnalyticsConsent();
-    
-    if (hasConsent) {
-      ReactGA.send({ 
-        hitType: 'pageview', 
-        page: pathname,
-        title: document.title
-      });
-      
-      if (process.env.NODE_ENV === 'development') {
-        console.log('📄 GA4 Page View:', { path: pathname, title: document.title });
-      }
-    }
-  }, [pathname, gaId]);
-
-  return null; // react-ga4 handles everything internally
-};
-
-// Check if user has given analytics consent
 function checkAnalyticsConsent(): boolean {
   if (typeof window === 'undefined') return false;
-  
+
   try {
     const consent = localStorage.getItem('cookie_consent_preferences');
     if (consent) {
@@ -113,18 +30,128 @@ function checkAnalyticsConsent(): boolean {
   } catch (error) {
     console.warn('Error checking analytics consent:', error);
   }
-  
+
   return false;
 }
 
-// Utility functions using react-ga4
+function gtag(...args: unknown[]) {
+  if (typeof window === 'undefined') return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(args);
+}
+
+function loadAnalyticsScript(gaId: string) {
+  if (typeof window === 'undefined' || !gaId || analyticsLoaded) return;
+
+  analyticsLoaded = true;
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+  document.head.appendChild(script);
+}
+
+function initializeAnalytics(gaId: string, hasConsent: boolean) {
+  if (typeof window === 'undefined' || !gaId) return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('consent', 'default', {
+    analytics_storage: hasConsent ? 'granted' : 'denied',
+    ad_storage: 'denied',
+    personalization_storage: 'denied',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+  });
+
+  if (!analyticsInitialized) {
+    gtag('config', gaId, {
+      anonymize_ip: true,
+      allow_google_signals: hasConsent,
+      allow_ad_personalization_signals: false,
+      send_page_view: false,
+    });
+    analyticsInitialized = true;
+  }
+}
+
+function ensureAnalytics(gaId: string, hasConsent: boolean) {
+  if (!gaId || !hasConsent) return;
+
+  const scheduleLoad = () => {
+    loadAnalyticsScript(gaId);
+    initializeAnalytics(gaId, hasConsent);
+  };
+
+  if (typeof window !== 'undefined' && window.requestIdleCallback) {
+    window.requestIdleCallback(scheduleLoad, { timeout: 2000 });
+    return;
+  }
+
+  window.setTimeout(scheduleLoad, 1500);
+}
+
+const GoogleAnalytics = ({ gaId }: GoogleAnalyticsProps) => {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    const hasAnalyticsConsent = isDevelopment || checkAnalyticsConsent();
+    ensureAnalytics(gaId, hasAnalyticsConsent);
+  }, [gaId]);
+
+  useEffect(() => {
+    if (!gaId) return;
+
+    const handleConsentChange = (event: Event) => {
+      const customEvent = event as CustomEvent<{ granted?: boolean }>;
+      const granted = customEvent.detail?.granted === true;
+
+      if (granted) {
+        ensureAnalytics(gaId, true);
+        window.setTimeout(() => {
+          window.gtag?.('event', 'page_view', {
+            page_path: window.location.pathname,
+            page_title: document.title,
+          });
+        }, 0);
+        return;
+      }
+
+      window.gtag?.('consent', 'update', {
+        analytics_storage: 'denied',
+      });
+    };
+
+    window.addEventListener(ANALYTICS_CONSENT_EVENT, handleConsentChange);
+    return () => window.removeEventListener(ANALYTICS_CONSENT_EVENT, handleConsentChange);
+  }, [gaId]);
+
+  useEffect(() => {
+    if (!gaId) return;
+
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    const hasConsent = isDevelopment || checkAnalyticsConsent();
+
+    if (hasConsent) {
+      ensureAnalytics(gaId, true);
+      window.gtag?.('event', 'page_view', {
+        page_path: pathname,
+        page_title: document.title,
+      });
+    }
+  }, [pathname, gaId]);
+
+  return null;
+};
+
 export const trackEvent = (
   eventName: string,
-  parameters: Record<string, any> = {}
+  parameters: Record<string, unknown> = {}
 ) => {
   const isDevelopment = process.env.NODE_ENV === 'development';
   if (isDevelopment || checkAnalyticsConsent()) {
-    ReactGA.event(eventName, parameters);
+    window.gtag?.('event', eventName, parameters);
   }
 };
 
@@ -134,7 +161,7 @@ export const trackConversion = (
   value?: number
 ) => {
   if (checkAnalyticsConsent()) {
-    ReactGA.gtag('event', 'conversion', {
+    window.gtag?.('event', 'conversion', {
       send_to: conversionLabel ? `${conversionId}/${conversionLabel}` : conversionId,
       value: value || 1,
       currency: 'EUR'
@@ -148,7 +175,7 @@ export const trackLeadFormSubmission = (
 ) => {
   const isDevelopment = process.env.NODE_ENV === 'development';
   if (isDevelopment || checkAnalyticsConsent()) {
-    ReactGA.event('generate_lead', {
+    window.gtag?.('event', 'generate_lead', {
       event_category: 'engagement',
       event_label: gemeente ? `gemeente_${gemeente}` : 'form_submission',
       custom_parameter_1: service || 'general',
@@ -157,11 +184,10 @@ export const trackLeadFormSubmission = (
   }
 };
 
-// Additional tracking functions
 export const trackPhoneClick = (phoneNumber?: string) => {
   const isDevelopment = process.env.NODE_ENV === 'development';
   if (isDevelopment || checkAnalyticsConsent()) {
-    ReactGA.event('phone_click', {
+    window.gtag?.('event', 'phone_click', {
       event_category: 'engagement',
       event_label: phoneNumber || 'unknown',
       value: 1
@@ -172,7 +198,7 @@ export const trackPhoneClick = (phoneNumber?: string) => {
 export const trackWhatsAppClick = (phoneNumber?: string) => {
   const isDevelopment = process.env.NODE_ENV === 'development';
   if (isDevelopment || checkAnalyticsConsent()) {
-    ReactGA.event('whatsapp_click', {
+    window.gtag?.('event', 'whatsapp_click', {
       event_category: 'engagement',
       event_label: phoneNumber || 'unknown',
       value: 1
@@ -183,7 +209,7 @@ export const trackWhatsAppClick = (phoneNumber?: string) => {
 export const trackEmailClick = (email?: string) => {
   const isDevelopment = process.env.NODE_ENV === 'development';
   if (isDevelopment || checkAnalyticsConsent()) {
-    ReactGA.event('email_click', {
+    window.gtag?.('event', 'email_click', {
       event_category: 'engagement',
       event_label: email || 'unknown',
       value: 1
@@ -194,7 +220,7 @@ export const trackEmailClick = (email?: string) => {
 export const trackServicePageView = (service?: string) => {
   const isDevelopment = process.env.NODE_ENV === 'development';
   if (isDevelopment || checkAnalyticsConsent()) {
-    ReactGA.event('service_page', {
+    window.gtag?.('event', 'service_page', {
       event_category: 'page_view',
       event_label: service || 'unknown',
       value: 1
@@ -205,7 +231,7 @@ export const trackServicePageView = (service?: string) => {
 export const trackGemeentePageView = (gemeente?: string) => {
   const isDevelopment = process.env.NODE_ENV === 'development';
   if (isDevelopment || checkAnalyticsConsent()) {
-    ReactGA.event('gemeente_page', {
+    window.gtag?.('event', 'gemeente_page', {
       event_category: 'page_view',
       event_label: gemeente || 'unknown',
       value: 1
@@ -216,7 +242,7 @@ export const trackGemeentePageView = (gemeente?: string) => {
 export const trackArticleView = (article?: string, category?: string) => {
   const isDevelopment = process.env.NODE_ENV === 'development';
   if (isDevelopment || checkAnalyticsConsent()) {
-    ReactGA.event('article_view', {
+    window.gtag?.('event', 'article_view', {
       event_category: 'content',
       event_label: article || 'unknown',
       custom_parameter_1: category || 'general',
@@ -225,18 +251,15 @@ export const trackArticleView = (article?: string, category?: string) => {
   }
 };
 
-// Function to update analytics consent and reinitialize if needed
 export const updateAnalyticsConsent = (hasConsent: boolean) => {
   if (typeof window === 'undefined') return;
-  
-  // Update consent via react-ga4
-  ReactGA.gtag('consent', 'update', {
+
+  window.gtag?.('consent', 'update', {
     analytics_storage: hasConsent ? 'granted' : 'denied',
   });
-  
-  if (process.env.NODE_ENV === 'development') {
-    console.log('🍪 GA4 Consent Updated:', hasConsent ? 'GRANTED' : 'DENIED');
-  }
+  window.dispatchEvent(new CustomEvent(ANALYTICS_CONSENT_EVENT, {
+    detail: { granted: hasConsent },
+  }));
 };
 
 export default GoogleAnalytics;

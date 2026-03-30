@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import PerformanceInitializer from "./components/PerformanceInitializer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sansFont = DM_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const serifFont = Cormorant_Garamond({
+  variable: "--font-serif",
   subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -95,8 +99,6 @@ export default function RootLayout({
   return (
     <html lang="nl">
       <head>
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || ''} />
-        
         {/* PWA Meta Tags */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -118,19 +120,9 @@ export default function RootLayout({
         
         {/* Manifest for PWA */}
         <link rel="manifest" href="/manifest.json" />
-        
-        {/* DNS prefetch */}
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="//www.google-analytics.com" />
-        
-        {/* Preconnect */}
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* Prefetch next page resources */}
-        <link rel="prefetch" href="/diensten/tuinonderhoud" />
-        <link rel="prefetch" href="/regio/leeuwarden" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${sansFont.variable} ${serifFont.variable}`}>
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || ''} />
         <PerformanceInitializer />
         {children}
       </body>

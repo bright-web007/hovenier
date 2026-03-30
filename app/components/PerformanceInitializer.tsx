@@ -1,61 +1,35 @@
 'use client';
 
 import { useEffect } from 'react';
-import { initializePerformanceOptimizations } from '../services/performance';
 
 export default function PerformanceInitializer() {
   useEffect(() => {
-    // Initialize performance optimizations on client side
-    initializePerformanceOptimizations();
-
-    // Register service worker for production
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
-      window.addEventListener('load', async () => {
+      const registerServiceWorker = async () => {
         try {
           const registration = await navigator.serviceWorker.register('/sw.js', {
             scope: '/'
           });
-          
-          console.log('SW registered: ', registration);
 
-          // Handle updates
           registration.addEventListener('updatefound', () => {
             const newWorker = registration.installing;
-            if (newWorker) {
-              newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  // Show update available notification
-                  showUpdateAvailableNotification();
-                }
-              });
-            }
+            if (!newWorker) return;
+
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                showUpdateAvailableNotification();
+              }
+            });
           });
-
-        } catch (registrationError) {
-          console.log('SW registration failed: ', registrationError);
+        } catch {
+          // Keep startup silent when registration fails.
         }
-      });
+      };
+
+      window.addEventListener('load', registerServiceWorker, { once: true });
     }
 
-    // Handle app install prompt
-    let deferredPrompt: any;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      showInstallPrompt();
-    });
-
-    // Handle app install
-    function showInstallPrompt() {
-      // You could show a custom install prompt here
-      // For now, we'll just log it
-      console.log('App can be installed');
-    }
-
-    // Handle offline/online events
     function handleOnline() {
-      console.log('App is online');
-      // Hide offline banner if it exists
       const offlineBanner = document.getElementById('offline-banner');
       if (offlineBanner) {
         offlineBanner.style.display = 'none';
@@ -63,8 +37,6 @@ export default function PerformanceInitializer() {
     }
 
     function handleOffline() {
-      console.log('App is offline');
-      // Show offline banner
       showOfflineBanner();
     }
 
@@ -77,7 +49,7 @@ export default function PerformanceInitializer() {
     };
   }, []);
 
-  return null; // This component doesn't render anything visible
+  return null;
 }
 
 function showUpdateAvailableNotification() {

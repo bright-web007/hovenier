@@ -53,10 +53,10 @@ export default function Navigation({ locale, translations = {} }: NavigationProp
           <img src="/assets/logo-light.svg" alt="Hovenier.frl - Vind de beste hovenier in Friesland" width="180" height="40" className="nav-logo-image" />
         </Link>
         <div className="nav-links">
-          <Link href={localizePath('/hoveniers', currentLocale)} className="nav-link">{t.gardeners}</Link>
-          <Link href={localizePath('/diensten', currentLocale)} className="nav-link">{t.services}</Link>
-          <Link href={localizePath('/regio', currentLocale)} className="nav-link">{t.regions}</Link>
-          <Link href={localizePath('/kosten', currentLocale)} className="nav-link">{t.costs}</Link>
+          <Link href={localizePath('/hoveniers', currentLocale)} className="nav-link" prefetch={false}>{t.gardeners}</Link>
+          <Link href={localizePath('/diensten', currentLocale)} className="nav-link" prefetch={false}>{t.services}</Link>
+          <Link href={localizePath('/regio', currentLocale)} className="nav-link" prefetch={false}>{t.regions}</Link>
+          <Link href={localizePath('/kosten', currentLocale)} className="nav-link" prefetch={false}>{t.costs}</Link>
           <div className="lang-toggle" role="group" aria-label="Taal selectie">
             <button 
               className={`lang-btn ${currentLocale === 'nl' ? 'active' : 'inactive'}`} 

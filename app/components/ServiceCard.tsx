@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 interface ServiceCardProps {
-  t?: (key: string) => string;
   title: string;
   description: string;
   imageUrl?: string;
@@ -19,7 +18,6 @@ interface ServiceCardProps {
 }
 
 export default function ServiceCard({
-  t = (key: string) => key,
   title,
   description,
   imageUrl,
@@ -46,7 +44,7 @@ export default function ServiceCard({
             src={imageUrl}
             alt={title}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 767px) calc(100vw - 3rem), (max-width: 1200px) calc(50vw - 3rem), 380px"
           />
         </div>
       ) : (
@@ -94,7 +92,12 @@ export default function ServiceCard({
             </div>
           )}
           
-          <Link href={href} className="service-card-link">
+          <Link
+            href={href}
+            className="service-card-link"
+            aria-label={`Meer info over ${title}`}
+            prefetch={false}
+          >
             Meer info
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

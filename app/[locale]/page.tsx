@@ -163,7 +163,7 @@ export default async function HomePage({ params }: Props) {
         />
         
         {/* Services Section */}
-        <section className="section section-services">
+        <section className="section section-services section-deferred">
           <div className="section-inner">
             <div className="section-header-row section-centered">
               <div>
@@ -223,7 +223,7 @@ export default async function HomePage({ params }: Props) {
             </div>
             
             <div className="section-centered">
-              <Link href={localizePath('/services', validLocale as SupportedLocale)} className="nav-cta nav-cta-large">
+              <Link href={localizePath('/services', validLocale as SupportedLocale)} className="nav-cta nav-cta-large" prefetch={false}>
                 {translations.buttons_view_all_services || 'Alle Diensten Bekijken'}
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

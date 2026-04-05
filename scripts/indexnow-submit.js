@@ -12,7 +12,13 @@
 require('dotenv').config({ path: '.env.local' });
 
 const KEY = process.env.INDEXNOW_KEY;
-const BASE_URL = (process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl').replace(/\/$/, '');
+// SITE_URL takes priority so running locally (where NEXT_PUBLIC_BASE_URL=http://localhost:3000)
+// doesn't accidentally submit with host=localhost. Always pass the production origin.
+const BASE_URL = (
+  process.env.SITE_URL ||
+  (process.env.NEXT_PUBLIC_BASE_URL?.includes('localhost') ? null : process.env.NEXT_PUBLIC_BASE_URL) ||
+  'https://hovenier.frl'
+).replace(/\/$/, '');
 const HOST = new URL(BASE_URL).hostname;
 
 if (!KEY) {

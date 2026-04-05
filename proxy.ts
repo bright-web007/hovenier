@@ -10,11 +10,17 @@ import {
 
 export default function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
-  const hostname = request.headers.get('host') || '';
+  const hostname = request.headers.get('host') || 'hovenier.frl';
+
+  // In Docker standalone mode request.nextUrl.hostname resolves to '0.0.0.0'
+  // because the server binds to that address. Always override with the real
+  // hostname from the Host header so redirects point to the correct domain.
+  const cleanHostname = hostname.replace(/^www\./, '').split(':')[0] || 'hovenier.frl';
+  url.hostname = cleanHostname;
+  url.port = '';
 
   // Handle www -> non-www redirect (for SEO domain consistency)
   if (hostname.startsWith('www.')) {
-    url.hostname = hostname.replace('www.', '');
     return NextResponse.redirect(url, { status: 301 });
   }
 
@@ -53,12 +59,16 @@ export default function proxy(request: NextRequest) {
 
   if (pathname !== canonicalPublicPath) {
     const url = request.nextUrl.clone();
+    url.hostname = cleanHostname;
+    url.port = '';
     url.pathname = canonicalPublicPath;
     return NextResponse.redirect(url, 308);
   }
 
   if (canonicalPublicPath !== internalLocalizedPath) {
     const url = request.nextUrl.clone();
+    url.hostname = cleanHostname;
+    url.port = '';
     url.pathname = internalLocalizedPath;
     return NextResponse.rewrite(url);
   }

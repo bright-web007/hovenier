@@ -62,80 +62,29 @@ describe('proxy.ts', () => {
     localeUtils.localizePath.mockReturnValue('/');
   });
 
-  describe('Domain redirects (newly added functionality)', () => {
-    test('should redirect www.hovenier.frl to hovenier.frl with 301', () => {
-      // Setup
+  describe('Domain redirects (handled at ingress level — not in proxy)', () => {
+    test('should NOT redirect www to non-www (ingress responsibility)', () => {
       mockHeaders.set('host', 'www.hovenier.frl');
       mockNextUrl.hostname = 'www.hovenier.frl';
 
       const { NextResponse } = require('next/server');
-
-      // Execute
       proxy(mockRequest);
 
-      // Assert
-      expect(mockNextUrl.hostname).toBe('hovenier.frl'); // hostname should be stripped
-      expect(NextResponse.redirect).toHaveBeenCalledWith(mockNextUrl, { status: 301 });
+      expect(NextResponse.redirect).not.toHaveBeenCalledWith(
+        expect.anything(), { status: 301 }
+      );
     });
 
-    test('should redirect HTTP to HTTPS in production with 301', () => {
-      // Setup
-      const originalEnv = process.env.NODE_ENV;
-      process.env.NODE_ENV = 'production';
+    test('should NOT redirect HTTP to HTTPS (ingress responsibility)', () => {
       mockHeaders.set('host', 'hovenier.frl');
       mockNextUrl.protocol = 'http:';
 
       const { NextResponse } = require('next/server');
-
-      // Execute
       proxy(mockRequest);
 
-      // Assert
-      expect(mockNextUrl.protocol).toBe('https:');
-      expect(NextResponse.redirect).toHaveBeenCalledWith(mockNextUrl, { status: 301 });
-      
-      // Cleanup
-      process.env.NODE_ENV = originalEnv;
-    });
-
-    test('should NOT redirect HTTP to HTTPS in development', () => {
-      // Setup
-      const originalEnv = process.env.NODE_ENV;
-      process.env.NODE_ENV = 'development';
-      mockHeaders.set('host', 'hovenier.frl');
-      mockNextUrl.protocol = 'http:';
-
-      const { NextResponse } = require('next/server');
-
-      // Execute
-      const result = proxy(mockRequest);
-
-      // Assert - should not redirect, should continue to locale logic
-      expect(NextResponse.redirect).not.toHaveBeenCalled();
-      
-      // Cleanup
-      process.env.NODE_ENV = originalEnv;
-    });
-
-    test('should handle both www and HTTP redirects with www taking priority', () => {
-      // Setup
-      const originalEnv = process.env.NODE_ENV;
-      process.env.NODE_ENV = 'production';
-      mockHeaders.set('host', 'www.hovenier.frl');
-      mockNextUrl.hostname = 'www.hovenier.frl';
-      mockNextUrl.protocol = 'http:';
-
-      const { NextResponse } = require('next/server');
-
-      // Execute
-      proxy(mockRequest);
-
-      // Assert - should redirect for www first (not HTTPS)
-      expect(mockNextUrl.hostname).toBe('hovenier.frl');
-      expect(NextResponse.redirect).toHaveBeenCalledWith(mockNextUrl, { status: 301 });
-      
-      // Cleanup
-      process.env.NODE_ENV = originalEnv;
+      expect(NextResponse.redirect).not.toHaveBeenCalledWith(
+        expect.anything(), { status: 301 }
+      );
     });
   });
 

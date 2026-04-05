@@ -9,26 +9,13 @@ import {
 } from './lib/locale-utils';
 
 export default function proxy(request: NextRequest) {
-  const url = request.nextUrl.clone();
-  const hostname = request.headers.get('host') || 'hovenier.frl';
+  const host = request.headers.get('host') || 'hovenier.frl';
 
-  // In Docker standalone mode request.nextUrl.hostname resolves to '0.0.0.0'
-  // because the server binds to that address. Always override with the real
-  // hostname from the Host header so redirects point to the correct domain.
-  const cleanHostname = hostname.replace(/^www\./, '').split(':')[0] || 'hovenier.frl';
-  url.hostname = cleanHostname;
-  url.port = '';
-
-  // Handle www -> non-www redirect (for SEO domain consistency)
-  if (hostname.startsWith('www.')) {
-    return NextResponse.redirect(url, { status: 301 });
-  }
-
-  // Handle HTTP -> HTTPS redirect (though this is usually handled by hosting)
-  if (url.protocol === 'http:' && process.env.NODE_ENV === 'production') {
-    url.protocol = 'https:';
-    return NextResponse.redirect(url, { status: 301 });
-  }
+  // In Docker standalone mode request.nextUrl.hostname is '0.0.0.0' (the
+  // internal bind address). Derive the real hostname and port from the Host
+  // header so any redirect/rewrite URL targets the correct domain.
+  // www normalisation and HTTP→HTTPS are handled at the ingress level.
+  const [cleanHostname, cleanPort = ''] = host.split(':');
 
   const { pathname } = request.nextUrl;
   const requestLocale = getPathLocale(pathname);
@@ -60,7 +47,7 @@ export default function proxy(request: NextRequest) {
   if (pathname !== canonicalPublicPath) {
     const url = request.nextUrl.clone();
     url.hostname = cleanHostname;
-    url.port = '';
+    url.port = cleanPort;
     url.pathname = canonicalPublicPath;
     return NextResponse.redirect(url, 308);
   }
@@ -68,7 +55,7 @@ export default function proxy(request: NextRequest) {
   if (canonicalPublicPath !== internalLocalizedPath) {
     const url = request.nextUrl.clone();
     url.hostname = cleanHostname;
-    url.port = '';
+    url.port = cleanPort;
     url.pathname = internalLocalizedPath;
     return NextResponse.rewrite(url);
   }

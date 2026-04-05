@@ -17,6 +17,14 @@ export default function proxy(request: NextRequest) {
   // www normalisation and HTTP→HTTPS are handled at the ingress level.
   const [cleanHostname, cleanPort = ''] = host.split(':');
 
+  // Honour X-Forwarded-Proto set by Cloudflare/ingress so that redirects
+  // issued by this proxy use the protocol the *client* used (https), not
+  // the protocol the ingress used to reach the origin (http). Without this,
+  // a 308 redirect sends the browser to http://, Cloudflare upgrades it back
+  // to https://, which hits the app again over http:// — infinite loop.
+  const forwardedProto = request.headers.get('x-forwarded-proto');
+  const clientProtocol = forwardedProto === 'https' ? 'https:' : request.nextUrl.protocol;
+
   const { pathname } = request.nextUrl;
   const requestLocale = getPathLocale(pathname);
   const normalizedPathname = stripLocalePrefix(pathname);
@@ -46,6 +54,7 @@ export default function proxy(request: NextRequest) {
 
   if (pathname !== canonicalPublicPath) {
     const url = request.nextUrl.clone();
+    url.protocol = clientProtocol;
     url.hostname = cleanHostname;
     url.port = cleanPort;
     url.pathname = canonicalPublicPath;
@@ -54,6 +63,7 @@ export default function proxy(request: NextRequest) {
 
   if (canonicalPublicPath !== internalLocalizedPath) {
     const url = request.nextUrl.clone();
+    url.protocol = clientProtocol;
     url.hostname = cleanHostname;
     url.port = cleanPort;
     url.pathname = internalLocalizedPath;

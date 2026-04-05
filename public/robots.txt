@@ -1,56 +1,91 @@
+# General crawler rules
 User-agent: *
 Allow: /
+Allow: /_next/static/
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /api/
+Disallow: /_next/data/
 
-# Explicitly allow AI crawlers for content training and indexing
+# Explicitly allow AI crawlers while keeping sensitive paths blocked
 User-agent: ChatGPT-User
 Allow: /
+Allow: /_next/static/
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /api/
+Disallow: /_next/data/
 
 User-agent: GPTBot
 Allow: /
+Allow: /_next/static/
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /api/
+Disallow: /_next/data/
 
 User-agent: Claude-Web
 Allow: /
+Allow: /_next/static/
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /api/
+Disallow: /_next/data/
 
 User-agent: ClaudeBot
 Allow: /
+Allow: /_next/static/
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /api/
+Disallow: /_next/data/
 
 User-agent: Bard
 Allow: /
+Allow: /_next/static/
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /api/
+Disallow: /_next/data/
 
 User-agent: GoogleVertexAI
 Allow: /
+Allow: /_next/static/
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /api/
+Disallow: /_next/data/
 
 User-agent: BingBot
 Allow: /
+Allow: /_next/static/
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /api/
+Disallow: /_next/data/
 
 User-agent: CCBot
 Allow: /
+Allow: /_next/static/
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /api/
+Disallow: /_next/data/
 
 User-agent: anthropic-ai
 Allow: /
+Allow: /_next/static/
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /api/
+Disallow: /_next/data/
 
 User-agent: Meta-ExternalAgent
 Allow: /
-
-# Block admin and internal pages
+Allow: /_next/static/
 Disallow: /admin/
 Disallow: /staging/
-Disallow: /_next/
 Disallow: /api/
+Disallow: /_next/data/
 
-# Allow important pages explicitly
-Allow: /
-Allow: /bedankt
-Allow: /diensten/
-Allow: /en/diensten/
-Allow: /regio/
-Allow: /samenwerking
-Allow: /articles/
-
-# Sitemap locations
 Sitemap: https://hovenier.frl/sitemap.xml
-Sitemap: https://hovenier.frl/sitemap-0.xml
-Sitemap: https://hovenier.frl/sitemap.xml
-
-# Crawl delay (be respectful to server resources)
-Crawl-delay: 1

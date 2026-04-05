@@ -76,9 +76,11 @@ Examples:
 ```
 User-agent: *
 Allow: /
+Allow: /_next/static/
 Disallow: /api/
-Disallow: /_next/
+Disallow: /_next/data/
 Disallow: /admin/
+Disallow: /staging/
 
 Sitemap: https://hovenier.frl/sitemap.xml
 ```

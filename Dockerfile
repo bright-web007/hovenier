@@ -36,7 +36,8 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
-ENV INDEXNOW_KEY=27b83659df554b2990b9aa2591489179
+# INDEXNOW_KEY is intentionally not baked in here — pass it at runtime
+# via your k8s secret or docker-compose env so it's not visible in image layers.
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs

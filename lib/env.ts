@@ -84,6 +84,9 @@ export const envSchema = z.object({
   NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY: turnstileSiteKeySchema,
   CLOUDFLARE_TURNSTILE_SECRET_KEY: turnstileSecretKeySchema,
   
+  // IndexNow (instant search engine pinging)
+  INDEXNOW_KEY: z.string().min(8).optional(),
+
   // Development & Analytics Settings
   ENABLE_ANALYTICS_IN_DEV: booleanFromString.optional().default(false),
   NEXT_TELEMETRY_DISABLED: z.string().optional().default('0'),
@@ -151,6 +154,7 @@ function createFallbackEnv(): Env {
     NEXUS_PROJECT_API_SECRET: process.env.NEXUS_PROJECT_API_SECRET || '',
     NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY || '',
     CLOUDFLARE_TURNSTILE_SECRET_KEY: process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY || '',
+    INDEXNOW_KEY: process.env.INDEXNOW_KEY,
     ENABLE_ANALYTICS_IN_DEV: process.env.ENABLE_ANALYTICS_IN_DEV === 'true',
     NEXT_TELEMETRY_DISABLED: process.env.NEXT_TELEMETRY_DISABLED || '0',
     

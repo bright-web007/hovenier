@@ -11,19 +11,27 @@ import {
 export default function proxy(request: NextRequest) {
   const host = request.headers.get('host') || 'hovenier.frl';
 
-  // In Docker standalone mode request.nextUrl.hostname is '0.0.0.0' (the
-  // internal bind address). Derive the real hostname and port from the Host
-  // header so any redirect/rewrite URL targets the correct domain.
-  // www normalisation and HTTP→HTTPS are handled at the ingress level.
+  // Derive the real hostname and port from the Host header.
+  // In Docker standalone mode request.nextUrl.hostname is '0.0.0.0'.
   const [cleanHostname, cleanPort = ''] = host.split(':');
 
-  // Honour X-Forwarded-Proto set by Cloudflare/ingress so that redirects
-  // issued by this proxy use the protocol the *client* used (https), not
-  // the protocol the ingress used to reach the origin (http). Without this,
-  // a 308 redirect sends the browser to http://, Cloudflare upgrades it back
-  // to https://, which hits the app again over http:// — infinite loop.
+  // Determine the correct public-facing protocol for user-visible 308 redirects.
+  // Check X-Forwarded-Proto (Cloudflare/ingress) and CF-Visitor as fallbacks.
+  // Default to https in production — without this, a 308 to http:// gets
+  // upgraded by Cloudflare, hits the origin again over http://, produces
+  // another 308, etc (infinite loop). nginx sidecars often strip
+  // X-Forwarded-Proto so we cannot rely on it alone.
   const forwardedProto = request.headers.get('x-forwarded-proto');
-  const clientProtocol = forwardedProto === 'https' ? 'https:' : request.nextUrl.protocol;
+  const cfVisitorScheme = (() => {
+    try { return JSON.parse(request.headers.get('cf-visitor') || '{}').scheme; }
+    catch { return null; }
+  })();
+  const redirectProtocol =
+    forwardedProto === 'https' || cfVisitorScheme === 'https'
+      ? 'https:'
+      : process.env.NODE_ENV === 'production'
+        ? 'https:'
+        : request.nextUrl.protocol;
 
   const { pathname } = request.nextUrl;
   const requestLocale = getPathLocale(pathname);
@@ -52,20 +60,25 @@ export default function proxy(request: NextRequest) {
     normalizedPathname.includes('/tag/')
   );
 
+  // Redirect to canonical public URL (e.g. /nl/diensten → /diensten).
+  // Must be an absolute URL with the correct public-facing protocol.
   if (pathname !== canonicalPublicPath) {
     const url = request.nextUrl.clone();
-    url.protocol = clientProtocol;
+    url.protocol = redirectProtocol;
     url.hostname = cleanHostname;
     url.port = cleanPort;
     url.pathname = canonicalPublicPath;
     return NextResponse.redirect(url, 308);
   }
 
+  // Internally rewrite the canonical public path to the [locale]-prefixed
+  // path that Next.js app router expects (e.g. /diensten → /nl/diensten).
+  // IMPORTANT: only change pathname — keep the original 0.0.0.0:port origin
+  // so Next.js treats this as a true internal rewrite and does NOT route the
+  // request back through the public ingress (which would re-trigger middleware
+  // and create a /nl → / → /nl redirect loop).
   if (canonicalPublicPath !== internalLocalizedPath) {
     const url = request.nextUrl.clone();
-    url.protocol = clientProtocol;
-    url.hostname = cleanHostname;
-    url.port = cleanPort;
     url.pathname = internalLocalizedPath;
     return NextResponse.rewrite(url);
   }

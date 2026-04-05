@@ -1,15 +1,15 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://www.hovenier.frl',
+  siteUrl: process.env.SITE_URL || 'https://hovenier.frl',
   generateRobotsTxt: false, // We have a custom robots.txt
   exclude: ['/staging/*', '/admin/*', '/api/*'],
   alternateRefs: [
     {
-      href: 'https://www.hovenier.frl',
+      href: 'https://hovenier.frl',
       hreflang: 'nl',
     },
     {
-      href: 'https://www.hovenier.frl/en',
+      href: 'https://hovenier.frl/en',
       hreflang: 'en',
     },
   ],

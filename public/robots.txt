@@ -49,6 +49,8 @@ Allow: /articles/
 
 # Sitemap locations
 Sitemap: https://hovenier.frl/sitemap.xml
+Sitemap: https://hovenier.frl/sitemap-0.xml
+Sitemap: https://hovenier.frl/sitemap.xml
 
 # Crawl delay (be respectful to server resources)
 Crawl-delay: 1

@@ -63,6 +63,70 @@ const nextConfig: NextConfig = {
 
   // I18n configuration
   trailingSlash: false,
+
+  // Redirects for SEO and legacy URLs
+  async redirects() {
+    return [
+      // Old WordPress category redirects (based on GSC crawled URLs)
+      {
+        source: '/category/tuinverlichting/:path*',
+        destination: '/diensten/tuinverlichting',
+        permanent: true,
+      },
+      {
+        source: '/category/schutting/:path*',
+        destination: '/diensten/schutting-plaatsen',
+        permanent: true,
+      },
+      {
+        source: '/category/bloemen/:path*', 
+        destination: '/diensten/bloembollen-planten',
+        permanent: true,
+      },
+      {
+        source: '/category/moestuin/:path*',
+        destination: '/diensten/moestuin-aanleggen',
+        permanent: true,
+      },
+      {
+        source: '/category/internet-diensten/:path*',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/category/interieur/:path*',
+        destination: '/',
+        permanent: true,
+      },
+      // Old WordPress blog post redirects  
+      {
+        source: '/hovenier-nieuws/:path*',
+        destination: '/artikelen',
+        permanent: true,
+      },
+      {
+        source: '/schutting/duurzame-schuttingen/:path*',
+        destination: '/diensten/schutting-plaatsen',
+        permanent: true,
+      },
+      {
+        source: '/bloemen/wat-is-een-bloemist/:path*',
+        destination: '/diensten/bloembollen-planten', 
+        permanent: true,
+      },
+      // RSS feeds - return 410 Gone
+      {
+        source: '/category/:category/feed/:path*',
+        destination: '/404',
+        permanent: false,
+      },
+      {
+        source: '/feed/:path*',
+        destination: '/404', 
+        permanent: false,
+      },
+    ];
+  },
   
   // Image optimization
   images: {

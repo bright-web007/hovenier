@@ -9,6 +9,21 @@ import {
 } from './lib/locale-utils';
 
 export default function proxy(request: NextRequest) {
+  const url = request.nextUrl.clone();
+  const hostname = request.headers.get('host') || '';
+
+  // Handle www -> non-www redirect (for SEO domain consistency)
+  if (hostname.startsWith('www.')) {
+    url.hostname = hostname.replace('www.', '');
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
+  // Handle HTTP -> HTTPS redirect (though this is usually handled by hosting)
+  if (url.protocol === 'http:' && process.env.NODE_ENV === 'production') {
+    url.protocol = 'https:';
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
   const { pathname } = request.nextUrl;
   const requestLocale = getPathLocale(pathname);
   const normalizedPathname = stripLocalePrefix(pathname);

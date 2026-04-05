@@ -1,20 +1,13 @@
 'use client'
 
+import Link from 'next/link'
 import styles from './Blog.module.css'
-
-interface Article {
-  id: number
-  title: string
-  excerpt: string
-  category: string
-  readTime: string
-  publishDate: string
-  image: string
-  featured: boolean
-}
+import type { ArticleRecord } from '@/lib/articles'
+import { formatArticleDate } from '@/lib/articles'
+import { localizePath, type SupportedLocale } from '@/lib/locale-utils'
 
 interface BlogFeaturedArticleProps {
-  article: Article
+  article: ArticleRecord
   locale: string
 }
 
@@ -25,7 +18,7 @@ export default function BlogFeaturedArticle({ article, locale }: BlogFeaturedArt
         <div className={styles.featuredText}>
           <div className={styles.featuredBadge}>
             <span className={styles.featuredLabel}>Uitgelicht</span>
-            <span className={styles.featuredCategory}>{article.category}</span>
+            <span className={styles.featuredCategory}>{article.category.name}</span>
           </div>
           <h2 className={styles.featuredTitle}>
             {article.title}
@@ -35,14 +28,14 @@ export default function BlogFeaturedArticle({ article, locale }: BlogFeaturedArt
           </p>
           <div className={styles.featuredMeta}>
             <div className={styles.featuredMetaText}>
-              {article.readTime} leestijd • {article.publishDate}
+              {article.readTime} min leestijd • {formatArticleDate(article.publishedAt, locale)}
             </div>
-            <a 
-              href={`/nieuws/artikel-${article.id}`}
+            <Link
+              href={localizePath(`/nieuws/${article.slug}`, locale as SupportedLocale)}
               className={styles.featuredButton}
             >
               Lees Verder →
-            </a>
+            </Link>
           </div>
         </div>
         <div className={styles.featuredImage}>

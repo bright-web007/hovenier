@@ -1,20 +1,13 @@
 'use client'
 
+import Link from 'next/link'
 import styles from './Blog.module.css'
-
-interface Article {
-  id: number
-  title: string
-  excerpt: string
-  category: string
-  readTime: string
-  publishDate: string
-  image: string
-  featured: boolean
-}
+import type { ArticleRecord } from '@/lib/articles'
+import { formatArticleDate } from '@/lib/articles'
+import { localizePath, type SupportedLocale } from '@/lib/locale-utils'
 
 interface BlogArticleGridProps {
-  articles: Article[]
+  articles: ArticleRecord[]
   locale: string
 }
 
@@ -34,10 +27,10 @@ export default function BlogArticleGrid({ articles, locale }: BlogArticleGridPro
               <div className={styles.articleText}>
                 <div className={styles.articleMeta}>
                   <span className={styles.articleCategory}>
-                    {article.category}
+                    {article.category.name}
                   </span>
                   <span className={styles.articleReadTime}>
-                    {article.readTime} leestijd
+                    {article.readTime} min leestijd
                   </span>
                 </div>
                 <h3 className={styles.articleTitle}>
@@ -47,13 +40,13 @@ export default function BlogArticleGrid({ articles, locale }: BlogArticleGridPro
                   {article.excerpt}
                 </p>
                 <div className={styles.articleFooter}>
-                  <span className={styles.articleDate}>{article.publishDate}</span>
-                  <a 
-                    href={`/nieuws/artikel-${article.id}`}
+                  <span className={styles.articleDate}>{formatArticleDate(article.publishedAt, locale)}</span>
+                  <Link
+                    href={localizePath(`/nieuws/${article.slug}`, locale as SupportedLocale)}
                     className={styles.articleLink}
                   >
                     Lees meer →
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

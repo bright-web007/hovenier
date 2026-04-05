@@ -2,28 +2,42 @@
  * Muse CMS Client - Fetch Articles (Next.js compatible, ESM)
  */
 
+interface MuseCMSConfig {
+  museGraphqlUrl: string;
+  mercuryTokenUrl: string;
+  appId: string;
+  appSecret: string;
+  museBlogUuid: string;
+}
+
 export class MuseCMSClient {
-  config: any;
+  config: MuseCMSConfig;
   projectToken: string | null;
 
-  constructor(config: any) {
+  constructor(config: MuseCMSConfig) {
     this.config = config;
     this.projectToken = null;
   }
 
   async getProjectToken() {
     if (this.projectToken) return this.projectToken;
+
     const response = await fetch(this.config.mercuryTokenUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
-        app_id: this.config.museAppId,
-        app_secret: this.config.museAppSecret,
+        app_id: this.config.appId,
+        app_secret: this.config.appSecret,
       }),
     });
+
     if (!response.ok) throw new Error(`Mercury auth failed: ${response.status} - ${response.statusText}`);
+
     const tokenData = await response.json();
-    this.projectToken = tokenData.token;
+    this.projectToken = tokenData.token ?? null;
+
     if (!this.projectToken) throw new Error('Failed to get project token from Mercury');
     return this.projectToken;
   }
@@ -152,4 +166,27 @@ export class MuseCMSClient {
       return 'standard';
     }
   }
+}
+
+export function createMuseCMSClient() {
+  const config: MuseCMSConfig = {
+    museGraphqlUrl: process.env.MUSE_GRAPHQL_URL!,
+    mercuryTokenUrl: process.env.MERCURY_TOKEN_URL!,
+    appId: process.env.NEXUS_PROJECT_API_KEY!,
+    appSecret: process.env.NEXUS_PROJECT_API_SECRET!,
+    museBlogUuid: process.env.MUSE_BLOG_UUID!,
+  };
+
+  const missing = [];
+  if (!config.museGraphqlUrl) missing.push('MUSE_GRAPHQL_URL');
+  if (!config.mercuryTokenUrl) missing.push('MERCURY_TOKEN_URL');
+  if (!config.appId) missing.push('NEXUS_PROJECT_API_KEY');
+  if (!config.appSecret) missing.push('NEXUS_PROJECT_API_SECRET');
+  if (!config.museBlogUuid) missing.push('MUSE_BLOG_UUID');
+
+  if (missing.length > 0) {
+    throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
+  }
+
+  return new MuseCMSClient(config);
 }

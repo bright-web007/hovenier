@@ -22,7 +22,13 @@ This guide helps you set up all required environment variables for the Hovenier.
 ```bash
 NEXT_PUBLIC_BASE_URL=http://localhost:3000  # Development
 # NEXT_PUBLIC_BASE_URL=https://hovenier.frl  # Production
+
+SITE_URL=http://localhost:3000  # Development  
+# SITE_URL=https://hovenier.frl  # Production (for sitemap generation)
 ```
+**Note**: 
+- `NEXT_PUBLIC_BASE_URL` is used for client-side metadata and canonical URLs
+- `SITE_URL` is used specifically for sitemap.xml generation and must be the canonical domain (no www subdomain)
 
 ### Error Monitoring (Sentry)
 ```bash

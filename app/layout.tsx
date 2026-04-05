@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
+import AdSenseScript from "./components/AdSenseScript";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import PerformanceInitializer from "./components/PerformanceInitializer";
 
@@ -123,6 +124,7 @@ export default function RootLayout({
       </head>
       <body className={`${sansFont.variable} ${serifFont.variable}`}>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || ''} />
+        <AdSenseScript clientId={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ''} />
         <PerformanceInitializer />
         {children}
       </body>

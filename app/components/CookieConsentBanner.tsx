@@ -84,6 +84,9 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
   const initializeServices = (prefs: ConsentPreferences) => {
     // Update Google Analytics consent state for the lightweight loader.
     updateAnalyticsConsent(prefs.analytics);
+    window.dispatchEvent(new CustomEvent('marketing-consent-changed', {
+      detail: { granted: prefs.marketing },
+    }));
     
     // Initialize other services based on consent
     console.log('Cookie consent preferences updated:', prefs);

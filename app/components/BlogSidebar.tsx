@@ -1,6 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import styles from './Blog.module.css'
+import { localizePath, type SupportedLocale } from '@/lib/locale-utils'
 
 interface Category {
   name: string
@@ -36,16 +38,16 @@ export default function BlogSidebar({ categories, locale }: BlogSidebarProps) {
         <h3 className={styles.widgetTitle}>Categorieën</h3>
         <div className={styles.categoryList}>
           {categories.map(category => (
-            <a 
+            <Link
               key={category.slug}
-              href={`/nieuws/categorie/${category.slug}`}
+              href={localizePath(`/nieuws/categorie/${category.slug}`, locale as SupportedLocale)}
               className={styles.categoryItem}
             >
               <span className={styles.categoryName}>{category.name}</span>
               <span className={styles.categoryCount}>
                 {category.count}
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
@@ -89,12 +91,12 @@ export default function BlogSidebar({ categories, locale }: BlogSidebarProps) {
         <p className={styles.contactDescription}>
           Krijg direct antwoord op je tuinvragen van lokale experts.
         </p>
-        <a 
-          href="/#lead-form"
+        <Link
+          href={localizePath('/#lead-form', locale as SupportedLocale)}
           className={styles.contactButton}
         >
           Gratis Advies →
-        </a>
+        </Link>
       </div>
     </div>
   )

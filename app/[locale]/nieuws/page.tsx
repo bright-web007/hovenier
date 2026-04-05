@@ -9,6 +9,7 @@ import BlogSidebar from '../../components/BlogSidebar'
 import BlogSchema from '../../components/schemas/BlogSchema'
 import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema'
 import styles from '../../components/Blog.module.css'
+import { getArticleCategories, getArticles } from '@/lib/articles'
 import { getAbsoluteUrl, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
 
 type Props = {
@@ -26,50 +27,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-const exampleArticles = [
-  {
-    id: 1,
-    title: 'Voorjaar 2024: 5 Essentiële Tuinklussen voor Maart',
-    excerpt: 'De lente staat voor de deur! Ontdek welke werkzaamheden nu prioriteit hebben om je tuin klaar te maken voor het groeiseizoen.',
-    category: 'seizoen',
-    readTime: '4 min',
-    publishDate: '2024-03-15',
-    image: '/images/spring-garden-prep.jpg',
-    featured: true
-  },
-  {
-    id: 2,
-    title: 'Kosten Groendak: Subsidies & Besparingen in 2024',
-    excerpt: 'Alles wat je moet weten over groendak subsidies, installatie kosten en lange termijn voordelen voor je portemonnee.',
-    category: 'groendak',
-    readTime: '6 min',
-    publishDate: '2024-03-12',
-    image: '/images/green-roof-costs.jpg',
-    featured: false
-  },
-  {
-    id: 3,
-    title: '10 Onderhoudsarme Planten voor de Friese Tuin',
-    excerpt: 'Weinig tijd voor tuinonderhoud? Deze planten gedijen perfect in het Friese klimaat met minimale zorg.',
-    category: 'tips',
-    readTime: '5 min',
-    publishDate: '2024-03-08',
-    image: '/images/low-maintenance-plants.jpg',
-    featured: false
-  }
-]
-
-const categories = [
-  { name: 'Kosten', slug: 'kosten', count: 12 },
-  { name: 'Seizoen', slug: 'seizoen', count: 18 },
-  { name: 'Tips', slug: 'tips', count: 24 },
-  { name: 'Groendak', slug: 'groendak', count: 8 },
-  { name: 'Tuinontwerp', slug: 'tuinontwerp', count: 15 }
-]
-
 export default async function NieuwsHubPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
+  const articles = await getArticles()
+  const categories = await getArticleCategories()
 
   // Breadcrumb items
   const breadcrumbItems = [
@@ -84,7 +46,7 @@ export default async function NieuwsHubPage({ params }: Props) {
   }));
 
   // Get featured article
-  const featuredArticle = exampleArticles.find(article => article.featured);
+  const featuredArticle = articles.find(article => article.featured) ?? articles[0];
 
   return (
     <>
@@ -92,8 +54,8 @@ export default async function NieuwsHubPage({ params }: Props) {
       <Breadcrumbs items={breadcrumbItems} />
       <BreadcrumbSchema items={breadcrumbSchemaItems} />
       
-      <main className="min-h-screen bg-gradient-to-br from-sage-50 to-forest-50">
-        <div className="container mx-auto px-4">
+      <main className={styles.page}>
+        <div className={styles.pageInner}>
           <BlogHero locale={locale} />
           
           <div className="py-8">
@@ -102,7 +64,7 @@ export default async function NieuwsHubPage({ params }: Props) {
             )}
             
             <div className={styles.layout}>
-              <BlogArticleGrid articles={exampleArticles} locale={locale} />
+              <BlogArticleGrid articles={articles} locale={locale} />
               <BlogSidebar categories={categories} locale={locale} />
             </div>
           </div>
@@ -111,7 +73,7 @@ export default async function NieuwsHubPage({ params }: Props) {
 
       <BlogSchema 
         locale={locale}
-        articles={exampleArticles}
+        articles={articles}
         url={getAbsoluteUrl('/nieuws', locale as SupportedLocale)}
       />
     </>

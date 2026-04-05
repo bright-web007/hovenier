@@ -1,49 +1,44 @@
+import type { ArticleRecord } from '@/lib/articles';
+
 interface ArticleSchemaProps {
-  headline: string;
-  description: string;
-  author: {
-    name: string;
-  };
-  publisher: {
-    name: string;
-    url: string;
-  };
-  datePublished: string;
-  dateModified?: string;
+  article: ArticleRecord;
+  locale: string;
   url: string;
 }
 
-export default function ArticleSchema({
-  headline,
-  description,
-  author,
-  publisher,
-  datePublished,
-  dateModified,
-  url
-}: ArticleSchemaProps) {
+export default function ArticleSchema({ article, locale, url }: ArticleSchemaProps) {
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline,
-    description,
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt,
+    inLanguage: locale === 'en' ? 'en-US' : 'nl-NL',
+    url,
+    articleSection: article.category.name,
+    image: [`https://hovenier.frl${article.image}`],
+    keywords: article.tags,
     author: {
-      "@type": "Person",
-      name: author.name
+      '@type': 'Organization',
+      name: 'Hovenier.frl',
+      url: 'https://hovenier.frl',
     },
     publisher: {
-      "@type": "Organization",
-      name: publisher.name,
-      url: publisher.url
+      '@type': 'Organization',
+      name: 'Hovenier.frl',
+      url: 'https://hovenier.frl',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://hovenier.frl/assets/logo-favicon.svg',
+      },
     },
-    datePublished,
-    dateModified: dateModified || datePublished,
-    url
+    mainEntityOfPage: url,
   };
 
   return (
-    <script 
-      type="application/ld+json" 
+    <script
+      type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   );

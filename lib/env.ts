@@ -71,6 +71,7 @@ export const envSchema = z.object({
   
   // CMS & API Services
   MUSE_GRAPHQL_URL: urlSchema,
+  MUSE_BLOG_UUID: z.string().optional().default(''),
   PROMETHEUS_GRAPHQL_URL: urlSchema,
   MERCURY_GRAPHQL_URL: urlSchema,
   MERCURY_TOKEN_URL: urlSchema,
@@ -142,6 +143,7 @@ function createFallbackEnv(): Env {
     NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN || '',
     NEXT_PUBLIC_GA4_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || '',
     MUSE_GRAPHQL_URL: process.env.MUSE_GRAPHQL_URL || '',
+    MUSE_BLOG_UUID: process.env.MUSE_BLOG_UUID || '',
     PROMETHEUS_GRAPHQL_URL: process.env.PROMETHEUS_GRAPHQL_URL || '',
     MERCURY_GRAPHQL_URL: process.env.MERCURY_GRAPHQL_URL || '',
     MERCURY_TOKEN_URL: process.env.MERCURY_TOKEN_URL || '',

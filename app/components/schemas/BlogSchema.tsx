@@ -1,19 +1,11 @@
 import React from 'react';
-
-interface Article {
-  id: number
-  title: string
-  excerpt: string
-  category: string
-  readTime: string
-  publishDate: string
-  image: string
-  featured: boolean
-}
+import type { ArticleRecord } from '@/lib/articles';
+import { getArticlePath } from '@/lib/articles';
+import { getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
 
 interface BlogSchemaProps {
   locale: string
-  articles: Article[]
+  articles: ArticleRecord[]
   url: string
 }
 
@@ -44,9 +36,9 @@ export default function BlogSchema({ locale, articles, url }: BlogSchemaProps) {
       "@type": "BlogPosting",
       "headline": article.title,
       "description": article.excerpt,
-      "url": `${url}/artikel-${article.id}`,
-      "datePublished": article.publishDate,
-      "dateModified": article.publishDate,
+      "url": getAbsoluteUrl(getArticlePath(article.slug), locale as SupportedLocale),
+      "datePublished": article.publishedAt,
+      "dateModified": article.updatedAt,
       "author": {
         "@type": "Organization",
         "name": "Hovenier.frl"
@@ -60,10 +52,10 @@ export default function BlogSchema({ locale, articles, url }: BlogSchemaProps) {
         }
       },
       "image": article.image || "https://hovenier.frl/images/default-article.jpg",
-      "articleSection": article.category,
-      "wordCount": parseInt(article.readTime) * 200, // Estimate based on read time
-      "timeRequired": `PT${article.readTime.replace(' min', '')}M`,
-      "keywords": [article.category, "tuinonderhoud", "hovenier", "friesland", "tuintips"]
+      "articleSection": article.category.name,
+      "wordCount": article.readTime * 200,
+      "timeRequired": `PT${article.readTime}M`,
+      "keywords": [article.category.name, "tuinonderhoud", "hovenier", "friesland", "tuintips"]
     }))
   };
 

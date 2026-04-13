@@ -1,8 +1,9 @@
 :root {
+  --font-sans: "DM Sans", system-ui, sans-serif;
   --forest: #2a3e20;
   --forest-deep: #1c3a12;
   --forest-mid: #3d5a2e;
-  --forest-light: #5a7a4e;
+  --forest-light: #5A7A4E;
   --sage: #8ab87a;
   --sage-light: #a8bfa0;
   --cream: #f5f2ec;
@@ -17,7 +18,7 @@
   --white: #ffffff;
   --border: rgba(42,62,32,0.12);
   --border-med: rgba(42,62,32,0.2);
-  --serif: var(--font-serif), Georgia, serif;
+  --serif: var(--font-sans), system-ui, sans-serif;
   --sans: var(--font-sans), system-ui, sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -3700,4 +3701,16 @@ a { text-decoration: none; color: inherit; }
 .text-forest { color: var(--forest); }
 .text-forest-deep { color: var(--forest-deep); }
 .text-cream { color: var(--cream); }
+}
+
+.service-learn-more {
+  font-weight: 600;
+  line-height: 100%;
+  font-size: 14px;
+  color: #16423C;
+  transition: opacity 0.2s ease;
+}
+.service-learn-more:hover {
+  opacity: 0.7;
+  text-decoration: underline;
 }

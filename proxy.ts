@@ -80,10 +80,13 @@ export default function proxy(request: NextRequest) {
   if (canonicalPublicPath !== internalLocalizedPath) {
     const url = request.nextUrl.clone();
     url.pathname = internalLocalizedPath;
-    return NextResponse.rewrite(url);
+    const response = NextResponse.rewrite(url);
+    response.headers.set('x-locale', requestLocale);
+    return response;
   }
 
   const response = NextResponse.next();
+  response.headers.set('x-locale', requestLocale);
 
   if (shouldNoindex) {
     response.headers.set('X-Robots-Tag', 'noindex, nofollow');

@@ -6,6 +6,7 @@ import NewLeadForm from '@/app/components/NewLeadForm';
 import Link from 'next/link';
 import ServiceSchema from '../../components/schemas/ServiceSchema';
 import { localizePath, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils';
+import ImageComponent from '@/app/components/ImageComponent';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -59,6 +60,36 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <div style={{ 
+        background: 'var(--forest-light)', 
+        width: '64px', 
+        height: '64px', 
+        borderRadius: '50%', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        margin: '0 auto 1rem' 
+      }}>
+        {icon}
+      </div>
+      <h3 style={{ 
+        fontSize: '1.125rem', 
+        fontWeight: '600', 
+        color: 'var(--forest)', 
+        marginBottom: '0.5rem' 
+      }}>
+        {title}
+      </h3>
+      <p style={{ color: 'var(--forest-mid)', fontSize: '14px' }}>
+        {description}
+      </p>
+    </div>
+  );
+}
+
 export default async function ServicesPage({ params }: Props) {
   const { locale } = await params;
   const validLocale = locale || defaultLocale;
@@ -74,11 +105,7 @@ export default async function ServicesPage({ params }: Props) {
       description: 'Professioneel tuinonderhoud om uw tuin het hele jaar door in topconditie te houden. Van gras maaien tot hagen knippen.',
       features: ['Gras maaien', 'Hagen knippen', 'Onkruidbestrijding', 'Seizoensklussen'],
       price: 'Vanaf €35/uur',
-      icon: (
-        <svg style={{ width: '32px', height: '32px', color: 'var(--sage)' }} fill="currentColor" viewBox="0 0 20 20">
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
-      )
+      image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80'
     },
     {
       id: 'tuinontwerp',
@@ -87,11 +114,7 @@ export default async function ServicesPage({ params }: Props) {
       description: 'Op maat gemaakte tuinontwerpen die perfect aansluiten bij uw wensen, stijl en budget. Van compact tot expansief.',
       features: ['3D visualisaties', 'Plantenschema\'s', 'Stijladvies', 'Budget planning'],
       price: 'Vanaf €750',
-      icon: (
-        <svg style={{ width: '32px', height: '32px', color: 'var(--forest)' }} fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 11-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15.586 13H14a1 1 0 01-1-1z" clipRule="evenodd" />
-        </svg>
-      )
+      image: 'https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?w=800&q=80'
     },
     {
       id: 'tuin-aanleggen',
@@ -100,11 +123,7 @@ export default async function ServicesPage({ params }: Props) {
       description: 'Van concept tot realisatie: wij leggen uw droomtuin volledig aan met kwalitatieve materialen en vakmanschap.',
       features: ['Grondwerkzaamheden', 'Beplanting', 'Verharding', 'Irrigatiesystemen'],
       price: 'Op maat',
-      icon: (
-        <svg style={{ width: '32px', height: '32px', color: 'var(--sage)' }} fill="currentColor" viewBox="0 0 20 20">
-          <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-        </svg>
-      )
+      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80'
     },
     {
       id: 'stratenmaker',
@@ -113,11 +132,7 @@ export default async function ServicesPage({ params }: Props) {
       description: 'Duurzame bestratingswerken voor terrassen, opritten en tuinpaden. Verschillende materialen en stijlen mogelijk.',
       features: ['Keramische tegels', 'Natuursteen', 'Betonstraat', 'Drainage systemen'],
       price: 'Vanaf €45/m²',
-      icon: (
-        <svg style={{ width: '32px', height: '32px', color: 'var(--forest)' }} fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-        </svg>
-      )
+      image: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&q=80'
     },
     {
       id: 'groendak',
@@ -126,11 +141,7 @@ export default async function ServicesPage({ params }: Props) {
       description: 'Extensieve en intensieve groendaken voor een duurzamere leefomgeving. Expertise in waterafvoer en beplanting.',
       features: ['Waterafvoer', 'Isolatie verbetering', 'Biodiversiteit', 'Energiebesparing'],
       price: 'Vanaf €85/m²',
-      icon: (
-        <svg style={{ width: '32px', height: '32px', color: 'var(--sage)' }} fill="currentColor" viewBox="0 0 20 20">
-          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-        </svg>
-      )
+      image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80'
     }
   ];
 
@@ -212,13 +223,11 @@ export default async function ServicesPage({ params }: Props) {
         minHeight: '100vh', 
         background: 'linear-gradient(to bottom right, var(--cream-light), var(--sage-light))' 
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>
           
           {/* Hero Section */}
           <div style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
             <div style={{ 
-              maxWidth: '64rem', 
-              margin: '0 auto', 
               textAlign: 'center', 
               marginBottom: '4rem' 
             }}>
@@ -246,135 +255,50 @@ export default async function ServicesPage({ params }: Props) {
             <section style={{ maxWidth: '80rem', margin: '0 auto', marginBottom: '4rem' }}>
               <div style={{ 
                 display: 'grid', 
-                gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', 
-                gap: '2rem' 
+                gridTemplateColumns: 'repeat(3, 1fr)', 
+                gap: '1rem' 
               }}>
                 {services.map((service) => (
                   <div key={service.id} style={{ 
                     background: 'var(--white)', 
                     borderRadius: '16px', 
-                    boxShadow: '0 10px 25px -3px rgba(0, 0, 0, 0.1)', 
+                    boxShadow: '0px 4px 20px 0px #0000000F', 
                     overflow: 'hidden',
                     transition: 'all 0.3s ease',
-                    border: '1px solid rgba(255, 255, 255, 0.2)'
+                    border: '1px solid #E5E7EB',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    overflowX: 'hidden',
+                    overflowY: 'hidden',
                   }}>
-                    <div style={{ padding: '2rem' }}>
-                      {/* Service Icon */}
-                      <div style={{ 
-                        background: 'var(--sage-light)', 
-                        width: '72px', 
-                        height: '72px', 
-                        borderRadius: '16px', 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        justifyContent: 'center', 
-                        marginBottom: '1.5rem' 
-                      }}>
-                        {service.icon}
-                      </div>
-
-                      {/* Service Header */}
-                      <div style={{ marginBottom: '1.5rem' }}>
-                        <h3 style={{ 
-                          fontSize: '1.5rem', 
-                          fontWeight: '700', 
-                          color: 'var(--forest)', 
-                          marginBottom: '0.5rem',
-                          fontFamily: 'var(--serif)'
-                        }}>
-                          {service.title}
-                        </h3>
-                        <p style={{ 
-                          fontSize: '1rem', 
-                          color: 'var(--sage)', 
-                          fontWeight: '500',
-                          marginBottom: '0.75rem'
-                        }}>
-                          {service.subtitle}
-                        </p>
-                        <p style={{ 
-                          color: 'var(--forest-mid)', 
-                          fontSize: '15px', 
-                          lineHeight: '1.6' 
-                        }}>
-                          {service.description}
-                        </p>
-                      </div>
-
-                      {/* Features */}
-                      <div style={{ marginBottom: '1.5rem' }}>
-                        <ul style={{ 
-                          listStyle: 'none', 
-                          padding: '0', 
-                          margin: '0',
-                          display: 'grid',
-                          gridTemplateColumns: 'repeat(2, 1fr)',
-                          gap: '0.5rem'
-                        }}>
-                          {service.features.map((feature, index) => (
-                            <li key={index} style={{ 
-                              display: 'flex', 
-                              alignItems: 'center', 
-                              color: 'var(--forest-mid)',
-                              fontSize: '14px'
-                            }}>
-                              <span style={{ 
-                                width: '6px', 
-                                height: '6px', 
-                                background: 'var(--sage)', 
-                                borderRadius: '50%', 
-                                marginRight: '0.5rem', 
-                                flexShrink: '0' 
-                              }}></span>
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Price & CTA */}
-                      <div style={{ 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        justifyContent: 'space-between',
-                        paddingTop: '1.5rem',
-                        borderTop: '1px solid var(--sage-light)'
-                      }}>
-                        <div>
-                          <span style={{ 
-                            fontSize: '1.125rem', 
-                            fontWeight: '600', 
-                            color: 'var(--forest)' 
-                          }}>
-                            {service.price}
-                          </span>
-                        </div>
-                        <Link 
-                          href={localizePath(`/diensten/${service.id}`, validLocale as SupportedLocale)}
-                          style={{ 
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            background: 'var(--sage)', 
-                            color: 'var(--white)', 
-                            padding: '0.75rem 1.5rem', 
-                            borderRadius: '8px', 
-                            fontSize: '14px',
-                            fontWeight: '600', 
-                            textDecoration: 'none',
-                            transition: 'background-color 0.2s ease'
-                          }}
-                        >
-                          Meer Info →
-                        </Link>
-                      </div>
+                    <div style={{
+                      width: '100%',
+                      height: '200px',
+                      position: 'relative',
+                    }}>
+                      <ImageComponent sizes='376px' fill style={{ objectFit: 'cover' }} loading='lazy' src={service.image} alt={`image of ${service.title}`} />
                     </div>
+                    <div style={{
+                      width: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      padding: '20px 24px 24px 24px',
+                      gap: '12px',
+                    }}>
+                      <div style={{ backgroundColor: '#16423C14', padding: '4px 10px', borderRadius: '4px', width: 'fit-content' }}>
+                        <p style={{ fontSize: '11px', lineHeight: '100%', color: '#16423C', fontWeight: 600,  }}>{service.subtitle}</p>
+                      </div>  
+                      <p style={{ fontWeight: 700, fontSize: '22px', color: '#1F2937', lineHeight: '100%', letterSpacing: '-0.3px' }}>{service.title}</p>
+                      <p style={{ fontSize: '14px', color: '#6B7280', lineHeight: '22px', fontWeight: 400 }}>{service.description}</p>
+                      <Link href={`/diensten/${service.id}`} className="service-learn-more">Learn more →</Link>
+                    </div>  
                   </div>
                 ))}
               </div>
             </section>
 
             {/* Why Choose Us Section */}
-            <section style={{ maxWidth: '64rem', margin: '0 auto', marginBottom: '4rem' }}>
+            <section style={{ marginBottom: '4rem' }}>
               <div style={{ 
                 background: 'var(--white)', 
                 borderRadius: '16px', 
@@ -396,93 +320,39 @@ export default async function ServicesPage({ params }: Props) {
                   gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
                   gap: '2rem' 
                 }}>
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ 
-                      background: 'var(--forest-light)', 
-                      width: '64px', 
-                      height: '64px', 
-                      borderRadius: '50%', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center', 
-                      margin: '0 auto 1rem' 
-                    }}>
-                      <svg style={{ width: '28px', height: '28px', color: 'var(--forest)' }} fill="currentColor" viewBox="0 0 20 20">
+                  <FeatureCard
+                    icon={
+                      <svg style={{ width: '28px', height: '28px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                    </div>
-                    <h3 style={{ 
-                      fontSize: '1.125rem', 
-                      fontWeight: '600', 
-                      color: 'var(--forest)', 
-                      marginBottom: '0.5rem' 
-                    }}>
-                      Gecertificeerd & Verzekerd
-                    </h3>
-                    <p style={{ color: 'var(--forest-mid)', fontSize: '14px' }}>
-                      Alle hoveniers zijn vakbekwaam, gecertificeerd en volledig verzekerd voor uw veiligheid
-                    </p>
-                  </div>
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ 
-                      background: 'var(--sage-light)', 
-                      width: '64px', 
-                      height: '64px', 
-                      borderRadius: '50%', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center', 
-                      margin: '0 auto 1rem' 
-                    }}>
-                      <svg style={{ width: '28px', height: '28px', color: 'var(--sage)' }} fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    }
+                    title="Gecertificeerd & Verzekerd"
+                    description="Alle hoveniers zijn vakbekwaam, gecertificeerd en volledig verzekerd voor uw veiligheid"
+                  />
+                  <FeatureCard
+                    icon={
+                      <svg style={{ width: '28px', height: '28px', color: 'var(--white)' }} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                    </div>
-                    <h3 style={{ 
-                      fontSize: '1.125rem', 
-                      fontWeight: '600', 
-                      color: 'var(--forest)', 
-                      marginBottom: '0.5rem' 
-                    }}>
-                      Kwaliteitsgarantie
-                    </h3>
-                    <p style={{ color: 'var(--forest-mid)', fontSize: '14px' }}>
-                      Tevredenheid gegarandeerd met naservice en advies voor optimaal tuinresultaat
-                    </p>
-                  </div>
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ 
-                      background: 'var(--forest-light)', 
-                      width: '64px', 
-                      height: '64px', 
-                      borderRadius: '50%', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center', 
-                      margin: '0 auto 1rem' 
-                    }}>
-                      <svg style={{ width: '28px', height: '28px', color: 'var(--forest)' }} fill="currentColor" viewBox="0 0 20 20">
+                    }
+                    title="Kwaliteitsgarantie"
+                    description="Tevredenheid gegarandeerd met naservice en advies voor optimaal tuinresultaat"
+                  />
+                  <FeatureCard
+                    icon={
+                      <svg style={{ width: '28px', height: '28px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                       </svg>
-                    </div>
-                    <h3 style={{ 
-                      fontSize: '1.125rem', 
-                      fontWeight: '600', 
-                      color: 'var(--forest)', 
-                      marginBottom: '0.5rem' 
-                    }}>
-                      Snelle Reactie
-                    </h3>
-                    <p style={{ color: 'var(--forest-mid)', fontSize: '14px' }}>
-                      Binnen 24 uur reactie op uw aanvraag en flexibele planning voor uw gemak
-                    </p>
-                  </div>
+                    }
+                    title="Snelle Reactie"
+                    description="Binnen 24 uur reactie op uw aanvraag en flexibele planning voor uw gemak"
+                  />
                 </div>
               </div>
             </section>
 
             {/* Quote Section */}
-            <section style={{ maxWidth: '64rem', margin: '0 auto' }}>
+            <section>
               <div style={{ 
                 background: 'var(--white)', 
                 borderRadius: '16px', 

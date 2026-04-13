@@ -50,7 +50,7 @@ export default async function RegioLandingPage({ params }: Props) {
       <Breadcrumbs items={breadcrumbItems} />
       
       <main style={{ minHeight: '100vh', background: 'linear-gradient(to bottom right, var(--cream-light), var(--sage-light))' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>
         <div style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
           {/* Hero Section */}
           <div style={{ maxWidth: '64rem', margin: '0 auto', textAlign: 'center', marginBottom: '4rem' }}>

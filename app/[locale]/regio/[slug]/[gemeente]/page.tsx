@@ -229,16 +229,16 @@ export default async function GemeentePage({ params }: Props) {
       
       <main>
         {/* Breadcrumbs */}
-        <section style={{ background: 'var(--cream-light)', padding: '1rem 0', borderBottom: '0.5px solid var(--border)' }}>
-          <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem' }}>
+        <section style={{ background: 'var(--cream-light)', borderBottom: '0.5px solid var(--border)' }}>
+          <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
             <Breadcrumbs items={breadcrumbItems} />
           </div>
         </section>
 
         {/* Hero Section */}
-        <section style={{ background: 'var(--white)', padding: '3rem 1.5rem' }}>
+        <section style={{ background: 'var(--white)' }}>
           <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '3rem', alignItems: 'start' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '3rem', alignItems: 'start', padding: '3rem 1rem' }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem', gap: '1rem' }}>
                   <div style={{ 
@@ -250,7 +250,7 @@ export default async function GemeentePage({ params }: Props) {
                     alignItems: 'center', 
                     justifyContent: 'center' 
                   }}>
-                    <svg style={{ width: '32px', height: '32px', color: 'var(--forest)' }} fill="currentColor" viewBox="0 0 20 20">
+                    <svg style={{ width: '32px', height: '32px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg>
                   </div>
@@ -299,10 +299,10 @@ export default async function GemeentePage({ params }: Props) {
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
                       {gemeenteData.nearby.map((nearbyName) => (
                         <span key={nearbyName} style={{ 
-                          background: 'var(--cream-dark)', 
-                          color: 'var(--forest)', 
-                          padding: '0.5rem 1rem', 
-                          borderRadius: '20px', 
+                          background: '#F5F0E8', 
+                          color: '#5C4033', 
+                          padding: '3px 8px', 
+                          borderRadius: '4px', 
                           fontSize: '14px',
                           fontWeight: '500'
                         }}>
@@ -337,7 +337,7 @@ export default async function GemeentePage({ params }: Props) {
               {/* Service Cards - Placeholder for now */}
               <div style={{ background: 'var(--white)', borderRadius: '12px', padding: '2rem' }}>
                 <div style={{ 
-                  background: 'var(--sage-light)', 
+                  background: 'var(--forest-light)', 
                   width: '60px', 
                   height: '60px', 
                   borderRadius: '50%', 
@@ -346,7 +346,7 @@ export default async function GemeentePage({ params }: Props) {
                   justifyContent: 'center',
                   margin: '0 auto 1.5rem'
                 }}>
-                  <svg style={{ width: '28px', height: '28px', color: 'var(--sage)' }} fill="currentColor" viewBox="0 0 20 20">
+                  <svg style={{ width: '28px', height: '28px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
                     <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
                   </svg>
                 </div>
@@ -360,7 +360,7 @@ export default async function GemeentePage({ params }: Props) {
 
               <div style={{ background: 'var(--white)', borderRadius: '12px', padding: '2rem' }}>
                 <div style={{ 
-                  background: 'var(--sage-light)', 
+                  background: 'var(--forest-light)', 
                   width: '60px', 
                   height: '60px', 
                   borderRadius: '50%', 
@@ -369,7 +369,7 @@ export default async function GemeentePage({ params }: Props) {
                   justifyContent: 'center',
                   margin: '0 auto 1.5rem'
                 }}>
-                  <svg style={{ width: '28px', height: '28px', color: 'var(--sage)' }} fill="currentColor" viewBox="0 0 20 20">
+                  <svg style={{ width: '28px', height: '28px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
                   </svg>
                 </div>
@@ -383,7 +383,7 @@ export default async function GemeentePage({ params }: Props) {
 
               <div style={{ background: 'var(--white)', borderRadius: '12px', padding: '2rem' }}>
                 <div style={{ 
-                  background: 'var(--sage-light)', 
+                  background: 'var(--forest-light)', 
                   width: '60px', 
                   height: '60px', 
                   borderRadius: '50%', 
@@ -392,7 +392,7 @@ export default async function GemeentePage({ params }: Props) {
                   justifyContent: 'center',
                   margin: '0 auto 1.5rem'
                 }}>
-                  <svg style={{ width: '28px', height: '28px', color: 'var(--sage)' }} fill="currentColor" viewBox="0 0 20 20">
+                  <svg style={{ width: '28px', height: '28px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
                     <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
                   </svg>
                 </div>

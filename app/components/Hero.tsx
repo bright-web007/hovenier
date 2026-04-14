@@ -1,4 +1,5 @@
 import HeroLeadForm from './HeroLeadForm';
+import Image from 'next/image';
 
 interface HeroProps {
   translations: {
@@ -42,10 +43,9 @@ export default function Hero({ translations, locale }: HeroProps) {
   return (
     <section className="hero" aria-label="Hovenier vinden in Friesland">
       <div className="hero-left">
-        <div className="hero-texture" aria-hidden="true"></div>
-        <div className="hero-leaf" aria-hidden="true"></div>
-        <div className="hero-leaf2" aria-hidden="true"></div>
-        <div>
+        <div className="hero-overlay" style={{ position: 'absolute', width: '100%', height: '100%', backgroundColor: 'black', opacity: 0.6, zIndex: 5, inset: 0 }} />
+        <Image sizes="(max-width: 768px) 100vw, 1280px" src="/images/bg.jpg" alt="A beautiful garden with greenery" fill style={{ objectFit: 'cover' }} />
+        <div style={{ zIndex: 10, position: 'relative' }}>
           <p className="hero-eyebrow">{translations.hero_eyebrow}</p>
           <h1 className="hero-h1">
             {locale === 'nl' ? (
@@ -70,7 +70,7 @@ export default function Hero({ translations, locale }: HeroProps) {
             </div>
           </div>
         </div>
-        <div className="hero-stats" aria-label="Statistieken">
+        <div style={{ zIndex: 10, position: 'relative' }} className="hero-stats" aria-label="Statistieken">
           <div><div className="stat-num">150+</div><div className="stat-label">{translations.stats_gardeners}</div></div>
           <div><div className="stat-num">18</div><div className="stat-label">{translations.stats_municipalities}</div></div>
           <div><div className="stat-num">4.8</div><div className="stat-label">{translations.stats_rating}</div></div>

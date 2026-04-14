@@ -94,26 +94,12 @@ a { text-decoration: none; color: inherit; }
   min-height: 560px;
 }
 .hero-left {
-  background: var(--forest);
   padding: 3.5rem 3rem 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
   overflow: hidden;
-}
-.hero-texture {
-  position: absolute; inset: 0; opacity: 0.002;
-  background-image: none;
-  background-size: 0px 0px;
-}
-.hero-leaf {
-  position: absolute; right: -60px; bottom: -60px; width: 200px; height: 200px;
-  border-radius: 50%; border: 40px solid rgba(138,184,122,0.03);
-}
-.hero-leaf2 {
-  position: absolute; right: 60px; bottom: 60px; width: 120px; height: 120px;
-  border-radius: 50%; border: 25px solid rgba(138,184,122,0.02);
 }
 .hero-eyebrow { position: relative; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #b8d6ad; font-weight: 500; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
 .hero-eyebrow::before { content: ''; width: 28px; height: 0.5px; background: #b8d6ad; display: block; flex-shrink: 0; }
@@ -433,6 +419,7 @@ a { text-decoration: none; color: inherit; }
 /* ANIMATIONS */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 .hero-left > * { animation: fadeUp 0.6s ease both; }
+.hero-overlay { animation: none; opacity: 0.6 !important; }
 .hero-eyebrow { animation-delay: 0.1s; }
 .hero-h1 { animation-delay: 0.2s; }
 .hero-sub { animation-delay: 0.3s; }
@@ -688,7 +675,7 @@ a { text-decoration: none; color: inherit; }
 .region-card-icon {
   width: 48px;
   height: 48px;
-  background: var(--sage-light);
+  background: var(--forest-light);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -704,7 +691,7 @@ a { text-decoration: none; color: inherit; }
 .region-card-icon svg {
   width: 24px;
   height: 24px;
-  color: var(--forest);
+  color: var(--white);
 }
 
 .region-card-content {
@@ -873,14 +860,14 @@ a { text-decoration: none; color: inherit; }
 /* Region Hub Card Hover Effects */
 .region-hub-card {
   background: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px 0px #0000000F;
   overflow: hidden;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   cursor: pointer;
-  text-decoration: none;
-  color: inherit;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .region-hub-card:hover {
@@ -890,12 +877,11 @@ a { text-decoration: none; color: inherit; }
 
 .region-standalone-card {
   background: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px 0px #0000000F;
   overflow: hidden;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   cursor: pointer;
-  text-decoration: none;
   color: inherit;
   height: 100%;
 }
@@ -1426,12 +1412,18 @@ a { text-decoration: none; color: inherit; }
 /* RELATED ARTICLES COMPONENT */
 .related-articles {
   background: var(--cream);
-  padding: 3rem 0;
+  padding: 4rem 20rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .related-articles-header {
   text-align: center;
-  margin-bottom: 2.5rem;
 }
 
 .related-articles-title {
@@ -1447,6 +1439,7 @@ a { text-decoration: none; color: inherit; }
   grid-template-columns: 1fr;
   gap: 1.5rem;
   width: 100%;
+  max-width: 1280px;
 }
 
 @media (min-width: 1280px) {
@@ -1616,21 +1609,24 @@ a { text-decoration: none; color: inherit; }
   padding-left: 1rem;
   padding-right: 1rem;
 
-/* Footer inner container for consistent padding */
-.footer-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
 .footer-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 3rem;
   margin-bottom: 3rem;
+}
+
+@media (max-width: 1065px) {
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 3rem;
+  }
 }
 
 .footer-brand {
   max-width: 400px;
+  margin-right: 1.25rem;
 }
 
 .footer-logo-link {
@@ -1641,13 +1637,6 @@ a { text-decoration: none; color: inherit; }
   text-decoration: none;
   display: block;
   margin-bottom: 1rem;
-}
-
-.footer-logo-image {
-  height: 36px;
-  width: auto;
-  max-width: 160px;
-  filter: brightness(0) invert(1); /* Make dark logo white for dark footer */
 }
 
 .footer-description {
@@ -1724,6 +1713,8 @@ a { text-decoration: none; color: inherit; }
 
 .footer-column {
   min-width: 0;
+  width: 100%;
+  max-width: 165px;
 }
 
 .footer-links {
@@ -1750,7 +1741,8 @@ a { text-decoration: none; color: inherit; }
 
 /* Regional hierarchy styles */
 .footer-regions {
-  min-width: 300px;
+  width: 100%;
+  max-width: 447px;
 }
 
 .footer-regions-grid {
@@ -1940,14 +1932,11 @@ a { text-decoration: none; color: inherit; }
     padding: 5rem 0 2.5rem;
   }
   
-  .footer-grid {
-    grid-template-columns: 1.5fr 1fr 1.2fr 1fr;
-    gap: 3rem;
-  }
   
   .footer-regions-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem 2rem;
+    flex-grow: 1;
   }
   
   .newsletter-form {

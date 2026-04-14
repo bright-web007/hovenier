@@ -124,5 +124,4 @@ function showOfflineBanner() {
   document.body.appendChild(banner);
 
   // Adjust body padding to account for banner
-  document.body.style.paddingTop = '48px';
 }

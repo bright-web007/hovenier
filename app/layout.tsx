@@ -95,7 +95,7 @@ export default async function RootLayout({
   const lang = headersList.get('x-locale') || 'nl';
 
   return (
-    <html lang={lang}>
+    <html lang={lang} suppressHydrationWarning>
       <head>
         {/* PWA Meta Tags */}
         <meta name="mobile-web-app-capable" content="yes" />

@@ -145,7 +145,7 @@ export default async function RegionHubPage({ params }: Props) {
       
       <main>
         {/* Breadcrumbs */}
-        <section style={{ background: 'var(--cream-light)', padding: '1rem 0', borderBottom: '0.5px solid var(--border)' }}>
+        <section style={{ background: 'var(--cream-light)', borderBottom: '0.5px solid var(--border)' }}>
           <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem' }}>
             <Breadcrumbs items={breadcrumbItems} />
           </div>

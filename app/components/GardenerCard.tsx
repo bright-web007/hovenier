@@ -11,6 +11,17 @@ interface GardenerCardProps {
 }
 
 export default function GardenerCard({ gardener, locale }: GardenerCardProps) {
+  const isEn = locale === 'en'
+
+  const specialtyTranslations: Record<string, string> = {
+    'Tuinonderhoud': 'Garden Maintenance',
+    'Tuinontwerp': 'Garden Design',
+    'Groendak': 'Green Roof',
+    'Stratenmaker': 'Paving',
+    'Tuin Aanleggen': 'Garden Construction',
+  }
+
+  const translateSpecialty = (s: string) => isEn ? (specialtyTranslations[s] || s) : s
   return (
     <div className={styles.gardenerCard}>
       <div className={styles.cardHeader}>
@@ -26,11 +37,11 @@ export default function GardenerCard({ gardener, locale }: GardenerCardProps) {
       <div className={styles.cardBadges}>
         {gardener.verified && (
           <span className={`${styles.badge} ${styles.badgeVerified}`}>
-            ✓ Geverifieerd
+            ✓ {isEn ? 'Verified' : 'Geverifieerd'}
           </span>
         )}
         <span className={`${styles.badge} ${gardener.availability === 'available' ? styles.badgeAvailable : styles.badgeBusy}`}>
-          {gardener.availability === 'available' ? 'Beschikbaar' : 'Bezet'}
+          ✓ {gardener.availability === 'available' ? (isEn ? 'Available' : 'Beschikbaar') : (isEn ? 'Busy' : 'Bezet')}
         </span>
       </div>
 
@@ -41,26 +52,26 @@ export default function GardenerCard({ gardener, locale }: GardenerCardProps) {
         </div>
         <div className={styles.metaItem}>
           <div className={styles.metaValue}>€{gardener.startingPrice}</div>
-          <div className={styles.metaLabel}>per uur</div>
+          <div className={styles.metaLabel}>{isEn ? 'per hour' : 'per uur'}</div>
         </div>
       </div>
 
       <div className={styles.cardSpecialties}>
-        <div className={styles.specialtiesLabel}>Specialisaties:</div>
+        <div className={styles.specialtiesLabel}>{isEn ? 'Specialties:' : 'Specialisaties:'}</div>
         <div className={styles.specialtiesList}>
-          {gardener.specialties.join(' • ')}
+          {gardener.specialties.map(translateSpecialty).join(' • ')}
         </div>
       </div>
 
       <div className={styles.cardActions}>
-        <Link 
+        <Link
           href={localizePath(`/hoveniers/${gardener.slug}`, locale as SupportedLocale)}
           className={styles.viewButton}
         >
-          Bekijk Profiel
+          {isEn ? 'View Profile' : 'Bekijk Profiel'}
         </Link>
         <button className={styles.contactButton}>
-          Direct Contact
+          {isEn ? 'Direct Contact' : 'Direct Contact'}
         </button>
       </div>
     </div>

@@ -2,6 +2,7 @@
 
 import { useDeferredValue, useState } from 'react'
 import GardenerCard from './GardenerCard'
+import CustomSelect from './CustomSelect'
 import styles from './GardenerDirectory.module.css'
 import type { Gardener } from '../../lib/gardeners-data'
 
@@ -106,7 +107,7 @@ export default function GardenerDirectoryClient({
             </label>
             <input
               id="directory-query"
-              className={styles.filterSelect}
+              className={`${styles.filterSelect} ${styles.filterInput}`}
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
@@ -117,69 +118,65 @@ export default function GardenerDirectoryClient({
             <label htmlFor="gemeente" className={styles.filterLabel}>
               {isEnglish ? 'Municipality' : 'Gemeente'}
             </label>
-            <select
+            <CustomSelect
               id="gemeente"
-              className={styles.filterSelect}
+              label={isEnglish ? 'All municipalities' : 'Alle gemeenten'}
               value={municipality}
-              onChange={(event) => setMunicipality(event.target.value)}
-            >
-              <option value="">{isEnglish ? 'All municipalities' : 'Alle gemeenten'}</option>
-              {municipalityOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+              onChange={setMunicipality}
+              options={[
+                { value: '', label: isEnglish ? 'All municipalities' : 'Alle gemeenten' },
+                ...municipalityOptions.map((o) => ({ value: o, label: o })),
+              ]}
+            />
           </div>
           <div className={styles.filterGroup}>
             <label htmlFor="service" className={styles.filterLabel}>
               {isEnglish ? 'Service type' : 'Service Type'}
             </label>
-            <select
+            <CustomSelect
               id="service"
-              className={styles.filterSelect}
+              label={isEnglish ? 'All services' : 'Alle diensten'}
               value={service}
-              onChange={(event) => setService(event.target.value)}
-            >
-              <option value="">{isEnglish ? 'All services' : 'Alle diensten'}</option>
-              {serviceOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+              onChange={setService}
+              options={[
+                { value: '', label: isEnglish ? 'All services' : 'Alle diensten' },
+                ...serviceOptions.map((o) => ({ value: o, label: o })),
+              ]}
+            />
           </div>
           <div className={styles.filterGroup}>
             <label htmlFor="rating" className={styles.filterLabel}>
               {isEnglish ? 'Minimum rating' : 'Minimale Rating'}
             </label>
-            <select
+            <CustomSelect
               id="rating"
-              className={styles.filterSelect}
+              label={isEnglish ? 'All ratings' : 'Alle ratings'}
               value={minRating}
-              onChange={(event) => setMinRating(event.target.value)}
-            >
-              <option value="">{isEnglish ? 'All ratings' : 'Alle ratings'}</option>
-              <option value="4.5">4.5+ sterren</option>
-              <option value="4.0">4.0+ sterren</option>
-              <option value="3.5">3.5+ sterren</option>
-            </select>
+              onChange={setMinRating}
+              options={[
+                { value: '', label: isEnglish ? 'All ratings' : 'Alle ratings' },
+                { value: '4.5', label: isEnglish ? '4.5+ stars' : '4.5+ sterren' },
+                { value: '4.0', label: isEnglish ? '4.0+ stars' : '4.0+ sterren' },
+                { value: '3.5', label: isEnglish ? '3.5+ stars' : '3.5+ sterren' },
+              ]}
+            />
           </div>
           <div className={styles.filterGroup}>
             <label htmlFor="availability" className={styles.filterLabel}>
               {isEnglish ? 'Availability' : 'Beschikbaarheid'}
             </label>
-            <select
+            <CustomSelect
               id="availability"
-              className={styles.filterSelect}
+              label={isEnglish ? 'All gardeners' : 'Alle hoveniers'}
               value={availability}
-              onChange={(event) => setAvailability(event.target.value)}
-            >
-              <option value="">{isEnglish ? 'All gardeners' : 'Alle hoveniers'}</option>
-              <option value="available">{isEnglish ? 'Available' : 'Beschikbaar'}</option>
-              <option value="busy">{isEnglish ? 'Busy' : 'Bezet'}</option>
-              <option value="verified">{isEnglish ? 'Verified only' : 'Alleen geverifieerd'}</option>
-            </select>
+              onChange={setAvailability}
+              options={[
+                { value: '', label: isEnglish ? 'All gardeners' : 'Alle hoveniers' },
+                { value: 'available', label: isEnglish ? 'Available' : 'Beschikbaar' },
+                { value: 'busy', label: isEnglish ? 'Busy' : 'Bezet' },
+                { value: 'verified', label: isEnglish ? 'Verified only' : 'Alleen geverifieerd' },
+              ]}
+            />
           </div>
         </div>
       </div>
@@ -188,16 +185,18 @@ export default function GardenerDirectoryClient({
         <span className={styles.resultsCount}>
           {filteredGardeners.length} {isEnglish ? 'gardeners found' : 'hoveniers gevonden'}
         </span>
-        <select
-          className={styles.sortSelect}
+        <CustomSelect
+          id="sortBy"
+          label={isEnglish ? 'Sort by rating' : 'Sorteer op rating'}
           value={sortBy}
-          onChange={(event) => setSortBy(event.target.value)}
-        >
-          <option value="rating">{isEnglish ? 'Sort by rating' : 'Sorteer op rating'}</option>
-          <option value="price">{isEnglish ? 'Sort by price' : 'Sorteer op prijs'}</option>
-          <option value="response">{isEnglish ? 'Sort by response time' : 'Sorteer op reactietijd'}</option>
-          <option value="location">{isEnglish ? 'Sort by location' : 'Sorteer op locatie'}</option>
-        </select>
+          onChange={setSortBy}
+          options={[
+            { value: 'rating', label: isEnglish ? 'Sort by rating' : 'Sorteer op rating' },
+            { value: 'price', label: isEnglish ? 'Sort by price' : 'Sorteer op prijs' },
+            { value: 'response', label: isEnglish ? 'Sort by response time' : 'Sorteer op reactietijd' },
+            { value: 'location', label: isEnglish ? 'Sort by location' : 'Sorteer op locatie' },
+          ]}
+        />
       </div>
 
       {filteredGardeners.length > 0 ? (

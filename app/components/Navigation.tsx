@@ -1,10 +1,8 @@
-'use client';
 import Link from 'next/link';
-import { useRouter, usePathname } from 'next/navigation';
+import LocaleLink from './LocaleLink';
 import {
   getPathLocale,
   localizePath,
-  setCookieLocale,
   switchLocalePath,
   type SupportedLocale
 } from '@/lib/locale-utils';
@@ -21,9 +19,7 @@ interface NavigationProps {
 }
 
 export default function Navigation({ locale, translations = {} }: NavigationProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const currentLocale = getPathLocale(pathname || localizePath('/', locale as SupportedLocale));
+  const currentLocale = (locale === 'en' ? 'en' : 'nl') as SupportedLocale;
   
   // Default fallback values using current locale
   const t = {
@@ -33,18 +29,11 @@ export default function Navigation({ locale, translations = {} }: NavigationProp
     costs: translations.costs || (currentLocale === 'nl' ? 'Kosten' : 'Costs'),
     request_quote: translations.request_quote || (currentLocale === 'nl' ? 'Offerte aanvragen' : 'Request Quote')
   };
-  
-  const scrollToForm = () => {
-    const formElement = document.getElementById('quote-form');
-    if (formElement) {
-      formElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-  
-  const switchLocale = (nextLocale: SupportedLocale) => {
-    setCookieLocale(nextLocale);
-    router.push(switchLocalePath(pathname, nextLocale));
-  };
+
+  // Build the equivalent path for the other locale
+  const currentPath = localizePath('/', currentLocale);
+  const nlHref = switchLocalePath(currentPath, 'nl');
+  const enHref = switchLocalePath(currentPath, 'en');
 
   return (
     <nav className="nav" role="navigation" aria-label="Hoofdnavigatie">
@@ -58,28 +47,28 @@ export default function Navigation({ locale, translations = {} }: NavigationProp
           <Link href={localizePath('/regio', currentLocale)} className="nav-link" prefetch={false}>{t.regions}</Link>
           <Link href={localizePath('/kosten', currentLocale)} className="nav-link" prefetch={false}>{t.costs}</Link>
           <div className="lang-toggle" role="group" aria-label="Taal selectie">
-            <button 
-              className={`lang-btn ${currentLocale === 'nl' ? 'active' : 'inactive'}`} 
-              onClick={() => switchLocale('nl')}
-              aria-pressed={currentLocale === 'nl'}
-              type="button"
+            <LocaleLink 
+              className={`lang-btn ${currentLocale === 'nl' ? 'active' : 'inactive'}`}
+              href={nlHref}
+              locale="nl"
+              ariaCurrent={currentLocale === 'nl' ? 'true' : undefined}
               data-testid="nl-button"
             >
               NL
-            </button>
-            <button 
-              className={`lang-btn ${currentLocale === 'en' ? 'active' : 'inactive'}`} 
-              onClick={() => switchLocale('en')}
-              aria-pressed={currentLocale === 'en'}
-              type="button"
+            </LocaleLink>
+            <LocaleLink 
+              className={`lang-btn ${currentLocale === 'en' ? 'active' : 'inactive'}`}
+              href={enHref}
+              locale="en"
+              ariaCurrent={currentLocale === 'en' ? 'true' : undefined}
               data-testid="en-button"
             >
               EN
-            </button>
+            </LocaleLink>
           </div>
-          <button className="nav-cta" onClick={scrollToForm}>
+          <Link className="nav-cta" href={`${localizePath('/diensten', currentLocale)}#quote-form`} prefetch={false}>
             {t.request_quote}
-          </button>
+          </Link>
         </div>
       </div>
     </nav>

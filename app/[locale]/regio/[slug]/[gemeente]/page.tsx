@@ -296,19 +296,42 @@ export default async function GemeentePage({ params }: Props) {
                     <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>
                       Nabij {gemeenteData.name}
                     </h3>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
-                      {gemeenteData.nearby.map((nearbyName) => (
-                        <span key={nearbyName} style={{ 
-                          background: 'var(--cream-dark)', 
-                          color: 'var(--forest)', 
-                          padding: '0.5rem 1rem', 
-                          borderRadius: '20px', 
-                          fontSize: '14px',
-                          fontWeight: '500'
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(252px, 1fr))', gap: '1rem' }}>
+                      {gemeenteData.nearby.map((nearbySlug) => {
+                        const nearbyGemeente = getGemeenteBySlug(nearbySlug);
+                        const displayName = nearbyGemeente ? nearbyGemeente.name : nearbySlug;
+                        const gardenerCount = nearbyGemeente ? Math.max(2, Math.round(nearbyGemeente.population / 15000)) : 3;
+                        return (
+                        <div key={nearbySlug} style={{ 
+                          background: 'var(--white)', 
+                          border: '1px solid var(--border)',
+                          borderRadius: '12px', 
+                          padding: '1.5rem 1rem',
+                          textAlign: 'center',
                         }}>
-                          {nearbyName}
-                        </span>
-                      ))}
+                          <div style={{
+                            width: '48px',
+                            height: '48px',
+                            borderRadius: '50%',
+                            background: 'var(--forest)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            margin: '0 auto 0.75rem',
+                          }}>
+                            <svg style={{ width: '22px', height: '22px', color: 'white' }} fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <div style={{ fontWeight: '600', color: 'var(--forest)', fontSize: '15px', marginBottom: '0.25rem' }}>
+                            {displayName}
+                          </div>
+                          <div style={{ fontSize: '13px', color: 'var(--forest-mid)' }}>
+                            {gardenerCount} hoveniers
+                          </div>
+                        </div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}

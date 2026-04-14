@@ -4,16 +4,18 @@ import styles from './Partnership.module.css'
 
 interface PartnershipRequirementsProps {
   requirements: string[]
+  locale?: string
 }
 
-export default function PartnershipRequirements({ requirements }: PartnershipRequirementsProps) {
+export default function PartnershipRequirements({ requirements, locale = 'nl' }: PartnershipRequirementsProps) {
+  const isEn = locale === 'en';
   return (
     <section className="section section-alt">
       <div className="section-inner">
         <div className={styles.requirements}>
-          <h2 className={styles.requirementsTitle}>Partner vereisten</h2>
+          <h2 className={styles.requirementsTitle}>{isEn ? 'Partner requirements' : 'Partner vereisten'}</h2>
           <p className={styles.requirementsDescription}>
-            Wij werken alleen samen met professionele hoveniers die voldoen aan onze kwaliteitseisen.
+            {isEn ? 'We only work with professional gardeners who meet our quality standards.' : 'Wij werken alleen samen met professionele hoveniers die voldoen aan onze kwaliteitseisen.'}
           </p>
           
           <div className={styles.requirementsList}>

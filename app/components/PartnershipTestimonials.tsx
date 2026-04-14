@@ -11,15 +11,17 @@ interface SuccessStory {
 
 interface PartnershipTestimonialsProps {
   successStories: SuccessStory[]
+  locale?: string
 }
 
-export default function PartnershipTestimonials({ successStories }: PartnershipTestimonialsProps) {
+export default function PartnershipTestimonials({ successStories, locale = 'nl' }: PartnershipTestimonialsProps) {
+  const isEn = locale === 'en';
   return (
     <section className="section">
       <div className="section-inner">
         <div className="section-header-row section-centered">
-          <h2 className="section-title">Succesverhalen</h2>
-          <p className="section-sub">Wat onze partners zeggen</p>
+          <h2 className="section-title">{isEn ? 'Success stories' : 'Succesverhalen'}</h2>
+          <p className="section-sub">{isEn ? 'What our partners say' : 'Wat onze partners zeggen'}</p>
         </div>
         
         <div className={styles.testimonialsGrid}>

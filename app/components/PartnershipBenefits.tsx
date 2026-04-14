@@ -10,15 +10,17 @@ interface Benefit {
 
 interface PartnershipBenefitsProps {
   benefits: Benefit[]
+  locale?: string
 }
 
-export default function PartnershipBenefits({ benefits }: PartnershipBenefitsProps) {
+export default function PartnershipBenefits({ benefits, locale = 'nl' }: PartnershipBenefitsProps) {
+  const isEn = locale === 'en';
   return (
     <section className="section section-alt">
       <div className="section-inner">
         <div className="section-header-row section-centered">
-          <h2 className="section-title">Waarom partner worden?</h2>
-          <p className="section-sub">De voordelen van samenwerken met Hovenier.frl</p>
+          <h2 className="section-title">{isEn ? 'Why become a partner?' : 'Waarom partner worden?'}</h2>
+          <p className="section-sub">{isEn ? 'The benefits of partnering with Hovenier.frl' : 'De voordelen van samenwerken met Hovenier.frl'}</p>
         </div>
         
         <div className={styles.benefitsGrid}>

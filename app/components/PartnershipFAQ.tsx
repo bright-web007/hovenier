@@ -9,14 +9,16 @@ interface FAQ {
 
 interface PartnershipFAQProps {
   faqs: FAQ[]
+  locale?: string
 }
 
-export default function PartnershipFAQ({ faqs }: PartnershipFAQProps) {
+export default function PartnershipFAQ({ faqs, locale = 'nl' }: PartnershipFAQProps) {
+  const isEn = locale === 'en';
   return (
     <section className="section section-alt">
       <div className="section-inner">
         <div className="section-header-row section-centered">
-          <h2 className="section-title">Veelgestelde vragen</h2>
+          <h2 className="section-title">{isEn ? 'Frequently asked questions' : 'Veelgestelde vragen'}</h2>
         </div>
         
         <div className={styles.faqGrid}>

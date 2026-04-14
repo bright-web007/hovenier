@@ -19,20 +19,23 @@
 .sectionCentered {
   text-align: center;
   margin-bottom: 4rem;
-  max-width: 48rem;
+  max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .sectionEyebrow {
   display: inline-block;
   font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--sage);
-  background: var(--sage-light);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  margin-bottom: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--sage);
+  padding: 1rem 1.5rem;
+  border-radius: 100px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -40,17 +43,19 @@
 .sectionTitle {
   font-family: var(--serif);
   font-size: 3rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--forest);
-  margin-bottom: 1.5rem;
-  line-height: 1.1;
+  padding-top: 15px;;
+  margin-bottom: 0.8px;
+  line-height: 52.8px;
 }
 
 .sectionSub {
   font-size: 1.125rem;
   color: var(--forest-mid);
   line-height: 1.6;
-  margin-bottom: 0;
+  padding: 24px 0;
+  max-width: 874px;
 }
 
 /* Search Section */
@@ -59,7 +64,8 @@
   border-radius: 6px;
   padding: 2rem;
   margin-bottom: 3rem;
-  border: 0.5px solid var(--border);
+  border: 1px solid #2A3E201F;
+  width: 100%;
 }
 
 .searchTitle {
@@ -73,7 +79,7 @@
 
 .filterGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
@@ -84,19 +90,39 @@
 }
 
 .filterLabel {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--forest);
+  font-size: 1rem;
+  font-weight: 400;
+  color: #2D4124;
+  line-height: 140%;
   margin-bottom: 0.5rem;
+  text-align: left;
 }
 
-.filterSelect {
-  padding: 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 0.875rem;
+.filterSelect, .sortSelect {
+  width: 100%;
+  padding: 12px 12px 12px 16px;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 1rem;
   background: white;
-  color: var(--forest);
+  color: #969696;
+  font-weight: 400;
+  line-height: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+  cursor: pointer;
+}
+
+.sortSelect {
+  max-width: 183px;
+  font-size: 14px;
+  color: #2A3E20;
+  line-height: 15px;
 }
 
 .searchButton {
@@ -124,6 +150,7 @@
   margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
+  width: 100%;
 }
 
 .resultsCount {
@@ -131,21 +158,13 @@
   color: var(--forest-mid);
 }
 
-.sortSelect {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 0.875rem;
-  background: white;
-  color: var(--forest);
-}
-
 /* Gardener Grid */
 .gardenersGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
+  gap: 1.5rem;
   margin-bottom: 3rem;
+  width: 100%;
 }
 
 .gardenerCard {
@@ -165,7 +184,7 @@
 .cardHeader {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 12px;
   margin-bottom: 1rem;
 }
 
@@ -185,6 +204,10 @@
 
 .cardInfo {
   flex: 1;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .cardName {
@@ -216,14 +239,17 @@
   letter-spacing: 0.05em;
 }
 
-.badgeVerified {
-  background: var(--sage);
-  color: white;
+.badgeAvailable, .badgeVerified {
+  background: var(--forest-light);
+  color: var(--white);
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0.6px;
+  padding: 6px 12px;
 }
 
-.badgeAvailable {
-  background: var(--forest-light);
-  color: var(--forest);
+.badgeVerified {
+  background: var(--sage);
 }
 
 .badgeBusy {
@@ -261,6 +287,7 @@
 
 .cardSpecialties {
   margin-bottom: 1rem;
+  padding-top: 12px;
 }
 
 .specialtiesLabel {
@@ -310,6 +337,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
+  font-family: var(--sans);
 }
 
 .contactButton:hover {

@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import {
@@ -21,6 +22,7 @@ interface NavigationProps {
 }
 
 export default function Navigation({ locale, translations = {} }: NavigationProps) {
+  const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const currentLocale = getPathLocale(pathname || localizePath('/', locale as SupportedLocale));
@@ -81,6 +83,78 @@ export default function Navigation({ locale, translations = {} }: NavigationProp
             {t.request_quote}
           </button>
         </div>
+
+        {/* Hamburger button - visible on mobile */}
+        <button
+          className="hamburger-btn"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? 'Menu sluiten' : 'Menu openen'}
+          aria-expanded={menuOpen}
+          type="button"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            {menuOpen ? (
+              <>
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </>
+            ) : (
+              <>
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </>
+            )}
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile menu overlay */}
+      {menuOpen && <div className="mobile-menu-overlay" onClick={() => setMenuOpen(false)} />}
+
+      {/* Mobile slide-out menu */}
+      <div className={`mobile-menu ${menuOpen ? 'mobile-menu-open' : ''}`}>
+        <div className="mobile-menu-header">
+          <Link href={localizePath('/', currentLocale)} className="nav-logo" onClick={() => setMenuOpen(false)}>
+            <img src="/assets/logo-light.svg" alt="Hovenier.frl" width="140" height="36" className="nav-logo-image" />
+          </Link>
+          <button
+            className="mobile-menu-close"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Menu sluiten"
+            type="button"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <Link href={localizePath('/hoveniers', currentLocale)} className="mobile-menu-link" onClick={() => setMenuOpen(false)}>{t.gardeners}</Link>
+        <Link href={localizePath('/diensten', currentLocale)} className="mobile-menu-link" onClick={() => setMenuOpen(false)}>{t.services}</Link>
+        <Link href={localizePath('/regio', currentLocale)} className="mobile-menu-link" onClick={() => setMenuOpen(false)}>{t.regions}</Link>
+        <Link href={localizePath('/kosten', currentLocale)} className="mobile-menu-link" onClick={() => setMenuOpen(false)}>{t.costs}</Link>
+        <div className="lang-toggle" role="group" aria-label="Taal selectie">
+          <button 
+            className={`lang-btn ${currentLocale === 'nl' ? 'active' : 'inactive'}`} 
+            onClick={() => { switchLocale('nl'); setMenuOpen(false); }}
+            aria-pressed={currentLocale === 'nl'}
+            type="button"
+          >
+            NL
+          </button>
+          <button 
+            className={`lang-btn ${currentLocale === 'en' ? 'active' : 'inactive'}`} 
+            onClick={() => { switchLocale('en'); setMenuOpen(false); }}
+            aria-pressed={currentLocale === 'en'}
+            type="button"
+          >
+            EN
+          </button>
+        </div>
+        <button className="nav-cta" style={{ width: '100%', marginTop: '0.5rem' }} onClick={() => { scrollToForm(); setMenuOpen(false); }}>
+          {t.request_quote}
+        </button>
       </div>
     </nav>
   );

@@ -211,7 +211,7 @@ export const gemeentesData: Gemeente[] = [
     population: 123000,
     lat: 53.2012,
     lng: 5.7999,
-    image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1696665482299-fc162ff54ce0?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     nearby: ["sneek", "drachten", "franeker"],
     intro: "Leeuwarden is de bruisende hoofdstad van Friesland, bekend om haar historische binnenstad, groene parken en karakteristieke stadstuinen. Hier vind je hoveniers die gespecialiseerd zijn in zowel moderne stadstuinen als klassieke Friese tuinen.",
     introEn: "Leeuwarden is the vibrant capital of Friesland, known for its historic city center, green parks and characteristic city gardens. Here you will find gardeners who specialize in both modern city gardens and classic Frisian gardens.",

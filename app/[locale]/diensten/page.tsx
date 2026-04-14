@@ -7,6 +7,7 @@ import Link from 'next/link';
 import ServiceSchema from '../../components/schemas/ServiceSchema';
 import { localizePath, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils';
 import ImageComponent from '@/app/components/ImageComponent';
+import DienstCard from '@/app/components/DienstCard';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -259,40 +260,14 @@ export default async function ServicesPage({ params }: Props) {
                 gap: '1rem' 
               }}>
                 {services.map((service) => (
-                  <div key={service.id} style={{ 
-                    background: 'var(--white)', 
-                    borderRadius: '16px', 
-                    boxShadow: '0px 4px 20px 0px #0000000F', 
-                    overflow: 'hidden',
-                    transition: 'all 0.3s ease',
-                    border: '1px solid #E5E7EB',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    overflowX: 'hidden',
-                    overflowY: 'hidden',
-                  }}>
-                    <div style={{
-                      width: '100%',
-                      height: '200px',
-                      position: 'relative',
-                    }}>
-                      <ImageComponent sizes='376px' fill style={{ objectFit: 'cover' }} loading='lazy' src={service.image} alt={`image of ${service.title}`} />
-                    </div>
-                    <div style={{
-                      width: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      padding: '20px 24px 24px 24px',
-                      gap: '12px',
-                    }}>
-                      <div style={{ backgroundColor: '#16423C14', padding: '4px 10px', borderRadius: '4px', width: 'fit-content' }}>
-                        <p style={{ fontSize: '11px', lineHeight: '100%', color: '#16423C', fontWeight: 600,  }}>{service.subtitle}</p>
-                      </div>  
-                      <p style={{ fontWeight: 700, fontSize: '22px', color: '#1F2937', lineHeight: '100%', letterSpacing: '-0.3px' }}>{service.title}</p>
-                      <p style={{ fontSize: '14px', color: '#6B7280', lineHeight: '22px', fontWeight: 400 }}>{service.description}</p>
-                      <Link href={`/diensten/${service.id}`} className="service-learn-more">Learn more →</Link>
-                    </div>  
-                  </div>
+                  <DienstCard
+                    key={service.id}
+                    id={service.id}
+                    title={service.title}
+                    subtitle={service.subtitle}
+                    description={service.description}
+                    image={service.image}
+                  />
                 ))}
               </div>
             </section>

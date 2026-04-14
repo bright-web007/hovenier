@@ -8,6 +8,8 @@ import RelatedArticles from '../../../../components/RelatedArticles'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../../components/StructuredData'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 import { regionHubs, getRegionHubBySlug, getGemeenteBySlug, type RegionHub, type Gemeente } from '@/lib/regions-hierarchy'
+import DienstCard from '../../../../components/DienstCard'
+import Link from 'next/link'
 
 // Simple translation function
 function createTranslator(locale: string) {
@@ -238,7 +240,7 @@ export default async function GemeentePage({ params }: Props) {
         {/* Hero Section */}
         <section style={{ background: 'var(--white)' }}>
           <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '3rem', alignItems: 'start', padding: '3rem 1rem' }}>
+            <div className='region-hero'>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem', gap: '1rem' }}>
                   <div style={{ 
@@ -248,7 +250,8 @@ export default async function GemeentePage({ params }: Props) {
                     borderRadius: '50%', 
                     display: 'flex', 
                     alignItems: 'center', 
-                    justifyContent: 'center' 
+                    justifyContent: 'center',
+                    flexShrink: 0 
                   }}>
                     <svg style={{ width: '32px', height: '32px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
@@ -296,18 +299,16 @@ export default async function GemeentePage({ params }: Props) {
                     <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>
                       Nabij {gemeenteData.name}
                     </h3>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+                    <div className="city-grid">
                       {gemeenteData.nearby.map((nearbyName) => (
-                        <span key={nearbyName} style={{ 
-                          background: '#F5F0E8', 
-                          color: '#5C4033', 
-                          padding: '3px 8px', 
-                          borderRadius: '4px', 
-                          fontSize: '14px',
-                          fontWeight: '500'
-                        }}>
-                          {nearbyName}
-                        </span>
+                        <Link style={{ backgroundColor: 'white', borderRadius: '8px', padding: "24px 1rem", border: '1px solid #2A3E201F', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: '252px' }} key={nearbyName} href={`/regio/${regionHub.slug}/${nearbyName}`}>
+                          <div style={{ borderRadius: '50%', width: '48px', height: '48px', backgroundColor: 'var(--forest-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" clipRule="evenodd" d="M6.05997 4.85984C7.63536 3.28446 9.77204 2.39941 12 2.39941C14.2279 2.39941 16.3646 3.28446 17.94 4.85984C19.5154 6.43523 20.4004 8.57191 20.4004 10.7998C20.4004 13.0278 19.5154 15.1645 17.94 16.7398L12 22.6798L6.05997 16.7398C5.27987 15.9598 4.66105 15.0338 4.23886 14.0146C3.81667 12.9954 3.59937 11.903 3.59937 10.7998C3.59937 9.69667 3.81667 8.6043 4.23886 7.5851C4.66105 6.56591 5.27987 5.63987 6.05997 4.85984ZM12 13.1998C12.6365 13.1998 13.2469 12.947 13.697 12.4969C14.1471 12.0468 14.4 11.4364 14.4 10.7998C14.4 10.1633 14.1471 9.55287 13.697 9.10279C13.2469 8.6527 12.6365 8.39984 12 8.39984C11.3635 8.39984 10.753 8.6527 10.3029 9.10279C9.85283 9.55287 9.59997 10.1633 9.59997 10.7998C9.59997 11.4364 9.85283 12.0468 10.3029 12.4969C10.753 12.947 11.3635 13.1998 12 13.1998Z" fill="white"/>
+                            </svg>
+                          </div>
+                          <p style={{ color: '#1C3A12', fontSize: '15px', lineHeight: '19.5px', textTransform: 'capitalize' }}>{nearbyName}</p>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -334,82 +335,34 @@ export default async function GemeentePage({ params }: Props) {
             </h2>
             
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
-              {/* Service Cards - Placeholder for now */}
-              <div style={{ background: 'var(--white)', borderRadius: '12px', padding: '2rem' }}>
-                <div style={{ 
-                  background: 'var(--forest-light)', 
-                  width: '60px', 
-                  height: '60px', 
-                  borderRadius: '50%', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  margin: '0 auto 1.5rem'
-                }}>
-                  <svg style={{ width: '28px', height: '28px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
-                  </svg>
-                </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem', textAlign: 'center' }}>
-                  Tuinonderhoud
-                </h3>
-                <p style={{ color: 'var(--forest-mid)', fontSize: '14px', textAlign: 'center', lineHeight: '1.6' }}>
-                  Regelmatig onderhoud voor een mooie tuin het hele jaar door
-                </p>
-              </div>
-
-              <div style={{ background: 'var(--white)', borderRadius: '12px', padding: '2rem' }}>
-                <div style={{ 
-                  background: 'var(--forest-light)', 
-                  width: '60px', 
-                  height: '60px', 
-                  borderRadius: '50%', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  margin: '0 auto 1.5rem'
-                }}>
-                  <svg style={{ width: '28px', height: '28px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem', textAlign: 'center' }}>
-                  Tuinontwerp
-                </h3>
-                <p style={{ color: 'var(--forest-mid)', fontSize: '14px', textAlign: 'center', lineHeight: '1.6' }}>
-                  Professioneel ontwerp voor uw droomtuin
-                </p>
-              </div>
-
-              <div style={{ background: 'var(--white)', borderRadius: '12px', padding: '2rem' }}>
-                <div style={{ 
-                  background: 'var(--forest-light)', 
-                  width: '60px', 
-                  height: '60px', 
-                  borderRadius: '50%', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  margin: '0 auto 1.5rem'
-                }}>
-                  <svg style={{ width: '28px', height: '28px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-                  </svg>
-                </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem', textAlign: 'center' }}>
-                  Bestrating
-                </h3>
-                <p style={{ color: 'var(--forest-mid)', fontSize: '14px', textAlign: 'center', lineHeight: '1.6' }}>
-                  Terrassen, opritten en tuinpaden professioneel aangelegd
-                </p>
-              </div>
+              <DienstCard
+                id="tuinonderhoud"
+                title="Tuinonderhoud"
+                subtitle="Regulier onderhoud & verzorging"
+                description="Regelmatig onderhoud voor een mooie tuin het hele jaar door"
+                image="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80"
+              />
+              <DienstCard
+                id="tuinontwerp"
+                title="Tuinontwerp"
+                subtitle="Creatieve tuinconcepten"
+                description="Professioneel ontwerp voor uw droomtuin"
+                image="https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?w=800&q=80"
+              />
+              <DienstCard
+                id="stratenmaker"
+                title="Bestrating"
+                subtitle="Terrassen & tuinpaden"
+                description="Terrassen, opritten en tuinpaden professioneel aangelegd"
+                image="https://images.unsplash.com/photo-1722953529218-7ade56b81293?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              />
             </div>
           </div>
         </section>
 
         {/* Lead Form Section */}
-        <section style={{ background: 'var(--white)', padding: '4rem 1.5rem' }}>
-          <div style={{ maxWidth: '48rem', margin: '0 auto' }}>
+        <section style={{ background: 'var(--white)', }}>
+          <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '4rem 1rem' }}>
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
               <h2 style={{ fontSize: '2rem', fontFamily: 'var(--serif)', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>
                 Gratis offerte aanvragen in {gemeenteData.name}

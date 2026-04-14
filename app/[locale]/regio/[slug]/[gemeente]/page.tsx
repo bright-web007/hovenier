@@ -12,7 +12,7 @@ import { regionHubs, getRegionHubBySlug, getGemeenteBySlug, type RegionHub, type
 // Simple translation function
 function createTranslator(locale: string) {
   let messages: Record<string, any> = {};
-  
+
   try {
     if (locale === 'nl') {
       messages = require(`../../../../../locales/nl/common.json`);
@@ -39,7 +39,7 @@ function createTranslator(locale: string) {
       request_quote: "Offerte aanvragen"
     };
   }
-  
+
   return (key: string): string => {
     const keys = key.split('.');
     let value: any = messages;
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug, gemeente } = await params;
   const regionHub = getRegionHubBySlug(slug);
   const gemeenteData = getGemeenteBySlug(gemeente);
-  
+
   if (!regionHub || !gemeenteData) {
     return {
       title: 'Gemeente niet gevonden | Hovenier.frl'
@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = `Hovenier in ${gemeenteData.name} | ${regionHub.name} | Hovenier.frl`;
   const description = `Vind lokale hoveniers in ${gemeenteData.name}, ${regionHub.name}. ${gemeenteData.intro} Vergelijk lokale tuinspecialisten in deze gemeente.`;
-  
+
   return {
     title,
     description,
@@ -86,7 +86,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const params: { locale: string; slug: string; gemeente: string }[] = [];
-  
+
   for (const hub of regionHubs) {
     for (const gemeente of hub.gemeentes) {
       params.push(
@@ -95,23 +95,23 @@ export async function generateStaticParams() {
       );
     }
   }
-  
+
   // Special case: Add leeuwarden as both region and gemeente
   params.push(
     { locale: 'nl', slug: 'leeuwarden', gemeente: 'leeuwarden' },
     { locale: 'en', slug: 'leeuwarden', gemeente: 'leeuwarden' }
   );
-  
+
   return params;
 }
 
 export default async function GemeentePage({ params }: Props) {
   const { locale, slug, gemeente } = await params;
   setRequestLocale(locale);
-  
+
   const regionHub = getRegionHubBySlug(slug);
   const gemeenteData = getGemeenteBySlug(gemeente);
-  
+
   if (!regionHub || !gemeenteData) {
     notFound();
   }
@@ -123,7 +123,7 @@ export default async function GemeentePage({ params }: Props) {
   }
 
   const validLocale = locale as SupportedLocale;
-  
+
   // Create translator function
   const t = createTranslator(validLocale);
 
@@ -176,7 +176,7 @@ export default async function GemeentePage({ params }: Props) {
       publishedAt: "2024-03-20",
     },
     {
-      id: "2", 
+      id: "2",
       title: `Beste tijd voor tuinaanleg in ${regionHub.name}`,
       excerpt: `Uitleg over de optimale timing voor tuinaanleg in de regio ${regionHub.name}.`,
       slug: `tuinaanleg-timing-${slug}`,
@@ -189,12 +189,12 @@ export default async function GemeentePage({ params }: Props) {
       title: `Kosten van hovenierdiensten in Friesland 2024`,
       excerpt: `Overzicht van prijzen voor professionele hovenierdiensten in heel Friesland.`,
       slug: "kosten-hovenierdiensten-friesland-2024",
-      category: "Kosten", 
+      category: "Kosten",
       readTime: 6,
       publishedAt: "2024-03-10",
     }
   ];
-  
+
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
     { label: 'Regio\'s', href: '/regio' },
@@ -204,20 +204,20 @@ export default async function GemeentePage({ params }: Props) {
 
   return (
     <div className="page-container">
-      <LocalBusinessSchema 
+      <LocalBusinessSchema
         url={`https://hovenier.frl${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`}
         nameContext={`Hoveniers in ${gemeenteData.name}`}
         services={[
           "Tuinonderhoud",
-          "Tuinontwerp", 
+          "Tuinontwerp",
           "Bestrating",
           "Boomverzorging",
           "Groendaken",
           "Tuinaanleg"
         ]}
       />
-      
-      <BreadcrumbSchema 
+
+      <BreadcrumbSchema
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
@@ -226,7 +226,7 @@ export default async function GemeentePage({ params }: Props) {
       />
 
       <Navigation locale={validLocale} translations={navTranslations} />
-      
+
       <main>
         {/* Breadcrumbs */}
         <section style={{ background: 'var(--cream-light)', padding: '1rem 0', borderBottom: '0.5px solid var(--border)' }}>
@@ -241,16 +241,16 @@ export default async function GemeentePage({ params }: Props) {
             <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '3rem', alignItems: 'start' }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem', gap: '1rem' }}>
-                  <div style={{ 
-                    background: 'var(--forest-light)', 
-                    width: '64px', 
-                    height: '64px', 
-                    borderRadius: '50%', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    justifyContent: 'center' 
+                  <div style={{
+                    background: "#5A7A4E",
+                    width: '64px',
+                    height: '64px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
                   }}>
-                    <svg style={{ width: '32px', height: '32px', color: 'var(--forest)' }} fill="currentColor" viewBox="0 0 20 20">
+                    <svg style={{ width: '32px', height: '32px', color: '#FFFFFF' }} fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg>
                   </div>
@@ -263,7 +263,7 @@ export default async function GemeentePage({ params }: Props) {
                     </p>
                   </div>
                 </div>
-                
+
                 <p style={{ fontSize: '1.25rem', color: 'var(--forest-mid)', marginBottom: '2rem', lineHeight: '1.6' }}>
                   {gemeenteData.intro}
                 </p>
@@ -302,34 +302,34 @@ export default async function GemeentePage({ params }: Props) {
                         const displayName = nearbyGemeente ? nearbyGemeente.name : nearbySlug;
                         const gardenerCount = nearbyGemeente ? Math.max(2, Math.round(nearbyGemeente.population / 15000)) : 3;
                         return (
-                        <div key={nearbySlug} style={{ 
-                          background: 'var(--white)', 
-                          border: '1px solid var(--border)',
-                          borderRadius: '12px', 
-                          padding: '1.5rem 1rem',
-                          textAlign: 'center',
-                        }}>
-                          <div style={{
-                            width: '48px',
-                            height: '48px',
-                            borderRadius: '50%',
-                            background: 'var(--forest)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            margin: '0 auto 0.75rem',
+                          <div key={nearbySlug} style={{
+                            background: 'var(--white)',
+                            border: '1px solid var(--border)',
+                            borderRadius: '12px',
+                            padding: '1.5rem 1rem',
+                            textAlign: 'center',
                           }}>
-                            <svg style={{ width: '22px', height: '22px', color: 'white' }} fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                            </svg>
+                            <div style={{
+                              width: '48px',
+                              height: '48px',
+                              borderRadius: '50%',
+                              background: '#5A7A4E',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              margin: '0 auto 0.75rem',
+                            }}>
+                              <svg style={{ width: '22px', height: '22px', color: 'white' }} fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div style={{ fontWeight: '600', color: 'var(--forest)', fontSize: '15px', marginBottom: '0.25rem' }}>
+                              {displayName}
+                            </div>
+                            <div style={{ fontSize: '13px', color: 'var(--forest-mid)' }}>
+                              {gardenerCount} hoveniers
+                            </div>
                           </div>
-                          <div style={{ fontWeight: '600', color: 'var(--forest)', fontSize: '15px', marginBottom: '0.25rem' }}>
-                            {displayName}
-                          </div>
-                          <div style={{ fontSize: '13px', color: 'var(--forest-mid)' }}>
-                            {gardenerCount} hoveniers
-                          </div>
-                        </div>
                         );
                       })}
                     </div>
@@ -339,7 +339,7 @@ export default async function GemeentePage({ params }: Props) {
 
               {/* Lead Form */}
               <div style={{ background: 'var(--cream-light)', borderRadius: '12px', padding: '2rem' }}>
-                <NewLeadForm 
+                <NewLeadForm
                   translations={translations}
                   locale={validLocale}
                   prefillMunicipality={gemeenteData.name}
@@ -355,17 +355,17 @@ export default async function GemeentePage({ params }: Props) {
             <h2 style={{ fontSize: '2rem', fontFamily: 'var(--serif)', fontWeight: '600', color: 'var(--forest)', marginBottom: '2rem', textAlign: 'center' }}>
               Populaire Hovenierdiensten in {gemeenteData.name}
             </h2>
-            
+
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
               {/* Service Cards - Placeholder for now */}
               <div style={{ background: 'var(--white)', borderRadius: '12px', padding: '2rem' }}>
-                <div style={{ 
-                  background: 'var(--sage-light)', 
-                  width: '60px', 
-                  height: '60px', 
-                  borderRadius: '50%', 
-                  display: 'flex', 
-                  alignItems: 'center', 
+                <div style={{
+                  background: 'var(--sage-light)',
+                  width: '60px',
+                  height: '60px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
                   justifyContent: 'center',
                   margin: '0 auto 1.5rem'
                 }}>
@@ -373,22 +373,22 @@ export default async function GemeentePage({ params }: Props) {
                     <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
                   </svg>
                 </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem', textAlign: 'center' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '0.25rem', textAlign: 'left' }}>
                   Tuinonderhoud
                 </h3>
-                <p style={{ color: 'var(--forest-mid)', fontSize: '14px', textAlign: 'center', lineHeight: '1.6' }}>
+                <p style={{ color: 'var(--forest-mid)', fontSize: '16px', textAlign: 'left', lineHeight: '1.6' }}>
                   Regelmatig onderhoud voor een mooie tuin het hele jaar door
                 </p>
               </div>
 
               <div style={{ background: 'var(--white)', borderRadius: '12px', padding: '2rem' }}>
-                <div style={{ 
-                  background: 'var(--sage-light)', 
-                  width: '60px', 
-                  height: '60px', 
-                  borderRadius: '50%', 
-                  display: 'flex', 
-                  alignItems: 'center', 
+                <div style={{
+                  background: 'var(--sage-light)',
+                  width: '60px',
+                  height: '60px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
                   justifyContent: 'center',
                   margin: '0 auto 1.5rem'
                 }}>
@@ -396,22 +396,22 @@ export default async function GemeentePage({ params }: Props) {
                     <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem', textAlign: 'center' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '0.25rem', textAlign: 'left' }}>
                   Tuinontwerp
                 </h3>
-                <p style={{ color: 'var(--forest-mid)', fontSize: '14px', textAlign: 'center', lineHeight: '1.6' }}>
+                <p style={{ color: 'var(--forest-mid)', fontSize: '16px', textAlign: 'left', lineHeight: '1.6' }}>
                   Professioneel ontwerp voor uw droomtuin
                 </p>
               </div>
 
               <div style={{ background: 'var(--white)', borderRadius: '12px', padding: '2rem' }}>
-                <div style={{ 
-                  background: 'var(--sage-light)', 
-                  width: '60px', 
-                  height: '60px', 
-                  borderRadius: '50%', 
-                  display: 'flex', 
-                  alignItems: 'center', 
+                <div style={{
+                  background: 'var(--sage-light)',
+                  width: '60px',
+                  height: '60px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
                   justifyContent: 'center',
                   margin: '0 auto 1.5rem'
                 }}>
@@ -419,12 +419,14 @@ export default async function GemeentePage({ params }: Props) {
                     <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
                   </svg>
                 </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem', textAlign: 'center' }}>
-                  Bestrating
-                </h3>
-                <p style={{ color: 'var(--forest-mid)', fontSize: '14px', textAlign: 'center', lineHeight: '1.6' }}>
-                  Terrassen, opritten en tuinpaden professioneel aangelegd
-                </p>
+                <div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '0.25rem', textAlign: 'left' }}>
+                    Bestrating
+                  </h3>
+                  <p style={{ color: 'var(--forest-mid)', fontSize: '16px', textAlign: 'left', lineHeight: '1.6' }}>
+                    Terrassen, opritten en tuinpaden professioneel aangelegd
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -444,7 +446,7 @@ export default async function GemeentePage({ params }: Props) {
 
             {/* Lead Form */}
             <div style={{ background: 'var(--cream-light)', borderRadius: '12px', padding: '2rem' }}>
-              <NewLeadForm 
+              <NewLeadForm
                 translations={translations}
                 locale={validLocale}
                 prefillMunicipality={gemeenteData.name}
@@ -463,32 +465,32 @@ export default async function GemeentePage({ params }: Props) {
               Bekijk alle {regionHub.gemeentes.length} gemeenten in deze regio
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href={localizePath(`/regio/${slug}`, validLocale)} style={{ 
-                display: 'inline-flex', 
-                alignItems: 'center', 
-                gap: '8px', 
-                padding: '14px 28px', 
-                fontSize: '14px', 
+              <a href={localizePath(`/regio/${slug}`, validLocale)} style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '14px 28px',
+                fontSize: '14px',
                 fontWeight: '600',
-                color: 'var(--forest)', 
-                border: '1px solid var(--forest)', 
-                borderRadius: '8px', 
+                color: 'var(--forest)',
+                border: '1px solid var(--forest)',
+                borderRadius: '8px',
                 textDecoration: 'none',
                 transition: 'all 0.2s ease',
                 background: 'var(--white)'
               }} className="back-to-regions-btn">
                 ← {regionHub.name}
               </a>
-              <a href={localizePath('/regio', validLocale)} style={{ 
-                display: 'inline-flex', 
-                alignItems: 'center', 
-                gap: '8px', 
-                padding: '14px 28px', 
-                fontSize: '14px', 
+              <a href={localizePath('/regio', validLocale)} style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '14px 28px',
+                fontSize: '14px',
                 fontWeight: '600',
-                color: 'var(--white)', 
-                background: 'var(--forest)', 
-                borderRadius: '8px', 
+                color: 'var(--white)',
+                background: 'var(--forest)',
+                borderRadius: '8px',
                 textDecoration: 'none',
                 transition: 'all 0.2s ease'
               }}>
@@ -499,8 +501,8 @@ export default async function GemeentePage({ params }: Props) {
         </section>
 
         {/* Related Articles */}
-        <RelatedArticles 
-          articles={relatedArticles} 
+        <RelatedArticles
+          articles={relatedArticles}
           title={`Gerelateerde artikelen voor ${gemeenteData.name}`}
         />
       </main>

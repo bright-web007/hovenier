@@ -204,7 +204,7 @@ export const regionHubs: RegionHub[] = [
     intro: "Noordwest-Friesland combineert de rijke historie van Harlingen met de unieke natuurschoon van de Waddeneilanden Vlieland en Terschelling.",
   },
   {
-    slug: "noordoost-friesland", 
+    slug: "noordoost-friesland",
     name: "Noordoost-Friesland",
     description: "Landelijke regio met traditionele dorpen en Waddeneilanden",
     gemeentes: gemeentesData.filter(g => ["noardeast-fryslan", "achtkarspelen", "dantumadeel", "ameland", "schiermonnikoog"].includes(g.slug)),
@@ -213,7 +213,7 @@ export const regionHubs: RegionHub[] = [
   },
   {
     slug: "centraal-friesland",
-    name: "Centraal-Friesland", 
+    name: "Centraal-Friesland",
     description: "Groene regio met bossen en natuurgebieden",
     gemeentes: gemeentesData.filter(g => ["smallingerland", "opsterland", "ooststellingwerf", "weststellingwerf"].includes(g.slug)),
     totalPopulation: 135000,
@@ -222,7 +222,7 @@ export const regionHubs: RegionHub[] = [
   {
     slug: "zuidwest-friesland",
     name: "Zuidwest-Friesland",
-    description: "Waterrijke regio met meren en sportvoorzieningen", 
+    description: "Waterrijke regio met meren en sportvoorzieningen",
     gemeentes: gemeentesData.filter(g => ["sudwest-fryslan", "heerenveen", "de-fryske-marren", "tietjerksteradeel"].includes(g.slug)),
     totalPopulation: 215000,
     intro: "Zuidwest-Friesland is de waterrijke regio van Friesland, bekend om de Friese meren, watersport en de sportstad Heerenveen.",

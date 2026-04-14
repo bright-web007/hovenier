@@ -82,7 +82,9 @@ export default function RegionStrip({
         <div className="region-grid">
           {displayRegions.map((region) => {
             const regionSlug = getRegionSlugByGemeenteSlug(region.slug);
-            const href = regionSlug ? `/regio/${regionSlug}/${region.slug}` : `/regio/${region.slug}`;
+            const href = regionSlug && regionSlug !== region.slug
+              ? `/regio/${regionSlug}/${region.slug}`
+              : `/regio/${region.slug}`;
             
             // Debug logging for development
             if (process.env.NODE_ENV === 'development' && !regionSlug) {

@@ -1944,7 +1944,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .footer-social {
-  display: flex;
+  display: none;
   gap: 1rem;
 }
 

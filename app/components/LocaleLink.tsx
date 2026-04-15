@@ -1,6 +1,6 @@
 'use client';
 
-import { setCookieLocale, type SupportedLocale } from '@/lib/locale-utils';
+import { setCookieLocale, switchLocalePath, stripLocalePrefix, type SupportedLocale } from '@/lib/locale-utils';
 
 interface LocaleLinkProps {
   href: string;
@@ -12,8 +12,14 @@ interface LocaleLinkProps {
 }
 
 export default function LocaleLink({ href, locale, className, ariaCurrent, children, ...rest }: LocaleLinkProps) {
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     setCookieLocale(locale);
+    // Build the equivalent path in the target locale from the current page
+    const currentPath = window.location.pathname;
+    const neutralPath = stripLocalePrefix(currentPath);
+    const targetPath = switchLocalePath(neutralPath, locale);
+    window.location.href = targetPath;
   };
 
   return (

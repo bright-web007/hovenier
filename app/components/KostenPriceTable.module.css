@@ -70,7 +70,7 @@
 }
 
 .priceColumn {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 16px;
   font-weight: 500;
   color: #1a3210;

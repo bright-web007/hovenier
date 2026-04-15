@@ -41,7 +41,7 @@
 }
 
 .sectionTitle {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 3rem;
   font-weight: 700;
   color: var(--forest);
@@ -69,7 +69,7 @@
 }
 
 .searchTitle {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 28px;
   font-weight: 600;
   color: var(--forest-deep);
@@ -416,4 +416,92 @@
   .cardActions {
     flex-direction: column;
   }
+}
+/* Custom Select Styles - matches filterSelect */
+.customSelect {
+  position: relative;
+  width: 100%;
+}
+
+.customSelectTwo {
+  position: relative;
+  width: fit-content;
+}
+
+.customSelectTrigger {
+  width: 100%;
+  padding: 12px 12px 12px 16px;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  color: #969696;
+  font-weight: 400;
+  line-height: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-family: var(--sans);
+}
+
+.customSelectOpen {
+  border-color: var(--forest);
+}
+
+.customSelectValue {
+  color: #969696;
+}
+
+.customSelectValueActive {
+  color: var(--text);
+}
+
+.customSelectChevron {
+  width: 16px;
+  height: 16px;
+  color: #6B7280;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.customSelectChevronUp {
+  transform: rotate(180deg);
+}
+
+.customSelectDropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 50;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.customSelectOption {
+  padding: 12px 16px;
+  font-size: 1rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.customSelectOption:hover {
+  background: var(--cream-light);
+}
+
+.customSelectOptionActive {
+  background: var(--cream);
+  color: var(--forest);
+  font-weight: 500;
 }

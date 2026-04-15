@@ -19,7 +19,7 @@
 }
 
 .legalTitle {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 42px;
   font-weight: 600;
   color: var(--forest);
@@ -42,7 +42,7 @@
 }
 
 .legalSectionTitle {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 28px;
   font-weight: 600;
   color: var(--forest);
@@ -105,7 +105,7 @@
 
 /* Cookie specific enhancements */
 .cookieIntroText {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 18px;
   color: var(--forest-mid);
   margin-bottom: 2rem;
@@ -180,7 +180,7 @@
 }
 
 .contactHighlight h3 {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 24px;
   margin-bottom: 1rem;
   font-weight: 600;

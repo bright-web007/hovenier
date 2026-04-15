@@ -186,6 +186,8 @@ export default function GardenerDirectoryClient({
           {filteredGardeners.length} {isEnglish ? 'gardeners found' : 'hoveniers gevonden'}
         </span>
         <CustomSelect
+          className={styles.sortSelect}
+          outerClassName={styles.customSelectTwo}
           id="sortBy"
           label={isEnglish ? 'Sort by rating' : 'Sorteer op rating'}
           value={sortBy}

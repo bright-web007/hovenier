@@ -235,7 +235,7 @@ export default async function ServicesPage({ params }: Props) {
             }}>
               <h1 style={{
                 fontSize: '3rem',
-                fontFamily: 'var(--serif)',
+                fontFamily: 'var(--heading-font)',
                 fontWeight: '600',
                 color: 'var(--forest)',
                 marginBottom: '1.5rem',
@@ -268,6 +268,7 @@ export default async function ServicesPage({ params }: Props) {
                     subtitle={service.subtitle}
                     description={service.description}
                     image={service.image}
+                    locale={validLocale}
                   />
                 ))}
               </div>
@@ -287,7 +288,7 @@ export default async function ServicesPage({ params }: Props) {
                   color: 'var(--forest)',
                   marginBottom: '2rem',
                   textAlign: 'center',
-                  fontFamily: 'var(--serif)'
+                  fontFamily: 'var(--heading-font)'
                 }}>
                   {isEn ? 'Why Choose Our Gardeners?' : 'Waarom Kiezen voor Onze Hoveniers?'}
                 </h2>
@@ -302,8 +303,8 @@ export default async function ServicesPage({ params }: Props) {
                         <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                     }
-                    title="Gecertificeerd & Verzekerd"
-                    description="Alle hoveniers zijn vakbekwaam, gecertificeerd en volledig verzekerd voor uw veiligheid"
+                    title={isEn ? 'Certified & Insured' : 'Gecertificeerd & Verzekerd'}
+                    description={isEn ? 'All gardeners are qualified, certified and fully insured for your safety' : 'Alle hoveniers zijn vakbekwaam, gecertificeerd en volledig verzekerd voor uw veiligheid'}
                   />
                   <FeatureCard
                     icon={
@@ -312,7 +313,7 @@ export default async function ServicesPage({ params }: Props) {
                       </svg>
                     }
                     title={isEn ? 'Quality Guarantee' : 'Kwaliteitsgarantie'}
-                    description="Tevredenheid gegarandeerd met naservice en advies voor optimaal tuinresultaat"
+                    description={isEn ? 'Satisfaction guaranteed with aftercare and advice for optimal garden results' : 'Tevredenheid gegarandeerd met naservice en advies voor optimaal tuinresultaat'}
                   />
                   <FeatureCard
                     icon={
@@ -341,7 +342,7 @@ export default async function ServicesPage({ params }: Props) {
                     fontWeight: '700',
                     color: 'var(--forest)',
                     marginBottom: '1rem',
-                    fontFamily: 'var(--serif)'
+                    fontFamily: 'var(--heading-font)'
                   }}>
                     {isEn ? 'Ready to Get Started?' : 'Klaar om te Beginnen?'}
                   </h2>

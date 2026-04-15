@@ -140,7 +140,7 @@ export default async function HomePage({ params }: Props) {
     sections_services_title: t('sections.services_title'),
     sections_services_subtitle: t('sections.services_subtitle'),
     regions_homepage_title: t('regions_content.homepage_title'),
-    contact_us: t('Contact Us')
+    contact_us: t('cta.contact_us')
   };
 
   return (

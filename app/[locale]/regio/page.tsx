@@ -32,7 +32,7 @@ function ServiceCategory({ title, subtitle, items }: { title: string; subtitle: 
 function StatCard({ value, label, color }: { value: string; label: string; color: string }) {
   return (
     <div style={{ textAlign: 'center' }}>
-      <p style={{ fontSize: '2rem', fontWeight: '600', color, marginBottom: '0.5rem', fontFamily: 'var(--serif)' }}>{value}</p>
+      <p style={{ fontSize: '2rem', fontWeight: '600', color, marginBottom: '0.5rem', fontFamily: 'var(--heading-font)' }}>{value}</p>
       <p style={{ color: 'var(--forest-mid)', fontWeight: '500', fontSize: '14px' }}>{label}</p>
     </div>
   );
@@ -218,7 +218,7 @@ export default async function RegioLandingPage({ params }: Props) {
         <div style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
           {/* Hero Section */}
           <div style={{ maxWidth: '1280px', margin: '0 auto', textAlign: 'center', marginBottom: '4rem' }}>
-            <h1 style={{ fontSize: '3rem', fontFamily: 'var(--serif)', fontWeight: '600', color: 'var(--forest)', marginBottom: '1.5rem', lineHeight: '1.1' }}>
+            <h1 style={{ fontSize: '3rem', fontFamily: 'var(--heading-font)', fontWeight: '600', color: 'var(--forest)', marginBottom: '1.5rem', lineHeight: '1.1' }}>
               {isEn ? 'Gardeners by Region in Friesland' : 'Hoveniers per Regio in Friesland'}
             </h1>
             <p style={{ fontSize: '1.25rem', color: 'var(--forest-mid)', marginBottom: '2rem', lineHeight: '1.6' }}>
@@ -229,7 +229,7 @@ export default async function RegioLandingPage({ params }: Props) {
           {/* Friesland Map or Visual */}
           <section style={{ maxWidth: '80rem', margin: '0 auto', marginBottom: '4rem' }}>
             <div style={{ background: 'var(--white)', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', padding: '2rem' }}>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1.5rem', textAlign: 'center', fontFamily: 'var(--serif)' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1.5rem', textAlign: 'center', fontFamily: 'var(--heading-font)' }}>
                 {isEn ? 'Why Local Gardeners?' : 'Waarom Lokale Hoveniers?'}
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
@@ -266,7 +266,7 @@ export default async function RegioLandingPage({ params }: Props) {
 
           {/* Regional Hubs Grid */}
           <section style={{ maxWidth: '80rem', margin: '0 auto', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: '2rem', fontFamily: 'var(--serif)', fontWeight: '600', color: 'var(--forest)', marginBottom: '3rem', textAlign: 'center' }}>
+            <h2 style={{ fontSize: '2rem', fontFamily: 'var(--heading-font)', fontWeight: '600', color: 'var(--forest)', marginBottom: '3rem', textAlign: 'center' }}>
               {isEn ? 'Choose your Region' : 'Kies uw Regio'}
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
@@ -366,7 +366,7 @@ export default async function RegioLandingPage({ params }: Props) {
           {/* Popular Services by Region */}
           <section style={{ maxWidth: '80rem', margin: '0 auto', marginBottom: '4rem' }}>
             <div style={{ background: 'var(--cream-dark)', borderRadius: '12px', padding: '2rem' }}>
-              <h2 style={{ fontSize: '2rem', fontFamily: 'var(--serif)', fontWeight: '600', color: 'var(--forest)', marginBottom: '2rem', textAlign: 'center' }}>
+              <h2 style={{ fontSize: '2rem', fontFamily: 'var(--heading-font)', fontWeight: '600', color: 'var(--forest)', marginBottom: '2rem', textAlign: 'center' }}>
                 {isEn ? 'Popular Services by Region' : 'Populaire Diensten per Regio'}
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
@@ -392,7 +392,7 @@ export default async function RegioLandingPage({ params }: Props) {
           {/* Regional Statistics */}
           <section style={{ maxWidth: '80rem', margin: '0 auto' }}>
             <div style={{ background: 'var(--white)', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', padding: '2rem' }}>
-              <h2 style={{ fontSize: '2rem', fontFamily: 'var(--serif)', fontWeight: '600', color: 'var(--forest)', marginBottom: '1.5rem', textAlign: 'center' }}>
+              <h2 style={{ fontSize: '2rem', fontFamily: 'var(--heading-font)', fontWeight: '600', color: 'var(--forest)', marginBottom: '1.5rem', textAlign: 'center' }}>
                 {isEn ? 'Gardeners in Friesland' : 'Hoveniers in Friesland'}
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.5rem' }}>

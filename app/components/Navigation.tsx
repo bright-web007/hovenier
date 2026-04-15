@@ -125,26 +125,26 @@ export default function Navigation({ locale, translations = {} }: NavigationProp
         <Link href={localizePath('/regio', currentLocale)} className="mobile-menu-link" onClick={() => setMenuOpen(false)}>{t.regions}</Link>
         <Link href={localizePath('/kosten', currentLocale)} className="mobile-menu-link" onClick={() => setMenuOpen(false)}>{t.costs}</Link>
         <div className="lang-toggle" role="group" aria-label="Taal selectie">
-          <button 
-            className={`lang-btn ${currentLocale === 'nl' ? 'active' : 'inactive'}`} 
-            onClick={() => { switchLocale('nl'); setMenuOpen(false); }}
-            aria-pressed={currentLocale === 'nl'}
-            type="button"
+          <LocaleLink 
+            className={`lang-btn ${currentLocale === 'nl' ? 'active' : 'inactive'}`}
+            href={nlHref}
+            locale="nl"
+            ariaCurrent={currentLocale === 'nl' ? 'true' : undefined}
           >
             NL
-          </button>
-          <button 
-            className={`lang-btn ${currentLocale === 'en' ? 'active' : 'inactive'}`} 
-            onClick={() => { switchLocale('en'); setMenuOpen(false); }}
-            aria-pressed={currentLocale === 'en'}
-            type="button"
+          </LocaleLink>
+          <LocaleLink 
+            className={`lang-btn ${currentLocale === 'en' ? 'active' : 'inactive'}`}
+            href={enHref}
+            locale="en"
+            ariaCurrent={currentLocale === 'en' ? 'true' : undefined}
           >
             EN
-          </button>
+          </LocaleLink>
         </div>
-        <button className="nav-cta" style={{ width: '100%', marginTop: '0.5rem' }} onClick={() => { scrollToForm(); setMenuOpen(false); }}>
+        <Link className="nav-cta" style={{ width: '100%', marginTop: '0.5rem', textAlign: 'center' }} href={`${localizePath('/diensten', currentLocale)}#quote-form`} onClick={() => setMenuOpen(false)}>
           {t.request_quote}
-        </button>
+        </Link>
       </div>
     </nav>
   );

@@ -166,6 +166,7 @@ export default async function RegioLandingPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale)
   const isEn = locale === 'en';
+  const t = translations[(locale as 'nl' | 'en')] ?? translations.nl;
 
   // English translations for region data
   const hubTranslations: Record<string, { name: string; description: string; intro: string }> = {
@@ -237,22 +238,13 @@ export default async function RegioLandingPage({ params }: Props) {
                     <svg style={{ width: '32px', height: '32px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg>
-                  </div>
-                  <h3 style={{ fontSize: '1.125rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '0.5rem' }}>{isEn ? 'Short Distance' : 'Korte Afstand'}</h3>
-                  <p style={{ color: 'var(--forest-mid)', fontSize: '14px' }}>{isEn ? 'Lower travel costs and faster service due to proximity' : 'Lagere reiskosten en snellere service door nabijheid'}</p>
-                </div>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ 
-                    background: 'var(--forest-light)', 
-                    width: '64px', 
-                    height: '64px', 
-                    borderRadius: '50%', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    justifyContent: 'center', 
-                    margin: '0 auto 1rem' 
-                  }}>
-                    <svg style={{ width: '32px', height: '32px', color: 'var(--forest)' }} fill="currentColor" viewBox="0 0 20 20">
+                  }
+                  title={isEn ? 'Short Distance' : 'Korte Afstand'}
+                  description={isEn ? 'Lower travel costs and faster service due to proximity' : 'Lagere reiskosten en snellere service door nabijheid'}
+                />
+                <FeatureCard
+                  icon={
+                    <svg style={{ width: '32px', height: '32px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9 12a1 1 0 102 0V6.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 6.414V12z" />
                     </svg>
                   }
@@ -381,17 +373,17 @@ export default async function RegioLandingPage({ params }: Props) {
                 <ServiceCategory
                   title={isEn ? 'Coastal Areas' : 'Kustgebieden'}
                   subtitle={isEn ? '(Northwest & Northeast Friesland)' : '(Noordwest & Noordoost-Friesland)'}
-                  items={isEn ? 'Salt-resistant planting' : 'Zoutbestendige beplanting'}
+                  items={t.coastalItems}
                 />
                 <ServiceCategory
                   title={isEn ? 'Inland Areas' : 'Binnenlandse Gebieden'}
                   subtitle={isEn ? '(Central Friesland)' : '(Centraal Friesland)'}
-                  items={isEn ? 'Drought-tolerant plants' : 'Droogtetolerante planten'}
+                  items={t.inlandItems}
                 />
                 <ServiceCategory
                   title={isEn ? 'Urban Areas' : 'Stedelijke Gebieden'}
                   subtitle={isEn ? '(Urban Centers)' : '(Stedelijke Centra)'}
-                  items={isEn ? 'City landscaping' : 'Stadslandschap'}
+                  items={t.urbanItems}
                 />
               </div>
             </div>

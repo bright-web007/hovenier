@@ -1,9 +1,9 @@
 // Service Worker for caching and offline functionality
 // Implements precaching, runtime caching, and background sync
 
-const CACHE_NAME = 'hovenier-v2';
-const STATIC_CACHE = 'hovenier-static-v2';
-const DYNAMIC_CACHE = 'hovenier-dynamic-v2';
+const CACHE_NAME = 'hovenier-v3';
+const STATIC_CACHE = 'hovenier-static-v3';
+const DYNAMIC_CACHE = 'hovenier-dynamic-v3';
 
 // Files to precache
 const STATIC_ASSETS = [
@@ -46,35 +46,29 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch event - serve from cache with network fallback
+// Fetch event - network-first for pages, cache-first for static assets
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Handle navigation requests
+  // Handle navigation requests - NETWORK FIRST (never serve stale HTML)
   if (request.mode === 'navigate') {
     event.respondWith(
-      caches.match(request)
-        .then((cachedResponse) => {
-          if (cachedResponse) {
-            return cachedResponse;
+      fetch(request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const responseClone = response.clone();
+            caches.open(DYNAMIC_CACHE)
+              .then((cache) => {
+                cache.put(request, responseClone);
+              });
           }
-          
-          return fetch(request)
-            .then((response) => {
-              if (response && response.status === 200) {
-                const responseClone = response.clone();
-                caches.open(DYNAMIC_CACHE)
-                  .then((cache) => {
-                    cache.put(request, responseClone);
-                  });
-              }
-              return response;
-            })
-            .catch(() => {
-              // Return offline page if available
-              return caches.match('/offline');
-            });
+          return response;
+        })
+        .catch(() => {
+          // Only use cache as offline fallback
+          return caches.match(request)
+            .then((cachedResponse) => cachedResponse || caches.match('/offline'));
         })
     );
     return;

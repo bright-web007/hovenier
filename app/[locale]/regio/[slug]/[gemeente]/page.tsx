@@ -14,7 +14,7 @@ import Link from 'next/link'
 // Simple translation function
 function createTranslator(locale: string) {
   let messages: Record<string, any> = {};
-  
+
   try {
     if (locale === 'nl') {
       messages = require(`../../../../../locales/nl/common.json`);
@@ -41,7 +41,7 @@ function createTranslator(locale: string) {
       request_quote: "Offerte aanvragen"
     };
   }
-  
+
   return (key: string): string => {
     const keys = key.split('.');
     let value: any = messages;
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug, gemeente } = await params;
   const regionHub = getRegionHubBySlug(slug);
   const gemeenteData = getGemeenteBySlug(gemeente);
-  
+
   if (!regionHub || !gemeenteData) {
     return {
       title: 'Gemeente niet gevonden | Hovenier.frl'
@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = `Hovenier in ${gemeenteData.name} | ${regionHub.name} | Hovenier.frl`;
   const description = `Vind lokale hoveniers in ${gemeenteData.name}, ${regionHub.name}. ${gemeenteData.intro} Vergelijk lokale tuinspecialisten in deze gemeente.`;
-  
+
   return {
     title,
     description,
@@ -88,7 +88,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const params: { locale: string; slug: string; gemeente: string }[] = [];
-  
+
   for (const hub of regionHubs) {
     for (const gemeente of hub.gemeentes) {
       params.push(
@@ -97,23 +97,23 @@ export async function generateStaticParams() {
       );
     }
   }
-  
+
   // Special case: Add leeuwarden as both region and gemeente
   params.push(
     { locale: 'nl', slug: 'leeuwarden', gemeente: 'leeuwarden' },
     { locale: 'en', slug: 'leeuwarden', gemeente: 'leeuwarden' }
   );
-  
+
   return params;
 }
 
 export default async function GemeentePage({ params }: Props) {
   const { locale, slug, gemeente } = await params;
   setRequestLocale(locale);
-  
+
   const regionHub = getRegionHubBySlug(slug);
   const gemeenteData = getGemeenteBySlug(gemeente);
-  
+
   if (!regionHub || !gemeenteData) {
     notFound();
   }
@@ -125,7 +125,7 @@ export default async function GemeentePage({ params }: Props) {
   }
 
   const validLocale = locale as SupportedLocale;
-  
+
   // Create translator function
   const t = createTranslator(validLocale);
 
@@ -178,7 +178,7 @@ export default async function GemeentePage({ params }: Props) {
       publishedAt: "2024-03-20",
     },
     {
-      id: "2", 
+      id: "2",
       title: `Beste tijd voor tuinaanleg in ${regionHub.name}`,
       excerpt: `Uitleg over de optimale timing voor tuinaanleg in de regio ${regionHub.name}.`,
       slug: `tuinaanleg-timing-${slug}`,
@@ -191,12 +191,12 @@ export default async function GemeentePage({ params }: Props) {
       title: `Kosten van hovenierdiensten in Friesland 2024`,
       excerpt: `Overzicht van prijzen voor professionele hovenierdiensten in heel Friesland.`,
       slug: "kosten-hovenierdiensten-friesland-2024",
-      category: "Kosten", 
+      category: "Kosten",
       readTime: 6,
       publishedAt: "2024-03-10",
     }
   ];
-  
+
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
     { label: 'Regio\'s', href: '/regio' },
@@ -206,20 +206,20 @@ export default async function GemeentePage({ params }: Props) {
 
   return (
     <div className="page-container">
-      <LocalBusinessSchema 
+      <LocalBusinessSchema
         url={`https://hovenier.frl${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`}
         nameContext={`Hoveniers in ${gemeenteData.name}`}
         services={[
           "Tuinonderhoud",
-          "Tuinontwerp", 
+          "Tuinontwerp",
           "Bestrating",
           "Boomverzorging",
           "Groendaken",
           "Tuinaanleg"
         ]}
       />
-      
-      <BreadcrumbSchema 
+
+      <BreadcrumbSchema
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
@@ -228,7 +228,7 @@ export default async function GemeentePage({ params }: Props) {
       />
 
       <Navigation locale={validLocale} translations={navTranslations} />
-      
+
       <main>
         {/* Breadcrumbs */}
         <section style={{ background: 'var(--cream-light)', borderBottom: '0.5px solid var(--border)' }}>
@@ -266,7 +266,7 @@ export default async function GemeentePage({ params }: Props) {
                     </p>
                   </div>
                 </div>
-                
+
                 <p style={{ fontSize: '1.25rem', color: 'var(--forest-mid)', marginBottom: '2rem', lineHeight: '1.6' }}>
                   {gemeenteData.intro}
                 </p>
@@ -317,7 +317,7 @@ export default async function GemeentePage({ params }: Props) {
 
               {/* Lead Form */}
               <div style={{ background: 'var(--cream-light)', borderRadius: '12px', padding: '2rem' }}>
-                <NewLeadForm 
+                <NewLeadForm
                   translations={translations}
                   locale={validLocale}
                   prefillMunicipality={gemeenteData.name}
@@ -333,7 +333,7 @@ export default async function GemeentePage({ params }: Props) {
             <h2 style={{ fontSize: '2rem', fontFamily: 'var(--serif)', fontWeight: '600', color: 'var(--forest)', marginBottom: '2rem', textAlign: 'center' }}>
               Populaire Hovenierdiensten in {gemeenteData.name}
             </h2>
-            
+
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
               <DienstCard
                 id="tuinonderhoud"
@@ -374,7 +374,7 @@ export default async function GemeentePage({ params }: Props) {
 
             {/* Lead Form */}
             <div style={{ background: 'var(--cream-light)', borderRadius: '12px', padding: '2rem' }}>
-              <NewLeadForm 
+              <NewLeadForm
                 translations={translations}
                 locale={validLocale}
                 prefillMunicipality={gemeenteData.name}
@@ -393,32 +393,32 @@ export default async function GemeentePage({ params }: Props) {
               Bekijk alle {regionHub.gemeentes.length} gemeenten in deze regio
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href={localizePath(`/regio/${slug}`, validLocale)} style={{ 
-                display: 'inline-flex', 
-                alignItems: 'center', 
-                gap: '8px', 
-                padding: '14px 28px', 
-                fontSize: '14px', 
+              <a href={localizePath(`/regio/${slug}`, validLocale)} style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '14px 28px',
+                fontSize: '14px',
                 fontWeight: '600',
-                color: 'var(--forest)', 
-                border: '1px solid var(--forest)', 
-                borderRadius: '8px', 
+                color: 'var(--forest)',
+                border: '1px solid var(--forest)',
+                borderRadius: '8px',
                 textDecoration: 'none',
                 transition: 'all 0.2s ease',
                 background: 'var(--white)'
               }} className="back-to-regions-btn">
                 ← {regionHub.name}
               </a>
-              <a href={localizePath('/regio', validLocale)} style={{ 
-                display: 'inline-flex', 
-                alignItems: 'center', 
-                gap: '8px', 
-                padding: '14px 28px', 
-                fontSize: '14px', 
+              <a href={localizePath('/regio', validLocale)} style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '14px 28px',
+                fontSize: '14px',
                 fontWeight: '600',
-                color: 'var(--white)', 
-                background: 'var(--forest)', 
-                borderRadius: '8px', 
+                color: 'var(--white)',
+                background: 'var(--forest)',
+                borderRadius: '8px',
                 textDecoration: 'none',
                 transition: 'all 0.2s ease'
               }}>
@@ -429,8 +429,8 @@ export default async function GemeentePage({ params }: Props) {
         </section>
 
         {/* Related Articles */}
-        <RelatedArticles 
-          articles={relatedArticles} 
+        <RelatedArticles
+          articles={relatedArticles}
           title={`Gerelateerde artikelen voor ${gemeenteData.name}`}
         />
       </main>

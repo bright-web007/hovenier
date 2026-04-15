@@ -103,11 +103,11 @@ describe('locale-utils.ts', () => {
   });
 
   describe('localizePath()', () => {
-    test('should return Dutch paths without prefix (default locale)', () => {
-      expect(localizePath('/diensten', 'nl')).toBe('/diensten');
-      expect(localizePath('/contact', 'nl')).toBe('/contact');
-      expect(localizePath('/', 'nl')).toBe('/');
-      expect(localizePath('/regio/leeuwarden', 'nl')).toBe('/regio/leeuwarden');
+    test('should return Dutch paths with /nl prefix', () => {
+      expect(localizePath('/diensten', 'nl')).toBe('/nl/diensten');
+      expect(localizePath('/contact', 'nl')).toBe('/nl/contact');
+      expect(localizePath('/', 'nl')).toBe('/nl');
+      expect(localizePath('/regio/leeuwarden', 'nl')).toBe('/nl/regio/leeuwarden');
     });
 
     test('should return English paths with /en prefix', () => {
@@ -119,28 +119,27 @@ describe('locale-utils.ts', () => {
 
     test('should handle already localized paths', () => {
       // Should normalize by getting internal path first
-      expect(localizePath('/en/diensten', 'nl')).toBe('/diensten');
+      expect(localizePath('/en/diensten', 'nl')).toBe('/nl/diensten');
       expect(localizePath('/nl/contact', 'en')).toBe('/en/contact');
     });
 
     test('should handle empty strings', () => {
-      expect(localizePath('', 'nl')).toBe('/');
+      expect(localizePath('', 'nl')).toBe('/nl');
       expect(localizePath('', 'en')).toBe('/en');
     });
   });
 
   describe('switchLocalePath()', () => {
     test('should switch between locales', () => {
-      expect(switchLocalePath('/diensten', 'en')).toBe('/en/diensten');
-      expect(switchLocalePath('/en/diensten', 'nl')).toBe('/diensten');
+      expect(switchLocalePath('/nl/diensten', 'en')).toBe('/en/diensten');
+      expect(switchLocalePath('/en/diensten', 'nl')).toBe('/nl/diensten');
       expect(switchLocalePath('/nl/contact', 'en')).toBe('/en/contact');
-      expect(switchLocalePath('/en/contact', 'nl')).toBe('/contact');
+      expect(switchLocalePath('/en/contact', 'nl')).toBe('/nl/contact');
     });
 
     test('should handle homepage switching', () => {
-      expect(switchLocalePath('/', 'en')).toBe('/en');
-      expect(switchLocalePath('/en', 'nl')).toBe('/');
       expect(switchLocalePath('/nl', 'en')).toBe('/en');
+      expect(switchLocalePath('/en', 'nl')).toBe('/nl');
     });
   });
 
@@ -157,9 +156,9 @@ describe('locale-utils.ts', () => {
     });
 
     test('should generate absolute URLs for Dutch locale', () => {
-      expect(getAbsoluteUrl('/diensten', 'nl')).toBe('https://hovenier.frl/diensten');
-      expect(getAbsoluteUrl('/', 'nl')).toBe('https://hovenier.frl/');
-      expect(getAbsoluteUrl('/contact', 'nl')).toBe('https://hovenier.frl/contact');
+      expect(getAbsoluteUrl('/diensten', 'nl')).toBe('https://hovenier.frl/nl/diensten');
+      expect(getAbsoluteUrl('/', 'nl')).toBe('https://hovenier.frl/nl');
+      expect(getAbsoluteUrl('/contact', 'nl')).toBe('https://hovenier.frl/nl/contact');
     });
 
     test('should generate absolute URLs for English locale', () => {

@@ -79,7 +79,7 @@ a { text-decoration: none; color: inherit; }
 .nav-link { font-size: 13px; color: var(--text-mid); font-weight: 400; letter-spacing: 0.03em; cursor: pointer; transition: color 0.2s; }
 .nav-link:hover { color: var(--forest); }
 .lang-toggle { display: flex; border: 0.5px solid var(--forest); border-radius: 3px; overflow: hidden; }
-.lang-btn { padding: 5px 10px; font-size: 11px; font-weight: 500; cursor: pointer; border: none; letter-spacing: 0.08em; font-family: var(--sans); transition: all 0.15s; }
+.lang-btn { padding: 5px 10px; font-size: 11px; font-weight: 500; cursor: pointer; border: none; letter-spacing: 0.08em; font-family: var(--sans); transition: all 0.15s; text-decoration: none; display: inline-block; }
 .lang-btn.active { background: var(--forest); color: var(--cream); }
 .lang-btn.inactive { background: transparent; color: var(--forest); }
 .nav-cta { background: var(--forest); color: var(--cream); font-size: 12px; font-weight: 500; padding: 10px 22px; border-radius: 3px; letter-spacing: 0.06em; cursor: pointer; font-family: var(--sans); border: none; transition: background 0.2s; }
@@ -953,6 +953,10 @@ a { text-decoration: none; color: inherit; }
   transform: translateY(-2px);
 }
 
+.region-hub-card:hover .region-cta {
+  color: var(--forest) !important;
+}
+
 .region-standalone-card {
   background: var(--white);
   border-radius: 16px;
@@ -967,6 +971,10 @@ a { text-decoration: none; color: inherit; }
 .region-standalone-card:hover {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
+}
+
+.region-standalone-card:hover .region-cta {
+  color: var(--white) !important;
 }
 
 /* Back to regions button hover */
@@ -3801,4 +3809,22 @@ a { text-decoration: none; color: inherit; }
     overflow-wrap: break-word;
     word-break: break-word;
   }
+}
+
+/* Diensten page hover cards */
+.diensten-card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.diensten-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px -1px rgb(0 0 0 / 0.15) !important;
+}
+
+/* Diensten page CTA button hover */
+.diensten-btn {
+  transition: background-color 0.2s ease;
+}
+.diensten-btn:hover {
+  background-color: var(--sage) !important;
 }

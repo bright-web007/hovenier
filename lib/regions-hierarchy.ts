@@ -231,7 +231,7 @@ export const regionHubs: RegionHub[] = [
     introEn: "Northwest Friesland combines the rich history of Harlingen with the unique natural beauty of the Wadden Islands Vlieland and Terschelling.",
   },
   {
-    slug: "noordoost-friesland", 
+    slug: "noordoost-friesland",
     name: "Noordoost-Friesland",
     description: "Landelijke regio met traditionele dorpen en Waddeneilanden",
     descriptionEn: "Rural region with traditional villages and Wadden Islands",
@@ -243,7 +243,7 @@ export const regionHubs: RegionHub[] = [
   },
   {
     slug: "centraal-friesland",
-    name: "Centraal-Friesland", 
+    name: "Centraal-Friesland",
     description: "Groene regio met bossen en natuurgebieden",
     descriptionEn: "Green region with forests and nature reserves",
     image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80", // forest/nature

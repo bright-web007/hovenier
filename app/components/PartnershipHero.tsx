@@ -7,33 +7,33 @@ interface PartnershipHeroProps {
 }
 
 export default function PartnershipHero({ locale }: PartnershipHeroProps) {
+  const isEn = locale === 'en';
   return (
     <section className="section partnership-hero">
       <div className="section-inner">
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
             <div className={styles.heroBadge}>
-              <span>Voor professionals</span>
+              <span>{isEn ? 'For professionals' : 'Voor professionals'}</span>
             </div>
             <h1 className={styles.heroTitle}>
-              Word partner van Hovenier.frl
+              {isEn ? 'Become a partner of Hovenier.frl' : 'Word partner van Hovenier.frl'}
             </h1>
             <p className={styles.heroDescription}>
-              Sluit je aan bij ons netwerk van gekwalificeerde hoveniers en krijg toegang tot 
-              klanten in heel Friesland. Zonder commissiekosten, met volledige transparantie.
+              {isEn ? 'Join our network of qualified gardeners and get access to clients across Friesland. No commission fees, with full transparency.' : 'Sluit je aan bij ons netwerk van gekwalificeerde hoveniers en krijg toegang tot klanten in heel Friesland. Zonder commissiekosten, met volledige transparantie.'}
             </p>
             <div className={styles.heroStats}>
               <div className={styles.heroStat}>
                 <span className={styles.heroStatNumber}>150+</span>
-                <span className={styles.heroStatLabel}>Tevreden klanten</span>
+                <span className={styles.heroStatLabel}>{isEn ? 'Satisfied clients' : 'Tevreden klanten'}</span>
               </div>
               <div className={styles.heroStat}>
                 <span className={styles.heroStatNumber}>25+</span>
-                <span className={styles.heroStatLabel}>Partner hoveniers</span>
+                <span className={styles.heroStatLabel}>{isEn ? 'Partner gardeners' : 'Partner hoveniers'}</span>
               </div>
               <div className={styles.heroStat}>
                 <span className={styles.heroStatNumber}>0%</span>
-                <span className={styles.heroStatLabel}>Commissie</span>
+                <span className={styles.heroStatLabel}>{isEn ? 'Commission' : 'Commissie'}</span>
               </div>
             </div>
           </div>

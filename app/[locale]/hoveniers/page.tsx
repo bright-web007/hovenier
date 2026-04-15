@@ -50,7 +50,7 @@ export default async function HoveniersDirectoryPage({ params }: Props) {
 
   return (
     <>
-      <GardenerDirectorySchema 
+      <GardenerDirectorySchema
         gardeners={gardeners}
         url={getAbsoluteUrl('/hoveniers', locale as SupportedLocale)}
         locale={locale}
@@ -58,23 +58,25 @@ export default async function HoveniersDirectoryPage({ params }: Props) {
       <BreadcrumbSchema items={breadcrumbSchemaItems} />
       <Navigation locale={locale} />
       <Breadcrumbs items={breadcrumbItems} />
-      
+
       <main className={styles.main}>
         <div className={styles.section}>
           <div className={styles.sectionInner}>
             {/* Hero Section */}
             <div className={styles.sectionCentered}>
               <div className={styles.sectionEyebrow}>
-              <span>HOVENIERS DIRECTORY</span>
-            </div>
-            <h1 className={styles.sectionTitle}>
-              Find Professional Gardeners
-            </h1>
-            <p className={styles.sectionSub}>
-              Vind de perfecte tuinspecialist voor uw project. Alle hoveniers zijn geverifieerd en beoordeeld door echte klanten.
-            </p>
+                <span>{locale === 'en' ? 'GARDENERS DIRECTORY' : 'HOVENIERS DIRECTORY'}</span>
+              </div>
+              <h1 className={styles.sectionTitle}>
+                {locale === 'en' ? 'Find Professional Gardeners' : 'Vind Professionele Hoveniers'}
+              </h1>
+              <p className={styles.sectionSub}>
+                {locale === 'en'
+                  ? 'Find the perfect garden specialist for your project. All gardeners are verified and reviewed by real customers.'
+                  : 'Vind de perfecte tuinspecialist voor uw project. Alle hoveniers zijn geverifieerd en beoordeeld door echte klanten.'}
+              </p>
 
-            <GardenerDirectoryClient gardeners={gardeners} locale={locale} />
+              <GardenerDirectoryClient gardeners={gardeners} locale={locale} />
             </div>
           </div>
         </div>

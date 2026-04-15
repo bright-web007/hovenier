@@ -2,7 +2,7 @@
 
 import styles from './KostenCalculatorCta.module.css';
 
-export default function KostenCalculatorCta() {
+export default function KostenCalculatorCta({ locale = 'nl' }: { locale?: string }) {
   const handleClick = () => {
     // Look for CTA section with multiple possible selectors
     const ctaSelectors = [
@@ -31,7 +31,7 @@ export default function KostenCalculatorCta() {
       onClick={handleClick}
       type="button"
     >
-      Vraag gratis offerte aan →
+      {locale === 'en' ? 'Request free quote →' : 'Vraag gratis offerte aan →'}
     </button>
   );
 }

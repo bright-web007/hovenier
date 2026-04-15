@@ -14,6 +14,7 @@ interface RegionStripProps {
   regions?: Region[];
   showCounts?: boolean;
   className?: string;
+  locale?: string;
   translations?: {
     contact_us: string;
   };
@@ -52,12 +53,14 @@ export default function RegionStrip({
   regions,
   showCounts = true,
   className = '',
+  locale = 'nl',
   translations
 }: RegionStripProps) {
+  const isEn = locale === 'en';
   
   // Use provided regions, or generate from gemeente data, or use fallback
   const displayRegions = regions || (gemeentesData.length > 0 ? generateRegionsFromGemeenten() : fallbackRegions);
-  const displayTitle = title || 'Hoveniers in elke Friese gemeente';
+  const displayTitle = title || (isEn ? 'Gardeners in every Frisian municipality' : 'Hoveniers in elke Friese gemeente');
 
   return (
     <section className={`region-strip ${className}`}>
@@ -65,13 +68,13 @@ export default function RegionStrip({
         {/* Section Header */}
         <div className="region-strip-header">
           <p className="section-eyebrow section-eyebrow-centered">
-            ALLE GEMEENTEN
+            {isEn ? 'ALL MUNICIPALITIES' : 'ALLE GEMEENTEN'}
           </p>
           <h2 className="section-title section-title-centered">
             {displayTitle}
           </h2>
           <p className="section-sub section-sub-centered">
-            Vind vakkundige hoveniers in elke Friese gemeente. Lokale expertise voor uw tuin.
+            {isEn ? 'Find skilled gardeners in every Frisian municipality. Local expertise for your garden.' : 'Vind vakkundige hoveniers in elke Friese gemeente. Lokale expertise voor uw tuin.'}
           </p>
         </div>
         
@@ -79,7 +82,9 @@ export default function RegionStrip({
         <div className="region-grid">
           {displayRegions.map((region) => {
             const regionSlug = getRegionSlugByGemeenteSlug(region.slug);
-            const href = regionSlug ? `/regio/${regionSlug}/${region.slug}` : `/regio/${region.slug}`;
+            const href = regionSlug && regionSlug !== region.slug
+              ? `/regio/${regionSlug}/${region.slug}`
+              : `/regio/${region.slug}`;
             
             // Debug logging for development
             if (process.env.NODE_ENV === 'development' && !regionSlug) {
@@ -105,7 +110,7 @@ export default function RegionStrip({
                   </h3>
                   {showCounts && region.count && (
                     <p className="region-card-count">
-                      {region.count} hoveniers
+                      {region.count} {isEn ? 'gardeners' : 'hoveniers'}
                     </p>
                   )}
                 </div>
@@ -117,7 +122,7 @@ export default function RegionStrip({
         {/* Call to Action */}
         <div className="region-strip-footer">
           <p className="region-strip-cta-text">
-            Niet uw gemeente erbij? We helpen u graag verder.
+            {isEn ? "Don't see your municipality? We're happy to help." : 'Niet uw gemeente erbij? We helpen u graag verder.'}
           </p>
           <Link 
             href="/contact"

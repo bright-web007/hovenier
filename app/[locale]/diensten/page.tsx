@@ -19,7 +19,7 @@ type Props = {
 // Simple translation function that loads from static JSON
 function createTranslator(locale: string) {
   let messages: Record<string, any> = {};
-  
+
   try {
     if (locale === 'nl') {
       messages = require(`../../../locales/nl/common.json`);
@@ -30,7 +30,7 @@ function createTranslator(locale: string) {
     console.error(`Could not load messages for locale ${locale}:`, error);
     messages = {};
   }
-  
+
   return (key: string) => {
     const keys = key.split('.');
     let value = messages;
@@ -52,7 +52,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const validLocale = locale || defaultLocale;
-  
+
   return {
     title: validLocale === 'nl' ? 'Hoveniersdiensten in Friesland | Tuinonderhoud & Tuinaanleg | Hovenier.frl' : 'Garden Services in Friesland | Maintenance & Design | Hovenier.frl',
     description: validLocale === 'nl' ? 'Professionele hoveniersdiensten in Friesland. Van tuinonderhoud tot complete tuinaanleg. Betrouwbare specialisten voor alle tuinwerkzaamheden. Vraag gratis offerte aan.' : 'Professional garden services in Friesland. From garden maintenance to complete garden design. Reliable specialists for all garden work. Request free quote.',
@@ -96,52 +96,53 @@ export default async function ServicesPage({ params }: Props) {
   const validLocale = locale || defaultLocale;
   if (!locales.includes(validLocale as any)) notFound();
   const t = createTranslator(validLocale);
+  const isEn = validLocale === 'en';
 
   // Service data
   const services = [
     {
       id: 'tuinonderhoud',
-      title: 'Tuinonderhoud',
-      subtitle: 'Regulier onderhoud & verzorging',
-      description: 'Professioneel tuinonderhoud om uw tuin het hele jaar door in topconditie te houden. Van gras maaien tot hagen knippen.',
-      features: ['Gras maaien', 'Hagen knippen', 'Onkruidbestrijding', 'Seizoensklussen'],
-      price: 'Vanaf €35/uur',
+      title: isEn ? 'Garden Maintenance' : 'Tuinonderhoud',
+      subtitle: isEn ? 'Regular maintenance & care' : 'Regulier onderhoud & verzorging',
+      description: isEn ? 'Professional garden maintenance to keep your garden in top condition all year round. From mowing lawns to trimming hedges.' : 'Professioneel tuinonderhoud om uw tuin het hele jaar door in topconditie te houden. Van gras maaien tot hagen knippen.',
+      features: isEn ? ['Lawn mowing', 'Hedge trimming', 'Weed control', 'Seasonal tasks'] : ['Gras maaien', 'Hagen knippen', 'Onkruidbestrijding', 'Seizoensklussen'],
+      price: isEn ? 'From €35/hour' : 'Vanaf €35/uur',
       image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80'
     },
     {
       id: 'tuinontwerp',
-      title: 'Tuinontwerp',
-      subtitle: 'Creatieve tuinconcepten',
-      description: 'Op maat gemaakte tuinontwerpen die perfect aansluiten bij uw wensen, stijl en budget. Van compact tot expansief.',
-      features: ['3D visualisaties', 'Plantenschema\'s', 'Stijladvies', 'Budget planning'],
-      price: 'Vanaf €750',
+      title: isEn ? 'Garden Design' : 'Tuinontwerp',
+      subtitle: isEn ? 'Creative garden concepts' : 'Creatieve tuinconcepten',
+      description: isEn ? 'Custom garden designs that perfectly match your wishes, style and budget. From compact to expansive.' : 'Op maat gemaakte tuinontwerpen die perfect aansluiten bij uw wensen, stijl en budget. Van compact tot expansief.',
+      features: isEn ? ['3D visualizations', 'Plant schemes', 'Style advice', 'Budget planning'] : ['3D visualisaties', 'Plantenschema\'s', 'Stijladvies', 'Budget planning'],
+      price: isEn ? 'From €750' : 'Vanaf €750',
       image: 'https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?w=800&q=80'
     },
     {
       id: 'tuin-aanleggen',
-      title: 'Tuin Aanleggen',
-      subtitle: 'Complete tuinrealisatie',
-      description: 'Van concept tot realisatie: wij leggen uw droomtuin volledig aan met kwalitatieve materialen en vakmanschap.',
-      features: ['Grondwerkzaamheden', 'Beplanting', 'Verharding', 'Irrigatiesystemen'],
-      price: 'Op maat',
+      title: isEn ? 'Garden Construction' : 'Tuin Aanleggen',
+      subtitle: isEn ? 'Complete garden realization' : 'Complete tuinrealisatie',
+      description: isEn ? 'From concept to realization: we build your dream garden with quality materials and craftsmanship.' : 'Van concept tot realisatie: wij leggen uw droomtuin volledig aan met kwalitatieve materialen en vakmanschap.',
+      features: isEn ? ['Groundwork', 'Planting', 'Paving', 'Irrigation systems'] : ['Grondwerkzaamheden', 'Beplanting', 'Verharding', 'Irrigatiesystemen'],
+      price: isEn ? 'Custom' : 'Op maat',
       image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80'
     },
     {
       id: 'stratenmaker',
-      title: 'Bestrating',
-      subtitle: 'Terrassen & tuinpaden',
-      description: 'Duurzame bestratingswerken voor terrassen, opritten en tuinpaden. Verschillende materialen en stijlen mogelijk.',
-      features: ['Keramische tegels', 'Natuursteen', 'Betonstraat', 'Drainage systemen'],
-      price: 'Vanaf €45/m²',
+      title: isEn ? 'Paving' : 'Bestrating',
+      subtitle: isEn ? 'Patios & garden paths' : 'Terrassen & tuinpaden',
+      description: isEn ? 'Durable paving work for patios, driveways and garden paths. Various materials and styles available.' : 'Duurzame bestratingswerken voor terrassen, opritten en tuinpaden. Verschillende materialen en stijlen mogelijk.',
+      features: isEn ? ['Ceramic tiles', 'Natural stone', 'Concrete paving', 'Drainage systems'] : ['Keramische tegels', 'Natuursteen', 'Betonstraat', 'Drainage systemen'],
+      price: isEn ? 'From €45/m²' : 'Vanaf €45/m²',
       image: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&q=80'
     },
     {
       id: 'groendak',
-      title: 'Groendaken',
-      subtitle: 'Duurzame dakoverdekking',
-      description: 'Extensieve en intensieve groendaken voor een duurzamere leefomgeving. Expertise in waterafvoer en beplanting.',
-      features: ['Waterafvoer', 'Isolatie verbetering', 'Biodiversiteit', 'Energiebesparing'],
-      price: 'Vanaf €85/m²',
+      title: isEn ? 'Green Roofs' : 'Groendaken',
+      subtitle: isEn ? 'Sustainable roof covering' : 'Duurzame dakoverdekking',
+      description: isEn ? 'Extensive and intensive green roofs for a more sustainable living environment. Expertise in water drainage and planting.' : 'Extensieve en intensieve groendaken voor een duurzamere leefomgeving. Expertise in waterafvoer en beplanting.',
+      features: isEn ? ['Water drainage', 'Insulation improvement', 'Biodiversity', 'Energy savings'] : ['Waterafvoer', 'Isolatie verbetering', 'Biodiversiteit', 'Energiebesparing'],
+      price: isEn ? 'From €85/m²' : 'Vanaf €85/m²',
       image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80'
     }
   ];
@@ -182,35 +183,35 @@ export default async function ServicesPage({ params }: Props) {
 
   return (
     <>
-      <ServiceSchema 
+      <ServiceSchema
         name="Tuinonderhoud"
         description="Professioneel tuinonderhoud voor het hele jaar door in Friesland. Gras maaien, hagen knippen, onkruidbestrijding en seizoensklussen door ervaren tuinspecialisten."
         provider={{ name: "Hovenier.frl", url: "https://hovenier.frl" }}
         areaServed="Friesland, Nederland"
         priceRange="€35-€50"
       />
-      <ServiceSchema 
+      <ServiceSchema
         name="Tuinontwerp"
         description="Creatieve tuinontwerpen op maat in Friesland. 3D visualisaties, plantenschema's en complete tuinconcepten die perfect aansluiten bij uw wensen en budget."
         provider={{ name: "Hovenier.frl", url: "https://hovenier.frl" }}
         areaServed="Friesland, Nederland"
         priceRange="€750-€2500"
       />
-      <ServiceSchema 
+      <ServiceSchema
         name="Tuin Aanleggen"
         description="Complete tuinaanleg van A tot Z in Friesland. Van concept tot realisatie met kwalitatieve materialen, grondwerkzaamheden, beplanting en verharding."
         provider={{ name: "Hovenier.frl", url: "https://hovenier.frl" }}
         areaServed="Friesland, Nederland"
         priceRange="€8000-€35000"
       />
-      <ServiceSchema 
+      <ServiceSchema
         name="Bestrating"
         description="Duurzame bestratingswerken in Friesland. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat door vakkundige stratenmakers."
         provider={{ name: "Hovenier.frl", url: "https://hovenier.frl" }}
         areaServed="Friesland, Nederland"
         priceRange="€45-€85"
       />
-      <ServiceSchema 
+      <ServiceSchema
         name="Groendaken"
         description="Extensieve en intensieve groendaken in Friesland. Duurzame dakoverdekking met expertise in waterafvoer, isolatie en beplanting voor een groenere leefomgeving."
         provider={{ name: "Hovenier.frl", url: "https://hovenier.frl" }}
@@ -219,10 +220,10 @@ export default async function ServicesPage({ params }: Props) {
       />
       <Navigation locale={validLocale as "nl" | "en"} />
       <Breadcrumbs items={breadcrumbItems} />
-      
-      <main style={{ 
-        minHeight: '100vh', 
-        background: 'linear-gradient(to bottom right, var(--cream-light), var(--sage-light))' 
+
+      <main style={{
+        minHeight: '100vh',
+        background: 'linear-gradient(to bottom right, var(--cream-light), var(--sage-light))'
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>
           
@@ -232,23 +233,23 @@ export default async function ServicesPage({ params }: Props) {
               textAlign: 'center', 
               marginBottom: '4rem' 
             }}>
-              <h1 style={{ 
-                fontSize: '3rem', 
-                fontFamily: 'var(--serif)', 
-                fontWeight: '600', 
-                color: 'var(--forest)', 
-                marginBottom: '1.5rem', 
-                lineHeight: '1.1' 
+              <h1 style={{
+                fontSize: '3rem',
+                fontFamily: 'var(--serif)',
+                fontWeight: '600',
+                color: 'var(--forest)',
+                marginBottom: '1.5rem',
+                lineHeight: '1.1'
               }}>
-                Onze Hovendiensten
+                {isEn ? 'Our Garden Services' : 'Onze Hovendiensten'}
               </h1>
-              <p style={{ 
-                fontSize: '1.25rem', 
-                color: 'var(--forest-mid)', 
-                marginBottom: '2rem', 
-                lineHeight: '1.6' 
+              <p style={{
+                fontSize: '1.25rem',
+                color: 'var(--forest-mid)',
+                marginBottom: '2rem',
+                lineHeight: '1.6'
               }}>
-                Professionele tuinspecialisten voor al uw groene dromen in Friesland
+                {isEn ? 'Professional garden specialists for all your green dreams in Friesland' : 'Professionele tuinspecialisten voor al uw groene dromen in Friesland'}
               </p>
             </div>
 
@@ -280,20 +281,20 @@ export default async function ServicesPage({ params }: Props) {
                 boxShadow: '0 10px 25px -3px rgba(0, 0, 0, 0.1)', 
                 padding: '3rem' 
               }}>
-                <h2 style={{ 
-                  fontSize: '2rem', 
-                  fontWeight: '700', 
-                  color: 'var(--forest)', 
-                  marginBottom: '2rem', 
+                <h2 style={{
+                  fontSize: '2rem',
+                  fontWeight: '700',
+                  color: 'var(--forest)',
+                  marginBottom: '2rem',
                   textAlign: 'center',
                   fontFamily: 'var(--serif)'
                 }}>
-                  Waarom Kiezen voor Onze Hoveniers?
+                  {isEn ? 'Why Choose Our Gardeners?' : 'Waarom Kiezen voor Onze Hoveniers?'}
                 </h2>
-                <div style={{ 
-                  display: 'grid', 
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
-                  gap: '2rem' 
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: '2rem'
                 }}>
                   <FeatureCard
                     icon={
@@ -310,7 +311,7 @@ export default async function ServicesPage({ params }: Props) {
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                     }
-                    title="Kwaliteitsgarantie"
+                    {isEn ? 'Quality Guarantee' : 'Kwaliteitsgarantie'}
                     description="Tevredenheid gegarandeerd met naservice en advies voor optimaal tuinresultaat"
                   />
                   <FeatureCard
@@ -319,8 +320,8 @@ export default async function ServicesPage({ params }: Props) {
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                       </svg>
                     }
-                    title="Snelle Reactie"
-                    description="Binnen 24 uur reactie op uw aanvraag en flexibele planning voor uw gemak"
+                      {isEn ? 'Fast Response' : 'Snelle Reactie'}
+                    description={isEn ? 'Response within 24 hours and flexible scheduling for your convenience' : 'Binnen 24 uur reactie op uw aanvraag en flexibele planning voor uw gemak'}
                   />
                 </div>
               </div>
@@ -335,27 +336,27 @@ export default async function ServicesPage({ params }: Props) {
                 padding: '3rem' 
               }}>
                 <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                  <h2 style={{ 
-                    fontSize: '2rem', 
-                    fontWeight: '700', 
-                    color: 'var(--forest)', 
+                  <h2 style={{
+                    fontSize: '2rem',
+                    fontWeight: '700',
+                    color: 'var(--forest)',
                     marginBottom: '1rem',
                     fontFamily: 'var(--serif)'
                   }}>
-                    Klaar om te Beginnen?
+                    {isEn ? 'Ready to Get Started?' : 'Klaar om te Beginnen?'}
                   </h2>
-                  <p style={{ 
-                    fontSize: '1.125rem', 
-                    color: 'var(--forest-mid)', 
+                  <p style={{
+                    fontSize: '1.125rem',
+                    color: 'var(--forest-mid)',
                     marginBottom: '2rem',
                     maxWidth: '600px',
                     margin: '0 auto'
                   }}>
-                    Vraag vandaag nog een vrijblijvende offerte aan en ontdek wat onze hoveniers voor uw tuin kunnen betekenen.
+                    {isEn ? 'Request a free quote today and discover what our gardeners can do for your garden.' : 'Vraag vandaag nog een vrijblijvende offerte aan en ontdek wat onze hoveniers voor uw tuin kunnen betekenen.'}
                   </p>
                 </div>
-                
-                <NewLeadForm 
+
+                <NewLeadForm
                   translations={formTranslations}
                   locale={validLocale}
                 />

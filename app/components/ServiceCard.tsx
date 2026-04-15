@@ -15,6 +15,7 @@ interface ServiceCardProps {
   features?: string[];
   popular?: boolean;
   className?: string;
+  locale?: string;
 }
 
 export default function ServiceCard({
@@ -25,15 +26,17 @@ export default function ServiceCard({
   price,
   features = [],
   popular = false,
-  className = ''
+  className = '',
+  locale = 'nl'
 }: ServiceCardProps) {
+  const isEn = locale === 'en';
 
   return (
     <div className={`service-card ${className}`}>
       {/* Popular Badge */}
       {popular && (
         <div className="service-card-popular">
-          Populair
+          {isEn ? 'Popular' : 'Populair'}
         </div>
       )}
       
@@ -70,7 +73,7 @@ export default function ServiceCard({
             ))}
             {features.length > 4 && (
               <li className="service-card-features-more">
-                +{features.length - 4} meer functies
+                +{features.length - 4} {isEn ? 'more features' : 'meer functies'}
               </li>
             )}
           </ul>
@@ -80,7 +83,7 @@ export default function ServiceCard({
         <div className="service-card-footer">
           {price ? (
             <div className="service-card-price">
-              Vanaf
+              {isEn ? 'From' : 'Vanaf'}
               <span className="service-card-price-amount">
                 €{price.from}
               </span>
@@ -88,17 +91,17 @@ export default function ServiceCard({
             </div>
           ) : (
             <div className="service-card-price">
-              Op aanvraag
+              {isEn ? 'On request' : 'Op aanvraag'}
             </div>
           )}
           
           <Link
             href={href}
             className="service-card-link"
-            aria-label={`Meer info over ${title}`}
+            aria-label={`${isEn ? 'More info about' : 'Meer info over'} ${title}`}
             prefetch={false}
           >
-            Meer info
+            {isEn ? 'More info' : 'Meer info'}
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

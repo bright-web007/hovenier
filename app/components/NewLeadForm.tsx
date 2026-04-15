@@ -7,6 +7,7 @@ import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { newLeadFormSchema, type NewLeadFormData } from '@/lib/validation';
 import { useFormValidation } from '@/lib/hooks/useFormValidation';
 import { FormField, FormErrorSummary, FormLoadingSpinner } from './FormValidation';
+import CustomSelect from './CustomSelect';
 import { securityKeys } from '@/lib/env';
 
 interface LeadFormProps {
@@ -180,7 +181,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
             type="text" 
             id="naam" 
             name="naam" 
-            placeholder="Jan de Vries" 
+            placeholder={locale === 'en' ? 'John Smith' : 'Jan de Vries'} 
             value={naam}
             onChange={(e) => updateField('naam', e.target.value)}
             required 
@@ -198,19 +199,17 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
             required
             className="flex-1"
           >
-            <select 
-              className={`form-select ${hasError('gemeente') ? 'border-red-500' : ''}`}
-              id="gemeente" 
-              name="gemeente" 
+            <CustomSelect
+              id="gemeente"
+              label={translations.select_municipality}
               value={gemeente}
-              onChange={(e) => updateField('gemeente', e.target.value)}
-              required
-              aria-invalid={hasError('gemeente')}
-              aria-describedby={hasError('gemeente') ? 'gemeente-error' : undefined}
-            >
-              <option value="" disabled>{translations.select_municipality}</option>
-              {gemeenten.map(g => <option key={g} value={g}>{g}</option>)}
-            </select>
+              onChange={(val) => updateField('gemeente', val)}
+              variant="form"
+              options={[
+                { value: '', label: translations.select_municipality },
+                ...gemeenten.map(g => ({ value: g, label: g })),
+              ]}
+            />
           </FormField>
 
           <FormField 
@@ -220,19 +219,17 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
             required
             className="flex-1"
           >
-            <select 
-              className={`form-select ${hasError('dienst') ? 'border-red-500' : ''}`}
-              id="dienst" 
-              name="dienst" 
+            <CustomSelect
+              id="dienst"
+              label={translations.what_do_you_need}
               value={dienst}
-              onChange={(e) => updateField('dienst', e.target.value)}
-              required
-              aria-invalid={hasError('dienst')}
-              aria-describedby={hasError('dienst') ? 'dienst-error' : undefined}
-            >
-              <option value="" disabled>{translations.what_do_you_need}</option>
-              {services.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
-            </select>
+              onChange={(val) => updateField('dienst', val)}
+              variant="form"
+              options={[
+                { value: '', label: translations.what_do_you_need },
+                ...services.map(s => ({ value: s.value, label: s.label })),
+              ]}
+            />
           </FormField>
         </div>
 
@@ -259,7 +256,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
 
         <FormField 
           fieldName="bericht" 
-          label="Beschrijf uw wensen"
+          label={locale === 'en' ? 'Describe your wishes' : 'Beschrijf uw wensen'}
           error={getError('bericht')}
           required
         >
@@ -267,7 +264,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
             className={`form-input ${hasError('bericht') ? 'border-red-500' : ''}`}
             id="bericht" 
             name="bericht" 
-            placeholder="Vertel ons over uw tuinwensen..."
+            placeholder={locale === 'en' ? 'Tell us about your garden wishes...' : 'Vertel ons over uw tuinwensen...'}
             value={bericht}
             onChange={(e) => updateField('bericht', e.target.value)}
             rows={4}
@@ -280,7 +277,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
         <div className="form-row">
           <FormField 
             fieldName="postcode" 
-            label="Postcode (optioneel)"
+            label={locale === 'en' ? 'Postcode (optional)' : 'Postcode (optioneel)'}
             error={getError('postcode')}
             className="flex-1"
           >
@@ -300,7 +297,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
 
           <FormField 
             fieldName="bedrijf" 
-            label="Bedrijf (optioneel)"
+            label={locale === 'en' ? 'Company (optional)' : 'Bedrijf (optioneel)'}
             error={getError('bedrijf')}
             className="flex-1"
           >
@@ -365,10 +362,12 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
         >
           {isDevelopment ? (
             <div className="p-3 bg-yellow-50 border border-yellow-200 rounded text-sm text-yellow-800">
-              ⚠️ Development mode: Turnstile CAPTCHA bypassed for testing
+              {locale === 'en'
+                ? '⚠️ Development mode: Turnstile CAPTCHA bypassed for testing'
+                : '⚠️ Ontwikkelmodus: Turnstile CAPTCHA overgeslagen voor testen'}
             </div>
           ) : (
-            <Suspense fallback={<div className="form-note">Beveiligingscontrole laden...</div>}>
+            <Suspense fallback={<div className="form-note">{locale === 'en' ? 'Loading security check...' : 'Beveiligingscontrole laden...'}</div>}>
               <TurnstileWidget
                 siteKey={securityKeys.turnstile.siteKey}
                 onSuccess={setTurnstileToken}

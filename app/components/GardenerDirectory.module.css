@@ -254,7 +254,7 @@
 
 .badgeBusy {
   background: var(--cream);
-  color: var(--forest-mid);
+  color: #000000;
 }
 
 .cardMeta {
@@ -372,7 +372,7 @@
   .section {
     padding: 3rem 1rem;
   }
-  
+
   .sectionTitle {
     font-size: 2.5rem;
   }
@@ -382,37 +382,37 @@
   .section {
     padding: 2rem 1rem;
   }
-  
+
   .sectionTitle {
     font-size: 2rem;
   }
-  
+
   .sectionSub {
     font-size: 1rem;
   }
-  
+
   .searchSection {
     padding: 1.5rem;
   }
-  
+
   .filterGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .resultsHeader {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .gardenersGrid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .gardenerCard {
     padding: 1.5rem;
   }
-  
+
   .cardActions {
     flex-direction: column;
   }

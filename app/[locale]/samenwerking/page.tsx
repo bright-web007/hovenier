@@ -53,11 +53,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { locale } = await params;
     const validLocale = locale || defaultLocale;
+    const isEn = validLocale === 'en';
     
     return {
-      title: 'Word Partner | Hovenier.frl - Voor Professionele Hoveniers',
-      description: 'Sluit je aan bij Hovenier.frl en krijg toegang tot klanten in heel Friesland. Voor gecertificeerde hoveniers met ervaring. Vergroot je klantenkring!',
-      keywords: ['hovenier partner', 'samenwerking', 'friesland', 'klanten', 'hoveniersbedrijf'],
+      title: isEn ? 'Become a Partner | Hovenier.frl - For Professional Gardeners' : 'Word Partner | Hovenier.frl - Voor Professionele Hoveniers',
+      description: isEn ? 'Join Hovenier.frl and get access to clients across Friesland. For certified gardeners with experience. Grow your client base!' : 'Sluit je aan bij Hovenier.frl en krijg toegang tot klanten in heel Friesland. Voor gecertificeerde hoveniers met ervaring. Vergroot je klantenkring!',
+      keywords: isEn ? ['gardener partner', 'partnership', 'friesland', 'clients', 'gardening company'] : ['hovenier partner', 'samenwerking', 'friesland', 'klanten', 'hoveniersbedrijf'],
       alternates: getLocaleAlternates('/samenwerking', validLocale as SupportedLocale),
     };
   } catch (error) {
@@ -82,6 +83,7 @@ export default async function SamenwerkingPage({ params }: Props) {
   }
 
   const t = createTranslator(validLocale);
+  const isEn = validLocale === 'en';
 
   // Partner benefits data
   const benefits: Array<{
@@ -90,105 +92,141 @@ export default async function SamenwerkingPage({ params }: Props) {
     icon: 'users' | 'money' | 'location' | 'badge';
   }> = [
     {
-      title: "Meer klanten",
-      description: "Krijg toegang tot klanten in heel Friesland die op zoek zijn naar betrouwbare hoveniers.",
-      icon: "users"
+      title: isEn ? 'More clients' : 'Meer klanten',
+      description: isEn ? 'Get access to clients across Friesland looking for reliable gardeners.' : 'Krijg toegang tot klanten in heel Friesland die op zoek zijn naar betrouwbare hoveniers.',
+      icon: 'users'
     },
     {
-      title: "Geen commissie",
-      description: "Wij rekenen geen commissie af. Direct contact tussen jou en de klant.",
-      icon: "money"
+      title: isEn ? 'No commission' : 'Geen commissie',
+      description: isEn ? 'We charge no commission. Direct contact between you and the client.' : 'Wij rekenen geen commissie af. Direct contact tussen jou en de klant.',
+      icon: 'money'
     },
     {
-      title: "Lokale focus",
-      description: "Word gekoppeld aan klanten in jouw werkgebied voor optimale efficiency.",
-      icon: "location"
+      title: isEn ? 'Local focus' : 'Lokale focus',
+      description: isEn ? 'Get matched with clients in your work area for optimal efficiency.' : 'Word gekoppeld aan klanten in jouw werkgebied voor optimale efficiency.',
+      icon: 'location'
     },
     {
-      title: "Kwaliteitsnetwerk",
-      description: "Onderdeel worden van een selecte groep gecertificeerde hoveniers.",
-      icon: "badge"
+      title: isEn ? 'Quality network' : 'Kwaliteitsnetwerk',
+      description: isEn ? 'Become part of a select group of certified gardeners.' : 'Onderdeel worden van een selecte groep gecertificeerde hoveniers.',
+      icon: 'badge'
     }
   ];
 
   // Requirements list
-  const requirements = [
-    "Minimaal 3 jaar ervaring als hovenier",
-    "KvK inschrijving en BTW nummer",
-    "Geldige WA-verzekering",
-    "Relevante certificaten (VCA, groendaken, etc.)",
-    "Positieve referenties van eerdere klanten",
-    "Werkgebied in Friesland of omliggende provincies"
+  const requirements = isEn ? [
+    'Minimum 3 years experience as a gardener',
+    'Chamber of Commerce registration and VAT number',
+    'Valid liability insurance',
+    'Relevant certificates (VCA, green roofs, etc.)',
+    'Positive references from previous clients',
+    'Work area in Friesland or surrounding provinces'
+  ] : [
+    'Minimaal 3 jaar ervaring als hovenier',
+    'KvK inschrijving en BTW nummer',
+    'Geldige WA-verzekering',
+    'Relevante certificaten (VCA, groendaken, etc.)',
+    'Positieve referenties van eerdere klanten',
+    'Werkgebied in Friesland of omliggende provincies'
   ];
 
   // FAQ data
-  const faqs = [
+  const faqs = isEn ? [
     {
-      question: "Wat kost het om partner te worden?",
-      answer: "Het partnerschap is volledig gratis. Wij verdienen alleen geld als onze partners succesvol zijn. Er zijn geen aanmeldkosten, maandelijkse kosten of commissies op opdrachten."
+      question: 'What does it cost to become a partner?',
+      answer: 'The partnership is completely free. We only earn money when our partners are successful. There are no registration fees, monthly costs or commissions on assignments.'
     },
     {
-      question: "Hoe worden klanten aan partners gekoppeld?",
-      answer: "Klanten geven hun locatie en gewenste dienst op. Wij koppelen hen aan de meest geschikte partners in hun gebied op basis van specialisatie, beschikbaarheid en reviews."
+      question: 'How are clients matched with partners?',
+      answer: 'Clients provide their location and desired service. We match them with the most suitable partners in their area based on specialization, availability and reviews.'
     },
     {
-      question: "Krijg ik gegarandeerd werk?",
-      answer: "We kunnen geen werk garanderen, maar we zorgen ervoor dat je kiesbrieven krijgt toegestuurd die passen bij jouw diensten en werkgebied. De kwaliteit van je diensten bepaalt je succes."
+      question: 'Am I guaranteed work?',
+      answer: "We cannot guarantee work, but we ensure you receive leads that match your services and work area. The quality of your services determines your success."
     },
     {
-      question: "Wat gebeurt er na de aanmelding?",
-      answer: "We nemen binnen 48 uur contact met je op voor een kennismakingsgesprek. Daarna voeren we een referentiecheck uit en bekijken we je certificaten en verzekeringen."
+      question: 'What happens after registration?',
+      answer: 'We will contact you within 48 hours for an introductory meeting. Then we conduct a reference check and review your certificates and insurance.'
     },
     {
-      question: "Kan ik zelf bepalen welke opdrachten ik aannneem?",
-      answer: "Ja, absoluut. Je bent altijd vrij om kiesbrieven af te slaan die niet passen bij je planning, specialisatie of werkgebied."
+      question: 'Can I choose which assignments I accept?',
+      answer: 'Yes, absolutely. You are always free to decline leads that do not fit your schedule, specialization or work area.'
+    }
+  ] : [
+    {
+      question: 'Wat kost het om partner te worden?',
+      answer: 'Het partnerschap is volledig gratis. Wij verdienen alleen geld als onze partners succesvol zijn. Er zijn geen aanmeldkosten, maandelijkse kosten of commissies op opdrachten.'
+    },
+    {
+      question: 'Hoe worden klanten aan partners gekoppeld?',
+      answer: 'Klanten geven hun locatie en gewenste dienst op. Wij koppelen hen aan de meest geschikte partners in hun gebied op basis van specialisatie, beschikbaarheid en reviews.'
+    },
+    {
+      question: 'Krijg ik gegarandeerd werk?',
+      answer: 'We kunnen geen werk garanderen, maar we zorgen ervoor dat je kiesbrieven krijgt toegestuurd die passen bij jouw diensten en werkgebied. De kwaliteit van je diensten bepaalt je succes.'
+    },
+    {
+      question: 'Wat gebeurt er na de aanmelding?',
+      answer: 'We nemen binnen 48 uur contact met je op voor een kennismakingsgesprek. Daarna voeren we een referentiecheck uit en bekijken we je certificaten en verzekeringen.'
+    },
+    {
+      question: 'Kan ik zelf bepalen welke opdrachten ik aannneem?',
+      answer: 'Ja, absoluut. Je bent altijd vrij om kiesbrieven af te slaan die niet passen bij je planning, specialisatie of werkgebied.'
     }
   ];
 
   // Success stories data
-  const successStories = [
+  const successStories = isEn ? [
     {
-      name: "Jan Verhoeven",
-      company: "Tuin & Bouw Heerenveen",
-      quote: "Sinds ik partner ben bij Hovenier.frl is mijn klantenkring met 40% gegroeid. Vooral de groendak specialists vragen maken het verschil.",
-      years: "2 jaar partner"
+      name: 'Jan Verhoeven',
+      company: 'Tuin & Bouw Heerenveen',
+      quote: "Since I became a partner at Hovenier.frl, my client base has grown by 40%. Especially the green roof specialist requests make the difference.",
+      years: '2 years partner'
     },
     {
-      name: "Maria Dijkstra",
-      company: "Groene Vingers Leeuwarden", 
-      quote: "De klanten die ik via het platform krijg zijn serieus en weten wat ze willen. Dat scheelt veel tijd en zorgt voor betere opdrachten.",
-      years: "1.5 jaar partner"
+      name: 'Maria Dijkstra',
+      company: 'Groene Vingers Leeuwarden',
+      quote: 'The clients I get through the platform are serious and know what they want. That saves a lot of time and leads to better assignments.',
+      years: '1.5 years partner'
     },
     {
-      name: "Pieter de Jong",
-      company: "Landschapshoven Smallingerland",
-      quote: "Het partnerschap heeft me geholpen om me te specialiseren in tuinontwerp. De klanten waarderen de professionele aanpak.",
-      years: "3 jaar partner"
+      name: 'Pieter de Jong',
+      company: 'Landschapshoven Smallingerland',
+      quote: 'The partnership has helped me specialize in garden design. The clients appreciate the professional approach.',
+      years: '3 years partner'
+    }
+  ] : [
+    {
+      name: 'Jan Verhoeven',
+      company: 'Tuin & Bouw Heerenveen',
+      quote: 'Sinds ik partner ben bij Hovenier.frl is mijn klantenkring met 40% gegroeid. Vooral de groendak specialists vragen maken het verschil.',
+      years: '2 jaar partner'
+    },
+    {
+      name: 'Maria Dijkstra',
+      company: 'Groene Vingers Leeuwarden',
+      quote: 'De klanten die ik via het platform krijg zijn serieus en weten wat ze willen. Dat scheelt veel tijd en zorgt voor betere opdrachten.',
+      years: '1.5 jaar partner'
+    },
+    {
+      name: 'Pieter de Jong',
+      company: 'Landschapshoven Smallingerland',
+      quote: 'Het partnerschap heeft me geholpen om me te specialiseren in tuinontwerp. De klanten waarderen de professionele aanpak.',
+      years: '3 jaar partner'
     }
   ];
 
   // Process steps
-  const processSteps = [
-    {
-      step: 1,
-      title: "Aanmelden",
-      description: "Vul het partnerformulier in met je bedrijfsgegevens en ervaring."
-    },
-    {
-      step: 2,
-      title: "Screening",
-      description: "Wij controleren je certificaten, verzekering en referenties."
-    },
-    {
-      step: 3, 
-      title: "Kennismaking",
-      description: "Persoonlijk gesprek over jouw specialisaties en werkgebied."
-    },
-    {
-      step: 4,
-      title: "Live gaan",
-      description: "Na goedkeuring ontvang je direct kiesbrieven van potentiële klanten."
-    }
+  const processSteps = isEn ? [
+    { step: 1, title: 'Sign up', description: 'Fill in the partner form with your business details and experience.' },
+    { step: 2, title: 'Screening', description: 'We check your certificates, insurance and references.' },
+    { step: 3, title: 'Introduction', description: 'Personal meeting about your specializations and work area.' },
+    { step: 4, title: 'Go live', description: 'After approval you immediately receive leads from potential clients.' }
+  ] : [
+    { step: 1, title: 'Aanmelden', description: 'Vul het partnerformulier in met je bedrijfsgegevens en ervaring.' },
+    { step: 2, title: 'Screening', description: 'Wij controleren je certificaten, verzekering en referenties.' },
+    { step: 3, title: 'Kennismaking', description: 'Persoonlijk gesprek over jouw specialisaties en werkgebied.' },
+    { step: 4, title: 'Live gaan', description: 'Na goedkeuring ontvang je direct kiesbrieven van potentiële klanten.' }
   ];
 
   // Prepare translations for the lead form
@@ -239,11 +277,11 @@ export default async function SamenwerkingPage({ params }: Props) {
       
       <main>
         <PartnershipHero locale={validLocale} />
-        <PartnershipBenefits benefits={benefits} />
-        <PartnershipProcess processSteps={processSteps} />
-        <PartnershipRequirements requirements={requirements} />
-        <PartnershipTestimonials successStories={successStories} />
-        <PartnershipFAQ faqs={faqs} />
+        <PartnershipBenefits benefits={benefits} locale={validLocale} />
+        <PartnershipProcess processSteps={processSteps} locale={validLocale} />
+        <PartnershipRequirements requirements={requirements} locale={validLocale} />
+        <PartnershipTestimonials successStories={successStories} locale={validLocale} />
+        <PartnershipFAQ faqs={faqs} locale={validLocale} />
         <PartnershipCTA translations={translations} locale={validLocale} />
       </main>
 

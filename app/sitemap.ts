@@ -8,13 +8,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   
   // Generate pages for each locale
   for (const locale of SUPPORTED_LOCALES) {
-    // Dutch is the main language (no prefix), English has /en prefix
-    const localePrefix = locale === 'nl' ? '' : `/${locale}`
+    const localePrefix = `/${locale}`
     const priority = locale === 'nl' ? 1 : 0.8  // Dutch pages get higher priority
     
     // Root page
     allPages.push({
-      url: localePrefix === '' ? baseUrl : `${baseUrl}${localePrefix}`,
+      url: `${baseUrl}${localePrefix}`,
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: priority,
@@ -35,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     
     for (const page of staticPages) {
       allPages.push({
-        url: localePrefix === '' ? `${baseUrl}${page.path}` : `${baseUrl}${localePrefix}${page.path}`,
+        url: `${baseUrl}${localePrefix}${page.path}`,
         lastModified: new Date(),
         changeFrequency: page.frequency,
         priority: page.priority * priority,
@@ -46,7 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const services = ['tuinonderhoud', 'tuinontwerp', 'groendak', 'tuin-aanleggen', 'stratenmaker']
     for (const service of services) {
       allPages.push({
-        url: localePrefix === '' ? `${baseUrl}/diensten/${service}` : `${baseUrl}${localePrefix}/diensten/${service}`,
+        url: `${baseUrl}${localePrefix}/diensten/${service}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.9 * priority,
@@ -57,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const kostenPages = ['hovenier-per-uur', 'tuin-aanleggen', 'tuinonderhoud', 'tuinontwerp', 'groendak']
     for (const page of kostenPages) {
       allPages.push({
-        url: localePrefix === '' ? `${baseUrl}/kosten/${page}` : `${baseUrl}${localePrefix}/kosten/${page}`,
+        url: `${baseUrl}${localePrefix}/kosten/${page}`,
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,
         priority: 0.7 * priority,
@@ -68,7 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const gardenerSlugs = ['tuinservice-friesland'] // In production, fetch from database
     for (const slug of gardenerSlugs) {
       allPages.push({
-        url: localePrefix === '' ? `${baseUrl}/hoveniers/${slug}` : `${baseUrl}${localePrefix}/hoveniers/${slug}`,
+        url: `${baseUrl}${localePrefix}/hoveniers/${slug}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.7 * priority,
@@ -79,7 +78,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const newsCategories = ['kosten', 'seizoen', 'tips', 'groendak', 'tuinontwerp']
     for (const category of newsCategories) {
       allPages.push({
-        url: localePrefix === '' ? `${baseUrl}/nieuws/categorie/${category}` : `${baseUrl}${localePrefix}/nieuws/categorie/${category}`,
+        url: `${baseUrl}${localePrefix}/nieuws/categorie/${category}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.6 * priority,

@@ -177,11 +177,7 @@ export function localizePath(pathname: string, locale: SupportedLocale): string 
   const internalPath = getInternalPath(normalizedPath);
   const publicPath = getLocalizedPublicPath(internalPath, locale);
 
-  if (locale === DEFAULT_LOCALE) {
-    return publicPath;
-  }
-
-  return publicPath === '/' ? '/en' : `/en${publicPath}`;
+  return publicPath === '/' ? `/${locale}` : `/${locale}${publicPath}`;
 }
 
 export function switchLocalePath(pathname: string, locale: SupportedLocale): string {

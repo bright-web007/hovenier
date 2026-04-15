@@ -2,7 +2,7 @@
 
 import styles from './KostenFAQ.module.css';
 
-const faqData = [
+const faqDataNl = [
   {
     q: "Wat kost een hovenier gemiddeld per uur in Friesland?",
     a: "Een hovenier in Friesland kost gemiddeld €35 tot €65 per uur. Voor standaard onderhoud betaalt u €35–50/uur. Voor specialistisch werk zoals bomen snoeien of groendakken rekent een hovenier €50–65/uur."
@@ -25,7 +25,31 @@ const faqData = [
   }
 ];
 
-export default function KostenFAQ() {
+const faqDataEn = [
+  {
+    q: "What does a gardener cost per hour on average in Friesland?",
+    a: "A gardener in Friesland costs an average of €35 to €65 per hour. For standard maintenance you pay €35–50/hour. For specialist work such as tree pruning or green roofs, a gardener charges €50–65/hour."
+  },
+  {
+    q: "What does garden maintenance cost per month?",
+    a: "For monthly garden maintenance you pay an average of €80–250 per month, depending on garden size. A small city garden (up to 50m²) costs €80–120/month. A larger garden (150m²+) costs €200–350/month."
+  },
+  {
+    q: "Is requesting a quote free?",
+    a: "Yes, via Hovenier.frl you can request quotes from multiple gardeners in your area completely free and without obligation. You pay nothing and are not committed to anything."
+  },
+  {
+    q: "What does a complete garden construction cost?",
+    a: "A complete garden construction in Friesland costs an average of €4,500–15,000 for a medium-sized garden (100–150m²). This includes design, groundwork, planting and paving. Have a specific wish? Request a quote for an accurate price estimate."
+  },
+  {
+    q: "Are there subsidies available for green roofs?",
+    a: "Yes, various Frisian municipalities offer subsidies for green roofs, ranging from €15–35 per m². Leeuwarden, Smallingerland and Súdwest-Fryslân have active subsidy programs. Your gardener can advise you on this."
+  }
+];
+
+export default function KostenFAQ({ locale = 'nl' }: { locale?: string }) {
+  const faqData = locale === 'en' ? faqDataEn : faqDataNl;
   const handleFaqToggle = (e: React.MouseEvent<HTMLDivElement>) => {
     const faqItem = e.currentTarget.parentElement;
     if (!faqItem) return;
@@ -41,7 +65,7 @@ export default function KostenFAQ() {
       if (item !== faqItem && otherAnswer && otherArrow) {
         otherAnswer.style.maxHeight = '0px';
         otherAnswer.style.opacity = '0';
-        otherAnswer.style.padding = '0';
+        otherAnswer.style.padding = '0 1.5rem';
         otherAnswer.style.borderTop = 'none';
         otherAnswer.style.marginTop = '0';
         otherAnswer.classList.remove('expanded');
@@ -54,7 +78,7 @@ export default function KostenFAQ() {
       if (answer) {
         answer.style.maxHeight = '0px';
         answer.style.opacity = '0';
-        answer.style.padding = '0';
+        answer.style.padding = '0 1.5rem';
         answer.style.borderTop = 'none';
         answer.style.marginTop = '0';
         answer.classList.remove('expanded');
@@ -66,7 +90,7 @@ export default function KostenFAQ() {
       if (answer) {
         answer.style.maxHeight = '200px';
         answer.style.opacity = '1';
-        answer.style.padding = '0.75rem 0 0.25rem 0';
+        answer.style.padding = '0.75rem 1.5rem 1.25rem 1.5rem';
         answer.style.borderTop = '1px solid #f0f4ec';
         answer.style.marginTop = '0.5rem';
         answer.classList.add('expanded');
@@ -103,7 +127,7 @@ export default function KostenFAQ() {
             style={{
               maxHeight: '0px',
               opacity: 0,
-              padding: '0',
+              padding: '0 1.5rem',
               margin: '0',
               transition: 'max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease'
             }}

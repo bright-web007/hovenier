@@ -5,6 +5,7 @@ import "./globals.css";
 import AdSenseScript from "./components/AdSenseScript";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import PerformanceInitializer from "./components/PerformanceInitializer";
+import { env } from "@/lib/env";
 
 const sansFont = DM_Sans({
   variable: "--font-sans",
@@ -118,9 +119,24 @@ export default async function RootLayout({
         
         {/* Manifest for PWA */}
         <link rel="manifest" href="/manifest.json" />
+
+        {env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID && (
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                })(window, document, "clarity", "script", "${env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID}");
+              `,
+            }}
+          />
+        )}
       </head>
       <body className={`${sansFont.variable}`}>
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || ''} />
+        <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || ''} />
         <AdSenseScript clientId={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ''} />
         <PerformanceInitializer />
         {children}

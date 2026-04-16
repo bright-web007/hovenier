@@ -64,7 +64,7 @@ export const envSchema = z.object({
   NODE_ENV: nodeEnvSchema,
   NEXT_PUBLIC_BASE_URL: urlSchema,
 
-  NEXT_PUBLIC_IMAGE_BASE_URL: urlSchema, // Default for builds, should be overridden in production
+  NEXT_PUBLIC_IMAGE_BASE_URL: urlSchema.optional().default(''),
   
   // Analytics & Monitoring
   SENTRY_DSN: sentryDsnSchema.optional().default(""),

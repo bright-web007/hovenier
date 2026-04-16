@@ -12,6 +12,7 @@ import PartnershipCTA from '../../components/PartnershipCTA';
 import PartnershipSchema from '../../components/schemas/PartnershipSchema';
 import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema';
 import { getAbsoluteUrl, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -19,35 +20,6 @@ export const defaultLocale = 'nl';
 type Props = {
   params: Promise<{ locale: string }>;
 };
-
-// Simple translation function
-function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
-  
-  try {
-    if (locale === 'nl') {
-      messages = require(`../../../locales/nl/common.json`);
-    } else {
-      messages = require(`../../../locales/en/common.json`);
-    }
-  } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
-    messages = {
-      form_eyebrow: "Gratis & vrijblijvend",
-      form_title: "Word partner",
-      form_subtitle: "Sluit je aan bij ons netwerk van professionele hoveniers."
-    };
-  }
-  
-  return (key: string) => {
-    const keys = key.split('.');
-    let value = messages;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return typeof value === 'string' ? value : key;
-  };
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {

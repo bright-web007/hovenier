@@ -1,58 +1,57 @@
 import styles from '../../styles/Cookie.module.css';
 
-export default function CookieThirdParty() {
+interface CookieThirdPartyProps {
+  translations: Record<string, string>;
+}
+
+export default function CookieThirdParty({ translations }: CookieThirdPartyProps) {
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>7. Derde partij cookies en diensten</h2>
+      <h2 className={styles.legalSectionTitle}>{translations.thirdparty_title}</h2>
       <p className={styles.legalText}>
-        Onze website maakt gebruik van verschillende externe diensten die hun eigen cookies 
-        kunnen plaatsen. Deze "derde partij cookies" worden geregeerd door de privacybeleiden 
-        van de respectievelijke dienstverleners.
+        {translations.thirdparty_text}
       </p>
       
-      <h3 className={styles.legalSubsectionTitle}>7.1 Google diensten</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.thirdparty_google_title}</h3>
       <p className={styles.legalText}>
-        Wij maken gebruik van verschillende Google diensten:
+        {translations.thirdparty_google_text}
       </p>
       <ul className={styles.legalList}>
-        <li><strong>Google Analytics:</strong> Voor websiteverkeer analyse en gebruikersgedrag inzichten</li>
-        <li><strong>Google Ads:</strong> Voor advertentiecampagnes en conversietracking</li>
-        <li><strong>Google Maps:</strong> Voor locatiediensten en routekaarten naar hoveniers</li>
-        <li><strong>reCAPTCHA:</strong> Voor spam- en botbescherming op onze contactformulieren</li>
+        <li><strong>{translations.thirdparty_google_analytics}</strong> {translations.thirdparty_google_analytics_desc}</li>
+        <li><strong>{translations.thirdparty_google_ads}</strong> {translations.thirdparty_google_ads_desc}</li>
+        <li><strong>{translations.thirdparty_google_maps}</strong> {translations.thirdparty_google_maps_desc}</li>
+        <li><strong>{translations.thirdparty_google_recaptcha}</strong> {translations.thirdparty_google_recaptcha_desc}</li>
       </ul>
       <p className={styles.legalText}>
-        Google's Privacy Beleid: <a href="https://policies.google.com/privacy" className={styles.legalLink} target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a>
+        {translations.thirdparty_google_privacy} <a href="https://policies.google.com/privacy" className={styles.legalLink} target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a>
       </p>
       
-      <h3 className={styles.legalSubsectionTitle}>7.2 Social Media platformen</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.thirdparty_social_title}</h3>
       <p className={styles.legalText}>
-        Onze website bevat knoppen en widgets van sociale media platformen:
+        {translations.thirdparty_social_text}
       </p>
       <ul className={styles.legalList}>
-        <li><strong>Facebook/Meta:</strong> Voor het delen van content en Facebook Pixel tracking</li>
-        <li><strong>Instagram:</strong> Voor het tonen van onze Instagram posts</li>
-        <li><strong>LinkedIn:</strong> Voor zakelijke netwerk functionaliteiten</li>
-        <li><strong>WhatsApp:</strong> Voor directe communicatie mogelijkheden</li>
+        <li><strong>{translations.thirdparty_facebook}</strong> {translations.thirdparty_facebook_desc}</li>
+        <li><strong>{translations.thirdparty_instagram}</strong> {translations.thirdparty_instagram_desc}</li>
+        <li><strong>{translations.thirdparty_linkedin}</strong> {translations.thirdparty_linkedin_desc}</li>
+        <li><strong>{translations.thirdparty_whatsapp}</strong> {translations.thirdparty_whatsapp_desc}</li>
       </ul>
       <p className={styles.legalText}>
-        Deze diensten kunnen informatie over uw bezoek verzamelen, ook als u niet ingelogd 
-        bent bij hun dienst. Raadpleeg hun privacybeleiden voor meer informatie.
+        {translations.thirdparty_social_note}
       </p>
       
-      <h3 className={styles.legalSubsectionTitle}>7.3 Beveiligings- en performance diensten</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.thirdparty_security_title}</h3>
       <p className={styles.legalText}>
-        Voor de beveiliging en optimalisatie van onze website gebruiken wij:
+        {translations.thirdparty_security_text}
       </p>
       <ul className={styles.legalList}>
-        <li><strong>Cloudflare:</strong> Voor DDoS bescherming, CDN diensten en website performance</li>
-        <li><strong>Sentry:</strong> Voor error monitoring en performance tracking</li>
+        <li><strong>{translations.thirdparty_cloudflare}</strong> {translations.thirdparty_cloudflare_desc}</li>
+        <li><strong>{translations.thirdparty_sentry}</strong> {translations.thirdparty_sentry_desc}</li>
       </ul>
       
       <div className={styles.warningBox}>
         <p className={styles.warningText}>
-          <strong>Belangrijk:</strong> Elke derde partij heeft zijn eigen privacybeleid 
-          en cookiebeleid. Wij raden u aan deze door te lezen om te begrijpen hoe 
-          uw gegevens door deze partijen worden gebruikt.
+          <strong>{translations.thirdparty_warning}</strong> {translations.thirdparty_warning_text}
         </p>
       </div>
     </section>

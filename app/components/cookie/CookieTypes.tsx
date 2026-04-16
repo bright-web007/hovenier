@@ -1,99 +1,95 @@
 import styles from '../../styles/Cookie.module.css';
 
-export default function CookieTypes() {
+interface CookieTypesProps {
+  translations: Record<string, string>;
+}
+
+export default function CookieTypes({ translations }: CookieTypesProps) {
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>4. Welke cookies gebruiken wij?</h2>
+      <h2 className={styles.legalSectionTitle}>{translations.types_title}</h2>
       <p className={styles.legalText}>
-        Wij gebruiken verschillende soorten cookies op onze website. Hieronder vindt u een 
-        overzicht van alle cookiecategorieën en de specifieke cookies die wij plaatsen:
+        {translations.types_text}
       </p>
 
-      <h3 className={styles.legalSubsectionTitle}>4.1 Noodzakelijke cookies</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.types_necessary_title}</h3>
       <p className={styles.legalText}>
-        Deze cookies zijn essentieel voor de werking van onze website en kunnen niet worden 
-        uitgeschakeld zonder dat de functionaliteit van de site wordt aangetast. Ze worden 
-        meestal alleen geplaatst naar aanleiding van acties die u onderneemt.
+        {translations.types_necessary_text}
       </p>
       <div className={styles.legalContact}>
-        <strong>_session</strong><br />
-        Doel: Sessie beheer en gebruikersidentificatie<br />
-        Bewaartijd: Tot einde van de browsersessie<br />
-        Type: Eerste partij cookie
+        <strong>{translations.types_session_name}</strong><br />
+        {translations.types_session_purpose}<br />
+        {translations.types_session_duration}<br />
+        {translations.types_session_type}
       </div>
       <div className={styles.legalContact}>
-        <strong>csrf_token</strong><br />
-        Doel: Beveiliging tegen Cross-Site Request Forgery aanvallen<br />
-        Bewaartijd: 24 uur<br />
-        Type: Eerste partij cookie
+        <strong>{translations.types_csrf_name}</strong><br />
+        {translations.types_csrf_purpose}<br />
+        {translations.types_csrf_duration}<br />
+        {translations.types_csrf_type}
       </div>
       <div className={styles.legalContact}>
-        <strong>cookie_consent</strong><br />
-        Doel: Opslaan van uw cookievoorkeuren<br />
-        Bewaartijd: 1 jaar<br />
-        Type: Eerste partij cookie
+        <strong>{translations.types_consent_name}</strong><br />
+        {translations.types_consent_purpose}<br />
+        {translations.types_consent_duration}<br />
+        {translations.types_consent_type}
       </div>
 
-      <h3 className={styles.legalSubsectionTitle}>4.2 Analytische cookies</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.types_analytical_title}</h3>
       <p className={styles.legalText}>
-        Deze cookies helpen ons begrijpen hoe bezoekers onze website gebruiken door 
-        informatie te verzamelen over pagina's die worden bezocht, foutmeldingen, 
-        en andere website-interacties. Alle gegevens worden geanonimiseerd verzameld.
+        {translations.types_analytical_text}
       </p>
       <div className={styles.legalContact}>
-        <strong>_ga, _ga_*</strong><br />
-        Doel: Google Analytics tracking voor verkeersmeting en gebruikersgedrag<br />
-        Bewaartijd: 2 jaar<br />
-        Type: Derde partij cookie (Google LLC)
+        <strong>{translations.types_ga_name}</strong><br />
+        {translations.types_ga_purpose}<br />
+        {translations.types_ga_duration}<br />
+        {translations.types_ga_type}
       </div>
       <div className={styles.legalContact}>
-        <strong>_gid</strong><br />
-        Doel: Onderscheid maken tussen verschillende website gebruikers<br />
-        Bewaartijd: 24 uur<br />
-        Type: Derde partij cookie (Google LLC)
+        <strong>{translations.types_gid_name}</strong><br />
+        {translations.types_gid_purpose}<br />
+        {translations.types_gid_duration}<br />
+        {translations.types_gid_type}
       </div>
       <div className={styles.legalContact}>
-        <strong>_gat</strong><br />
-        Doel: Beperken van het aantal verzoeken aan Google Analytics<br />
-        Bewaartijd: 1 minuut<br />
-        Type: Derde partij cookie (Google LLC)
+        <strong>{translations.types_gat_name}</strong><br />
+        {translations.types_gat_purpose}<br />
+        {translations.types_gat_duration}<br />
+        {translations.types_gat_type}
       </div>
 
-      <h3 className={styles.legalSubsectionTitle}>4.3 Functionele cookies</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.types_functional_title}</h3>
       <p className={styles.legalText}>
-        Deze cookies maken extra functionaliteiten mogelijk en zorgen voor een 
-        gepersonaliseerde ervaring. Ze onthouden uw keuzes en voorkeuren.
+        {translations.types_functional_text}
       </p>
       <div className={styles.legalContact}>
-        <strong>lang_preference</strong><br />
-        Doel: Bewaren van uw taalvoorkeur (Nederlands/Engels)<br />
-        Bewaartijd: 1 jaar<br />
-        Type: Eerste partij cookie
+        <strong>{translations.types_lang_name}</strong><br />
+        {translations.types_lang_purpose}<br />
+        {translations.types_lang_duration}<br />
+        {translations.types_lang_type}
       </div>
       <div className={styles.legalContact}>
-        <strong>region_preference</strong><br />
-        Doel: Onthouden van uw locatievoorkeuren voor relevante hoveniers<br />
-        Bewaartijd: 6 maanden<br />
-        Type: Eerste partij cookie
+        <strong>{translations.types_region_name}</strong><br />
+        {translations.types_region_purpose}<br />
+        {translations.types_region_duration}<br />
+        {translations.types_region_type}
       </div>
 
-      <h3 className={styles.legalSubsectionTitle}>4.4 Marketing cookies</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.types_marketing_title}</h3>
       <p className={styles.legalText}>
-        Deze cookies worden gebruikt voor het tonen van relevante advertenties en 
-        het meten van advertentie-effectiviteit. Voor deze cookies vragen wij uw 
-        uitdrukkelijke toestemming.
+        {translations.types_marketing_text}
       </p>
       <div className={styles.legalContact}>
-        <strong>_fbp, _fbc</strong><br />
-        Doel: Facebook Pixel tracking voor advertentiedoeleinden<br />
-        Bewaartijd: 90 dagen<br />
-        Type: Derde partij cookie (Meta Platforms)
+        <strong>{translations.types_fb_name}</strong><br />
+        {translations.types_fb_purpose}<br />
+        {translations.types_fb_duration}<br />
+        {translations.types_fb_type}
       </div>
       <div className={styles.legalContact}>
-        <strong>ads_conversion</strong><br />
-        Doel: Meten van advertentieconversies en ROI<br />
-        Bewaartijd: 30 dagen<br />
-        Type: Eerste partij cookie
+        <strong>{translations.types_ads_name}</strong><br />
+        {translations.types_ads_purpose}<br />
+        {translations.types_ads_duration}<br />
+        {translations.types_ads_type}
       </div>
     </section>
   );

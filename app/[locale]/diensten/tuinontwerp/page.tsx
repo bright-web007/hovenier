@@ -25,7 +25,7 @@ type Props = {
 // Simple translation function
 function createTranslator(locale: string) {
   let messages: Record<string, any> = {};
-  
+
   try {
     if (locale === 'nl') {
       messages = require(`../../../../locales/nl/common.json`);
@@ -43,7 +43,7 @@ function createTranslator(locale: string) {
       form_subtitle: "Ontvang binnen 24 uur reacties van tuinontwerpers in uw regio."
     };
   }
-  
+
   return (key: string) => {
     const keys = key.split('.');
     let value = messages;
@@ -54,82 +54,144 @@ function createTranslator(locale: string) {
   };
 }
 
-const faqs = [
-  {
-    question: "Wat kost een professioneel tuinontwerp in Friesland?",
-    answer: "Een compleet tuinontwerp varieert van €750-2500, afhankelijk van de grootte en complexiteit. Dit omvat conceptontwerp, plantenkeuze, 3D visualisatie en technische tekeningen."
-  },
-  {
-    question: "Hoe lang duurt het ontwerpproces?",
-    answer: "Van eerste gesprek tot definitief ontwerp duurt gemiddeld 2-4 weken. Dit hangt af van de grootte van uw tuin en gewenste detailniveau."
-  },
-  {
-    question: "Krijg ik ook 3D visualisaties van mijn nieuwe tuin?",
-    answer: "Ja, bij elk tuinontwerp leveren wij professionele 3D renders zodat u uw nieuwe tuin al kunt zien voordat de aanleg begint."
-  },
-  {
-    question: "Kunnen jullie ook de aanleg verzorgen?",
-    answer: "Absoluut! Wij werken samen met ervaren hovenieraanbedrijven die het ontwerp precies volgens specificaties kunnen realiseren."
-  },
-  {
-    question: "Houden jullie rekening met onderhoudsvriendelijkheid?",
-    answer: "Zeker. We ontwerpen altijd met het gewenste onderhoudsniveau in gedachten en kiezen planten die passen bij uw beschikbare tijd en ervaring."
-  }
-];
+const faqs = {
+  nl: [
+    {
+      question: "Wat kost een professioneel tuinontwerp in Friesland?",
+      answer: "Een compleet tuinontwerp varieert van €750-2500, afhankelijk van de grootte en complexiteit. Dit omvat conceptontwerp, plantenkeuze, 3D visualisatie en technische tekeningen."
+    },
+    {
+      question: "Hoe lang duurt het ontwerpproces?",
+      answer: "Van eerste gesprek tot definitief ontwerp duurt gemiddeld 2-4 weken. Dit hangt af van de grootte van uw tuin en gewenste detailniveau."
+    },
+    {
+      question: "Krijg ik ook 3D visualisaties van mijn nieuwe tuin?",
+      answer: "Ja, bij elk tuinontwerp leveren wij professionele 3D renders zodat u uw nieuwe tuin al kunt zien voordat de aanleg begint."
+    },
+    {
+      question: "Kunnen jullie ook de aanleg verzorgen?",
+      answer: "Absoluut! Wij werken samen met ervaren hovenieraanbedrijven die het ontwerp precies volgens specificaties kunnen realiseren."
+    },
+    {
+      question: "Houden jullie rekening met onderhoudsvriendelijkheid?",
+      answer: "Zeker. We ontwerpen altijd met het gewenste onderhoudsniveau in gedachten en kiezen planten die passen bij uw beschikbare tijd en ervaring."
+    }
+  ],
+  en: [
+    {
+      question: "What does a professional garden design cost in Friesland?",
+      answer: "A complete garden design ranges from €750-2500, depending on size and complexity. This includes concept design, plant selection, 3D visualization and technical drawings."
+    },
+    {
+      question: "How long does the design process take?",
+      answer: "From first consultation to final design takes on average 2-4 weeks. This depends on the size of your garden and desired level of detail."
+    },
+    {
+      question: "Will I get 3D visualizations of my new garden?",
+      answer: "Yes, with every garden design we deliver professional 3D renders so you can see your new garden before construction begins."
+    },
+    {
+      question: "Can you also handle the construction?",
+      answer: "Absolutely! We work together with experienced gardening companies who can realize the design exactly according to specifications."
+    },
+    {
+      question: "Do you consider maintenance-friendliness?",
+      answer: "Certainly. We always design with the desired maintenance level in mind and choose plants that match your available time and experience."
+    }
+  ]
+};
 
 // Sample related articles data
-const relatedArticles = [
-  {
-    id: "1",
-    title: "Tuinontwerp trends 2024: wat is populair dit jaar?",
-    excerpt: "Ontdek de nieuwste trends in tuinontwerp en landscaping voor een moderne buitenruimte.",
-    slug: "tuinontwerp-trends-2024",
-    category: "Tuinontwerp",
-    readTime: 6,
-    publishedAt: "2024-03-18",
-  },
-  {
-    id: "2", 
-    title: "Kleine tuin, grote plannen: maximaal uit uw ruimte",
-    excerpt: "Tips en trucs voor het ontwerpen van een functionele en mooie kleine tuin.",
-    slug: "kleine-tuin-ontwerp-tips",
-    category: "Tuinontwerp",
-    readTime: 8,
-    publishedAt: "2024-03-12",
-  },
-  {
-    id: "3",
-    title: "Duurzame tuinen: milieuvriendelijk ontwerpen",
-    excerpt: "Hoe u een prachtige tuin kunt creëren die ook goed is voor het milieu.",
-    slug: "duurzame-tuin-ontwerp",
-    category: "Duurzaamheid", 
-    readTime: 7,
-    publishedAt: "2024-03-08",
-  }
-];
+const relatedArticles = {
+  nl: [
+    {
+      id: "1",
+      title: "Tuinontwerp trends 2024: wat is populair dit jaar?",
+      excerpt: "Ontdek de nieuwste trends in tuinontwerp en landscaping voor een moderne buitenruimte.",
+      slug: "tuinontwerp-trends-2024",
+      category: "Tuinontwerp",
+      readTime: 6,
+      publishedAt: "2024-03-18",
+    },
+    {
+      id: "2",
+      title: "Kleine tuin, grote plannen: maximaal uit uw ruimte",
+      excerpt: "Tips en trucs voor het ontwerpen van een functionele en mooie kleine tuin.",
+      slug: "kleine-tuin-ontwerp-tips",
+      category: "Tuinontwerp",
+      readTime: 8,
+      publishedAt: "2024-03-12",
+    },
+    {
+      id: "3",
+      title: "Duurzame tuinen: milieuvriendelijk ontwerpen",
+      excerpt: "Hoe u een prachtige tuin kunt creëren die ook goed is voor het milieu.",
+      slug: "duurzame-tuin-ontwerp",
+      category: "Duurzaamheid",
+      readTime: 7,
+      publishedAt: "2024-03-08",
+    }
+  ],
+  en: [
+    {
+      id: "1",
+      title: "Garden design trends 2024: what's popular this year?",
+      excerpt: "Discover the latest trends in garden design and landscaping for a modern outdoor space.",
+      slug: "tuinontwerp-trends-2024",
+      category: "Garden Design",
+      readTime: 6,
+      publishedAt: "2024-03-18",
+    },
+    {
+      id: "2",
+      title: "Small garden, big plans: make the most of your space",
+      excerpt: "Tips and tricks for designing a functional and beautiful small garden.",
+      slug: "kleine-tuin-ontwerp-tips",
+      category: "Garden Design",
+      readTime: 8,
+      publishedAt: "2024-03-12",
+    },
+    {
+      id: "3",
+      title: "Sustainable gardens: eco-friendly design",
+      excerpt: "How to create a beautiful garden that is also good for the environment.",
+      slug: "duurzame-tuin-ontwerp",
+      category: "Sustainability",
+      readTime: 7,
+      publishedAt: "2024-03-08",
+    }
+  ]
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { locale } = await params;
     const validLocale = locale || defaultLocale;
-    
+    const isEn = validLocale === 'en';
+
     return {
-      title: 'Tuinontwerp Friesland | Professionele Landschapsarchitect | Hovenier.frl',
-      description: 'Professionele tuinontwerpen in Friesland. 3D visualisatie, plantenkeuze en complete realisatie. Vanaf €750. Vraag gratis offerte.',
-      keywords: ['tuinontwerp', 'landschapsarchitect', 'tuinarchitect', 'friesland', '3d visualisatie'],
+      title: isEn
+        ? 'Garden Design Friesland | Professional Landscape Architect | Hovenier.frl'
+        : 'Tuinontwerp Friesland | Professionele Landschapsarchitect | Hovenier.frl',
+      description: isEn
+        ? 'Professional garden designs in Friesland. 3D visualization, plant selection and complete realization. From €750. Request a free quote.'
+        : 'Professionele tuinontwerpen in Friesland. 3D visualisatie, plantenkeuze en complete realisatie. Vanaf €750. Vraag gratis offerte.',
+      keywords: isEn
+        ? ['garden design', 'landscape architect', 'garden architect', 'friesland', '3d visualization']
+        : ['tuinontwerp', 'landschapsarchitect', 'tuinarchitect', 'friesland', '3d visualisatie'],
       alternates: getLocaleAlternates('/diensten/tuinontwerp', validLocale as SupportedLocale),
     };
   } catch (error) {
     return {
       title: 'Tuinontwerp - Hovenier.frl',
-      description: 'Professionele tuinontwerp diensten in Friesland.'
+      description: 'Professional garden design services in Friesland.'
     };
   }
 }
 
 export default async function TuinontwerpPage({ params }: Props) {
   let validLocale = defaultLocale;
-  
+
   try {
     const { locale } = await params;
     validLocale = locale || defaultLocale;
@@ -141,6 +203,9 @@ export default async function TuinontwerpPage({ params }: Props) {
   }
 
   const t = createTranslator(validLocale);
+  const isEn = validLocale === 'en';
+  const localeFaqs = faqs[isEn ? 'en' : 'nl'];
+  const localeArticles = relatedArticles[isEn ? 'en' : 'nl'];
 
   // Navigation translations
   const navTranslations = {
@@ -188,22 +253,22 @@ export default async function TuinontwerpPage({ params }: Props) {
 
   return (
     <>
-      <LocalBusinessSchema 
+      <LocalBusinessSchema
         serviceType="tuinontwerp"
         url={`https://hovenier.frl${localizePath('/diensten/tuinontwerp', validLocale as SupportedLocale)}`}
       />
-      
-      <BreadcrumbSchema 
+
+      <BreadcrumbSchema
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
           url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl${localizePath('/diensten/tuinontwerp', validLocale as SupportedLocale)}`
         }))}
       />
-      
+
       <Navigation locale={validLocale} translations={navTranslations} />
       <Breadcrumbs items={breadcrumbItems} />
-      
+
       <main>
         {/* Hero Section */}
         <section className="section">
@@ -218,23 +283,24 @@ export default async function TuinontwerpPage({ params }: Props) {
                   </div>
                 </div>
                 <div className="service-hero-text">
-                  <h1 className="service-hero-title">Tuinontwerp in Friesland</h1>
+                  <h1 className="service-hero-title">{isEn ? 'Garden Design in Friesland' : 'Tuinontwerp in Friesland'}</h1>
                   <p className="service-hero-description">
-                    Van conceptschets tot 3D visualisatie - onze tuinarchitecten ontwerpen uw droomtuin. 
-                    Unieke ontwerpen die perfect passen bij uw wensen, levensstijl en de Friese omgeving.
+                    {isEn
+                      ? 'From concept sketch to 3D visualization — our garden architects design your dream garden. Unique designs that perfectly match your wishes, lifestyle and the Frisian surroundings.'
+                      : 'Van conceptschets tot 3D visualisatie - onze tuinarchitecten ontwerpen uw droomtuin. Unieke ontwerpen die perfect passen bij uw wensen, levensstijl en de Friese omgeving.'}
                   </p>
                   <div className="service-hero-stats">
                     <div className="service-stat">
                       <span className="service-stat-number">€750+</span>
-                      <span className="service-stat-label">vanaf prijs</span>
+                      <span className="service-stat-label">{isEn ? 'starting price' : 'vanaf prijs'}</span>
                     </div>
                     <div className="service-stat">
                       <span className="service-stat-number">3D</span>
-                      <span className="service-stat-label">visualisatie</span>
+                      <span className="service-stat-label">{isEn ? 'visualization' : 'visualisatie'}</span>
                     </div>
                     <div className="service-stat">
                       <span className="service-stat-number">15+</span>
-                      <span className="service-stat-label">ontwerpers</span>
+                      <span className="service-stat-label">{isEn ? 'designers' : 'ontwerpers'}</span>
                     </div>
                   </div>
                 </div>
@@ -247,10 +313,10 @@ export default async function TuinontwerpPage({ params }: Props) {
         <section className="section section-alt">
           <div className="section-inner">
             <div className="section-header-row section-centered">
-              <h2 className="section-title">Van idee tot droomtuin</h2>
-              <p className="section-sub">Ons complete ontwerpproces in 4 stappen</p>
+              <h2 className="section-title">{isEn ? 'From idea to dream garden' : 'Van idee tot droomtuin'}</h2>
+              <p className="section-sub">{isEn ? 'Our complete design process in 4 steps' : 'Ons complete ontwerpproces in 4 stappen'}</p>
             </div>
-            
+
             <div className="service-features-grid">
               <div className="service-feature">
                 <div className="service-feature-icon">
@@ -258,24 +324,24 @@ export default async function TuinontwerpPage({ params }: Props) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                 </div>
-                <h3 className="service-feature-title">1. Intakegesprek & locatiebezoek</h3>
+                <h3 className="service-feature-title">{isEn ? '1. Intake meeting & site visit' : '1. Intakegesprek & locatiebezoek'}</h3>
                 <p className="service-feature-description">
-                  Kennismaking, wensen inventariseren en ter plaatse de mogelijkheden bekijken.
+                  {isEn ? 'Introduction, inventory of wishes and on-site review of possibilities.' : 'Kennismaking, wensen inventariseren en ter plaatse de mogelijkheden bekijken.'}
                 </p>
               </div>
-              
+
               <div className="service-feature">
                 <div className="service-feature-icon">
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                   </svg>
                 </div>
-                <h3 className="service-feature-title">2. Conceptontwerp & schetsen</h3>
+                <h3 className="service-feature-title">{isEn ? '2. Concept design & sketches' : '2. Conceptontwerp & schetsen'}</h3>
                 <p className="service-feature-description">
-                  Eerste schetsen en concepten op basis van uw wensen en de locatie-eigenschappen.
+                  {isEn ? 'Initial sketches and concepts based on your wishes and site characteristics.' : 'Eerste schetsen en concepten op basis van uw wensen en de locatie-eigenschappen.'}
                 </p>
               </div>
-              
+
               <div className="service-feature">
                 <div className="service-feature-icon">
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -283,21 +349,21 @@ export default async function TuinontwerpPage({ params }: Props) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
                 </div>
-                <h3 className="service-feature-title">3. 3D visualisatie & plantenkeuze</h3>
+                <h3 className="service-feature-title">{isEn ? '3. 3D visualization & plant selection' : '3. 3D visualisatie & plantenkeuze'}</h3>
                 <p className="service-feature-description">
-                  Realistische 3D beelden van uw nieuwe tuin plus gedetailleerde plantenselectie.
+                  {isEn ? 'Realistic 3D images of your new garden plus detailed plant selection.' : 'Realistische 3D beelden van uw nieuwe tuin plus gedetailleerde plantenselectie.'}
                 </p>
               </div>
-              
+
               <div className="service-feature">
                 <div className="service-feature-icon">
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                   </svg>
                 </div>
-                <h3 className="service-feature-title">4. Definitief ontwerp & realisatie</h3>
+                <h3 className="service-feature-title">{isEn ? '4. Final design & realization' : '4. Definitief ontwerp & realisatie'}</h3>
                 <p className="service-feature-description">
-                  Technische tekeningen en begeleiding bij de aanleg door onze partner hovenier.
+                  {isEn ? 'Technical drawings and guidance during construction by our partner gardener.' : 'Technische tekeningen en begeleiding bij de aanleg door onze partner hovenier.'}
                 </p>
               </div>
             </div>
@@ -308,11 +374,11 @@ export default async function TuinontwerpPage({ params }: Props) {
         <section className="section">
           <div className="section-inner">
             <div className="section-header-row section-centered">
-              <h2 className="section-title">Veelgestelde vragen</h2>
+              <h2 className="section-title">{isEn ? 'Frequently asked questions' : 'Veelgestelde vragen'}</h2>
             </div>
-            
+
             <div className="faq-grid">
-              {faqs.map((faq, index) => (
+              {localeFaqs.map((faq, index) => (
                 <div key={index} className="faq-item">
                   <h3 className="faq-question">{faq.question}</h3>
                   <p className="faq-answer">{faq.answer}</p>
@@ -327,9 +393,9 @@ export default async function TuinontwerpPage({ params }: Props) {
           <div className="section-inner">
             <div className="service-form-container">
               <div className="service-form-header">
-                <h2 className="section-title section-title-centered">Vraag een tuinontwerp aan</h2>
+                <h2 className="section-title section-title-centered">{isEn ? 'Request a garden design' : 'Vraag een tuinontwerp aan'}</h2>
                 <p className="section-sub section-sub-centered">
-                  Ontvang binnen 24 uur reacties van ervaren tuinarchitecten in uw gemeente
+                  {isEn ? 'Receive responses from experienced garden architects in your municipality within 24 hours' : 'Ontvang binnen 24 uur reacties van ervaren tuinarchitecten in uw gemeente'}
                 </p>
               </div>
               <div className="service-form-content">
@@ -341,7 +407,7 @@ export default async function TuinontwerpPage({ params }: Props) {
       </main>
 
       {/* Related Articles */}
-      <RelatedArticles articles={relatedArticles} title="Gerelateerde artikelen over tuinontwerp" />
+      <RelatedArticles articles={localeArticles} title={isEn ? 'Related articles about garden design' : 'Gerelateerde artikelen over tuinontwerp'} />
 
       {/* FAQ Schema */}
       <script
@@ -350,7 +416,7 @@ export default async function TuinontwerpPage({ params }: Props) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": faqs.map(faq => ({
+            "mainEntity": localeFaqs.map(faq => ({
               "@type": "Question",
               "name": faq.question,
               "acceptedAnswer": {
@@ -369,8 +435,8 @@ export default async function TuinontwerpPage({ params }: Props) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Service",
-            "name": "Tuinontwerp",
-            "description": "Professionele tuinontwerp diensten in Friesland door gecertificeerde tuinarchitecten",
+            "name": isEn ? "Garden Design" : "Tuinontwerp",
+            "description": isEn ? "Professional garden design services in Friesland by certified garden architects" : "Professionele tuinontwerp diensten in Friesland door gecertificeerde tuinarchitecten",
             "provider": {
               "@type": "LocalBusiness",
               "name": "Hovenier.frl",

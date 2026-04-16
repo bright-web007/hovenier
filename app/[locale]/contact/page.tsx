@@ -19,10 +19,18 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
 
-  return {
+  const meta = locale === 'en' ? {
+    title: 'Contact - Hovenier.frl | Get in Touch',
+    description: 'Contact hovenier.frl for questions about partnerships, press, or technical support. We are happy to help.',
+    keywords: 'contact, hovenier.frl, partnership, press, technical support, Friesland',
+  } : {
     title: 'Contact - Hovenier.frl | Neem Contact Op',
     description: 'Neem contact op met hovenier.frl voor vragen over partnerships, pers, of technische ondersteuning. We helpen je graag verder.',
     keywords: 'contact, hovenier.frl, partnership, pers, technische ondersteuning, Friesland',
+  };
+
+  return {
+    ...meta,
     alternates: getLocaleAlternates('/contact', locale as SupportedLocale),
   }
 }

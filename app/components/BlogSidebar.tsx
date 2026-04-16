@@ -15,27 +15,28 @@ interface BlogSidebarProps {
   locale: string
 }
 
-const popularArticles = [
-  {
-    title: "Wat kost een hovenier per uur?",
-    date: "15 maart 2024"
-  },
-  {
-    title: "5 fouten bij tuinonderhoud",
-    date: "10 maart 2024"
-  },
-  {
-    title: "Groendak subsidies 2024",
-    date: "8 maart 2024"
-  }
-]
+const popularArticles = {
+  nl: [
+    { title: "Wat kost een hovenier per uur?", date: "15 maart 2024" },
+    { title: "5 fouten bij tuinonderhoud", date: "10 maart 2024" },
+    { title: "Groendak subsidies 2024", date: "8 maart 2024" }
+  ],
+  en: [
+    { title: "What does a gardener cost per hour?", date: "March 15, 2024" },
+    { title: "5 mistakes in garden maintenance", date: "March 10, 2024" },
+    { title: "Green roof subsidies 2024", date: "March 8, 2024" }
+  ]
+}
 
 export default function BlogSidebar({ categories, locale }: BlogSidebarProps) {
+  const isEn = locale === 'en';
+  const articles = popularArticles[isEn ? 'en' : 'nl'];
+
   return (
     <div className={styles.sidebar}>
       {/* Categories Widget */}
       <div className={styles.widget}>
-        <h3 className={styles.widgetTitle}>Categorieën</h3>
+        <h3 className={styles.widgetTitle}>{isEn ? 'Categories' : 'Categorieën'}</h3>
         <div className={styles.categoryList}>
           {categories.map(category => (
             <Link
@@ -54,27 +55,27 @@ export default function BlogSidebar({ categories, locale }: BlogSidebarProps) {
 
       {/* Newsletter Widget */}
       <div className={`${styles.widget} ${styles.newsletterWidget}`}>
-        <h3 className={styles.widgetTitle}>Tuinnieuwsbrief</h3>
+        <h3 className={styles.widgetTitle}>{isEn ? 'Garden Newsletter' : 'Tuinnieuwsbrief'}</h3>
         <p className={styles.newsletterDescription}>
-          Ontvang maandelijks de beste tuintips en seizoensadvies in je inbox.
+          {isEn ? 'Receive the best garden tips and seasonal advice in your inbox monthly.' : 'Ontvang maandelijks de beste tuintips en seizoensadvies in je inbox.'}
         </p>
         <div className={styles.newsletterForm}>
           <input 
             type="email" 
-            placeholder="Je email adres"
+            placeholder={isEn ? 'Your email address' : 'Je email adres'}
             className={styles.newsletterInput}
           />
           <button className={styles.newsletterButton}>
-            Aanmelden
+            {isEn ? 'Subscribe' : 'Aanmelden'}
           </button>
         </div>
       </div>
 
       {/* Popular Articles Widget */}
       <div className={styles.widget}>
-        <h3 className={styles.widgetTitle}>Populaire Artikelen</h3>
+        <h3 className={styles.widgetTitle}>{isEn ? 'Popular Articles' : 'Populaire Artikelen'}</h3>
         <div className={styles.popularList}>
-          {popularArticles.map((article, index) => (
+          {articles.map((article, index) => (
             <a key={index} href="#" className={styles.popularItem}>
               <h4 className={styles.popularTitle}>
                 {article.title}
@@ -87,15 +88,15 @@ export default function BlogSidebar({ categories, locale }: BlogSidebarProps) {
 
       {/* Quick Contact Widget */}
       <div className={`${styles.widget} ${styles.contactWidget}`}>
-        <h3 className={styles.widgetTitle}>Advies Nodig?</h3>
+        <h3 className={styles.widgetTitle}>{isEn ? 'Need Advice?' : 'Advies Nodig?'}</h3>
         <p className={styles.contactDescription}>
-          Krijg direct antwoord op je tuinvragen van lokale experts.
+          {isEn ? 'Get direct answers to your garden questions from local experts.' : 'Krijg direct antwoord op je tuinvragen van lokale experts.'}
         </p>
         <Link
           href={localizePath('/#lead-form', locale as SupportedLocale)}
           className={styles.contactButton}
         >
-          Gratis Advies →
+          {isEn ? 'Free Advice →' : 'Gratis Advies →'}
         </Link>
       </div>
     </div>

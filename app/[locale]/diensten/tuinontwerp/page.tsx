@@ -6,14 +6,13 @@ import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../components/RelatedArticles';
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
 
-// ISR: Never revalidate (static service content, changes only with deployments)
 export const revalidate = false;
 
-// Generate static params for both locales to enable ISR
 export async function generateStaticParams() {
   return [{ locale: 'nl' }, { locale: 'en' }];
 }
@@ -22,146 +21,7 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-// Simple translation function
-function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
 
-  try {
-    if (locale === 'nl') {
-      messages = require(`../../../../locales/nl/common.json`);
-    } else {
-      messages = require(`../../../../locales/en/common.json`);
-    }
-  } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
-    // Fallback messages
-    messages = {
-      service_design_title: "Tuinontwerp in Friesland",
-      service_design_subtitle: "Professionele tuinontwerpen door gecertificeerde landschapsarchitecten",
-      form_eyebrow: "Gratis & vrijblijvend",
-      form_title: "Offerte tuinontwerp",
-      form_subtitle: "Ontvang binnen 24 uur reacties van tuinontwerpers in uw regio."
-    };
-  }
-
-  return (key: string) => {
-    const keys = key.split('.');
-    let value = messages;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return typeof value === 'string' ? value : key;
-  };
-}
-
-const faqs = {
-  nl: [
-    {
-      question: "Wat kost een professioneel tuinontwerp in Friesland?",
-      answer: "Een compleet tuinontwerp varieert van €750-2500, afhankelijk van de grootte en complexiteit. Dit omvat conceptontwerp, plantenkeuze, 3D visualisatie en technische tekeningen."
-    },
-    {
-      question: "Hoe lang duurt het ontwerpproces?",
-      answer: "Van eerste gesprek tot definitief ontwerp duurt gemiddeld 2-4 weken. Dit hangt af van de grootte van uw tuin en gewenste detailniveau."
-    },
-    {
-      question: "Krijg ik ook 3D visualisaties van mijn nieuwe tuin?",
-      answer: "Ja, bij elk tuinontwerp leveren wij professionele 3D renders zodat u uw nieuwe tuin al kunt zien voordat de aanleg begint."
-    },
-    {
-      question: "Kunnen jullie ook de aanleg verzorgen?",
-      answer: "Absoluut! Wij werken samen met ervaren hovenieraanbedrijven die het ontwerp precies volgens specificaties kunnen realiseren."
-    },
-    {
-      question: "Houden jullie rekening met onderhoudsvriendelijkheid?",
-      answer: "Zeker. We ontwerpen altijd met het gewenste onderhoudsniveau in gedachten en kiezen planten die passen bij uw beschikbare tijd en ervaring."
-    }
-  ],
-  en: [
-    {
-      question: "What does a professional garden design cost in Friesland?",
-      answer: "A complete garden design ranges from €750-2500, depending on size and complexity. This includes concept design, plant selection, 3D visualization and technical drawings."
-    },
-    {
-      question: "How long does the design process take?",
-      answer: "From first consultation to final design takes on average 2-4 weeks. This depends on the size of your garden and desired level of detail."
-    },
-    {
-      question: "Will I get 3D visualizations of my new garden?",
-      answer: "Yes, with every garden design we deliver professional 3D renders so you can see your new garden before construction begins."
-    },
-    {
-      question: "Can you also handle the construction?",
-      answer: "Absolutely! We work together with experienced gardening companies who can realize the design exactly according to specifications."
-    },
-    {
-      question: "Do you consider maintenance-friendliness?",
-      answer: "Certainly. We always design with the desired maintenance level in mind and choose plants that match your available time and experience."
-    }
-  ]
-};
-
-// Sample related articles data
-const relatedArticles = {
-  nl: [
-    {
-      id: "1",
-      title: "Tuinontwerp trends 2024: wat is populair dit jaar?",
-      excerpt: "Ontdek de nieuwste trends in tuinontwerp en landscaping voor een moderne buitenruimte.",
-      slug: "tuinontwerp-trends-2024",
-      category: "Tuinontwerp",
-      readTime: 6,
-      publishedAt: "2024-03-18",
-    },
-    {
-      id: "2",
-      title: "Kleine tuin, grote plannen: maximaal uit uw ruimte",
-      excerpt: "Tips en trucs voor het ontwerpen van een functionele en mooie kleine tuin.",
-      slug: "kleine-tuin-ontwerp-tips",
-      category: "Tuinontwerp",
-      readTime: 8,
-      publishedAt: "2024-03-12",
-    },
-    {
-      id: "3",
-      title: "Duurzame tuinen: milieuvriendelijk ontwerpen",
-      excerpt: "Hoe u een prachtige tuin kunt creëren die ook goed is voor het milieu.",
-      slug: "duurzame-tuin-ontwerp",
-      category: "Duurzaamheid",
-      readTime: 7,
-      publishedAt: "2024-03-08",
-    }
-  ],
-  en: [
-    {
-      id: "1",
-      title: "Garden design trends 2024: what's popular this year?",
-      excerpt: "Discover the latest trends in garden design and landscaping for a modern outdoor space.",
-      slug: "tuinontwerp-trends-2024",
-      category: "Garden Design",
-      readTime: 6,
-      publishedAt: "2024-03-18",
-    },
-    {
-      id: "2",
-      title: "Small garden, big plans: make the most of your space",
-      excerpt: "Tips and tricks for designing a functional and beautiful small garden.",
-      slug: "kleine-tuin-ontwerp-tips",
-      category: "Garden Design",
-      readTime: 8,
-      publishedAt: "2024-03-12",
-    },
-    {
-      id: "3",
-      title: "Sustainable gardens: eco-friendly design",
-      excerpt: "How to create a beautiful garden that is also good for the environment.",
-      slug: "duurzame-tuin-ontwerp",
-      category: "Sustainability",
-      readTime: 7,
-      publishedAt: "2024-03-08",
-    }
-  ]
-};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
@@ -204,8 +64,8 @@ export default async function TuinontwerpPage({ params }: Props) {
 
   const t = createTranslator(validLocale);
   const isEn = validLocale === 'en';
-  const localeFaqs = faqs[isEn ? 'en' : 'nl'];
-  const localeArticles = relatedArticles[isEn ? 'en' : 'nl'];
+  const localeFaqs = t.raw('faqs.tuinontwerp') || [];
+  const localeArticles = t.raw('related_articles.tuinontwerp') || [];
 
   // Navigation translations
   const navTranslations = {
@@ -378,7 +238,7 @@ export default async function TuinontwerpPage({ params }: Props) {
             </div>
 
             <div className="faq-grid">
-              {localeFaqs.map((faq, index) => (
+              {localeFaqs.map((faq: { question: string; answer: string }, index: number) => (
                 <div key={index} className="faq-item">
                   <h3 className="faq-question">{faq.question}</h3>
                   <p className="faq-answer">{faq.answer}</p>
@@ -416,7 +276,7 @@ export default async function TuinontwerpPage({ params }: Props) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": localeFaqs.map(faq => ({
+            "mainEntity": localeFaqs.map((faq: { question: string; answer: string }) => ({
               "@type": "Question",
               "name": faq.question,
               "acceptedAnswer": {

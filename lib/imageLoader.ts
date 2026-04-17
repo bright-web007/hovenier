@@ -36,9 +36,9 @@ export function getImageUrl(src: string, options?: { width?: number; quality?: n
       ? `w-${options.width},f-webp,q-${q}`
       : `f-webp,q-${q}`
 
-    // External absolute URLs: keep full URL (with protocol) so the CDN can proxy them
+    // External absolute URLs: proxy through CDN using the /tr: path pattern
     if (cleanSrc.startsWith('http://') || cleanSrc.startsWith('https://')) {
-      return `${baseUrl}${cleanSrc}?tr=${params}`
+      return `${baseUrl}/tr:${params}/${cleanSrc}`
     }
 
     // Relative/internal paths: strip any accidental protocol and prepend baseUrl

@@ -1,5 +1,6 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import LocaleLink from './LocaleLink';
 
@@ -15,6 +16,12 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ links, ctaHref, ctaLabel, logoHref, nlHref, enHref, currentLocale }: MobileMenuProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Close menu on route change (e.g. browser back/forward)
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   return (
     <>

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import Navigation from '../../components/Navigation';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -10,41 +11,6 @@ export const defaultLocale = 'nl';
 type Props = {
   params: Promise<{ locale: string }>;
 };
-
-// Simple translation function
-function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
-  
-  try {
-    if (locale === 'nl') {
-      messages = require(`../../../locales/nl/common.json`);
-    } else {
-      messages = require(`../../../locales/en/common.json`);
-    }
-  } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
-    // Fallback messages
-    messages = {
-      thank_you_page_title: "Bedankt voor uw aanvraag!",
-      thank_you_page_subtitle: "Wij hebben uw aanvraag ontvangen en nemen binnen 24 uur contact met u op.",
-      thank_you_page_what_happens_next: "Wat gebeurt er nu?",
-      thank_you_page_step_1: "Binnen 24 uur nemen wij contact met u op",
-      thank_you_page_step_2: "Wij koppelen u aan de beste hovenier in uw regio", 
-      thank_you_page_step_3: "U ontvangt binnen 48 uur een offerte op maat",
-      thank_you_page_back_home: "Terug naar home",
-      thank_you_page_view_services: "Bekijk onze diensten"
-    };
-  }
-  
-  return (key: string) => {
-    const keys = key.split('.');
-    let value = messages;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return typeof value === 'string' ? value : key;
-  };
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {

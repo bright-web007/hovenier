@@ -6,14 +6,13 @@ import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../components/RelatedArticles';
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
 
-// ISR: Never revalidate (static service content, changes only with deployments)
 export const revalidate = false;
 
-// Generate static params for both locales to enable ISR
 export async function generateStaticParams() {
   return [{ locale: 'nl' }, { locale: 'en' }];
 }
@@ -22,146 +21,7 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-// Simple translation function
-function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
 
-  try {
-    if (locale === 'nl') {
-      messages = require(`../../../../locales/nl/common.json`);
-    } else {
-      messages = require(`../../../../locales/en/common.json`);
-    }
-  } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
-    // Fallback messages
-    messages = {
-      service_maintenance_title: "Tuinonderhoud in Friesland",
-      service_maintenance_subtitle: "Professioneel tuinonderhoud door gecertificeerde hoveniers",
-      form_eyebrow: "Gratis & vrijblijvend",
-      form_title: "Offerte tuinonderhoud",
-      form_subtitle: "Ontvang binnen 24 uur reacties van hoveniers in uw regio."
-    };
-  }
-
-  return (key: string) => {
-    const keys = key.split('.');
-    let value = messages;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return typeof value === 'string' ? value : key;
-  };
-}
-
-const faqs = {
-  nl: [
-    {
-      question: "Wat kost tuinonderhoud per maand?",
-      answer: "Een tuinonderhoud abonnement kost €60–€200 per maand, afhankelijk van tuingrootte en frequentie. Deze vaste prijs is 10–20% voordeliger dan losse bezoeken en zorgt voor optimaal tuinonderhoud het hele jaar door."
-    },
-    {
-      question: "Hoe vaak moet ik mijn tuin laten onderhouden?",
-      answer: "Voor een verzorgde tuin adviseren we maandelijks onderhoud tijdens het groeiseizoen (maart–oktober) en 2–3x per jaar in de winterperiode voor seizoensklussen."
-    },
-    {
-      question: "Wat zijn de voordelen van een tuinonderhoud abonnement?",
-      answer: "Vaste lagere prijs per bezoek (10–20% korting), geen gedoe met planning, uw tuin is altijd verzorgd, en flexibele bezoekfrequentie afgestemd op seizoen en behoeften."
-    },
-    {
-      question: "Welke werkzaamheden vallen onder tuinonderhoud?",
-      answer: "Gras maaien en randjes steken, hagen knippen, onkruid verwijderen, snoeiwerk, bladeren opruimen, winterklaar maken, mestgift en seizoensplanting."
-    },
-    {
-      question: "Doen jullie ook tuinonderhoud voor bedrijven?",
-      answer: "Ja, onze hoveniers verzorgen groenonderhoud voor bedrijfsterreinen, VvE's en gemeentelijk groen. Vraag een offerte aan voor een maatwerkcontract."
-    }
-  ],
-  en: [
-    {
-      question: "What does garden maintenance cost per month?",
-      answer: "A garden maintenance subscription costs €60–€200 per month, depending on garden size and frequency. This fixed price is 10–20% more affordable than individual visits and ensures optimal garden maintenance all year round."
-    },
-    {
-      question: "How often should I have my garden maintained?",
-      answer: "For a well-kept garden, we recommend monthly maintenance during the growing season (March–October) and 2–3 times per year in winter for seasonal tasks."
-    },
-    {
-      question: "What are the benefits of a garden maintenance subscription?",
-      answer: "Fixed lower price per visit (10–20% discount), no scheduling hassle, your garden is always cared for, and flexible visit frequency tailored to season and needs."
-    },
-    {
-      question: "What work is included in garden maintenance?",
-      answer: "Lawn mowing and edging, hedge trimming, weed removal, pruning, leaf clearing, winterizing, fertilizing and seasonal planting."
-    },
-    {
-      question: "Do you also provide garden maintenance for businesses?",
-      answer: "Yes, our gardeners provide green maintenance for business premises, homeowner associations and municipal green spaces. Request a quote for a custom contract."
-    }
-  ]
-};
-
-// Sample related articles data
-const relatedArticles = {
-  nl: [
-    {
-      id: "1",
-      title: "Wanneer is het beste moment om uw gazon te maaien?",
-      excerpt: "Ontdek de optimale timing voor gras maaien en tips voor een perfect resultaat.",
-      slug: "wanneer-gazon-maaien",
-      category: "Tuinonderhoud",
-      readTime: 5,
-      publishedAt: "2024-03-15",
-    },
-    {
-      id: "2",
-      title: "Onkruid natuurlijk bestrijden zonder chemicaliën",
-      excerpt: "Milieuvriendelijke methoden om onkruid effectief te verwijderen uit uw tuin.",
-      slug: "onkruid-natuurlijk-bestrijden",
-      category: "Tuintips",
-      readTime: 7,
-      publishedAt: "2024-03-10",
-    },
-    {
-      id: "3",
-      title: "Seizoenssnoei: wat, wanneer en hoe?",
-      excerpt: "Complete gids voor het snoeien van bomen en struiken door het jaar heen.",
-      slug: "seizoenssnoei-gids",
-      category: "Snoeitechnieken",
-      readTime: 8,
-      publishedAt: "2024-03-05",
-    }
-  ],
-  en: [
-    {
-      id: "1",
-      title: "When is the best time to mow your lawn?",
-      excerpt: "Discover the optimal timing for lawn mowing and tips for a perfect result.",
-      slug: "wanneer-gazon-maaien",
-      category: "Garden Maintenance",
-      readTime: 5,
-      publishedAt: "2024-03-15",
-    },
-    {
-      id: "2",
-      title: "Fighting weeds naturally without chemicals",
-      excerpt: "Eco-friendly methods to effectively remove weeds from your garden.",
-      slug: "onkruid-natuurlijk-bestrijden",
-      category: "Garden Tips",
-      readTime: 7,
-      publishedAt: "2024-03-10",
-    },
-    {
-      id: "3",
-      title: "Seasonal pruning: what, when and how?",
-      excerpt: "Complete guide to pruning trees and shrubs throughout the year.",
-      slug: "seizoenssnoei-gids",
-      category: "Pruning Techniques",
-      readTime: 8,
-      publishedAt: "2024-03-05",
-    }
-  ]
-};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
@@ -204,8 +64,8 @@ export default async function TuinonderhoudPage({ params }: Props) {
 
   const t = createTranslator(validLocale);
   const isEn = validLocale === 'en';
-  const localeFaqs = faqs[isEn ? 'en' : 'nl'];
-  const localeArticles = relatedArticles[isEn ? 'en' : 'nl'];
+  const localeFaqs = t.raw('faqs.tuinonderhoud') || [];
+  const localeArticles = t.raw('related_articles.tuinonderhoud') || [];
 
   // Navigation translations
   const navTranslations = {

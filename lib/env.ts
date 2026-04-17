@@ -71,6 +71,7 @@ export const envSchema = z.object({
   NEXT_PUBLIC_SENTRY_DSN: sentryDsnSchema.optional().default(""),
   NEXT_PUBLIC_GA4_MEASUREMENT_ID: ga4IdSchema,
   NEXT_PUBLIC_MICROSOFT_CLARITY_ID: z.string().min(1).optional(),
+  NEXT_PUBLIC_ADSENSE_CLIENT_ID: z.string().min(1).optional(),
   
   // CMS & API Services
   MUSE_GRAPHQL_URL: urlSchema,
@@ -114,6 +115,7 @@ export const clientEnvSchema = z.object({
   NEXT_PUBLIC_SENTRY_DSN: sentryDsnSchema.optional(),
   NEXT_PUBLIC_GA4_MEASUREMENT_ID: ga4IdSchema.optional(),
   NEXT_PUBLIC_MICROSOFT_CLARITY_ID: z.string().optional(),
+  NEXT_PUBLIC_ADSENSE_CLIENT_ID: z.string().optional(),
   NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY: turnstileSiteKeySchema.optional(),
   NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: optionalApiKeySchema,
 });
@@ -151,6 +153,7 @@ function createFallbackEnv(): Env {
     NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN || '',
     NEXT_PUBLIC_GA4_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || '',
     NEXT_PUBLIC_MICROSOFT_CLARITY_ID: process.env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID,
+    NEXT_PUBLIC_ADSENSE_CLIENT_ID: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID,
     MUSE_GRAPHQL_URL: process.env.MUSE_GRAPHQL_URL || '',
     MUSE_BLOG_UUID: process.env.MUSE_BLOG_UUID || '',
     PROMETHEUS_GRAPHQL_URL: process.env.PROMETHEUS_GRAPHQL_URL || '',

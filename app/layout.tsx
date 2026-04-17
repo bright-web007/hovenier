@@ -137,7 +137,7 @@ export default async function RootLayout({
       </head>
       <body className={`${sansFont.variable}`}>
         <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || ''} />
-        <AdSenseScript clientId={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ''} />
+        <AdSenseScript clientId={env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ''} />
         <PerformanceInitializer />
         {children}
       </body>

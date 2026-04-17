@@ -15,6 +15,7 @@ import DisclaimerExternal from '../../components/disclaimer/DisclaimerExternal';
 import DisclaimerContact from '../../components/disclaimer/DisclaimerContact';
 import DisclaimerSchema from '../../components/disclaimer/DisclaimerSchema';
 import { getLocaleAlternates, getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -27,10 +28,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { locale } = await params;
     const validLocale = locale || defaultLocale;
+    const t = createTranslator(validLocale);
     
     return {
-      title: 'Aansprakelijkheid | Hovenier.frl - Disclaimer & Beperkingen',
-      description: 'Aansprakelijkheidsverklaring van Hovenier.frl. Belangrijke informatie over aansprakelijkheidsbeperkingen en het gebruik van ons platform.',
+      title: t('disclaimer.meta_title'),
+      description: t('disclaimer.meta_description'),
       robots: {
         index: true,
         follow: true
@@ -58,17 +60,21 @@ export default async function DisclaimerPage({ params }: Props) {
     console.error('Error parsing params:', error);
   }
 
+  const t = createTranslator(validLocale);
+
   // Breadcrumb data for display
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
-    { label: 'Aansprakelijkheid' }
+    { label: t('disclaimer.breadcrumb_home'), href: '/' },
+    { label: t('disclaimer.breadcrumb_disclaimer') }
   ];
 
   // Breadcrumb data for schema
   const breadcrumbSchemaData = [
-    { name: 'Home', url: getAbsoluteUrl('/', validLocale as SupportedLocale) },
-    { name: 'Aansprakelijkheid', url: getAbsoluteUrl('/aansprakelijkheid', validLocale as SupportedLocale) }
+    { name: t('disclaimer.breadcrumb_home'), url: getAbsoluteUrl('/', validLocale as SupportedLocale) },
+    { name: t('disclaimer.breadcrumb_disclaimer'), url: getAbsoluteUrl('/aansprakelijkheid', validLocale as SupportedLocale) }
   ];
+
+  const translations = t.sub('disclaimer');
 
   return (
     <div className={styles.disclaimerPage}>
@@ -79,24 +85,24 @@ export default async function DisclaimerPage({ params }: Props) {
       <main>
         <section className="section">
           <div className="section-inner">
-            <DisclaimerHero />
+            <DisclaimerHero translations={translations} />
             
             <div className={styles.content}>
               <div className={styles.contentInner}>
-                <DisclaimerIntroduction />
-                <DisclaimerGeneral />
-                <DisclaimerLimitations />
-                <DisclaimerInformation />
-                <DisclaimerUsage />
-                <DisclaimerExternal />
-                <DisclaimerContact />
+                <DisclaimerIntroduction translations={translations} />
+                <DisclaimerGeneral translations={translations} />
+                <DisclaimerLimitations translations={translations} />
+                <DisclaimerInformation translations={translations} />
+                <DisclaimerUsage translations={translations} />
+                <DisclaimerExternal translations={translations} />
+                <DisclaimerContact translations={translations} />
               </div>
             </div>
           </div>
         </section>
       </main>
       
-      <DisclaimerSchema />
+      <DisclaimerSchema translations={translations} />
     </div>
   );
 }

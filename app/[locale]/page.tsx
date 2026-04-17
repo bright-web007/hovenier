@@ -8,6 +8,7 @@ import ServiceCard from '../components/ServiceCard';
 import RegionStrip from '../components/RegionStrip';
 import { OrganizationSchema, WebsiteSchema } from '../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -23,39 +24,6 @@ export async function generateStaticParams() {
 type Props = {
   params: Promise<{ locale: string }>;
 };
-
-// Simple translation function that loads from static JSON
-function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
-
-  try {
-    if (locale === 'nl') {
-      messages = require(`../../locales/nl/common.json`);
-    } else {
-      messages = require(`../../locales/en/common.json`);
-    }
-  } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
-    // Fallback messages
-    messages = {
-      hero_eyebrow: "Friesland's hoveniersgids",
-      hero_title: "Uw droomtuin begint met de juiste hovenier",
-      hero_subtitle: "Vakkundige hoveniers in uw regio, zorgvuldig geselecteerd.",
-      free_quote: "Gratis offerte",
-      no_obligations: "Geen verplichtingen",
-      certified_gardeners: "Gecertificeerde hoveniers"
-    };
-  }
-
-  return (key: string) => {
-    const keys = key.split('.');
-    let value = messages;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return typeof value === 'string' ? value : key;
-  };
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
@@ -140,7 +108,7 @@ export default async function HomePage({ params }: Props) {
     sections_services_title: t('sections.services_title'),
     sections_services_subtitle: t('sections.services_subtitle'),
     regions_homepage_title: t('regions_content.homepage_title'),
-    contact_us: t('Contact Us')
+    contact_us: t('cta.contact_us')
   };
 
   return (
@@ -226,7 +194,7 @@ export default async function HomePage({ params }: Props) {
             </div>
 
             <div className="section-centered">
-              <Link href={localizePath('/services', validLocale as SupportedLocale)} className="nav-cta nav-cta-large" prefetch={false}>
+              <Link href={localizePath('/diensten', validLocale as SupportedLocale)} className="nav-cta nav-cta-large" prefetch={false}>
                 {translations.buttons_view_all_services || 'Alle Diensten Bekijken'}
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

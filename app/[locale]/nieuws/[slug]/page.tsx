@@ -33,8 +33,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!article) {
     return {
-      title: 'Artikel niet gevonden',
-      description: 'Het gevraagde artikel kon niet worden gevonden.',
+      title: locale === 'en' ? 'Article not found' : 'Artikel niet gevonden',
+      description: locale === 'en' ? 'The requested article could not be found.' : 'Het gevraagde artikel kon niet worden gevonden.',
     };
   }
 
@@ -99,7 +99,7 @@ export default async function NewsArticlePage({ params }: Props) {
                 {article.category.name}
               </Link>
               <span className={styles.articleMetaText}>
-                {formatArticleDate(article.publishedAt, locale)} · {article.readTime} min leestijd
+                {formatArticleDate(article.publishedAt, locale)} · {article.readTime} {locale === 'en' ? 'min read' : 'min leestijd'}
               </span>
               </div>
 
@@ -129,7 +129,7 @@ export default async function NewsArticlePage({ params }: Props) {
             </div>
 
             <section className={styles.articleFooterPanel}>
-              <h2 className={styles.sectionTitle}>Verder lezen</h2>
+              <h2 className={styles.sectionTitle}>{locale === 'en' ? 'Continue reading' : 'Verder lezen'}</h2>
               <div className={styles.relatedGrid}>
               {relatedArticles.map((relatedArticle) => (
                 <Link

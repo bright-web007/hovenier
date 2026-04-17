@@ -1,52 +1,46 @@
 import styles from '../../styles/Cookie.module.css';
 
-export default function CookieChanges() {
+interface CookieChangesProps {
+  translations: Record<string, string>;
+}
+
+export default function CookieChanges({ translations }: CookieChangesProps) {
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>8. Wijzigingen in dit cookiebeleid</h2>
+      <h2 className={styles.legalSectionTitle}>{translations.changes_title}</h2>
       <p className={styles.legalText}>
-        Wij behouden ons het recht voor om dit cookiebeleid van tijd tot tijd bij te werken 
-        om wijzigingen in ons gebruik van cookies, technologische ontwikkelingen, of 
-        wijzigingen in de wet- en regelgeving te reflecteren.
+        {translations.changes_text}
       </p>
       
-      <h3 className={styles.legalSubsectionTitle}>8.1 Kennisgeving van wijzigingen</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.changes_notification_title}</h3>
       <p className={styles.legalText}>
-        Bij belangrijke wijzigingen in dit cookiebeleid zullen wij u daarvan op de hoogte 
-        stellen via:
+        {translations.changes_notification_text}
       </p>
       <ul className={styles.legalList}>
-        <li>Een kennisgeving op onze website (banner of pop-up)</li>
-        <li>Een update van de "laatst bijgewerkt" datum bovenaan dit beleid</li>
-        <li>Een e-mail naar geregistreerde gebruikers (indien van toepassing)</li>
-        <li>Via onze sociale media kanalen voor significante wijzigingen</li>
+        <li>{translations.changes_notification_banner}</li>
+        <li>{translations.changes_notification_date}</li>
+        <li>{translations.changes_notification_email}</li>
+        <li>{translations.changes_notification_social}</li>
       </ul>
       
-      <h3 className={styles.legalSubsectionTitle}>8.2 Nieuwe toestemming</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.changes_new_consent_title}</h3>
       <p className={styles.legalText}>
-        Wanneer wij nieuwe soorten cookies introduceren die uw toestemming vereisen, 
-        zullen wij u daar expliciet om vragen via onze cookiebanner of een aparte 
-        toestemmingsprompt.
+        {translations.changes_new_consent_text}
       </p>
       
-      <h3 className={styles.legalSubsectionTitle}>8.3 Regelmatige controle</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.changes_review_title}</h3>
       <p className={styles.legalText}>
-        Wij controleren dit cookiebeleid minstens jaarlijks om ervoor te zorgen dat 
-        het accuraat en up-to-date blijft. De laatste herzieningsdatum staat vermeld 
-        bovenaan dit document.
+        {translations.changes_review_text}
       </p>
       
       <p className={styles.legalText}>
-        Wij adviseren u om dit cookiebeleid regelmatig te raadplegen om op de hoogte 
-        te blijven van eventuele wijzigingen. Uw voortgezette gebruik van onze website 
-        na publicatie van wijzigingen betekent dat u akkoord gaat met het bijgewerkte beleid.
+        {translations.changes_advice}
       </p>
       
       <div className={styles.legalContact}>
         <p>
-          <strong>Vragen over wijzigingen?</strong><br />
-          Neem contact met ons op via <a href="mailto:privacy@hovenier.frl" className={styles.legalLink}>privacy@hovenier.frl</a> 
-          als u vragen heeft over wijzigingen in dit cookiebeleid.
+          <strong>{translations.changes_questions_label}</strong><br />
+          {translations.changes_questions_text} <a href="mailto:privacy@hovenier.frl" className={styles.legalLink}>privacy@hovenier.frl</a> {translations.changes_questions_suffix}
         </p>
       </div>
     </section>

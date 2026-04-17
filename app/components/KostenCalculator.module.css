@@ -81,7 +81,7 @@
 }
 
 .resultPrice {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 40px;
   font-weight: 500;
   color: #f4f0e8;

@@ -12,32 +12,32 @@ type Props = {
   params: Promise<{ locale: string; categorie: string }>
 }
 
-// Available categories
+// Available categories with translations
 const categories = [
   {
     slug: 'kosten',
-    name: 'Kosten & Prijzen',
-    description: 'Alles over kosten en prijzen van tuinonderhoud, tuinontwerp en andere hoveniersdiensten.'
+    name: { nl: 'Kosten & Prijzen', en: 'Costs & Prices' },
+    description: { nl: 'Alles over kosten en prijzen van tuinonderhoud, tuinontwerp en andere hoveniersdiensten.', en: 'Everything about costs and prices of garden maintenance, garden design and other gardening services.' }
   },
   {
     slug: 'seizoen',
-    name: 'Seizoensadvies',
-    description: 'Tips en advies per seizoen voor optimaal tuinonderhoud en planning.'
+    name: { nl: 'Seizoensadvies', en: 'Seasonal Advice' },
+    description: { nl: 'Tips en advies per seizoen voor optimaal tuinonderhoud en planning.', en: 'Tips and advice per season for optimal garden maintenance and planning.' }
   },
   {
     slug: 'tips',
-    name: 'Tuintips',
-    description: 'Praktische tips en tricks voor tuinverzorging, onderhoud en verfraaing.'
+    name: { nl: 'Tuintips', en: 'Garden Tips' },
+    description: { nl: 'Praktische tips en tricks voor tuinverzorging, onderhoud en verfraaing.', en: 'Practical tips and tricks for garden care, maintenance and beautification.' }
   },
   {
     slug: 'groendak',
-    name: 'Groendaken',
-    description: 'Alles over groendaken, sedumdaken en duurzame dakbegroeiing.'
+    name: { nl: 'Groendaken', en: 'Green Roofs' },
+    description: { nl: 'Alles over groendaken, sedumdaken en duurzame dakbegroeiing.', en: 'Everything about green roofs, sedum roofs and sustainable roof vegetation.' }
   },
   {
     slug: 'tuinontwerp',
-    name: 'Tuinontwerp',
-    description: 'Inspiratie, trends en advies voor tuinontwerp en landschapsarchitectuur.'
+    name: { nl: 'Tuinontwerp', en: 'Garden Design' },
+    description: { nl: 'Inspiratie, trends en advies voor tuinontwerp en landschapsarchitectuur.', en: 'Inspiration, trends and advice for garden design and landscape architecture.' }
   }
 ]
 
@@ -54,18 +54,28 @@ export const revalidate = false
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, categorie } = await params
   const category = categories.find(c => c.slug === categorie)
-  
+  const lang = (locale === 'en' ? 'en' : 'nl') as 'en' | 'nl';
+
   if (!category) {
     return {
-      title: 'Categorie niet gevonden',
-      description: 'De gevraagde categorie kon niet worden gevonden.'
+      title: lang === 'en' ? 'Category not found' : 'Categorie niet gevonden',
+      description: lang === 'en' ? 'The requested category could not be found.' : 'De gevraagde categorie kon niet worden gevonden.'
     }
   }
 
+  const name = category.name[lang];
+  const description = category.description[lang];
+
   return {
-    title: `${category.name} - Tuinnieuws & Tips | Hovenier.frl`,
-    description: `${category.description} Ontdek artikelen over ${category.name.toLowerCase()} in onze blog.`,
-    keywords: `${category.name}, tuinnieuws, tuintips, hovenier blog, ${category.slug}, Friesland`,
+    title: lang === 'en'
+      ? `${name} - Garden News & Tips | Hovenier.frl`
+      : `${name} - Tuinnieuws & Tips | Hovenier.frl`,
+    description: lang === 'en'
+      ? `${description} Discover articles about ${name.toLowerCase()} in our blog.`
+      : `${description} Ontdek artikelen over ${name.toLowerCase()} in onze blog.`,
+    keywords: lang === 'en'
+      ? `${name}, garden news, garden tips, gardener blog, ${category.slug}, Friesland`
+      : `${name}, tuinnieuws, tuintips, hovenier blog, ${category.slug}, Friesland`,
     alternates: getLocaleAlternates(`/nieuws/categorie/${categorie}`, locale as SupportedLocale),
   }
 }
@@ -73,10 +83,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function NewsCategoryPage({ params }: Props) {
   const { locale, categorie } = await params
   setRequestLocale(locale)
-  
+  const lang = (locale === 'en' ? 'en' : 'nl') as 'en' | 'nl';
+
   // Find category by slug
   const category = categories.find(c => c.slug === categorie)
-  
+
   if (!category) {
     notFound()
   }
@@ -88,24 +99,24 @@ export default async function NewsCategoryPage({ params }: Props) {
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
     { label: locale === 'en' ? 'News' : 'Nieuws', href: '/nieuws' },
-    { label: category.name }
+    { label: category.name[lang] }
   ]
 
   return (
     <>
       <Navigation locale={locale} />
       <Breadcrumbs items={breadcrumbItems} />
-      
+
       <main className={styles.page}>
         <div className={styles.pageInner}>
-          
+
           <div className={styles.categoryHeader}>
             <div className={styles.categoryHero}>
               <h1 className={styles.categoryTitle}>
-                {category.name}
+                {category.name[lang]}
               </h1>
               <p className={styles.categoryDescription}>
-                {category.description}
+                {category.description[lang]}
               </p>
             </div>
           </div>
@@ -133,10 +144,10 @@ export default async function NewsCategoryPage({ params }: Props) {
             ) : (
               <div className={styles.emptyState}>
                 <h3 className={styles.emptyStateTitle}>
-                  Binnenkort beschikbaar
+                  {lang === 'en' ? 'Coming soon' : 'Binnenkort beschikbaar'}
                 </h3>
                 <p className={styles.emptyStateText}>
-                  We werken aan nieuwe artikelen in deze categorie. Kom binnenkort terug!
+                  {lang === 'en' ? 'We are working on new articles in this category. Check back soon!' : 'We werken aan nieuwe artikelen in deze categorie. Kom binnenkort terug!'}
                 </p>
               </div>
             )}
@@ -144,20 +155,20 @@ export default async function NewsCategoryPage({ params }: Props) {
 
           <section className={styles.categoryNavPanel}>
             <h3 className={styles.sectionTitle}>
-              Andere Categorieën
+              {lang === 'en' ? 'Other Categories' : 'Andere Categorieën'}
             </h3>
             <div className={styles.categoryNavGrid}>
               {categories.filter(c => c.slug !== categorie).map((cat) => (
-                <Link 
+                <Link
                   key={cat.slug}
                   href={localizePath(`/nieuws/categorie/${cat.slug}`, locale as SupportedLocale)}
                   className={styles.categoryNavCard}
                 >
                   <div className={styles.categoryNavName}>
-                    {cat.name}
+                    {cat.name[lang]}
                   </div>
                   <div className={styles.categoryNavDescription}>
-                    {cat.description.split('.')[0]}
+                    {cat.description[lang].split('.')[0]}
                   </div>
                 </Link>
               ))}

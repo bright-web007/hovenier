@@ -91,29 +91,29 @@ export default async function TermsPage({ params }: Props) {
         <section className="section">
           <div className="section-inner">
             <div className={styles.legalContent}>
-              <TermsHero />
+              <TermsHero locale={validLocale} />
               
               <div className={styles.legalSections}>
-                <TermsDefinitions />
-                <TermsApplicability />
-                <TermsServices />
-                <TermsUsage />
-                <TermsRegistration />
-                <TermsIntellectualProperty />
-                <TermsLiability />
-                <TermsCosts />
-                <TermsComplaints />
-                <TermsTermination />
-                <TermsChanges />
-                <TermsLaw />
-                <TermsContact />
+                <TermsDefinitions locale={validLocale} />
+                <TermsApplicability locale={validLocale} />
+                <TermsServices locale={validLocale} />
+                <TermsUsage locale={validLocale} />
+                <TermsRegistration locale={validLocale} />
+                <TermsIntellectualProperty locale={validLocale} />
+                <TermsLiability locale={validLocale} />
+                <TermsCosts locale={validLocale} />
+                <TermsComplaints locale={validLocale} />
+                <TermsTermination locale={validLocale} />
+                <TermsChanges locale={validLocale} />
+                <TermsLaw locale={validLocale} />
+                <TermsContact locale={validLocale} />
               </div>
             </div>
           </div>
         </section>
       </main>
       
-      <TermsSchema />
+      <TermsSchema locale={validLocale} />
     </div>
   );
 }

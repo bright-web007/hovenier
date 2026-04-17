@@ -60,7 +60,7 @@ export default async function OverOnsPage({ params }: Props) {
             }}>
               <h1 style={{
                 fontSize: '3rem',
-                fontFamily: 'var(--serif)',
+                fontFamily: 'var(--heading-font)',
                 fontWeight: '600',
                 color: 'var(--forest)',
                 marginBottom: '1.5rem',

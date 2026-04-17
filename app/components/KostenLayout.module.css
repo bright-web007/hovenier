@@ -32,7 +32,7 @@
 }
 
 .sectionTitle {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 36px;
   font-weight: 500;
   color: #1a3210;

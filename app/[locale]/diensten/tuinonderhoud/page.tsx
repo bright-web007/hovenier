@@ -6,14 +6,13 @@ import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../components/RelatedArticles';
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
 
-// ISR: Never revalidate (static service content, changes only with deployments)
 export const revalidate = false;
 
-// Generate static params for both locales to enable ISR
 export async function generateStaticParams() {
   return [{ locale: 'nl' }, { locale: 'en' }];
 }
@@ -22,114 +21,37 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-// Simple translation function
-function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
-  
-  try {
-    if (locale === 'nl') {
-      messages = require(`../../../../locales/nl/common.json`);
-    } else {
-      messages = require(`../../../../locales/en/common.json`);
-    }
-  } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
-    // Fallback messages
-    messages = {
-      service_maintenance_title: "Tuinonderhoud in Friesland",
-      service_maintenance_subtitle: "Professioneel tuinonderhoud door gecertificeerde hoveniers",
-      form_eyebrow: "Gratis & vrijblijvend",
-      form_title: "Offerte tuinonderhoud",
-      form_subtitle: "Ontvang binnen 24 uur reacties van hoveniers in uw regio."
-    };
-  }
-  
-  return (key: string) => {
-    const keys = key.split('.');
-    let value = messages;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return typeof value === 'string' ? value : key;
-  };
-}
 
-const faqs = [
-  {
-    question: "Wat kost tuinonderhoud per maand?",
-    answer: "Een tuinonderhoud abonnement kost €60–€200 per maand, afhankelijk van tuingrootte en frequentie. Deze vaste prijs is 10–20% voordeliger dan losse bezoeken en zorgt voor optimaal tuinonderhoud het hele jaar door."
-  },
-  {
-    question: "Hoe vaak moet ik mijn tuin laten onderhouden?",
-    answer: "Voor een verzorgde tuin adviseren we maandelijks onderhoud tijdens het groeiseizoen (maart–oktober) en 2–3x per jaar in de winterperiode voor seizoensklussen."
-  },
-  {
-    question: "Wat zijn de voordelen van een tuinonderhoud abonnement?",
-    answer: "Vaste lagere prijs per bezoek (10–20% korting), geen gedoe met planning, uw tuin is altijd verzorgd, en flexibele bezoekfrequentie afgestemd op seizoen en behoeften."
-  },
-  {
-    question: "Welke werkzaamheden vallen onder tuinonderhoud?",
-    answer: "Gras maaien en randjes steken, hagen knippen, onkruid verwijderen, snoeiwerk, bladeren opruimen, winterklaar maken, mestgift en seizoensplanting."
-  },
-  {
-    question: "Doen jullie ook tuinonderhoud voor bedrijven?",
-    answer: "Ja, onze hoveniers verzorgen groenonderhoud voor bedrijfsterreinen, VvE's en gemeentelijk groen. Vraag een offerte aan voor een maatwerkcontract."
-  }
-];
-
-// Sample related articles data
-const relatedArticles = [
-  {
-    id: "1",
-    title: "Wanneer is het beste moment om uw gazon te maaien?",
-    excerpt: "Ontdek de optimale timing voor gras maaien en tips voor een perfect resultaat.",
-    slug: "wanneer-gazon-maaien",
-    category: "Tuinonderhoud",
-    readTime: 5,
-    publishedAt: "2024-03-15",
-  },
-  {
-    id: "2", 
-    title: "Onkruid natuurlijk bestrijden zonder chemicaliën",
-    excerpt: "Milieuvriendelijke methoden om onkruid effectief te verwijderen uit uw tuin.",
-    slug: "onkruid-natuurlijk-bestrijden",
-    category: "Tuintips",
-    readTime: 7,
-    publishedAt: "2024-03-10",
-  },
-  {
-    id: "3",
-    title: "Seizoenssnoei: wat, wanneer en hoe?",
-    excerpt: "Complete gids voor het snoeien van bomen en struiken door het jaar heen.",
-    slug: "seizoenssnoei-gids",
-    category: "Snoeitechnieken", 
-    readTime: 8,
-    publishedAt: "2024-03-05",
-  }
-];
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { locale } = await params;
     const validLocale = locale || defaultLocale;
-    
+    const isEn = validLocale === 'en';
+
     return {
-      title: 'Tuinonderhoud Friesland | Professioneel & Betrouwbaar | Hovenier.frl',
-      description: 'Professioneel tuinonderhoud in Friesland door gecertificeerde hoveniers. Maandelijkse abonnementen of eenmalige klussen. Vanaf €35/uur — gratis offerte aanvragen.',
-      keywords: ['tuinonderhoud', 'tuinonderhoud friesland', 'tuinonderhoud abonnement', 'abonnement tuinonderhoud', 'tuinonderhoud bedrijven', 'tuinonderhoud particulier'],
+      title: isEn
+        ? 'Garden Maintenance Friesland | Professional & Reliable | Hovenier.frl'
+        : 'Tuinonderhoud Friesland | Professioneel & Betrouwbaar | Hovenier.frl',
+      description: isEn
+        ? 'Professional garden maintenance in Friesland by certified gardeners. Monthly subscriptions or one-time jobs. From €35/hour — request a free quote.'
+        : 'Professioneel tuinonderhoud in Friesland door gecertificeerde hoveniers. Maandelijkse abonnementen of eenmalige klussen. Vanaf €35/uur — gratis offerte aanvragen.',
+      keywords: isEn
+        ? ['garden maintenance', 'garden maintenance friesland', 'garden maintenance subscription', 'garden maintenance businesses', 'garden maintenance private']
+        : ['tuinonderhoud', 'tuinonderhoud friesland', 'tuinonderhoud abonnement', 'abonnement tuinonderhoud', 'tuinonderhoud bedrijven', 'tuinonderhoud particulier'],
       alternates: getLocaleAlternates('/diensten/tuinonderhoud', validLocale as SupportedLocale),
     };
   } catch (error) {
     return {
       title: 'Tuinonderhoud - Hovenier.frl',
-      description: 'Professionele tuinonderhoud diensten in Friesland.'
+      description: 'Professional garden maintenance services in Friesland.'
     };
   }
 }
 
 export default async function TuinonderhoudPage({ params }: Props) {
   let validLocale = defaultLocale;
-  
+
   try {
     const { locale } = await params;
     validLocale = locale || defaultLocale;
@@ -141,6 +63,9 @@ export default async function TuinonderhoudPage({ params }: Props) {
   }
 
   const t = createTranslator(validLocale);
+  const isEn = validLocale === 'en';
+  const localeFaqs = t.raw('faqs.tuinonderhoud') || [];
+  const localeArticles = t.raw('related_articles.tuinonderhoud') || [];
 
   // Navigation translations
   const navTranslations = {
@@ -188,22 +113,22 @@ export default async function TuinonderhoudPage({ params }: Props) {
 
   return (
     <>
-      <LocalBusinessSchema 
+      <LocalBusinessSchema
         serviceType="tuinonderhoud"
         url={`https://hovenier.frl${localizePath('/diensten/tuinonderhoud', validLocale as SupportedLocale)}`}
       />
-      
-      <BreadcrumbSchema 
+
+      <BreadcrumbSchema
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
           url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl${localizePath('/diensten/tuinonderhoud', validLocale as SupportedLocale)}`
         }))}
       />
-      
+
       <Navigation locale={validLocale} translations={navTranslations} />
       <Breadcrumbs items={breadcrumbItems} />
-      
+
       <main>
         {/* Hero Section */}
         <section className="section">
@@ -218,23 +143,24 @@ export default async function TuinonderhoudPage({ params }: Props) {
                   </div>
                 </div>
                 <div className="service-hero-text">
-                  <h1 className="service-hero-title">Tuinonderhoud in Friesland</h1>
+                  <h1 className="service-hero-title">{isEn ? 'Garden Maintenance in Friesland' : 'Tuinonderhoud in Friesland'}</h1>
                   <p className="service-hero-description">
-                    Professioneel tuinonderhoud door ervaren hoveniers. Van wekelijks gras maaien tot seizoensonderhoud - 
-                    wij zorgen ervoor dat uw tuin er het hele jaar door prachtig uitziet.
+                    {isEn
+                      ? 'Professional garden maintenance by experienced gardeners. From weekly lawn mowing to seasonal maintenance — we ensure your garden looks beautiful all year round.'
+                      : 'Professioneel tuinonderhoud door ervaren hoveniers. Van wekelijks gras maaien tot seizoensonderhoud - wij zorgen ervoor dat uw tuin er het hele jaar door prachtig uitziet.'}
                   </p>
                   <div className="service-hero-stats">
                     <div className="service-stat">
                       <span className="service-stat-number">€35+</span>
-                      <span className="service-stat-label">per uur</span>
+                      <span className="service-stat-label">{isEn ? 'per hour' : 'per uur'}</span>
                     </div>
                     <div className="service-stat">
                       <span className="service-stat-number">28</span>
-                      <span className="service-stat-label">hoveniers</span>
+                      <span className="service-stat-label">{isEn ? 'gardeners' : 'hoveniers'}</span>
                     </div>
                     <div className="service-stat">
                       <span className="service-stat-number">4.8★</span>
-                      <span className="service-stat-label">gemiddeld</span>
+                      <span className="service-stat-label">{isEn ? 'average' : 'gemiddeld'}</span>
                     </div>
                   </div>
                 </div>
@@ -247,10 +173,10 @@ export default async function TuinonderhoudPage({ params }: Props) {
         <section className="section section-alt">
           <div className="section-inner">
             <div className="section-header-row section-centered">
-              <h2 className="section-title">Wat wij voor u doen</h2>
-              <p className="section-sub">Complete tuinverzorging door vakkundige hoveniers</p>
+              <h2 className="section-title">{isEn ? 'What we do for you' : 'Wat wij voor u doen'}</h2>
+              <p className="section-sub">{isEn ? 'Complete garden care by skilled gardeners' : 'Complete tuinverzorging door vakkundige hoveniers'}</p>
             </div>
-            
+
             <div className="service-features-grid">
               <div className="service-feature">
                 <div className="service-feature-icon">
@@ -258,45 +184,45 @@ export default async function TuinonderhoudPage({ params }: Props) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                   </svg>
                 </div>
-                <h3 className="service-feature-title">Gras maaien & verzorging</h3>
+                <h3 className="service-feature-title">{isEn ? 'Lawn mowing & care' : 'Gras maaien & verzorging'}</h3>
                 <p className="service-feature-description">
-                  Regelmatig maaien, randjes steken en gazonverzorging voor een perfect groen tapijt.
+                  {isEn ? 'Regular mowing, edging and lawn care for a perfect green carpet.' : 'Regelmatig maaien, randjes steken en gazonverzorging voor een perfect groen tapijt.'}
                 </p>
               </div>
-              
+
               <div className="service-feature">
                 <div className="service-feature-icon">
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM7 21h10a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a4 4 0 01-4-4z" />
                   </svg>
                 </div>
-                <h3 className="service-feature-title">Snoeien & vormgeven</h3>
+                <h3 className="service-feature-title">{isEn ? 'Pruning & shaping' : 'Snoeien & vormgeven'}</h3>
                 <p className="service-feature-description">
-                  Professioneel snoeien van bomen, struiken en hagen volgens seizoensrichtlijnen.
+                  {isEn ? 'Professional pruning of trees, shrubs and hedges according to seasonal guidelines.' : 'Professioneel snoeien van bomen, struiken en hagen volgens seizoensrichtlijnen.'}
                 </p>
               </div>
-              
+
               <div className="service-feature">
                 <div className="service-feature-icon">
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
                   </svg>
                 </div>
-                <h3 className="service-feature-title">Onkruidbestrijding</h3>
+                <h3 className="service-feature-title">{isEn ? 'Weed control' : 'Onkruidbestrijding'}</h3>
                 <p className="service-feature-description">
-                  Effectieve en milieuvriendelijke onkruidbestrijding voor borders en gazons.
+                  {isEn ? 'Effective and eco-friendly weed control for borders and lawns.' : 'Effectieve en milieuvriendelijke onkruidbestrijding voor borders en gazons.'}
                 </p>
               </div>
-              
+
               <div className="service-feature">
                 <div className="service-feature-icon">
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                   </svg>
                 </div>
-                <h3 className="service-feature-title">Seizoensonderhoud</h3>
+                <h3 className="service-feature-title">{isEn ? 'Seasonal maintenance' : 'Seizoensonderhoud'}</h3>
                 <p className="service-feature-description">
-                  Bladeren harken, winterklaar maken, voorjaarsbeurten en seizoensbeplanting.
+                  {isEn ? 'Leaf raking, winterizing, spring treatments and seasonal planting.' : 'Bladeren harken, winterklaar maken, voorjaarsbeurten en seizoensbeplanting.'}
                 </p>
               </div>
             </div>
@@ -307,11 +233,11 @@ export default async function TuinonderhoudPage({ params }: Props) {
         <section className="section">
           <div className="section-inner">
             <div className="section-header-row section-centered">
-              <h2 className="section-title">Veelgestelde vragen</h2>
+              <h2 className="section-title">{isEn ? 'Frequently asked questions' : 'Veelgestelde vragen'}</h2>
             </div>
-            
+
             <div className="faq-grid">
-              {faqs.map((faq, index) => (
+              {localeFaqs.map((faq, index) => (
                 <div key={index} className="faq-item">
                   <h3 className="faq-question">{faq.question}</h3>
                   <p className="faq-answer">{faq.answer}</p>
@@ -326,9 +252,9 @@ export default async function TuinonderhoudPage({ params }: Props) {
           <div className="section-inner">
             <div className="service-form-container">
               <div className="service-form-header">
-                <h2 className="section-title section-title-centered">Vraag een offerte aan</h2>
+                <h2 className="section-title section-title-centered">{isEn ? 'Request a quote' : 'Vraag een offerte aan'}</h2>
                 <p className="section-sub section-sub-centered">
-                  Ontvang binnen 24 uur reacties van ervaren hoveniers in uw gemeente
+                  {isEn ? 'Receive responses from experienced gardeners in your municipality within 24 hours' : 'Ontvang binnen 24 uur reacties van ervaren hoveniers in uw gemeente'}
                 </p>
               </div>
               <div className="service-form-content">
@@ -340,7 +266,7 @@ export default async function TuinonderhoudPage({ params }: Props) {
       </main>
 
       {/* Related Articles */}
-      <RelatedArticles articles={relatedArticles} title="Gerelateerde artikelen over tuinonderhoud" />
+      <RelatedArticles articles={localeArticles} title={isEn ? 'Related articles about garden maintenance' : 'Gerelateerde artikelen over tuinonderhoud'} />
 
       {/* FAQ Schema */}
       <script
@@ -349,7 +275,7 @@ export default async function TuinonderhoudPage({ params }: Props) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": faqs.map(faq => ({
+            "mainEntity": localeFaqs.map(faq => ({
               "@type": "Question",
               "name": faq.question,
               "acceptedAnswer": {
@@ -368,8 +294,8 @@ export default async function TuinonderhoudPage({ params }: Props) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Service",
-            "name": "Tuinonderhoud",
-            "description": "Professionele tuinonderhoud diensten in Friesland door gecertificeerde hoveniers",
+            "name": isEn ? "Garden Maintenance" : "Tuinonderhoud",
+            "description": isEn ? "Professional garden maintenance services in Friesland by certified gardeners" : "Professionele tuinonderhoud diensten in Friesland door gecertificeerde hoveniers",
             "provider": {
               "@type": "LocalBusiness",
               "name": "Hovenier.frl",

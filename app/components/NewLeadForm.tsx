@@ -43,8 +43,8 @@ interface LeadFormProps {
 }
 
 const gemeenten = [
-  "Leeuwarden", "Súdwest-Fryslân", "Smallingerland", "Heerenveen", 
-  "Achtkarspelen", "Tietjerksteradiel", "Dantumadiel", "De Fryske Marren", 
+  "Leeuwarden", "Súdwest-Fryslân", "Smallingerland", "Heerenveen",
+  "Achtkarspelen", "Tietjerksteradiel", "Dantumadiel", "De Fryske Marren",
   "Waadhoeke", "Noardeast-Fryslân", "Harlingen"
 ];
 
@@ -56,13 +56,13 @@ const TurnstileWidget = lazy(async () => {
 export default function NewLeadForm({ translations, locale, prefillMunicipality, serviceType }: LeadFormProps) {
   const services = [
     { value: "tuinonderhoud", label: translations.services.tuinonderhoud },
-    { value: "tuinontwerp", label: translations.services.tuinontwerp }, 
+    { value: "tuinontwerp", label: translations.services.tuinontwerp },
     { value: "tuin-aanleggen", label: translations.services['tuin-aanleggen'] },
     { value: "stratenmaker", label: translations.services.stratenmaker },
     { value: "groendak", label: translations.services.groendak },
     { value: "overig", label: translations.services.overig }
   ];
-  
+
   const [naam, setNaam] = useState("");
   const [gemeente, setGemeente] = useState(prefillMunicipality || "");
   const [dienst, setDienst] = useState(serviceType === 'groendak' ? 'groendak' : '');
@@ -98,7 +98,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
       try {
         // Track form submission immediately
         trackLeadFormSubmission(validatedData.gemeente, validatedData.dienst);
-        
+
         // Submit to Prometheus service
         const leadData = {
           ...validatedData,
@@ -106,9 +106,9 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
           timestamp: new Date().toISOString(),
           source: 'website_form'
         };
-        
+
         const result = await submitLeadToPrometheus(leadData);
-        
+
         if (result.success) {
           console.log('Lead submitted successfully:', result.leadId);
           router.push(localizePath('/bedankt', locale as SupportedLocale));
@@ -116,7 +116,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
           console.warn('Lead submission had issues:', result.error);
           router.push(localizePath('/bedankt', locale as SupportedLocale));
         }
-        
+
       } catch (error) {
         console.error('Form submission error:', error);
         router.push(localizePath('/bedankt', locale as SupportedLocale));
@@ -129,7 +129,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const formData = {
       naam,
       gemeente,
@@ -166,25 +166,25 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
       <p className="form-eyebrow">{translations.form_eyebrow}</p>
       <h2 className="form-title">{translations.form_title}</h2>
       <p className="form-sub">{translations.form_subtitle}</p>
-      
+
       <FormErrorSummary errors={errors} />
-      
+
       <form onSubmit={onSubmit} noValidate>
-        <FormField 
-          fieldName="naam" 
+        <FormField
+          fieldName="naam"
           label={translations.your_name}
           error={getError('naam')}
           required
         >
-          <input 
+          <input
             className={`form-input ${hasError('naam') ? 'border-red-500' : ''}`}
-            type="text" 
-            id="naam" 
-            name="naam" 
-            placeholder={locale === 'en' ? 'John Smith' : 'Jan de Vries'} 
+            type="text"
+            id="naam"
+            name="naam"
+            placeholder={locale === 'en' ? 'John Smith' : 'Jan de Vries'}
             value={naam}
             onChange={(e) => updateField('naam', e.target.value)}
-            required 
+            required
             autoComplete="name"
             aria-invalid={hasError('naam')}
             aria-describedby={hasError('naam') ? 'naam-error' : undefined}
@@ -192,8 +192,8 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
         </FormField>
 
         <div className="form-row">
-          <FormField 
-            fieldName="gemeente" 
+          <FormField
+            fieldName="gemeente"
             label={translations.municipality}
             error={getError('gemeente')}
             required
@@ -212,8 +212,8 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
             />
           </FormField>
 
-          <FormField 
-            fieldName="dienst" 
+          <FormField
+            fieldName="dienst"
             label={translations.service}
             error={getError('dienst')}
             required
@@ -233,37 +233,37 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
           </FormField>
         </div>
 
-        <FormField 
-          fieldName="telefoon" 
+        <FormField
+          fieldName="telefoon"
           label={translations.phone_number}
           error={getError('telefoon')}
           required
         >
-          <input 
+          <input
             className={`form-input ${hasError('telefoon') ? 'border-red-500' : ''}`}
-            type="tel" 
-            id="telefoon" 
-            name="telefoon" 
-            placeholder="06 12345678" 
+            type="tel"
+            id="telefoon"
+            name="telefoon"
+            placeholder="06 12345678"
             value={telefoon}
             onChange={(e) => updateField('telefoon', e.target.value)}
-            required 
+            required
             autoComplete="tel"
             aria-invalid={hasError('telefoon')}
             aria-describedby={hasError('telefoon') ? 'telefoon-error' : undefined}
           />
         </FormField>
 
-        <FormField 
-          fieldName="bericht" 
+        <FormField
+          fieldName="bericht"
           label={locale === 'en' ? 'Describe your wishes' : 'Beschrijf uw wensen'}
           error={getError('bericht')}
           required
         >
-          <textarea 
+          <textarea
             className={`form-input ${hasError('bericht') ? 'border-red-500' : ''}`}
-            id="bericht" 
-            name="bericht" 
+            id="bericht"
+            name="bericht"
             placeholder={locale === 'en' ? 'Tell us about your garden wishes...' : 'Vertel ons over uw tuinwensen...'}
             value={bericht}
             onChange={(e) => updateField('bericht', e.target.value)}
@@ -275,18 +275,18 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
         </FormField>
 
         <div className="form-row">
-          <FormField 
-            fieldName="postcode" 
+          <FormField
+            fieldName="postcode"
             label={locale === 'en' ? 'Postcode (optional)' : 'Postcode (optioneel)'}
             error={getError('postcode')}
             className="flex-1"
           >
-            <input 
+            <input
               className={`form-input ${hasError('postcode') ? 'border-red-500' : ''}`}
-              type="text" 
-              id="postcode" 
-              name="postcode" 
-              placeholder="1234 AB" 
+              type="text"
+              id="postcode"
+              name="postcode"
+              placeholder="1234 AB"
               value={postcode}
               onChange={(e) => updateField('postcode', e.target.value)}
               autoComplete="postal-code"
@@ -295,18 +295,18 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
             />
           </FormField>
 
-          <FormField 
-            fieldName="bedrijf" 
+          <FormField
+            fieldName="bedrijf"
             label={locale === 'en' ? 'Company (optional)' : 'Bedrijf (optioneel)'}
             error={getError('bedrijf')}
             className="flex-1"
           >
-            <input 
+            <input
               className={`form-input ${hasError('bedrijf') ? 'border-red-500' : ''}`}
-              type="text" 
-              id="bedrijf" 
-              name="bedrijf" 
-              placeholder={translations.your_company} 
+              type="text"
+              id="bedrijf"
+              name="bedrijf"
+              placeholder={translations.your_company}
               value={bedrijf}
               onChange={(e) => updateField('bedrijf', e.target.value)}
               autoComplete="organization"
@@ -316,15 +316,15 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
           </FormField>
         </div>
 
-        <FormField 
-          fieldName="privacy" 
+        <FormField
+          fieldName="privacy"
           error={getError('privacy')}
         >
           <label className="form-checkbox-row">
-            <input 
-              type="checkbox" 
-              id="privacy" 
-              name="privacy" 
+            <input
+              type="checkbox"
+              id="privacy"
+              name="privacy"
               checked={privacy}
               onChange={(e) => updateField('privacy', e.target.checked)}
               required
@@ -334,39 +334,33 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
             />
             <span className={`form-checkbox-text ${hasError('privacy') ? 'text-red-600' : ''}`}>
               {translations.privacy_agreement}{' '}
-              <a href={localizePath('/privacy-beleid', locale as SupportedLocale)} 
-                 target="_blank" 
-                 rel="noopener noreferrer">
+              <a href={localizePath('/privacy-beleid', locale as SupportedLocale)}
+                target="_blank"
+                rel="noopener noreferrer">
                 {translations.privacy_link}
               </a>
               {' '}{translations.privacy_consent}
             </span>
           </label>
         </FormField>
-        
+
         {/* Keep honeypot field hidden */}
-        <input 
-          type="text" 
-          name="_honeypot" 
+        <input
+          type="text"
+          name="_honeypot"
           value={honeypot}
           onChange={(e) => setHoneypot(e.target.value)}
-          style={{display:'none'}} 
-          tabIndex={-1} 
+          style={{ display: 'none' }}
+          tabIndex={-1}
           autoComplete="off"
         />
-        
+
         {/* Turnstile Security Verification */}
-        <FormField 
+        <FormField
           fieldName="turnstileToken"
           error={getError('turnstileToken')}
         >
-          {isDevelopment ? (
-            <div className="p-3 bg-yellow-50 border border-yellow-200 rounded text-sm text-yellow-800">
-              {locale === 'en'
-                ? '⚠️ Development mode: Turnstile CAPTCHA bypassed for testing'
-                : '⚠️ Ontwikkelmodus: Turnstile CAPTCHA overgeslagen voor testen'}
-            </div>
-          ) : (
+          {isDevelopment ? null : (
             <Suspense fallback={<div className="form-note">{locale === 'en' ? 'Loading security check...' : 'Beveiligingscontrole laden...'}</div>}>
               <TurnstileWidget
                 siteKey={securityKeys.turnstile.siteKey}
@@ -377,10 +371,10 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
             </Suspense>
           )}
         </FormField>
-        
-        <button 
-          type="submit" 
-          className="form-btn" 
+
+        <button
+          type="submit"
+          className="form-btn"
           disabled={isValidating || (!turnstileToken && !isDevelopment)}
         >
           {isValidating ? (
@@ -392,7 +386,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
             `${translations.send_request} →`
           )}
         </button>
-        
+
         <p className="form-note">{translations.form_note}</p>
       </form>
     </>

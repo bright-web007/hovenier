@@ -18,6 +18,7 @@ import CookieChanges from '../../components/cookie/CookieChanges';
 import CookieContact from '../../components/cookie/CookieContact';
 import CookieSchema from '../../components/cookie/CookieSchema';
 import { getLocaleAlternates, getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -30,10 +31,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { locale } = await params;
     const validLocale = locale || defaultLocale;
+    const t = createTranslator(validLocale);
     
     return {
-      title: 'Cookiebeleid | Hovenier.frl - Cookies & Tracking',
-      description: 'Cookiebeleid van Hovenier.frl. Informatie over welke cookies wij gebruiken en hoe u uw cookie-instellingen kunt beheren.',
+      title: t('cookie_policy.meta_title'),
+      description: t('cookie_policy.meta_description'),
       robots: {
         index: true,
         follow: true
@@ -61,17 +63,22 @@ export default async function CookiePolicyPage({ params }: Props) {
     console.error('Error parsing params:', error);
   }
 
+  const t = createTranslator(validLocale);
+
   // Breadcrumb data for display
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
-    { label: 'Cookiebeleid' }
+    { label: t('cookie_policy.breadcrumb_home'), href: '/' },
+    { label: t('cookie_policy.breadcrumb_cookie') }
   ];
 
   // Breadcrumb data for schema
   const breadcrumbSchemaData = [
-    { name: 'Home', url: getAbsoluteUrl('/', validLocale as SupportedLocale) },
-    { name: 'Cookiebeleid', url: getAbsoluteUrl('/cookie-beleid', validLocale as SupportedLocale) }
+    { name: t('cookie_policy.breadcrumb_home'), url: getAbsoluteUrl('/', validLocale as SupportedLocale) },
+    { name: t('cookie_policy.breadcrumb_cookie'), url: getAbsoluteUrl('/cookie-beleid', validLocale as SupportedLocale) }
   ];
+
+  // Build translations object for cookie components
+  const translations = t.sub('cookie_policy');
 
   return (
     <div className={styles.cookiePage}>
@@ -82,27 +89,27 @@ export default async function CookiePolicyPage({ params }: Props) {
       <main>
         <section className="section">
           <div className="section-inner">
-            <CookieHero />
+            <CookieHero translations={translations} locale={validLocale} />
             
             <div className={styles.content}>
               <div className={styles.contentInner}>
-                <CookieIntroduction />
-                <CookieDefinition />
-                <CookieUsage />
-                <CookieTypes />
-                <CookieConsent />
-                <CookieManagement />
-                <CookieThirdParty />
-                <CookieSecurity />
-                <CookieChanges />
-                <CookieContact />
+                <CookieIntroduction translations={translations} />
+                <CookieDefinition translations={translations} />
+                <CookieUsage translations={translations} />
+                <CookieTypes translations={translations} />
+                <CookieConsent translations={translations} />
+                <CookieManagement translations={translations} />
+                <CookieThirdParty translations={translations} />
+                <CookieSecurity translations={translations} />
+                <CookieChanges translations={translations} />
+                <CookieContact translations={translations} />
               </div>
             </div>
           </div>
         </section>
       </main>
       
-      <CookieSchema />
+      <CookieSchema translations={translations} />
     </div>
   );
 }

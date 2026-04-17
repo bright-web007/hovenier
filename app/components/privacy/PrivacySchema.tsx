@@ -1,20 +1,29 @@
-const PrivacySchema = () => {
+const PrivacySchema = ({ locale = 'nl' }: { locale?: string }) => {
+  const isEn = locale === 'en';
+  const lang = isEn ? 'en-US' : 'nl-NL';
+  const urlPrefix = isEn ? 'https://hovenier.frl/en' : 'https://hovenier.frl';
+  const pageUrl = `${urlPrefix}/privacy-beleid`;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'WebPage',
-        '@id': 'https://hovenier.frl/privacy-beleid',
-        url: 'https://hovenier.frl/privacy-beleid',
-        name: 'Privacybeleid | Hovenier.frl - Gegevensbescherming & Privacy',
-        description: 'Privacybeleid van Hovenier.frl. Hoe wij uw persoonlijke gegevens verzamelen, gebruiken en beschermen conform GDPR wetgeving.',
+        '@id': pageUrl,
+        url: pageUrl,
+        name: isEn
+          ? 'Privacy Policy | Hovenier.frl - Data Protection & Privacy'
+          : 'Privacybeleid | Hovenier.frl - Gegevensbescherming & Privacy',
+        description: isEn
+          ? 'Privacy policy of Hovenier.frl. How we collect, use and protect your personal data in compliance with GDPR legislation.'
+          : 'Privacybeleid van Hovenier.frl. Hoe wij uw persoonlijke gegevens verzamelen, gebruiken en beschermen conform GDPR wetgeving.',
         isPartOf: {
           '@id': 'https://hovenier.frl#website'
         },
         about: {
           '@type': 'Thing',
-          name: 'Privacy Policy',
-          description: 'Data protection and privacy policy'
+          name: isEn ? 'Privacy Policy' : 'Privacybeleid',
+          description: isEn ? 'Data protection and privacy policy' : 'Gegevensbescherming en privacybeleid'
         },
         primaryImageOfPage: {
           '@type': 'ImageObject',
@@ -22,7 +31,7 @@ const PrivacySchema = () => {
         },
         datePublished: new Date().toISOString(),
         dateModified: new Date().toISOString(),
-        inLanguage: 'nl-NL',
+        inLanguage: lang,
         publisher: {
           '@type': 'Organization',
           name: 'Hovenier.frl',
@@ -35,14 +44,16 @@ const PrivacySchema = () => {
       },
       {
         '@type': 'PrivacyPolicy',
-        '@id': 'https://hovenier.frl/privacy-policy-document',
-        name: 'Hovenier.frl Privacy Policy',
-        description: 'Comprehensive privacy policy detailing data collection, usage, and protection practices',
-        url: 'https://hovenier.frl/privacy-beleid',
+        '@id': `${pageUrl}#document`,
+        name: isEn ? 'Hovenier.frl Privacy Policy' : 'Hovenier.frl Privacybeleid',
+        description: isEn
+          ? 'Comprehensive privacy policy detailing data collection, usage, and protection practices'
+          : 'Uitgebreid privacybeleid met details over gegevensverzameling, gebruik en beschermingsmaatregelen',
+        url: pageUrl,
         isPartOf: {
           '@id': 'https://hovenier.frl#website'
         },
-        inLanguage: 'nl-NL',
+        inLanguage: lang,
         dateCreated: new Date().toISOString(),
         dateModified: new Date().toISOString(),
         author: {

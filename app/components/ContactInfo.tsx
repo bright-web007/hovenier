@@ -7,10 +7,12 @@ interface ContactInfoProps {
 }
 
 export default function ContactInfo({ locale }: ContactInfoProps) {
+  const isEn = locale === 'en';
+
   return (
     <div className={styles.contactCard}>
       <h3 className={styles.contactCardTitle}>
-        Direct Contact
+        {isEn ? 'Direct Contact' : 'Direct Contact'}
       </h3>
       <div className={styles.contactItems}>
         <div className={styles.contactItem}>
@@ -23,7 +25,7 @@ export default function ContactInfo({ locale }: ContactInfoProps) {
           <div className={styles.contactDetails}>
             <h4>Email</h4>
             <p>info@hovenier.frl</p>
-            <p className={styles.contactSubtext}>We reageren binnen 24 uur</p>
+            <p className={styles.contactSubtext}>{isEn ? 'We respond within 24 hours' : 'We reageren binnen 24 uur'}</p>
           </div>
         </div>
 
@@ -34,9 +36,9 @@ export default function ContactInfo({ locale }: ContactInfoProps) {
             </svg>
           </div>
           <div className={styles.contactDetails}>
-            <h4>Locatie</h4>
-            <p>Friesland, Nederland</p>
-            <p className={styles.contactSubtext}>Lokaal gevestigd in Friesland</p>
+            <h4>{isEn ? 'Location' : 'Locatie'}</h4>
+            <p>{isEn ? 'Friesland, Netherlands' : 'Friesland, Nederland'}</p>
+            <p className={styles.contactSubtext}>{isEn ? 'Locally based in Friesland' : 'Lokaal gevestigd in Friesland'}</p>
           </div>
         </div>
       </div>

@@ -18,7 +18,7 @@
   --white: #ffffff;
   --border: rgba(42,62,32,0.12);
   --border-med: rgba(42,62,32,0.2);
-  --serif: var(--font-sans), system-ui, sans-serif;
+  --heading-font: var(--font-sans), system-ui, sans-serif;
   --sans: var(--font-sans), system-ui, sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -61,7 +61,7 @@ a { text-decoration: none; color: inherit; }
   justify-content: space-between;
 }
 .nav-logo { 
-  font-family: var(--serif); 
+  font-family: var(--heading-font); 
   font-size: 22px; 
   font-weight: 600; 
   color: var(--forest-deep); 
@@ -108,14 +108,14 @@ a { text-decoration: none; color: inherit; }
 }
 .hero-eyebrow { position: relative; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #b8d6ad; font-weight: 500; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
 .hero-eyebrow::before { content: ''; width: 28px; height: 0.5px; background: #b8d6ad; display: block; flex-shrink: 0; }
-.hero-h1 { position: relative; font-family: var(--serif); font-size: 58px; line-height: 1.05; color: var(--cream); font-weight: 600; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+.hero-h1 { position: relative; font-family: var(--heading-font); font-size: 58px; line-height: 1.05; color: var(--cream); font-weight: 600; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
 .hero-h1 em { color: var(--sage); font-style: italic; }
 .hero-sub { position: relative; font-size: 15px; color: var(--sage-light); line-height: 1.6; max-width: 420px; font-weight: 300; margin-bottom: 2rem; }
 .hero-badges { position: relative; display: flex; gap: 8px; flex-wrap: wrap; }
 .hero-badge { font-size: 11px; padding: 7px 16px; border-radius: 2px; border: 0.5px solid rgba(138,184,122,0.25); color: var(--sage-light); letter-spacing: 0.04em; display: flex; align-items: center; gap: 7px; }
 .badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
 .hero-stats { position: relative; display: flex; gap: 3rem; padding-top: 2.5rem; border-top: 0.5px solid rgba(255,255,255,0.07); }
-.stat-num { font-family: var(--serif); font-size: 36px; font-weight: 600; color: var(--cream); line-height: 1; }
+.stat-num { font-family: var(--heading-font); font-size: 36px; font-weight: 600; color: var(--cream); line-height: 1; }
 .stat-label { font-size: 10px; color: #b8d6ad; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 5px; }
 
 /* FORM PANEL */
@@ -128,7 +128,7 @@ a { text-decoration: none; color: inherit; }
   border-left: 0.5px solid var(--border);
 }
 .form-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); font-weight: 500; margin-bottom: 8px; }
-.form-title { font-family: var(--serif); font-size: 28px; font-weight: 600; color: var(--forest-deep); margin-bottom: 6px; line-height: 1.2; }
+.form-title { font-family: var(--heading-font); font-size: 28px; font-weight: 600; color: var(--forest-deep); margin-bottom: 6px; line-height: 1.2; }
 .form-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 1.75rem; line-height: 1.65; }
 .form-field { margin-bottom: 11px; }
 .form-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-mid); font-weight: 500; display: block; margin-bottom: 5px; }
@@ -199,12 +199,11 @@ a { text-decoration: none; color: inherit; }
 .trust-sep { width: 0.5px; height: 18px; background: rgba(255,255,255,0.07); margin-right: 2rem; }
 
 /* SECTIONS */
-.section { padding: 4rem 1.5rem; }
+.section { padding: 4rem 1rem; }
 .section-alt { background: var(--cream-dark); }
 .section-inner { 
   max-width: 1280px; 
   margin: 0 auto; 
-  padding: 0 1rem;
 }
 
 /* Article sections have better spacing */
@@ -214,12 +213,12 @@ a { text-decoration: none; color: inherit; }
 }
 
 @media (min-width: 768px) {
-  .section { padding: 5rem 2rem; }
+  .section { padding: 5rem 1rem; }
   .section.article-section { padding: 4rem 2rem; }
 }
 
 @media (min-width: 1024px) {
-  .section { padding: 6rem 3rem; }
+  .section { padding: 6rem 1rem; }
   .section.article-section { 
     padding: 5rem 0; 
     min-height: auto;
@@ -227,7 +226,7 @@ a { text-decoration: none; color: inherit; }
 }
 .section-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
 .section-eyebrow::before { content: ''; width: 20px; height: 0.5px; background: var(--gold); display: block; }
-.section-title { font-family: var(--serif); font-size: 44px; font-weight: 600; color: var(--forest-deep); margin-bottom: 12px; line-height: 1.1; letter-spacing: -0.01em; }
+.section-title { font-family: var(--heading-font); font-size: 44px; font-weight: 600; color: var(--forest-deep); margin-bottom: 12px; line-height: 1.1; letter-spacing: -0.01em; }
 .section-title em { font-style: italic; color: var(--forest-mid); }
 .section-sub { font-size: 15px; color: var(--text-muted); max-width: 520px; line-height: 1.7; margin-bottom: 3rem; font-weight: 300; }
 .section-header-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; }
@@ -339,7 +338,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .trust-stat-value {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 32px;
   font-weight: 600;
   color: var(--forest-deep);
@@ -891,7 +890,7 @@ a { text-decoration: none; color: inherit; }
   }
   
   /* Sections mobile */
-  .section { padding: 3rem 0; }
+  .section { padding: 3rem 1rem; }
   .section-title { font-size: 32px; margin-bottom: 8px; }
   .section-sub { font-size: 14px; margin-bottom: 2rem; }
   .section-header-row { 
@@ -1004,7 +1003,7 @@ a { text-decoration: none; color: inherit; }
   .hero-stats { gap: 1.5rem; }
   
   .form-title { font-size: 22px; }
-  .section { padding: 2.5rem 0; }
+  .section { padding: 2.5rem 1rem; }
   .section-title { font-size: 28px; }
   
   /* Region strip extra small mobile */
@@ -1023,7 +1022,7 @@ a { text-decoration: none; color: inherit; }
   .hero-left { padding: 3.5rem 2.5rem 3rem; }
   .hero-right { padding: 2.5rem 2rem; }
   .hero-h1 { font-size: 52px; }
-  .section { padding: 4rem 0; }
+  .section { padding: 4rem 1rem; }
   .section-title { font-size: 38px; }
   .service-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1041,7 +1040,7 @@ a { text-decoration: none; color: inherit; }
 
 /* Extra large screens */
 @media (min-width: 1400px) {
-  .section { padding: 5rem 0; }
+  .section { padding: 5rem 1rem; }
   .hero-left { padding: 4rem 4rem 3.5rem; }
   .hero-right { padding: 3rem 2.5rem; }
 }
@@ -1082,7 +1081,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .steps-title {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 28px;
   color: var(--forest);
   margin-bottom: 2.5rem;
@@ -1267,8 +1266,6 @@ a { text-decoration: none; color: inherit; }
   grid-template-columns: 120px 1fr;
   gap: 2rem;
   align-items: center;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 .service-hero-image {
@@ -1297,7 +1294,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .service-hero-title {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 36px;
   font-weight: 600;
   color: var(--forest);
@@ -1340,8 +1337,6 @@ a { text-decoration: none; color: inherit; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
-  max-width: 900px;
-  margin: 0 auto;
 }
 
 .service-feature {
@@ -1384,13 +1379,10 @@ a { text-decoration: none; color: inherit; }
   line-height: 1.5;
 }
 
-/* FAQ Styles */
 .faq-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 .faq-item {
@@ -1399,6 +1391,8 @@ a { text-decoration: none; color: inherit; }
   border: 1px solid var(--border);
   border-radius: 12px;
   transition: all 0.2s ease;
+  word-wrap: break-word;
+  min-width: 0;
 }
 
 .faq-item:hover {
@@ -1420,12 +1414,6 @@ a { text-decoration: none; color: inherit; }
   line-height: 1.6;
 }
 
-/* Service Form Styles */
-.service-form-container {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
 .service-form-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -1444,6 +1432,10 @@ a { text-decoration: none; color: inherit; }
     grid-template-columns: 1fr;
     text-align: center;
     gap: 1.5rem;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
   }
   
   .service-hero-image-placeholder {
@@ -1509,7 +1501,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .related-articles-title {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 28px;
   font-weight: 600;
   color: var(--forest);
@@ -1730,7 +1722,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .footer-logo-link {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 28px;
   font-weight: 700;
   color: var(--white);
@@ -1752,7 +1744,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .footer-section-title {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 16px;
   font-weight: 600;
   color: var(--white);
@@ -1857,7 +1849,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .footer-region-title {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 15px;
   font-weight: 600;
   color: var(--white);
@@ -1952,7 +1944,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .footer-social {
-  display: flex;
+  display: none;
   gap: 1rem;
 }
 
@@ -2144,7 +2136,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .partnership-hero-title {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 42px;
   font-weight: 600;
   color: var(--forest);
@@ -2317,7 +2309,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .partnership-requirements-title {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 36px;
   color: var(--forest);
   margin-bottom: 1.5rem;
@@ -2414,7 +2406,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .partnership-cta-title {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 32px;
   color: var(--forest);
   margin-bottom: 1rem;
@@ -2688,6 +2680,7 @@ a { text-decoration: none; color: inherit; }
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s ease;
+  width: 100%;
 }
 
 .faq-item:hover {
@@ -2827,7 +2820,7 @@ a { text-decoration: none; color: inherit; }
 
 /* Article Typography */
 .article-title {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 2.25rem;
   line-height: 1.15;
   font-weight: 700;
@@ -2929,7 +2922,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .rate-price {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--forest);
@@ -2992,7 +2985,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .prose h2 {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 2.25rem;
   font-weight: 600;
   color: var(--forest-deep);
@@ -3325,7 +3318,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .legal-title {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 42px;
   font-weight: 600;
   color: var(--forest);
@@ -3348,7 +3341,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .legal-section-title {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 28px;
   font-weight: 600;
   color: var(--forest);
@@ -3563,7 +3556,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .rate-card-price {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 2.5rem;
   font-weight: 600;
   color: var(--forest);
@@ -3623,7 +3616,7 @@ a { text-decoration: none; color: inherit; }
 .text-xl { font-size: 1.25rem; }
 .font-medium { font-weight: 500; }
 .font-semibold { font-weight: 600; }
-.font-serif { font-family: var(--serif); }
+.font-serif { font-family: var(--heading-font); }
 .uppercase { text-transform: uppercase; }
 .italic { font-style: italic; }
 .tracking-wider { letter-spacing: 0.05em; }
@@ -3649,11 +3642,11 @@ a { text-decoration: none; color: inherit; }
 .border-forest-mid { border-color: var(--forest-mid); }
 .border-sage-light { border-color: var(--sage-light); }
 
-.font-serif { font-family: var(--serif); }
+.font-serif { font-family: var(--heading-font); }
 
 /* Article Typography */
 .article-title {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 2.25rem;
   line-height: 1.15;
   font-weight: 700;
@@ -3767,7 +3760,7 @@ a { text-decoration: none; color: inherit; }
 
 /* Article Section Title */
 .article-section-title {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 2rem;
   font-weight: 600;
   color: var(--forest-deep);
@@ -3791,6 +3784,25 @@ a { text-decoration: none; color: inherit; }
 .text-forest-deep { color: var(--forest-deep); }
 .text-cream { color: var(--cream); }
 }
+
+/* DienstCard */
+.dienst-card {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px 0px #0000000F;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #E5E7EB;
+  display: flex;
+  flex-direction: column;
+}
+.dienst-card:hover { transform: translateY(-2px); }
+.dienst-card-image { width: 100%; height: 200px; position: relative; }
+.dienst-card-content { width: 100%; display: flex; flex-direction: column; padding: 20px 24px 24px; gap: 12px; }
+.dienst-card-badge { background-color: #16423C14; padding: 4px 10px; border-radius: 4px; width: fit-content; }
+.dienst-card-badge-text { font-size: 11px; line-height: 100%; color: #16423C; font-weight: 600; }
+.dienst-card-title { font-weight: 700; font-size: 22px; color: #1F2937; line-height: 100%; letter-spacing: -0.3px; }
+.dienst-card-description { font-size: 14px; color: #6B7280; line-height: 22px; font-weight: 400; }
 
 .service-learn-more {
   font-weight: 600;

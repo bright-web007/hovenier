@@ -18,10 +18,14 @@ jest.mock('next/server', () => ({
 // Mock the locale-utils module
 jest.mock('../lib/locale-utils', () => ({
   DEFAULT_LOCALE: 'nl',
+  SUPPORTED_LOCALES: ['nl', 'en'],
+  LOCALE_COOKIE_NAME: 'hovenier-language-preference',
   getPathLocale: jest.fn(),
   stripLocalePrefix: jest.fn(),
   getInternalPath: jest.fn(),
   localizePath: jest.fn(),
+  getServerCookieLocale: jest.fn().mockReturnValue(null),
+  getServerAcceptLanguage: jest.fn().mockReturnValue('nl'),
 }));
 
 import proxy from '../proxy';
@@ -50,9 +54,15 @@ describe('proxy.ts', () => {
     mockRequest = {
       nextUrl: mockNextUrl,
       headers: {
-        get: jest.fn((key: string) => mockHeaders.get(key) || ''),
+        get: jest.fn((key: string) => mockHeaders.get(key) || null),
       },
     };
+
+    // Setup mock return values for NextResponse methods
+    const { NextResponse } = require('next/server');
+    NextResponse.redirect.mockReturnValue({ cookies: { set: jest.fn() } });
+    NextResponse.rewrite.mockReturnValue({ headers: { set: jest.fn() } });
+    NextResponse.next.mockReturnValue({ headers: { set: jest.fn() } });
 
     // Setup default locale-utils mocks
     const localeUtils = require('../lib/locale-utils');
@@ -60,6 +70,8 @@ describe('proxy.ts', () => {
     localeUtils.stripLocalePrefix.mockReturnValue('/');
     localeUtils.getInternalPath.mockReturnValue('/');
     localeUtils.localizePath.mockReturnValue('/');
+    localeUtils.getServerCookieLocale.mockReturnValue(null);
+    localeUtils.getServerAcceptLanguage.mockReturnValue('nl');
   });
 
   describe('Domain redirects (handled at ingress level — not in proxy)', () => {
@@ -130,24 +142,23 @@ describe('proxy.ts', () => {
     });
 
     test('should handle English locale internal rewrites', () => {
-      // Setup - trigger a rewrite by making canonical and internal paths different
+      // Setup - English locale via explicit /en/ prefix where canonical differs from internal
       mockHeaders.set('host', 'hovenier.frl');
-      mockNextUrl.pathname = '/services'; // Public path without locale
+      mockNextUrl.pathname = '/en/services';
       
       const localeUtils = require('../lib/locale-utils');
-      localeUtils.getPathLocale.mockReturnValue('en'); // Detected as English
-      localeUtils.getInternalPath.mockReturnValue('/services'); // Internal path
-      localeUtils.localizePath.mockReturnValue('/services'); // Same as pathname (no redirect)
-      // Internal localized path will be /en/services, different from canonical /services
+      localeUtils.getPathLocale.mockReturnValue('en');
+      localeUtils.getInternalPath.mockReturnValue('/services');
+      localeUtils.localizePath.mockReturnValue('/en/services'); // Same as pathname
+      localeUtils.stripLocalePrefix.mockReturnValue('/services');
       
       const { NextResponse } = require('next/server');
 
       // Execute
       proxy(mockRequest);
 
-      // Assert - Should rewrite to internal English path
-      expect(mockNextUrl.pathname).toBe('/en/services'); // Internal path with English locale
-      expect(NextResponse.rewrite).toHaveBeenCalledWith(mockNextUrl);
+      // Assert - canonical === internal, so NextResponse.next() is used
+      expect(NextResponse.next).toHaveBeenCalled();
     });
   });
 
@@ -221,8 +232,8 @@ describe('proxy.ts', () => {
       // Execute
       proxy(mockRequest);
 
-      // Assert
-      expect(mockNext.headers.set).not.toHaveBeenCalled();
+      // Assert — x-locale is always set, but X-Robots-Tag should NOT be
+      expect(mockNext.headers.set).not.toHaveBeenCalledWith('X-Robots-Tag', expect.anything());
     });
   });
 
@@ -268,9 +279,102 @@ describe('proxy.ts', () => {
         if (should) {
           expect(mockNext.headers.set).toHaveBeenCalledWith('X-Robots-Tag', 'noindex, nofollow');
         } else {
-          expect(mockNext.headers.set).not.toHaveBeenCalled();
+          expect(mockNext.headers.set).not.toHaveBeenCalledWith('X-Robots-Tag', expect.anything());
         }
       });
+    });
+  });
+
+  describe('Locale auto-detection from Accept-Language', () => {
+    test('should detect English from Accept-Language on first visit to /', () => {
+      mockHeaders.set('host', 'hovenier.frl');
+      mockNextUrl.pathname = '/';
+
+      const localeUtils = require('../lib/locale-utils');
+      localeUtils.getServerCookieLocale.mockReturnValue(null);
+      localeUtils.getServerAcceptLanguage.mockReturnValue('en');
+      localeUtils.localizePath.mockReturnValue('/en');
+      localeUtils.stripLocalePrefix.mockReturnValue('/');
+      localeUtils.getInternalPath.mockReturnValue('/');
+
+      const { NextResponse } = require('next/server');
+      const mockRedirectResponse = { cookies: { set: jest.fn() } };
+      NextResponse.redirect.mockReturnValue(mockRedirectResponse);
+
+      proxy(mockRequest);
+
+      expect(mockNextUrl.pathname).toBe('/en');
+      expect(NextResponse.redirect).toHaveBeenCalledWith(mockNextUrl, 308);
+      expect(mockRedirectResponse.cookies.set).toHaveBeenCalledWith(
+        'hovenier-language-preference',
+        'en',
+        expect.objectContaining({ path: '/', sameSite: 'lax' })
+      );
+    });
+
+    test('should default to Dutch when Accept-Language is unsupported', () => {
+      mockHeaders.set('host', 'hovenier.frl');
+      mockNextUrl.pathname = '/';
+
+      const localeUtils = require('../lib/locale-utils');
+      localeUtils.getServerCookieLocale.mockReturnValue(null);
+      localeUtils.getServerAcceptLanguage.mockReturnValue('nl'); // defaults to nl for unsupported
+      localeUtils.localizePath.mockReturnValue('/nl');
+      localeUtils.stripLocalePrefix.mockReturnValue('/');
+      localeUtils.getInternalPath.mockReturnValue('/');
+
+      const { NextResponse } = require('next/server');
+      const mockRedirectResponse = { cookies: { set: jest.fn() } };
+      NextResponse.redirect.mockReturnValue(mockRedirectResponse);
+
+      proxy(mockRequest);
+
+      expect(mockNextUrl.pathname).toBe('/nl');
+      expect(NextResponse.redirect).toHaveBeenCalledWith(mockNextUrl, 308);
+    });
+
+    test('should use cookie locale over Accept-Language', () => {
+      mockHeaders.set('host', 'hovenier.frl');
+      mockNextUrl.pathname = '/';
+
+      const localeUtils = require('../lib/locale-utils');
+      localeUtils.getServerCookieLocale.mockReturnValue('en'); // Cookie says English
+      localeUtils.getServerAcceptLanguage.mockReturnValue('nl'); // Browser says Dutch
+      localeUtils.localizePath.mockReturnValue('/en');
+      localeUtils.stripLocalePrefix.mockReturnValue('/');
+      localeUtils.getInternalPath.mockReturnValue('/');
+
+      const { NextResponse } = require('next/server');
+      const mockRedirectResponse = { cookies: { set: jest.fn() } };
+      NextResponse.redirect.mockReturnValue(mockRedirectResponse);
+
+      proxy(mockRequest);
+
+      expect(mockNextUrl.pathname).toBe('/en');
+      expect(NextResponse.redirect).toHaveBeenCalledWith(mockNextUrl, 308);
+      // Should NOT set cookie (already exists)
+      expect(mockRedirectResponse.cookies.set).not.toHaveBeenCalled();
+    });
+
+    test('should respect explicit locale prefix over cookie', () => {
+      mockHeaders.set('host', 'hovenier.frl');
+      mockNextUrl.pathname = '/nl/diensten';
+
+      const localeUtils = require('../lib/locale-utils');
+      localeUtils.getServerCookieLocale.mockReturnValue('en'); // Cookie says English
+      localeUtils.getPathLocale.mockReturnValue('nl'); // URL says Dutch
+      localeUtils.localizePath.mockReturnValue('/nl/diensten');
+      localeUtils.stripLocalePrefix.mockReturnValue('/diensten');
+      localeUtils.getInternalPath.mockReturnValue('/diensten');
+
+      const mockNext = { headers: { set: jest.fn() } };
+      const { NextResponse } = require('next/server');
+      NextResponse.next.mockReturnValue(mockNext);
+
+      proxy(mockRequest);
+
+      // Should NOT redirect — explicit URL wins
+      expect(NextResponse.redirect).not.toHaveBeenCalled();
     });
   });
 });

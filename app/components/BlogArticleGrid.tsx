@@ -16,7 +16,7 @@ export default function BlogArticleGrid({ articles, locale }: BlogArticleGridPro
   
   return (
     <div>
-      <h2 className={styles.articlesHeader}>Recente Artikelen</h2>
+      <h2 className={styles.articlesHeader}>{locale === 'en' ? 'Recent Articles' : 'Recente Artikelen'}</h2>
       <div className={styles.articlesGrid}>
         {recentArticles.map(article => (
           <article key={article.id} className={styles.articleCard}>
@@ -30,7 +30,7 @@ export default function BlogArticleGrid({ articles, locale }: BlogArticleGridPro
                     {article.category.name}
                   </span>
                   <span className={styles.articleReadTime}>
-                    {article.readTime} min leestijd
+                    {article.readTime} {locale === 'en' ? 'min read' : 'min leestijd'}
                   </span>
                 </div>
                 <h3 className={styles.articleTitle}>
@@ -45,7 +45,7 @@ export default function BlogArticleGrid({ articles, locale }: BlogArticleGridPro
                     href={localizePath(`/nieuws/${article.slug}`, locale as SupportedLocale)}
                     className={styles.articleLink}
                   >
-                    Lees meer →
+                    {locale === 'en' ? 'Read more →' : 'Lees meer →'}
                   </Link>
                 </div>
               </div>
@@ -55,9 +55,9 @@ export default function BlogArticleGrid({ articles, locale }: BlogArticleGridPro
       </div>
 
       <div className={styles.pagination}>
-        <p className={styles.paginationTitle}>Dit is een CMS-gedreven pagina</p>
+        <p className={styles.paginationTitle}>{locale === 'en' ? 'This is a CMS-driven page' : 'Dit is een CMS-gedreven pagina'}</p>
         <p className={styles.paginationSubtext}>
-          Artikelen worden automatisch ingeladen van Muse CMS
+          {locale === 'en' ? 'Articles are automatically loaded from Muse CMS' : 'Artikelen worden automatisch ingeladen van Muse CMS'}
         </p>
       </div>
     </div>

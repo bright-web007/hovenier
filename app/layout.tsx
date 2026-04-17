@@ -1,22 +1,16 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { DM_Sans } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import AdSenseScript from "./components/AdSenseScript";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import PerformanceInitializer from "./components/PerformanceInitializer";
+import { env } from "@/lib/env";
 
 const sansFont = DM_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
-});
-
-const serifFont = Cormorant_Garamond({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "600", "700"],
-  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -92,13 +86,17 @@ export const metadata: Metadata = {
   category: 'business',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: {
   children: React.ReactNode;
 }) {
+  // Detect locale from the x-locale header set by proxy.ts
+  const headersList = await headers();
+  const lang = headersList.get('x-locale') || 'nl';
+
   return (
-    <html lang="nl">
+    <html lang={lang} suppressHydrationWarning>
       <head>
         {/* PWA Meta Tags */}
         <meta name="mobile-web-app-capable" content="yes" />
@@ -121,10 +119,25 @@ export default function RootLayout({
         
         {/* Manifest for PWA */}
         <link rel="manifest" href="/manifest.json" />
+
+        {env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID && (
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                })(window, document, "clarity", "script", "${env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID}");
+              `,
+            }}
+          />
+        )}
       </head>
-      <body className={`${sansFont.variable} ${serifFont.variable}`}>
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || ''} />
-        <AdSenseScript clientId={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ''} />
+      <body className={`${sansFont.variable}`}>
+        <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || ''} />
+        <AdSenseScript clientId={env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ''} />
         <PerformanceInitializer />
         {children}
       </body>

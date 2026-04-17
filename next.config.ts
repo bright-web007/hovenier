@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Allow external dev access — comma-separated IPs/hostnames via ALLOWED_DEV_ORIGINS env var
+  ...(process.env.ALLOWED_DEV_ORIGINS && {
+    allowedDevOrigins: process.env.ALLOWED_DEV_ORIGINS.split(',').map(o => o.trim()),
+  }),
+  
   // Performance optimizations
   compress: true,
   poweredByHeader: false,
@@ -40,7 +45,7 @@ const nextConfig: NextConfig = {
               "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.googletagmanager.com https://*.google-analytics.com https://challenges.cloudflare.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://*.gstatic.com",
+              "img-src 'self' data: https://*.hivedeck.com https://*.unsplash.com https://*.google-analytics.com https://*.googletagmanager.com https://*.gstatic.com",
               // GA4 collect endpoints - explicit regional coverage for all possible domains
               "connect-src 'self' https://*.google-analytics.com https://region1.google-analytics.com https://region1.analytics.google.com https://www.google-analytics.com https://analytics.google.com https://ssl.google-analytics.com https://*.googletagmanager.com https://*.analytics.google.com https://*.doubleclick.net https://stats.g.doubleclick.net https://www.google.com https://www.google.nl https://challenges.cloudflare.com https://vitals.vercel-analytics.com",
               "frame-src 'self' https://challenges.cloudflare.com",

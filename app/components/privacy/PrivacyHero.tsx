@@ -1,11 +1,12 @@
 import styles from '../../styles/Privacy.module.css';
 
-const PrivacyHero = () => {
+const PrivacyHero = ({ locale = 'nl' }: { locale?: string }) => {
+  const isEn = locale === 'en';
   return (
     <header className={styles.legalHeader}>
-      <h1 className={styles.legalTitle}>Privacybeleid</h1>
+      <h1 className={styles.legalTitle}>{isEn ? 'Privacy Policy' : 'Privacybeleid'}</h1>
       <p className={styles.legalSubtitle}>
-        Laatst bijgewerkt: {new Date().toLocaleDateString('nl-NL', { 
+        {isEn ? 'Last updated: ' : 'Laatst bijgewerkt: '}{new Date().toLocaleDateString(isEn ? 'en-US' : 'nl-NL', { 
           year: 'numeric', 
           month: 'long', 
           day: 'numeric' 

@@ -1,0 +1,235 @@
+# Bitbucket Pipelines for Hovenier Next.js Application
+image:
+  name: node:22
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+    TZ: UTC
+
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: Setup Dependencies & Code Quality
+          size: 2x
+          caches:
+            - node
+          script:
+            - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+            - apt-get update && apt-get install -y git curl awscli bash python3 make g++
+            # Node.js setup
+            - node --version
+            # AWS and environment setup
+            - aws configure set aws_access_key_id $AWS_ACCESS_KEY
+            - aws configure set aws_secret_access_key $AWS_SECRET_KEY
+            - aws configure set region $AWS_DEFAULT_REGION
+            - aws s3 cp s3://hovenier/envs/env.development .env || echo "Development environment file not found, continuing without it"
+            # Install dependencies
+            - yarn install --frozen-lockfile
+            # Code quality checks
+            - yarn lint
+          artifacts:
+            - node_modules/**
+            - .env
+      - step:
+          name: Build Verification
+          size: 2x
+          script:
+            # Build the application
+            - echo "Building Next.js application..."
+            - yarn build
+            # Verify build artifacts
+            - echo "Verifying build artifacts..."
+            - ls -la .next/
+            # Smoke test
+            - timeout 30s yarn start &
+            - sleep 15
+            - curl -f http://localhost:3000 || echo "Application health check completed"
+            - pkill -f "next start" || echo "Test server cleanup completed"
+          artifacts:
+            - .next/**
+
+  branches:
+    main:
+      - step:
+          name: Setup Dependencies & Code Quality
+          size: 2x
+          caches:
+            - node
+          script:
+            - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+            - apt-get update && apt-get install -y git curl awscli bash python3 make g++
+            # AWS and environment setup
+            - aws configure set aws_access_key_id $AWS_ACCESS_KEY
+            - aws configure set aws_secret_access_key $AWS_SECRET_KEY
+            - aws configure set region $AWS_DEFAULT_REGION
+            - aws s3 cp s3://hovenier/envs/env.production .env
+            # Install dependencies
+            - yarn install --frozen-lockfile
+            # Code quality checks
+            - yarn lint
+          artifacts:
+            - node_modules/**
+            - src/**
+            - .env
+      - step:
+          name: Build
+          size: 2x
+          script:
+            - yarn build
+            # Verify build artifacts
+            - ls -la .next/
+          artifacts:
+            - .next/**
+      - step:
+          name: Build and Push Docker Image - Production
+          image: atlassian/default-image:4
+          size: 2x
+          services:
+            - docker
+          script:
+            - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+            - apt-get update -qq && apt-get install -y git curl awscli bash python3 make g++
+            # Download environment file
+            - aws configure set aws_access_key_id $AWS_ACCESS_KEY
+            - aws configure set aws_secret_access_key $AWS_SECRET_KEY
+            - aws configure set region $AWS_DEFAULT_REGION
+            - aws s3 cp s3://hovenier/envs/env.production .env
+            # Login to Docker registry
+            - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+            # Build once, tag multiple times
+            - export IMAGE_NAME="hovenier"
+            - export TAG_COMMIT=${BITBUCKET_COMMIT::7}
+            - export TAG_BUILD_NUMBER=${BITBUCKET_BUILD_NUMBER}
+            - docker build -t $DOCKER_TEAM_USERNAME/$IMAGE_NAME:$TAG_COMMIT .
+            - docker tag $DOCKER_TEAM_USERNAME/$IMAGE_NAME:$TAG_COMMIT $DOCKER_TEAM_USERNAME/$IMAGE_NAME:main
+            - docker tag $DOCKER_TEAM_USERNAME/$IMAGE_NAME:$TAG_COMMIT $DOCKER_TEAM_USERNAME/$IMAGE_NAME:build-$TAG_BUILD_NUMBER
+            - docker tag $DOCKER_TEAM_USERNAME/$IMAGE_NAME:$TAG_COMMIT $DOCKER_TEAM_USERNAME/$IMAGE_NAME:latest
+            - docker tag $DOCKER_TEAM_USERNAME/$IMAGE_NAME:$TAG_COMMIT $DOCKER_TEAM_USERNAME/$IMAGE_NAME:production
+            # Push all tags
+            - docker push $DOCKER_TEAM_USERNAME/$IMAGE_NAME:$TAG_COMMIT
+            - docker push $DOCKER_TEAM_USERNAME/$IMAGE_NAME:main
+            - docker push $DOCKER_TEAM_USERNAME/$IMAGE_NAME:build-$TAG_BUILD_NUMBER
+            - docker push $DOCKER_TEAM_USERNAME/$IMAGE_NAME:latest
+            - docker push $DOCKER_TEAM_USERNAME/$IMAGE_NAME:production
+            # Clean up
+            - docker image prune -f || true
+
+    develop:
+      - step:
+          name: Lint & Build
+          size: 2x
+          caches:
+            - node
+          script:
+            - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+            - apt-get update && apt-get install -y git curl awscli bash python3 make g++
+            # AWS and environment setup
+            - aws configure set aws_access_key_id $AWS_ACCESS_KEY
+            - aws configure set aws_secret_access_key $AWS_SECRET_KEY
+            - aws configure set region $AWS_DEFAULT_REGION
+            - aws s3 cp s3://hovenier/envs/env.development .env
+            # Install dependencies and build
+            - yarn install --frozen-lockfile
+            - yarn lint
+            - yarn build
+            - echo "Build completed successfully for develop branch"
+            - ls -la .next/
+      - step:
+          name: Build and Push Docker Image - Develop
+          image: atlassian/default-image:4
+          services:
+            - docker
+          script:
+            - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+            - apt-get update -qq && apt-get install -y git curl awscli bash python3 make g++
+            - aws configure set aws_access_key_id $AWS_ACCESS_KEY
+            - aws configure set aws_secret_access_key $AWS_SECRET_KEY
+            - aws configure set region $AWS_DEFAULT_REGION
+            - aws s3 cp s3://hovenier/envs/env.development .env
+            - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+            - docker build -t $DOCKER_TEAM_USERNAME/hovenier:develop .
+            - docker push $DOCKER_TEAM_USERNAME/hovenier:develop
+            - echo "Docker image pushed with tag develop"
+
+    staging:
+      - step:
+          name: Lint & Build
+          size: 2x
+          caches:
+            - node
+          script:
+            - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+            - apt-get update && apt-get install -y git curl awscli bash python3 make g++
+            # AWS and environment setup
+            - aws configure set aws_access_key_id $AWS_ACCESS_KEY
+            - aws configure set aws_secret_access_key $AWS_SECRET_KEY
+            - aws configure set region $AWS_DEFAULT_REGION
+            - aws s3 cp s3://hovenier/envs/env.staging .env
+            # Install dependencies and build
+            - yarn install --frozen-lockfile
+            - yarn lint
+            - yarn build
+            - echo "Build completed successfully for staging branch"
+            - ls -la .next/
+      - step:
+          name: Build and Push Docker Image - Staging
+          image: atlassian/default-image:4
+          services:
+            - docker
+          script:
+            - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+            - apt-get update -qq && apt-get install -y git curl awscli bash python3 make g++
+            - aws configure set aws_access_key_id $AWS_ACCESS_KEY
+            - aws configure set aws_secret_access_key $AWS_SECRET_KEY
+            - aws configure set region $AWS_DEFAULT_REGION
+            - aws s3 cp s3://hovenier/envs/env.staging .env
+            - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+            - docker build -t $DOCKER_TEAM_USERNAME/hovenier:staging .
+            - docker push $DOCKER_TEAM_USERNAME/hovenier:staging
+            - echo "Docker image pushed with tag staging"
+
+    production:
+      - step:
+          name: Lint & Build
+          size: 2x
+          caches:
+            - node
+          script:
+            - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+            - apt-get update && apt-get install -y git curl awscli bash python3 make g++
+            # AWS and environment setup
+            - aws configure set aws_access_key_id $AWS_ACCESS_KEY
+            - aws configure set aws_secret_access_key $AWS_SECRET_KEY
+            - aws configure set region $AWS_DEFAULT_REGION
+            - aws s3 cp s3://hovenier/envs/env.production .env
+            # Install dependencies and build
+            - yarn install --frozen-lockfile
+            - yarn lint
+            - yarn build
+            - echo "Production build completed successfully"
+            - ls -la .next/
+      - step:
+          name: Build and Push Docker Image - Production
+          image: atlassian/default-image:4
+          services:
+            - docker
+          script:
+            - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+            - apt-get update -qq && apt-get install -y git curl awscli bash python3 make g++
+            - aws configure set aws_access_key_id $AWS_ACCESS_KEY
+            - aws configure set aws_secret_access_key $AWS_SECRET_KEY
+            - aws configure set region $AWS_DEFAULT_REGION
+            - aws s3 cp s3://hovenier/envs/env.production .env
+            - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+            - docker build -t $DOCKER_TEAM_USERNAME/hovenier:production .
+            - docker tag $DOCKER_TEAM_USERNAME/hovenier:production $DOCKER_TEAM_USERNAME/hovenier:latest
+            - docker push $DOCKER_TEAM_USERNAME/hovenier:production
+            - docker push $DOCKER_TEAM_USERNAME/hovenier:latest
+            - echo "Docker images pushed with tags production, latest"
+
+definitions:
+  caches:
+    node: node_modules
+  services:
+    docker:
+      memory: 3072

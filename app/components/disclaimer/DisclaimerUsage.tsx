@@ -1,43 +1,46 @@
 import styles from '../../styles/Disclaimer.module.css';
 
-export default function DisclaimerUsage() {
+interface DisclaimerUsageProps {
+  translations: Record<string, string>;
+}
+
+export default function DisclaimerUsage({ translations }: DisclaimerUsageProps) {
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>4. Aanbevelingen voor Gebruik</h2>
+      <h2 className={styles.legalSectionTitle}>{translations.usage_title}</h2>
       
       <div className={styles.warningBox}>
         <h3 className={styles.warningTitle}>
-          💡 Belangrijk Advies
+          {translations.usage_warning_title}
         </h3>
         <p className={styles.warningText}>
-          Wij raden u sterk aan om altijd zelf onderzoek te doen naar hoveniers voordat 
-          u een overeenkomst aangaat.
+          {translations.usage_warning_text}
         </p>
       </div>
 
-      <h3 className={styles.legalSubsectionTitle}>4.1 Due Diligence</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.usage_due_diligence_title}</h3>
       <p className={styles.legalText}>
-        Voordat u een hovenier inhuurt, adviseren wij u om:
+        {translations.usage_due_diligence_text}
       </p>
       
       <ul className={styles.legalList}>
-        <li>Meerdere offertes op te vragen en te vergelijken</li>
-        <li>Referenties en eerdere werken te controleren</li>
-        <li>Verzekeringen en vergunningen te verifiëren</li>
-        <li>Duidelijke afspraken te maken over werkzaamheden en kosten</li>
-        <li>Contractvoorwaarden zorgvuldig door te lezen</li>
+        <li>{translations.usage_dd_quotes}</li>
+        <li>{translations.usage_dd_references}</li>
+        <li>{translations.usage_dd_insurance}</li>
+        <li>{translations.usage_dd_agreements}</li>
+        <li>{translations.usage_dd_contracts}</li>
       </ul>
 
-      <h3 className={styles.legalSubsectionTitle}>4.2 Eigen Verantwoordelijkheid</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.usage_responsibility_title}</h3>
       <p className={styles.legalText}>
-        Als gebruiker van ons platform bent u zelf verantwoordelijk voor:
+        {translations.usage_responsibility_text}
       </p>
       
       <ul className={styles.legalList}>
-        <li>Het selecteren van geschikte hoveniers voor uw project</li>
-        <li>Het onderhandelen over prijzen en voorwaarden</li>
-        <li>Het controleren van kwaliteit tijdens en na uitvoering</li>
-        <li>Het afhandelen van eventuele geschillen met hoveniers</li>
+        <li>{translations.usage_resp_selection}</li>
+        <li>{translations.usage_resp_negotiation}</li>
+        <li>{translations.usage_resp_quality}</li>
+        <li>{translations.usage_resp_disputes}</li>
       </ul>
     </section>
   );

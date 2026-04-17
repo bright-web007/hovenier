@@ -29,7 +29,7 @@
 .heroTitle {
   font-size: 3.5rem;
   font-weight: bold;
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   margin-bottom: 1.5rem;
   line-height: 1.1;
 }
@@ -111,7 +111,7 @@
   font-size: 2rem;
   font-weight: bold;
   color: var(--forest-deep);
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   margin-bottom: 1rem;
   line-height: 1.2;
 }
@@ -167,7 +167,7 @@
   font-size: 2rem;
   font-weight: bold;
   color: var(--forest-deep);
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   margin-bottom: 2rem;
 }
 
@@ -316,7 +316,7 @@
   font-size: 1.25rem;
   font-weight: bold;
   color: var(--forest-deep);
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   margin-bottom: 1rem;
 }
 
@@ -531,7 +531,7 @@
 }
 
 .articleHeroTitle {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   line-height: 1;
   color: var(--forest-deep);
@@ -577,7 +577,7 @@
 }
 
 .sectionTitle {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   color: var(--forest-deep);
   font-size: 1.8rem;
   margin-bottom: 1rem;
@@ -631,7 +631,7 @@
 
 .categoryTitle {
   font-size: clamp(2.4rem, 5vw, 4rem);
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-weight: 600;
   color: var(--forest-deep);
   margin-bottom: 1rem;

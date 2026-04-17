@@ -92,29 +92,29 @@ export default async function PrivacyPolicyPage({ params }: Props) {
         <section className="section">
           <div className="section-inner">
             <div className={styles.legalContent}>
-              <PrivacyHero />
+              <PrivacyHero locale={validLocale} />
               
               <div className={styles.legalSections}>
-                <PrivacyIntroduction />
-                <PrivacyResponsibilities />
-                <PrivacyDataCollection />
-                <PrivacyDataUsage />
-                <PrivacyLegalBasis />
-                <PrivacyDataSharing />
-                <PrivacySecurity />
-                <PrivacyRetention />
-                <PrivacyRights />
-                <PrivacyCookies />
-                <PrivacyComplaints />
-                <PrivacyChanges />
-                <PrivacyContact />
+                <PrivacyIntroduction locale={validLocale} />
+                <PrivacyResponsibilities locale={validLocale} />
+                <PrivacyDataCollection locale={validLocale} />
+                <PrivacyDataUsage locale={validLocale} />
+                <PrivacyLegalBasis locale={validLocale} />
+                <PrivacyDataSharing locale={validLocale} />
+                <PrivacySecurity locale={validLocale} />
+                <PrivacyRetention locale={validLocale} />
+                <PrivacyRights locale={validLocale} />
+                <PrivacyCookies locale={validLocale} />
+                <PrivacyComplaints locale={validLocale} />
+                <PrivacyChanges locale={validLocale} />
+                <PrivacyContact locale={validLocale} />
               </div>
             </div>
           </div>
         </section>
       </main>
       
-      <PrivacySchema />
+      <PrivacySchema locale={validLocale} />
     </div>
   );
 }

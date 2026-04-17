@@ -66,7 +66,7 @@ export default function NotFound() {
               </div>
               
               <h1 style={{ 
-                fontFamily: 'var(--serif)', 
+                fontFamily: 'var(--heading-font)', 
                 fontSize: '48px', 
                 fontWeight: '600', 
                 color: 'var(--forest)', 
@@ -282,7 +282,7 @@ export default function NotFound() {
               margin: '0 auto'
             }}>
               <h2 style={{ 
-                fontFamily: 'var(--serif)', 
+                fontFamily: 'var(--heading-font)', 
                 fontSize: '32px', 
                 fontWeight: '600', 
                 color: 'var(--forest)', 

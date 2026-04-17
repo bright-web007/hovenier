@@ -13,7 +13,9 @@ export default function ContactHero({ locale }: ContactHeroProps) {
         Contact
       </h1>
       <p className={styles.heroSubtitle}>
-        Vragen, feedback of samenwerking? We horen graag van je!
+        {locale === 'en'
+          ? 'Questions, feedback or collaboration? We would love to hear from you!'
+          : 'Vragen, feedback of samenwerking? We horen graag van je!'}
       </p>
     </div>
   )

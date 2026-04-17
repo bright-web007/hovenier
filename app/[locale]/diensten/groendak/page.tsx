@@ -6,14 +6,13 @@ import RelatedArticles from '../../../components/RelatedArticles';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
 
-// ISR: Never revalidate (static service content, changes only with deployments)
 export const revalidate = false;
 
-// Generate static params for both locales to enable ISR
 export async function generateStaticParams() {
   return [{ locale: 'nl' }, { locale: 'en' }];
 }
@@ -22,118 +21,37 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-// Simple translation function
-function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
-  
-  try {
-    if (locale === 'nl') {
-      messages = require(`../../../../locales/nl/common.json`);
-    } else {
-      messages = require(`../../../../locales/en/common.json`);
-    }
-  } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
-    // Fallback messages
-    messages = {
-      service_greenroof_title: "Groendaken in Friesland",
-      service_greenroof_subtitle: "Duurzame groendaken door gecertificeerde specialisten",
-      form_eyebrow: "Gratis & vrijblijvend",
-      form_title: "Offerte groendak",
-      form_subtitle: "Ontvang binnen 24 uur reacties van groendak specialisten in uw regio."
-    };
-  }
-  
-  return (key: string) => {
-    const keys = key.split('.');
-    let value = messages;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return typeof value === 'string' ? value : key;
-  };
-}
 
-const faqs = [
-  {
-    question: "Wat kost een groendak?",
-    answer: "Een extensief sedumdak kost €40–€60 per m², intensieve groendaken €80–€150 per m². Voor een gemiddeld groendak van 30 m² betaalt u €1.200–€1.800 inclusief aanleg."
-  },
-  {
-    question: "Welke subsidie is er voor groendaken in Friesland?",
-    answer: "Leeuwarden biedt tot €15 per m², Súdwest-Fryslân heeft klimaatadaptatie subsidie (bedrag varieert), en Smallingerland heeft incidentele subsidieronden. Uw hovenier helpt bij de aanvraag."
-  },
-  {
-    question: "Wat is een extensief groendak?",
-    answer: "Een extensief groendak is lichtgewicht, onderhoudsarm en geschikt voor de meeste hellende en platte daken. De begroeiing bestaat uit sedum, mossen en kruiden."
-  },
-  {
-    question: "Kunnen groendaken gecombineerd worden met zonnepanelen?",
-    answer: "Ja — groendaken en zonnepanelen zijn een uitstekende combinatie. De begroeiing houdt de panelen koeler, wat de stroomopbrengst verhoogt."
-  },
-  {
-    question: "Is mijn dak geschikt voor een groendak?",
-    answer: "De meeste platte of licht hellende daken zijn geschikt, maar we controleren altijd de draagkracht, waterafvoer en isolatie. Een dakconstructie-onderzoek is onderdeel van ons proces."
-  },
-  {
-    question: "Hoeveel onderhoud heeft een groendak nodig?",
-    answer: "Extensieve groendaken vereisen minimaal onderhoud (1-2x per jaar). Intensieve groendaken hebben meer zorg nodig, vergelijkbaar met een gewone tuin."
-  }
-];
-
-// Sample related articles data
-const relatedArticles = [
-  {
-    id: "1",
-    title: "Groendaken en subsidies in Nederland 2024",
-    excerpt: "Overzicht van beschikbare subsidies en regelingen voor groendaken in uw gemeente.",
-    slug: "groendak-subsidies-2024",
-    category: "Subsidies",
-    readTime: 6,
-    publishedAt: "2024-03-20",
-  },
-  {
-    id: "2", 
-    title: "Sedum groendaken: voordelen en nadelen",
-    excerpt: "Alles over sedum planten voor uw groendak en waarom ze zo populair zijn.",
-    slug: "sedum-groendaken-voordelen",
-    category: "Groendaken",
-    readTime: 5,
-    publishedAt: "2024-03-15",
-  },
-  {
-    id: "3",
-    title: "Intensief vs extensief groendak: wat past bij u?",
-    excerpt: "Welk type groendak past het beste bij uw wensen, budget en onderhoudsmogelijkheden.",
-    slug: "intensief-extensief-groendak-vergelijking",
-    category: "Groendaken", 
-    readTime: 8,
-    publishedAt: "2024-03-10",
-  }
-];
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { locale } = await params;
     const validLocale = locale || defaultLocale;
-    
+    const isEn = validLocale === 'en';
+
     return {
-      title: 'Groendak Aanleggen Friesland | Sedum & Extensief Groendak | Hovenier.frl',
-      description: 'Professionele groendaken in Friesland. Extensief sedumdak of intensief groendak — inclusief subsidie-advies. Vanaf €40/m² — vraag gratis offerte aan bij een specialist.',
-      keywords: ['groendak', 'groendak aanleggen', 'extensief groendak', 'groendak subsidie', 'subsidie groendak', 'groendak met zonnepanelen', 'groendak friesland', 'sedumdak'],
+      title: isEn
+        ? 'Green Roof Installation Friesland | Sedum & Extensive Green Roof | Hovenier.frl'
+        : 'Groendak Aanleggen Friesland | Sedum & Extensief Groendak | Hovenier.frl',
+      description: isEn
+        ? 'Professional green roofs in Friesland. Extensive sedum roof or intensive green roof — including subsidy advice. From €40/m² — request a free quote from a specialist.'
+        : 'Professionele groendaken in Friesland. Extensief sedumdak of intensief groendak — inclusief subsidie-advies. Vanaf €40/m² — vraag gratis offerte aan bij een specialist.',
+      keywords: isEn
+        ? ['green roof', 'green roof installation', 'extensive green roof', 'green roof subsidy', 'green roof solar panels', 'green roof friesland', 'sedum roof']
+        : ['groendak', 'groendak aanleggen', 'extensief groendak', 'groendak subsidie', 'subsidie groendak', 'groendak met zonnepanelen', 'groendak friesland', 'sedumdak'],
       alternates: getLocaleAlternates('/diensten/groendak', validLocale as SupportedLocale),
     };
   } catch (error) {
     return {
       title: 'Groendaken - Hovenier.frl',
-      description: 'Professionele groendak diensten in Friesland.'
+      description: 'Professional green roof services in Friesland.'
     };
   }
 }
 
 export default async function GroendakPage({ params }: Props) {
   let validLocale = defaultLocale;
-  
+
   try {
     const { locale } = await params;
     validLocale = locale || defaultLocale;
@@ -145,6 +63,9 @@ export default async function GroendakPage({ params }: Props) {
   }
 
   const t = createTranslator(validLocale);
+  const isEn = validLocale === 'en';
+  const localeFaqs = t.raw('faqs.groendak') || [];
+  const localeArticles = t.raw('related_articles.groendak') || [];
 
   // Navigation translations
   const navTranslations = {
@@ -158,8 +79,8 @@ export default async function GroendakPage({ params }: Props) {
   // Breadcrumb navigation
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: 'Diensten', href: localizePath('/services', validLocale as SupportedLocale) },
-    { label: 'Groendaken' }
+    { label: isEn ? 'Services' : 'Diensten', href: localizePath('/services', validLocale as SupportedLocale) },
+    { label: isEn ? 'Green Roofs' : 'Groendaken' }
   ];
 
   // Prepare translations for the lead form
@@ -194,7 +115,7 @@ export default async function GroendakPage({ params }: Props) {
     <>
       <Navigation locale={validLocale} translations={navTranslations} />
       <Breadcrumbs items={breadcrumbItems} />
-      
+
       <main>
         {/* Hero Section */}
         <section className="section">
@@ -202,30 +123,31 @@ export default async function GroendakPage({ params }: Props) {
             <div className="service-hero">
               <div className="service-hero-content">
                 <div className="service-hero-image">
-                  <img 
-                    src="/images/green-roof.png" 
-                    alt="Professioneel groendak aangelegd in Friesland"
+                  <img
+                    src="/images/green-roof.png"
+                    alt={isEn ? "Professional green roof installed in Friesland" : "Professioneel groendak aangelegd in Friesland"}
                     className="service-hero-image-photo"
                   />
                 </div>
                 <div className="service-hero-text">
-                  <h1 className="service-hero-title">Groendaken in Friesland</h1>
+                  <h1 className="service-hero-title">{isEn ? 'Green Roofs in Friesland' : 'Groendaken in Friesland'}</h1>
                   <p className="service-hero-description">
-                    Duurzame groendaken die uw leefomgeving verbeteren. Van extensieve sedum daken tot intensieve 
-                    daktuin - onze specialisten zorgen voor vakkundige aanleg met alle benodigde certificaten.
+                    {isEn
+                      ? 'Sustainable green roofs that improve your living environment. From extensive sedum roofs to intensive roof gardens — our specialists ensure expert installation with all required certifications.'
+                      : 'Duurzame groendaken die uw leefomgeving verbeteren. Van extensieve sedum daken tot intensieve daktuin - onze specialisten zorgen voor vakkundige aanleg met alle benodigde certificaten.'}
                   </p>
                   <div className="service-hero-stats">
                     <div className="service-stat">
                       <span className="service-stat-number">€85+</span>
-                      <span className="service-stat-label">per m²</span>
+                      <span className="service-stat-label">{isEn ? 'per m²' : 'per m²'}</span>
                     </div>
                     <div className="service-stat">
-                      <span className="service-stat-number">25jr</span>
-                      <span className="service-stat-label">garantie</span>
+                      <span className="service-stat-number">{isEn ? '25yr' : '25jr'}</span>
+                      <span className="service-stat-label">{isEn ? 'warranty' : 'garantie'}</span>
                     </div>
                     <div className="service-stat">
                       <span className="service-stat-number">12</span>
-                      <span className="service-stat-label">specialisten</span>
+                      <span className="service-stat-label">{isEn ? 'specialists' : 'specialisten'}</span>
                     </div>
                   </div>
                 </div>
@@ -238,46 +160,46 @@ export default async function GroendakPage({ params }: Props) {
         <section className="section section-alt">
           <div className="section-inner">
             <div className="section-header-row section-centered">
-              <h2 className="section-title">Twee hoofdtypes groendaken</h2>
-              <p className="section-sub">Welk groendak past het beste bij uw situatie?</p>
+              <h2 className="section-title">{isEn ? 'Two main types of green roofs' : 'Twee hoofdtypes groendaken'}</h2>
+              <p className="section-sub">{isEn ? 'Which green roof suits your situation best?' : 'Welk groendak past het beste bij uw situatie?'}</p>
             </div>
-            
+
             <div className="greenroof-types">
               <div className="greenroof-type-card">
                 <div className="greenroof-type-header">
-                  <h3 className="greenroof-type-title">Extensief groendak</h3>
-                  <p className="greenroof-type-price">€85-110 per m²</p>
+                  <h3 className="greenroof-type-title">{isEn ? 'Extensive green roof' : 'Extensief groendak'}</h3>
+                  <p className="greenroof-type-price">€85-110 {isEn ? 'per m²' : 'per m²'}</p>
                 </div>
                 <div className="greenroof-type-content">
                   <p className="greenroof-type-description">
-                    Lichte, onderhoudsarme oplossing met sedum en grassen. Perfect voor berging, garages en bedrijfspanden.
+                    {isEn ? 'Light, low-maintenance solution with sedum and grasses. Perfect for sheds, garages and commercial buildings.' : 'Lichte, onderhoudsarme oplossing met sedum en grassen. Perfect voor berging, garages en bedrijfspanden.'}
                   </p>
                   <ul className="greenroof-type-features">
-                    <li>Substraatdikte: 2-15 cm</li>
-                    <li>Gewicht: 60-150 kg/m²</li>
-                    <li>Onderhoud: 1-2x per jaar</li>
-                    <li>Niet toegankelijk voor personen</li>
-                    <li>Sedum, grassen, kruiden</li>
+                    <li>{isEn ? 'Substrate depth: 2-15 cm' : 'Substraatdikte: 2-15 cm'}</li>
+                    <li>{isEn ? 'Weight: 60-150 kg/m²' : 'Gewicht: 60-150 kg/m²'}</li>
+                    <li>{isEn ? 'Maintenance: 1-2x per year' : 'Onderhoud: 1-2x per jaar'}</li>
+                    <li>{isEn ? 'Not accessible for people' : 'Niet toegankelijk voor personen'}</li>
+                    <li>{isEn ? 'Sedum, grasses, herbs' : 'Sedum, grassen, kruiden'}</li>
                   </ul>
                 </div>
               </div>
-              
+
               <div className="greenroof-type-card greenroof-type-card-popular">
-                <div className="greenroof-type-popular">Populair</div>
+                <div className="greenroof-type-popular">{isEn ? 'Popular' : 'Populair'}</div>
                 <div className="greenroof-type-header">
-                  <h3 className="greenroof-type-title">Intensief groendak</h3>
-                  <p className="greenroof-type-price">€120-200 per m²</p>
+                  <h3 className="greenroof-type-title">{isEn ? 'Intensive green roof' : 'Intensief groendak'}</h3>
+                  <p className="greenroof-type-price">€120-200 {isEn ? 'per m²' : 'per m²'}</p>
                 </div>
                 <div className="greenroof-type-content">
                   <p className="greenroof-type-description">
-                    Volwaardige daktuin die toegankelijk is. Geschikt voor terrassen, tuinen en recreatieve ruimtes.
+                    {isEn ? 'Full-fledged roof garden that is accessible. Suitable for terraces, gardens and recreational spaces.' : 'Volwaardige daktuin die toegankelijk is. Geschikt voor terrassen, tuinen en recreatieve ruimtes.'}
                   </p>
                   <ul className="greenroof-type-features">
-                    <li>Substraatdikte: 15-100+ cm</li>
-                    <li>Gewicht: 150-500+ kg/m²</li>
-                    <li>Onderhoud: reguliere tuinverzorging</li>
-                    <li>Toegankelijk en bewandelbaar</li>
-                    <li>Struiken, bomen, gazon mogelijk</li>
+                    <li>{isEn ? 'Substrate depth: 15-100+ cm' : 'Substraatdikte: 15-100+ cm'}</li>
+                    <li>{isEn ? 'Weight: 150-500+ kg/m²' : 'Gewicht: 150-500+ kg/m²'}</li>
+                    <li>{isEn ? 'Maintenance: regular garden care' : 'Onderhoud: reguliere tuinverzorging'}</li>
+                    <li>{isEn ? 'Accessible and walkable' : 'Toegankelijk en bewandelbaar'}</li>
+                    <li>{isEn ? 'Shrubs, trees, lawn possible' : 'Struiken, bomen, gazon mogelijk'}</li>
                   </ul>
                 </div>
               </div>
@@ -289,10 +211,10 @@ export default async function GroendakPage({ params }: Props) {
         <section className="section">
           <div className="section-inner">
             <div className="section-header-row section-centered">
-              <h2 className="section-title">Voordelen van groendaken</h2>
-              <p className="section-sub">Waarom kiezen steeds meer mensen voor een groendak?</p>
+              <h2 className="section-title">{isEn ? 'Benefits of green roofs' : 'Voordelen van groendaken'}</h2>
+              <p className="section-sub">{isEn ? 'Why are more and more people choosing a green roof?' : 'Waarom kiezen steeds meer mensen voor een groendak?'}</p>
             </div>
-            
+
             <div className="service-features-grid">
               <div className="service-feature">
                 <div className="service-feature-icon">
@@ -300,45 +222,45 @@ export default async function GroendakPage({ params }: Props) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="service-feature-title">Betere isolatie</h3>
+                <h3 className="service-feature-title">{isEn ? 'Better insulation' : 'Betere isolatie'}</h3>
                 <p className="service-feature-description">
-                  Tot 30% minder energiekosten door natuurlijke isolatie zomer en winter.
+                  {isEn ? 'Up to 30% less energy costs through natural insulation in summer and winter.' : 'Tot 30% minder energiekosten door natuurlijke isolatie zomer en winter.'}
                 </p>
               </div>
-              
+
               <div className="service-feature">
                 <div className="service-feature-icon">
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
                   </svg>
                 </div>
-                <h3 className="service-feature-title">Waterberging</h3>
+                <h3 className="service-feature-title">{isEn ? 'Water retention' : 'Waterberging'}</h3>
                 <p className="service-feature-description">
-                  Vermindert afvalwater en voorkomt wateroverlast bij hevige regenval.
+                  {isEn ? 'Reduces wastewater and prevents flooding during heavy rainfall.' : 'Vermindert afvalwater en voorkomt wateroverlast bij hevige regenval.'}
                 </p>
               </div>
-              
+
               <div className="service-feature">
                 <div className="service-feature-icon">
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                 </div>
-                <h3 className="service-feature-title">Biodiversiteit</h3>
+                <h3 className="service-feature-title">{isEn ? 'Biodiversity' : 'Biodiversiteit'}</h3>
                 <p className="service-feature-description">
-                  Leefruimte voor insecten, vogels en ondersteunt de lokale ecosystemen.
+                  {isEn ? 'Habitat for insects, birds and supports local ecosystems.' : 'Leefruimte voor insecten, vogels en ondersteunt de lokale ecosystemen.'}
                 </p>
               </div>
-              
+
               <div className="service-feature">
                 <div className="service-feature-icon">
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                   </svg>
                 </div>
-                <h3 className="service-feature-title">Waardevermeerdering</h3>
+                <h3 className="service-feature-title">{isEn ? 'Value increase' : 'Waardevermeerdering'}</h3>
                 <p className="service-feature-description">
-                  Verhoogt de waarde van uw eigendom en verbetert het WOZ-gehalte.
+                  {isEn ? 'Increases the value of your property and improves its assessment.' : 'Verhoogt de waarde van uw eigendom en verbetert het WOZ-gehalte.'}
                 </p>
               </div>
             </div>
@@ -349,11 +271,11 @@ export default async function GroendakPage({ params }: Props) {
         <section className="section section-alt">
           <div className="section-inner">
             <div className="section-header-row section-centered">
-              <h2 className="section-title">Veelgestelde vragen</h2>
+              <h2 className="section-title">{isEn ? 'Frequently asked questions' : 'Veelgestelde vragen'}</h2>
             </div>
-            
+
             <div className="faq-grid">
-              {faqs.map((faq, index) => (
+              {localeFaqs.map((faq, index) => (
                 <div key={index} className="faq-item">
                   <h3 className="faq-question">{faq.question}</h3>
                   <p className="faq-answer">{faq.answer}</p>
@@ -368,9 +290,9 @@ export default async function GroendakPage({ params }: Props) {
           <div className="section-inner">
             <div className="service-form-container">
               <div className="service-form-header">
-                <h2 className="section-title section-title-centered">Vraag een groendak offerte aan</h2>
+                <h2 className="section-title section-title-centered">{isEn ? 'Request a green roof quote' : 'Vraag een groendak offerte aan'}</h2>
                 <p className="section-sub section-sub-centered">
-                  Ontvang binnen 24 uur reacties van groendak specialisten inclusief subsidie-advies
+                  {isEn ? 'Receive responses from green roof specialists including subsidy advice within 24 hours' : 'Ontvang binnen 24 uur reacties van groendak specialisten inclusief subsidie-advies'}
                 </p>
               </div>
               <div className="service-form-content">
@@ -382,7 +304,7 @@ export default async function GroendakPage({ params }: Props) {
       </main>
 
       {/* Related Articles */}
-      <RelatedArticles articles={relatedArticles} title="Gerelateerde artikelen over groendaken" />
+      <RelatedArticles articles={localeArticles} title={isEn ? 'Related articles about green roofs' : 'Gerelateerde artikelen over groendaken'} />
 
       {/* FAQ Schema */}
       <script
@@ -391,7 +313,7 @@ export default async function GroendakPage({ params }: Props) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": faqs.map(faq => ({
+            "mainEntity": localeFaqs.map(faq => ({
               "@type": "Question",
               "name": faq.question,
               "acceptedAnswer": {
@@ -410,8 +332,8 @@ export default async function GroendakPage({ params }: Props) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Service",
-            "name": "Groendaken",
-            "description": "Professionele groendak aanleg in Friesland door gecertificeerde specialisten",
+            "name": isEn ? "Green Roofs" : "Groendaken",
+            "description": isEn ? "Professional green roof installation in Friesland by certified specialists" : "Professionele groendak aanleg in Friesland door gecertificeerde specialisten",
             "provider": {
               "@type": "LocalBusiness",
               "name": "Hovenier.frl",
@@ -446,9 +368,9 @@ export default async function GroendakPage({ params }: Props) {
           }),
         }}
       />
-      
+
       {/* Breadcrumb Schema */}
-      <BreadcrumbSchema 
+      <BreadcrumbSchema
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,

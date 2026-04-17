@@ -1,13 +1,17 @@
 import Script from 'next/script';
 
-export default function DisclaimerSchema() {
+interface DisclaimerSchemaProps {
+  translations: Record<string, string>;
+}
+
+export default function DisclaimerSchema({ translations }: DisclaimerSchemaProps) {
   const disclaimerSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Disclaimer - Hovenier.frl",
-    "description": "Disclaimer en aansprakelijkheidsbeperkingen voor het gebruik van Hovenier.frl platform en diensten.",
+    "name": translations.schema_name,
+    "description": translations.schema_description,
     "url": "https://hovenier.frl/aansprakelijkheid",
-    "inLanguage": "nl-NL",
+    "inLanguage": translations.schema_language,
     "isPartOf": {
       "@type": "WebSite",
       "name": "Hovenier.frl",
@@ -15,8 +19,8 @@ export default function DisclaimerSchema() {
     },
     "mainEntity": {
       "@type": "WebPageElement",
-      "name": "Disclaimer",
-      "description": "Volledige disclaimer met aansprakelijkheidsbeperkingen voor Hovenier.frl",
+      "name": translations.schema_main_name,
+      "description": translations.schema_main_description,
       "dateModified": new Date().toISOString().split('T')[0],
       "publisher": {
         "@type": "Organization",
@@ -32,22 +36,22 @@ export default function DisclaimerSchema() {
         {
           "@type": "Thing",
           "name": "Liability Limitations",
-          "description": "Beperkingen van aansprakelijkheid voor platformgebruik"
+          "description": translations.schema_about_liability
         },
         {
           "@type": "Thing",
           "name": "Information Accuracy",
-          "description": "Disclaimer over nauwkeurigheid van verstrekte informatie"
+          "description": translations.schema_about_accuracy
         },
         {
           "@type": "Thing",
           "name": "Third Party Services",
-          "description": "Disclaimer voor diensten van aangesloten hoveniers"
+          "description": translations.schema_about_services
         },
         {
           "@type": "Thing",
           "name": "External Links",
-          "description": "Disclaimer voor externe websites en links"
+          "description": translations.schema_about_links
         }
       ]
     }

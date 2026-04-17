@@ -10,7 +10,7 @@
   font-size: 3.5rem;
   font-weight: bold;
   color: var(--color-forest);
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   margin-bottom: 1rem;
   line-height: 1.1;
 }
@@ -63,7 +63,7 @@
   font-size: 1.25rem;
   font-weight: bold;
   color: var(--color-forest);
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   margin-bottom: 1rem;
 }
 

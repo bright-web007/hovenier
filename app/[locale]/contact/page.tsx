@@ -11,6 +11,7 @@ import ContactSchema from '../../components/schemas/ContactSchema'
 import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema'
 import styles from '../../components/Contact.module.css'
 import { getAbsoluteUrl, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -18,19 +19,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  const meta = locale === 'en' ? {
-    title: 'Contact - Hovenier.frl | Get in Touch',
-    description: 'Contact hovenier.frl for questions about partnerships, press, or technical support. We are happy to help.',
-    keywords: 'contact, hovenier.frl, partnership, press, technical support, Friesland',
-  } : {
-    title: 'Contact - Hovenier.frl | Neem Contact Op',
-    description: 'Neem contact op met hovenier.frl voor vragen over partnerships, pers, of technische ondersteuning. We helpen je graag verder.',
-    keywords: 'contact, hovenier.frl, partnership, pers, technische ondersteuning, Friesland',
-  };
+  const t = createTranslator(locale)
 
   return {
-    ...meta,
+    title: t('contact_page.meta_title'),
+    description: t('contact_page.meta_description'),
     alternates: getLocaleAlternates('/contact', locale as SupportedLocale),
   }
 }
@@ -42,7 +35,7 @@ export default async function ContactPage({ params }: Props) {
   // Breadcrumb items
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: locale === 'en' ? 'Contact' : 'Contact' }
+    { label: 'Contact' }
   ];
 
   // Transform breadcrumbs for schema

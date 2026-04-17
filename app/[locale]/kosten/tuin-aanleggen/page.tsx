@@ -4,6 +4,7 @@ import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from '@/app/components/NewLeadForm'
 import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -31,6 +32,7 @@ export async function generateStaticParams() {
 export default async function TuinAanleggenKostenPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
+  const t = createTranslator(locale)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -333,29 +335,29 @@ export default async function TuinAanleggenKostenPage({ params }: Props) {
                   locale={locale}
                   serviceType="tuin-aanleggen"
                   translations={{
-                    form_eyebrow: locale === 'en' ? 'Free & No Obligations' : 'Gratis & vrijblijvend',
-                    form_title: locale === 'en' ? 'Request Quote' : 'Vraag een offerte aan',
-                    form_subtitle: locale === 'en' ? 'Get responses within 24 hours from gardeners in your area.' : 'Ontvang binnen 24 uur reacties van hoveniers in uw regio.',
-                    your_name: locale === 'en' ? 'Your name' : 'Uw naam',
-                    municipality: locale === 'en' ? 'Municipality' : 'Gemeente',
-                    service: locale === 'en' ? 'Service' : 'Dienst',
-                    phone_number: locale === 'en' ? 'Phone number' : 'Telefoonnummer',
-                    send_request: locale === 'en' ? 'Send Request' : 'Verstuur aanvraag',
-                    form_note: locale === 'en' ? 'Completely free · no spam · GDPR compliant' : 'Volledig gratis · geen spam · AVG-conform',
-                    select_municipality: locale === 'en' ? 'Select municipality' : 'Selecteer gemeente',
-                    what_do_you_need: locale === 'en' ? 'What do you need?' : 'Wat heeft u nodig?',
-                    your_company: locale === 'en' ? 'Your company' : 'Uw bedrijf',
-                    loading: locale === 'en' ? 'Loading...' : 'Versturen...',
-                    privacy_agreement: locale === 'en' ? 'I agree to the' : 'Ik ga akkoord met het',
-                    privacy_link: locale === 'en' ? 'privacy policy' : 'privacybeleid',
-                    privacy_consent: locale === 'en' ? 'and consent to processing my data.' : 'en geef toestemming voor het verwerken van mijn gegevens.',
+                    form_eyebrow: t('form_eyebrow'),
+                    form_title: t('form_title'),
+                    form_subtitle: t('form_subtitle'),
+                    your_name: t('your_name'),
+                    municipality: t('municipality'),
+                    service: t('service'),
+                    phone_number: t('phone_number'),
+                    send_request: t('send_request'),
+                    form_note: t('form_note'),
+                    select_municipality: t('form.select_municipality'),
+                    what_do_you_need: t('form.what_do_you_need'),
+                    your_company: t('form.your_company'),
+                    loading: t('form.loading'),
+                    privacy_agreement: t('form.privacy_agreement'),
+                    privacy_link: t('form.privacy_link'),
+                    privacy_consent: t('form.privacy_consent'),
                     services: {
-                      tuinonderhoud: locale === 'en' ? 'Garden Maintenance' : 'Tuinonderhoud',
-                      tuinontwerp: locale === 'en' ? 'Garden Design' : 'Tuinontwerp',
-                      'tuin-aanleggen': locale === 'en' ? 'Garden Installation' : 'Tuin Aanleggen',
-                      stratenmaker: locale === 'en' ? 'Paving' : 'Bestrating',
-                      groendak: locale === 'en' ? 'Green Roof' : 'Groendak',
-                      overig: locale === 'en' ? 'Other' : 'Overig'
+                      tuinonderhoud: t('form.services.tuinonderhoud'),
+                      tuinontwerp: t('form.services.tuinontwerp'),
+                      'tuin-aanleggen': t('form.services.tuin-aanleggen'),
+                      stratenmaker: t('form.services.stratenmaker'),
+                      groendak: t('form.services.groendak'),
+                      overig: t('form.services.overig')
                     }
                   }}
                 />

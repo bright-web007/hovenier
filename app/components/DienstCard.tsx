@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import ImageComponent from '@/app/components/ImageComponent';
 import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/i18n';
 
 interface DienstCardProps {
   id: string;
@@ -12,6 +13,8 @@ interface DienstCardProps {
 }
 
 export default function DienstCard({ id, title, subtitle, description, image, locale = 'nl' }: DienstCardProps) {
+  const t = createTranslator(locale);
+
   return (
     <div style={{
       background: 'var(--white)',
@@ -42,7 +45,7 @@ export default function DienstCard({ id, title, subtitle, description, image, lo
         </div>
         <p style={{ fontWeight: 700, fontSize: '22px', color: '#1F2937', lineHeight: '100%', letterSpacing: '-0.3px' }}>{title}</p>
         <p style={{ fontSize: '14px', color: '#6B7280', lineHeight: '22px', fontWeight: 400 }}>{description}</p>
-        <Link href={localizePath(`/diensten/${id}`, locale as SupportedLocale)} className="service-learn-more">{locale === 'en' ? 'Learn more →' : 'Meer informatie →'}</Link>
+        <Link href={localizePath(`/diensten/${id}`, locale as SupportedLocale)} className="service-learn-more">{t('dienst_card.learn_more')}</Link>
       </div>
     </div>
   );

@@ -7,50 +7,10 @@ import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../../components/RelatedArticles'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../../components/StructuredData'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 import { regionHubs, getRegionHubBySlug, getGemeenteBySlug, getRegionSlugByGemeenteSlug, type RegionHub, type Gemeente } from '@/lib/regions-hierarchy'
 import DienstCard from '../../../../components/DienstCard'
 import Link from 'next/link'
-
-// Simple translation function
-function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
-
-  try {
-    if (locale === 'nl') {
-      messages = require(`../../../../../locales/nl/common.json`);
-    } else {
-      messages = require(`../../../../../locales/en/common.json`);
-    }
-  } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
-    // Fallback messages
-    messages = {
-      form_eyebrow: "Gratis & vrijblijvend",
-      form_title: "Offerte aanvragen",
-      form_subtitle: "Ontvang binnen 24 uur reacties van lokale specialisten.",
-      your_name: "Uw naam",
-      municipality: "Gemeente",
-      service: "Gewenste service",
-      phone_number: "Telefoonnummer",
-      send_request: "Verstuur aanvraag",
-      form_note: "Door het versturen van dit formulier gaat u akkoord met onze voorwaarden.",
-      gardeners: "Hoveniers",
-      services: "Diensten",
-      regions: "Regio's",
-      inspiration: "Inspiratie",
-      request_quote: "Offerte aanvragen"
-    };
-  }
-
-  return (key: string): string => {
-    const keys = key.split('.');
-    let value: any = messages;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return (typeof value === 'string') ? value : key;
-  };
-}
 
 type Props = {
   params: Promise<{ locale: string; slug: string; gemeente: string }>
@@ -63,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!regionHub || !gemeenteData) {
     return {
-      title: locale === 'en' ? 'Municipality not found | Hovenier.frl' : 'Gemeente niet gevonden | Hovenier.frl'
+      title: createTranslator(locale)('regio_page.gemeente_not_found_title')
     };
   }
 
@@ -157,20 +117,20 @@ export default async function GemeentePage({ params }: Props) {
     phone_number: t('phone_number'),
     send_request: t('send_request'),
     form_note: t('form_note'),
-    select_municipality: validLocale === 'en' ? 'Select municipality' : 'Selecteer gemeente',
-    what_do_you_need: validLocale === 'en' ? 'What do you need?' : 'Wat heeft u nodig?',
-    your_company: validLocale === 'en' ? 'Your company' : 'Uw bedrijf',
-    loading: validLocale === 'en' ? 'Loading...' : 'Versturen...',
-    privacy_agreement: validLocale === 'en' ? 'I agree to the' : 'Ik ga akkoord met het',
-    privacy_link: validLocale === 'en' ? 'privacy policy' : 'privacybeleid',
-    privacy_consent: validLocale === 'en' ? 'and consent to processing my data.' : 'en geef toestemming voor het verwerken van mijn gegevens.',
+    select_municipality: t('form.select_municipality'),
+    what_do_you_need: t('form.what_do_you_need'),
+    your_company: t('form.your_company'),
+    loading: t('form.loading'),
+    privacy_agreement: t('form.privacy_agreement'),
+    privacy_link: t('form.privacy_link'),
+    privacy_consent: t('form.privacy_consent'),
     services: {
-      tuinonderhoud: validLocale === 'en' ? 'Garden Maintenance' : 'Tuinonderhoud',
-      tuinontwerp: validLocale === 'en' ? 'Garden Design' : 'Tuinontwerp',
-      'tuin-aanleggen': validLocale === 'en' ? 'Garden Installation' : 'Tuin Aanleggen',
-      stratenmaker: validLocale === 'en' ? 'Paving' : 'Bestrating',
-      groendak: validLocale === 'en' ? 'Green Roof' : 'Groendak',
-      overig: validLocale === 'en' ? 'Other' : 'Overig'
+      tuinonderhoud: t('form.services.tuinonderhoud'),
+      tuinontwerp: t('form.services.tuinontwerp'),
+      'tuin-aanleggen': t('form.services.tuin-aanleggen'),
+      stratenmaker: t('form.services.stratenmaker'),
+      groendak: t('form.services.groendak'),
+      overig: t('form.services.overig')
     }
   };
 

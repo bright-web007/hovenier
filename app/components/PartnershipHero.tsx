@@ -1,5 +1,6 @@
 'use client'
 
+import { createTranslator } from '@/i18n'
 import styles from './Partnership.module.css'
 
 interface PartnershipHeroProps {
@@ -7,33 +8,33 @@ interface PartnershipHeroProps {
 }
 
 export default function PartnershipHero({ locale }: PartnershipHeroProps) {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale);
   return (
     <section className="section partnership-hero">
       <div className="section-inner">
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
             <div className={styles.heroBadge}>
-              <span>{isEn ? 'For professionals' : 'Voor professionals'}</span>
+              <span>{t('partnership.hero_eyebrow')}</span>
             </div>
             <h1 className={styles.heroTitle}>
-              {isEn ? 'Become a partner of Hovenier.frl' : 'Word partner van Hovenier.frl'}
+              {t('partnership.hero_title')}
             </h1>
             <p className={styles.heroDescription}>
-              {isEn ? 'Join our network of qualified gardeners and get access to clients across Friesland. No commission fees, with full transparency.' : 'Sluit je aan bij ons netwerk van gekwalificeerde hoveniers en krijg toegang tot klanten in heel Friesland. Zonder commissiekosten, met volledige transparantie.'}
+              {t('partnership.hero_subtitle')}
             </p>
             <div className={styles.heroStats}>
               <div className={styles.heroStat}>
                 <span className={styles.heroStatNumber}>150+</span>
-                <span className={styles.heroStatLabel}>{isEn ? 'Satisfied clients' : 'Tevreden klanten'}</span>
+                <span className={styles.heroStatLabel}>{t('partnership.hero_stat_clients')}</span>
               </div>
               <div className={styles.heroStat}>
                 <span className={styles.heroStatNumber}>25+</span>
-                <span className={styles.heroStatLabel}>{isEn ? 'Partner gardeners' : 'Partner hoveniers'}</span>
+                <span className={styles.heroStatLabel}>{t('partnership.hero_stat_gardeners')}</span>
               </div>
               <div className={styles.heroStat}>
                 <span className={styles.heroStatNumber}>0%</span>
-                <span className={styles.heroStatLabel}>{isEn ? 'Commission' : 'Commissie'}</span>
+                <span className={styles.heroStatLabel}>{t('partnership.hero_stat_commission')}</span>
               </div>
             </div>
           </div>

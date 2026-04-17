@@ -1,7 +1,9 @@
 import Script from 'next/script';
+import { createTranslator } from '@/i18n';
 
 export default function TermsSchema({ locale = 'nl' }: { locale?: string }) {
   const isEn = locale === 'en';
+  const t = createTranslator(locale);
   const lang = isEn ? 'en-US' : 'nl-NL';
   const urlPrefix = isEn ? 'https://hovenier.frl/en' : 'https://hovenier.frl';
   const pageUrl = `${urlPrefix}/algemene-voorwaarden`;
@@ -9,12 +11,8 @@ export default function TermsSchema({ locale = 'nl' }: { locale?: string }) {
   const termsSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": isEn
-      ? "Terms and Conditions - Hovenier.frl"
-      : "Algemene Voorwaarden - Hovenier.frl",
-    "description": isEn
-      ? "Terms and conditions for using the Hovenier.frl platform and services."
-      : "Algemene voorwaarden voor het gebruik van Hovenier.frl platform en dienstverlening.",
+    "name": t('terms.schema_name'),
+    "description": t('terms.schema_description'),
     "url": pageUrl,
     "inLanguage": lang,
     "isPartOf": {
@@ -24,10 +22,8 @@ export default function TermsSchema({ locale = 'nl' }: { locale?: string }) {
     },
     "mainEntity": {
       "@type": "TermsOfService",
-      "name": isEn ? "Terms and Conditions" : "Algemene Voorwaarden",
-      "description": isEn
-        ? "Complete terms and conditions for the Hovenier.frl platform"
-        : "Volledige algemene voorwaarden voor Hovenier.frl platform",
+      "name": t('terms.schema_tc_name'),
+      "description": t('terms.schema_tc_description'),
       "dateModified": new Date().toISOString().split('T')[0],
       "publisher": {
         "@type": "Organization",
@@ -36,30 +32,24 @@ export default function TermsSchema({ locale = 'nl' }: { locale?: string }) {
         "contactPoint": {
           "@type": "ContactPoint",
           "email": "info@hovenier.frl",
-          "contactType": isEn ? "Legal Department" : "Juridische Afdeling"
+          "contactType": t('terms.schema_contact_type')
         }
       },
       "about": [
         {
           "@type": "Thing",
-          "name": isEn ? "Platform Usage" : "Platformgebruik",
-          "description": isEn
-            ? "Terms for using the Hovenier.frl platform"
-            : "Voorwaarden voor gebruik van het Hovenier.frl platform"
+          "name": t('terms.schema_about_usage'),
+          "description": t('terms.schema_about_usage_desc')
         },
         {
           "@type": "Thing",
-          "name": isEn ? "Service Terms" : "Dienstvoorwaarden",
-          "description": isEn
-            ? "Terms for services and mediation"
-            : "Voorwaarden voor dienstverlening en bemiddeling"
+          "name": t('terms.schema_about_services'),
+          "description": t('terms.schema_about_services_desc')
         },
         {
           "@type": "Thing",
-          "name": isEn ? "User Rights" : "Gebruikersrechten",
-          "description": isEn
-            ? "Rights and obligations of users"
-            : "Rechten en plichten van gebruikers"
+          "name": t('terms.schema_about_rights'),
+          "description": t('terms.schema_about_rights_desc')
         }
       ]
     }

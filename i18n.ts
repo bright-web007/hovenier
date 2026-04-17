@@ -1,25 +1,19 @@
 import {notFound} from 'next/navigation';
+import en from './locales/en/common.json';
+import nl from './locales/nl/common.json';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
 
-// Simple translation function that loads from static JSON
+const allMessages: Record<string, Record<string, any>> = { en, nl };
+
+// Translation function that works in both server and client components
 export function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
-  
-  try {
-    if (locale === 'nl') {
-      messages = require(`./locales/nl/common.json`);
-    } else {
-      messages = require(`./locales/en/common.json`);
-    }
-  } catch (error) {
-    messages = {};
-  }
-  
-  return (key: string) => {
+  const messages = allMessages[locale] || allMessages['nl'];
+
+  return (key: string): string => {
     const keys = key.split('.');
-    let value = messages;
+    let value: any = messages;
     for (const k of keys) {
       value = value?.[k];
     }
@@ -28,9 +22,5 @@ export function createTranslator(locale: string) {
 }
 
 export async function getMessages(locale: string) {
-  try {
-    return require(`./locales/${locale}/common.json`);
-  } catch (error) {
-    return {};
-  }
+  return allMessages[locale] || allMessages['nl'];
 }

@@ -7,6 +7,7 @@ import ServiceSchema from '../../components/schemas/ServiceSchema';
 import KostenCalculator from '../../components/KostenCalculator';
 import KostenFAQClient from '../../components/KostenFAQClient';
 import { localizePath, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/i18n';
 
 // CSS Module imports
 import heroStyles from '../../components/KostenHero.module.css';
@@ -36,11 +37,12 @@ export default async function KostenPage({ params }: Props) {
   const { locale } = await params;
   const validLocale = locale || 'nl';
   const isEn = validLocale === 'en';
+  const t = createTranslator(validLocale);
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: validLocale === 'en' ? 'Home' : 'Home', href: '/' },
-    { label: validLocale === 'en' ? 'Costs' : 'Kosten' }
+    { label: 'Home', href: '/' },
+    { label: t('kosten_page.breadcrumb_costs') }
   ];
 
   return (
@@ -274,29 +276,29 @@ export default async function KostenPage({ params }: Props) {
                 <div className={layoutStyles.serviceFormContent}>
                   <NewLeadForm 
                     translations={{
-                      form_eyebrow: isEn ? "Free Quote" : "Gratis Offerte",
-                      form_title: isEn ? "Request a quote directly" : "Vraag direct een offerte aan",
-                      form_subtitle: isEn ? "Contact from local gardeners within 24 hours" : "Binnen 24 uur contact van lokale hoveniers",
-                      your_name: isEn ? "Your name" : "Uw naam",
-                      municipality: isEn ? "Municipality" : "Gemeente",
-                      service: isEn ? "Desired service" : "Gewenste dienst",
-                      phone_number: isEn ? "Phone number" : "Telefoonnummer",
-                      send_request: isEn ? "Send request" : "Verstuur aanvraag",
-                      form_note: isEn ? "By submitting this form you agree to our terms" : "Door dit formulier te versturen gaat u akkoord met onze voorwaarden",
-                      select_municipality: isEn ? "Select municipality" : "Selecteer gemeente",
-                      what_do_you_need: isEn ? "What do you need?" : "Wat heeft u nodig?",
-                      your_company: isEn ? "Your company" : "Uw bedrijf",
-                      loading: isEn ? "Sending..." : "Versturen...",
-                      privacy_agreement: isEn ? "I agree to the" : "Ik ga akkoord met het",
-                      privacy_link: isEn ? "privacy policy" : "privacybeleid",
-                      privacy_consent: isEn ? "and give consent for processing my data." : "en geef toestemming voor het verwerken van mijn gegevens.",
+                      form_eyebrow: t('form_eyebrow'),
+                      form_title: t('form_title'),
+                      form_subtitle: t('form_subtitle'),
+                      your_name: t('your_name'),
+                      municipality: t('municipality'),
+                      service: t('service'),
+                      phone_number: t('phone_number'),
+                      send_request: t('send_request'),
+                      form_note: t('form_note'),
+                      select_municipality: t('form.select_municipality'),
+                      what_do_you_need: t('form.what_do_you_need'),
+                      your_company: t('form.your_company'),
+                      loading: t('form.loading'),
+                      privacy_agreement: t('form.privacy_agreement'),
+                      privacy_link: t('form.privacy_link'),
+                      privacy_consent: t('form.privacy_consent'),
                       services: {
-                        tuinonderhoud: isEn ? "Garden Maintenance" : "Tuinonderhoud",
-                        tuinontwerp: isEn ? "Garden Design" : "Tuinontwerp",
-                        'tuin-aanleggen': isEn ? "Garden Construction" : "Tuin Aanleggen",
-                        stratenmaker: isEn ? "Paving" : "Bestrating",
-                        groendak: isEn ? "Green Roof" : "Groendak",
-                        overig: isEn ? "Other" : "Overig"
+                        tuinonderhoud: t('form.services.tuinonderhoud'),
+                        tuinontwerp: t('form.services.tuinontwerp'),
+                        'tuin-aanleggen': t('form.services.tuin-aanleggen'),
+                        stratenmaker: t('form.services.stratenmaker'),
+                        groendak: t('form.services.groendak'),
+                        overig: t('form.services.overig')
                       }
                     }}
                     locale={locale}

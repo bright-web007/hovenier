@@ -12,6 +12,7 @@ import PartnershipCTA from '../../components/PartnershipCTA';
 import PartnershipSchema from '../../components/schemas/PartnershipSchema';
 import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema';
 import { getAbsoluteUrl, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/i18n';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -20,45 +21,16 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-// Simple translation function
-function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
-  
-  try {
-    if (locale === 'nl') {
-      messages = require(`../../../locales/nl/common.json`);
-    } else {
-      messages = require(`../../../locales/en/common.json`);
-    }
-  } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
-    messages = {
-      form_eyebrow: "Gratis & vrijblijvend",
-      form_title: "Word partner",
-      form_subtitle: "Sluit je aan bij ons netwerk van professionele hoveniers."
-    };
-  }
-  
-  return (key: string) => {
-    const keys = key.split('.');
-    let value = messages;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return typeof value === 'string' ? value : key;
-  };
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { locale } = await params;
     const validLocale = locale || defaultLocale;
-    const isEn = validLocale === 'en';
+    const t = createTranslator(validLocale);
     
     return {
-      title: isEn ? 'Become a Partner | Hovenier.frl - For Professional Gardeners' : 'Word Partner | Hovenier.frl - Voor Professionele Hoveniers',
-      description: isEn ? 'Join Hovenier.frl and get access to clients across Friesland. For certified gardeners with experience. Grow your client base!' : 'Sluit je aan bij Hovenier.frl en krijg toegang tot klanten in heel Friesland. Voor gecertificeerde hoveniers met ervaring. Vergroot je klantenkring!',
-      keywords: isEn ? ['gardener partner', 'partnership', 'friesland', 'clients', 'gardening company'] : ['hovenier partner', 'samenwerking', 'friesland', 'klanten', 'hoveniersbedrijf'],
+      title: t('partnership.meta_title'),
+      description: t('partnership.meta_description'),
+      keywords: t('partnership.meta_keywords_list').split(', '),
       alternates: getLocaleAlternates('/samenwerking', validLocale as SupportedLocale),
     };
   } catch (error) {
@@ -92,23 +64,23 @@ export default async function SamenwerkingPage({ params }: Props) {
     icon: 'users' | 'money' | 'location' | 'badge';
   }> = [
     {
-      title: isEn ? 'More clients' : 'Meer klanten',
-      description: isEn ? 'Get access to clients across Friesland looking for reliable gardeners.' : 'Krijg toegang tot klanten in heel Friesland die op zoek zijn naar betrouwbare hoveniers.',
+      title: t('partnership.benefit_clients_title'),
+      description: t('partnership.benefit_clients_desc'),
       icon: 'users'
     },
     {
-      title: isEn ? 'No commission' : 'Geen commissie',
-      description: isEn ? 'We charge no commission. Direct contact between you and the client.' : 'Wij rekenen geen commissie af. Direct contact tussen jou en de klant.',
+      title: t('partnership.benefit_commission_title'),
+      description: t('partnership.benefit_commission_desc'),
       icon: 'money'
     },
     {
-      title: isEn ? 'Local focus' : 'Lokale focus',
-      description: isEn ? 'Get matched with clients in your work area for optimal efficiency.' : 'Word gekoppeld aan klanten in jouw werkgebied voor optimale efficiency.',
+      title: t('partnership.benefit_local_title'),
+      description: t('partnership.benefit_local_desc'),
       icon: 'location'
     },
     {
-      title: isEn ? 'Quality network' : 'Kwaliteitsnetwerk',
-      description: isEn ? 'Become part of a select group of certified gardeners.' : 'Onderdeel worden van een selecte groep gecertificeerde hoveniers.',
+      title: t('partnership.benefit_quality_title'),
+      description: t('partnership.benefit_quality_desc'),
       icon: 'badge'
     }
   ];
@@ -259,8 +231,8 @@ export default async function SamenwerkingPage({ params }: Props) {
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: validLocale === 'en' ? 'Home' : 'Home', href: '/' },
-    { label: validLocale === 'en' ? 'Partnership' : 'Samenwerking' }
+    { label: 'Home', href: '/' },
+    { label: t('partnership.breadcrumb_partnership') }
   ];
 
   // Transform breadcrumbs for schema

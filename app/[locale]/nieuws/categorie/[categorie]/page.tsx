@@ -7,6 +7,7 @@ import styles from '../../../../components/Blog.module.css'
 import { notFound } from 'next/navigation'
 import { formatArticleDate, getArticles } from '@/lib/articles'
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 
 type Props = {
   params: Promise<{ locale: string; categorie: string }>
@@ -83,6 +84,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function NewsCategoryPage({ params }: Props) {
   const { locale, categorie } = await params
   setRequestLocale(locale)
+  const t = createTranslator(locale)
   const lang = (locale === 'en' ? 'en' : 'nl') as 'en' | 'nl';
 
   // Find category by slug
@@ -98,7 +100,7 @@ export default async function NewsCategoryPage({ params }: Props) {
   // Breadcrumb items
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: locale === 'en' ? 'News' : 'Nieuws', href: '/nieuws' },
+    { label: t('nieuws_page.breadcrumb'), href: '/nieuws' },
     { label: category.name[lang] }
   ]
 

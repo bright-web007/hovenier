@@ -7,6 +7,7 @@ import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../components/RelatedArticles';
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 import styles from './Stratenmaker.module.css'
 
 export const locales = ['en', 'nl'] as const;
@@ -23,38 +24,6 @@ export async function generateStaticParams() {
 type Props = {
   params: Promise<{ locale: string }>;
 };
-
-// Simple translation function
-function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
-
-  try {
-    if (locale === 'nl') {
-      messages = require(`../../../../locales/nl/common.json`);
-    } else {
-      messages = require(`../../../../locales/en/common.json`);
-    }
-  } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
-    // Fallback messages
-    messages = {
-      service_stratenmaker_title: "Stratenmaker & Bestrating in Friesland",
-      service_stratenmaker_subtitle: "Professionele hardscaping diensten door gecertificeerde stratenmakers",
-      form_eyebrow: "Gratis & vrijblijvend",
-      form_title: "Offerte bestrating",
-      form_subtitle: "Ontvang binnen 24 uur reacties van stratenmakers in uw regio."
-    };
-  }
-
-  return (key: string) => {
-    const keys = key.split('.');
-    let value = messages;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return typeof value === 'string' ? value : key;
-  };
-}
 
 const faqs = {
   nl: [
@@ -160,18 +129,12 @@ const relatedArticles = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const validLocale = locale || defaultLocale;
-  const isEn = validLocale === 'en';
+  const t = createTranslator(validLocale);
 
   return {
-    title: isEn
-      ? 'Paver Friesland | Paving & Terrace Installation | Hovenier.frl'
-      : 'Stratenmaker Friesland | Bestrating & Terras Aanleggen | Hovenier.frl',
-    description: isEn
-      ? 'Need a paver in Friesland? Expert paving for terraces, driveways and garden paths. Ceramic, natural stone or concrete — free quotes from local specialists.'
-      : 'Stratenmaker nodig in Friesland? Vakkundige bestrating voor terrassen, opritten en tuinpaden. Keramisch, natuursteen of beton — gratis offertes van lokale specialisten.',
-    keywords: isEn
-      ? 'paver friesland, paving friesland, terrace installation friesland, driveway paving friesland'
-      : 'stratenmaker friesland, hovenier stratenmaker friesland, stratenmaker gezocht friesland, bestrating aanleggen friesland, terras aanleggen friesland',
+    title: t('stratenmaker.meta_title'),
+    description: t('stratenmaker.meta_description'),
+    keywords: t('stratenmaker.meta_keywords'),
     alternates: getLocaleAlternates('/diensten/stratenmaker', validLocale as SupportedLocale),
   }
 }
@@ -182,9 +145,8 @@ export default async function StratenmakerPage({ params }: Props) {
   setRequestLocale(validLocale);
 
   const t = createTranslator(validLocale);
-  const isEn = validLocale === 'en';
-  const localeFaqs = faqs[isEn ? 'en' : 'nl'];
-  const localeArticles = relatedArticles[isEn ? 'en' : 'nl'];
+  const localeFaqs = faqs[validLocale as 'en' | 'nl'] || faqs['nl'];
+  const localeArticles = relatedArticles[validLocale as 'en' | 'nl'] || relatedArticles['nl'];
 
   // Simple translations for the form
   const formTranslations = {
@@ -217,8 +179,8 @@ export default async function StratenmakerPage({ params }: Props) {
   // Breadcrumb items 
   const breadcrumbItems = [
     { label: 'Home', href: localizePath('/', validLocale as SupportedLocale) },
-    { label: isEn ? 'Services' : 'Diensten', href: localizePath('/diensten', validLocale as SupportedLocale) },
-    { label: isEn ? 'Paver' : 'Stratenmaker', href: localizePath('/diensten/stratenmaker', validLocale as SupportedLocale) }
+    { label: t('stratenmaker.breadcrumb_services'), href: localizePath('/diensten', validLocale as SupportedLocale) },
+    { label: t('stratenmaker.breadcrumb_paver'), href: localizePath('/diensten/stratenmaker', validLocale as SupportedLocale) }
   ];
 
   return (
@@ -244,10 +206,10 @@ export default async function StratenmakerPage({ params }: Props) {
           {/* Hero Section */}
           <div className={styles.heroSection}>
             <h1 className={styles.heroTitle}>
-              {isEn ? 'Paver & Paving' : 'Stratenmaker & Bestrating'}
+              {t('stratenmaker.hero_title')}
             </h1>
             <p className={styles.heroSubtitle}>
-              {isEn ? 'Professional hardscaping services in Friesland' : 'Professionele hardscaping diensten in Friesland'}
+              {t('stratenmaker.hero_subtitle')}
             </p>
           </div>
 
@@ -255,18 +217,14 @@ export default async function StratenmakerPage({ params }: Props) {
           <section className={styles.section}>
             <div className={styles.card}>
               <h2 className={styles.cardTitle}>
-                {isEn ? 'Expert Paving Work' : 'Deskundige Bestratingswerken'}
+                {t('stratenmaker.expert_title')}
               </h2>
               <div className={styles.cardContent}>
                 <p>
-                  {isEn
-                    ? 'A paver lays the foundation for durable and aesthetically beautiful outdoor spaces. Our qualified specialists in Friesland combine technical expertise with attention to detail for all your hardscaping projects.'
-                    : 'Een stratenmaker legt de basis voor duurzame en esthetisch mooie buitenruimtes. Onze gekwalificeerde specialisten in Friesland combineren technische expertise met oog voor detail voor al uw hardscaping projecten.'}
+                  {t('stratenmaker.expert_text_1')}
                 </p>
                 <p>
-                  {isEn
-                    ? 'From simple garden paths to complex driveways and terraces — we work exclusively with experienced professionals who are familiar with local ground conditions and building regulations.'
-                    : 'Van eenvoudige tuinpaden tot complexe opritten en terrassen - we werken uitsluitend met ervaren professionals die bekend zijn met lokale grondcondities en bouwvoorschriften.'}
+                  {t('stratenmaker.expert_text_2')}
                 </p>
               </div>
             </div>
@@ -275,7 +233,7 @@ export default async function StratenmakerPage({ params }: Props) {
           {/* Service Types */}
           <section className={styles.sectionWide}>
             <h2 className={styles.sectionTitle}>
-              {isEn ? 'Our Paving Specializations' : 'Onze Bestrating Specialisaties'}
+              {t('stratenmaker.specializations_title')}
             </h2>
             <div className={`${styles.grid} ${styles.gridCols2} ${styles.gridCols3}`}>
               <div className={styles.serviceCard}>
@@ -284,9 +242,9 @@ export default async function StratenmakerPage({ params }: Props) {
                     <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h3 className={styles.serviceTitle}>{isEn ? 'Driveways & Parking Areas' : 'Opritten & Parkeerplaatsen'}</h3>
+                <h3 className={styles.serviceTitle}>{t('stratenmaker.spec_driveways_title')}</h3>
                 <p className={styles.serviceDescription}>
-                  {isEn ? 'Durable driveways made of concrete pavers, natural stone or asphalt. Including drainage and foundation.' : 'Duurzame opritten van betonklinkers, natuursteen of asfalt. Inclusief drainage en fundering.'}
+                  {t('stratenmaker.spec_driveways_desc')}
                 </p>
               </div>
 
@@ -296,9 +254,9 @@ export default async function StratenmakerPage({ params }: Props) {
                     <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
                   </svg>
                 </div>
-                <h3 className={styles.serviceTitle}>{isEn ? 'Terraces & Patios' : 'Terrassen & Patio\'s'}</h3>
+                <h3 className={styles.serviceTitle}>{t('stratenmaker.spec_terraces_title')}</h3>
                 <p className={styles.serviceDescription}>
-                  {isEn ? 'Stylish outdoor spaces made of ceramic, natural stone, concrete or wood. Custom made for your garden.' : 'Stijlvolle buitenruimtes van keramiek, natuursteen, beton of hout. Op maat gemaakt voor uw tuin.'}
+                  {t('stratenmaker.spec_terraces_desc')}
                 </p>
               </div>
 
@@ -308,9 +266,9 @@ export default async function StratenmakerPage({ params }: Props) {
                     <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h3 className={styles.serviceTitle}>{isEn ? 'Garden Paths & Borders' : 'Tuinpaden & Borders'}</h3>
+                <h3 className={styles.serviceTitle}>{t('stratenmaker.spec_paths_title')}</h3>
                 <p className={styles.serviceDescription}>
-                  {isEn ? 'Functional and decorative paths through the garden. Various materials and patterns available.' : 'Functionele en decoratieve paden door de tuin. Diverse materialen en patronen mogelijk.'}
+                  {t('stratenmaker.spec_paths_desc')}
                 </p>
               </div>
 
@@ -320,9 +278,9 @@ export default async function StratenmakerPage({ params }: Props) {
                     <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h3 className={styles.serviceTitle}>{isEn ? 'Retaining Walls & Borders' : 'Keermuren & Borders'}</h3>
+                <h3 className={styles.serviceTitle}>{t('stratenmaker.spec_walls_title')}</h3>
                 <p className={styles.serviceDescription}>
-                  {isEn ? 'Retaining walls and borders made of concrete, natural stone or stacking blocks for height differences.' : 'Steunmuren en borders van beton, natuursteen of stapelblokken voor hoogteverschillen.'}
+                  {t('stratenmaker.spec_walls_desc')}
                 </p>
               </div>
 
@@ -332,9 +290,9 @@ export default async function StratenmakerPage({ params }: Props) {
                     <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
                   </svg>
                 </div>
-                <h3 className={styles.serviceTitle}>{isEn ? 'Drainage & Sewerage' : 'Drainage & Riolering'}</h3>
+                <h3 className={styles.serviceTitle}>{t('stratenmaker.spec_drainage_title')}</h3>
                 <p className={styles.serviceDescription}>
-                  {isEn ? 'Professional water drainage, drainage systems and sewerage for paved surfaces.' : 'Professionele waterafvoer, drainagesystemen en riolering voor bestrate oppervlakken.'}
+                  {t('stratenmaker.spec_drainage_desc')}
                 </p>
               </div>
 
@@ -344,9 +302,9 @@ export default async function StratenmakerPage({ params }: Props) {
                     <path fillRule="evenodd" d="M9.504 1.132a1 1 0 01.992 0l1.75 1a1 1 0 11-.992 1.736L10 3.152l-1.254.716a1 1 0 11-.992-1.736l1.75-1zM5.618 4.504a1 1 0 01-.372 1.364L5.016 6l.23.132a1 1 0 11-.992 1.736L3 7.723V8a1 1 0 01-2 0V6a.996.996 0 01.52-.878l1.734-.99a1 1 0 011.364.372zm8.764 0a1 1 0 011.364-.372l1.733.99A.996.996 0 0118 6v2a1 1 0 11-2 0v-.277l-1.254.145a1 1 0 11-.992-1.736L14.984 6l-.23-.132a1 1 0 01-.372-1.364zm-7 4a1 1 0 011.364-.372L10 8.848l1.254-.716a1 1 0 11.992 1.736L11 10.723V12a1 1 0 11-2 0v-1.277l-1.246-.855a1 1 0 01-.372-1.364zM3 11a1 1 0 011 1v1.277l1.246.855a1 1 0 11-.992 1.736l-1.75-1A1 1 0 012 14v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 01-.504.868l-1.75 1a1 1 0 11-.992-1.736L16 13.277V12a1 1 0 011-1zm-9.618 5.504a1 1 0 011.364.372l.254.145V16a1 1 0 112 0v1.021l.254-.145a1 1 0 11.992 1.736l-1.735.99a.995.995 0 01-1.022 0l-1.735-.99a1 1 0 01.128-1.608z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h3 className={styles.serviceTitle}>{isEn ? 'Decorative Elements' : 'Decoratieve Elementen'}</h3>
+                <h3 className={styles.serviceTitle}>{t('stratenmaker.spec_decorative_title')}</h3>
                 <p className={styles.serviceDescription}>
-                  {isEn ? 'Circle cuts, mosaics, inlaid work and other decorative paving techniques.' : 'Cirkelzagen, mozaïeken, ingelegd werk en andere decoratieve bestratingstechnieken.'}
+                  {t('stratenmaker.spec_decorative_desc')}
                 </p>
               </div>
             </div>
@@ -356,27 +314,27 @@ export default async function StratenmakerPage({ params }: Props) {
           <section className={styles.section}>
             <div className={styles.highlightSection}>
               <h2 className={styles.highlightTitle}>
-                {isEn ? 'Materials & Options' : 'Materialen & Opties'}
+                {t('stratenmaker.materials_title')}
               </h2>
               <div className={`${styles.grid} ${styles.gridCols2}`}>
                 <div className={styles.materialsList}>
-                  <h3>{isEn ? 'Paving Materials' : 'Bestrating Materialen'}</h3>
+                  <h3>{t('stratenmaker.materials_paving_title')}</h3>
                   <ul>
-                    <li>{isEn ? 'Concrete pavers (various colors/sizes)' : 'Betonklinkers (diverse kleuren/formaten)'}</li>
-                    <li>{isEn ? 'Natural stone (bluestone, granite, basalt)' : 'Natuursteen (hardsteen, graniet, basalt)'}</li>
-                    <li>{isEn ? 'Ceramic tiles (large format)' : 'Keramische tegels (groot formaat)'}</li>
-                    <li>{isEn ? 'Decorative gravel & stabilization mats' : 'Siergrind & stabilisatiematten'}</li>
-                    <li>{isEn ? 'Asphalt & crushed stone (functional)' : 'Asfalt & steenslag (functioneel)'}</li>
+                    <li>{t('stratenmaker.materials_concrete')}</li>
+                    <li>{t('stratenmaker.materials_natural')}</li>
+                    <li>{t('stratenmaker.materials_ceramic')}</li>
+                    <li>{t('stratenmaker.materials_gravel')}</li>
+                    <li>{t('stratenmaker.materials_asphalt')}</li>
                   </ul>
                 </div>
                 <div className={styles.materialsList}>
-                  <h3>{isEn ? 'Special Techniques' : 'Speciale Technieken'}</h3>
+                  <h3>{t('stratenmaker.techniques_title')}</h3>
                   <ul>
-                    <li>{isEn ? 'Permeable paving (water-permeable)' : 'Doorlatende bestrating (waterdoorlatend)'}</li>
-                    <li>{isEn ? 'Deformation-resistant constructions' : 'Vervorming bestendige constructies'}</li>
-                    <li>{isEn ? 'Anti-slip treatments' : 'Antislip behandelingen'}</li>
-                    <li>{isEn ? 'Integrated edge restraint' : 'Geïntegreerde kantopsluiting'}</li>
-                    <li>{isEn ? 'LED lighting integration' : 'LED verlichting integratie'}</li>
+                    <li>{t('stratenmaker.techniques_permeable')}</li>
+                    <li>{t('stratenmaker.techniques_deformation')}</li>
+                    <li>{t('stratenmaker.techniques_antislip')}</li>
+                    <li>{t('stratenmaker.techniques_edge')}</li>
+                    <li>{t('stratenmaker.techniques_led')}</li>
                   </ul>
                 </div>
               </div>
@@ -387,29 +345,29 @@ export default async function StratenmakerPage({ params }: Props) {
           <section className={styles.section}>
             <div className={styles.card}>
               <h2 className={styles.cardTitle} style={{ textAlign: 'center' }}>
-                {isEn ? 'Paving Cost Overview' : 'Kostenoverzicht Bestrating'}
+                {t('stratenmaker.cost_title')}
               </h2>
               <div className={styles.priceGrid}>
                 <div className={styles.priceCard}>
-                  <h3>{isEn ? 'Concrete Pavers' : 'Betonklinkers'}</h3>
+                  <h3>{t('stratenmaker.cost_concrete_title')}</h3>
                   <p className={styles.priceAmount}>€45 - €75/m²</p>
-                  <p className={styles.priceNote}>{isEn ? 'Incl. sand/cement joints' : 'Incl. zand/cement voegen'}</p>
+                  <p className={styles.priceNote}>{t('stratenmaker.cost_concrete_note')}</p>
                 </div>
                 <div className={styles.priceCard}>
-                  <h3>{isEn ? 'Natural Stone' : 'Natuursteen'}</h3>
+                  <h3>{t('stratenmaker.cost_natural_title')}</h3>
                   <p className={styles.priceAmount}>€75 - €150/m²</p>
-                  <p className={styles.priceNote}>{isEn ? 'Depending on stone type' : 'Afhankelijk van steensoort'}</p>
+                  <p className={styles.priceNote}>{t('stratenmaker.cost_natural_note')}</p>
                 </div>
                 <div className={styles.priceCard}>
-                  <h3>{isEn ? 'Ceramic Tiles' : 'Keramische Tegels'}</h3>
+                  <h3>{t('stratenmaker.cost_ceramic_title')}</h3>
                   <p className={styles.priceAmount}>€85 - €120/m²</p>
-                  <p className={styles.priceNote}>{isEn ? 'Large format, on plots' : 'Groot formaat, op plots'}</p>
+                  <p className={styles.priceNote}>{t('stratenmaker.cost_ceramic_note')}</p>
                 </div>
               </div>
               <div className={styles.priceDetails}>
-                <p><strong>{isEn ? 'Including:' : 'Inclusief:'}</strong> {isEn ? 'Groundwork, foundation, sand/gravel, laying and finishing' : 'Grondwerk, fundering, zand/grind, leggen en afwerking'}</p>
-                <p><strong>{isEn ? 'Excluding:' : 'Exclusief:'}</strong> {isEn ? 'Any permits, sewer work, electrical connections' : 'Eventuele vergunningen, rioolwerk, elektrische aansluitingen'}</p>
-                <p><strong>{isEn ? 'Surcharge possible for:' : 'Toeslag mogelijk voor:'}</strong> {isEn ? 'Very hard ground, limited accessibility, special patterns' : 'Zeer harde grond, beperkte toegankelijkheid, speciale patronen'}</p>
+                <p><strong>{t('stratenmaker.cost_including_label')}</strong> {t('stratenmaker.cost_including_text')}</p>
+                <p><strong>{t('stratenmaker.cost_excluding_label')}</strong> {t('stratenmaker.cost_excluding_text')}</p>
+                <p><strong>{t('stratenmaker.cost_surcharge_label')}</strong> {t('stratenmaker.cost_surcharge_text')}</p>
               </div>
             </div>
           </section>
@@ -418,7 +376,7 @@ export default async function StratenmakerPage({ params }: Props) {
           <section className={styles.section}>
             <div className={styles.highlightSection}>
               <h2 className={styles.highlightTitle}>
-                {isEn ? 'The Paving Process' : 'Het Bestratingsproces'}
+                {t('stratenmaker.process_title')}
               </h2>
               <div className={styles.processSteps}>
                 <div className={styles.processStep}>
@@ -426,9 +384,9 @@ export default async function StratenmakerPage({ params }: Props) {
                     <span>1</span>
                   </div>
                   <div className={styles.stepContent}>
-                    <h3>{isEn ? 'Measurement & Advice' : 'Opmeting & Advies'}</h3>
+                    <h3>{t('stratenmaker.process_step1_title')}</h3>
                     <p>
-                      {isEn ? 'Precise measurement, soil investigation and advice on materials and execution.' : 'Precieze opmeting, bodemonderzoek en advies over materialen en uitvoering.'}
+                      {t('stratenmaker.process_step1_text')}
                     </p>
                   </div>
                 </div>
@@ -438,9 +396,9 @@ export default async function StratenmakerPage({ params }: Props) {
                     <span>2</span>
                   </div>
                   <div className={styles.stepContent}>
-                    <h3>{isEn ? 'Earthwork & Foundation' : 'Grondverzet & Fundering'}</h3>
+                    <h3>{t('stratenmaker.process_step2_title')}</h3>
                     <p>
-                      {isEn ? 'Excavation, applying foundation layer and compacting according to PAV guidelines.' : 'Uitgraven, fundatielaag aanbrengen en verdichten volgens PAV richtlijnen.'}
+                      {t('stratenmaker.process_step2_text')}
                     </p>
                   </div>
                 </div>
@@ -450,9 +408,9 @@ export default async function StratenmakerPage({ params }: Props) {
                     <span>3</span>
                   </div>
                   <div className={styles.stepContent}>
-                    <h3>{isEn ? 'Sand Bed & Edge Restraint' : 'Zandbed & Kantopsluiting'}</h3>
+                    <h3>{t('stratenmaker.process_step3_title')}</h3>
                     <p>
-                      {isEn ? 'Applying sand bed and placing edges/edge restraint for stability.' : 'Aanbrengen zandbed en plaatsen van randen/kantopsluiting voor stabiliteit.'}
+                      {t('stratenmaker.process_step3_text')}
                     </p>
                   </div>
                 </div>
@@ -462,9 +420,9 @@ export default async function StratenmakerPage({ params }: Props) {
                     <span>4</span>
                   </div>
                   <div className={styles.stepContent}>
-                    <h3>{isEn ? 'Laying & Finishing' : 'Leggen & Afwerking'}</h3>
+                    <h3>{t('stratenmaker.process_step4_title')}</h3>
                     <p>
-                      {isEn ? 'Professional laying of paving, jointing and compacting for optimal compaction.' : 'Professioneel leggen van bestrating, voegen en trillen voor optimale verdichting.'}
+                      {t('stratenmaker.process_step4_text')}
                     </p>
                   </div>
                 </div>
@@ -475,7 +433,7 @@ export default async function StratenmakerPage({ params }: Props) {
           {/* FAQ Section */}
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>
-              {isEn ? 'Frequently Asked Questions' : 'Veelgestelde Vragen'}
+              {t('stratenmaker.faq_title')}
             </h2>
             <div className={styles.faqSection}>
               {localeFaqs.map((faq, index) => (
@@ -495,10 +453,10 @@ export default async function StratenmakerPage({ params }: Props) {
           <section className={styles.leadFormSection}>
             <div className={styles.leadFormCard}>
               <h2 className={styles.leadFormTitle}>
-                {isEn ? 'Free Quotes for Paving Work' : 'Gratis Offertes voor Bestratingswerk'}
+                {t('stratenmaker.lead_title')}
               </h2>
               <p className={styles.leadFormDescription}>
-                {isEn ? 'Get in touch with up to 3 experienced pavers in your municipality within 24 hours' : 'Krijg binnen 24 uur contact van tot 3 ervaren stratenmakers in jouw gemeente'}
+                {t('stratenmaker.lead_description')}
               </p>
               <NewLeadForm
                 translations={formTranslations}
@@ -511,7 +469,7 @@ export default async function StratenmakerPage({ params }: Props) {
           <section className={styles.relatedSection}>
             <RelatedArticles
               articles={localeArticles}
-              title={isEn ? 'Related articles about paving' : 'Gerelateerde artikelen over bestrating'}
+              title={t('stratenmaker.related_title')}
             />
           </section>
         </div>

@@ -17,6 +17,7 @@ import {
   getRelatedArticles,
 } from '@/lib/articles';
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/i18n';
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -30,11 +31,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const article = await getArticleBySlug(slug);
+  const t = createTranslator(locale);
 
   if (!article) {
     return {
-      title: locale === 'en' ? 'Article not found' : 'Artikel niet gevonden',
-      description: locale === 'en' ? 'The requested article could not be found.' : 'Het gevraagde artikel kon niet worden gevonden.',
+      title: t('nieuws_page.article_not_found_title'),
+      description: t('nieuws_page.article_not_found_description'),
     };
   }
 
@@ -57,6 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function NewsArticlePage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
+  const t = createTranslator(locale);
 
   const article = await getArticleBySlug(slug);
   if (!article) {
@@ -70,13 +73,13 @@ export default async function NewsArticlePage({ params }: Props) {
 
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: locale === 'en' ? 'News' : 'Nieuws', href: '/nieuws' },
+    { label: t('nieuws_page.breadcrumb'), href: '/nieuws' },
     { label: article.title },
   ];
 
   const breadcrumbSchemaItems = [
     { name: 'Home', url: getAbsoluteUrl('/', locale as SupportedLocale) },
-    { name: locale === 'en' ? 'News' : 'Nieuws', url: getAbsoluteUrl('/nieuws', locale as SupportedLocale) },
+    { name: t('nieuws_page.breadcrumb'), url: getAbsoluteUrl('/nieuws', locale as SupportedLocale) },
     { name: article.title, url: articleUrl },
   ];
 
@@ -99,7 +102,7 @@ export default async function NewsArticlePage({ params }: Props) {
                 {article.category.name}
               </Link>
               <span className={styles.articleMetaText}>
-                {formatArticleDate(article.publishedAt, locale)} · {article.readTime} {locale === 'en' ? 'min read' : 'min leestijd'}
+                {formatArticleDate(article.publishedAt, locale)} · {article.readTime} {t('blog.min_read')}
               </span>
               </div>
 
@@ -129,7 +132,7 @@ export default async function NewsArticlePage({ params }: Props) {
             </div>
 
             <section className={styles.articleFooterPanel}>
-              <h2 className={styles.sectionTitle}>{locale === 'en' ? 'Continue reading' : 'Verder lezen'}</h2>
+              <h2 className={styles.sectionTitle}>{t('nieuws_page.continue_reading')}</h2>
               <div className={styles.relatedGrid}>
               {relatedArticles.map((relatedArticle) => (
                 <Link

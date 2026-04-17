@@ -11,6 +11,7 @@ import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema'
 import styles from '../../components/Blog.module.css'
 import { getArticleCategories, getArticles } from '@/lib/articles'
 import { getAbsoluteUrl, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -18,19 +19,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  const meta = locale === 'en' ? {
-    title: 'Garden News & Tips - Blog | Hovenier.frl',
-    description: 'Discover the latest garden trends, seasonal tips and expert advice. Stay up to date with everything about garden maintenance and landscape design in Friesland.',
-    keywords: 'garden news, garden tips, gardener blog, seasonal garden advice, garden maintenance tips, Friesland',
-  } : {
-    title: 'Tuinnieuws & Tips - Blog | Hovenier.frl',
-    description: 'Ontdek de nieuwste tuintrends, seizoenstips en expert advies. Blijf op de hoogte van alles over tuinonderhoud en landschapsdesign in Friesland.',
-    keywords: 'tuinnieuws, tuintips, hovenier blog, seizoen tuinadvies, tuinonderhoud tips, Friesland',
-  };
+  const t = createTranslator(locale)
 
   return {
-    ...meta,
+    title: t('nieuws_page.meta_title'),
+    description: t('nieuws_page.meta_description'),
     alternates: getLocaleAlternates('/nieuws', locale as SupportedLocale),
   }
 }
@@ -38,13 +31,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function NieuwsHubPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
+  const t = createTranslator(locale)
   const articles = await getArticles()
   const categories = await getArticleCategories()
 
   // Breadcrumb items
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: locale === 'en' ? 'News' : 'Nieuws' }
+    { label: t('nieuws_page.breadcrumb') }
   ];
 
   // Transform breadcrumbs for schema

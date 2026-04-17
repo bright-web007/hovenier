@@ -2,6 +2,7 @@ import React from 'react';
 import type { ArticleRecord } from '@/lib/articles';
 import { getArticlePath } from '@/lib/articles';
 import { getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/i18n';
 
 interface BlogSchemaProps {
   locale: string
@@ -10,6 +11,7 @@ interface BlogSchemaProps {
 }
 
 export default function BlogSchema({ locale, articles, url }: BlogSchemaProps) {
+  const t = createTranslator(locale);
   const blogSchema = {
     "@context": "https://schema.org",
     "@type": "Blog",
@@ -93,7 +95,7 @@ export default function BlogSchema({ locale, articles, url }: BlogSchemaProps) {
       {
         "@type": "ListItem",
         "position": 2,
-        "name": locale === 'en' ? 'News' : 'Nieuws',
+        "name": t('nieuws_page.breadcrumb'),
         "item": url
       }
     ]

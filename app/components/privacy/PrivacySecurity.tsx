@@ -1,18 +1,19 @@
 import styles from '../../styles/Privacy.module.css';
+import { createTranslator } from '@/i18n';
 
 const PrivacySecurity = ({ locale = 'nl' }: { locale?: string }) => {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale);
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>{isEn ? '7. Data security' : '7. Gegevensbeveiliging'}</h2>
+      <h2 className={styles.legalSectionTitle}>{t('privacy_page.security_title')}</h2>
       <p className={styles.legalText}>
-        {isEn ? 'We take appropriate technical and organizational measures to protect your data against:' : 'Wij nemen passende technische en organisatorische maatregelen om uw gegevens te beschermen tegen:'}
+        {t('privacy_page.security_intro')}
       </p>
       <ul className={styles.legalList}>
-        <li>{isEn ? 'Unauthorized access' : 'Ongeautoriseerde toegang'}</li>
-        <li>{isEn ? 'Loss or destruction' : 'Verlies of vernietiging'}</li>
-        <li>{isEn ? 'Unlawful processing' : 'Onrechtmatige verwerking'}</li>
-        <li>{isEn ? 'Accidental damage' : 'Accidentele beschadiging'}</li>
+        <li>{t('privacy_page.security_unauthorized')}</li>
+        <li>{t('privacy_page.security_loss')}</li>
+        <li>{t('privacy_page.security_unlawful')}</li>
+        <li>{t('privacy_page.security_accidental')}</li>
       </ul>
     </section>
   );

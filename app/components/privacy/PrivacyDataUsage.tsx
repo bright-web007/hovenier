@@ -1,16 +1,17 @@
 import styles from '../../styles/Privacy.module.css';
+import { createTranslator } from '@/i18n';
 
 const PrivacyDataUsage = ({ locale = 'nl' }: { locale?: string }) => {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale);
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>{isEn ? '4. What do we use your data for?' : '4. Waarvoor gebruiken wij uw gegevens?'}</h2>
+      <h2 className={styles.legalSectionTitle}>{t('privacy_page.data_usage_title')}</h2>
       <ul className={styles.legalList}>
-        <li>{isEn ? 'Matching customers with suitable gardeners' : 'Het koppelen van klanten aan geschikte hoveniers'}</li>
-        <li>{isEn ? 'Sending quotes and communication' : 'Het versturen van offertes en communicatie'}</li>
-        <li>{isEn ? 'Improving our services' : 'Het verbeteren van onze dienstverlening'}</li>
-        <li>{isEn ? 'Complying with legal obligations' : 'Het naleven van wettelijke verplichtingen'}</li>
-        <li>{isEn ? 'Sending newsletters (with consent)' : 'Het verzenden van nieuwsbrieven (met toestemming)'}</li>
+        <li>{t('privacy_page.data_usage_matching')}</li>
+        <li>{t('privacy_page.data_usage_quotes')}</li>
+        <li>{t('privacy_page.data_usage_improving')}</li>
+        <li>{t('privacy_page.data_usage_legal')}</li>
+        <li>{t('privacy_page.data_usage_newsletters')}</li>
       </ul>
     </section>
   );

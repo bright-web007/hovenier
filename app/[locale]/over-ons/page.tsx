@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../components/Navigation'
 import Breadcrumbs from '../../components/Breadcrumbs'
 import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -32,11 +33,12 @@ export default async function OverOnsPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
   const isEn = locale === 'en';
+  const t = createTranslator(locale);
 
   // Breadcrumb items
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: locale === 'en' ? 'About Us' : 'Over Ons' }
+    { label: t('over_ons.breadcrumb') }
   ];
 
   return (

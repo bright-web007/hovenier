@@ -5,6 +5,7 @@ import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 import { regionHubs, getRegionHubBySlug, type RegionHub, standaloneRegions, getGemeenteBySlug, type Gemeente } from '@/lib/regions-hierarchy'
 import Link from 'next/link'
 
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!regionHub && !standaloneRegion) {
     return {
-      title: locale === 'en' ? 'Region not found | Hovenier.frl' : 'Regio niet gevonden | Hovenier.frl'
+      title: createTranslator(locale)('regio_page.not_found_title')
     };
   }
 
@@ -90,7 +91,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   // Fallback if neither found
   return {
-    title: locale === 'en' ? 'Region not found | Hovenier.frl' : 'Regio niet gevonden | Hovenier.frl'
+    title: createTranslator(locale)('regio_page.not_found_title')
   };
 }
 

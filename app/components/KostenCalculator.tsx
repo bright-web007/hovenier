@@ -4,6 +4,7 @@ import { useState } from 'react';
 import calculatorStyles from './KostenCalculator.module.css';
 import KostenCalculatorCta from './KostenCalculatorCta';
 import CustomSelect from './CustomSelect';
+import { createTranslator } from '@/i18n';
 
 const prices: Record<string, Record<string, [number, number]>> = {
   onderhoud: { small: [140, 250], medium: [200, 380], large: [300, 550], xlarge: [450, 750] },
@@ -34,6 +35,7 @@ const notesEn: Record<string, string> = {
 
 export default function KostenCalculator({ locale = 'nl' }: { locale?: string }) {
   const isEn = locale === 'en';
+  const t = createTranslator(locale);
   const notes = isEn ? notesEn : notesNl;
   const numberLocale = isEn ? 'en-US' : 'nl-NL';
 
@@ -48,43 +50,43 @@ export default function KostenCalculator({ locale = 'nl' }: { locale?: string })
     <div className={calculatorStyles.calculatorWrapper}>
       <div className={calculatorStyles.calculatorRow}>
         <div className={calculatorStyles.calculatorField}>
-          <label>{isEn ? 'Type of work' : 'Type werkzaamheden'}</label>
+          <label>{t('calculator.work_type')}</label>
           <CustomSelect
             id="jobType"
-            label={isEn ? 'Type of work' : 'Type werkzaamheden'}
+            label={t('calculator.work_type')}
             value={jobType}
             onChange={setJobType}
             variant="form"
             options={[
-              { value: 'onderhoud', label: isEn ? 'Garden Maintenance' : 'Tuinonderhoud' },
-              { value: 'aanleg', label: isEn ? 'Garden Construction' : 'Tuin aanleggen' },
-              { value: 'ontwerp', label: isEn ? 'Garden Design' : 'Tuinontwerp' },
-              { value: 'snoei', label: isEn ? 'Pruning' : 'Snoeien' },
-              { value: 'groendak', label: isEn ? 'Green Roof' : 'Groendak' },
-              { value: 'stratenmaker', label: isEn ? 'Paving' : 'Stratenmaker' },
+              { value: 'onderhoud', label: t('calculator.garden_maintenance') },
+              { value: 'aanleg', label: t('calculator.garden_construction') },
+              { value: 'ontwerp', label: t('calculator.garden_design') },
+              { value: 'snoei', label: t('calculator.pruning') },
+              { value: 'groendak', label: t('calculator.green_roof') },
+              { value: 'stratenmaker', label: t('calculator.paving') },
             ]}
           />
         </div>
         <div className={calculatorStyles.calculatorField}>
-          <label>{isEn ? 'Garden size' : 'Tuingrootte'}</label>
+          <label>{t('calculator.garden_size')}</label>
           <CustomSelect
             id="gardenSize"
-            label={isEn ? 'Garden size' : 'Tuingrootte'}
+            label={t('calculator.garden_size')}
             value={gardenSize}
             onChange={setGardenSize}
             variant="form"
             options={[
-              { value: 'small', label: isEn ? 'Small (up to 50m²)' : 'Klein (tot 50m²)' },
-              { value: 'medium', label: isEn ? 'Medium (50–150m²)' : 'Middelgroot (50–150m²)' },
-              { value: 'large', label: isEn ? 'Large (150–300m²)' : 'Groot (150–300m²)' },
-              { value: 'xlarge', label: isEn ? 'Very large (300m²+)' : 'Zeer groot (300m²+)' },
+              { value: 'small', label: t('calculator.small') },
+              { value: 'medium', label: t('calculator.medium') },
+              { value: 'large', label: t('calculator.large') },
+              { value: 'xlarge', label: t('calculator.xlarge') },
             ]}
           />
         </div>
       </div>
       <div className={calculatorStyles.calculatorResult}>
         <div className={calculatorStyles.resultContent}>
-          <div className={calculatorStyles.resultLabel}>{isEn ? 'Estimated costs' : 'Geschatte kosten'}</div>
+          <div className={calculatorStyles.resultLabel}>{t('calculator.estimated_costs')}</div>
           <div className={calculatorStyles.resultPrice}>€{lo} – €{hi}</div>
           <div className={calculatorStyles.resultNote}>{notes[jobType]}</div>
         </div>

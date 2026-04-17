@@ -40,7 +40,7 @@
 
 .name {
   font-size: 3rem;
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-weight: 600;
   color: var(--forest);
   margin-bottom: 1rem;

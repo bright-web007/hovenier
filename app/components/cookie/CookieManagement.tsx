@@ -1,75 +1,71 @@
 import styles from '../../styles/Cookie.module.css';
 
-export default function CookieManagement() {
+interface CookieManagementProps {
+  translations: Record<string, string>;
+}
+
+export default function CookieManagement({ translations }: CookieManagementProps) {
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>5. Cookies beheren en verwijderen</h2>
+      <h2 className={styles.legalSectionTitle}>{translations.management_title}</h2>
       <p className={styles.legalText}>
-        U heeft verschillende opties om uw cookievoorkeuren te beheren. U kunt te allen tijde 
-        uw toestemming voor niet-noodzakelijke cookies intrekken of wijzigen.
+        {translations.management_text}
       </p>
 
-      <h3 className={styles.legalSubsectionTitle}>5.1 Via ons Cookie Centrum</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.management_center_title}</h3>
       <p className={styles.legalText}>
-        De eenvoudigste manier om uw cookievoorkeuren te wijzigen is via ons Cookie Centrum. 
-        Dit centrum kunt u bereiken via:
+        {translations.management_center_text}
       </p>
       <ul className={styles.legalList}>
-        <li>De cookie banner die verschijnt bij uw eerste bezoek</li>
-        <li>De link "Cookie Instellingen" in de footer van elke pagina</li>
-        <li>Door contact met ons op te nemen via <a href="mailto:privacy@hovenier.frl" className={styles.legalLink}>privacy@hovenier.frl</a></li>
+        <li>{translations.management_center_banner}</li>
+        <li>{translations.management_center_footer}</li>
+        <li>{translations.management_center_email} <a href="mailto:privacy@hovenier.frl" className={styles.legalLink}>privacy@hovenier.frl</a></li>
       </ul>
       <p className={styles.legalText}>
-        In het Cookie Centrum kunt u per categorie aangeven of u deze cookies wilt accepteren 
-        of weigeren. Noodzakelijke cookies kunnen niet worden uitgeschakeld.
+        {translations.management_center_note}
       </p>
 
-      <h3 className={styles.legalSubsectionTitle}>5.2 Via uw webbrowser</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.management_browser_title}</h3>
       <p className={styles.legalText}>
-        U kunt cookies ook rechtstreeks beheren via de instellingen van uw webbrowser. 
-        Elke browser heeft zijn eigen methode voor cookiebeheer:
+        {translations.management_browser_text}
       </p>
       <ul className={styles.legalList}>
-        <li><a href="https://support.google.com/chrome/answer/95647" className={styles.legalLink} target="_blank" rel="noopener noreferrer">Google Chrome</a> - Cookies beheren in Chrome</li>
-        <li><a href="https://support.mozilla.org/nl/kb/cookies-informatie-websites" className={styles.legalLink} target="_blank" rel="noopener noreferrer">Mozilla Firefox</a> - Firefox privacy en beveiligingsinstellingen</li>
-        <li><a href="https://support.microsoft.com/nl-nl/microsoft-edge/cookies-in-microsoft-edge-verwijderen" className={styles.legalLink} target="_blank" rel="noopener noreferrer">Microsoft Edge</a> - Edge cookiebeheer</li>
-        <li><a href="https://support.apple.com/nl-nl/guide/safari/sfri11471/mac" className={styles.legalLink} target="_blank" rel="noopener noreferrer">Safari</a> - Safari privacy instellingen</li>
+        <li><a href="https://support.google.com/chrome/answer/95647" className={styles.legalLink} target="_blank" rel="noopener noreferrer">{translations.management_chrome}</a> - {translations.management_chrome_desc}</li>
+        <li><a href="https://support.mozilla.org/nl/kb/cookies-informatie-websites" className={styles.legalLink} target="_blank" rel="noopener noreferrer">{translations.management_firefox}</a> - {translations.management_firefox_desc}</li>
+        <li><a href="https://support.microsoft.com/nl-nl/microsoft-edge/cookies-in-microsoft-edge-verwijderen" className={styles.legalLink} target="_blank" rel="noopener noreferrer">{translations.management_edge}</a> - {translations.management_edge_desc}</li>
+        <li><a href="https://support.apple.com/nl-nl/guide/safari/sfri11471/mac" className={styles.legalLink} target="_blank" rel="noopener noreferrer">{translations.management_safari}</a> - {translations.management_safari_desc}</li>
       </ul>
       <p className={styles.legalText}>
-        Let op: het blokkeren van cookies via uw browser blokkeert alle cookies voor alle websites, 
-        niet alleen voor Hovenier.frl.
+        {translations.management_browser_note}
       </p>
 
-      <h3 className={styles.legalSubsectionTitle}>5.3 Derde partij opt-out tools</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.management_optout_title}</h3>
       <p className={styles.legalText}>
-        Voor sommige derde partij cookies kunt u gebruik maken van specifieke opt-out tools:
+        {translations.management_optout_text}
       </p>
       <ul className={styles.legalList}>
-        <li><a href="https://tools.google.com/dlpage/gaoptout" className={styles.legalLink} target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a></li>
-        <li><a href="https://www.facebook.com/ads/preferences" className={styles.legalLink} target="_blank" rel="noopener noreferrer">Facebook Advertentievoorkeuren</a></li>
-        <li><a href="https://optout.aboutads.info" className={styles.legalLink} target="_blank" rel="noopener noreferrer">Digital Advertising Alliance Opt-out Page</a></li>
+        <li><a href="https://tools.google.com/dlpage/gaoptout" className={styles.legalLink} target="_blank" rel="noopener noreferrer">{translations.management_optout_ga}</a></li>
+        <li><a href="https://www.facebook.com/ads/preferences" className={styles.legalLink} target="_blank" rel="noopener noreferrer">{translations.management_optout_fb}</a></li>
+        <li><a href="https://optout.aboutads.info" className={styles.legalLink} target="_blank" rel="noopener noreferrer">{translations.management_optout_daa}</a></li>
       </ul>
 
-      <h3 className={styles.legalSubsectionTitle}>5.4 Gevolgen van het uitschakelen van cookies</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.management_consequences_title}</h3>
       <p className={styles.legalText}>
-        Het uitschakelen van bepaalde cookies kan invloed hebben op uw ervaring op onze website:
+        {translations.management_consequences_text}
       </p>
       <ul className={styles.legalList}>
-        <li><strong>Noodzakelijke cookies:</strong> Kunnen niet worden uitgeschakeld zonder verlies van basisfunctionaliteit</li>
-        <li><strong>Functionele cookies:</strong> Uw voorkeuren worden niet onthouden (taal, regio, etc.)</li>
-        <li><strong>Analytische cookies:</strong> Wij kunnen de website minder goed optimaliseren voor gebruikers</li>
-        <li><strong>Marketing cookies:</strong> Advertenties kunnen minder relevant zijn voor uw interesses</li>
+        <li><strong>{translations.management_consequences_necessary}</strong> {translations.management_consequences_necessary_desc}</li>
+        <li><strong>{translations.management_consequences_functional}</strong> {translations.management_consequences_functional_desc}</li>
+        <li><strong>{translations.management_consequences_analytical}</strong> {translations.management_consequences_analytical_desc}</li>
+        <li><strong>{translations.management_consequences_marketing}</strong> {translations.management_consequences_marketing_desc}</li>
       </ul>
       <p className={styles.legalText}>
-        Ook na het uitschakelen van cookies blijft de basisfunctionaliteit van onze website 
-        gewoon beschikbaar. U kunt nog steeds hoveniers zoeken, contact opnemen en offertes aanvragen.
+        {translations.management_consequences_footer}
       </p>
 
       <div className={styles.warningBox}>
         <p className={styles.warningText}>
-          <strong>Belangrijk:</strong> Wanneer u cookies verwijdert uit uw browser, 
-          worden ook uw cookievoorkeuren gewist. Bij een volgend bezoek zult u 
-          opnieuw gevraagd worden om uw voorkeuren in te stellen.
+          <strong>{translations.management_warning}</strong> {translations.management_warning_text}
         </p>
       </div>
     </section>

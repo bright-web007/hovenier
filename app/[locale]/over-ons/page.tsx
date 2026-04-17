@@ -48,8 +48,8 @@ export default async function OverOnsPage({ params }: Props) {
         minHeight: '100vh',
         background: 'linear-gradient(to bottom right, var(--cream-light), var(--sage-light))'
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem' }}>
-
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem' }}>
+          
           {/* Hero Section */}
           <div style={{ paddingTop: '4rem', paddingBottom: '2rem' }}>
             <div style={{
@@ -60,7 +60,7 @@ export default async function OverOnsPage({ params }: Props) {
             }}>
               <h1 style={{
                 fontSize: '3rem',
-                fontFamily: 'var(--serif)',
+                fontFamily: 'var(--heading-font)',
                 fontWeight: '600',
                 color: 'var(--forest)',
                 marginBottom: '1.5rem',

@@ -1,61 +1,61 @@
 import styles from '../../styles/Cookie.module.css';
 
-export default function CookieSecurity() {
+interface CookieSecurityProps {
+  translations: Record<string, string>;
+}
+
+export default function CookieSecurity({ translations }: CookieSecurityProps) {
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>9. Beveiliging van uw gegevens</h2>
+      <h2 className={styles.legalSectionTitle}>{translations.security_title}</h2>
       <p className={styles.legalText}>
-        Wij nemen de beveiliging van uw persoonlijke gegevens en cookie-informatie 
-        zeer serieus. Wij implementeren passende technische en organisatorische 
-        maatregelen om uw gegevens te beschermen.
+        {translations.security_text}
       </p>
       
-      <h3 className={styles.legalSubsectionTitle}>9.1 Technische beveiligingsmaatregelen</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.security_technical_title}</h3>
       <ul className={styles.legalList}>
-        <li><strong>Encryptie:</strong> Alle gegevens worden beveiligd met SSL/TLS encryptie tijdens overdracht</li>
-        <li><strong>Toegangscontrole:</strong> Beperkte toegang tot systemen op basis van functievereisten</li>
-        <li><strong>Firewalls & Monitoring:</strong> 24/7 monitoring van onze systemen en netwerken</li>
-        <li><strong>Regelmatige Updates:</strong> Systemen worden regelmatig bijgewerkt met beveiligingspatches</li>
-        <li><strong>Backup & Recovery:</strong> Regelmatige back-ups met beveiligde opslag</li>
+        <li><strong>{translations.security_encryption}</strong> {translations.security_encryption_desc}</li>
+        <li><strong>{translations.security_access}</strong> {translations.security_access_desc}</li>
+        <li><strong>{translations.security_firewall}</strong> {translations.security_firewall_desc}</li>
+        <li><strong>{translations.security_updates}</strong> {translations.security_updates_desc}</li>
+        <li><strong>{translations.security_backup}</strong> {translations.security_backup_desc}</li>
       </ul>
       
-      <h3 className={styles.legalSubsectionTitle}>9.2 Organisatorische maatregelen</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.security_org_title}</h3>
       <ul className={styles.legalList}>
-        <li><strong>Privacy Training:</strong> Alle medewerkers ontvangen training over gegevensbescherming</li>
-        <li><strong>Toegangsbeheer:</strong> Strikte procedures voor toegang tot persoonlijke gegevens</li>
-        <li><strong>Incident Response:</strong> Procedures voor het afhandelen van datalekken</li>
-        <li><strong>Audit & Controle:</strong> Regelmatige controles van onze beveiligingsprocedures</li>
+        <li><strong>{translations.security_training}</strong> {translations.security_training_desc}</li>
+        <li><strong>{translations.security_access_mgmt}</strong> {translations.security_access_mgmt_desc}</li>
+        <li><strong>{translations.security_incident}</strong> {translations.security_incident_desc}</li>
+        <li><strong>{translations.security_audit}</strong> {translations.security_audit_desc}</li>
       </ul>
       
-      <h3 className={styles.legalSubsectionTitle}>9.3 Cookie-specifieke beveiliging</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.security_cookie_title}</h3>
       <p className={styles.legalText}>
-        Voor cookies implementeren wij specifieke beveiligingsmaatregelen:
+        {translations.security_cookie_text}
       </p>
       <ul className={styles.legalList}>
-        <li><strong>Secure flag:</strong> Cookies worden alleen verzonden via beveiligde HTTPS-verbindingen</li>
-        <li><strong>HttpOnly flag:</strong> Functionele cookies zijn beschermd tegen client-side scripts</li>
-        <li><strong>SameSite:</strong> Beveiliging tegen CSRF-aanvallen via SameSite cookie attributen</li>
-        <li><strong>Minimale gegevens:</strong> Wij verzamelen alleen de minimaal noodzakelijke informatie</li>
-        <li><strong>Retentiebeleid:</strong> Cookies worden automatisch verwijderd na de vastgestelde periode</li>
+        <li><strong>{translations.security_secure_flag}</strong> {translations.security_secure_flag_desc}</li>
+        <li><strong>{translations.security_httponly}</strong> {translations.security_httponly_desc}</li>
+        <li><strong>{translations.security_samesite}</strong> {translations.security_samesite_desc}</li>
+        <li><strong>{translations.security_minimal}</strong> {translations.security_minimal_desc}</li>
+        <li><strong>{translations.security_retention}</strong> {translations.security_retention_desc}</li>
       </ul>
       
       <div className={styles.warningBox}>
         <p className={styles.warningText}>
-          <strong>Datalek melding:</strong> In het onwaarschijnlijke geval van een datalek 
-          dat uw persoonlijke gegevens betreft, zullen wij u binnen 72 uur informeren 
-          conform de AVG-vereisten.
+          <strong>{translations.security_breach_label}</strong> {translations.security_breach_text}
         </p>
       </div>
       
-      <h3 className={styles.legalSubsectionTitle}>9.4 Uw rol in beveiliging</h3>
+      <h3 className={styles.legalSubsectionTitle}>{translations.security_role_title}</h3>
       <p className={styles.legalText}>
-        U kunt ook bijdragen aan de beveiliging van uw gegevens door:
+        {translations.security_role_text}
       </p>
       <ul className={styles.legalList}>
-        <li>Een actuele browser te gebruiken met de nieuwste beveiligingsupdates</li>
-        <li>Uw browserinstellingen te configureren voor optimale privacy</li>
-        <li>Verdachte activiteiten op uw account te melden</li>
-        <li>Uw login gegevens (indien van toepassing) veilig te bewaren</li>
+        <li>{translations.security_role_browser}</li>
+        <li>{translations.security_role_settings}</li>
+        <li>{translations.security_role_report}</li>
+        <li>{translations.security_role_credentials}</li>
       </ul>
     </section>
   );

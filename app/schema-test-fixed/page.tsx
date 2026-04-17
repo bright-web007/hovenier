@@ -31,7 +31,7 @@ export default function SchemaTestPage() {
   ];
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
+    <div style={{ padding: '2rem', maxWidth: '1280px', margin: '0 auto' }}>
       <h1>🔍 Schema.org Validation Test Page</h1>
       <p>This page contains all schema types for validation testing.</p>
       

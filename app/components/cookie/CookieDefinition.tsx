@@ -1,23 +1,21 @@
 import styles from '../../styles/Cookie.module.css';
 
-export default function CookieDefinition() {
+interface CookieDefinitionProps {
+  translations: Record<string, string>;
+}
+
+export default function CookieDefinition({ translations }: CookieDefinitionProps) {
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>2. Wat zijn Cookies?</h2>
+      <h2 className={styles.legalSectionTitle}>{translations.definition_title}</h2>
       <p className={styles.legalText}>
-        Cookies zijn kleine tekstbestanden die op uw apparaat (computer, tablet, smartphone) 
-        worden opgeslagen wanneer u een website bezoekt. Deze bestanden bevatten informatie 
-        die door de website kan worden gelezen bij een volgend bezoek.
+        {translations.definition_text_1}
       </p>
       <p className={styles.legalText}>
-        Cookies kunnen door de websiteeigenaar zelf worden geplaatst (eerste partij cookies) 
-        of door externe partijen zoals adverteerders of analysetools (derde partij cookies). 
-        Ze kunnen tijdelijk zijn (sessiecookies) die worden verwijderd wanneer u uw browser sluit, 
-        of permanent (persistente cookies) die voor een bepaalde periode op uw apparaat blijven.
+        {translations.definition_text_2}
       </p>
       <p className={styles.legalText}>
-        Naast cookies gebruiken wij ook vergelijkbare technologieën zoals web beacons, pixels, 
-        en lokale opslag om informatie te verzamelen over hoe u onze website gebruikt.
+        {translations.definition_text_3}
       </p>
     </section>
   );

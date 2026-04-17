@@ -56,6 +56,8 @@ export default function GardenerCard({ gardener, locale }: GardenerCardProps) {
         </div>
       </div>
 
+      <div style={{ width: '100%', height: '1px', backgroundColor: '#CECECE', marginBottom: '16px' }}></div>
+
       <div className={styles.cardSpecialties}>
         <div className={styles.specialtiesLabel}>{isEn ? 'Specialties:' : 'Specialisaties:'}</div>
         <div className={styles.specialtiesList}>

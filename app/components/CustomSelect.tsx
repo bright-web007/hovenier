@@ -14,6 +14,8 @@ interface CustomSelectProps {
   options: Option[]
   value: string
   onChange: (value: string) => void
+  className?: string,
+  outerClassName?: string,
   variant?: 'default' | 'form'
 }
 
@@ -47,7 +49,7 @@ const formOptionStyle: React.CSSProperties = {
   padding: '10px 14px',
 }
 
-export default function CustomSelect({ id, label, options, value, onChange, variant = 'default' }: CustomSelectProps) {
+export default function CustomSelect({ id, label, options, value, onChange, variant = 'default', className, outerClassName }: CustomSelectProps) {
   const [isOpen, setIsOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -64,11 +66,11 @@ export default function CustomSelect({ id, label, options, value, onChange, vari
   }, [])
 
   return (
-    <div className={styles.customSelect} ref={ref}>
+    <div className={`${styles.customSelect} ${outerClassName || ''}`} ref={ref}>
       <button
         id={id}
         type="button"
-        className={`${styles.customSelectTrigger} ${isOpen ? styles.customSelectOpen : ''}`}
+        className={`${styles.customSelectTrigger} ${isOpen ? styles.customSelectOpen : ''} ${className || ''}`}
         style={variant === 'form' ? (isOpen ? formTriggerOpenStyle : formTriggerStyle) : undefined}
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}

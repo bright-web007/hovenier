@@ -7,20 +7,22 @@ interface ContactFormProps {
 }
 
 export default function ContactForm({ locale }: ContactFormProps) {
+  const isEn = locale === 'en';
+
   return (
     <div className={styles.form}>
-      <div className="form-eyebrow">Gratis & vrijblijvend</div>
+      <div className="form-eyebrow">{isEn ? 'Free & no obligation' : 'Gratis & vrijblijvend'}</div>
       <h2 className="form-title">
-        Stuur ons een bericht
+        {isEn ? 'Send us a message' : 'Stuur ons een bericht'}
       </h2>
       <p className="form-sub">
-        We nemen binnen 24 uur contact met je op.
+        {isEn ? 'We will get back to you within 24 hours.' : 'We nemen binnen 24 uur contact met je op.'}
       </p>
       <form>
         <div className="form-row">
           <div className="form-field">
             <label htmlFor="firstName" className="form-label">
-              Voornaam *
+              {isEn ? 'First name *' : 'Voornaam *'}
             </label>
             <input
               type="text"
@@ -32,7 +34,7 @@ export default function ContactForm({ locale }: ContactFormProps) {
           </div>
           <div className="form-field">
             <label htmlFor="lastName" className="form-label">
-              Achternaam *
+              {isEn ? 'Last name *' : 'Achternaam *'}
             </label>
             <input
               type="text"
@@ -59,7 +61,7 @@ export default function ContactForm({ locale }: ContactFormProps) {
 
         <div className="form-field">
           <label htmlFor="subject" className="form-label">
-            Onderwerp *
+            {isEn ? 'Subject *' : 'Onderwerp *'}
           </label>
           <select
             id="subject"
@@ -67,19 +69,19 @@ export default function ContactForm({ locale }: ContactFormProps) {
             required
             className="form-select"
           >
-            <option value="">Selecteer onderwerp...</option>
-            <option value="general">Algemene vraag</option>
-            <option value="partnership">Partnership/Samenwerking</option>
-            <option value="press">Pers</option>
-            <option value="technical">Technische ondersteuning</option>
-            <option value="feedback">Feedback/Suggestie</option>
-            <option value="other">Anders</option>
+            <option value="">{isEn ? 'Select subject...' : 'Selecteer onderwerp...'}</option>
+            <option value="general">{isEn ? 'General question' : 'Algemene vraag'}</option>
+            <option value="partnership">{isEn ? 'Partnership/Collaboration' : 'Partnership/Samenwerking'}</option>
+            <option value="press">{isEn ? 'Press' : 'Pers'}</option>
+            <option value="technical">{isEn ? 'Technical support' : 'Technische ondersteuning'}</option>
+            <option value="feedback">{isEn ? 'Feedback/Suggestion' : 'Feedback/Suggestie'}</option>
+            <option value="other">{isEn ? 'Other' : 'Anders'}</option>
           </select>
         </div>
 
         <div className="form-field">
           <label htmlFor="message" className="form-label">
-            Bericht *
+            {isEn ? 'Message *' : 'Bericht *'}
           </label>
           <textarea
             id="message"
@@ -87,7 +89,7 @@ export default function ContactForm({ locale }: ContactFormProps) {
             rows={4}
             required
             className="form-input"
-            placeholder="Beschrijf je vraag of opmerking..."
+            placeholder={isEn ? 'Describe your question or comment...' : 'Beschrijf je vraag of opmerking...'}
           ></textarea>
         </div>
 
@@ -95,13 +97,17 @@ export default function ContactForm({ locale }: ContactFormProps) {
           type="submit"
           className="form-btn"
         >
-          Verstuur Bericht
+          {isEn ? 'Send Message' : 'Verstuur Bericht'}
         </button>
       </form>
 
       <p className="form-note">
-        * Verplichte velden. We respecteren je privacy - zie ons{' '}
-        <a href="/privacy-beleid">privacybeleid</a>.
+        {isEn
+          ? '* Required fields. We respect your privacy - see our '
+          : '* Verplichte velden. We respecteren je privacy - zie ons '}
+        <a href={isEn ? '/en/privacy-beleid' : '/privacy-beleid'}>
+          {isEn ? 'privacy policy' : 'privacybeleid'}
+        </a>.
       </p>
     </div>
   )

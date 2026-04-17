@@ -1,13 +1,17 @@
 import Script from 'next/script';
 
-export default function CookieSchema() {
+interface CookieSchemaProps {
+  translations: Record<string, string>;
+}
+
+export default function CookieSchema({ translations }: CookieSchemaProps) {
   const cookieSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Cookiebeleid - Hovenier.frl",
-    "description": "Cookiebeleid van Hovenier.frl. Informatie over welke cookies wij gebruiken en hoe u uw cookie-instellingen kunt beheren.",
+    "name": translations.schema_name,
+    "description": translations.schema_description,
     "url": "https://hovenier.frl/cookie-beleid",
-    "inLanguage": "nl-NL",
+    "inLanguage": translations.schema_language,
     "isPartOf": {
       "@type": "WebSite",
       "name": "Hovenier.frl",
@@ -15,8 +19,8 @@ export default function CookieSchema() {
     },
     "mainEntity": {
       "@type": "PrivacyPolicy",
-      "name": "Cookiebeleid",
-      "description": "Uitgebreide informatie over cookie-gebruik bij Hovenier.frl",
+      "name": translations.schema_main_name,
+      "description": translations.schema_main_description,
       "dateModified": new Date().toISOString().split('T')[0],
       "publisher": {
         "@type": "Organization",
@@ -32,17 +36,17 @@ export default function CookieSchema() {
         {
           "@type": "Thing",
           "name": "Cookie Management",
-          "description": "Hoe cookies beheren en voorkeuren instellen"
+          "description": translations.schema_main_description
         },
         {
           "@type": "Thing",
           "name": "Data Collection",
-          "description": "Welke gegevens worden verzameld via cookies"
+          "description": translations.schema_description
         },
         {
           "@type": "Thing",
           "name": "Third Party Services",
-          "description": "External services die cookies plaatsen"
+          "description": translations.thirdparty_text
         }
       ]
     }

@@ -63,6 +63,8 @@ export const envSchema = z.object({
   // Core application settings
   NODE_ENV: nodeEnvSchema,
   NEXT_PUBLIC_BASE_URL: urlSchema,
+
+  NEXT_PUBLIC_IMAGE_BASE_URL: urlSchema.optional().default(''),
   
   // Analytics & Monitoring
   SENTRY_DSN: sentryDsnSchema.optional().default(""),
@@ -141,6 +143,7 @@ export function validateEnvironment(): Env {
 function createFallbackEnv(): Env {
   return {
     NODE_ENV: (process.env.NODE_ENV as 'development' | 'production' | 'test') || 'development',
+    NEXT_PUBLIC_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_IMAGE_BASE_URL || '',
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
     SENTRY_DSN: process.env.SENTRY_DSN || '',
     NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN || '',

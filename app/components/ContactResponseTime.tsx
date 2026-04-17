@@ -7,23 +7,25 @@ interface ContactResponseTimeProps {
 }
 
 export default function ContactResponseTime({ locale }: ContactResponseTimeProps) {
+  const isEn = locale === 'en';
+
   return (
     <div className={styles.responseCard}>
       <h3 className={styles.contactCardTitle}>
-        Reactietijd
+        {isEn ? 'Response Time' : 'Reactietijd'}
       </h3>
       <div className={styles.responseItems}>
         <div className={styles.responseItem}>
           <span className={styles.responseLabel}>Email</span>
-          <span className={styles.responseTime}>&lt; 24 uur</span>
+          <span className={styles.responseTime}>&lt; 24 {isEn ? 'hours' : 'uur'}</span>
         </div>
         <div className={styles.responseItem}>
-          <span className={styles.responseLabel}>Partnership vragen</span>
-          <span className={styles.responseTime}>&lt; 48 uur</span>
+          <span className={styles.responseLabel}>{isEn ? 'Partnership questions' : 'Partnership vragen'}</span>
+          <span className={styles.responseTime}>&lt; 48 {isEn ? 'hours' : 'uur'}</span>
         </div>
         <div className={styles.responseItem}>
-          <span className={styles.responseLabel}>Technische problemen</span>
-          <span className={styles.responseTime}>&lt; 12 uur</span>
+          <span className={styles.responseLabel}>{isEn ? 'Technical issues' : 'Technische problemen'}</span>
+          <span className={styles.responseTime}>&lt; 12 {isEn ? 'hours' : 'uur'}</span>
         </div>
       </div>
     </div>

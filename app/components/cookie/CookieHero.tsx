@@ -1,16 +1,21 @@
 import styles from '../../styles/Cookie.module.css';
 
-export default function CookieHero() {
+interface CookieHeroProps {
+  translations: Record<string, string>;
+  locale: string;
+}
+
+export default function CookieHero({ translations, locale }: CookieHeroProps) {
   return (
     <header className={styles.legalHeader}>
       <div className="section-inner">
         <div className={styles.legalContent}>
-          <h1 className={styles.legalTitle}>Cookiebeleid</h1>
+          <h1 className={styles.legalTitle}>{translations.hero_title}</h1>
           <p className={styles.legalSubtitle}>
-            Transparante informatie over hoe wij cookies gebruiken om uw ervaring op Hovenier.frl te verbeteren
+            {translations.hero_subtitle}
           </p>
           <p className={styles.legalSubtitle}>
-            Laatst bijgewerkt: {new Date().toLocaleDateString('nl-NL', { 
+            {translations.hero_last_updated} {new Date().toLocaleDateString(locale === 'en' ? 'en-GB' : 'nl-NL', { 
               year: 'numeric', 
               month: 'long', 
               day: 'numeric' 

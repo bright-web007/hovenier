@@ -1,29 +1,33 @@
 import styles from '../../styles/Disclaimer.module.css';
 
-export default function DisclaimerLimitations() {
+interface DisclaimerLimitationsProps {
+  translations: Record<string, string>;
+}
+
+export default function DisclaimerLimitations({ translations }: DisclaimerLimitationsProps) {
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>2. Beperkingen van Aansprakelijkheid</h2>
+      <h2 className={styles.legalSectionTitle}>{translations.limitations_title}</h2>
       
       <div className={styles.disclaimerTypes}>
         <div className={styles.disclaimerCard}>
-          <h3 className={styles.disclaimerCardTitle}>🚫 Geen Garanties</h3>
+          <h3 className={styles.disclaimerCardTitle}>{translations.limitations_no_guarantees_title}</h3>
           <p className={styles.disclaimerCardText}>
-            Wij bieden geen garanties op resultaten of tevredenheid
+            {translations.limitations_no_guarantees_text}
           </p>
         </div>
         
         <div className={styles.disclaimerCard}>
-          <h3 className={styles.disclaimerCardTitle}>⚡ Geen Aansprakelijkheid</h3>
+          <h3 className={styles.disclaimerCardTitle}>{translations.limitations_no_liability_title}</h3>
           <p className={styles.disclaimerCardText}>
-            Beperkte aansprakelijkheid voor schade of tekortkomingen
+            {translations.limitations_no_liability_text}
           </p>
         </div>
         
         <div className={styles.disclaimerCard}>
-          <h3 className={styles.disclaimerCardTitle}>🔍 Eigen Onderzoek</h3>
+          <h3 className={styles.disclaimerCardTitle}>{translations.limitations_own_research_title}</h3>
           <p className={styles.disclaimerCardText}>
-            Klanten zijn zelf verantwoordelijk voor due diligence
+            {translations.limitations_own_research_text}
           </p>
         </div>
       </div>
@@ -31,41 +35,37 @@ export default function DisclaimerLimitations() {
       <div className={styles.limitationGrid}>
         <div className={styles.limitationCard}>
           <h3 className={styles.limitationTitle}>
-            💼 Dienstverlening
+            {translations.limitations_services_title}
           </h3>
           <p className={styles.limitationDescription}>
-            Hovenier.frl is niet verantwoordelijk voor de kwaliteit, tijdigheid, kosten 
-            of resultaten van diensten geleverd door aangesloten hoveniers.
+            {translations.limitations_services_text}
           </p>
         </div>
         
         <div className={styles.limitationCard}>
           <h3 className={styles.limitationTitle}>
-            🔧 Technische Problemen
+            {translations.limitations_technical_title}
           </h3>
           <p className={styles.limitationDescription}>
-            Wij zijn niet aansprakelijk voor technische storingen, uitval van de website 
-            of verlies van gegevens.
+            {translations.limitations_technical_text}
           </p>
         </div>
         
         <div className={styles.limitationCard}>
           <h3 className={styles.limitationTitle}>
-            💰 Financiële Schade
+            {translations.limitations_financial_title}
           </h3>
           <p className={styles.limitationDescription}>
-            Geen aansprakelijkheid voor directe of indirecte financiële schade als gevolg 
-            van het gebruik van ons platform.
+            {translations.limitations_financial_text}
           </p>
         </div>
         
         <div className={styles.limitationCard}>
           <h3 className={styles.limitationTitle}>
-            🔗 Externe Links
+            {translations.limitations_external_title}
           </h3>
           <p className={styles.limitationDescription}>
-            Wij zijn niet verantwoordelijk voor de inhoud van externe websites 
-            waarnaar wij linken.
+            {translations.limitations_external_text}
           </p>
         </div>
       </div>

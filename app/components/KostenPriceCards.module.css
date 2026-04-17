@@ -53,7 +53,7 @@
 }
 
 .priceCardPrice {
-  font-family: var(--serif);
+  font-family: var(--heading-font);
   font-size: 32px;
   font-weight: 500;
   color: #2a3e20;

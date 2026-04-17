@@ -19,10 +19,18 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
 
-  return {
+  const meta = locale === 'en' ? {
+    title: 'Garden News & Tips - Blog | Hovenier.frl',
+    description: 'Discover the latest garden trends, seasonal tips and expert advice. Stay up to date with everything about garden maintenance and landscape design in Friesland.',
+    keywords: 'garden news, garden tips, gardener blog, seasonal garden advice, garden maintenance tips, Friesland',
+  } : {
     title: 'Tuinnieuws & Tips - Blog | Hovenier.frl',
     description: 'Ontdek de nieuwste tuintrends, seizoenstips en expert advies. Blijf op de hoogte van alles over tuinonderhoud en landschapsdesign in Friesland.',
     keywords: 'tuinnieuws, tuintips, hovenier blog, seizoen tuinadvies, tuinonderhoud tips, Friesland',
+  };
+
+  return {
+    ...meta,
     alternates: getLocaleAlternates('/nieuws', locale as SupportedLocale),
   }
 }

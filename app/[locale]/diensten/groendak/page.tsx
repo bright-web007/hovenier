@@ -6,14 +6,13 @@ import RelatedArticles from '../../../components/RelatedArticles';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
 
-// ISR: Never revalidate (static service content, changes only with deployments)
 export const revalidate = false;
 
-// Generate static params for both locales to enable ISR
 export async function generateStaticParams() {
   return [{ locale: 'nl' }, { locale: 'en' }];
 }
@@ -22,154 +21,7 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-// Simple translation function
-function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
 
-  try {
-    if (locale === 'nl') {
-      messages = require(`../../../../locales/nl/common.json`);
-    } else {
-      messages = require(`../../../../locales/en/common.json`);
-    }
-  } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
-    // Fallback messages
-    messages = {
-      service_greenroof_title: "Groendaken in Friesland",
-      service_greenroof_subtitle: "Duurzame groendaken door gecertificeerde specialisten",
-      form_eyebrow: "Gratis & vrijblijvend",
-      form_title: "Offerte groendak",
-      form_subtitle: "Ontvang binnen 24 uur reacties van groendak specialisten in uw regio."
-    };
-  }
-
-  return (key: string) => {
-    const keys = key.split('.');
-    let value = messages;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return typeof value === 'string' ? value : key;
-  };
-}
-
-const faqs = {
-  nl: [
-    {
-      question: "Wat kost een groendak?",
-      answer: "Een extensief sedumdak kost €40–€60 per m², intensieve groendaken €80–€150 per m². Voor een gemiddeld groendak van 30 m² betaalt u €1.200–€1.800 inclusief aanleg."
-    },
-    {
-      question: "Welke subsidie is er voor groendaken in Friesland?",
-      answer: "Leeuwarden biedt tot €15 per m², Súdwest-Fryslân heeft klimaatadaptatie subsidie (bedrag varieert), en Smallingerland heeft incidentele subsidieronden. Uw hovenier helpt bij de aanvraag."
-    },
-    {
-      question: "Wat is een extensief groendak?",
-      answer: "Een extensief groendak is lichtgewicht, onderhoudsarm en geschikt voor de meeste hellende en platte daken. De begroeiing bestaat uit sedum, mossen en kruiden."
-    },
-    {
-      question: "Kunnen groendaken gecombineerd worden met zonnepanelen?",
-      answer: "Ja — groendaken en zonnepanelen zijn een uitstekende combinatie. De begroeiing houdt de panelen koeler, wat de stroomopbrengst verhoogt."
-    },
-    {
-      question: "Is mijn dak geschikt voor een groendak?",
-      answer: "De meeste platte of licht hellende daken zijn geschikt, maar we controleren altijd de draagkracht, waterafvoer en isolatie. Een dakconstructie-onderzoek is onderdeel van ons proces."
-    },
-    {
-      question: "Hoeveel onderhoud heeft een groendak nodig?",
-      answer: "Extensieve groendaken vereisen minimaal onderhoud (1-2x per jaar). Intensieve groendaken hebben meer zorg nodig, vergelijkbaar met een gewone tuin."
-    }
-  ],
-  en: [
-    {
-      question: "What does a green roof cost?",
-      answer: "An extensive sedum roof costs €40–€60 per m², intensive green roofs €80–€150 per m². For an average green roof of 30 m² you pay €1,200–€1,800 including installation."
-    },
-    {
-      question: "What subsidies are available for green roofs in Friesland?",
-      answer: "Leeuwarden offers up to €15 per m², Súdwest-Fryslân has a climate adaptation subsidy (amount varies), and Smallingerland has occasional subsidy rounds. Your gardener helps with the application."
-    },
-    {
-      question: "What is an extensive green roof?",
-      answer: "An extensive green roof is lightweight, low-maintenance and suitable for most sloped and flat roofs. The vegetation consists of sedum, mosses and herbs."
-    },
-    {
-      question: "Can green roofs be combined with solar panels?",
-      answer: "Yes — green roofs and solar panels are an excellent combination. The vegetation keeps the panels cooler, which increases electricity yield."
-    },
-    {
-      question: "Is my roof suitable for a green roof?",
-      answer: "Most flat or slightly sloped roofs are suitable, but we always check the load-bearing capacity, drainage and insulation. A roof structure assessment is part of our process."
-    },
-    {
-      question: "How much maintenance does a green roof need?",
-      answer: "Extensive green roofs require minimal maintenance (1-2x per year). Intensive green roofs need more care, comparable to a regular garden."
-    }
-  ]
-};
-
-// Sample related articles data
-const relatedArticles = {
-  nl: [
-    {
-      id: "1",
-      title: "Groendaken en subsidies in Nederland 2024",
-      excerpt: "Overzicht van beschikbare subsidies en regelingen voor groendaken in uw gemeente.",
-      slug: "groendak-subsidies-2024",
-      category: "Subsidies",
-      readTime: 6,
-      publishedAt: "2024-03-20",
-    },
-    {
-      id: "2",
-      title: "Sedum groendaken: voordelen en nadelen",
-      excerpt: "Alles over sedum planten voor uw groendak en waarom ze zo populair zijn.",
-      slug: "sedum-groendaken-voordelen",
-      category: "Groendaken",
-      readTime: 5,
-      publishedAt: "2024-03-15",
-    },
-    {
-      id: "3",
-      title: "Intensief vs extensief groendak: wat past bij u?",
-      excerpt: "Welk type groendak past het beste bij uw wensen, budget en onderhoudsmogelijkheden.",
-      slug: "intensief-extensief-groendak-vergelijking",
-      category: "Groendaken",
-      readTime: 8,
-      publishedAt: "2024-03-10",
-    }
-  ],
-  en: [
-    {
-      id: "1",
-      title: "Green roofs and subsidies in the Netherlands 2024",
-      excerpt: "Overview of available subsidies and regulations for green roofs in your municipality.",
-      slug: "groendak-subsidies-2024",
-      category: "Subsidies",
-      readTime: 6,
-      publishedAt: "2024-03-20",
-    },
-    {
-      id: "2",
-      title: "Sedum green roofs: advantages and disadvantages",
-      excerpt: "Everything about sedum plants for your green roof and why they are so popular.",
-      slug: "sedum-groendaken-voordelen",
-      category: "Green Roofs",
-      readTime: 5,
-      publishedAt: "2024-03-15",
-    },
-    {
-      id: "3",
-      title: "Intensive vs extensive green roof: which suits you?",
-      excerpt: "Which type of green roof best fits your wishes, budget and maintenance capabilities.",
-      slug: "intensief-extensief-groendak-vergelijking",
-      category: "Green Roofs",
-      readTime: 8,
-      publishedAt: "2024-03-10",
-    }
-  ]
-};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
@@ -212,8 +64,8 @@ export default async function GroendakPage({ params }: Props) {
 
   const t = createTranslator(validLocale);
   const isEn = validLocale === 'en';
-  const localeFaqs = faqs[isEn ? 'en' : 'nl'];
-  const localeArticles = relatedArticles[isEn ? 'en' : 'nl'];
+  const localeFaqs = t.raw('faqs.groendak') || [];
+  const localeArticles = t.raw('related_articles.groendak') || [];
 
   // Navigation translations
   const navTranslations = {

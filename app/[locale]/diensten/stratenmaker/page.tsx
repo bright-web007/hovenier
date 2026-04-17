@@ -7,6 +7,7 @@ import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../components/RelatedArticles';
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/lib/translator'
 import styles from './Stratenmaker.module.css'
 
 export const locales = ['en', 'nl'] as const;
@@ -24,138 +25,7 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-// Simple translation function
-function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
 
-  try {
-    if (locale === 'nl') {
-      messages = require(`../../../../locales/nl/common.json`);
-    } else {
-      messages = require(`../../../../locales/en/common.json`);
-    }
-  } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
-    // Fallback messages
-    messages = {
-      service_stratenmaker_title: "Stratenmaker & Bestrating in Friesland",
-      service_stratenmaker_subtitle: "Professionele hardscaping diensten door gecertificeerde stratenmakers",
-      form_eyebrow: "Gratis & vrijblijvend",
-      form_title: "Offerte bestrating",
-      form_subtitle: "Ontvang binnen 24 uur reacties van stratenmakers in uw regio."
-    };
-  }
-
-  return (key: string) => {
-    const keys = key.split('.');
-    let value = messages;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return typeof value === 'string' ? value : key;
-  };
-}
-
-const faqs = {
-  nl: [
-    {
-      question: "Hoe lang gaat bestrating mee?",
-      answer: "Bij correcte aanleg en normaal gebruik gaan betonklinkers 25-30 jaar mee, natuursteen 50+ jaar. De kwaliteit van de fundering is cruciaal voor levensduur. Onderhoud bestaat voornamelijk uit voegen aanvullen en occasioneel schoonmaken."
-    },
-    {
-      question: "Is een vergunning nodig voor bestrating?",
-      answer: "Voor bestrating van uw eigen terrein is meestal geen vergunning nodig. Wel moet u zich houden aan de maximale verharding per perceel (check uw bestemmingsplan). Bij aansluiting op de openbare weg kan een KLIC-melding verplicht zijn."
-    },
-    {
-      question: "Welk materiaal is het beste voor mijn situatie?",
-      answer: "Dit hangt af van gebruik, budget en esthetiek. Betonklinkers zijn veelzijdig en betaalbaar, natuursteen is duurzamer maar duurder. Voor zwaar verkeer (opritten) adviseren we verstevigde klinkers of natuursteen. Voor terrassen zijn keramische tegels populair."
-    },
-    {
-      question: "Wanneer is het beste seizoen voor bestratingswerkzaamheden?",
-      answer: "Bestrating kan bijna het hele jaar door, behalve bij vorst. Het beste seizoen is maart-november. In de winter kan bij vorstvrij weer ook worden gewerkt. Voor grote projecten plannen we bij voorkeur in droge perioden vanwege grondcondities."
-    }
-  ],
-  en: [
-    {
-      question: "How long does paving last?",
-      answer: "With correct installation and normal use, concrete pavers last 25-30 years, natural stone 50+ years. The quality of the foundation is crucial for longevity. Maintenance mainly consists of filling joints and occasional cleaning."
-    },
-    {
-      question: "Is a permit required for paving?",
-      answer: "For paving your own property, a permit is usually not required. However, you must comply with the maximum paved area per plot (check your zoning plan). When connecting to the public road, a KLIC notification may be mandatory."
-    },
-    {
-      question: "Which material is best for my situation?",
-      answer: "This depends on use, budget and aesthetics. Concrete pavers are versatile and affordable, natural stone is more durable but more expensive. For heavy traffic (driveways) we recommend reinforced pavers or natural stone. For terraces, ceramic tiles are popular."
-    },
-    {
-      question: "When is the best season for paving work?",
-      answer: "Paving can be done almost year-round, except during frost. The best season is March-November. In winter, work can also be done in frost-free weather. For large projects we prefer to schedule during dry periods due to ground conditions."
-    }
-  ]
-};
-
-// Sample related articles data
-const relatedArticles = {
-  nl: [
-    {
-      id: "1",
-      title: "Kosten bestrating: wat betaal je per m² in 2024?",
-      excerpt: "Compleet overzicht van bestratingsprijzen voor verschillende materialen en technieken.",
-      slug: "kosten-bestrating-per-m2",
-      category: "Prijzen",
-      readTime: 5,
-      publishedAt: "2024-03-15",
-    },
-    {
-      id: "2",
-      title: "Betonklinkers vs natuursteen: wat is beter?",
-      excerpt: "Vergelijking tussen verschillende bestratingsmaterialen voor oprit en terras.",
-      slug: "betonklinkers-natuursteen-vergelijking",
-      category: "Materialen",
-      readTime: 7,
-      publishedAt: "2024-03-10",
-    },
-    {
-      id: "3",
-      title: "Drainage en waterafvoer bij bestrating",
-      excerpt: "Waarom goede waterafvoer essentieel is en hoe je dit professioneel aanpakt.",
-      slug: "drainage-waterafvoer-bestrating",
-      category: "Techniek",
-      readTime: 6,
-      publishedAt: "2024-03-05",
-    }
-  ],
-  en: [
-    {
-      id: "1",
-      title: "Paving costs: what do you pay per m² in 2024?",
-      excerpt: "Complete overview of paving prices for different materials and techniques.",
-      slug: "kosten-bestrating-per-m2",
-      category: "Prices",
-      readTime: 5,
-      publishedAt: "2024-03-15",
-    },
-    {
-      id: "2",
-      title: "Concrete pavers vs natural stone: which is better?",
-      excerpt: "Comparison between different paving materials for driveways and terraces.",
-      slug: "betonklinkers-natuursteen-vergelijking",
-      category: "Materials",
-      readTime: 7,
-      publishedAt: "2024-03-10",
-    },
-    {
-      id: "3",
-      title: "Drainage and water discharge for paving",
-      excerpt: "Why good drainage is essential and how to handle it professionally.",
-      slug: "drainage-waterafvoer-bestrating",
-      category: "Technique",
-      readTime: 6,
-      publishedAt: "2024-03-05",
-    }
-  ]
-};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -183,8 +53,8 @@ export default async function StratenmakerPage({ params }: Props) {
 
   const t = createTranslator(validLocale);
   const isEn = validLocale === 'en';
-  const localeFaqs = faqs[isEn ? 'en' : 'nl'];
-  const localeArticles = relatedArticles[isEn ? 'en' : 'nl'];
+  const localeFaqs = t.raw('faqs.stratenmaker') || []
+  const localeArticles = t.raw('related_articles.stratenmaker') || []
 
   // Simple translations for the form
   const formTranslations = {

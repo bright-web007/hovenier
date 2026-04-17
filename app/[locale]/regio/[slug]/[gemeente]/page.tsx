@@ -10,47 +10,7 @@ import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale
 import { regionHubs, getRegionHubBySlug, getGemeenteBySlug, getRegionSlugByGemeenteSlug, type RegionHub, type Gemeente } from '@/lib/regions-hierarchy'
 import DienstCard from '../../../../components/DienstCard'
 import Link from 'next/link'
-
-// Simple translation function
-function createTranslator(locale: string) {
-  let messages: Record<string, any> = {};
-
-  try {
-    if (locale === 'nl') {
-      messages = require(`../../../../../locales/nl/common.json`);
-    } else {
-      messages = require(`../../../../../locales/en/common.json`);
-    }
-  } catch (error) {
-    console.error(`Could not load messages for locale ${locale}:`, error);
-    // Fallback messages
-    messages = {
-      form_eyebrow: "Gratis & vrijblijvend",
-      form_title: "Offerte aanvragen",
-      form_subtitle: "Ontvang binnen 24 uur reacties van lokale specialisten.",
-      your_name: "Uw naam",
-      municipality: "Gemeente",
-      service: "Gewenste service",
-      phone_number: "Telefoonnummer",
-      send_request: "Verstuur aanvraag",
-      form_note: "Door het versturen van dit formulier gaat u akkoord met onze voorwaarden.",
-      gardeners: "Hoveniers",
-      services: "Diensten",
-      regions: "Regio's",
-      inspiration: "Inspiratie",
-      request_quote: "Offerte aanvragen"
-    };
-  }
-
-  return (key: string): string => {
-    const keys = key.split('.');
-    let value: any = messages;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return (typeof value === 'string') ? value : key;
-  };
-}
+import { createTranslator } from '@/lib/translator'
 
 type Props = {
   params: Promise<{ locale: string; slug: string; gemeente: string }>

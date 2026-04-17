@@ -16,19 +16,17 @@ pipelines:
           script:
             - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
             - apt-get update && apt-get install -y git curl awscli bash python3 make g++
-            # Node.js and pnpm setup
+            # Node.js setup
             - node --version
-            - npm install -g pnpm
-            - pnpm --version
             # AWS and environment setup
             - aws configure set aws_access_key_id $AWS_ACCESS_KEY
             - aws configure set aws_secret_access_key $AWS_SECRET_KEY
             - aws configure set region $AWS_DEFAULT_REGION
             - aws s3 cp s3://hovenier/envs/env.development .env || echo "Development environment file not found, continuing without it"
             # Install dependencies
-            - pnpm install --frozen-lockfile
+            - yarn install --frozen-lockfile
             # Code quality checks
-            - pnpm lint
+            - yarn lint
           artifacts:
             - node_modules/**
             - .env
@@ -36,15 +34,14 @@ pipelines:
           name: Build Verification
           size: 2x
           script:
-            - npm install -g pnpm
             # Build the application
             - echo "Building Next.js application..."
-            - pnpm build
+            - yarn build
             # Verify build artifacts
             - echo "Verifying build artifacts..."
             - ls -la .next/
             # Smoke test
-            - timeout 30s pnpm start &
+            - timeout 30s yarn start &
             - sleep 15
             - curl -f http://localhost:3000 || echo "Application health check completed"
             - pkill -f "next start" || echo "Test server cleanup completed"
@@ -61,16 +58,15 @@ pipelines:
           script:
             - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
             - apt-get update && apt-get install -y git curl awscli bash python3 make g++
-            - npm install -g pnpm
             # AWS and environment setup
             - aws configure set aws_access_key_id $AWS_ACCESS_KEY
             - aws configure set aws_secret_access_key $AWS_SECRET_KEY
             - aws configure set region $AWS_DEFAULT_REGION
             - aws s3 cp s3://hovenier/envs/env.production .env
             # Install dependencies
-            - pnpm install --frozen-lockfile
+            - yarn install --frozen-lockfile
             # Code quality checks
-            - pnpm lint
+            - yarn lint
           artifacts:
             - node_modules/**
             - src/**
@@ -79,8 +75,7 @@ pipelines:
           name: Build
           size: 2x
           script:
-            - npm install -g pnpm
-            - pnpm build
+            - yarn build
             # Verify build artifacts
             - ls -la .next/
           artifacts:
@@ -128,16 +123,15 @@ pipelines:
           script:
             - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
             - apt-get update && apt-get install -y git curl awscli bash python3 make g++
-            - npm install -g pnpm
             # AWS and environment setup
             - aws configure set aws_access_key_id $AWS_ACCESS_KEY
             - aws configure set aws_secret_access_key $AWS_SECRET_KEY
             - aws configure set region $AWS_DEFAULT_REGION
             - aws s3 cp s3://hovenier/envs/env.development .env
             # Install dependencies and build
-            - pnpm install --frozen-lockfile
-            - pnpm lint
-            - pnpm build
+            - yarn install --frozen-lockfile
+            - yarn lint
+            - yarn build
             - echo "Build completed successfully for develop branch"
             - ls -la .next/
       - step:
@@ -166,16 +160,15 @@ pipelines:
           script:
             - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
             - apt-get update && apt-get install -y git curl awscli bash python3 make g++
-            - npm install -g pnpm
             # AWS and environment setup
             - aws configure set aws_access_key_id $AWS_ACCESS_KEY
             - aws configure set aws_secret_access_key $AWS_SECRET_KEY
             - aws configure set region $AWS_DEFAULT_REGION
             - aws s3 cp s3://hovenier/envs/env.staging .env
             # Install dependencies and build
-            - pnpm install --frozen-lockfile
-            - pnpm lint
-            - pnpm build
+            - yarn install --frozen-lockfile
+            - yarn lint
+            - yarn build
             - echo "Build completed successfully for staging branch"
             - ls -la .next/
       - step:
@@ -204,16 +197,15 @@ pipelines:
           script:
             - ln -fs /usr/share/zoneinfo/UTC /etc/localtime
             - apt-get update && apt-get install -y git curl awscli bash python3 make g++
-            - npm install -g pnpm
             # AWS and environment setup
             - aws configure set aws_access_key_id $AWS_ACCESS_KEY
             - aws configure set aws_secret_access_key $AWS_SECRET_KEY
             - aws configure set region $AWS_DEFAULT_REGION
             - aws s3 cp s3://hovenier/envs/env.production .env
             # Install dependencies and build
-            - pnpm install --frozen-lockfile
-            - pnpm lint
-            - pnpm build
+            - yarn install --frozen-lockfile
+            - yarn lint
+            - yarn build
             - echo "Production build completed successfully"
             - ls -la .next/
       - step:

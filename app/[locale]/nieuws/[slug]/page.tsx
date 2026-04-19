@@ -72,7 +72,7 @@ export default async function NewsArticlePage({ params }: Props) {
   const articleUrl = getAbsoluteUrl(articlePath, locale as SupportedLocale);
 
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: t('nieuws_page.breadcrumb'), href: '/nieuws' },
     { label: article.title },
   ];

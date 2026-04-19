@@ -67,7 +67,7 @@ export default async function TuinontwerpKostenPage({ params }: Props) {
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: 'Kosten', href: '/kosten' },
     { label: 'Tuinontwerp' }
   ];

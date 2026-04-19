@@ -5,6 +5,7 @@ import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from "@/app/components/NewLeadForm"
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData'
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 
 type Props = {
   params: { locale: string }
@@ -32,6 +33,7 @@ export async function generateStaticParams() {
 export default async function TuinAanleggenPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale)
+  const t = createTranslator(locale)
   
   // Simple translations for the form
   const formTranslations = {
@@ -63,7 +65,7 @@ export default async function TuinAanleggenPage({ params }: Props) {
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: 'Diensten', href: localizePath('/services', locale as SupportedLocale) },
     { label: 'Tuin Aanleggen' }
   ];

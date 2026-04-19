@@ -40,7 +40,7 @@ export default async function HoveniersDirectoryPage({ params }: Props) {
 
   // Breadcrumb items  
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: t('hoveniers_page.breadcrumb') }
   ];
 

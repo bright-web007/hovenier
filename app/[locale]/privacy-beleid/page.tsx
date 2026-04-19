@@ -20,6 +20,7 @@ import PrivacyChanges from '../../components/privacy/PrivacyChanges';
 import PrivacyContact from '../../components/privacy/PrivacyContact';
 import PrivacySchema from '../../components/privacy/PrivacySchema';
 import { getLocaleAlternates, getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/i18n';
 
 import styles from '../../styles/Privacy.module.css';
 
@@ -71,9 +72,10 @@ export default async function PrivacyPolicyPage({ params }: Props) {
   }
 
   const isEnglish = validLocale === 'en';
+  const t = createTranslator(validLocale);
   
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: isEnglish ? 'Privacy Policy' : 'Privacybeleid' }
   ];
 

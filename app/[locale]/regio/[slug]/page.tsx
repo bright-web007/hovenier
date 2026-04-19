@@ -130,6 +130,7 @@ export default async function RegionHubPage({ params }: Props) {
 
   const validLocale = locale as SupportedLocale;
   const isEn = locale === 'en';
+  const t = createTranslator(locale);
 
   const regionNameEn: Record<string, string> = {
     'noordwest-friesland': 'Northwest Friesland',
@@ -143,7 +144,7 @@ export default async function RegionHubPage({ params }: Props) {
   const isStandalone = !regionHub && standaloneRegion;
 
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: isEn ? 'Regions' : 'Regio\'s', href: '/regio' },
     { label: displayName, href: `/regio/${slug}` }
   ];

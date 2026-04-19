@@ -1,8 +1,14 @@
 {
   "welcome": "Welcome to Hovenier!",
-  "lead_form": "Lead Form",
+  "lead_form": {
+    "describe_wishes": "Describe your wishes",
+    "wishes_placeholder": "Tell us about your garden wishes...",
+    "postcode": "Postcode (optional)",
+    "company": "Company (optional)",
+    "security_loading": "Loading security check..."
+  },
   "services": "Services",
-  "articles": "Articles", 
+  "articles": "Articles",
   "gardeners": "Gardeners",
   "regions": "Regions",
   "costs": "Costs",
@@ -53,8 +59,7 @@
     "municipalities": "Municipalities",
     "rating": "Rating",
     "projects": "Projects",
-    "satisfied": "Satisfied",
-    "municipalities": "Municipalities"
+    "satisfied": "Satisfied"
   },
   "form": {
     "select_municipality": "Select municipality",
@@ -74,8 +79,8 @@
     }
   },
   "cta": {
-    "contact_us": "Contact us",
-    "municipality_not_listed": "Don't see your municipality? We're happy to help."
+    "title": "Ready to transform your garden?",
+    "subtitle": "Receive free quotes from reliable gardeners in your area. Compare prices and choose the best gardener for your project."
   },
   "footer": {
     "description": "The place to find reliable gardeners in Friesland. Compare quotes, read reviews and choose with confidence for the best gardener in your municipality.",
@@ -137,10 +142,6 @@
       }
     }
   },
-  "cta": {
-    "title": "Ready to transform your garden?",
-    "subtitle": "Receive free quotes from reliable gardeners in your area. Compare prices and choose the best gardener for your project."
-  },
   "trustbar": {
     "gardeners": "Gardeners",
     "projects": "Projects",
@@ -158,7 +159,7 @@
       "price_from": "From €45/hour",
       "features": [
         "Lawn care and mowing",
-        "Tree and shrub pruning", 
+        "Tree and shrub pruning",
         "Weed control",
         "Seasonal planting work"
       ]
@@ -757,8 +758,12 @@
     "data_sharing_technical": "Technical service providers for website maintenance",
     "data_sharing_authorities": "Authorities when legally required",
     "data_sharing_no_sell": "We never sell your data to third parties for marketing purposes.",
-    "schema_name": "Privacy Policy",
-    "schema_description": "Data protection and privacy policy"
+    "schema_page_name": "Privacy Policy | Hovenier.frl - Data Protection & Privacy",
+    "schema_page_description": "Privacy policy of Hovenier.frl. How we collect, use and protect your personal data in compliance with GDPR legislation.",
+    "schema_about_name": "Privacy Policy",
+    "schema_about_description": "Data protection and privacy policy",
+    "schema_document_name": "Hovenier.frl Privacy Policy",
+    "schema_document_description": "Comprehensive privacy policy detailing data collection, usage, and protection practices"
   },
   "terms": {
     "hero_title": "Terms and Conditions",
@@ -880,13 +885,6 @@
   "dienst_card": {
     "learn_more": "Learn more →"
   },
-  "lead_form": {
-    "describe_wishes": "Describe your wishes",
-    "wishes_placeholder": "Tell us about your garden wishes...",
-    "postcode": "Postcode (optional)",
-    "company": "Company (optional)",
-    "security_loading": "Loading security check..."
-  },
   "privacy_page_extra": {
     "hero_title": "Privacy Policy",
     "hero_last_updated": "Last updated: ",
@@ -951,5 +949,222 @@
     "on_request": "On request",
     "more_info_about": "More info about",
     "more_info": "More info"
+  },
+  "faqs": {
+    "groendak": [
+      {
+        "question": "What does a green roof cost?",
+        "answer": "An extensive sedum roof costs €40–€60 per m², intensive green roofs €80–€150 per m². For an average green roof of 30 m² you pay €1,200–€1,800 including installation."
+      },
+      {
+        "question": "What subsidies are available for green roofs in Friesland?",
+        "answer": "Leeuwarden offers up to €15 per m², Súdwest-Fryslân has a climate adaptation subsidy (amount varies), and Smallingerland has occasional subsidy rounds. Your gardener helps with the application."
+      },
+      {
+        "question": "What is an extensive green roof?",
+        "answer": "An extensive green roof is lightweight, low-maintenance and suitable for most sloped and flat roofs. The vegetation consists of sedum, mosses and herbs."
+      },
+      {
+        "question": "Can green roofs be combined with solar panels?",
+        "answer": "Yes — green roofs and solar panels are an excellent combination. The vegetation keeps the panels cooler, which increases electricity yield."
+      },
+      {
+        "question": "Is my roof suitable for a green roof?",
+        "answer": "Most flat or slightly sloped roofs are suitable, but we always check the load-bearing capacity, drainage and insulation. A roof structure assessment is part of our process."
+      },
+      {
+        "question": "How much maintenance does a green roof need?",
+        "answer": "Extensive green roofs require minimal maintenance (1-2x per year). Intensive green roofs need more care, comparable to a regular garden."
+      }
+    ],
+    "stratenmaker": [
+      {
+        "question": "How long does paving last?",
+        "answer": "With correct installation and normal use, concrete pavers last 25-30 years, natural stone 50+ years. The quality of the foundation is crucial for longevity. Maintenance mainly consists of filling joints and occasional cleaning."
+      },
+      {
+        "question": "Is a permit required for paving?",
+        "answer": "For paving your own property, a permit is usually not required. However, you must comply with the maximum paved area per plot (check your zoning plan). When connecting to the public road, a KLIC notification may be mandatory."
+      },
+      {
+        "question": "Which material is best for my situation?",
+        "answer": "This depends on use, budget and aesthetics. Concrete pavers are versatile and affordable, natural stone is more durable but more expensive. For heavy traffic (driveways) we recommend reinforced pavers or natural stone. For terraces, ceramic tiles are popular."
+      },
+      {
+        "question": "When is the best season for paving work?",
+        "answer": "Paving can be done almost year-round, except during frost. The best season is March-November. In winter, work can also be done in frost-free weather. For large projects we prefer to schedule during dry periods due to ground conditions."
+      }
+    ],
+    "tuinonderhoud": [
+      {
+        "question": "What does garden maintenance cost per month?",
+        "answer": "A garden maintenance subscription costs €60–€200 per month, depending on garden size and frequency. This fixed price is 10–20% more affordable than individual visits and ensures optimal garden maintenance all year round."
+      },
+      {
+        "question": "How often should I have my garden maintained?",
+        "answer": "For a well-kept garden, we recommend monthly maintenance during the growing season (March–October) and 2–3 times per year in winter for seasonal tasks."
+      },
+      {
+        "question": "What are the benefits of a garden maintenance subscription?",
+        "answer": "Fixed lower price per visit (10–20% discount), no scheduling hassle, your garden is always cared for, and flexible visit frequency tailored to season and needs."
+      },
+      {
+        "question": "What work is included in garden maintenance?",
+        "answer": "Lawn mowing and edging, hedge trimming, weed removal, pruning, leaf clearing, winterizing, fertilizing and seasonal planting."
+      },
+      {
+        "question": "Do you also provide garden maintenance for businesses?",
+        "answer": "Yes, our gardeners provide green maintenance for business premises, homeowner associations and municipal green spaces. Request a quote for a custom contract."
+      }
+    ],
+    "tuinontwerp": [
+      {
+        "question": "What does a professional garden design cost in Friesland?",
+        "answer": "A complete garden design ranges from €750-2500, depending on size and complexity. This includes concept design, plant selection, 3D visualization and technical drawings."
+      },
+      {
+        "question": "How long does the design process take?",
+        "answer": "From first consultation to final design takes on average 2-4 weeks. This depends on the size of your garden and desired level of detail."
+      },
+      {
+        "question": "Will I get 3D visualizations of my new garden?",
+        "answer": "Yes, with every garden design we deliver professional 3D renders so you can see your new garden before construction begins."
+      },
+      {
+        "question": "Can you also handle the construction?",
+        "answer": "Absolutely! We work together with experienced gardening companies who can realize the design exactly according to specifications."
+      },
+      {
+        "question": "Do you consider maintenance-friendliness?",
+        "answer": "Certainly. We always design with the desired maintenance level in mind and choose plants that match your available time and experience."
+      }
+    ]
+  },
+  "related_articles": {
+    "groendak": [
+      {
+        "id": "1",
+        "title": "Green roofs and subsidies in the Netherlands 2024",
+        "excerpt": "Overview of available subsidies and regulations for green roofs in your municipality.",
+        "slug": "groendak-subsidies-2024",
+        "category": "Subsidies",
+        "readTime": 6,
+        "publishedAt": "2024-03-20"
+      },
+      {
+        "id": "2",
+        "title": "Sedum green roofs: advantages and disadvantages",
+        "excerpt": "Everything about sedum plants for your green roof and why they are so popular.",
+        "slug": "sedum-groendaken-voordelen",
+        "category": "Green Roofs",
+        "readTime": 5,
+        "publishedAt": "2024-03-15"
+      },
+      {
+        "id": "3",
+        "title": "Intensive vs extensive green roof: which suits you?",
+        "excerpt": "Which type of green roof best fits your wishes, budget and maintenance capabilities.",
+        "slug": "intensief-extensief-groendak-vergelijking",
+        "category": "Green Roofs",
+        "readTime": 8,
+        "publishedAt": "2024-03-10"
+      }
+    ],
+    "stratenmaker": [
+      {
+        "id": "1",
+        "title": "Paving costs: what do you pay per m² in 2024?",
+        "excerpt": "Complete overview of paving prices for different materials and techniques.",
+        "slug": "kosten-bestrating-per-m2",
+        "category": "Prices",
+        "readTime": 5,
+        "publishedAt": "2024-03-15"
+      },
+      {
+        "id": "2",
+        "title": "Concrete pavers vs natural stone: which is better?",
+        "excerpt": "Comparison between different paving materials for driveways and terraces.",
+        "slug": "betonklinkers-natuursteen-vergelijking",
+        "category": "Materials",
+        "readTime": 7,
+        "publishedAt": "2024-03-10"
+      },
+      {
+        "id": "3",
+        "title": "Drainage and water discharge for paving",
+        "excerpt": "Why good drainage is essential and how to handle it professionally.",
+        "slug": "drainage-waterafvoer-bestrating",
+        "category": "Technique",
+        "readTime": 6,
+        "publishedAt": "2024-03-05"
+      }
+    ],
+    "tuinonderhoud": [
+      {
+        "id": "1",
+        "title": "When is the best time to mow your lawn?",
+        "excerpt": "Discover the optimal timing for lawn mowing and tips for a perfect result.",
+        "slug": "wanneer-gazon-maaien",
+        "category": "Garden Maintenance",
+        "readTime": 5,
+        "publishedAt": "2024-03-15"
+      },
+      {
+        "id": "2",
+        "title": "Fighting weeds naturally without chemicals",
+        "excerpt": "Eco-friendly methods to effectively remove weeds from your garden.",
+        "slug": "onkruid-natuurlijk-bestrijden",
+        "category": "Garden Tips",
+        "readTime": 7,
+        "publishedAt": "2024-03-10"
+      },
+      {
+        "id": "3",
+        "title": "Seasonal pruning: what, when and how?",
+        "excerpt": "Complete guide to pruning trees and shrubs throughout the year.",
+        "slug": "seizoenssnoei-gids",
+        "category": "Pruning Techniques",
+        "readTime": 8,
+        "publishedAt": "2024-03-05"
+      }
+    ],
+    "tuinontwerp": [
+      {
+        "id": "1",
+        "title": "Garden design trends 2024: what's popular this year?",
+        "excerpt": "Discover the latest trends in garden design and landscaping for a modern outdoor space.",
+        "slug": "tuinontwerp-trends-2024",
+        "category": "Garden Design",
+        "readTime": 6,
+        "publishedAt": "2024-03-18"
+      },
+      {
+        "id": "2",
+        "title": "Small garden, big plans: make the most of your space",
+        "excerpt": "Tips and tricks for designing a functional and beautiful small garden.",
+        "slug": "kleine-tuin-ontwerp-tips",
+        "category": "Garden Design",
+        "readTime": 8,
+        "publishedAt": "2024-03-12"
+      },
+      {
+        "id": "3",
+        "title": "Sustainable gardens: eco-friendly design",
+        "excerpt": "How to create a beautiful garden that is also good for the environment.",
+        "slug": "duurzame-tuin-ontwerp",
+        "category": "Sustainability",
+        "readTime": 7,
+        "publishedAt": "2024-03-08"
+      }
+    ]
+  },
+  "breadcrumb_home": "Home",
+  "calculator_notes": {
+    "onderhoud": "Per visit \\u00b7 average 4\\u20137 hours of work",
+    "aanleg": "Total project price \\u00b7 including materials",
+    "ontwerp": "Total price \\u00b7 including planting plan and drawings",
+    "snoei": "Per visit \\u00b7 depending on quantity",
+    "groendak": "Total price \\u00b7 excluding subsidy",
+    "stratenmaker": "Total price \\u00b7 excluding material costs"
   }
 }

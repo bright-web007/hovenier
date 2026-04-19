@@ -41,7 +41,7 @@ export default async function KostenPage({ params }: Props) {
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: t('kosten_page.breadcrumb_costs') }
   ];
 

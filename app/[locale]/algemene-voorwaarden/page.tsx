@@ -21,6 +21,7 @@ import TermsLaw from '../../components/terms/TermsLaw';
 import TermsContact from '../../components/terms/TermsContact';
 import TermsSchema from '../../components/terms/TermsSchema';
 import { getLocaleAlternates, getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/i18n';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -70,9 +71,10 @@ export default async function TermsPage({ params }: Props) {
   }
 
   const isEnglish = validLocale === 'en';
+  const t = createTranslator(validLocale);
   
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: isEnglish ? 'Terms and Conditions' : 'Algemene Voorwaarden' }
   ];
 

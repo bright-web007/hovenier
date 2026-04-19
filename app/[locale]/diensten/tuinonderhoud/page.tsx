@@ -64,8 +64,8 @@ export default async function TuinonderhoudPage({ params }: Props) {
 
   const t = createTranslator(validLocale);
   const isEn = validLocale === 'en';
-  const localeFaqs = t.raw('faqs.tuinonderhoud') || [];
-  const localeArticles = t.raw('related_articles.tuinonderhoud') || [];
+  const localeFaqs = (t.raw('faqs.tuinonderhoud') || []) as Array<{ question: string; answer: string }>;
+  const localeArticles = (t.raw('related_articles.tuinonderhoud') || []) as Array<{ id: string; title: string; excerpt: string; slug: string; category: string; readTime: number; publishedAt: string }>;
 
   // Navigation translations
   const navTranslations = {

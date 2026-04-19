@@ -194,7 +194,7 @@ export default async function GemeentePage({ params }: Props) {
   ];
 
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: isEn ? 'Regions' : 'Regio\'s', href: '/regio' },
     { label: regionHub.name, href: `/regio/${slug}` },
     { label: gemeenteData.name, href: `/regio/${slug}/${gemeente}` }

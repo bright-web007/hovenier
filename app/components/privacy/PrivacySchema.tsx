@@ -14,15 +14,15 @@ const PrivacySchema = ({ locale = 'nl' }: { locale?: string }) => {
         '@type': 'WebPage',
         '@id': pageUrl,
         url: pageUrl,
-        name: t('privacy_page.schema_name'),
-        description: t('privacy_page.schema_description'),
+        name: t('privacy_page.schema_page_name'),
+        description: t('privacy_page.schema_page_description'),
         isPartOf: {
           '@id': 'https://hovenier.frl#website'
         },
         about: {
           '@type': 'Thing',
-          name: t('privacy_page.schema_name'),
-          description: t('privacy_page.schema_description')
+          name: t('privacy_page.schema_about_name'),
+          description: t('privacy_page.schema_about_description')
         },
         primaryImageOfPage: {
           '@type': 'ImageObject',
@@ -44,8 +44,8 @@ const PrivacySchema = ({ locale = 'nl' }: { locale?: string }) => {
       {
         '@type': 'PrivacyPolicy',
         '@id': `${pageUrl}#document`,
-        name: t('privacy_page.schema_name'),
-        description: t('privacy_page.schema_description'),
+        name: t('privacy_page.schema_document_name'),
+        description: t('privacy_page.schema_document_description'),
         url: pageUrl,
         isPartOf: {
           '@id': 'https://hovenier.frl#website'

@@ -1,6 +1,12 @@
 {
   "welcome": "Welkom bij Hovenier!",
-  "lead_form": "Leadformulier",
+  "lead_form": {
+    "describe_wishes": "Beschrijf uw wensen",
+    "wishes_placeholder": "Vertel ons over uw tuinwensen...",
+    "postcode": "Postcode (optioneel)",
+    "company": "Bedrijf (optioneel)",
+    "security_loading": "Beveiligingscontrole laden..."
+  },
   "services": "Diensten",
   "articles": "Artikelen",
   "gardeners": "Hoveniers",
@@ -50,7 +56,7 @@
   },
   "stats": {
     "gardeners": "Hoveniers",
-    "municipalities": "Gemeenten", 
+    "municipalities": "Gemeenten",
     "rating": "Beoordeling",
     "projects": "Projecten",
     "satisfied": "Tevreden",
@@ -74,8 +80,8 @@
     }
   },
   "cta": {
-    "contact_us": "Neem contact op",
-    "municipality_not_listed": "Niet uw gemeente erbij? We helpen u graag verder."
+    "title": "Klaar om uw tuin te transformeren?",
+    "subtitle": "Ontvang gratis offertes van betrouwbare hoveniers in uw buurt. Vergelijk prijzen en kies de beste hovenier voor uw project."
   },
   "footer": {
     "description": "Hoveniers vinden in Friesland. Reviews lezen, werk bekijken, offertes vergelijken. Simpel.",
@@ -136,10 +142,6 @@
         "aansprakelijkheid": "Aansprakelijkheid"
       }
     }
-  },
-  "cta": {
-    "title": "Klaar om uw tuin te transformeren?",
-    "subtitle": "Ontvang gratis offertes van betrouwbare hoveniers in uw buurt. Vergelijk prijzen en kies de beste hovenier voor uw project."
   },
   "trustbar": {
     "gardeners": "Hoveniers",
@@ -757,8 +759,12 @@
     "data_sharing_technical": "Technische dienstverleners voor websiteonderhoud",
     "data_sharing_authorities": "Autoriteiten wanneer dit wettelijk verplicht is",
     "data_sharing_no_sell": "Wij verkopen nooit uw gegevens aan derden voor marketing doeleinden.",
-    "schema_name": "Privacybeleid",
-    "schema_description": "Gegevensbescherming en privacybeleid"
+    "schema_page_name": "Privacybeleid | Hovenier.frl - Gegevensbescherming & Privacy",
+    "schema_page_description": "Privacybeleid van Hovenier.frl. Hoe wij uw persoonlijke gegevens verzamelen, gebruiken en beschermen conform GDPR wetgeving.",
+    "schema_about_name": "Privacybeleid",
+    "schema_about_description": "Gegevensbescherming en privacybeleid",
+    "schema_document_name": "Hovenier.frl Privacybeleid",
+    "schema_document_description": "Uitgebreid privacybeleid met details over gegevensverzameling, gebruik en beschermingsmaatregelen"
   },
   "terms": {
     "hero_title": "Algemene Voorwaarden",
@@ -880,13 +886,6 @@
   "dienst_card": {
     "learn_more": "Meer informatie →"
   },
-  "lead_form": {
-    "describe_wishes": "Beschrijf uw wensen",
-    "wishes_placeholder": "Vertel ons over uw tuinwensen...",
-    "postcode": "Postcode (optioneel)",
-    "company": "Bedrijf (optioneel)",
-    "security_loading": "Beveiligingscontrole laden..."
-  },
   "privacy_page_extra": {
     "hero_title": "Privacybeleid",
     "hero_last_updated": "Laatst bijgewerkt: ",
@@ -951,5 +950,222 @@
     "on_request": "Op aanvraag",
     "more_info_about": "Meer info over",
     "more_info": "Meer info"
+  },
+  "faqs": {
+    "groendak": [
+      {
+        "question": "Wat kost een groendak?",
+        "answer": "Een extensief sedumdak kost €40–€60 per m², intensieve groendaken €80–€150 per m². Voor een gemiddeld groendak van 30 m² betaalt u €1.200–€1.800 inclusief aanleg."
+      },
+      {
+        "question": "Welke subsidie is er voor groendaken in Friesland?",
+        "answer": "Leeuwarden biedt tot €15 per m², Súdwest-Fryslân heeft klimaatadaptatie subsidie (bedrag varieert), en Smallingerland heeft incidentele subsidieronden. Uw hovenier helpt bij de aanvraag."
+      },
+      {
+        "question": "Wat is een extensief groendak?",
+        "answer": "Een extensief groendak is lichtgewicht, onderhoudsarm en geschikt voor de meeste hellende en platte daken. De begroeiing bestaat uit sedum, mossen en kruiden."
+      },
+      {
+        "question": "Kunnen groendaken gecombineerd worden met zonnepanelen?",
+        "answer": "Ja — groendaken en zonnepanelen zijn een uitstekende combinatie. De begroeiing houdt de panelen koeler, wat de stroomopbrengst verhoogt."
+      },
+      {
+        "question": "Is mijn dak geschikt voor een groendak?",
+        "answer": "De meeste platte of licht hellende daken zijn geschikt, maar we controleren altijd de draagkracht, waterafvoer en isolatie. Een dakconstructie-onderzoek is onderdeel van ons proces."
+      },
+      {
+        "question": "Hoeveel onderhoud heeft een groendak nodig?",
+        "answer": "Extensieve groendaken vereisen minimaal onderhoud (1-2x per jaar). Intensieve groendaken hebben meer zorg nodig, vergelijkbaar met een gewone tuin."
+      }
+    ],
+    "stratenmaker": [
+      {
+        "question": "Hoe lang gaat bestrating mee?",
+        "answer": "Bij correcte aanleg en normaal gebruik gaan betonklinkers 25-30 jaar mee, natuursteen 50+ jaar. De kwaliteit van de fundering is cruciaal voor levensduur. Onderhoud bestaat voornamelijk uit voegen aanvullen en occasioneel schoonmaken."
+      },
+      {
+        "question": "Is een vergunning nodig voor bestrating?",
+        "answer": "Voor bestrating van uw eigen terrein is meestal geen vergunning nodig. Wel moet u zich houden aan de maximale verharding per perceel (check uw bestemmingsplan). Bij aansluiting op de openbare weg kan een KLIC-melding verplicht zijn."
+      },
+      {
+        "question": "Welk materiaal is het beste voor mijn situatie?",
+        "answer": "Dit hangt af van gebruik, budget en esthetiek. Betonklinkers zijn veelzijdig en betaalbaar, natuursteen is duurzamer maar duurder. Voor zwaar verkeer (opritten) adviseren we verstevigde klinkers of natuursteen. Voor terrassen zijn keramische tegels populair."
+      },
+      {
+        "question": "Wanneer is het beste seizoen voor bestratingswerkzaamheden?",
+        "answer": "Bestrating kan bijna het hele jaar door, behalve bij vorst. Het beste seizoen is maart-november. In de winter kan bij vorstvrij weer ook worden gewerkt. Voor grote projecten plannen we bij voorkeur in droge perioden vanwege grondcondities."
+      }
+    ],
+    "tuinonderhoud": [
+      {
+        "question": "Wat kost tuinonderhoud per maand?",
+        "answer": "Een tuinonderhoud abonnement kost €60–€200 per maand, afhankelijk van tuingrootte en frequentie. Deze vaste prijs is 10–20% voordeliger dan losse bezoeken en zorgt voor optimaal tuinonderhoud het hele jaar door."
+      },
+      {
+        "question": "Hoe vaak moet ik mijn tuin laten onderhouden?",
+        "answer": "Voor een verzorgde tuin adviseren we maandelijks onderhoud tijdens het groeiseizoen (maart–oktober) en 2–3x per jaar in de winterperiode voor seizoensklussen."
+      },
+      {
+        "question": "Wat zijn de voordelen van een tuinonderhoud abonnement?",
+        "answer": "Vaste lagere prijs per bezoek (10–20% korting), geen gedoe met planning, uw tuin is altijd verzorgd, en flexibele bezoekfrequentie afgestemd op seizoen en behoeften."
+      },
+      {
+        "question": "Welke werkzaamheden vallen onder tuinonderhoud?",
+        "answer": "Gras maaien en randjes steken, hagen knippen, onkruid verwijderen, snoeiwerk, bladeren opruimen, winterklaar maken, mestgift en seizoensplanting."
+      },
+      {
+        "question": "Doen jullie ook tuinonderhoud voor bedrijven?",
+        "answer": "Ja, onze hoveniers verzorgen groenonderhoud voor bedrijfsterreinen, VvE's en gemeentelijk groen. Vraag een offerte aan voor een maatwerkcontract."
+      }
+    ],
+    "tuinontwerp": [
+      {
+        "question": "Wat kost een professioneel tuinontwerp in Friesland?",
+        "answer": "Een compleet tuinontwerp varieert van €750-2500, afhankelijk van de grootte en complexiteit. Dit omvat conceptontwerp, plantenkeuze, 3D visualisatie en technische tekeningen."
+      },
+      {
+        "question": "Hoe lang duurt het ontwerpproces?",
+        "answer": "Van eerste gesprek tot definitief ontwerp duurt gemiddeld 2-4 weken. Dit hangt af van de grootte van uw tuin en gewenste detailniveau."
+      },
+      {
+        "question": "Krijg ik ook 3D visualisaties van mijn nieuwe tuin?",
+        "answer": "Ja, bij elk tuinontwerp leveren wij professionele 3D renders zodat u uw nieuwe tuin al kunt zien voordat de aanleg begint."
+      },
+      {
+        "question": "Kunnen jullie ook de aanleg verzorgen?",
+        "answer": "Absoluut! Wij werken samen met ervaren hovenieraanbedrijven die het ontwerp precies volgens specificaties kunnen realiseren."
+      },
+      {
+        "question": "Houden jullie rekening met onderhoudsvriendelijkheid?",
+        "answer": "Zeker. We ontwerpen altijd met het gewenste onderhoudsniveau in gedachten en kiezen planten die passen bij uw beschikbare tijd en ervaring."
+      }
+    ]
+  },
+  "related_articles": {
+    "groendak": [
+      {
+        "id": "1",
+        "title": "Groendaken en subsidies in Nederland 2024",
+        "excerpt": "Overzicht van beschikbare subsidies en regelingen voor groendaken in uw gemeente.",
+        "slug": "groendak-subsidies-2024",
+        "category": "Subsidies",
+        "readTime": 6,
+        "publishedAt": "2024-03-20"
+      },
+      {
+        "id": "2",
+        "title": "Sedum groendaken: voordelen en nadelen",
+        "excerpt": "Alles over sedum planten voor uw groendak en waarom ze zo populair zijn.",
+        "slug": "sedum-groendaken-voordelen",
+        "category": "Groendaken",
+        "readTime": 5,
+        "publishedAt": "2024-03-15"
+      },
+      {
+        "id": "3",
+        "title": "Intensief vs extensief groendak: wat past bij u?",
+        "excerpt": "Welk type groendak past het beste bij uw wensen, budget en onderhoudsmogelijkheden.",
+        "slug": "intensief-extensief-groendak-vergelijking",
+        "category": "Groendaken",
+        "readTime": 8,
+        "publishedAt": "2024-03-10"
+      }
+    ],
+    "stratenmaker": [
+      {
+        "id": "1",
+        "title": "Kosten bestrating: wat betaal je per m² in 2024?",
+        "excerpt": "Compleet overzicht van bestratingsprijzen voor verschillende materialen en technieken.",
+        "slug": "kosten-bestrating-per-m2",
+        "category": "Prijzen",
+        "readTime": 5,
+        "publishedAt": "2024-03-15"
+      },
+      {
+        "id": "2",
+        "title": "Betonklinkers vs natuursteen: wat is beter?",
+        "excerpt": "Vergelijking tussen verschillende bestratingsmaterialen voor oprit en terras.",
+        "slug": "betonklinkers-natuursteen-vergelijking",
+        "category": "Materialen",
+        "readTime": 7,
+        "publishedAt": "2024-03-10"
+      },
+      {
+        "id": "3",
+        "title": "Drainage en waterafvoer bij bestrating",
+        "excerpt": "Waarom goede waterafvoer essentieel is en hoe je dit professioneel aanpakt.",
+        "slug": "drainage-waterafvoer-bestrating",
+        "category": "Techniek",
+        "readTime": 6,
+        "publishedAt": "2024-03-05"
+      }
+    ],
+    "tuinonderhoud": [
+      {
+        "id": "1",
+        "title": "Wanneer is het beste moment om uw gazon te maaien?",
+        "excerpt": "Ontdek de optimale timing voor gras maaien en tips voor een perfect resultaat.",
+        "slug": "wanneer-gazon-maaien",
+        "category": "Tuinonderhoud",
+        "readTime": 5,
+        "publishedAt": "2024-03-15"
+      },
+      {
+        "id": "2",
+        "title": "Onkruid natuurlijk bestrijden zonder chemicaliën",
+        "excerpt": "Milieuvriendelijke methoden om onkruid effectief te verwijderen uit uw tuin.",
+        "slug": "onkruid-natuurlijk-bestrijden",
+        "category": "Tuintips",
+        "readTime": 7,
+        "publishedAt": "2024-03-10"
+      },
+      {
+        "id": "3",
+        "title": "Seizoenssnoei: wat, wanneer en hoe?",
+        "excerpt": "Complete gids voor het snoeien van bomen en struiken door het jaar heen.",
+        "slug": "seizoenssnoei-gids",
+        "category": "Snoeitechnieken",
+        "readTime": 8,
+        "publishedAt": "2024-03-05"
+      }
+    ],
+    "tuinontwerp": [
+      {
+        "id": "1",
+        "title": "Tuinontwerp trends 2024: wat is populair dit jaar?",
+        "excerpt": "Ontdek de nieuwste trends in tuinontwerp en landscaping voor een moderne buitenruimte.",
+        "slug": "tuinontwerp-trends-2024",
+        "category": "Tuinontwerp",
+        "readTime": 6,
+        "publishedAt": "2024-03-18"
+      },
+      {
+        "id": "2",
+        "title": "Kleine tuin, grote plannen: maximaal uit uw ruimte",
+        "excerpt": "Tips en trucs voor het ontwerpen van een functionele en mooie kleine tuin.",
+        "slug": "kleine-tuin-ontwerp-tips",
+        "category": "Tuinontwerp",
+        "readTime": 8,
+        "publishedAt": "2024-03-12"
+      },
+      {
+        "id": "3",
+        "title": "Duurzame tuinen: milieuvriendelijk ontwerpen",
+        "excerpt": "Hoe u een prachtige tuin kunt creëren die ook goed is voor het milieu.",
+        "slug": "duurzame-tuin-ontwerp",
+        "category": "Duurzaamheid",
+        "readTime": 7,
+        "publishedAt": "2024-03-08"
+      }
+    ]
+  },
+  "breadcrumb_home": "Home",
+  "calculator_notes": {
+    "onderhoud": "Per bezoek \\u00b7 gemiddeld 4\\u20137 uur werk",
+    "aanleg": "Totaalprijs project \\u00b7 inclusief materialen",
+    "ontwerp": "Totaalprijs \\u00b7 inclusief plantplan en tekeningen",
+    "snoei": "Per bezoek \\u00b7 afhankelijk van hoeveelheid",
+    "groendak": "Totaalprijs \\u00b7 exclusief subsidie",
+    "stratenmaker": "Totaalprijs \\u00b7 exclusief materiaalkosten"
   }
 }

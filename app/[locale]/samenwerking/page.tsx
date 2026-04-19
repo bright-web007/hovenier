@@ -231,7 +231,7 @@ export default async function SamenwerkingPage({ params }: Props) {
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: t('partnership.breadcrumb_partnership') }
   ];
 

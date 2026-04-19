@@ -202,7 +202,7 @@ export default async function RegioLandingPage({ params }: Props) {
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: 'Home', href: localizePath('/', locale as SupportedLocale) },
+    { label: ti('breadcrumb_home'), href: localizePath('/', locale as SupportedLocale) },
     { label: ti('regio_page.breadcrumb_regions'), href: localizePath('/regio', locale as SupportedLocale) }
   ];
 

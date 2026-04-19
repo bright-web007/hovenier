@@ -37,7 +37,7 @@ export default async function NieuwsHubPage({ params }: Props) {
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: t('nieuws_page.breadcrumb') }
   ];
 

@@ -15,29 +15,10 @@ const prices: Record<string, Record<string, [number, number]>> = {
   stratenmaker: { small: [1500, 3000], medium: [3500, 7000], large: [7000, 14000], xlarge: [12000, 24000] },
 };
 
-const notesNl: Record<string, string> = {
-  onderhoud: 'Per bezoek · gemiddeld 4–7 uur werk',
-  aanleg: 'Totaalprijs project · inclusief materialen',
-  ontwerp: 'Totaalprijs · inclusief plantplan en tekeningen',
-  snoei: 'Per bezoek · afhankelijk van hoeveelheid',
-  groendak: 'Totaalprijs · exclusief subsidie',
-  stratenmaker: 'Totaalprijs · exclusief materiaalkosten',
-};
-
-const notesEn: Record<string, string> = {
-  onderhoud: 'Per visit · average 4–7 hours of work',
-  aanleg: 'Total project price · including materials',
-  ontwerp: 'Total price · including planting plan and drawings',
-  snoei: 'Per visit · depending on quantity',
-  groendak: 'Total price · excluding subsidy',
-  stratenmaker: 'Total price · excluding material costs',
-};
-
 export default function KostenCalculator({ locale = 'nl' }: { locale?: string }) {
-  const isEn = locale === 'en';
   const t = createTranslator(locale);
-  const notes = isEn ? notesEn : notesNl;
-  const numberLocale = isEn ? 'en-US' : 'nl-NL';
+  const notes = (t.raw('calculator_notes') || {}) as Record<string, string>;
+  const numberLocale = locale === 'en' ? 'en-US' : 'nl-NL';
 
   const [jobType, setJobType] = useState('onderhoud');
   const [gardenSize, setGardenSize] = useState('medium');

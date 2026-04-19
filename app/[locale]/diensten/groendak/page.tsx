@@ -64,8 +64,8 @@ export default async function GroendakPage({ params }: Props) {
 
   const t = createTranslator(validLocale);
   const isEn = validLocale === 'en';
-  const localeFaqs = t.raw('faqs.groendak') || [];
-  const localeArticles = t.raw('related_articles.groendak') || [];
+  const localeFaqs = (t.raw('faqs.groendak') || []) as Array<{ question: string; answer: string }>;
+  const localeArticles = (t.raw('related_articles.groendak') || []) as Array<{ id: string; title: string; excerpt: string; slug: string; category: string; readTime: number; publishedAt: string }>;
 
   // Navigation translations
   const navTranslations = {
@@ -78,7 +78,7 @@ export default async function GroendakPage({ params }: Props) {
 
   // Breadcrumb navigation
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: isEn ? 'Services' : 'Diensten', href: localizePath('/services', validLocale as SupportedLocale) },
     { label: isEn ? 'Green Roofs' : 'Groendaken' }
   ];

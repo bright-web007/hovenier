@@ -68,7 +68,7 @@ export default async function GardenerProfilePage({ params }: Props) {
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: t('hoveniers_page.breadcrumb'), href: localizePath('/hoveniers', locale as SupportedLocale) },
     { label: gardener.name }
   ]

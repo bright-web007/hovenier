@@ -24,8 +24,8 @@ export default function DienstCard({ id, title, subtitle, description, image, lo
         <div className="dienst-card-badge">
           <p className="dienst-card-badge-text">{subtitle}</p>
         </div>
-        <p style={{ fontWeight: 700, fontSize: '22px', color: '#1F2937', lineHeight: '100%', letterSpacing: '-0.3px' }}>{title}</p>
-        <p style={{ fontSize: '14px', color: '#6B7280', lineHeight: '22px', fontWeight: 400 }}>{description}</p>
+        <p className="dienst-card-title">{title}</p>
+        <p className="dienst-card-description">{description}</p>
         <Link href={localizePath(`/diensten/${id}`, locale as SupportedLocale)} className="service-learn-more">{t('dienst_card.learn_more')}</Link>
       </div>
     </div>

@@ -4,6 +4,7 @@ import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from "@/app/components/NewLeadForm"
 import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -31,6 +32,7 @@ export async function generateStaticParams() {
 export default async function HovenierPerUurPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
+  const t = createTranslator(locale)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -65,7 +67,7 @@ export default async function HovenierPerUurPage({ params }: Props) {
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: 'Kosten', href: '/kosten' },
     { label: 'Wat kost een hovenier per uur?' }
   ];

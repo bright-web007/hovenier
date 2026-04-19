@@ -57,7 +57,6 @@ export default function RegionStrip({
   locale = 'nl',
   translations
 }: RegionStripProps) {
-  const isEn = locale === 'en';
   const t = createTranslator(locale || 'nl');
   
   // Use provided regions, or generate from gemeente data, or use fallback

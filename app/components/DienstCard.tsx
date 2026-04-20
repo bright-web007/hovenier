@@ -10,10 +10,12 @@ interface DienstCardProps {
   description: string;
   image: string;
   locale?: string;
+  href?: string;
 }
 
-export default function DienstCard({ id, title, subtitle, description, image, locale = 'nl' }: DienstCardProps) {
+export default function DienstCard({ id, title, subtitle, description, image, locale = 'nl', href }: DienstCardProps) {
   const t = createTranslator(locale);
+  const linkHref = href || localizePath(`/diensten/${id}`, locale as SupportedLocale);
 
   return (
     <div className="dienst-card">
@@ -26,7 +28,7 @@ export default function DienstCard({ id, title, subtitle, description, image, lo
         </div>
         <p className="dienst-card-title">{title}</p>
         <p className="dienst-card-description">{description}</p>
-        <Link href={localizePath(`/diensten/${id}`, locale as SupportedLocale)} className="service-learn-more">{t('dienst_card.learn_more')}</Link>
+        <Link href={linkHref} className="service-learn-more">{t('dienst_card.learn_more')}</Link>
       </div>
     </div>
   );

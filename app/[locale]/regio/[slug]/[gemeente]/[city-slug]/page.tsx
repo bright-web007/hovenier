@@ -214,6 +214,7 @@ const Page = async ({ params }: Props) => {
                 }
                 image="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80"
                 locale={validLocale}
+                href={`/${validLocale}/regio/${slug}/${gemeente}/${citySlug}/tuinonderhoud`}
               />
               <DienstCard
                 id="tuinontwerp"
@@ -225,6 +226,7 @@ const Page = async ({ params }: Props) => {
                 }
                 image="https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?w=800&q=80"
                 locale={validLocale}
+                href={`/${validLocale}/regio/${slug}/${gemeente}/${citySlug}/tuinontwerp`}
               />
               <DienstCard
                 id="groendak"
@@ -236,6 +238,7 @@ const Page = async ({ params }: Props) => {
                 }
                 image="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80"
                 locale={validLocale}
+                href={`/${validLocale}/regio/${slug}/${gemeente}/${citySlug}/groendak`}
               />
             </div>
           </div>

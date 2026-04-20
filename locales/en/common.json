@@ -1166,5 +1166,28 @@
     "snoei": "Per visit \\u00b7 depending on quantity",
     "groendak": "Total price \\u00b7 excluding subsidy",
     "stratenmaker": "Total price \\u00b7 excluding material costs"
+  },
+  "city_service_page": {
+    "eyebrow": "Services",
+    "tuinonderhoud": {
+      "title": "Garden Maintenance in {cityName}",
+      "description": "Garden maintenance in {cityName} requires a good understanding of the combination of sandy and marshy soil. Via Hovenier FRL we bring you in contact with experienced gardeners in {gemeenteName} and surroundings, such as nearby municipalities and villages. Whether you are looking for periodic maintenance or a one-time spruce-up, we ensure that you quickly find a suitable professional who keeps your garden in top condition."
+    },
+    "tuinontwerp": {
+      "title": "Garden Design in {cityName}",
+      "description": "Looking for a creative garden design in {cityName}? Via Hovenier FRL we connect you with experienced garden designers who know the local conditions well. They create unique designs that perfectly suit your wishes and the characteristics of the {cityName} area."
+    },
+    "groendak": {
+      "title": "Green Roofs in {cityName}",
+      "description": "Interested in a green roof in {cityName}? Via Hovenier FRL we connect you with specialists in sustainable roof coverings. They have expertise in water drainage, insulation and the specific conditions in {cityName} and surroundings for a longer lifespan of your roof."
+    },
+    "stratenmaker": {
+      "title": "Paving in {cityName}",
+      "description": "Looking for a professional paver in {cityName}? Via Hovenier FRL we connect you with experienced paving specialists for terraces, driveways and garden paths. They know the local soil conditions and deliver work that lasts."
+    },
+    "tuin-aanleggen": {
+      "title": "Garden Installation in {cityName}",
+      "description": "Want to have a garden installed in {cityName}? Via Hovenier FRL we connect you with experienced garden installers who transform your outdoor space into your dream garden, tailored to the local conditions."
+    }
   }
 }

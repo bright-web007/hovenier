@@ -1167,5 +1167,28 @@
     "snoei": "Per bezoek \\u00b7 afhankelijk van hoeveelheid",
     "groendak": "Totaalprijs \\u00b7 exclusief subsidie",
     "stratenmaker": "Totaalprijs \\u00b7 exclusief materiaalkosten"
+  },
+  "city_service_page": {
+    "eyebrow": "Diensten",
+    "tuinonderhoud": {
+      "title": "Tuinonderhoud in {cityName}",
+      "description": "Tuinonderhoud in {cityName} vraagt om een gerichte aanpak, mede door de combinatie van zand- en veengrond. Via Hovenier FRL brengen wij u in contact met ervaren hoveniers in {gemeenteName} en omgeving. Of u nu op zoek bent naar periodiek onderhoud of een eenmalige opknapbeurt, wij zorgen dat u snel een geschikte vakman vindt die uw tuin in topconditie houdt."
+    },
+    "tuinontwerp": {
+      "title": "Tuinontwerp in {cityName}",
+      "description": "Op zoek naar een creatief tuinontwerp in {cityName}? Via Hovenier FRL koppelen wij u aan ervaren tuinontwerpers die de lokale omstandigheden goed kennen. Zij creëren unieke ontwerpen die perfect aansluiten bij uw wensen en de kenmerken van de {cityName}er omgeving."
+    },
+    "groendak": {
+      "title": "Groendaken in {cityName}",
+      "description": "Interesse in een groendak in {cityName}? Via Hovenier FRL koppelen wij u aan specialisten in duurzame dakbedekkingen. Zij hebben expertise in waterafvoer, isolatie en de specifieke omstandigheden in {cityName} en omgeving voor een langere levensduur van uw dak."
+    },
+    "stratenmaker": {
+      "title": "Stratenmaker in {cityName}",
+      "description": "Op zoek naar een professionele stratenmaker in {cityName}? Via Hovenier FRL koppelen wij u aan ervaren bestratingsspecialisten voor terrassen, opritten en tuinpaden. Zij kennen de lokale bodemgesteldheid en leveren werk dat lang meegaat."
+    },
+    "tuin-aanleggen": {
+      "title": "Tuin Aanleggen in {cityName}",
+      "description": "Wilt u een tuin laten aanleggen in {cityName}? Via Hovenier FRL koppelen wij u aan ervaren tuinaanleggers die uw buitenruimte omtoveren tot uw droomtuin, afgestemd op de lokale omstandigheden."
+    }
   }
 }

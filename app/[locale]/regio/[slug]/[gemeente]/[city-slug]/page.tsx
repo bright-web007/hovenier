@@ -3,8 +3,9 @@ import Breadcrumbs from "@/app/components/Breadcrumbs";
 import DienstCard from "@/app/components/DienstCard";
 import ReviewCard from "@/app/components/ReviewCard";
 import LeadFormSection from "@/app/components/LeadFormSection";
-import { getLocaleAlternates, getAbsoluteUrl, localizePath, SupportedLocale } from "@/lib/locale-utils";
+import { getLocaleAlternates, SupportedLocale } from "@/lib/locale-utils";
 import { getRegionHubBySlug, getGemeenteBySlug } from "@/lib/regions-hierarchy";
+import { createTranslator } from '@/i18n';
 import { Metadata } from 'next';
 
 
@@ -21,6 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug, gemeente, 'city-slug': citySlug } = await params;
   const validLocale = locale || defaultLocale;
   const isEn = validLocale === 'en';
+  const t = createTranslator(validLocale);
 
   const formatName = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   const cityName = formatName(citySlug);
@@ -47,15 +49,53 @@ const Page = async ({ params }: Props) => {
     const validLocale = locale || defaultLocale;
     const isEn = validLocale === 'en';
 
+    const t = createTranslator(validLocale);
+
     const regionHub = getRegionHubBySlug(slug);
     const gemeenteData = getGemeenteBySlug(gemeente);
 
     const formatLabel = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     const cityName = formatLabel(citySlug);
 
+    // Navigation translations
+    const navTranslations = {
+      gardeners: t('gardeners'),
+      services: t('services'),
+      regions: t('regions'),
+      request_quote: t('request_quote'),
+    };
+
+    // Lead form translations
+    const translations = {
+      form_eyebrow: t('form_eyebrow'),
+      form_title: t('form_title'),
+      form_subtitle: t('form_subtitle'),
+      your_name: t('your_name'),
+      municipality: t('municipality'),
+      service: t('service'),
+      phone_number: t('phone_number'),
+      send_request: t('send_request'),
+      form_note: t('form_note'),
+      select_municipality: t('form.select_municipality'),
+      what_do_you_need: t('form.what_do_you_need'),
+      your_company: t('form.your_company'),
+      loading: t('form.loading'),
+      privacy_agreement: t('form.privacy_agreement'),
+      privacy_link: t('form.privacy_link'),
+      privacy_consent: t('form.privacy_consent'),
+      services: {
+        tuinonderhoud: t('form.services.tuinonderhoud'),
+        tuinontwerp: t('form.services.tuinontwerp'),
+        'tuin-aanleggen': t('form.services.tuin-aanleggen'),
+        stratenmaker: t('form.services.stratenmaker'),
+        groendak: t('form.services.groendak'),
+        overig: t('form.services.overig'),
+      },
+    };
+
     const breadcrumbItems = [
-        { label: 'Home', href: `/${validLocale}` },
-        { label: isEn ? 'Regions' : "Regio's", href: `/${validLocale}/regio` },
+        { label: t('breadcrumb_home'), href: `/${validLocale}` },
+        { label: t('regio_page.breadcrumb_regions'), href: `/${validLocale}/regio` },
         { label: regionHub?.name || formatLabel(slug), href: `/${validLocale}/regio/${slug}` },
         { label: gemeenteData?.name || formatLabel(gemeente), href: `/${validLocale}/regio/${slug}/${gemeente}` },
         { label: cityName },
@@ -63,7 +103,7 @@ const Page = async ({ params }: Props) => {
 
     return (
         <>
-        <Navigation locale={validLocale} />
+        <Navigation locale={validLocale} translations={navTranslations} />
         <Breadcrumbs items={breadcrumbItems} />
         {/* Hero Section */}
         <section style={{ backgroundColor: '#2A3E20EB', width: '100%' }}>
@@ -125,7 +165,7 @@ const Page = async ({ params }: Props) => {
             }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="#8AB87A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                {isEn ? 'No obligation' : 'Vrijblijvend'}
+                {t('no_obligations')}
               </span>
               <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="#8AB87A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -233,7 +273,7 @@ const Page = async ({ params }: Props) => {
                 }
                 name="Marieke de Boer"
                 image="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                subtitle={isEn ? 'Sneek' : 'Sneek'}
+                subtitle={cityName}
               />
               <ReviewCard
                 quote={isEn
@@ -242,7 +282,7 @@ const Page = async ({ params }: Props) => {
                 }
                 name="Jan Willem Visser"
                 image="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                subtitle={isEn ? 'Sneek · Front yard' : 'Sneek · Voortuin'}
+                subtitle={isEn ? `${cityName} · Front yard` : `${cityName} · Voortuin`}
               />
               <ReviewCard
                 quote={isEn
@@ -251,7 +291,7 @@ const Page = async ({ params }: Props) => {
                 }
                 name="Sietske Dijkstra"
                 image="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                subtitle={isEn ? 'Sneek · Green roof' : 'Sneek · Groendak'}
+                subtitle={isEn ? `${cityName} · Green roof` : `${cityName} · Groendak`}
               />
             </div>
           </div>
@@ -262,32 +302,7 @@ const Page = async ({ params }: Props) => {
           subtitle={isEn ? `Receive within 24 hours responses from local gardener specialists` : `Ontvang binnen 24 uur reacties van lokale hovenier specialisten`}
           locale={validLocale}
           backgroundColor="#FFFFFF"
-          translations={{
-            form_eyebrow: isEn ? 'Free Quote' : 'Gratis Offerte',
-            form_title: isEn ? 'Request a quote' : 'Vraag een offerte aan',
-            form_subtitle: isEn ? `Receive within 24 hours responses from gardeners in your area` : `Ontvang binnen 24 uur reacties van hoveniers in uw regio`,
-            your_name: isEn ? 'Your name' : 'Uw naam',
-            municipality: isEn ? 'Municipality' : 'Gemeente',
-            service: isEn ? 'Desired service' : 'Gewenste dienst',
-            phone_number: isEn ? 'Phone number' : 'Telefoonnummer',
-            send_request: isEn ? 'Send request' : 'Verstuur aanvraag',
-            form_note: isEn ? 'By submitting this form you agree to our terms' : 'Door dit formulier te versturen gaat u akkoord met onze voorwaarden',
-            select_municipality: isEn ? 'Select municipality' : 'Selecteer gemeente',
-            what_do_you_need: isEn ? 'What do you need?' : 'Wat heeft u nodig?',
-            your_company: isEn ? 'Your company' : 'Uw bedrijf',
-            loading: isEn ? 'Sending...' : 'Versturen...',
-            privacy_agreement: isEn ? 'I agree to the' : 'Ik ga akkoord met het',
-            privacy_link: isEn ? 'privacy policy' : 'privacybeleid',
-            privacy_consent: isEn ? 'and consent to processing my data.' : 'en geef toestemming voor het verwerken van mijn gegevens.',
-            services: {
-              tuinonderhoud: isEn ? 'Garden Maintenance' : 'Tuinonderhoud',
-              tuinontwerp: isEn ? 'Garden Design' : 'Tuinontwerp',
-              'tuin-aanleggen': isEn ? 'Garden Installation' : 'Tuin Aanleggen',
-              stratenmaker: isEn ? 'Paving' : 'Bestrating',
-              groendak: isEn ? 'Green Roof' : 'Groendak',
-              overig: isEn ? 'Other' : 'Overig',
-            },
-          }}
+          translations={translations}
         />
         </>
     )

@@ -3840,3 +3840,16 @@ a { text-decoration: none; color: inherit; }
 .diensten-btn:hover {
   background-color: var(--sage) !important;
 }
+
+/* Responsive grid: 3 cols -> 1 col below 640px */
+.grid-responsive-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+}
+@media (max-width: 640px) {
+  .grid-responsive-3 {
+    grid-template-columns: 1fr;
+  }
+}

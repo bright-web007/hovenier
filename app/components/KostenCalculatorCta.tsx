@@ -1,8 +1,11 @@
 'use client';
 
 import styles from './KostenCalculatorCta.module.css';
+import { createTranslator } from '@/i18n';
 
 export default function KostenCalculatorCta({ locale = 'nl' }: { locale?: string }) {
+  const t = createTranslator(locale);
+
   const handleClick = () => {
     // Look for CTA section with multiple possible selectors
     const ctaSelectors = [
@@ -31,7 +34,7 @@ export default function KostenCalculatorCta({ locale = 'nl' }: { locale?: string
       onClick={handleClick}
       type="button"
     >
-      {locale === 'en' ? 'Request free quote →' : 'Vraag gratis offerte aan →'}
+      {t('calculator.request_quote')}
     </button>
   );
 }

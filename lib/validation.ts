@@ -127,11 +127,22 @@ export const validateForm = <T>(schema: z.ZodSchema<T>, data: unknown) => {
 };
 
 // Helper to extract field errors for form display
-export const getFieldError = (errors: any, fieldName: string): string | null => {
-  if (!errors || !errors[fieldName]) return null;
+export type FormErrors = {
+  _errors?: string[];
+  [key: string]: unknown;
+} | null | undefined;
+
+export const getFieldError = (errors: FormErrors, fieldName: string): string | null => {
+  if (!errors || !(fieldName in errors)) return null;
   
   const fieldErrors = errors[fieldName];
-  if (Array.isArray(fieldErrors._errors) && fieldErrors._errors.length > 0) {
+  if (
+    fieldErrors &&
+    typeof fieldErrors === 'object' &&
+    '_errors' in fieldErrors &&
+    Array.isArray(fieldErrors._errors) &&
+    fieldErrors._errors.length > 0
+  ) {
     return fieldErrors._errors[0];
   }
   
@@ -139,18 +150,19 @@ export const getFieldError = (errors: any, fieldName: string): string | null => 
 };
 
 // Helper to check if form has any errors
-export const hasFormErrors = (errors: any): boolean => {
+export const hasFormErrors = (errors: FormErrors): boolean => {
   if (!errors) return false;
   
   return Object.keys(errors).some(key => {
-    if (key === '_errors') return errors[key].length > 0;
-    return errors[key] && typeof errors[key] === 'object';
+    const field = (errors as Record<string, unknown>)[key];
+    if (key === '_errors') return Array.isArray(field) && field.length > 0;
+    return field != null && typeof field === 'object';
   });
 };
 
 // Clean form data (remove empty strings, trim whitespace)
-export const cleanFormData = (data: Record<string, any>): Record<string, any> => {
-  const cleaned: Record<string, any> = {};
+export const cleanFormData = (data: Record<string, unknown>): Record<string, unknown> => {
+  const cleaned: Record<string, unknown> = {};
   
   for (const [key, value] of Object.entries(data)) {
     if (typeof value === 'string') {

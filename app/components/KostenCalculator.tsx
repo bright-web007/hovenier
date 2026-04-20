@@ -4,6 +4,7 @@ import { useState } from 'react';
 import calculatorStyles from './KostenCalculator.module.css';
 import KostenCalculatorCta from './KostenCalculatorCta';
 import CustomSelect from './CustomSelect';
+import { createTranslator } from '@/i18n';
 
 const prices: Record<string, Record<string, [number, number]>> = {
   onderhoud: { small: [140, 250], medium: [200, 380], large: [300, 550], xlarge: [450, 750] },
@@ -14,28 +15,10 @@ const prices: Record<string, Record<string, [number, number]>> = {
   stratenmaker: { small: [1500, 3000], medium: [3500, 7000], large: [7000, 14000], xlarge: [12000, 24000] },
 };
 
-const notesNl: Record<string, string> = {
-  onderhoud: 'Per bezoek · gemiddeld 4–7 uur werk',
-  aanleg: 'Totaalprijs project · inclusief materialen',
-  ontwerp: 'Totaalprijs · inclusief plantplan en tekeningen',
-  snoei: 'Per bezoek · afhankelijk van hoeveelheid',
-  groendak: 'Totaalprijs · exclusief subsidie',
-  stratenmaker: 'Totaalprijs · exclusief materiaalkosten',
-};
-
-const notesEn: Record<string, string> = {
-  onderhoud: 'Per visit · average 4–7 hours of work',
-  aanleg: 'Total project price · including materials',
-  ontwerp: 'Total price · including planting plan and drawings',
-  snoei: 'Per visit · depending on quantity',
-  groendak: 'Total price · excluding subsidy',
-  stratenmaker: 'Total price · excluding material costs',
-};
-
 export default function KostenCalculator({ locale = 'nl' }: { locale?: string }) {
-  const isEn = locale === 'en';
-  const notes = isEn ? notesEn : notesNl;
-  const numberLocale = isEn ? 'en-US' : 'nl-NL';
+  const t = createTranslator(locale);
+  const notes = (t.raw('calculator_notes') || {}) as Record<string, string>;
+  const numberLocale = locale === 'en' ? 'en-US' : 'nl-NL';
 
   const [jobType, setJobType] = useState('onderhoud');
   const [gardenSize, setGardenSize] = useState('medium');
@@ -48,43 +31,43 @@ export default function KostenCalculator({ locale = 'nl' }: { locale?: string })
     <div className={calculatorStyles.calculatorWrapper}>
       <div className={calculatorStyles.calculatorRow}>
         <div className={calculatorStyles.calculatorField}>
-          <label>{isEn ? 'Type of work' : 'Type werkzaamheden'}</label>
+          <label>{t('calculator.work_type')}</label>
           <CustomSelect
             id="jobType"
-            label={isEn ? 'Type of work' : 'Type werkzaamheden'}
+            label={t('calculator.work_type')}
             value={jobType}
             onChange={setJobType}
             variant="form"
             options={[
-              { value: 'onderhoud', label: isEn ? 'Garden Maintenance' : 'Tuinonderhoud' },
-              { value: 'aanleg', label: isEn ? 'Garden Construction' : 'Tuin aanleggen' },
-              { value: 'ontwerp', label: isEn ? 'Garden Design' : 'Tuinontwerp' },
-              { value: 'snoei', label: isEn ? 'Pruning' : 'Snoeien' },
-              { value: 'groendak', label: isEn ? 'Green Roof' : 'Groendak' },
-              { value: 'stratenmaker', label: isEn ? 'Paving' : 'Stratenmaker' },
+              { value: 'onderhoud', label: t('calculator.garden_maintenance') },
+              { value: 'aanleg', label: t('calculator.garden_construction') },
+              { value: 'ontwerp', label: t('calculator.garden_design') },
+              { value: 'snoei', label: t('calculator.pruning') },
+              { value: 'groendak', label: t('calculator.green_roof') },
+              { value: 'stratenmaker', label: t('calculator.paving') },
             ]}
           />
         </div>
         <div className={calculatorStyles.calculatorField}>
-          <label>{isEn ? 'Garden size' : 'Tuingrootte'}</label>
+          <label>{t('calculator.garden_size')}</label>
           <CustomSelect
             id="gardenSize"
-            label={isEn ? 'Garden size' : 'Tuingrootte'}
+            label={t('calculator.garden_size')}
             value={gardenSize}
             onChange={setGardenSize}
             variant="form"
             options={[
-              { value: 'small', label: isEn ? 'Small (up to 50m²)' : 'Klein (tot 50m²)' },
-              { value: 'medium', label: isEn ? 'Medium (50–150m²)' : 'Middelgroot (50–150m²)' },
-              { value: 'large', label: isEn ? 'Large (150–300m²)' : 'Groot (150–300m²)' },
-              { value: 'xlarge', label: isEn ? 'Very large (300m²+)' : 'Zeer groot (300m²+)' },
+              { value: 'small', label: t('calculator.small') },
+              { value: 'medium', label: t('calculator.medium') },
+              { value: 'large', label: t('calculator.large') },
+              { value: 'xlarge', label: t('calculator.xlarge') },
             ]}
           />
         </div>
       </div>
       <div className={calculatorStyles.calculatorResult}>
         <div className={calculatorStyles.resultContent}>
-          <div className={calculatorStyles.resultLabel}>{isEn ? 'Estimated costs' : 'Geschatte kosten'}</div>
+          <div className={calculatorStyles.resultLabel}>{t('calculator.estimated_costs')}</div>
           <div className={calculatorStyles.resultPrice}>€{lo} – €{hi}</div>
           <div className={calculatorStyles.resultNote}>{notes[jobType]}</div>
         </div>

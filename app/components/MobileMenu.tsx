@@ -1,6 +1,6 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import LocaleLink from './LocaleLink';
 
@@ -16,12 +16,6 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ links, ctaHref, ctaLabel, logoHref, nlHref, enHref, currentLocale }: MobileMenuProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
-
-  // Close menu on route change (e.g. browser back/forward)
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
 
   return (
     <>
@@ -56,7 +50,7 @@ export default function MobileMenu({ links, ctaHref, ctaLabel, logoHref, nlHref,
       <div className={`mobile-menu ${menuOpen ? 'mobile-menu-open' : ''}`}>
         <div className="mobile-menu-header">
           <Link href={logoHref} className="nav-logo" onClick={() => setMenuOpen(false)}>
-            <img src="/assets/logo-light.svg" alt="Hovenier.frl" width="140" height="36" className="nav-logo-image" />
+            <Image src="/assets/logo-light.svg" alt="Hovenier.frl" width={140} height={36} className="nav-logo-image" />
           </Link>
           <button
             className="mobile-menu-close"

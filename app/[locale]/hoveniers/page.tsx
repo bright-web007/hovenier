@@ -8,6 +8,7 @@ import GardenerDirectoryClient from '../../components/GardenerDirectoryClient'
 import { gardeners } from '../../../lib/gardeners-data'
 import styles from '../../components/GardenerDirectory.module.css'
 import { getAbsoluteUrl, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -35,17 +36,18 @@ export async function generateStaticParams() {
 export default async function HoveniersDirectoryPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = createTranslator(locale);
 
   // Breadcrumb items  
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
-    { label: locale === 'en' ? 'Gardeners' : 'Hoveniers' }
+    { label: t('breadcrumb_home'), href: '/' },
+    { label: t('hoveniers_page.breadcrumb') }
   ];
 
   // Breadcrumb schema items (needs full URLs)
   const breadcrumbSchemaItems = [
     { name: 'Home', url: getAbsoluteUrl('/', locale as SupportedLocale) },
-    { name: locale === 'en' ? 'Gardeners' : 'Hoveniers', url: getAbsoluteUrl('/hoveniers', locale as SupportedLocale) }
+    { name: t('hoveniers_page.breadcrumb'), url: getAbsoluteUrl('/hoveniers', locale as SupportedLocale) }
   ];
 
   return (
@@ -65,10 +67,10 @@ export default async function HoveniersDirectoryPage({ params }: Props) {
             {/* Hero Section */}
             <div className={styles.sectionCentered}>
               <div className={styles.sectionEyebrow}>
-                <span>{locale === 'en' ? 'GARDENERS DIRECTORY' : 'HOVENIERS DIRECTORY'}</span>
+                <span>{t('hoveniers_page.directory_eyebrow')}</span>
               </div>
               <h1 className={styles.sectionTitle}>
-                {locale === 'en' ? 'Find Professional Gardeners' : 'Vind Professionele Hoveniers'}
+                {t('hoveniers_page.directory_title')}
               </h1>
               <p className={styles.sectionSub}>
                 {locale === 'en'

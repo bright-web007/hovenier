@@ -4,6 +4,7 @@
  */
 
 import { render, screen } from '@testing-library/react';
+import type { ComponentPropsWithoutRef } from 'react';
 
 // Mock Next.js modules
 jest.mock('next/navigation', () => ({
@@ -30,56 +31,14 @@ jest.mock('@/lib/locale-utils', () => ({
 
 // Mock Turnstile component
 jest.mock('@marsidev/react-turnstile', () => {
-  return function MockTurnstile(props: any) {
+  return function MockTurnstile(props: ComponentPropsWithoutRef<'div'>) {
     return <div data-testid="turnstile-mock" {...props} />;
   };
 });
 
-// Helper function to create mock messages for next-intl
-const createMockMessages = () => ({
-  common: {
-    navigation: {
-      home: 'Home',
-      diensten: 'Services',
-      hoveniers: 'Gardeners',
-      contact: 'Contact',
-      nieuws: 'News'
-    },
-    footer: {
-      contact: 'Contact',
-      about: 'About Us',
-      privacy: 'Privacy Policy'
-    }
-  },
-  pages: {
-    contact: {
-      title: 'Contact Us',
-      subtitle: 'Get in touch',
-      form: {
-        name: 'Name',
-        email: 'Email',
-        message: 'Message',
-        submit: 'Send Message'
-      }
-    },
-    'over-ons': {
-      title: 'About Us',
-      subtitle: 'Who we are'
-    },
-    privacy: {
-      title: 'Privacy Policy'
-    },
-    algemene: {
-      title: 'Terms and Conditions'
-    }
-  }
-});
-
 describe('Static Pages Integration Tests', () => {
-  const mockMessages = createMockMessages();
-  
   // Helper to render a page with mocked intl context
-  const renderWithIntl = (component: React.ReactElement, locale = 'nl') => {
+  const renderWithIntl = (component: React.ReactElement) => {
     return render(component);
   };
 
@@ -104,9 +63,7 @@ describe('Static Pages Integration Tests', () => {
       
       // Should have contact form elements or contact information
       // Note: These tests might need adjustment based on actual component structure
-      const pageContent = screen.getByTestId ? 
-        screen.queryByTestId('contact-page') : 
-        document.body;
+      const pageContent = screen.queryByTestId('contact-page') ?? document.body;
       
       expect(pageContent).toBeTruthy();
     });
@@ -231,7 +188,7 @@ describe('Static Pages Integration Tests', () => {
         const mockParams = Promise.resolve({ locale });
         
         expect(() => {
-          renderWithIntl(<HomePage params={mockParams} />, locale);
+          renderWithIntl(<HomePage params={mockParams} />);
         }).not.toThrow();
       }
     });

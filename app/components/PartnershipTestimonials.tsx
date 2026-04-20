@@ -1,6 +1,7 @@
 'use client'
 
 import styles from './Partnership.module.css'
+import { createTranslator } from '@/i18n'
 
 interface SuccessStory {
   name: string
@@ -15,20 +16,20 @@ interface PartnershipTestimonialsProps {
 }
 
 export default function PartnershipTestimonials({ successStories, locale = 'nl' }: PartnershipTestimonialsProps) {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale);
   return (
     <section className="section">
       <div className="section-inner">
         <div className="section-header-row section-centered">
-          <h2 className="section-title">{isEn ? 'Success stories' : 'Succesverhalen'}</h2>
-          <p className="section-sub">{isEn ? 'What our partners say' : 'Wat onze partners zeggen'}</p>
+          <h2 className="section-title">{t('partnership_testimonials.title')}</h2>
+          <p className="section-sub">{t('partnership_testimonials.subtitle')}</p>
         </div>
         
         <div className={styles.testimonialsGrid}>
           {successStories.map((story, index) => (
             <div key={index} className={styles.testimonialCard}>
               <div className="partnership-testimonial-content">
-                <p className={styles.testimonialQuote}>"{story.quote}"</p>
+                <p className={styles.testimonialQuote}>&ldquo;{story.quote}&rdquo;</p>
                 <div className={styles.testimonialAuthor}>
                   <div className="partnership-testimonial-info">
                     <h4 className={styles.testimonialName}>{story.name}</h4>

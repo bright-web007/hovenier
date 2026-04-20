@@ -8,6 +8,63 @@ import {
   validateServiceSpecificSchema
 } from '../utils/schema-validation';
 
+type OfferCatalogItem = {
+  '@type': 'Offer';
+  '@id': string;
+  itemOffered: {
+    '@type': 'Service';
+    name: string;
+    provider: {
+      '@type': 'LocalBusiness';
+      '@id': string;
+      name: string;
+    };
+  };
+};
+
+type LocalBusinessSchemaShape = {
+  '@id': string;
+  name: string;
+  address: {
+    addressLocality: string;
+    postalCode: string;
+    addressRegion: string;
+    addressCountry: string;
+  };
+  geo: {
+    latitude: string;
+    longitude: string;
+  };
+  serviceArea: {
+    geoMidpoint: {
+      latitude: string;
+      longitude: string;
+    };
+  };
+  areaServed: {
+    '@type': 'State';
+    name: string;
+    containedInPlace: {
+      '@type': 'Country';
+      name: string;
+    };
+  };
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog';
+    name: string;
+    itemListElement: OfferCatalogItem[];
+  };
+};
+
+function getLocalBusinessSchema(container: ReturnType<typeof render>['container']): LocalBusinessSchemaShape {
+  const structuredData = extractStructuredData(container.innerHTML);
+  const localBusinessSchema = findLocalBusinessSchema(structuredData);
+
+  expect(localBusinessSchema).toBeTruthy();
+
+  return localBusinessSchema as LocalBusinessSchemaShape;
+}
+
 // Mock next-intl for testing
 jest.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,
@@ -95,12 +152,10 @@ describe('LocalBusinessSchema Component', () => {
         />
       );
 
-      const html = container.innerHTML;
-      const structuredData = extractStructuredData(html);
-      const localBusinessSchema = findLocalBusinessSchema(structuredData);
+      const localBusinessSchema = getLocalBusinessSchema(container);
       
-      const schemaServices = localBusinessSchema!.hasOfferCatalog.itemListElement.map(
-        (item: any) => item.itemOffered.name
+      const schemaServices = localBusinessSchema.hasOfferCatalog.itemListElement.map(
+        (item) => item.itemOffered.name
       );
       
       customServices.forEach(service => {
@@ -148,11 +203,9 @@ describe('LocalBusinessSchema Component', () => {
           />
         );
 
-        const html = container.innerHTML;
-        const structuredData = extractStructuredData(html);
-        const localBusinessSchema = findLocalBusinessSchema(structuredData);
+        const localBusinessSchema = getLocalBusinessSchema(container);
         
-        businessIds.push(localBusinessSchema!['@id']);
+        businessIds.push(localBusinessSchema['@id']);
       });
 
       // All @id values should be identical
@@ -166,14 +219,12 @@ describe('LocalBusinessSchema Component', () => {
         <LocalBusinessSchema {...baseProps} />
       );
 
-      const html = container.innerHTML;
-      const structuredData = extractStructuredData(html);
-      const localBusinessSchema = findLocalBusinessSchema(structuredData);
+      const localBusinessSchema = getLocalBusinessSchema(container);
       
-      expect(localBusinessSchema!.address.addressLocality).toBe('Leeuwarden');
-      expect(localBusinessSchema!.address.postalCode).toBe('8900');
-      expect(localBusinessSchema!.address.addressRegion).toBe('Friesland');
-      expect(localBusinessSchema!.address.addressCountry).toBe('NL');
+      expect(localBusinessSchema.address.addressLocality).toBe('Leeuwarden');
+      expect(localBusinessSchema.address.postalCode).toBe('8900');
+      expect(localBusinessSchema.address.addressRegion).toBe('Friesland');
+      expect(localBusinessSchema.address.addressCountry).toBe('NL');
     });
 
     test('should have consistent geographic coordinates', () => {
@@ -181,14 +232,12 @@ describe('LocalBusinessSchema Component', () => {
         <LocalBusinessSchema {...baseProps} />
       );
 
-      const html = container.innerHTML;
-      const structuredData = extractStructuredData(html);
-      const localBusinessSchema = findLocalBusinessSchema(structuredData);
+      const localBusinessSchema = getLocalBusinessSchema(container);
       
-      expect(localBusinessSchema!.geo.latitude).toBe('53.2012');
-      expect(localBusinessSchema!.geo.longitude).toBe('5.7999');
-      expect(localBusinessSchema!.serviceArea.geoMidpoint.latitude).toBe('53.2012');
-      expect(localBusinessSchema!.serviceArea.geoMidpoint.longitude).toBe('5.7999');
+      expect(localBusinessSchema.geo.latitude).toBe('53.2012');
+      expect(localBusinessSchema.geo.longitude).toBe('5.7999');
+      expect(localBusinessSchema.serviceArea.geoMidpoint.latitude).toBe('53.2012');
+      expect(localBusinessSchema.serviceArea.geoMidpoint.longitude).toBe('5.7999');
     });
 
     test('should have consistent area served information', () => {
@@ -196,14 +245,12 @@ describe('LocalBusinessSchema Component', () => {
         <LocalBusinessSchema {...baseProps} />
       );
 
-      const html = container.innerHTML;
-      const structuredData = extractStructuredData(html);
-      const localBusinessSchema = findLocalBusinessSchema(structuredData);
+      const localBusinessSchema = getLocalBusinessSchema(container);
       
-      expect(localBusinessSchema!.areaServed.name).toBe('Friesland');
-      expect(localBusinessSchema!.areaServed['@type']).toBe('State');
-      expect(localBusinessSchema!.areaServed.containedInPlace.name).toBe('Nederland');
-      expect(localBusinessSchema!.areaServed.containedInPlace['@type']).toBe('Country');
+      expect(localBusinessSchema.areaServed.name).toBe('Friesland');
+      expect(localBusinessSchema.areaServed['@type']).toBe('State');
+      expect(localBusinessSchema.areaServed.containedInPlace.name).toBe('Nederland');
+      expect(localBusinessSchema.areaServed.containedInPlace['@type']).toBe('Country');
     });
 
     test('should have valid offer catalog structure', () => {
@@ -211,11 +258,9 @@ describe('LocalBusinessSchema Component', () => {
         <LocalBusinessSchema {...baseProps} />
       );
 
-      const html = container.innerHTML;
-      const structuredData = extractStructuredData(html);
-      const localBusinessSchema = findLocalBusinessSchema(structuredData);
+      const localBusinessSchema = getLocalBusinessSchema(container);
       
-      const catalog = localBusinessSchema!.hasOfferCatalog;
+      const catalog = localBusinessSchema.hasOfferCatalog;
       expect(catalog['@type']).toBe('OfferCatalog');
       expect(catalog.name).toBe('Hoveniersdiensten');
       expect(catalog.itemListElement).toBeDefined();
@@ -223,7 +268,7 @@ describe('LocalBusinessSchema Component', () => {
       expect(catalog.itemListElement.length).toBeGreaterThan(0);
 
       // Validate each offer structure
-      catalog.itemListElement.forEach((offer: any, index: number) => {
+      catalog.itemListElement.forEach((offer, index: number) => {
         expect(offer['@type']).toBe('Offer');
         expect(offer['@id']).toContain('service-' + index);
         expect(offer.itemOffered['@type']).toBe('Service');

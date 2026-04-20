@@ -46,69 +46,8 @@ jest.mock('@/lib/services', () => ({
   ]
 }));
 
-// Helper function to create mock messages
-const createMockMessages = () => ({
-  common: {
-    navigation: {
-      home: 'Home',
-      diensten: 'Services',
-      contact: 'Contact'
-    }
-  },
-  pages: {
-    diensten: {
-      title: 'Services',
-      groendak: {
-        title: 'Groendak Services',
-        description: 'Professional green roof services'
-      },
-      stratenmaker: {
-        title: 'Paving Services',
-        description: 'Professional paving and surfacing'
-      },
-      tuinonderhoud: {
-        title: 'Garden Maintenance',
-        description: 'Regular garden maintenance services'
-      },
-      tuinontwerp: {
-        title: 'Garden Design',
-        description: 'Professional garden design services'
-      },
-      'tuin-aanleggen': {
-        title: 'Garden Installation',
-        description: 'Complete garden installation services'
-      }
-    },
-    kosten: {
-      title: 'Kosten',
-      groendak: {
-        title: 'Groendak Kosten',
-        description: 'Cost information for green roofs'
-      },
-      'hovenier-per-uur': {
-        title: 'Hovenier per Uur Kosten',
-        description: 'Hourly gardener costs'
-      },
-      tuinonderhoud: {
-        title: 'Tuinonderhoud Kosten',
-        description: 'Garden maintenance costs'
-      },
-      tuinontwerp: {
-        title: 'Tuinontwerp Kosten',
-        description: 'Garden design costs'
-      },
-      'tuin-aanleggen': {
-        title: 'Tuin Aanleggen Kosten',
-        description: 'Garden installation costs'
-      }
-    }
-  }
-});
-
 describe('Service and Cost Pages Integration Tests', () => {
-  const mockMessages = createMockMessages();
-  
-  const renderWithIntl = (component: React.ReactElement, locale = 'nl') => {
+  const renderWithIntl = (component: React.ReactElement) => {
     return render(component);
   };
 
@@ -152,7 +91,7 @@ describe('Service and Cost Pages Integration Tests', () => {
             });
             
             expect(() => {
-              renderWithIntl(<ServicePage params={mockParams} />, locale);
+              renderWithIntl(<ServicePage params={mockParams} />);
             }).not.toThrow();
           }
           
@@ -326,14 +265,14 @@ describe('Service and Cost Pages Integration Tests', () => {
         try {
           await import(`@/app/[locale]/diensten/${service}/page`);
           hasServicePage = true;
-        } catch (error) {
+        } catch {
           console.warn(`Service page missing for ${service}`);
         }
 
         try {  
           await import(`@/app/[locale]/kosten/${service}/page`);
           hasCostPage = true;
-        } catch (error) {
+        } catch {
           console.warn(`Cost page missing for ${service}`);
         }
 
@@ -353,7 +292,8 @@ describe('Service and Cost Pages Integration Tests', () => {
   describe('Dynamic Service Generation', () => {
     test('should handle service pages with generateStaticParams', async () => {
       try {
-        const { generateStaticParams } = await import(`@/app/[locale]/diensten/[service]/page`);
+        const servicePageModulePath = '@/app/[locale]/diensten/[service]/page';
+        const { generateStaticParams } = await import(servicePageModulePath);
         
         if (generateStaticParams) {
           const params = await generateStaticParams();
@@ -361,7 +301,7 @@ describe('Service and Cost Pages Integration Tests', () => {
           expect(params.length).toBeGreaterThan(0);
           
           // Each param should have service property
-          params.forEach(param => {
+          params.forEach((param: { service: string }) => {
             expect(param).toHaveProperty('service');
             expect(typeof param.service).toBe('string');
           });
@@ -373,7 +313,8 @@ describe('Service and Cost Pages Integration Tests', () => {
 
     test('should handle cost pages with generateStaticParams', async () => {
       try {
-        const { generateStaticParams } = await import(`@/app/[locale]/kosten/[service]/page`);
+        const costPageModulePath = '@/app/[locale]/kosten/[service]/page';
+        const { generateStaticParams } = await import(costPageModulePath);
         
         if (generateStaticParams) {
           const params = await generateStaticParams();
@@ -381,7 +322,7 @@ describe('Service and Cost Pages Integration Tests', () => {
           expect(params.length).toBeGreaterThan(0);
           
           // Each param should have service property
-          params.forEach(param => {
+          params.forEach((param: { service: string }) => {
             expect(param).toHaveProperty('service');
             expect(typeof param.service).toBe('string');
           });
@@ -424,7 +365,8 @@ describe('Service and Cost Pages Integration Tests', () => {
   describe('Error Handling', () => {
     test('should handle invalid service parameters gracefully', async () => {
       try {
-        const { default: ServicePage } = await import(`@/app/[locale]/diensten/[service]/page`);
+        const servicePageModulePath = '@/app/[locale]/diensten/[service]/page';
+        const { default: ServicePage } = await import(servicePageModulePath);
         
         const mockParams = Promise.resolve({ 
           locale: 'nl',

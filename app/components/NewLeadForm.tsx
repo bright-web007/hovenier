@@ -1,9 +1,10 @@
 "use client";
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import { useRouter } from "next/navigation";
 import { trackLeadFormSubmission } from './GoogleAnalytics';
 import { submitLeadToPrometheus } from '../services/prometheus';
 import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/i18n';
 import { newLeadFormSchema, type NewLeadFormData } from '@/lib/validation';
 import { useFormValidation } from '@/lib/hooks/useFormValidation';
 import { FormField, FormErrorSummary, FormLoadingSpinner } from './FormValidation';
@@ -49,11 +50,14 @@ const gemeenten = [
 ];
 
 const TurnstileWidget = lazy(async () => {
-  const module = await import('@marsidev/react-turnstile');
-  return { default: module.Turnstile };
+  const turnstileModule = await import('@marsidev/react-turnstile');
+  return { default: turnstileModule.Turnstile };
 });
 
 export default function NewLeadForm({ translations, locale, prefillMunicipality, serviceType }: LeadFormProps) {
+  const t = createTranslator(locale);
+  const isDevelopment = typeof window !== 'undefined' && (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost');
+
   const services = [
     { value: "tuinonderhoud", label: translations.services.tuinonderhoud },
     { value: "tuinontwerp", label: translations.services.tuinontwerp },
@@ -73,16 +77,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
   const [privacy, setPrivacy] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [isDevelopment, setIsDevelopment] = useState(false);
   const router = useRouter();
-
-  // Set development mode on client side
-  useEffect(() => {
-    setIsDevelopment(process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost');
-    if (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost') {
-      console.log('Development mode detected, Turnstile will be bypassed');
-    }
-  }, []);
 
   const {
     handleSubmit,
@@ -256,7 +251,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
 
         <FormField
           fieldName="bericht"
-          label={locale === 'en' ? 'Describe your wishes' : 'Beschrijf uw wensen'}
+          label={t('lead_form.describe_wishes')}
           error={getError('bericht')}
           required
         >
@@ -264,7 +259,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
             className={`form-input ${hasError('bericht') ? 'border-red-500' : ''}`}
             id="bericht"
             name="bericht"
-            placeholder={locale === 'en' ? 'Tell us about your garden wishes...' : 'Vertel ons over uw tuinwensen...'}
+            placeholder={t('lead_form.wishes_placeholder')}
             value={bericht}
             onChange={(e) => updateField('bericht', e.target.value)}
             rows={4}
@@ -277,7 +272,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
         <div className="form-row">
           <FormField
             fieldName="postcode"
-            label={locale === 'en' ? 'Postcode (optional)' : 'Postcode (optioneel)'}
+            label={t('lead_form.postcode')}
             error={getError('postcode')}
             className="flex-1"
           >
@@ -297,7 +292,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
 
           <FormField
             fieldName="bedrijf"
-            label={locale === 'en' ? 'Company (optional)' : 'Bedrijf (optioneel)'}
+            label={t('lead_form.company')}
             error={getError('bedrijf')}
             className="flex-1"
           >
@@ -361,7 +356,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
           error={getError('turnstileToken')}
         >
           {isDevelopment ? null : (
-            <Suspense fallback={<div className="form-note">{locale === 'en' ? 'Loading security check...' : 'Beveiligingscontrole laden...'}</div>}>
+            <Suspense fallback={<div className="form-note">{t('lead_form.security_loading')}</div>}>
               <TurnstileWidget
                 siteKey={securityKeys.turnstile.siteKey}
                 onSuccess={setTurnstileToken}

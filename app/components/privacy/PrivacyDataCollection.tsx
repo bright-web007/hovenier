@@ -1,25 +1,26 @@
 import styles from '../../styles/Privacy.module.css';
+import { createTranslator } from '@/i18n';
 
 const PrivacyDataCollection = ({ locale = 'nl' }: { locale?: string }) => {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale);
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>{isEn ? '3. What data do we collect?' : '3. Welke gegevens verzamelen wij?'}</h2>
+      <h2 className={styles.legalSectionTitle}>{t('privacy_page_extra.data_collection_title')}</h2>
       
-      <h3 className={styles.legalSubsectionTitle}>{isEn ? '3.1 Data you provide to us' : '3.1 Gegevens die u ons verstrekt'}</h3>
+      <h3 className={styles.legalSubsectionTitle}>{t('privacy_page_extra.data_collection_provided_title')}</h3>
       <ul className={styles.legalList}>
-        <li>{isEn ? 'Name and contact details (email, phone number)' : 'Naam en contactgegevens (e-mail, telefoonnummer)'}</li>
-        <li>{isEn ? 'Municipality/place of residence' : 'Gemeente/woonplaats'}</li>
-        <li>{isEn ? 'Desired services' : 'Gewenste diensten'}</li>
-        <li>{isEn ? 'Any specifics about your request' : 'Eventuele bijzonderheden over uw aanvraag'}</li>
+        <li>{t('privacy_page_extra.data_collection_provided_1')}</li>
+        <li>{t('privacy_page_extra.data_collection_provided_2')}</li>
+        <li>{t('privacy_page_extra.data_collection_provided_3')}</li>
+        <li>{t('privacy_page_extra.data_collection_provided_4')}</li>
       </ul>
 
-      <h3 className={styles.legalSubsectionTitle}>{isEn ? '3.2 Automatically collected data' : '3.2 Automatisch verzamelde gegevens'}</h3>
+      <h3 className={styles.legalSubsectionTitle}>{t('privacy_page_extra.data_collection_auto_title')}</h3>
       <ul className={styles.legalList}>
-        <li>{isEn ? 'IP address' : 'IP-adres'}</li>
-        <li>{isEn ? 'Browser information' : 'Browser informatie'}</li>
-        <li>{isEn ? 'Page visits and click behavior' : 'Paginabezoeken en klikgedrag'}</li>
-        <li>{isEn ? 'Date and time of visit' : 'Datum en tijd van bezoek'}</li>
+        <li>{t('privacy_page_extra.data_collection_auto_1')}</li>
+        <li>{t('privacy_page_extra.data_collection_auto_2')}</li>
+        <li>{t('privacy_page_extra.data_collection_auto_3')}</li>
+        <li>{t('privacy_page_extra.data_collection_auto_4')}</li>
       </ul>
     </section>
   );

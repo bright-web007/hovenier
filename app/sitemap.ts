@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { SUPPORTED_LOCALES, DEFAULT_LOCALE, SupportedLocale } from '@/lib/locale-utils'
+import { SUPPORTED_LOCALES } from '@/lib/locale-utils'
  
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl'

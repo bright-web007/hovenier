@@ -28,12 +28,41 @@ jest.mock('../lib/locale-utils', () => ({
   getServerAcceptLanguage: jest.fn().mockReturnValue('nl'),
 }));
 
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+import * as localeUtils from '../lib/locale-utils';
 import proxy from '../proxy';
 
+type MockNextUrl = {
+  clone: jest.Mock<MockNextUrl, []>;
+  pathname: string;
+  protocol: string;
+  hostname: string;
+  port: string;
+};
+
+type MockRequest = {
+  nextUrl: MockNextUrl;
+  headers: {
+    get: jest.Mock<string | null, [string]>;
+  };
+};
+
 describe('proxy.ts', () => {
-  let mockRequest: any;
-  let mockNextUrl: any;
+  let mockRequest: MockRequest;
+  let mockNextUrl: MockNextUrl;
   let mockHeaders: Map<string, string>;
+
+  const redirectMock = NextResponse.redirect as jest.Mock;
+  const rewriteMock = NextResponse.rewrite as jest.Mock;
+  const nextMock = NextResponse.next as jest.Mock;
+  const getPathLocaleMock = localeUtils.getPathLocale as jest.MockedFunction<typeof localeUtils.getPathLocale>;
+  const stripLocalePrefixMock = localeUtils.stripLocalePrefix as jest.MockedFunction<typeof localeUtils.stripLocalePrefix>;
+  const getInternalPathMock = localeUtils.getInternalPath as jest.MockedFunction<typeof localeUtils.getInternalPath>;
+  const localizePathMock = localeUtils.localizePath as jest.MockedFunction<typeof localeUtils.localizePath>;
+  const getServerCookieLocaleMock = localeUtils.getServerCookieLocale as jest.MockedFunction<typeof localeUtils.getServerCookieLocale>;
+  const getServerAcceptLanguageMock = localeUtils.getServerAcceptLanguage as jest.MockedFunction<typeof localeUtils.getServerAcceptLanguage>;
+  const callProxy = () => proxy(mockRequest as unknown as NextRequest);
 
   beforeEach(() => {
     // Reset all mocks
@@ -48,6 +77,7 @@ describe('proxy.ts', () => {
       pathname: '/',
       protocol: 'https:',
       hostname: 'hovenier.frl',
+      port: '',
     };
     
     // Mock NextRequest
@@ -59,19 +89,17 @@ describe('proxy.ts', () => {
     };
 
     // Setup mock return values for NextResponse methods
-    const { NextResponse } = require('next/server');
-    NextResponse.redirect.mockReturnValue({ cookies: { set: jest.fn() } });
-    NextResponse.rewrite.mockReturnValue({ headers: { set: jest.fn() } });
-    NextResponse.next.mockReturnValue({ headers: { set: jest.fn() } });
+    redirectMock.mockReturnValue({ cookies: { set: jest.fn() } });
+    rewriteMock.mockReturnValue({ headers: { set: jest.fn() } });
+    nextMock.mockReturnValue({ headers: { set: jest.fn() } });
 
     // Setup default locale-utils mocks
-    const localeUtils = require('../lib/locale-utils');
-    localeUtils.getPathLocale.mockReturnValue('nl');
-    localeUtils.stripLocalePrefix.mockReturnValue('/');
-    localeUtils.getInternalPath.mockReturnValue('/');
-    localeUtils.localizePath.mockReturnValue('/');
-    localeUtils.getServerCookieLocale.mockReturnValue(null);
-    localeUtils.getServerAcceptLanguage.mockReturnValue('nl');
+    getPathLocaleMock.mockReturnValue('nl');
+    stripLocalePrefixMock.mockReturnValue('/');
+    getInternalPathMock.mockReturnValue('/');
+    localizePathMock.mockReturnValue('/');
+    getServerCookieLocaleMock.mockReturnValue(null);
+    getServerAcceptLanguageMock.mockReturnValue('nl');
   });
 
   describe('Domain redirects (handled at ingress level — not in proxy)', () => {
@@ -79,10 +107,9 @@ describe('proxy.ts', () => {
       mockHeaders.set('host', 'www.hovenier.frl');
       mockNextUrl.hostname = 'www.hovenier.frl';
 
-      const { NextResponse } = require('next/server');
-      proxy(mockRequest);
+      callProxy();
 
-      expect(NextResponse.redirect).not.toHaveBeenCalledWith(
+      expect(redirectMock).not.toHaveBeenCalledWith(
         expect.anything(), { status: 301 }
       );
     });
@@ -91,10 +118,9 @@ describe('proxy.ts', () => {
       mockHeaders.set('host', 'hovenier.frl');
       mockNextUrl.protocol = 'http:';
 
-      const { NextResponse } = require('next/server');
-      proxy(mockRequest);
+      callProxy();
 
-      expect(NextResponse.redirect).not.toHaveBeenCalledWith(
+      expect(redirectMock).not.toHaveBeenCalledWith(
         expect.anything(), { status: 301 }
       );
     });
@@ -106,17 +132,14 @@ describe('proxy.ts', () => {
       mockHeaders.set('host', 'hovenier.frl');
       mockNextUrl.pathname = '/wrong-path';
       
-      const localeUtils = require('../lib/locale-utils');
-      localeUtils.localizePath.mockReturnValue('/correct-path'); // Different canonical path
-
-      const { NextResponse } = require('next/server');
+      localizePathMock.mockReturnValue('/correct-path'); // Different canonical path
 
       // Execute
-      proxy(mockRequest);
+      callProxy();
 
       // Assert
       expect(mockNextUrl.pathname).toBe('/correct-path');
-      expect(NextResponse.redirect).toHaveBeenCalledWith(mockNextUrl, 308); // 308 for canonical redirects
+      expect(redirectMock).toHaveBeenCalledWith(mockNextUrl, 308); // 308 for canonical redirects
     });
   });
 
@@ -126,19 +149,16 @@ describe('proxy.ts', () => {
       mockHeaders.set('host', 'hovenier.frl');
       mockNextUrl.pathname = '/diensten';
       
-      const localeUtils = require('../lib/locale-utils');
-      localeUtils.getPathLocale.mockReturnValue('nl');
-      localeUtils.getInternalPath.mockReturnValue('/diensten');
-      localeUtils.localizePath.mockReturnValue('/diensten'); // Same as pathname
-      
-      const { NextResponse } = require('next/server');
+      getPathLocaleMock.mockReturnValue('nl');
+      getInternalPathMock.mockReturnValue('/diensten');
+      localizePathMock.mockReturnValue('/diensten'); // Same as pathname
 
       // Execute
-      proxy(mockRequest);
+      callProxy();
 
       // Assert
       expect(mockNextUrl.pathname).toBe('/nl/diensten'); // Internal path with locale
-      expect(NextResponse.rewrite).toHaveBeenCalledWith(mockNextUrl);
+      expect(rewriteMock).toHaveBeenCalledWith(mockNextUrl);
     });
 
     test('should handle English locale internal rewrites', () => {
@@ -146,19 +166,16 @@ describe('proxy.ts', () => {
       mockHeaders.set('host', 'hovenier.frl');
       mockNextUrl.pathname = '/en/services';
       
-      const localeUtils = require('../lib/locale-utils');
-      localeUtils.getPathLocale.mockReturnValue('en');
-      localeUtils.getInternalPath.mockReturnValue('/services');
-      localeUtils.localizePath.mockReturnValue('/en/services'); // Same as pathname
-      localeUtils.stripLocalePrefix.mockReturnValue('/services');
-      
-      const { NextResponse } = require('next/server');
+      getPathLocaleMock.mockReturnValue('en');
+      getInternalPathMock.mockReturnValue('/services');
+      localizePathMock.mockReturnValue('/en/services'); // Same as pathname
+      stripLocalePrefixMock.mockReturnValue('/services');
 
       // Execute
-      proxy(mockRequest);
+      callProxy();
 
       // Assert - canonical === internal, so NextResponse.next() is used
-      expect(NextResponse.next).toHaveBeenCalled();
+      expect(nextMock).toHaveBeenCalled();
     });
   });
 
@@ -168,19 +185,17 @@ describe('proxy.ts', () => {
       mockHeaders.set('host', 'hovenier.frl');
       mockNextUrl.pathname = '/nl/admin/dashboard'; // Use full localized path
       
-      const localeUtils = require('../lib/locale-utils');
-      localeUtils.stripLocalePrefix.mockReturnValue('/admin/dashboard');
-      localeUtils.localizePath.mockReturnValue('/nl/admin/dashboard'); // Same as pathname
-      localeUtils.getInternalPath.mockReturnValue('/admin/dashboard');
-      localeUtils.getPathLocale.mockReturnValue('nl');
+      stripLocalePrefixMock.mockReturnValue('/admin/dashboard');
+      localizePathMock.mockReturnValue('/nl/admin/dashboard'); // Same as pathname
+      getInternalPathMock.mockReturnValue('/admin/dashboard');
+      getPathLocaleMock.mockReturnValue('nl');
       // internalLocalizedPath = /nl/admin/dashboard (same as canonical)
       
       const mockNext = { headers: { set: jest.fn() } };
-      const { NextResponse } = require('next/server');
-      NextResponse.next.mockReturnValue(mockNext);
+      nextMock.mockReturnValue(mockNext);
 
       // Execute
-      proxy(mockRequest);
+      callProxy();
 
       // Assert
       expect(mockNext.headers.set).toHaveBeenCalledWith('X-Robots-Tag', 'noindex, nofollow');
@@ -191,12 +206,12 @@ describe('proxy.ts', () => {
       mockHeaders.set('host', 'hovenier.frl');
       mockNextUrl.pathname = '/nl/search?q=test';
       
-      const localeUtils = require('../lib/locale-utils');
+      
       // Key: stripLocalePrefix should return the full path with query params for search detection
-      localeUtils.stripLocalePrefix.mockReturnValue('/search?q=test'); 
-      localeUtils.localizePath.mockReturnValue('/nl/search?q=test'); // Same as pathname
-      localeUtils.getInternalPath.mockReturnValue('/search?q=test'); // Include query string to avoid rewrite
-      localeUtils.getPathLocale.mockReturnValue('nl');
+      stripLocalePrefixMock.mockReturnValue('/search?q=test'); 
+      localizePathMock.mockReturnValue('/nl/search?q=test'); // Same as pathname
+      getInternalPathMock.mockReturnValue('/search?q=test'); // Include query string to avoid rewrite
+      getPathLocaleMock.mockReturnValue('nl');
       
       // Debug: verify our assumptions about the noindex logic
       const normalizedPathname = '/search?q=test';
@@ -204,11 +219,10 @@ describe('proxy.ts', () => {
       expect(hasSearchQuery).toBe(true); // This should be true for the logic to work
       
       const mockNext = { headers: { set: jest.fn() } };
-      const { NextResponse } = require('next/server');
-      NextResponse.next.mockReturnValue(mockNext);
+      nextMock.mockReturnValue(mockNext);
 
       // Execute
-      proxy(mockRequest);
+      callProxy();
 
       // Assert
       expect(mockNext.headers.set).toHaveBeenCalledWith('X-Robots-Tag', 'noindex, nofollow');
@@ -219,18 +233,16 @@ describe('proxy.ts', () => {
       mockHeaders.set('host', 'hovenier.frl');
       mockNextUrl.pathname = '/nl/diensten';
       
-      const localeUtils = require('../lib/locale-utils');
-      localeUtils.stripLocalePrefix.mockReturnValue('/diensten');
-      localeUtils.localizePath.mockReturnValue('/nl/diensten'); // Same as pathname
-      localeUtils.getInternalPath.mockReturnValue('/diensten');
-      localeUtils.getPathLocale.mockReturnValue('nl');
+      stripLocalePrefixMock.mockReturnValue('/diensten');
+      localizePathMock.mockReturnValue('/nl/diensten'); // Same as pathname
+      getInternalPathMock.mockReturnValue('/diensten');
+      getPathLocaleMock.mockReturnValue('nl');
       
       const mockNext = { headers: { set: jest.fn() } };
-      const { NextResponse } = require('next/server');
-      NextResponse.next.mockReturnValue(mockNext);
+      nextMock.mockReturnValue(mockNext);
 
       // Execute
-      proxy(mockRequest);
+      callProxy();
 
       // Assert — x-locale is always set, but X-Robots-Tag should NOT be
       expect(mockNext.headers.set).not.toHaveBeenCalledWith('X-Robots-Tag', expect.anything());
@@ -259,21 +271,19 @@ describe('proxy.ts', () => {
         const localizedPath = `/nl${path}`; // Add locale prefix
         mockNextUrl.pathname = localizedPath;
         
-        const localeUtils = require('../lib/locale-utils');
         // For search routes, include query params in normalized path for detection
         const normalizedPath = path.includes('/search?') ? path : path.split('?')[0];
-        localeUtils.stripLocalePrefix.mockReturnValue(normalizedPath);
-        localeUtils.localizePath.mockReturnValue(localizedPath); // Same as full pathname 
+        stripLocalePrefixMock.mockReturnValue(normalizedPath);
+        localizePathMock.mockReturnValue(localizedPath); // Same as full pathname 
         // For search routes, preserve query string to avoid redirect/rewrite logic
-        localeUtils.getInternalPath.mockReturnValue(path.includes('/search?') ? path : path.split('?')[0]);
-        localeUtils.getPathLocale.mockReturnValue('nl');
+        getInternalPathMock.mockReturnValue(path.includes('/search?') ? path : path.split('?')[0]);
+        getPathLocaleMock.mockReturnValue('nl');
         
         const mockNext = { headers: { set: jest.fn() } };
-        const { NextResponse } = require('next/server');
-        NextResponse.next.mockReturnValue(mockNext);
+        nextMock.mockReturnValue(mockNext);
 
         // Execute
-        proxy(mockRequest);
+        callProxy();
 
         // Assert
         if (should) {
@@ -290,21 +300,19 @@ describe('proxy.ts', () => {
       mockHeaders.set('host', 'hovenier.frl');
       mockNextUrl.pathname = '/';
 
-      const localeUtils = require('../lib/locale-utils');
-      localeUtils.getServerCookieLocale.mockReturnValue(null);
-      localeUtils.getServerAcceptLanguage.mockReturnValue('en');
-      localeUtils.localizePath.mockReturnValue('/en');
-      localeUtils.stripLocalePrefix.mockReturnValue('/');
-      localeUtils.getInternalPath.mockReturnValue('/');
+      getServerCookieLocaleMock.mockReturnValue(null);
+      getServerAcceptLanguageMock.mockReturnValue('en');
+      localizePathMock.mockReturnValue('/en');
+      stripLocalePrefixMock.mockReturnValue('/');
+      getInternalPathMock.mockReturnValue('/');
 
-      const { NextResponse } = require('next/server');
       const mockRedirectResponse = { cookies: { set: jest.fn() } };
-      NextResponse.redirect.mockReturnValue(mockRedirectResponse);
+      redirectMock.mockReturnValue(mockRedirectResponse);
 
-      proxy(mockRequest);
+      callProxy();
 
       expect(mockNextUrl.pathname).toBe('/en');
-      expect(NextResponse.redirect).toHaveBeenCalledWith(mockNextUrl, 308);
+      expect(redirectMock).toHaveBeenCalledWith(mockNextUrl, 308);
       expect(mockRedirectResponse.cookies.set).toHaveBeenCalledWith(
         'hovenier-language-preference',
         'en',
@@ -316,42 +324,38 @@ describe('proxy.ts', () => {
       mockHeaders.set('host', 'hovenier.frl');
       mockNextUrl.pathname = '/';
 
-      const localeUtils = require('../lib/locale-utils');
-      localeUtils.getServerCookieLocale.mockReturnValue(null);
-      localeUtils.getServerAcceptLanguage.mockReturnValue('nl'); // defaults to nl for unsupported
-      localeUtils.localizePath.mockReturnValue('/nl');
-      localeUtils.stripLocalePrefix.mockReturnValue('/');
-      localeUtils.getInternalPath.mockReturnValue('/');
+      getServerCookieLocaleMock.mockReturnValue(null);
+      getServerAcceptLanguageMock.mockReturnValue('nl'); // defaults to nl for unsupported
+      localizePathMock.mockReturnValue('/nl');
+      stripLocalePrefixMock.mockReturnValue('/');
+      getInternalPathMock.mockReturnValue('/');
 
-      const { NextResponse } = require('next/server');
       const mockRedirectResponse = { cookies: { set: jest.fn() } };
-      NextResponse.redirect.mockReturnValue(mockRedirectResponse);
+      redirectMock.mockReturnValue(mockRedirectResponse);
 
-      proxy(mockRequest);
+      callProxy();
 
       expect(mockNextUrl.pathname).toBe('/nl');
-      expect(NextResponse.redirect).toHaveBeenCalledWith(mockNextUrl, 308);
+      expect(redirectMock).toHaveBeenCalledWith(mockNextUrl, 308);
     });
 
     test('should use cookie locale over Accept-Language', () => {
       mockHeaders.set('host', 'hovenier.frl');
       mockNextUrl.pathname = '/';
 
-      const localeUtils = require('../lib/locale-utils');
-      localeUtils.getServerCookieLocale.mockReturnValue('en'); // Cookie says English
-      localeUtils.getServerAcceptLanguage.mockReturnValue('nl'); // Browser says Dutch
-      localeUtils.localizePath.mockReturnValue('/en');
-      localeUtils.stripLocalePrefix.mockReturnValue('/');
-      localeUtils.getInternalPath.mockReturnValue('/');
+      getServerCookieLocaleMock.mockReturnValue('en'); // Cookie says English
+      getServerAcceptLanguageMock.mockReturnValue('nl'); // Browser says Dutch
+      localizePathMock.mockReturnValue('/en');
+      stripLocalePrefixMock.mockReturnValue('/');
+      getInternalPathMock.mockReturnValue('/');
 
-      const { NextResponse } = require('next/server');
       const mockRedirectResponse = { cookies: { set: jest.fn() } };
-      NextResponse.redirect.mockReturnValue(mockRedirectResponse);
+      redirectMock.mockReturnValue(mockRedirectResponse);
 
-      proxy(mockRequest);
+      callProxy();
 
       expect(mockNextUrl.pathname).toBe('/en');
-      expect(NextResponse.redirect).toHaveBeenCalledWith(mockNextUrl, 308);
+      expect(redirectMock).toHaveBeenCalledWith(mockNextUrl, 308);
       // Should NOT set cookie (already exists)
       expect(mockRedirectResponse.cookies.set).not.toHaveBeenCalled();
     });
@@ -360,21 +364,19 @@ describe('proxy.ts', () => {
       mockHeaders.set('host', 'hovenier.frl');
       mockNextUrl.pathname = '/nl/diensten';
 
-      const localeUtils = require('../lib/locale-utils');
-      localeUtils.getServerCookieLocale.mockReturnValue('en'); // Cookie says English
-      localeUtils.getPathLocale.mockReturnValue('nl'); // URL says Dutch
-      localeUtils.localizePath.mockReturnValue('/nl/diensten');
-      localeUtils.stripLocalePrefix.mockReturnValue('/diensten');
-      localeUtils.getInternalPath.mockReturnValue('/diensten');
+      getServerCookieLocaleMock.mockReturnValue('en'); // Cookie says English
+      getPathLocaleMock.mockReturnValue('nl'); // URL says Dutch
+      localizePathMock.mockReturnValue('/nl/diensten');
+      stripLocalePrefixMock.mockReturnValue('/diensten');
+      getInternalPathMock.mockReturnValue('/diensten');
 
       const mockNext = { headers: { set: jest.fn() } };
-      const { NextResponse } = require('next/server');
-      NextResponse.next.mockReturnValue(mockNext);
+      nextMock.mockReturnValue(mockNext);
 
-      proxy(mockRequest);
+      callProxy();
 
       // Should NOT redirect — explicit URL wins
-      expect(NextResponse.redirect).not.toHaveBeenCalled();
+      expect(redirectMock).not.toHaveBeenCalled();
     });
   });
 });

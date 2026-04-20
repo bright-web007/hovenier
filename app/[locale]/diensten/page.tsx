@@ -3,15 +3,16 @@ import { Metadata } from 'next';
 import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import NewLeadForm from '@/app/components/NewLeadForm';
-import Link from 'next/link';
 import ServiceSchema from '../../components/schemas/ServiceSchema';
-import { localizePath, getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils';
-import ImageComponent from '@/app/components/ImageComponent';
+import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils';
 import DienstCard from '@/app/components/DienstCard';
-import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
+
+function isSupportedPageLocale(locale: string): locale is (typeof locales)[number] {
+  return locales.includes(locale as (typeof locales)[number]);
+}
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -70,8 +71,7 @@ function FeatureCard({ icon, title, description }: { icon: React.ReactNode; titl
 export default async function ServicesPage({ params }: Props) {
   const { locale } = await params;
   const validLocale = locale || defaultLocale;
-  if (!locales.includes(validLocale as any)) notFound();
-  const t = createTranslator(validLocale);
+  if (!isSupportedPageLocale(validLocale)) notFound();
   const isEn = validLocale === 'en';
 
   // Service data

@@ -1,5 +1,8 @@
+import { createTranslator } from '@/i18n';
+
 const PrivacySchema = ({ locale = 'nl' }: { locale?: string }) => {
   const isEn = locale === 'en';
+  const t = createTranslator(locale);
   const lang = isEn ? 'en-US' : 'nl-NL';
   const urlPrefix = isEn ? 'https://hovenier.frl/en' : 'https://hovenier.frl';
   const pageUrl = `${urlPrefix}/privacy-beleid`;
@@ -11,19 +14,15 @@ const PrivacySchema = ({ locale = 'nl' }: { locale?: string }) => {
         '@type': 'WebPage',
         '@id': pageUrl,
         url: pageUrl,
-        name: isEn
-          ? 'Privacy Policy | Hovenier.frl - Data Protection & Privacy'
-          : 'Privacybeleid | Hovenier.frl - Gegevensbescherming & Privacy',
-        description: isEn
-          ? 'Privacy policy of Hovenier.frl. How we collect, use and protect your personal data in compliance with GDPR legislation.'
-          : 'Privacybeleid van Hovenier.frl. Hoe wij uw persoonlijke gegevens verzamelen, gebruiken en beschermen conform GDPR wetgeving.',
+        name: t('privacy_page.schema_page_name'),
+        description: t('privacy_page.schema_page_description'),
         isPartOf: {
           '@id': 'https://hovenier.frl#website'
         },
         about: {
           '@type': 'Thing',
-          name: isEn ? 'Privacy Policy' : 'Privacybeleid',
-          description: isEn ? 'Data protection and privacy policy' : 'Gegevensbescherming en privacybeleid'
+          name: t('privacy_page.schema_about_name'),
+          description: t('privacy_page.schema_about_description')
         },
         primaryImageOfPage: {
           '@type': 'ImageObject',
@@ -45,10 +44,8 @@ const PrivacySchema = ({ locale = 'nl' }: { locale?: string }) => {
       {
         '@type': 'PrivacyPolicy',
         '@id': `${pageUrl}#document`,
-        name: isEn ? 'Hovenier.frl Privacy Policy' : 'Hovenier.frl Privacybeleid',
-        description: isEn
-          ? 'Comprehensive privacy policy detailing data collection, usage, and protection practices'
-          : 'Uitgebreid privacybeleid met details over gegevensverzameling, gebruik en beschermingsmaatregelen',
+        name: t('privacy_page.schema_document_name'),
+        description: t('privacy_page.schema_document_description'),
         url: pageUrl,
         isPartOf: {
           '@id': 'https://hovenier.frl#website'

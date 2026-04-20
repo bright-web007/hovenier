@@ -1,20 +1,20 @@
 import styles from '../../styles/Terms.module.css';
+import { createTranslator } from '@/i18n';
 
 export default function TermsHero({ locale = 'nl' }: { locale?: string }) {
   const isEn = locale === 'en';
+  const t = createTranslator(locale);
 
   return (
     <header className={styles.legalHeader}>
       <div className="section-inner">
         <div className={styles.legalContent}>
-          <h1 className={styles.legalTitle}>{isEn ? 'Terms and Conditions' : 'Algemene Voorwaarden'}</h1>
+          <h1 className={styles.legalTitle}>{t('terms.hero_title')}</h1>
           <p className={styles.legalSubtitle}>
-            {isEn
-              ? 'Transparent terms for the use of Hovenier.frl and our services'
-              : 'Transparante voorwaarden voor het gebruik van Hovenier.frl en onze dienstverlening'}
+            {t('terms.hero_subtitle')}
           </p>
           <p className={styles.legalSubtitle}>
-            {isEn ? 'Last updated: ' : 'Laatst bijgewerkt: '}
+            {t('terms.hero_last_updated')}
             {new Date().toLocaleDateString(isEn ? 'en-US' : 'nl-NL', { 
               year: 'numeric', 
               month: 'long', 

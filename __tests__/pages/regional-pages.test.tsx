@@ -63,49 +63,8 @@ jest.mock('@/lib/regions-hierarchy', () => ({
   }
 }));
 
-// Helper function to create mock messages
-const createMockMessages = () => ({
-  common: {
-    navigation: {
-      home: 'Home',
-      regio: 'Regions',
-      contact: 'Contact'
-    }
-  },
-  pages: {
-    regio: {
-      title: 'Regions',
-      subtitle: 'Find gardeners in your region',
-      'noordwest-friesland': {
-        title: 'Gardeners in Noordwest-Friesland',
-        description: 'Professional gardeners in northwestern Friesland'
-      },
-      'noordoost-friesland': {
-        title: 'Gardeners in Noordoost-Friesland',
-        description: 'Professional gardeners in northeastern Friesland'
-      }
-    },
-    gemeente: {
-      waadhoeke: {
-        title: 'Gardeners in Waadhoeke',
-        description: 'Find professional gardeners in Waadhoeke'
-      },
-      harlingen: {
-        title: 'Gardeners in Harlingen',
-        description: 'Find professional gardeners in Harlingen'
-      },
-      leeuwarden: {
-        title: 'Gardeners in Leeuwarden', 
-        description: 'Find professional gardeners in Leeuwarden'
-      }
-    }
-  }
-});
-
 describe('Regional Pages Integration Tests', () => {
-  const mockMessages = createMockMessages();
-  
-  const renderWithIntl = (component: React.ReactElement, locale = 'nl') => {
+  const renderWithIntl = (component: React.ReactElement) => {
     return render(component);
   };
 
@@ -147,7 +106,7 @@ describe('Regional Pages Integration Tests', () => {
             });
             
             expect(() => {
-              renderWithIntl(<RegionPage params={mockParams} />, locale);
+              renderWithIntl(<RegionPage params={mockParams} />);
             }).not.toThrow();
           }
           
@@ -227,7 +186,8 @@ describe('Regional Pages Integration Tests', () => {
         
         for (const hubSlug of hubSlugs) {
           try {
-            const { default: HubPage } = await import(`@/app/[locale]/regio/hub-[slug]/page`);
+            const hubPageModulePath = '@/app/[locale]/regio/hub-[slug]/page';
+            const { default: HubPage } = await import(hubPageModulePath);
             
             const mockParams = Promise.resolve({ 
               locale: 'nl',

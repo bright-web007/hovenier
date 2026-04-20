@@ -218,7 +218,7 @@ export default function NotFound() {
                   fontWeight: '500',
                   textDecoration: 'underline'
                 }}>
-                  Bekijk regio's →
+                  Bekijk regio&apos;s →
                 </Link>
               </div>
 

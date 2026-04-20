@@ -1,6 +1,7 @@
 'use client'
 
 import styles from './Contact.module.css'
+import { createTranslator } from '@/i18n'
 
 interface ContactFormProps {
   locale: string
@@ -8,21 +9,22 @@ interface ContactFormProps {
 
 export default function ContactForm({ locale }: ContactFormProps) {
   const isEn = locale === 'en';
+  const t = createTranslator(locale);
 
   return (
     <div className={styles.form}>
-      <div className="form-eyebrow">{isEn ? 'Free & no obligation' : 'Gratis & vrijblijvend'}</div>
+      <div className="form-eyebrow">{t('contact_page.form_eyebrow')}</div>
       <h2 className="form-title">
-        {isEn ? 'Send us a message' : 'Stuur ons een bericht'}
+        {t('contact_page.form_title')}
       </h2>
       <p className="form-sub">
-        {isEn ? 'We will get back to you within 24 hours.' : 'We nemen binnen 24 uur contact met je op.'}
+        {t('contact_page.form_subtitle')}
       </p>
       <form>
         <div className="form-row">
           <div className="form-field">
             <label htmlFor="firstName" className="form-label">
-              {isEn ? 'First name *' : 'Voornaam *'}
+              {t('contact_page.first_name')}
             </label>
             <input
               type="text"
@@ -34,7 +36,7 @@ export default function ContactForm({ locale }: ContactFormProps) {
           </div>
           <div className="form-field">
             <label htmlFor="lastName" className="form-label">
-              {isEn ? 'Last name *' : 'Achternaam *'}
+              {t('contact_page.last_name')}
             </label>
             <input
               type="text"
@@ -61,7 +63,7 @@ export default function ContactForm({ locale }: ContactFormProps) {
 
         <div className="form-field">
           <label htmlFor="subject" className="form-label">
-            {isEn ? 'Subject *' : 'Onderwerp *'}
+            {t('contact_page.subject_label')}
           </label>
           <select
             id="subject"
@@ -69,19 +71,19 @@ export default function ContactForm({ locale }: ContactFormProps) {
             required
             className="form-select"
           >
-            <option value="">{isEn ? 'Select subject...' : 'Selecteer onderwerp...'}</option>
-            <option value="general">{isEn ? 'General question' : 'Algemene vraag'}</option>
-            <option value="partnership">{isEn ? 'Partnership/Collaboration' : 'Partnership/Samenwerking'}</option>
-            <option value="press">{isEn ? 'Press' : 'Pers'}</option>
-            <option value="technical">{isEn ? 'Technical support' : 'Technische ondersteuning'}</option>
-            <option value="feedback">{isEn ? 'Feedback/Suggestion' : 'Feedback/Suggestie'}</option>
-            <option value="other">{isEn ? 'Other' : 'Anders'}</option>
+            <option value="">{t('contact_page.subject_placeholder')}</option>
+            <option value="general">{t('contact_page.subject_general')}</option>
+            <option value="partnership">{t('contact_page.subject_partnership')}</option>
+            <option value="press">{t('contact_page.subject_press')}</option>
+            <option value="technical">{t('contact_page.subject_technical')}</option>
+            <option value="feedback">{t('contact_page.subject_feedback')}</option>
+            <option value="other">{t('contact_page.subject_other')}</option>
           </select>
         </div>
 
         <div className="form-field">
           <label htmlFor="message" className="form-label">
-            {isEn ? 'Message *' : 'Bericht *'}
+            {t('contact_page.message_label')}
           </label>
           <textarea
             id="message"
@@ -89,7 +91,7 @@ export default function ContactForm({ locale }: ContactFormProps) {
             rows={4}
             required
             className="form-input"
-            placeholder={isEn ? 'Describe your question or comment...' : 'Beschrijf je vraag of opmerking...'}
+            placeholder={t('contact_page.message_placeholder')}
           ></textarea>
         </div>
 
@@ -97,7 +99,7 @@ export default function ContactForm({ locale }: ContactFormProps) {
           type="submit"
           className="form-btn"
         >
-          {isEn ? 'Send Message' : 'Verstuur Bericht'}
+          {t('contact_page.send_button')}
         </button>
       </form>
 
@@ -106,7 +108,7 @@ export default function ContactForm({ locale }: ContactFormProps) {
           ? '* Required fields. We respect your privacy - see our '
           : '* Verplichte velden. We respecteren je privacy - zie ons '}
         <a href={isEn ? '/en/privacy-beleid' : '/privacy-beleid'}>
-          {isEn ? 'privacy policy' : 'privacybeleid'}
+          {t('contact_page.privacy_link')}
         </a>.
       </p>
     </div>

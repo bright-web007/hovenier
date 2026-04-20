@@ -1,24 +1,21 @@
 import styles from '../../styles/Terms.module.css';
+import { createTranslator } from '@/i18n';
 
 export default function TermsRegistration({ locale = 'nl' }: { locale?: string }) {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale);
 
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>{isEn ? '5. Registration and Account' : '5. Registratie en Account'}</h2>
+      <h2 className={styles.legalSectionTitle}>{t('terms.registration_title')}</h2>
       
-      <h3 className={styles.legalSubsectionTitle}>{isEn ? '5.1 For Customers' : '5.1 Voor Klanten'}</h3>
+      <h3 className={styles.legalSubsectionTitle}>{t('terms.registration_customers_title')}</h3>
       <p className={styles.legalText}>
-        {isEn
-          ? 'Customers can use the basic functionalities of the platform without registration.'
-          : 'Klanten kunnen zonder registratie gebruik maken van de basisfunctionaliteiten van het platform.'}
+        {t('terms.registration_customers_text')}
       </p>
 
-      <h3 className={styles.legalSubsectionTitle}>{isEn ? '5.2 For Gardeners' : '5.2 Voor Hoveniers'}</h3>
+      <h3 className={styles.legalSubsectionTitle}>{t('terms.registration_gardeners_title')}</h3>
       <p className={styles.legalText}>
-        {isEn
-          ? 'Gardeners who wish to join the platform go through a screening process in which certificates, insurance, and references are verified.'
-          : 'Hoveniers die zich willen aansluiten bij het platform doorlopen een screening proces waarbij certificaten, verzekeringen en referenties worden gecontroleerd.'}
+        {t('terms.registration_gardeners_text')}
       </p>
     </section>
   );

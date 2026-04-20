@@ -5,6 +5,7 @@ import styles from './Blog.module.css'
 import type { ArticleRecord } from '@/lib/articles'
 import { formatArticleDate } from '@/lib/articles'
 import { localizePath, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 
 interface BlogArticleGridProps {
   articles: ArticleRecord[]
@@ -12,11 +13,12 @@ interface BlogArticleGridProps {
 }
 
 export default function BlogArticleGrid({ articles, locale }: BlogArticleGridProps) {
+  const t = createTranslator(locale);
   const recentArticles = articles.filter(article => !article.featured)
   
   return (
     <div>
-      <h2 className={styles.articlesHeader}>{locale === 'en' ? 'Recent Articles' : 'Recente Artikelen'}</h2>
+      <h2 className={styles.articlesHeader}>{t('blog.recent_articles')}</h2>
       <div className={styles.articlesGrid}>
         {recentArticles.map(article => (
           <article key={article.id} className={styles.articleCard}>
@@ -30,7 +32,7 @@ export default function BlogArticleGrid({ articles, locale }: BlogArticleGridPro
                     {article.category.name}
                   </span>
                   <span className={styles.articleReadTime}>
-                    {article.readTime} {locale === 'en' ? 'min read' : 'min leestijd'}
+                    {article.readTime} {t('blog.min_read')}
                   </span>
                 </div>
                 <h3 className={styles.articleTitle}>
@@ -45,7 +47,7 @@ export default function BlogArticleGrid({ articles, locale }: BlogArticleGridPro
                     href={localizePath(`/nieuws/${article.slug}`, locale as SupportedLocale)}
                     className={styles.articleLink}
                   >
-                    {locale === 'en' ? 'Read more →' : 'Lees meer →'}
+                    {t('blog.read_more')}
                   </Link>
                 </div>
               </div>
@@ -55,9 +57,9 @@ export default function BlogArticleGrid({ articles, locale }: BlogArticleGridPro
       </div>
 
       <div className={styles.pagination}>
-        <p className={styles.paginationTitle}>{locale === 'en' ? 'This is a CMS-driven page' : 'Dit is een CMS-gedreven pagina'}</p>
+        <p className={styles.paginationTitle}>{t('blog.cms_note')}</p>
         <p className={styles.paginationSubtext}>
-          {locale === 'en' ? 'Articles are automatically loaded from Muse CMS' : 'Artikelen worden automatisch ingeladen van Muse CMS'}
+          {t('blog.cms_detail')}
         </p>
       </div>
     </div>

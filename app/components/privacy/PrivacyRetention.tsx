@@ -1,15 +1,16 @@
 import styles from '../../styles/Privacy.module.css';
+import { createTranslator } from '@/i18n';
 
 const PrivacyRetention = ({ locale = 'nl' }: { locale?: string }) => {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale);
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>{isEn ? '8. Retention periods' : '8. Bewaartermijnen'}</h2>
+      <h2 className={styles.legalSectionTitle}>{t('privacy_page.retention_title')}</h2>
       <ul className={styles.legalList}>
-        <li><strong>{isEn ? 'Contact requests:' : 'Contactaanvragen:'}</strong> {isEn ? '2 years after last contact' : '2 jaar na laatste contact'}</li>
-        <li><strong>{isEn ? 'Newsletter registrations:' : 'Nieuwsbrief registraties:'}</strong> {isEn ? 'Until unsubscription' : 'Tot uitschrijving'}</li>
-        <li><strong>{isEn ? 'Website analytics:' : 'Website analytics:'}</strong> {isEn ? '26 months' : '26 maanden'}</li>
-        <li><strong>{isEn ? 'Administration:' : 'Administratie:'}</strong> {isEn ? '7 years in accordance with tax legislation' : '7 jaar conform fiscale wetgeving'}</li>
+        <li><strong>{t('privacy_page.retention_contact_label')}</strong> {t('privacy_page.retention_contact_value')}</li>
+        <li><strong>{t('privacy_page.retention_newsletter_label')}</strong> {t('privacy_page.retention_newsletter_value')}</li>
+        <li><strong>{t('privacy_page.retention_analytics_label')}</strong> {t('privacy_page.retention_analytics_value')}</li>
+        <li><strong>{t('privacy_page.retention_admin_label')}</strong> {t('privacy_page.retention_admin_value')}</li>
       </ul>
     </section>
   );

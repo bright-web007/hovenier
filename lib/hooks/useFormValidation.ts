@@ -1,17 +1,17 @@
 import { useState, useCallback } from 'react';
 import { z } from 'zod';
-import { validateForm as validateWithSchema, getFieldError, hasFormErrors, cleanFormData } from '../validation';
+import { validateForm as validateWithSchema, getFieldError, hasFormErrors, cleanFormData, type FormErrors } from '../validation';
 
 interface UseFormValidationOptions<T> {
   schema: z.ZodSchema<T>;
   onSuccess?: (data: T) => void | Promise<void>;
-  onError?: (errors: any) => void;
+  onError?: (errors: FormErrors) => void;
   validateOnChange?: boolean;
   cleanData?: boolean;
 }
 
 interface FormValidationState {
-  errors: any;
+  errors: FormErrors;
   isValid: boolean;
   isValidating: boolean;
   hasSubmitted: boolean;
@@ -32,7 +32,7 @@ export function useFormValidation<T>({
   });
 
   // Validate individual field
-  const validateField = useCallback((fieldName: string, value: any) => {
+  const validateField = useCallback((fieldName: string, value: unknown) => {
     try {
       // For individual field validation, create a full object with current value
       // and validate just that field from the full validation result
@@ -80,14 +80,14 @@ export function useFormValidation<T>({
       }));
       return fieldError;
       
-    } catch (error) {
+    } catch {
       // If validation fails completely, ignore for individual field validation
       return null;
     }
   }, [schema]);
 
   // Validate entire form
-  const validate = useCallback((data: Record<string, any>) => {
+  const validate = useCallback((data: Record<string, unknown>) => {
     setValidationState(prev => ({ ...prev, isValidating: true }));
     
     const processedData = cleanData ? cleanFormData(data) : data;
@@ -104,7 +104,7 @@ export function useFormValidation<T>({
   }, [schema, cleanData]);
 
   // Handle form submission
-  const handleSubmit = useCallback(async (data: Record<string, any>) => {
+  const handleSubmit = useCallback(async (data: Record<string, unknown>) => {
     setValidationState(prev => ({ 
       ...prev, 
       hasSubmitted: true,
@@ -116,7 +116,7 @@ export function useFormValidation<T>({
     if (result.success) {
       try {
         await onSuccess?.(result.data);
-      } catch (error) {
+      } catch {
         // Silent error handling
       }
     } else {
@@ -129,7 +129,7 @@ export function useFormValidation<T>({
   }, [validate, onSuccess, onError]);
 
   // Handle field change with optional validation
-  const handleFieldChange = useCallback((fieldName: string, value: any) => {
+  const handleFieldChange = useCallback((fieldName: string, value: unknown) => {
     if (validateOnChange || validationState.hasSubmitted) {
       validateField(fieldName, value);
     }

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { createTranslator } from '@/i18n';
 
 interface ServiceCardProps {
   title: string;
@@ -29,14 +30,14 @@ export default function ServiceCard({
   className = '',
   locale = 'nl'
 }: ServiceCardProps) {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale);
 
   return (
     <div className={`service-card ${className}`}>
       {/* Popular Badge */}
       {popular && (
         <div className="service-card-popular">
-          {isEn ? 'Popular' : 'Populair'}
+          {t('service_card.popular')}
         </div>
       )}
       
@@ -73,7 +74,7 @@ export default function ServiceCard({
             ))}
             {features.length > 4 && (
               <li className="service-card-features-more">
-                +{features.length - 4} {isEn ? 'more features' : 'meer functies'}
+                +{features.length - 4} {t('service_card.more_features')}
               </li>
             )}
           </ul>
@@ -83,7 +84,7 @@ export default function ServiceCard({
         <div className="service-card-footer">
           {price ? (
             <div className="service-card-price">
-              {isEn ? 'From' : 'Vanaf'}
+              {t('service_card.from')}
               <span className="service-card-price-amount">
                 €{price.from}
               </span>
@@ -91,17 +92,17 @@ export default function ServiceCard({
             </div>
           ) : (
             <div className="service-card-price">
-              {isEn ? 'On request' : 'Op aanvraag'}
+              {t('service_card.on_request')}
             </div>
           )}
           
           <Link
             href={href}
             className="service-card-link"
-            aria-label={`${isEn ? 'More info about' : 'Meer info over'} ${title}`}
+            aria-label={`${t('service_card.more_info_about')} ${title}`}
             prefetch={false}
           >
-            {isEn ? 'More info' : 'Meer info'}
+            {t('service_card.more_info')}
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

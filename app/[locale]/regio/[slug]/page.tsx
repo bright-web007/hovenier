@@ -5,7 +5,8 @@ import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
-import { regionHubs, getRegionHubBySlug, type RegionHub, standaloneRegions, getGemeenteBySlug, type Gemeente } from '@/lib/regions-hierarchy'
+import { createTranslator } from '@/i18n'
+import { regionHubs, getRegionHubBySlug, standaloneRegions, getGemeenteBySlug } from '@/lib/regions-hierarchy'
 import Link from 'next/link'
 
 type Props = {
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!regionHub && !standaloneRegion) {
     return {
-      title: locale === 'en' ? 'Region not found | Hovenier.frl' : 'Regio niet gevonden | Hovenier.frl'
+      title: createTranslator(locale)('regio_page.not_found_title')
     };
   }
 
@@ -90,7 +91,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   // Fallback if neither found
   return {
-    title: locale === 'en' ? 'Region not found | Hovenier.frl' : 'Regio niet gevonden | Hovenier.frl'
+    title: createTranslator(locale)('regio_page.not_found_title')
   };
 }
 
@@ -129,6 +130,7 @@ export default async function RegionHubPage({ params }: Props) {
 
   const validLocale = locale as SupportedLocale;
   const isEn = locale === 'en';
+  const t = createTranslator(locale);
 
   const regionNameEn: Record<string, string> = {
     'noordwest-friesland': 'Northwest Friesland',
@@ -139,10 +141,9 @@ export default async function RegionHubPage({ params }: Props) {
 
   // Set up data based on type
   const displayName = regionHub ? (isEn ? (regionNameEn[regionHub.slug] || regionHub.name) : regionHub.name) : standaloneRegion!.name;
-  const isStandalone = !regionHub && standaloneRegion;
 
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: isEn ? 'Regions' : 'Regio\'s', href: '/regio' },
     { label: displayName, href: `/regio/${slug}` }
   ];

@@ -92,7 +92,7 @@ export default async function GardenerProfilePage({ params }: Props) {
       <Navigation locale={locale} />
       <Breadcrumbs items={breadcrumbItems} />
       
-      <GardenerProfile gardener={gardener} locale={locale} />
+      <GardenerProfile gardener={gardener} />
     </>
   )
 }

@@ -58,9 +58,18 @@ export function FormField({
 }
 
 interface FormErrorSummaryProps {
-  errors: any;
+  errors: Record<string, unknown> | null | undefined;
   title?: string;
   className?: string;
+}
+
+type FormErrorNode = {
+  _errors?: string[];
+  [key: string]: unknown;
+};
+
+function isFormErrorNode(value: unknown): value is FormErrorNode {
+  return typeof value === 'object' && value !== null;
 }
 
 export function FormErrorSummary({ 
@@ -72,12 +81,12 @@ export function FormErrorSummary({
 
   const errorList: string[] = [];
   
-  const collectErrors = (obj: any, prefix = '') => {
-    Object.keys(obj).forEach(key => {
+  const collectErrors = (obj: FormErrorNode) => {
+    Object.keys(obj).forEach((key) => {
       if (key === '_errors' && Array.isArray(obj[key])) {
-        errorList.push(...obj[key]);
-      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-        collectErrors(obj[key], prefix ? `${prefix}.${key}` : key);
+        errorList.push(...(obj[key] as string[]));
+      } else if (isFormErrorNode(obj[key])) {
+        collectErrors(obj[key]);
       }
     });
   };

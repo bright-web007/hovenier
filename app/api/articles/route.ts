@@ -6,7 +6,8 @@ export async function GET() {
     const client = createMuseCMSClient();
     const articles = await client.fetchAllPosts(100);
     return NextResponse.json(articles);
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

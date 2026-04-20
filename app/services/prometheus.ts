@@ -142,9 +142,11 @@ export function trackLeadSubmission(leadData: LeadData) {
   }
 }
 
-export default {
+const prometheusService = {
   submitLeadToPrometheus,
   validateTurnstileToken,
   sendLeadNotification,
-  trackLeadSubmission
+  trackLeadSubmission,
 };
+
+export default prometheusService;

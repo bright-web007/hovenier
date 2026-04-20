@@ -6,7 +6,7 @@ import Breadcrumbs from '../../../components/Breadcrumbs'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 import { createTranslator } from '@/i18n'
-import { regionHubs, getRegionHubBySlug, type RegionHub, standaloneRegions, getGemeenteBySlug, type Gemeente } from '@/lib/regions-hierarchy'
+import { regionHubs, getRegionHubBySlug, standaloneRegions, getGemeenteBySlug } from '@/lib/regions-hierarchy'
 import Link from 'next/link'
 
 type Props = {
@@ -141,7 +141,6 @@ export default async function RegionHubPage({ params }: Props) {
 
   // Set up data based on type
   const displayName = regionHub ? (isEn ? (regionNameEn[regionHub.slug] || regionHub.name) : regionHub.name) : standaloneRegion!.name;
-  const isStandalone = !regionHub && standaloneRegion;
 
   const breadcrumbItems = [
     { label: t('breadcrumb_home'), href: '/' },

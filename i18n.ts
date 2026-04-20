@@ -1,4 +1,3 @@
-import {notFound} from 'next/navigation';
 import en from './locales/en/common.json';
 import nl from './locales/nl/common.json';
 

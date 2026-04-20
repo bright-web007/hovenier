@@ -8,7 +8,7 @@ import RelatedArticles from '../../../../components/RelatedArticles'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../../components/StructuredData'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 import { createTranslator } from '@/i18n'
-import { regionHubs, getRegionHubBySlug, getGemeenteBySlug, getRegionSlugByGemeenteSlug, type RegionHub, type Gemeente } from '@/lib/regions-hierarchy'
+import { regionHubs, getRegionHubBySlug, getGemeenteBySlug, getRegionSlugByGemeenteSlug } from '@/lib/regions-hierarchy'
 import DienstCard from '../../../../components/DienstCard'
 import Link from 'next/link'
 

@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import Hero from '../components/Hero';
@@ -12,6 +11,10 @@ import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
+
+function isSupportedPageLocale(locale: string): locale is (typeof locales)[number] {
+  return locales.includes(locale as (typeof locales)[number]);
+}
 
 // ISR: Never revalidate (static content, changes only with deployments)
 export const revalidate = false;
@@ -36,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       keywords: ['hovenier friesland', 'hoveniers in friesland', 'hoveniers friesland', 'hovenier in friesland', 'tuinaanleg friesland', 'hovenier gezocht friesland'],
       alternates: getLocaleAlternates('/', validLocale as SupportedLocale),
     };
-  } catch (error) {
+  } catch {
     return {
       title: 'Hovenier.frl - Betrouwbare Hoveniers in Friesland',
       description: 'Vind de beste hoveniers in Friesland.'
@@ -50,7 +53,7 @@ export default async function HomePage({ params }: Props) {
   try {
     const { locale } = await params;
     validLocale = locale || defaultLocale;
-    if (!locales.includes(validLocale as any)) {
+    if (!isSupportedPageLocale(validLocale)) {
       validLocale = defaultLocale;
     }
   } catch (error) {

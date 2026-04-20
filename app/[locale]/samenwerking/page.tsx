@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';
@@ -17,6 +16,10 @@ import { createTranslator } from '@/i18n';
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
 
+function isSupportedPageLocale(locale: string): locale is (typeof locales)[number] {
+  return locales.includes(locale as (typeof locales)[number]);
+}
+
 type Props = {
   params: Promise<{ locale: string }>;
 };
@@ -33,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       keywords: t('partnership.meta_keywords_list').split(', '),
       alternates: getLocaleAlternates('/samenwerking', validLocale as SupportedLocale),
     };
-  } catch (error) {
+  } catch {
     return {
       title: 'Word Partner - Hovenier.frl',
       description: 'Word partner van Hovenier.frl en vergroot je klantenkring.'
@@ -47,7 +50,7 @@ export default async function SamenwerkingPage({ params }: Props) {
   try {
     const { locale } = await params;
     validLocale = locale || defaultLocale;
-    if (!locales.includes(validLocale as any)) {
+    if (!isSupportedPageLocale(validLocale)) {
       validLocale = defaultLocale;
     }
   } catch (error) {

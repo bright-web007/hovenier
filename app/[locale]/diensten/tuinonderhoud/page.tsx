@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Navigation from '../../../components/Navigation';
 import Breadcrumbs from '../../../components/Breadcrumbs';
@@ -10,6 +9,10 @@ import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
+
+function isSupportedPageLocale(locale: string): locale is (typeof locales)[number] {
+  return locales.includes(locale as (typeof locales)[number]);
+}
 
 export const revalidate = false;
 
@@ -41,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         : ['tuinonderhoud', 'tuinonderhoud friesland', 'tuinonderhoud abonnement', 'abonnement tuinonderhoud', 'tuinonderhoud bedrijven', 'tuinonderhoud particulier'],
       alternates: getLocaleAlternates('/diensten/tuinonderhoud', validLocale as SupportedLocale),
     };
-  } catch (error) {
+  } catch {
     return {
       title: 'Tuinonderhoud - Hovenier.frl',
       description: 'Professional garden maintenance services in Friesland.'
@@ -55,7 +58,7 @@ export default async function TuinonderhoudPage({ params }: Props) {
   try {
     const { locale } = await params;
     validLocale = locale || defaultLocale;
-    if (!locales.includes(validLocale as any)) {
+    if (!isSupportedPageLocale(validLocale)) {
       validLocale = defaultLocale;
     }
   } catch (error) {

@@ -13,8 +13,14 @@ import {
   trackArticleView 
 } from '../components/GoogleAnalytics';
 
+type AnalyticsWindow = Window & {
+  gtag?: (...args: unknown[]) => void;
+  dataLayer?: unknown[];
+};
+
 export default function GA4TestPage() {
   const [eventLog, setEventLog] = useState<string[]>([]);
+  const analyticsWindow = typeof window !== 'undefined' ? (window as AnalyticsWindow) : undefined;
   
   const logEvent = (eventName: string) => {
     const timestamp = new Date().toLocaleTimeString();
@@ -94,7 +100,7 @@ export default function GA4TestPage() {
         <h2 style={{ margin: '0 0 1rem 0', color: '#0369a1' }}>Instructions:</h2>
         <ol style={{ margin: 0, paddingLeft: '1.5rem' }}>
           <li>Open browser DevTools → Network tab</li>
-          <li>Filter by "google-analytics" or "collect"</li>
+          <li>Filter by &quot;google-analytics&quot; or &quot;collect&quot;</li>
           <li>Click test buttons below</li>
           <li>Check for network requests to GA4</li>
           <li>Also check GA4 Real-time view in dashboard</li>
@@ -219,8 +225,8 @@ export default function GA4TestPage() {
           <div>Analytics in Dev: {process.env.ENABLE_ANALYTICS_IN_DEV || 'false'}</div>
           <div>Base URL: {process.env.NEXT_PUBLIC_BASE_URL || 'not set'}</div>
           <div>User Agent: {typeof window !== 'undefined' ? window.navigator.userAgent.substring(0, 80) + '...' : 'Server'}</div>
-          <div>gtag available: {typeof window !== 'undefined' && typeof (window as any).gtag === 'function' ? '✅ Yes' : '❌ No'}</div>
-          <div>dataLayer: {typeof window !== 'undefined' && (window as any).dataLayer && Array.isArray((window as any).dataLayer) ? `✅ ${(window as any).dataLayer.length} items` : '❌ No'}</div>
+          <div>gtag available: {typeof analyticsWindow?.gtag === 'function' ? '✅ Yes' : '❌ No'}</div>
+          <div>dataLayer: {Array.isArray(analyticsWindow?.dataLayer) ? `✅ ${analyticsWindow.dataLayer.length} items` : '❌ No'}</div>
         </div>
       </div>
 
@@ -229,7 +235,7 @@ export default function GA4TestPage() {
         <h3 style={{ margin: '0 0 1rem 0', color: '#065f46' }}>Debug Tips:</h3>
         <ul style={{ margin: 0, paddingLeft: '1.5rem', color: '#065f46' }}>
           <li>Open DevTools → Network tab</li>
-          <li>Filter by "google-analytics.com" or "collect"</li>
+          <li>Filter by &quot;google-analytics.com&quot; or &quot;collect&quot;</li>
           <li>Look for POST requests to collect endpoint</li>
           <li>Check GA4 → Reports → Realtime for live data</li>
           <li>Events may take 1-2 minutes to appear in GA4</li>

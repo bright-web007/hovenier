@@ -14,7 +14,6 @@ import heroStyles from '../../components/KostenHero.module.css';
 import priceCardStyles from '../../components/KostenPriceCards.module.css';
 import priceTableStyles from '../../components/KostenPriceTable.module.css';
 import factorsStyles from '../../components/KostenFactors.module.css';
-import faqStyles from '../../components/KostenFAQ.module.css';
 import layoutStyles from '../../components/KostenLayout.module.css';
 
 type Props = {

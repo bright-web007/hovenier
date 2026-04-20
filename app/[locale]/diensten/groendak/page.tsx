@@ -1,5 +1,5 @@
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import Image from 'next/image';
 import Navigation from '../../../components/Navigation';
 import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../components/RelatedArticles';
@@ -10,6 +10,10 @@ import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
+
+function isSupportedPageLocale(locale: string): locale is (typeof locales)[number] {
+  return locales.includes(locale as (typeof locales)[number]);
+}
 
 export const revalidate = false;
 
@@ -41,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         : ['groendak', 'groendak aanleggen', 'extensief groendak', 'groendak subsidie', 'subsidie groendak', 'groendak met zonnepanelen', 'groendak friesland', 'sedumdak'],
       alternates: getLocaleAlternates('/diensten/groendak', validLocale as SupportedLocale),
     };
-  } catch (error) {
+  } catch {
     return {
       title: 'Groendaken - Hovenier.frl',
       description: 'Professional green roof services in Friesland.'
@@ -55,7 +59,7 @@ export default async function GroendakPage({ params }: Props) {
   try {
     const { locale } = await params;
     validLocale = locale || defaultLocale;
-    if (!locales.includes(validLocale as any)) {
+    if (!isSupportedPageLocale(validLocale)) {
       validLocale = defaultLocale;
     }
   } catch (error) {
@@ -123,9 +127,11 @@ export default async function GroendakPage({ params }: Props) {
             <div className="service-hero">
               <div className="service-hero-content">
                 <div className="service-hero-image">
-                  <img
+                  <Image
                     src="/images/green-roof.png"
                     alt={isEn ? "Professional green roof installed in Friesland" : "Professioneel groendak aangelegd in Friesland"}
+                    width={800}
+                    height={600}
                     className="service-hero-image-photo"
                   />
                 </div>

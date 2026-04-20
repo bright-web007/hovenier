@@ -375,7 +375,7 @@ export default async function TuinontwerpKostenPage({ params }: Props) {
                     </svg>
                     <div>
                       <div className="font-semibold">Speciale elementen gewenst</div>
-                      <div className="text-sm text-gray-600">Vijvers, pergola's, speciale verharding</div>
+                      <div className="text-sm text-gray-600">Vijvers, pergola&apos;s, speciale verharding</div>
                     </div>
                   </li>
                   <li className="flex items-start">

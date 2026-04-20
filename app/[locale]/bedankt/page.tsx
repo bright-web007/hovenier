@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import Navigation from '../../components/Navigation';
@@ -7,6 +6,10 @@ import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
+
+function isSupportedPageLocale(locale: string): locale is (typeof locales)[number] {
+  return locales.includes(locale as (typeof locales)[number]);
+}
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -23,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       robots: 'noindex, nofollow', // Don't index thank you pages
       alternates: getLocaleAlternates('/bedankt', validLocale as SupportedLocale),
     };
-  } catch (error) {
+  } catch {
     return {
       title: 'Bedankt - Hovenier.frl',
       description: 'Bedankt voor uw aanvraag.'
@@ -37,7 +40,7 @@ export default async function BedanktPage({ params }: Props) {
   try {
     const { locale } = await params;
     validLocale = locale || defaultLocale;
-    if (!locales.includes(validLocale as any)) {
+    if (!isSupportedPageLocale(validLocale)) {
       validLocale = defaultLocale;
     }
   } catch (error) {

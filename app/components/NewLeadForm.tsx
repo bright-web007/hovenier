@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import { useRouter } from "next/navigation";
 import { trackLeadFormSubmission } from './GoogleAnalytics';
 import { submitLeadToPrometheus } from '../services/prometheus';
@@ -50,12 +50,13 @@ const gemeenten = [
 ];
 
 const TurnstileWidget = lazy(async () => {
-  const module = await import('@marsidev/react-turnstile');
-  return { default: module.Turnstile };
+  const turnstileModule = await import('@marsidev/react-turnstile');
+  return { default: turnstileModule.Turnstile };
 });
 
 export default function NewLeadForm({ translations, locale, prefillMunicipality, serviceType }: LeadFormProps) {
   const t = createTranslator(locale);
+  const isDevelopment = typeof window !== 'undefined' && (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost');
 
   const services = [
     { value: "tuinonderhoud", label: translations.services.tuinonderhoud },
@@ -76,16 +77,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
   const [privacy, setPrivacy] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [isDevelopment, setIsDevelopment] = useState(false);
   const router = useRouter();
-
-  // Set development mode on client side
-  useEffect(() => {
-    setIsDevelopment(process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost');
-    if (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost') {
-      console.log('Development mode detected, Turnstile will be bypassed');
-    }
-  }, []);
 
   const {
     handleSubmit,

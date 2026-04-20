@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../components/Navigation'
 import Breadcrumbs from '../../components/Breadcrumbs'
@@ -294,7 +295,7 @@ export default async function OverOnsPage({ params }: Props) {
                   {isEn ? 'We offer three different membership levels - from free basic listings to premium featured placements. All gardeners on our platform are verified for qualifications and reliability.' : 'We bieden drie verschillende lidmaatschapsniveaus - van gratis basis listings tot premium featured placements. Alle hoveniers op ons platform worden gecontroleerd op kwalificaties en betrouwbaarheid.'}
                 </p>
               </div>
-              <a
+              <Link
                 href="/samenwerking"
                 style={{
                   display: 'inline-block',
@@ -308,8 +309,8 @@ export default async function OverOnsPage({ params }: Props) {
                   transition: 'background-color 0.2s'
                 }}
               >
-                {isEn ? 'Become a Partner →' : 'Word Partner →'}
-              </a>
+                {isEn ? 'Become a Partner' : 'Word Partner'}
+              </Link>
             </div>
           </section>
 

@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
@@ -159,7 +160,7 @@ export default async function TuinAanleggenPage({ params }: Props) {
               </div>
               <h3 className="text-lg font-semibold text-forest-900 mb-3">Hardscaping</h3>
               <p className="text-forest-700 text-sm">
-                Terrassen, paden, muren, pergola's en andere hardscape elementen.
+                Terrassen, paden, muren, pergola&apos;s en andere hardscape elementen.
               </p>
             </div>
 
@@ -298,9 +299,9 @@ export default async function TuinAanleggenPage({ params }: Props) {
               Prijzen zijn indicatief en afhankelijk van grondsoort, toegankelijkheid, gekozen materialen en complexiteit van het ontwerp.
             </p>
             <div className="text-center mt-4">
-              <a href="/kosten/tuin-aanleggen" className="text-sage-600 hover:underline font-medium">
+              <Link href="/kosten/tuin-aanleggen" className="text-sage-600 hover:underline font-medium">
                 → Bekijk gedetailleerde kostengids
-              </a>
+              </Link>
             </div>
           </div>
         </section>

@@ -3,6 +3,15 @@
 
 import ReactGA from 'react-ga4';
 
+type LayoutShiftEntry = PerformanceEntry & {
+  hadRecentInput?: boolean;
+  value: number;
+};
+
+type FirstInputEntry = PerformanceEntry & {
+  processingStart: number;
+};
+
 // Preload critical resources
 export function preloadCriticalResources() {
   if (typeof window === 'undefined') return;
@@ -72,25 +81,24 @@ export function measureCoreWebVitals() {
 
   // Track CLS (Cumulative Layout Shift)
   let clsValue = 0;
-  let clsEntries: any[] = [];
+  let clsEntries: LayoutShiftEntry[] = [];
 
   const observer = new PerformanceObserver((entryList) => {
     for (const entry of entryList.getEntries()) {
-      const layoutShiftEntry = entry as any; // Cast to avoid TS error since hadRecentInput exists on layout-shift entries
+      const layoutShiftEntry = entry as LayoutShiftEntry;
       if (!layoutShiftEntry.hadRecentInput) {
-        const firstSessionEntry = clsEntries[0];
         const lastSessionEntry = clsEntries[clsEntries.length - 1];
 
         if (clsEntries.length === 0 || entry.startTime - lastSessionEntry.startTime < 1000) {
-          clsEntries.push(entry);
+          clsEntries.push(layoutShiftEntry);
         } else {
-          clsValue = Math.max(clsValue, clsEntries.reduce((sum, e) => sum + (e as any).value, 0));
-          clsEntries = [entry];
+          clsValue = Math.max(clsValue, clsEntries.reduce((sum, e) => sum + e.value, 0));
+          clsEntries = [layoutShiftEntry];
         }
       }
     }
 
-    clsValue = Math.max(clsValue, clsEntries.reduce((sum, e) => sum + (e as any).value, 0));
+    clsValue = Math.max(clsValue, clsEntries.reduce((sum, e) => sum + e.value, 0));
     
     console.log('CLS:', clsValue);
     
@@ -128,7 +136,7 @@ export function measureCoreWebVitals() {
   // Track FID (First Input Delay) / INP (Interaction to Next Paint)
   const fidObserver = new PerformanceObserver((entryList) => {
     const entries = entryList.getEntries();
-    const firstEntry = entries[0] as any; // Cast to avoid TS error
+    const firstEntry = entries[0] as FirstInputEntry;
     const fidValue = firstEntry.processingStart - firstEntry.startTime;
     
     console.log('FID:', fidValue);
@@ -275,11 +283,13 @@ export function initializePerformanceOptimizations() {
   }
 }
 
-export default {
+const performanceService = {
   preloadCriticalResources,
   setupImageLazyLoading,
   loadThirdPartyScript,
   measureCoreWebVitals,
   initializePerformanceOptimizations,
-  generateResourceHints
+  generateResourceHints,
 };
+
+export default performanceService;

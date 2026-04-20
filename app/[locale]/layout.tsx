@@ -6,6 +6,10 @@ import CookieConsentBanner from '../components/CookieConsentBanner';
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
 
+function isSupportedPageLocale(locale: string): locale is (typeof locales)[number] {
+  return locales.includes(locale as (typeof locales)[number]);
+}
+
 type Props = {
   children: ReactNode;
   params: Promise<{ locale: string }>;
@@ -17,7 +21,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   try {
     const { locale } = await params;
     validLocale = locale || defaultLocale;
-    if (!locales.includes(validLocale as any)) {
+    if (!isSupportedPageLocale(validLocale)) {
       validLocale = defaultLocale;
     }
   } catch (error) {

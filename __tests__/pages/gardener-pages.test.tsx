@@ -46,6 +46,26 @@ jest.mock('@/lib/gardeners-data', () => ({
     rating: 4.5,
     reviews: 42
   }),
+  gardeners: [
+    { 
+      slug: 'tuinservice-friesland',
+      name: 'Tuinservice Friesland',
+      company: 'Tuinservice Friesland BV',
+      location: 'Leeuwarden'
+    },
+    { 
+      slug: 'groene-vingers',
+      name: 'Groene Vingers',
+      company: 'Groene Vingers Hoveniers',
+      location: 'Harlingen'
+    },
+    { 
+      slug: 'friese-tuinen',
+      name: 'Friese Tuinen',
+      company: 'Friese Tuinen & Parken',
+      location: 'Drachten'
+    }
+  ],
   getAllGardeners: () => [
     { 
       slug: 'tuinservice-friesland',
@@ -68,39 +88,8 @@ jest.mock('@/lib/gardeners-data', () => ({
   ]
 }));
 
-// Helper function to create mock messages
-const createMockMessages = () => ({
-  common: {
-    navigation: {
-      home: 'Home',
-      hoveniers: 'Gardeners',
-      contact: 'Contact'
-    },
-    buttons: {
-      contact: 'Contact Gardener',
-      quote: 'Request Quote',
-      phone: 'Call Now'
-    }
-  },
-  pages: {
-    hoveniers: {
-      title: 'Professional Gardeners',
-      subtitle: 'Find expert gardeners in Friesland',
-      profile: {
-        services: 'Services',
-        contact: 'Contact Information',
-        reviews: 'Reviews',
-        portfolio: 'Portfolio',
-        about: 'About'
-      }
-    }
-  }
-});
-
 describe('Gardener Profile Pages Integration Tests', () => {
-  const mockMessages = createMockMessages();
-  
-  const renderWithIntl = (component: React.ReactElement, locale = 'nl') => {
+  const renderWithIntl = (component: React.ReactElement) => {
     return render(component);
   };
 
@@ -143,7 +132,7 @@ describe('Gardener Profile Pages Integration Tests', () => {
             });
             
             expect(() => {
-              renderWithIntl(<GardenerPage params={mockParams} />, locale);
+              renderWithIntl(<GardenerPage params={mockParams} />);
             }).not.toThrow();
           }
           
@@ -335,15 +324,14 @@ describe('Gardener Profile Pages Integration Tests', () => {
     test('should properly integrate with gardener data sources', async () => {
       try {
         // Test the gardener data integration
-        const { getAllGardeners } = await import('@/lib/gardeners-data');
+        const { gardeners } = await import('@/lib/gardeners-data');
         
-        if (getAllGardeners) {
-          const gardeners = getAllGardeners();
+        if (gardeners) {
           expect(Array.isArray(gardeners)).toBe(true);
           expect(gardeners.length).toBeGreaterThan(0);
           
           // Each gardener should have required fields
-          gardeners.forEach(gardener => {
+          gardeners.forEach((gardener) => {
             expect(gardener).toHaveProperty('slug');
             expect(gardener).toHaveProperty('name');
             expect(typeof gardener.slug).toBe('string');

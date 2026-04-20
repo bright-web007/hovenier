@@ -268,7 +268,7 @@ export default async function TuinonderhoudKostenPage({ params }: Props) {
                 </ul>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-forest-900 mb-4">Seizoensgebonden Extra's:</h3>
+                <h3 className="text-xl font-semibold text-forest-900 mb-4">Seizoensgebonden Extra&apos;s:</h3>
                 <ul className="space-y-2 text-forest-700">
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-emerald-600 rounded-full mr-3"></span>
@@ -314,7 +314,7 @@ export default async function TuinonderhoudKostenPage({ params }: Props) {
                 <li>• <strong>Bereikbaarheid:</strong> Smalle toegangen</li>
                 <li>• <strong>Hoogteverschillen:</strong> Hellingen en trappen</li>
                 <li>• <strong>Bomen & struiken:</strong> Snoeiwerkzaamheden</li>
-                <li>• <strong>Bijzondere elementen:</strong> Vijvers, pergola's</li>
+                <li>• <strong>Bijzondere elementen:</strong> Vijvers, pergola&apos;s</li>
               </ul>
             </div>
 
@@ -329,7 +329,7 @@ export default async function TuinonderhoudKostenPage({ params }: Props) {
                 <li>• <strong>Flexibiliteit:</strong> Vaste dagen vs. op afroep</li>
               </ul>
             </div>
-
+                <h3 className="text-xl font-semibold text-forest-900 mb-4">Seizoensgebonden Extra&apos;s:</h3>
             <div className="bg-white rounded-xl p-6 shadow-lg">
               <h3 className="text-lg font-semibold text-forest-900 mb-4">Externe Factoren</h3>
               <ul className="text-sm text-forest-700 space-y-2">

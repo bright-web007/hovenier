@@ -1,11 +1,12 @@
 'use client'
 
+import type { ComponentProps } from 'react'
 import { createTranslator } from '@/i18n'
 import NewLeadForm from './NewLeadForm'
 import styles from './Partnership.module.css'
 
 interface PartnershipCTAProps {
-  translations: any
+  translations: ComponentProps<typeof NewLeadForm>['translations']
   locale: string
 }
 

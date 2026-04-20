@@ -120,12 +120,34 @@ export const clientEnvSchema = z.object({
   NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: optionalApiKeySchema,
 });
 
+let hasLoggedBuildFallbackWarning = false;
+
+function isBuildTimeEnvironmentValidation() {
+  return process.env.npm_lifecycle_event === 'build';
+}
+
+function shouldThrowOnInvalidEnvironment() {
+  if (process.env.SKIP_ENV_VALIDATION === 'true') {
+    return false;
+  }
+
+  return process.env.NODE_ENV === 'production' && !isBuildTimeEnvironmentValidation();
+}
+
+function logBuildValidationWarning() {
+  if (hasLoggedBuildFallbackWarning) {
+    return;
+  }
+
+  hasLoggedBuildFallbackWarning = true;
+  console.warn('Environment validation failed during build. Falling back to placeholder values for static generation.');
+}
+
 // Validation function with detailed error reporting
 export function validateEnvironment(): Env {
   // Skip validation on client-side to avoid errors with server-only variables
   if (typeof window !== 'undefined') {
     // Client-side: only validate public variables
-    const clientResult = clientEnvSchema.safeParse(process.env);
     // Return a partial env for client-side usage
     return createFallbackEnv();
   }
@@ -133,9 +155,12 @@ export function validateEnvironment(): Env {
   const result = envSchema.safeParse(process.env);
   
   if (!result.success) {
-    if (process.env.NODE_ENV === 'production') {
+    if (shouldThrowOnInvalidEnvironment()) {
       throw new Error('Environment validation failed in production');
     } else {
+      if (process.env.NODE_ENV === 'production') {
+        logBuildValidationWarning();
+      }
       return createFallbackEnv();
     }
   }

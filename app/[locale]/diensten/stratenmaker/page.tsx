@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'

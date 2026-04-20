@@ -1,15 +1,18 @@
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Navigation from '../../../components/Navigation';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import NewLeadForm from "@/app/components/NewLeadForm"
-import RelatedArticles from '../../../components/RelatedArticles';
+import RelatedArticles, { type Article } from '../../../components/RelatedArticles';
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { createTranslator } from '@/lib/translator';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
+
+function isSupportedPageLocale(locale: string): locale is (typeof locales)[number] {
+  return locales.includes(locale as (typeof locales)[number]);
+}
 
 export const revalidate = false;
 
@@ -20,6 +23,29 @@ export async function generateStaticParams() {
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+function isFaqItem(value: unknown): value is FaqItem {
+  return typeof value === 'object' && value !== null && 'question' in value && 'answer' in value;
+}
+
+function isRelatedArticle(value: unknown): value is Article {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'id' in value &&
+    'title' in value &&
+    'excerpt' in value &&
+    'slug' in value &&
+    'category' in value &&
+    'readTime' in value &&
+    'publishedAt' in value
+  );
+}
 
 
 
@@ -41,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         : ['tuinontwerp', 'landschapsarchitect', 'tuinarchitect', 'friesland', '3d visualisatie'],
       alternates: getLocaleAlternates('/diensten/tuinontwerp', validLocale as SupportedLocale),
     };
-  } catch (error) {
+  } catch {
     return {
       title: 'Tuinontwerp - Hovenier.frl',
       description: 'Professional garden design services in Friesland.'
@@ -55,7 +81,7 @@ export default async function TuinontwerpPage({ params }: Props) {
   try {
     const { locale } = await params;
     validLocale = locale || defaultLocale;
-    if (!locales.includes(validLocale as any)) {
+    if (!isSupportedPageLocale(validLocale)) {
       validLocale = defaultLocale;
     }
   } catch (error) {
@@ -64,8 +90,10 @@ export default async function TuinontwerpPage({ params }: Props) {
 
   const t = createTranslator(validLocale);
   const isEn = validLocale === 'en';
-  const localeFaqs = t.raw('faqs.tuinontwerp') || [];
-  const localeArticles = t.raw('related_articles.tuinontwerp') || [];
+  const rawFaqs = t.raw('faqs.tuinontwerp');
+  const rawArticles = t.raw('related_articles.tuinontwerp');
+  const localeFaqs: FaqItem[] = Array.isArray(rawFaqs) ? rawFaqs.filter(isFaqItem) : [];
+  const localeArticles: Article[] = Array.isArray(rawArticles) ? rawArticles.filter(isRelatedArticle) : [];
 
   // Navigation translations
   const navTranslations = {
@@ -238,7 +266,7 @@ export default async function TuinontwerpPage({ params }: Props) {
             </div>
 
             <div className="faq-grid">
-              {localeFaqs.map((faq: { question: string; answer: string }, index: number) => (
+              {localeFaqs.map((faq, index: number) => (
                 <div key={index} className="faq-item">
                   <h3 className="faq-question">{faq.question}</h3>
                   <p className="faq-answer">{faq.answer}</p>
@@ -276,7 +304,7 @@ export default async function TuinontwerpPage({ params }: Props) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": localeFaqs.map((faq: { question: string; answer: string }) => ({
+            "mainEntity": localeFaqs.map((faq) => ({
               "@type": "Question",
               "name": faq.question,
               "acceptedAnswer": {

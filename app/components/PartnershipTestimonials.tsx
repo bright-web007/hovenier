@@ -29,7 +29,7 @@ export default function PartnershipTestimonials({ successStories, locale = 'nl' 
           {successStories.map((story, index) => (
             <div key={index} className={styles.testimonialCard}>
               <div className="partnership-testimonial-content">
-                <p className={styles.testimonialQuote}>"{story.quote}"</p>
+                <p className={styles.testimonialQuote}>&ldquo;{story.quote}&rdquo;</p>
                 <div className={styles.testimonialAuthor}>
                   <div className="partnership-testimonial-info">
                     <h4 className={styles.testimonialName}>{story.name}</h4>

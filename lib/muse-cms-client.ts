@@ -142,12 +142,13 @@ export class MuseCMSClient {
     return articles;
   }
 
-  determineArticleType(post: any) {
+  determineArticleType(post: Record<string, unknown>) {
     const category = post.category || {};
     const content = post.content || '';
-    const wordCount = content ? content.split(/\s+/).length : 0;
-    const categoryName = (category.name || '').toLowerCase();
-    const categorySlug = (category.slug || '').toLowerCase();
+    const wordCount = typeof content === 'string' ? content.split(/\s+/).length : 0;
+    const cat = category as Record<string, unknown>;
+    const categoryName = ((cat.name as string) || '').toLowerCase();
+    const categorySlug = ((cat.slug as string) || '').toLowerCase();
     if ([
       'opinion', 'editorial', 'social'
     ].some(term => categoryName.includes(term) || categorySlug.includes(term))) {

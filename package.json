@@ -39,10 +39,12 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^16.3.2",
     "@types/jest": "^29.5.12",
     "@types/node": "^20",
+    "@types/node-fetch": "2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "ajv": "^8.12.0",

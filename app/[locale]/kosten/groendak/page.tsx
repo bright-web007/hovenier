@@ -354,7 +354,7 @@ export default async function GroendakKostenPage({ params }: Props) {
             </div>
             <div className="text-center mt-8">
               <p className="text-forest-700 text-lg">
-                <strong>Tip:</strong> Subsidies zijn vaak beperkt beschikbaar op basis van 'eerst komen, eerst maalt'. 
+                <strong>Tip:</strong> Subsidies zijn vaak beperkt beschikbaar op basis van &apos;eerst komen, eerst maalt&apos;. 
                 Plan uw groendak project vroeg in het jaar voor de beste kans op subsidie.
               </p>
             </div>

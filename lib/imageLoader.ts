@@ -36,9 +36,20 @@ export function getImageUrl(src: string, options?: { width?: number; quality?: n
       ? `w-${options.width},f-webp,q-${q}`
       : `f-webp,q-${q}`
 
-    // External absolute URLs: proxy through CDN using the /tr: path pattern
+    // External absolute URLs that the CDN can't proxy — return with original params
     if (cleanSrc.startsWith('http://') || cleanSrc.startsWith('https://')) {
-      return `${baseUrl}/tr:${params}/${cleanSrc}`
+      try {
+        const url = new URL(cleanSrc)
+        // Only proxy through CDN if the host is on the same CDN domain
+        if (baseUrl && url.hostname.endsWith('hivedeck.com')) {
+          return `${baseUrl.replace(/\/+$/, '')}/tr:${params}/${cleanSrc}`
+        }
+      } catch {
+        // Invalid URL — fall through
+      }
+      // For external URLs (e.g. Unsplash), use native params
+      const sep = src.includes('?') ? '&' : '?'
+      return options?.width ? `${src}${sep}w=${options.width}&q=${q}` : src
     }
 
     // Relative/internal paths: strip any accidental protocol and prepend baseUrl

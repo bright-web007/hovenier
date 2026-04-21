@@ -3853,3 +3853,22 @@ a { text-decoration: none; color: inherit; }
     grid-template-columns: 1fr;
   }
 }
+
+.crosslink-text:hover {
+  color: var(--forest) !important;
+}
+
+@media (max-width: 649px) {
+  .grid-responsive-3-sm {
+    grid-template-columns: 1fr !important;
+  }
+  .grid-responsive-2-sm {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (min-width: 650px) and (max-width: 1023px) {
+  .grid-responsive-3-sm {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

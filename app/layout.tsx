@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
+import Script from "next/script";
 import AdSenseScript from "./components/AdSenseScript";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import PerformanceInitializer from "./components/PerformanceInitializer";
@@ -120,9 +121,12 @@ export default async function RootLayout({
         {/* Manifest for PWA */}
         <link rel="manifest" href="/manifest.json" />
 
+      </head>
+      <body className={`${sansFont.variable}`}>
         {env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID && (
-          <script
-            type="text/javascript"
+          <Script
+            id="microsoft-clarity"
+            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
                 (function(c,l,a,r,i,t,y){
@@ -134,8 +138,6 @@ export default async function RootLayout({
             }}
           />
         )}
-      </head>
-      <body className={`${sansFont.variable}`}>
         <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || ''} />
         <AdSenseScript clientId={env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ''} />
         <PerformanceInitializer />

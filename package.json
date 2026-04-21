@@ -30,6 +30,7 @@
   "dependencies": {
     "@marsidev/react-turnstile": "^1.4.2",
     "@sentry/nextjs": "^10.45.0",
+    "iconsax-reactjs": "^0.0.8",
     "next": "16.2.1",
     "next-intl": "^4.8.3",
     "next-sitemap": "^4.2.3",

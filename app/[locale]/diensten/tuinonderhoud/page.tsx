@@ -110,7 +110,7 @@ export default async function TuinonderhoudPage({ params }: Props) {
   // Breadcrumb items
   const breadcrumbItems = [
     { label: validLocale === 'nl' ? 'Home' : 'Home', href: '/' },
-    { label: validLocale === 'nl' ? 'Diensten' : 'Services', href: localizePath('/services', validLocale as SupportedLocale) },
+    { label: validLocale === 'nl' ? 'Diensten' : 'Services', href: localizePath('/diensten', validLocale as SupportedLocale) },
     { label: validLocale === 'nl' ? 'Tuinonderhoud' : 'Garden Maintenance' }
   ];
 

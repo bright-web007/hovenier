@@ -195,9 +195,9 @@ export default async function GemeentePage({ params }: Props) {
 
   const breadcrumbItems = [
     { label: t('breadcrumb_home'), href: '/' },
-    { label: isEn ? 'Regions' : 'Regio\'s', href: '/regio' },
-    { label: regionHub.name, href: `/regio/${slug}` },
-    { label: gemeenteData.name, href: `/regio/${slug}/${gemeente}` }
+    { label: isEn ? 'Regions' : 'Regio\'s', href: localizePath('/regio', locale as SupportedLocale) },
+    { label: regionHub.name, href: localizePath(`/regio/${slug}`, locale as SupportedLocale) },
+    { label: gemeenteData.name, href: localizePath(`/regio/${slug}/${gemeente}`, locale as SupportedLocale) }
   ];
 
   return (

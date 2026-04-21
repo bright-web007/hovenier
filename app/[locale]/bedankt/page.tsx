@@ -109,7 +109,7 @@ export default async function BedanktPage({ params }: Props) {
                 {t('thank_you_page_back_home') || 'Terug naar home'}
               </Link>
               
-              <Link href={localizePath('/services', validLocale as SupportedLocale)} className="nav-cta nav-cta-outline">
+              <Link href={localizePath('/diensten', validLocale as SupportedLocale)} className="nav-cta nav-cta-outline">
                 {t('thank_you_page_view_services') || 'Bekijk onze diensten'}
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

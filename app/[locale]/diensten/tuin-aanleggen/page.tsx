@@ -67,7 +67,7 @@ export default async function TuinAanleggenPage({ params }: Props) {
   // Breadcrumb items
   const breadcrumbItems = [
     { label: t('breadcrumb_home'), href: '/' },
-    { label: 'Diensten', href: localizePath('/services', locale as SupportedLocale) },
+    { label: 'Diensten', href: localizePath('/diensten', locale as SupportedLocale) },
     { label: 'Tuin Aanleggen' }
   ];
 

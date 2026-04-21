@@ -73,7 +73,7 @@ export default async function NewsArticlePage({ params }: Props) {
 
   const breadcrumbItems = [
     { label: t('breadcrumb_home'), href: '/' },
-    { label: t('nieuws_page.breadcrumb'), href: '/nieuws' },
+    { label: t('nieuws_page.breadcrumb'), href: localizePath('/nieuws', locale as SupportedLocale) },
     { label: article.title },
   ];
 

@@ -144,8 +144,8 @@ export default async function RegionHubPage({ params }: Props) {
 
   const breadcrumbItems = [
     { label: t('breadcrumb_home'), href: '/' },
-    { label: isEn ? 'Regions' : 'Regio\'s', href: '/regio' },
-    { label: displayName, href: `/regio/${slug}` }
+    { label: isEn ? 'Regions' : 'Regio\'s', href: localizePath('/regio', locale as SupportedLocale) },
+    { label: displayName, href: localizePath(`/regio/${slug}`, locale as SupportedLocale) }
   ];
 
   return (

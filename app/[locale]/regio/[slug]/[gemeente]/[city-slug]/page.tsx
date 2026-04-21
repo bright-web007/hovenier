@@ -24,7 +24,7 @@ type CityOverrideKeys = {
   faq?: Array<{ q: string; a: string }>;
 };
 
-function getCityOverride(t: any, citySlug: string): CityOverrideKeys | null {
+function getCityOverride(t: ReturnType<typeof createTranslator>, citySlug: string): CityOverrideKeys | null {
   const override = t.raw(`city_overrides.${citySlug}`);
   return override || null;
 }

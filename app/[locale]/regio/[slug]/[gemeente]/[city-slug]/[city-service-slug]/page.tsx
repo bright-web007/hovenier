@@ -192,7 +192,7 @@ const Page = async ({ params }: Props) => {
       // Add more sub sections as needed
     };
 
-    function getCityServiceOverride(t: any, citySlug: string, serviceSlug: string): CityServiceOverride | null {
+    function getCityServiceOverride(t: ReturnType<typeof createTranslator>, citySlug: string, serviceSlug: string): CityServiceOverride | null {
       const override = t.raw(`city_service_overrides.${citySlug}.${serviceSlug}`);
       return override || null;
     }

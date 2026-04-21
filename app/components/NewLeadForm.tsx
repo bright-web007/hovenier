@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, lazy, useState, useEffect } from "react";
+import { Suspense, lazy, useState } from "react";
 import { useRouter } from "next/navigation";
 import { trackLeadFormSubmission } from './GoogleAnalytics';
 import { submitLeadToPrometheus } from '../services/prometheus';
@@ -56,10 +56,7 @@ const TurnstileWidget = lazy(async () => {
 
 export default function NewLeadForm({ translations, locale, prefillMunicipality, serviceType }: LeadFormProps) {
   const t = createTranslator(locale);
-  const [isDevelopment, setIsDevelopment] = useState(false);
-  useEffect(() => {
-    setIsDevelopment(process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost');
-  }, []);
+  const isDevelopment = typeof window !== 'undefined' && (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost');
 
   const services = [
     { value: "tuinonderhoud", label: translations.services.tuinonderhoud },

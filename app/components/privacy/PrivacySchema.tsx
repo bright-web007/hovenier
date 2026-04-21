@@ -1,10 +1,9 @@
 import { createTranslator } from '@/i18n';
 
 const PrivacySchema = ({ locale = 'nl' }: { locale?: string }) => {
-  const isEn = locale === 'en';
   const t = createTranslator(locale);
-  const lang = isEn ? 'en-US' : 'nl-NL';
-  const urlPrefix = isEn ? 'https://hovenier.frl/en' : 'https://hovenier.frl';
+  const lang = locale === 'en' ? 'en-US' : 'nl-NL';
+  const urlPrefix = locale === 'en' ? 'https://hovenier.frl/en' : 'https://hovenier.frl';
   const pageUrl = `${urlPrefix}/privacy-beleid`;
 
   const jsonLd = {

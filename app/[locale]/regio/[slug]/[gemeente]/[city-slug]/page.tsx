@@ -5,9 +5,12 @@ import ReviewCard from "@/app/components/ReviewCard";
 import LeadFormSection from "@/app/components/LeadFormSection";
 import { getLocaleAlternates, getAbsoluteUrl, SupportedLocale } from "@/lib/locale-utils";
 import { getRegionHubBySlug, getGemeenteBySlug } from "@/lib/regions-hierarchy";
-import { createTranslator } from '@/i18n';
+import { createTranslator, locales, defaultLocale } from '@/i18n';
 import { Metadata } from 'next';
 import { BreadcrumbSchema } from "@/app/components/StructuredData";
+import { notFound } from 'next/navigation';
+
+export { locales, defaultLocale };
 
 // Helper to get city-specific content or fall back to generic
 type CityOverrideKeys = {
@@ -33,19 +36,18 @@ type Props = {
   params: Promise<{ locale: string; slug: string; gemeente: string; 'city-slug': string }>;
 };
 
+export const revalidate = 3600;
 
-export const locales = ['en', 'nl'] as const;
-export const defaultLocale = 'nl';
-export const dynamic = 'force-dynamic';
+const formatLabel = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+const interpolate = (s: string, cityName: string) => s.replace(/\{cityName\}/g, cityName);
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug, gemeente, 'city-slug': citySlug } = await params;
   const validLocale = locale || defaultLocale;
   const t = createTranslator(validLocale);
 
-  const formatName = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-  const cityName = formatName(citySlug);
-  const i = (s: string) => s.replace(/\{cityName\}/g, cityName);
+  const cityName = formatLabel(citySlug);
+  const i = (s: string) => interpolate(s, cityName);
 
   const cityOverride = getCityOverride(t, citySlug);
   const title = i(t('city_page.meta_title'));
@@ -91,11 +93,10 @@ const Page = async ({ params }: Props) => {
     const regionHub = getRegionHubBySlug(slug);
     const gemeenteData = getGemeenteBySlug(gemeente);
 
-    const formatLabel = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-    const cityName = formatLabel(citySlug);
+    if (!regionHub || !gemeenteData) notFound();
 
-    // Interpolate {cityName} placeholders in translation strings
-    const i = (s: string) => s.replace(/\{cityName\}/g, cityName);
+    const cityName = formatLabel(citySlug);
+    const i = (s: string) => interpolate(s, cityName);
 
     // Navigation translations
     const navTranslations = {

@@ -106,9 +106,12 @@ export default function ArticleCard({
             {author && (
               <div className="flex items-center gap-2">
                 {author.avatar ? (
-                  <img 
-                    src={author.avatar} 
+                  <Image
+                    src={author.avatar}
                     alt={author.name}
+                    width={24}
+                    height={24}
+                    unoptimized
                     className="w-6 h-6 rounded-full object-cover"
                   />
                 ) : (

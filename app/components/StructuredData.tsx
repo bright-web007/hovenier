@@ -1,4 +1,4 @@
-import { getBusinessConfig, ServiceType, type LocalBusinessConfig } from '@/lib/business-config';
+import { getBusinessConfig, ServiceType } from '@/lib/business-config';
 
 interface LocalBusinessSchemaProps {
   /** Service type to get specific config, omit for general business config */
@@ -157,7 +157,7 @@ export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": items.map((item, index) => ({
+    "itemListElement": items.map((item) => ({
       "@type": "ListItem",
       "position": item.position,
       "name": item.name,

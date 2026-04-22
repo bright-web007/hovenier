@@ -1,5 +1,6 @@
 'use client'
 
+import { createTranslator } from '@/i18n'
 import styles from './Partnership.module.css'
 
 interface FAQ {
@@ -13,12 +14,12 @@ interface PartnershipFAQProps {
 }
 
 export default function PartnershipFAQ({ faqs, locale = 'nl' }: PartnershipFAQProps) {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale);
   return (
     <section className="section section-alt">
       <div className="section-inner">
         <div className="section-header-row section-centered">
-          <h2 className="section-title">{isEn ? 'Frequently asked questions' : 'Veelgestelde vragen'}</h2>
+          <h2 className="section-title">{t('partnership.faq_title')}</h2>
         </div>
         
         <div className={styles.faqGrid}>

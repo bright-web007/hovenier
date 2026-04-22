@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { getRegionSlugByGemeenteSlug, gemeentesData } from '@/lib/regions-hierarchy';
+import { createTranslator } from '@/i18n';
 
 interface Region {
   name: string;
@@ -56,11 +57,11 @@ export default function RegionStrip({
   locale = 'nl',
   translations
 }: RegionStripProps) {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale || 'nl');
   
   // Use provided regions, or generate from gemeente data, or use fallback
   const displayRegions = regions || (gemeentesData.length > 0 ? generateRegionsFromGemeenten() : fallbackRegions);
-  const displayTitle = title || (isEn ? 'Gardeners in every Frisian municipality' : 'Hoveniers in elke Friese gemeente');
+  const displayTitle = title || t('region_strip.default_title');
 
   return (
     <section className={`region-strip ${className}`}>
@@ -68,13 +69,13 @@ export default function RegionStrip({
         {/* Section Header */}
         <div className="region-strip-header">
           <p className="section-eyebrow section-eyebrow-centered">
-            {isEn ? 'ALL MUNICIPALITIES' : 'ALLE GEMEENTEN'}
+            {t('region_strip.all_municipalities')}
           </p>
           <h2 className="section-title section-title-centered">
             {displayTitle}
           </h2>
           <p className="section-sub section-sub-centered">
-            {isEn ? 'Find skilled gardeners in every Frisian municipality. Local expertise for your garden.' : 'Vind vakkundige hoveniers in elke Friese gemeente. Lokale expertise voor uw tuin.'}
+            {t('region_strip.subtitle')}
           </p>
         </div>
         
@@ -110,7 +111,7 @@ export default function RegionStrip({
                   </h3>
                   {showCounts && region.count && (
                     <p className="region-card-count">
-                      {region.count} {isEn ? 'gardeners' : 'hoveniers'}
+                      {region.count} {t('region_strip.gardeners')}
                     </p>
                   )}
                 </div>
@@ -122,7 +123,7 @@ export default function RegionStrip({
         {/* Call to Action */}
         <div className="region-strip-footer">
           <p className="region-strip-cta-text">
-            {isEn ? "Don't see your municipality? We're happy to help." : 'Niet uw gemeente erbij? We helpen u graag verder.'}
+            {t('region_strip.not_listed')}
           </p>
           <Link 
             href="/contact"

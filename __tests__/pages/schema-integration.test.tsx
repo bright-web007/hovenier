@@ -4,6 +4,7 @@
  */
 
 import { render } from '@testing-library/react';
+import { LocalBusinessSchema } from '@/app/components/StructuredData';
 import { 
   extractStructuredData, 
   findLocalBusinessSchema, 
@@ -12,6 +13,35 @@ import {
   validateServiceSpecificSchema,
   SERVICE_VALIDATION
 } from '../utils/schema-validation';
+
+type OfferCatalogItem = {
+  '@type': 'Offer';
+  '@id': string;
+  itemOffered: {
+    '@type': 'Service';
+    name: string;
+    provider: {
+      '@type': 'LocalBusiness';
+      '@id': string;
+      name: string;
+    };
+  };
+};
+
+type LocalBusinessSchemaShape = {
+  '@id': string;
+  name: string;
+  legalName: string;
+  url: string;
+  currenciesAccepted: string;
+  address: unknown;
+  geo: unknown;
+  areaServed: unknown;
+  serviceArea: unknown;
+  hasOfferCatalog: {
+    itemListElement: OfferCatalogItem[];
+  };
+};
 
 // Mock next-intl and other Next.js dependencies
 jest.mock('next-intl', () => ({
@@ -43,11 +73,6 @@ jest.mock('@/lib/locale-utils', () => ({
 }));
 
 describe('Page Schema Integration Tests', () => {
-  // Helper function to create mock page props
-  const createMockParams = (locale = 'nl', extra = {}) => ({
-    params: Promise.resolve({ locale, ...extra })
-  });
-
   describe('Service Pages Schema Validation', () => {
     const servicePages = [
       { 
@@ -64,21 +89,12 @@ describe('Page Schema Integration Tests', () => {
 
     servicePages.forEach(({ serviceType, path, expectedName }) => {
       test(`should have valid schema on ${serviceType} service page`, async () => {
-        // Mock the specific service page component
-        const MockServicePage = () => {
-          const { LocalBusinessSchema } = require('@/app/components/StructuredData');
-          
-          return (
-            <>
-              <LocalBusinessSchema
-                serviceType={serviceType as keyof typeof SERVICE_VALIDATION}
-                url={`https://hovenier.frl${path}`}
-              />
-            </>
-          );
-        };
-
-        const { container } = render(<MockServicePage />);
+        const { container } = render(
+          <LocalBusinessSchema
+            serviceType={serviceType as keyof typeof SERVICE_VALIDATION}
+            url={`https://hovenier.frl${path}`}
+          />
+        );
         const html = container.innerHTML;
         const structuredData = extractStructuredData(html);
         
@@ -113,20 +129,12 @@ describe('Page Schema Integration Tests', () => {
 
   describe('Regional Pages Schema Validation', () => {
     test('should have valid schema on main regio page', () => {
-      const MockRegioPage = () => {
-        const { LocalBusinessSchema } = require('@/app/components/StructuredData');
-        
-        return (
-          <>
-            <LocalBusinessSchema 
-              url="https://hovenier.frl/regio"
-              nameContext="Hoveniers per Gemeente Friesland"
-            />
-          </>
-        );
-      };
-
-      const { container } = render(<MockRegioPage />);
+      const { container } = render(
+        <LocalBusinessSchema 
+          url="https://hovenier.frl/regio"
+          nameContext="Hoveniers per Gemeente Friesland"
+        />
+      );
       const html = container.innerHTML;
       const structuredData = extractStructuredData(html);
       
@@ -146,28 +154,20 @@ describe('Page Schema Integration Tests', () => {
     });
 
     test('should have valid schema on regional hub pages', () => {
-      const MockRegionHubPage = () => {
-        const { LocalBusinessSchema } = require('@/app/components/StructuredData');
-        
-        return (
-          <>
-            <LocalBusinessSchema 
-              url="https://hovenier.frl/regio/noordwest-friesland"
-              nameContext="Hoveniers in Noordwest-Friesland"
-              services={[
-                "Tuinonderhoud",
-                "Tuinontwerp", 
-                "Bestrating",
-                "Boomverzorging",
-                "Groendaken",
-                "Tuinaanleg"
-              ]}
-            />
-          </>
-        );
-      };
-
-      const { container } = render(<MockRegionHubPage />);
+      const { container } = render(
+        <LocalBusinessSchema 
+          url="https://hovenier.frl/regio/noordwest-friesland"
+          nameContext="Hoveniers in Noordwest-Friesland"
+          services={[
+            'Tuinonderhoud',
+            'Tuinontwerp', 
+            'Bestrating',
+            'Boomverzorging',
+            'Groendaken',
+            'Tuinaanleg'
+          ]}
+        />
+      );
       const html = container.innerHTML;
       const structuredData = extractStructuredData(html);
       
@@ -186,8 +186,8 @@ describe('Page Schema Integration Tests', () => {
       expect(localBusinessSchema!.name).toContain('Noordwest-Friesland');
 
       // Verify custom services are included
-      const schemaServices = localBusinessSchema!.hasOfferCatalog.itemListElement.map(
-        (item: any) => item.itemOffered.name
+      const schemaServices = (localBusinessSchema as LocalBusinessSchemaShape).hasOfferCatalog.itemListElement.map(
+        (item) => item.itemOffered.name
       );
       expect(schemaServices).toContain('Tuinonderhoud');
       expect(schemaServices).toContain('Groendaken');
@@ -196,22 +196,14 @@ describe('Page Schema Integration Tests', () => {
 
   describe('Gardener Profile Pages Schema Validation', () => {
     test('should have valid schema on gardener profile page', () => {
-      const MockGardenerPage = () => {
-        const { LocalBusinessSchema } = require('@/app/components/StructuredData');
-        
-        return (
-          <>
-            <LocalBusinessSchema 
-              serviceType="gardener"
-              url="https://hovenier.frl/hoveniers/test-gardener"
-              nameContext="Test Gardener - Test Company"
-              services={["Tuinonderhoud", "Tuinontwerp", "Bestrating"]}
-            />
-          </>
-        );
-      };
-
-      const { container } = render(<MockGardenerPage />);
+      const { container } = render(
+        <LocalBusinessSchema 
+          serviceType="gardener"
+          url="https://hovenier.frl/hoveniers/test-gardener"
+          nameContext="Test Gardener - Test Company"
+          services={['Tuinonderhoud', 'Tuinontwerp', 'Bestrating']}
+        />
+      );
       const html = container.innerHTML;
       const structuredData = extractStructuredData(html);
       
@@ -240,32 +232,26 @@ describe('Page Schema Integration Tests', () => {
         { serviceType: 'gardener', url: '/hoveniers/test', nameContext: 'Test Gardener' }
       ];
 
-      const schemas: any[] = [];
+      const schemas: LocalBusinessSchemaShape[] = [];
 
       pageConfigurations.forEach(config => {
-        const MockPage = () => {
-          const { LocalBusinessSchema } = require('@/app/components/StructuredData');
-          
-          return (
-            <LocalBusinessSchema 
-              serviceType={config.serviceType as any}
-              url={`https://hovenier.frl${config.url}`}
-              nameContext={config.nameContext}
-            />
-          );
-        };
-
-        const { container } = render(<MockPage />);
+        const { container } = render(
+          <LocalBusinessSchema 
+            serviceType={config.serviceType as keyof typeof SERVICE_VALIDATION | 'gardener' | undefined}
+            url={`https://hovenier.frl${config.url}`}
+            nameContext={config.nameContext}
+          />
+        );
         const html = container.innerHTML;
         const structuredData = extractStructuredData(html);
         const localBusinessSchema = findLocalBusinessSchema(structuredData);
         
         expect(localBusinessSchema).toBeTruthy();
-        schemas.push(localBusinessSchema);
+        schemas.push(localBusinessSchema as LocalBusinessSchemaShape);
       });
 
       // Verify core business data is identical across all schemas
-      const coreBusinessFields = [
+      const coreBusinessFields: Array<keyof LocalBusinessSchemaShape> = [
         '@id',
         'legalName',
         'currenciesAccepted',
@@ -289,19 +275,16 @@ describe('Page Schema Integration Tests', () => {
 
     test('should have consistent provider information in offer catalogs', () => {
       const { container } = render(
-        (() => {
-          const { LocalBusinessSchema } = require('@/app/components/StructuredData');
-          return <LocalBusinessSchema url="https://hovenier.frl/test" />;
-        })()
+        <LocalBusinessSchema url="https://hovenier.frl/test" />
       );
 
       const html = container.innerHTML;
       const structuredData = extractStructuredData(html);
       const localBusinessSchema = findLocalBusinessSchema(structuredData);
       
-      const offers = localBusinessSchema!.hasOfferCatalog.itemListElement;
+      const offers = (localBusinessSchema as LocalBusinessSchemaShape).hasOfferCatalog.itemListElement;
       
-      offers.forEach((offer: any) => {
+      offers.forEach((offer) => {
         expect(offer.itemOffered.provider['@id']).toBe('https://hovenier.frl');
         expect(offer.itemOffered.provider.name).toBe('Hovenier.frl');
         expect(offer.itemOffered.provider['@type']).toBe('LocalBusiness');

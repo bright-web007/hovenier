@@ -7,6 +7,7 @@ import GardenerProfile from '../../../components/GardenerProfile'
 import { getGardenerBySlug, getAllGardenerSlugs } from '../../../../lib/gardeners-data'
 import { notFound } from 'next/navigation'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>
@@ -56,6 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function GardenerProfilePage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
+  const t = createTranslator(locale);
   
   // Find gardener by slug
   const gardener = getGardenerBySlug(slug)
@@ -66,15 +68,15 @@ export default async function GardenerProfilePage({ params }: Props) {
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
-    { label: locale === 'en' ? 'Gardeners' : 'Hoveniers', href: localizePath('/hoveniers', locale as SupportedLocale) },
+    { label: t('breadcrumb_home'), href: '/' },
+    { label: t('hoveniers_page.breadcrumb'), href: localizePath('/hoveniers', locale as SupportedLocale) },
     { label: gardener.name }
   ]
 
   // Breadcrumb schema items (needs full URLs and position)
   const breadcrumbSchemaItems = [
     { position: 1, name: 'Home', url: getAbsoluteUrl('/', locale as SupportedLocale) },
-    { position: 2, name: locale === 'en' ? 'Gardeners' : 'Hoveniers', url: getAbsoluteUrl('/hoveniers', locale as SupportedLocale) },
+    { position: 2, name: t('hoveniers_page.breadcrumb'), url: getAbsoluteUrl('/hoveniers', locale as SupportedLocale) },
     { position: 3, name: gardener.name, url: getAbsoluteUrl(`/hoveniers/${slug}`, locale as SupportedLocale) }
   ]
 
@@ -90,7 +92,7 @@ export default async function GardenerProfilePage({ params }: Props) {
       <Navigation locale={locale} />
       <Breadcrumbs items={breadcrumbItems} />
       
-      <GardenerProfile gardener={gardener} locale={locale} />
+      <GardenerProfile gardener={gardener} />
     </>
   )
 }

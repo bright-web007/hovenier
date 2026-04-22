@@ -6,16 +6,21 @@
  */
 
 import { render, screen, fireEvent } from '@testing-library/react';
+import type { ReactNode } from 'react';
 import BlogSidebar from '../../app/components/BlogSidebar';
 import { localizePath } from '../../lib/locale-utils';
 
 // Mock next/link
 jest.mock('next/link', () => {
-  return ({ children, href, className }: any) => (
+  const MockNextLink = ({ children, href, className }: { children: ReactNode; href: string; className?: string }) => (
     <a href={href} className={className}>
       {children}
     </a>
   );
+
+  MockNextLink.displayName = 'MockNextLink';
+
+  return MockNextLink;
 });
 
 // Mock locale-utils
@@ -208,11 +213,9 @@ describe('BlogSidebar', () => {
     });
 
     test('should render contact button with correct href', () => {
-      mockLocalizePath.mockReturnValueOnce('/en/#lead-form');
-      
       render(<BlogSidebar categories={mockCategories} locale="en" />);
       
-      const contactButton = screen.getByText('Gratis Advies →');
+      const contactButton = screen.getByText('Free Advice →');
       expect(contactButton.closest('a')).toHaveAttribute('href', '/en/#lead-form');
     });
   });

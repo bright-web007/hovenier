@@ -4,19 +4,19 @@ import enMessages from '../locales/en/common.json';
 export type TranslatorFn = {
   (key: string): string;
   sub: (prefix: string) => Record<string, string>;
-  raw: (key: string) => any;
+  raw: (key: string) => unknown;
 };
 
-const messageMap: Record<string, Record<string, any>> = {
+const messageMap: Record<string, Record<string, unknown>> = {
   nl: nlMessages,
   en: enMessages,
 };
 
-function resolve(messages: Record<string, any>, key: string): any {
+function resolve(messages: Record<string, unknown>, key: string): unknown {
   const keys = key.split('.');
-  let value: any = messages;
+  let value: unknown = messages;
   for (const k of keys) {
-    value = value?.[k];
+    value = (value as Record<string, unknown>)?.[k];
   }
   return value;
 }
@@ -43,8 +43,8 @@ export function createTranslator(locale: string): TranslatorFn {
     if (!obj || typeof obj !== 'object') return {};
 
     const result: Record<string, string> = {};
-    const flatten = (current: any, path: string) => {
-      for (const [k, v] of Object.entries(current)) {
+    const flatten = (current: unknown, path: string) => {
+      for (const [k, v] of Object.entries(current as Record<string, unknown>)) {
         const newPath = path ? `${path}_${k}` : k;
         if (typeof v === 'string') {
           result[newPath] = v;
@@ -57,7 +57,7 @@ export function createTranslator(locale: string): TranslatorFn {
     return result;
   };
 
-  t.raw = (key: string): any => resolve(messages, key);
+  t.raw = (key: string): unknown => resolve(messages, key);
 
   return t;
 }

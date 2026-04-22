@@ -4,6 +4,7 @@ import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import { LocalBusinessSchema } from '../../components/StructuredData';
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/i18n';
 import { regionHubs, standaloneRegions } from '@/lib/regions-hierarchy';
 import Link from 'next/link';
 import ImageComponent from '@/app/components/ImageComponent';
@@ -144,12 +145,12 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = translations[(locale as 'nl' | 'en')] ?? translations.nl;
+  const ti = createTranslator(locale);
 
   return {
-    title: locale === 'en' ? 'Gardeners by Region in Friesland | Hovenier.frl' : 'Hoveniers per Regio in Friesland | Hovenier.frl',
-    description: locale === 'en' ? 'Find local gardeners in all regions of Friesland. From Northwest Friesland to Southwest Friesland - discover which garden specialists are active in your region.' : 'Vind lokale hoveniers in alle regio\'s van Friesland. Van Noordwest-Friesland tot Zuidwest-Friesland - ontdek welke tuinspecialisten actief zijn in jouw regio.',
-    keywords: locale === 'en' ? 'gardener by region, Friesland gardeners, local gardener, region gardener, Frisian municipalities' : 'hovenier per regio, Friesland hoveniers, lokale tuinman, regio hovenier, Friese gemeenten',
+    title: ti('regio_page.meta_title'),
+    description: ti('regio_page.meta_description'),
+    keywords: ti('regio_page.meta_keywords'),
     alternates: getLocaleAlternates('/regio', locale as SupportedLocale),
   }
 }
@@ -167,6 +168,7 @@ export default async function RegioLandingPage({ params }: Props) {
   setRequestLocale(locale)
   const isEn = locale === 'en';
   const t = translations[(locale as 'nl' | 'en')] ?? translations.nl;
+  const ti = createTranslator(locale);
 
   // English translations for region data
   const hubTranslations: Record<string, { name: string; description: string; intro: string }> = {
@@ -200,8 +202,8 @@ export default async function RegioLandingPage({ params }: Props) {
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: 'Home', href: localizePath('/', locale as SupportedLocale) },
-    { label: locale === 'en' ? 'Regions' : 'Regio\'s', href: localizePath('/regio', locale as SupportedLocale) }
+    { label: ti('breadcrumb_home'), href: localizePath('/', locale as SupportedLocale) },
+    { label: ti('regio_page.breadcrumb_regions'), href: localizePath('/regio', locale as SupportedLocale) }
   ];
 
   return (

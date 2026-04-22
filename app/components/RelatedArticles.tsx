@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export interface Article {
   id: string;
@@ -44,10 +45,12 @@ export default function RelatedArticles({
             <Link href={`/articles/${article.slug}`} className="related-article-link">
               <div className="related-article-image">
                 {article.imageUrl ? (
-                  <img
+                  <Image
                     src={article.imageUrl}
                     alt={article.title}
                     className="related-article-img"
+                    fill
+                    unoptimized
                   />
                 ) : (
                   <div className="related-article-placeholder">

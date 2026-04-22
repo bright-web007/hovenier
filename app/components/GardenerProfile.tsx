@@ -5,10 +5,9 @@ import styles from './GardenerProfile.module.css'
 
 interface GardenerProfileProps {
   gardener: Gardener
-  locale: string
 }
 
-export default function GardenerProfile({ gardener, locale }: GardenerProfileProps) {
+export default function GardenerProfile({ gardener }: GardenerProfileProps) {
   return (
     <main className={styles.main}>
       <div className={styles.container}>

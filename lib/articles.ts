@@ -114,31 +114,43 @@ function estimateReadTime(rawReadTime: unknown, body: string) {
   return Math.max(3, Math.ceil(words / 180));
 }
 
-function mapMuseArticle(article: any, index: number): ArticleRecord {
+function mapMuseArticle(article: Record<string, unknown>, index: number): ArticleRecord {
   const body = typeof article.bodyText === 'string' ? article.bodyText : '';
+    const category = (article.category as Record<string, unknown> | undefined) ?? {};
+    const tags = Array.isArray(article.tags)
+      ? article.tags
+          .map((tag) => {
+            const tagRecord = tag as Record<string, unknown>;
+            return typeof tagRecord.name === 'string' ? tagRecord.name : tagRecord.slug;
+          })
+          .filter((tag): tag is string => typeof tag === 'string' && tag.length > 0)
+      : [];
   const excerpt =
     typeof article.dek === 'string' && article.dek.trim().length > 0
       ? article.dek.trim()
       : body.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 180);
 
   return {
-    id: article.articleId ?? article.externalRef ?? article.urlSlug ?? `article-${index}`,
-    slug: article.urlSlug,
-    title: article.headline,
+      id: String(article.articleId ?? article.externalRef ?? article.urlSlug ?? `article-${index}`),
+      slug: typeof article.urlSlug === 'string' ? article.urlSlug : `article-${index}`,
+      title: typeof article.headline === 'string' ? article.headline : 'Artikel',
     excerpt,
     body,
     category: {
-      name: article.category?.name ?? 'Tips',
-      slug: article.category?.slug ?? 'tips',
+        name: typeof category.name === 'string' ? category.name : 'Tips',
+        slug: typeof category.slug === 'string' ? category.slug : 'tips',
     },
     readTime: estimateReadTime(article.readTime, body),
-    publishedAt: article.publishedAt ?? new Date().toISOString(),
-    updatedAt: article.updatedAt ?? article.publishedAt ?? new Date().toISOString(),
+      publishedAt: typeof article.publishedAt === 'string' ? article.publishedAt : new Date().toISOString(),
+      updatedAt:
+        typeof article.updatedAt === 'string'
+          ? article.updatedAt
+          : typeof article.publishedAt === 'string'
+            ? article.publishedAt
+            : new Date().toISOString(),
     featured: index === 0,
     image: '/images/tuinontwerp-hero.jpg',
-    tags: Array.isArray(article.tags)
-      ? article.tags.map((tag: { name?: string; slug?: string }) => tag.name || tag.slug).filter(Boolean)
-      : [],
+      tags,
   };
 }
 
@@ -185,7 +197,10 @@ export const getArticles = cache(async (): Promise<ArticleRecord[]> => {
   try {
     const articles = await createMuseCMSClient().fetchAllPosts(24);
     const normalized = articles
-      .filter((article: any) => article.urlSlug && article.headline)
+      .filter((article: unknown) => {
+        const a = article as Record<string, unknown>;
+        return a.urlSlug && a.headline;
+      })
       .map(mapMuseArticle);
 
     return normalized.length > 0 ? normalized : FALLBACK_ARTICLES;

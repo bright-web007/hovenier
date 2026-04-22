@@ -1,23 +1,9 @@
-import { getAbsoluteUrl, localizePath, type SupportedLocale } from './locale-utils';
+import { getAbsoluteUrl, type SupportedLocale } from './locale-utils';
+import { createTranslator } from './translator';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl';
 
 // Create translator function for SEO utilities
-function createSeoTranslator(locale: string) {
-  try {
-    const translations = require(`../locales/${locale}/common.json`);
-    return (key: string) => {
-      const keys = key.split('.');
-      let result = translations;
-      for (const k of keys) {
-        result = result?.[k];
-      }
-      return result || key;
-    };
-  } catch (error) {
-    return (key: string) => key;
-  }
-}
 
 export interface SEOConfig {
   title: string;
@@ -69,7 +55,7 @@ export function generateBreadcrumbs(
   const pathSegments = path.split('/').filter(Boolean);
   let currentPath = '';
   
-  pathSegments.forEach((segment, index) => {
+  pathSegments.forEach((segment) => {
     currentPath += `/${segment}`;
     const label = customLabels?.[segment] || segment.charAt(0).toUpperCase() + segment.slice(1);
     
@@ -89,7 +75,7 @@ export function getDefaultSEOConfig(
   locale: string,
   path: string = ''
 ): Partial<SEOConfig> {
-  const t = createSeoTranslator(locale);
+  const t = createTranslator(locale);
   
   return {
     title: t('seo.default.title'),

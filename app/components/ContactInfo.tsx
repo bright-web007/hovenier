@@ -1,18 +1,19 @@
 'use client'
 
 import styles from './Contact.module.css'
+import { createTranslator } from '@/i18n'
 
 interface ContactInfoProps {
   locale: string
 }
 
 export default function ContactInfo({ locale }: ContactInfoProps) {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale);
 
   return (
     <div className={styles.contactCard}>
       <h3 className={styles.contactCardTitle}>
-        {isEn ? 'Direct Contact' : 'Direct Contact'}
+        {t('contact_page.direct_contact')}
       </h3>
       <div className={styles.contactItems}>
         <div className={styles.contactItem}>
@@ -25,7 +26,7 @@ export default function ContactInfo({ locale }: ContactInfoProps) {
           <div className={styles.contactDetails}>
             <h4>Email</h4>
             <p>info@hovenier.frl</p>
-            <p className={styles.contactSubtext}>{isEn ? 'We respond within 24 hours' : 'We reageren binnen 24 uur'}</p>
+            <p className={styles.contactSubtext}>{t('contact_page.respond_time')}</p>
           </div>
         </div>
 
@@ -36,9 +37,9 @@ export default function ContactInfo({ locale }: ContactInfoProps) {
             </svg>
           </div>
           <div className={styles.contactDetails}>
-            <h4>{isEn ? 'Location' : 'Locatie'}</h4>
-            <p>{isEn ? 'Friesland, Netherlands' : 'Friesland, Nederland'}</p>
-            <p className={styles.contactSubtext}>{isEn ? 'Locally based in Friesland' : 'Lokaal gevestigd in Friesland'}</p>
+            <h4>{t('contact_page.location_title')}</h4>
+            <p>{t('contact_page.location_value')}</p>
+            <p className={styles.contactSubtext}>{t('contact_page.location_subtitle')}</p>
           </div>
         </div>
       </div>

@@ -10,6 +10,68 @@ import {
   SERVICE_VALIDATION
 } from './utils/schema-validation';
 
+function buildLocalBusinessSchema(config: typeof HOVENIER_BUSINESS_CONFIG) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': config.contactInfo.website,
+    name: config.name,
+    legalName: config.legalName,
+    description: config.description,
+    url: config.contactInfo.website,
+    sameAs: [config.contactInfo.website],
+    priceRange: config.priceRange,
+    currenciesAccepted: config.currenciesAccepted,
+    paymentAccepted: [...config.paymentAccepted],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: config.address.addressLocality,
+      postalCode: config.address.postalCode,
+      addressRegion: config.address.addressRegion,
+      addressCountry: config.address.addressCountry
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: config.location.latitude,
+      longitude: config.location.longitude
+    },
+    areaServed: {
+      '@type': config.serviceArea.type,
+      name: config.serviceArea.name,
+      containedInPlace: {
+        '@type': 'Country',
+        name: 'Nederland'
+      }
+    },
+    serviceArea: {
+      '@type': 'GeoCircle',
+      geoMidpoint: {
+        '@type': 'GeoCoordinates',
+        latitude: config.location.latitude,
+        longitude: config.location.longitude
+      },
+      geoRadius: config.serviceArea.radius
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Hoveniersdiensten',
+      itemListElement: config.coreServices.map((service, index) => ({
+        '@type': 'Offer',
+        '@id': `${config.contactInfo.website}#service-${index + 1}`,
+        itemOffered: {
+          '@type': 'Service',
+          name: service,
+          provider: {
+            '@type': 'LocalBusiness',
+            '@id': config.contactInfo.website,
+            name: config.legalName
+          }
+        }
+      }))
+    }
+  };
+}
+
 describe('Business Configuration Schema Validation', () => {
   describe('Core Business Config', () => {
     test('should have valid main business configuration', () => {
@@ -89,6 +151,23 @@ describe('Business Configuration Schema Validation', () => {
       expect(SERVICE_SPECIFIC_CONFIGS.tuinonderhoud.name).toContain('Tuinonderhoud');
       expect(SERVICE_SPECIFIC_CONFIGS.tuinontwerp.name).toContain('Tuinontwerp');
       expect(SERVICE_SPECIFIC_CONFIGS['tuin-aanleggen'].name).toContain('Tuin Aanleggen');
+    });
+
+    test('should produce schema-valid LocalBusiness data for the main config', () => {
+      const schema = buildLocalBusinessSchema(HOVENIER_BUSINESS_CONFIG);
+      const isValid = validateLocalBusinessSchema(schema);
+
+      expect(isValid).toBe(true);
+      expect(validateBusinessConfigConsistency(schema)).toEqual([]);
+    });
+
+    test('should satisfy service validation rules for configured service schemas', () => {
+      (Object.keys(SERVICE_VALIDATION) as Array<keyof typeof SERVICE_VALIDATION>).forEach((serviceType) => {
+        const config = SERVICE_SPECIFIC_CONFIGS[serviceType];
+        const schema = buildLocalBusinessSchema(config);
+
+        expect(validateServiceSpecificSchema(schema, serviceType)).toEqual([]);
+      });
     });
   });
 

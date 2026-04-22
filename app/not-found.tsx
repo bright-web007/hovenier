@@ -161,7 +161,7 @@ export default function NotFound() {
                 }}>
                   Ontdek alle tuindiensten van onze gecertificeerde hoveniers
                 </p>
-                <Link href={localizePath('/services', 'nl')} style={{ 
+                <Link href={localizePath('/diensten', 'nl')} style={{ 
                   color: 'var(--sage)', 
                   fontSize: '14px', 
                   fontWeight: '500',

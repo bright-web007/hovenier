@@ -544,7 +544,9 @@
     "breadcrumb_services": "Diensten",
     "breadcrumb_paver": "Stratenmaker",
     "hero_title": "Stratenmaker & Bestrating",
+    "hero_eyebrow": "Diensten",
     "hero_subtitle": "Professionele hardscaping diensten in Friesland",
+    "hero_description": "Van opritten en terrassen tot tuinpaden en keermuren — onze gecertificeerde stratenmakers leveren vakkundige bestrating met duurzame materialen en aandacht voor detail.",
     "expert_title": "Deskundige Bestratingswerken",
     "expert_text_1": "Een stratenmaker legt de basis voor duurzame en esthetisch mooie buitenruimtes. Onze gekwalificeerde specialisten in Friesland combineren technische expertise met oog voor detail voor al uw hardscaping projecten.",
     "expert_text_2": "Van eenvoudige tuinpaden tot complexe opritten en terrassen - we werken uitsluitend met ervaren professionals die bekend zijn met lokale grondcondities en bouwvoorschriften.",
@@ -588,6 +590,7 @@
     "cost_surcharge_label": "Toeslag mogelijk voor:",
     "cost_surcharge_text": "Zeer harde grond, beperkte toegankelijkheid, speciale patronen",
     "process_title": "Het Bestratingsproces",
+    "process_subtitle": "Ons volledige bestratingsproces in 4 stappen",
     "process_step1_title": "Opmeting & Advies",
     "process_step1_text": "Precieze opmeting, bodemonderzoek en advies over materialen en uitvoering.",
     "process_step2_title": "Grondverzet & Fundering",
@@ -1040,6 +1043,28 @@
         "question": "Houden jullie rekening met onderhoudsvriendelijkheid?",
         "answer": "Zeker. We ontwerpen altijd met het gewenste onderhoudsniveau in gedachten en kiezen planten die passen bij uw beschikbare tijd en ervaring."
       }
+    ],
+    "tuin-aanleggen": [
+      {
+        "question": "Wat kost het aanleggen van een tuin per m\u00b2?",
+        "answer": "De kosten voor tuinaanleg variëren sterk afhankelijk van materialen en complexiteit. Gemiddeld rekent u vanaf \u20ac50 per m\u00b2 voor een complete aanleg inclusief beplanting en bestrating."
+      },
+      {
+        "question": "Hoe lang duurt het aanleggen van een tuin?",
+        "answer": "Een gemiddelde tuin van 100-150 m\u00b2 is doorgaans binnen 2 tot 3 weken aangelegd. Grotere of complexere projecten kunnen iets langer duren."
+      },
+      {
+        "question": "Is er garantie op de tuinaanleg?",
+        "answer": "Ja, op al onze aanlegwerkzaamheden geven wij 2 jaar garantie. Dit geldt voor constructieve elementen zoals bestrating en constructies. Voor beplanting geldt een aanplantgarantie van 1 groeiseizoen."
+      },
+      {
+        "question": "In welk seizoen kan mijn tuin het beste worden aangelegd?",
+        "answer": "Tuinaanleg is het hele jaar mogelijk, maar het voorjaar en de herfst zijn de meest gunstige periodes. In deze seizoenen wortelen planten beter en is de bodem goed te bewerken."
+      },
+      {
+        "question": "Kan ik ook een bestaande tuin laten renoveren?",
+        "answer": "Absoluut. Wij verzorgen niet alleen nieuwe tuinen maar ook complete renovaties van bestaande tuinen, inclusief het verwijderen van oude elementen en het vernieuwen van de inrichting."
+      }
     ]
   },
   "related_articles": {
@@ -1157,6 +1182,35 @@
         "category": "Duurzaamheid",
         "readTime": 7,
         "publishedAt": "2024-03-08"
+      }
+    ],
+    "tuin-aanleggen": [
+      {
+        "id": "1",
+        "title": "Hoeveel kost een nieuwe tuin laten aanleggen?",
+        "excerpt": "Alles wat u moet weten over de kosten van professionele tuinaanleg in Friesland.",
+        "slug": "kosten-tuin-aanleggen",
+        "category": "Kosten & Prijzen",
+        "readTime": 5,
+        "publishedAt": "2024-04-10"
+      },
+      {
+        "id": "2",
+        "title": "Stappenplan: van lege grond naar droomtuin",
+        "excerpt": "Een praktische gids voor het aanlegproces van uw nieuwe tuin, stap voor stap uitgelegd.",
+        "slug": "stappenplan-tuin-aanleggen",
+        "category": "Tips & Advies",
+        "readTime": 7,
+        "publishedAt": "2024-03-15"
+      },
+      {
+        "id": "3",
+        "title": "Welke planten passen bij de Friese bodem?",
+        "excerpt": "Ontdek welke beplanting het beste gedijt in Friesland en hoe u de juiste keuzes maakt.",
+        "slug": "planten-friese-bodem",
+        "category": "Beplanting",
+        "readTime": 6,
+        "publishedAt": "2024-02-20"
       }
     ]
   },
@@ -1873,5 +1927,143 @@
         "faq_5_a": "Meestal binnen 24 uur."
       }
     }
+  },
+  "tuinonderhoud_page": {
+    "eyebrow": "Diensten",
+    "title": "Tuinonderhoud in Friesland",
+    "description": "Professioneel tuinonderhoud door ervaren hoveniers. Van wekelijks gras maaien tot seizoensonderhoud — wij zorgen dat uw tuin er het hele jaar door prachtig uitziet.",
+    "stat_price": "\u20ac35+",
+    "stat_price_label": "Per uur",
+    "stat_gardeners": "28",
+    "stat_gardeners_label": "Hoveniers",
+    "stat_rating": "4.8\u2605",
+    "stat_rating_label": "Gemiddeld",
+    "benefits_title": "Wat wij voor u doen",
+    "benefits_subtitle": "Complete tuinverzorging door vakkundige hoveniers",
+    "benefit_1_title": "Gras maaien & verzorging",
+    "benefit_1_desc": "Regelmatig maaien, randjes steken en gazonverzorging voor een perfect groen tapijt het hele seizoen.",
+    "benefit_2_title": "Snoeien & vormgeven",
+    "benefit_2_desc": "Professioneel snoeien van bomen, struiken en hagen volgens de seizoensrichtlijnen voor optimale groei.",
+    "benefit_3_title": "Onkruidbestrijding",
+    "benefit_3_desc": "Effectieve en milieuvriendelijke onkruidbestrijding voor borders, gazons en bestrating.",
+    "benefit_4_title": "Seizoensonderhoud",
+    "benefit_4_desc": "Bladeren harken, winterklaar maken, voorjaarsbeurten en seizoensbeplanting op het juiste moment.",
+    "faq_title": "Veelgestelde vragen over tuinonderhoud",
+    "lead_title": "Vraag een tuinonderhoud offerte aan",
+    "lead_subtitle": "Ontvang binnen 24 uur reacties van ervaren hoveniers in uw gemeente",
+    "related_articles_title": "Gerelateerde artikelen over tuinonderhoud",
+    "breadcrumb_services": "Diensten",
+    "breadcrumb_maintenance": "Tuinonderhoud",
+    "meta_title": "Tuinonderhoud Friesland | Professioneel & Betrouwbaar | Hovenier.frl",
+    "meta_description": "Professioneel tuinonderhoud in Friesland door gecertificeerde hoveniers. Maandelijkse abonnementen of eenmalige klussen. Vanaf \u20ac35/uur \u2014 gratis offerte aanvragen.",
+    "meta_keywords": "tuinonderhoud, tuinonderhoud friesland, tuinonderhoud abonnement, tuinonderhoud bedrijven, tuinonderhoud particulier"
+  },
+  "tuin_aanleggen_page": {
+    "eyebrow": "Diensten",
+    "title": "Tuin Aanleggen in Friesland",
+    "description": "Van kale grond tot uw droomtuin \u2014 onze hoveniers begeleiden u van het eerste ontwerp tot de eindrealisatie. Vakkundige tuinaanleg afgestemd op de Friese omstandigheden.",
+    "process_title": "Het Tuinaanleg Proces",
+    "process_subtitle": "Van eerste gesprek tot oplevering in 4 stappen",
+    "process_step1_title": "Intake & Locatiebezoek",
+    "process_step1_text": "Persoonlijk gesprek over wensen en budget, opname van de tuin en bodemanalyse ter plaatse.",
+    "process_step2_title": "Ontwerp & Offerte",
+    "process_step2_text": "Professioneel tuinontwerp op maat met materiaaladvies en een transparante prijsopgave.",
+    "process_step3_title": "Grondwerk & Aanleg",
+    "process_step3_text": "Grondverzet, drainage, hardscaping, beplanting en gazonwerk door ervaren vakmensen.",
+    "process_step4_title": "Oplevering & Nazorg",
+    "process_step4_text": "Eindafwerking, opruimen en advies voor het onderhoud van uw nieuwe tuin met garantie op het werk.",
+    "faq_title": "Veelgestelde vragen over tuinaanleg",
+    "lead_title": "Gratis Offertes voor Tuinaanleg",
+    "lead_subtitle": "Ontvang binnen 24 uur contact van tot 3 ervaren hoveniers in uw gemeente",
+    "related_articles_title": "Gerelateerde artikelen over tuinaanleg",
+    "breadcrumb_services": "Diensten",
+    "breadcrumb_installation": "Tuin Aanleggen",
+    "meta_title": "Tuin Aanleggen Friesland | Professionele Tuinaanleg | Hovenier.frl",
+    "meta_description": "Laat uw tuin professioneel aanleggen door ervaren hoveniers in Friesland. Van ontwerp tot realisatie \u2014 gratis offertes van gecertificeerde tuinspecialisten.",
+    "meta_keywords": "tuin aanleggen, tuinaanleg, hovenier, friesland, tuinontwerp realisatie"
+  },
+  "tuinontwerp_page": {
+    "eyebrow": "Diensten",
+    "title": "Tuinontwerp in Friesland",
+    "description": "Van conceptschets tot 3D visualisatie — onze tuinarchitecten ontwerpen uw droomtuin. Unieke ontwerpen die perfect passen bij uw wensen, levensstijl en de Friese omgeving.",
+    "stat_price": "€750+",
+    "stat_price_label": "Vanaf prijs",
+    "stat_visual": "3D",
+    "stat_visual_label": "Visualisatie",
+    "stat_designers": "15+",
+    "stat_designers_label": "Ontwerpers",
+    "process_title": "Van idee tot droomtuin",
+    "process_subtitle": "Ons complete ontwerpproces in 4 stappen",
+    "process_step1_title": "Intakegesprek & locatiebezoek",
+    "process_step1_text": "Kennismaking, wensen inventariseren en ter plaatse de mogelijkheden bekijken.",
+    "process_step2_title": "Conceptontwerp & schetsen",
+    "process_step2_text": "Eerste schetsen en concepten op basis van uw wensen en de locatie-eigenschappen.",
+    "process_step3_title": "3D visualisatie & plantenkeuze",
+    "process_step3_text": "Realistische 3D beelden van uw nieuwe tuin plus gedetailleerde plantenselectie.",
+    "process_step4_title": "Definitief ontwerp & realisatie",
+    "process_step4_text": "Technische tekeningen en begeleiding bij de aanleg door onze partner hovenier.",
+    "faq_title": "Veelgestelde vragen",
+    "lead_title": "Vraag een tuinontwerp offerte aan",
+    "lead_subtitle": "Ontvang binnen 24 uur reacties van tuinontwerpers in uw regio",
+    "related_articles_title": "Gerelateerde artikelen over tuinontwerp",
+    "breadcrumb_services": "Diensten",
+    "breadcrumb_design": "Tuinontwerp",
+    "meta_title": "Tuinontwerp Friesland | Professionele Tuinarchitect | Hovenier.frl",
+    "meta_description": "Professionele tuinontwerpen in Friesland. 3D visualisatie, plantenkeuze en complete realisatie. Vanaf €750. Vraag gratis offerte.",
+    "meta_keywords": "tuinontwerp, landschapsarchitect, tuinarchitect, friesland, 3d visualisatie"
+  },
+  "groendak_page": {
+    "eyebrow": "Diensten",
+    "title": "Groendaken in Friesland",
+    "description": "Duurzame groendaken die uw leefomgeving verbeteren. Van extensieve sedum daken tot intensieve daktuinen — onze specialisten zorgen voor vakkundige aanleg met alle benodigde certificaten.",
+    "stat_price": "€85+",
+    "stat_price_label": "Per m²",
+    "stat_warranty": "25jr",
+    "stat_warranty_label": "Garantie",
+    "stat_specialists": "12",
+    "stat_specialists_label": "Specialisten",
+    "lead_title": "Vraag een groendak offerte aan",
+    "lead_subtitle": "Ontvang binnen 24 uur reacties van groendak specialisten inclusief subsidie-advies",
+    "related_articles_title": "Gerelateerde artikelen over groendaken",
+    "breadcrumb_services": "Diensten",
+    "breadcrumb_green_roofs": "Groendaken",
+    "types_title": "Twee hoofdtypes groendaken",
+    "types_subtitle": "Welk groendak past het beste bij uw situatie?",
+    "extensief_title": "Extensief groendak",
+    "extensief_price": "€85 – 110 per m²",
+    "extensief_desc": "Lichte, onderhoudsarme oplossing met sedum en grassen. Perfect voor berging, garages en bedrijfspanden.",
+    "extensief_dikte": "2–15 cm",
+    "extensief_gewicht": "60–150 kg/m²",
+    "extensief_onderhoud": "1–2x per jaar",
+    "extensief_toegankelijk": "Nee",
+    "extensief_beplanting": "Sedum, grassen, kruiden",
+    "intensief_title": "Intensief groendak",
+    "intensief_badge": "Populair",
+    "intensief_price": "€120 – 200 per m²",
+    "intensief_desc": "Volwaardige daktuin die toegankelijk is. Geschikt voor terrassen, tuinen en recreatieve ruimtes.",
+    "intensief_dikte": "15–100+ cm",
+    "intensief_gewicht": "150–500+ kg/m²",
+    "intensief_onderhoud": "Reguliere tuinverzorging",
+    "intensief_toegankelijk": "Ja, bewandelbaar",
+    "intensief_beplanting": "Struiken, bomen, gazon",
+    "spec_dikte": "Substraatdikte",
+    "spec_gewicht": "Gewicht",
+    "spec_onderhoud": "Onderhoud",
+    "spec_toegankelijk": "Toegankelijk",
+    "spec_beplanting": "Beplanting",
+    "benefits_title": "Voordelen van groendaken",
+    "benefits_subtitle": "De meetbare voordelen van een groen dak",
+    "benefit_1_title": "Betere isolatie",
+    "benefit_1_desc": "Tot 30% minder energiekosten door natuurlijke isolatie zomer en winter.",
+    "benefit_2_title": "Waterberging",
+    "benefit_2_desc": "Vermindert afvalwater en voorkomt wateroverlast bij hevige neerval.",
+    "benefit_3_title": "Biodiversiteit",
+    "benefit_3_desc": "Leefruimte voor insecten, vogels en ondersteunt de lokale ecosystemen.",
+    "benefit_4_title": "Waardevermeerdering",
+    "benefit_4_desc": "Verhoogt de waarde van uw eigendom en verbetert het WOZ-gehalte.",
+    "faq_title": "Veelgestelde vragen over groendaken",
+    "meta_title": "Groendak Aanleggen Friesland | Sedum & Extensief Groendak | Hovenier.frl",
+    "meta_description": "Professionele groendaken in Friesland. Extensief sedumdak of intensief groendak — inclusief subsidie-advies. Vanaf €40/m² — vraag gratis offerte aan bij een specialist.",
+    "meta_keywords": "groendak,groendak aanleggen,extensief groendak,groendak subsidie,subsidie groendak,groendak met zonnepanelen,groendak friesland,sedumdak"
   }
 }

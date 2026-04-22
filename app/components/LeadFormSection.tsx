@@ -32,6 +32,7 @@ type LeadFormSectionProps = {
   };
   prefillMunicipality?: string;
   backgroundColor?: string;
+  formBackgroundColor?: string;
 };
 
 export default function LeadFormSection({
@@ -41,6 +42,7 @@ export default function LeadFormSection({
   translations,
   prefillMunicipality,
   backgroundColor = 'var(--cream-light, #F5F1EA)',
+  formBackgroundColor = '#F9F7F2',
 }: LeadFormSectionProps) {
   return (
     <section style={{ backgroundColor, width: '100%' }}>
@@ -64,7 +66,7 @@ export default function LeadFormSection({
         </div>
 
         <div style={{
-          background: '#F9F7F2',
+          background: formBackgroundColor,
           borderRadius: '12px',
           padding: '32px',
           margin: '0 auto',

@@ -1,12 +1,58 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Navigation from '../../../components/Navigation';
-import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../components/RelatedArticles';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { env } from '@/lib/env';
 import { createTranslator } from '@/lib/translator';
+import { TickCircle, Cloud, Heart, DollarCircle } from 'iconsax-reactjs';
+import FaqSection from '@/app/components/FaqSection';
+import LeadFormSection from '@/app/components/LeadFormSection';
+import BenefitsSection from '@/app/components/BenefitsSection';
+
+type RoofTypeCardProps = {
+  title: string;
+  price: string;
+  description: string;
+  specs: { label: string; value: string }[];
+  badge?: string;
+  accentBar?: boolean;
+};
+
+function RoofTypeCard({ title, price, description, specs, badge }: RoofTypeCardProps) {
+  return (
+    <div className="roof-type-card">
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '24px' }}>
+        {badge && (
+          <span style={{ backgroundColor: 'var(--forest)', color: 'var(--white)', fontSize: '11px', fontWeight: 500, letterSpacing: '0.5px', padding: '6px 14px', borderRadius: '20px', textTransform: 'capitalize', whiteSpace: 'nowrap' }}>
+            {badge}
+          </span>
+        )}
+        <h3 style={{ fontFamily: 'var(--heading-font)', fontSize: '26px', lineHeight: '32px', fontWeight: 700, color: 'var(--forest)', margin: 0 }}>
+          {title}
+        </h3>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <span style={{ backgroundColor: '#8AB87A26', borderRadius: '8px', padding: '8px 14px', fontSize: '1rem', fontWeight: 600, color: 'var(--forest)' }}>
+          {price}
+        </span>
+      </div>
+      <p style={{ fontSize: '15px', lineHeight: '24px', fontWeight: 400, color: 'var(--text-mid)', margin: 0 }}>
+        {description}
+      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', borderTop: '1px solid #2A3E2014', paddingTop: '24px' }}>
+        {specs.map(({ label, value }) => (
+          <div key={label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
+            <span style={{ color: 'var(--text-muted)', fontWeight: 400 }}>{label}</span>
+            <span style={{ color: 'var(--forest)', fontWeight: 500 }}>{value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
@@ -31,18 +77,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { locale } = await params;
     const validLocale = locale || defaultLocale;
-    const isEn = validLocale === 'en';
+    const t = createTranslator(validLocale);
 
     return {
-      title: isEn
-        ? 'Green Roof Installation Friesland | Sedum & Extensive Green Roof | Hovenier.frl'
-        : 'Groendak Aanleggen Friesland | Sedum & Extensief Groendak | Hovenier.frl',
-      description: isEn
-        ? 'Professional green roofs in Friesland. Extensive sedum roof or intensive green roof — including subsidy advice. From €40/m² — request a free quote from a specialist.'
-        : 'Professionele groendaken in Friesland. Extensief sedumdak of intensief groendak — inclusief subsidie-advies. Vanaf €40/m² — vraag gratis offerte aan bij een specialist.',
-      keywords: isEn
-        ? ['green roof', 'green roof installation', 'extensive green roof', 'green roof subsidy', 'green roof solar panels', 'green roof friesland', 'sedum roof']
-        : ['groendak', 'groendak aanleggen', 'extensief groendak', 'groendak subsidie', 'subsidie groendak', 'groendak met zonnepanelen', 'groendak friesland', 'sedumdak'],
+      title: t('groendak_page.meta_title'),
+      description: t('groendak_page.meta_description'),
+      keywords: t('groendak_page.meta_keywords').split(','),
       alternates: getLocaleAlternates('/diensten/groendak', validLocale as SupportedLocale),
     };
   } catch {
@@ -83,8 +123,8 @@ export default async function GroendakPage({ params }: Props) {
   // Breadcrumb navigation
   const breadcrumbItems = [
     { label: t('breadcrumb_home'), href: '/' },
-    { label: isEn ? 'Services' : 'Diensten', href: localizePath('/services', validLocale as SupportedLocale) },
-    { label: isEn ? 'Green Roofs' : 'Groendaken' }
+    { label: t('groendak_page.breadcrumb_services'), href: localizePath('/diensten', validLocale as SupportedLocale) },
+    { label: t('groendak_page.breadcrumb_green_roofs') }
   ];
 
   // Prepare translations for the lead form
@@ -117,201 +157,6 @@ export default async function GroendakPage({ params }: Props) {
 
   return (
     <>
-      <Navigation locale={validLocale} translations={navTranslations} />
-      <Breadcrumbs items={breadcrumbItems} />
-
-      <main>
-        {/* Hero Section */}
-        <section className="section">
-          <div className="section-inner">
-            <div className="service-hero">
-              <div className="service-hero-content">
-                <div className="service-hero-image">
-                  <Image
-                    src="/images/green-roof.png"
-                    alt={isEn ? "Professional green roof installed in Friesland" : "Professioneel groendak aangelegd in Friesland"}
-                    width={800}
-                    height={600}
-                    className="service-hero-image-photo"
-                  />
-                </div>
-                <div className="service-hero-text">
-                  <h1 className="service-hero-title">{isEn ? 'Green Roofs in Friesland' : 'Groendaken in Friesland'}</h1>
-                  <p className="service-hero-description">
-                    {isEn
-                      ? 'Sustainable green roofs that improve your living environment. From extensive sedum roofs to intensive roof gardens — our specialists ensure expert installation with all required certifications.'
-                      : 'Duurzame groendaken die uw leefomgeving verbeteren. Van extensieve sedum daken tot intensieve daktuin - onze specialisten zorgen voor vakkundige aanleg met alle benodigde certificaten.'}
-                  </p>
-                  <div className="service-hero-stats">
-                    <div className="service-stat">
-                      <span className="service-stat-number">€85+</span>
-                      <span className="service-stat-label">{isEn ? 'per m²' : 'per m²'}</span>
-                    </div>
-                    <div className="service-stat">
-                      <span className="service-stat-number">{isEn ? '25yr' : '25jr'}</span>
-                      <span className="service-stat-label">{isEn ? 'warranty' : 'garantie'}</span>
-                    </div>
-                    <div className="service-stat">
-                      <span className="service-stat-number">12</span>
-                      <span className="service-stat-label">{isEn ? 'specialists' : 'specialisten'}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Types of Green Roofs */}
-        <section className="section section-alt">
-          <div className="section-inner">
-            <div className="section-header-row section-centered">
-              <h2 className="section-title">{isEn ? 'Two main types of green roofs' : 'Twee hoofdtypes groendaken'}</h2>
-              <p className="section-sub">{isEn ? 'Which green roof suits your situation best?' : 'Welk groendak past het beste bij uw situatie?'}</p>
-            </div>
-
-            <div className="greenroof-types">
-              <div className="greenroof-type-card">
-                <div className="greenroof-type-header">
-                  <h3 className="greenroof-type-title">{isEn ? 'Extensive green roof' : 'Extensief groendak'}</h3>
-                  <p className="greenroof-type-price">€85-110 {isEn ? 'per m²' : 'per m²'}</p>
-                </div>
-                <div className="greenroof-type-content">
-                  <p className="greenroof-type-description">
-                    {isEn ? 'Light, low-maintenance solution with sedum and grasses. Perfect for sheds, garages and commercial buildings.' : 'Lichte, onderhoudsarme oplossing met sedum en grassen. Perfect voor berging, garages en bedrijfspanden.'}
-                  </p>
-                  <ul className="greenroof-type-features">
-                    <li>{isEn ? 'Substrate depth: 2-15 cm' : 'Substraatdikte: 2-15 cm'}</li>
-                    <li>{isEn ? 'Weight: 60-150 kg/m²' : 'Gewicht: 60-150 kg/m²'}</li>
-                    <li>{isEn ? 'Maintenance: 1-2x per year' : 'Onderhoud: 1-2x per jaar'}</li>
-                    <li>{isEn ? 'Not accessible for people' : 'Niet toegankelijk voor personen'}</li>
-                    <li>{isEn ? 'Sedum, grasses, herbs' : 'Sedum, grassen, kruiden'}</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="greenroof-type-card greenroof-type-card-popular">
-                <div className="greenroof-type-popular">{isEn ? 'Popular' : 'Populair'}</div>
-                <div className="greenroof-type-header">
-                  <h3 className="greenroof-type-title">{isEn ? 'Intensive green roof' : 'Intensief groendak'}</h3>
-                  <p className="greenroof-type-price">€120-200 {isEn ? 'per m²' : 'per m²'}</p>
-                </div>
-                <div className="greenroof-type-content">
-                  <p className="greenroof-type-description">
-                    {isEn ? 'Full-fledged roof garden that is accessible. Suitable for terraces, gardens and recreational spaces.' : 'Volwaardige daktuin die toegankelijk is. Geschikt voor terrassen, tuinen en recreatieve ruimtes.'}
-                  </p>
-                  <ul className="greenroof-type-features">
-                    <li>{isEn ? 'Substrate depth: 15-100+ cm' : 'Substraatdikte: 15-100+ cm'}</li>
-                    <li>{isEn ? 'Weight: 150-500+ kg/m²' : 'Gewicht: 150-500+ kg/m²'}</li>
-                    <li>{isEn ? 'Maintenance: regular garden care' : 'Onderhoud: reguliere tuinverzorging'}</li>
-                    <li>{isEn ? 'Accessible and walkable' : 'Toegankelijk en bewandelbaar'}</li>
-                    <li>{isEn ? 'Shrubs, trees, lawn possible' : 'Struiken, bomen, gazon mogelijk'}</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Benefits Section */}
-        <section className="section">
-          <div className="section-inner">
-            <div className="section-header-row section-centered">
-              <h2 className="section-title">{isEn ? 'Benefits of green roofs' : 'Voordelen van groendaken'}</h2>
-              <p className="section-sub">{isEn ? 'Why are more and more people choosing a green roof?' : 'Waarom kiezen steeds meer mensen voor een groendak?'}</p>
-            </div>
-
-            <div className="service-features-grid">
-              <div className="service-feature">
-                <div className="service-feature-icon">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3 className="service-feature-title">{isEn ? 'Better insulation' : 'Betere isolatie'}</h3>
-                <p className="service-feature-description">
-                  {isEn ? 'Up to 30% less energy costs through natural insulation in summer and winter.' : 'Tot 30% minder energiekosten door natuurlijke isolatie zomer en winter.'}
-                </p>
-              </div>
-
-              <div className="service-feature">
-                <div className="service-feature-icon">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                  </svg>
-                </div>
-                <h3 className="service-feature-title">{isEn ? 'Water retention' : 'Waterberging'}</h3>
-                <p className="service-feature-description">
-                  {isEn ? 'Reduces wastewater and prevents flooding during heavy rainfall.' : 'Vermindert afvalwater en voorkomt wateroverlast bij hevige regenval.'}
-                </p>
-              </div>
-
-              <div className="service-feature">
-                <div className="service-feature-icon">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
-                </div>
-                <h3 className="service-feature-title">{isEn ? 'Biodiversity' : 'Biodiversiteit'}</h3>
-                <p className="service-feature-description">
-                  {isEn ? 'Habitat for insects, birds and supports local ecosystems.' : 'Leefruimte voor insecten, vogels en ondersteunt de lokale ecosystemen.'}
-                </p>
-              </div>
-
-              <div className="service-feature">
-                <div className="service-feature-icon">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                  </svg>
-                </div>
-                <h3 className="service-feature-title">{isEn ? 'Value increase' : 'Waardevermeerdering'}</h3>
-                <p className="service-feature-description">
-                  {isEn ? 'Increases the value of your property and improves its assessment.' : 'Verhoogt de waarde van uw eigendom en verbetert het WOZ-gehalte.'}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="section section-alt">
-          <div className="section-inner">
-            <div className="section-header-row section-centered">
-              <h2 className="section-title">{isEn ? 'Frequently asked questions' : 'Veelgestelde vragen'}</h2>
-            </div>
-
-            <div className="faq-grid">
-              {localeFaqs.map((faq: { question: string; answer: string }, index: number) => (
-                <div key={index} className="faq-item">
-                  <h3 className="faq-question">{faq.question}</h3>
-                  <p className="faq-answer">{faq.answer}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Lead Form Section */}
-        <section className="section">
-          <div className="section-inner">
-            <div className="service-form-container">
-              <div className="service-form-header">
-                <h2 className="section-title section-title-centered">{isEn ? 'Request a green roof quote' : 'Vraag een groendak offerte aan'}</h2>
-                <p className="section-sub section-sub-centered">
-                  {isEn ? 'Receive responses from green roof specialists including subsidy advice within 24 hours' : 'Ontvang binnen 24 uur reacties van groendak specialisten inclusief subsidie-advies'}
-                </p>
-              </div>
-              <div className="service-form-content">
-                <NewLeadForm translations={translations} locale={validLocale} />
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* Related Articles */}
-      <RelatedArticles articles={localeArticles} title={isEn ? 'Related articles about green roofs' : 'Gerelateerde artikelen over groendaken'} />
-
       {/* FAQ Schema */}
       <script
         type="application/ld+json"
@@ -380,15 +225,129 @@ export default async function GroendakPage({ params }: Props) {
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
-          url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`
+          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`
         }))}
       />
 
       {/* Local Business Schema for Green Roof Services */}
       <LocalBusinessSchema
         serviceType="groendak"
-        url={`https://hovenier.frl${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`}
+        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`}
       />
+
+      <Navigation locale={validLocale} translations={navTranslations} />
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <main>
+        <section style={{ backgroundColor: '#2A3E20EB', width: '100%', position: 'relative' }}>
+          <Image sizes="100vw" style={{ objectFit: 'cover' }} loading='eager' alt="Green Roof background image" src="/images/green_roof_bg.jpg" fill />
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: '#2A3E20E5', zIndex: 10 }}></div>
+          <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '50.5px 1rem', display: 'flex', flexDirection: 'column', gap: '15.4px', position: 'relative', zIndex: 20 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ width: '22px', height: '.5px', backgroundColor: 'var(--sage)' }} />
+              <span style={{ fontSize: '10px', fontWeight: '500', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--sage)' }}>
+                {t('groendak_page.eyebrow')}
+              </span>
+            </div>
+            <h1 style={{ color: '#F4F0E8', fontSize: '48px', fontWeight: 500, lineHeight: '51.84px', margin: 0 }}>
+              {t('groendak_page.title')}
+            </h1>
+            <p style={{ borderLeft: '2px solid var(--sage)', padding: '16px 20px', backgroundColor: '#FFFFFF0F', color: '#C8DFC0', fontSize: '15px', lineHeight: '24.75px', fontWeight: 300, margin: 0 }}>
+              {t('groendak_page.description')}
+            </p>
+            <div style={{ display: 'flex', gap: '2rem', marginTop: '8.6px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <p style={{ color: '#FFFFFF', fontSize: '24px', fontWeight: 700, margin: 0 }}>{t('groendak_page.stat_price')}</p>
+                <p style={{ color: '#B8C4B0', fontSize: '14px', fontWeight: 400, letterSpacing: '0.5px', textTransform: 'uppercase', margin: 0 }}>
+                  {t('groendak_page.stat_price_label')}
+                </p>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <p style={{ color: '#FFFFFF', fontSize: '24px', fontWeight: 700, margin: 0 }}>{t('groendak_page.stat_warranty')}</p>
+                <p style={{ color: '#B8C4B0', fontSize: '14px', fontWeight: 400, letterSpacing: '0.5px', textTransform: 'uppercase', margin: 0 }}>
+                  {t('groendak_page.stat_warranty_label')}
+                </p>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <p style={{ color: '#FFFFFF', fontSize: '24px', fontWeight: 700, margin: 0 }}>{t('groendak_page.stat_specialists')}</p>
+                <p style={{ color: '#B8C4B0', fontSize: '14px', fontWeight: 400, letterSpacing: '0.5px', textTransform: 'uppercase', margin: 0 }}>
+                  {t('groendak_page.stat_specialists_label')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>   
+
+        <section style={{ backgroundColor: 'var(--cream-dark)', width: '100%' }}>
+          <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '80px 1rem', display: 'flex', flexDirection: 'column', gap: '48px' }}>
+            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <h2 style={{ fontFamily: 'var(--heading-font)', fontSize: '44px', fontWeight: 700, color: 'var(--forest-deep)', margin: 0, letterSpacing: '-0.44px' }}>
+                {t('groendak_page.types_title')}
+              </h2>
+              <p style={{ fontSize: '15px', lineHeight: '26px', color: 'var(--text-muted)', margin: 0, fontWeight: 400 }}>
+                {t('groendak_page.types_subtitle')}
+              </p>
+            </div>
+
+            <div className="grid-responsive-2-sm" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '32px' }}>
+              <RoofTypeCard
+                title={t('groendak_page.extensief_title')}
+                price={t('groendak_page.extensief_price')}
+                description={t('groendak_page.extensief_desc')}
+                accentBar
+                specs={[
+                  { label: t('groendak_page.spec_dikte'), value: t('groendak_page.extensief_dikte') },
+                  { label: t('groendak_page.spec_gewicht'), value: t('groendak_page.extensief_gewicht') },
+                  { label: t('groendak_page.spec_onderhoud'), value: t('groendak_page.extensief_onderhoud') },
+                  { label: t('groendak_page.spec_toegankelijk'), value: t('groendak_page.extensief_toegankelijk') },
+                  { label: t('groendak_page.spec_beplanting'), value: t('groendak_page.extensief_beplanting') },
+                ]}
+              />
+              <RoofTypeCard
+                title={t('groendak_page.intensief_title')}
+                price={t('groendak_page.intensief_price')}
+                description={t('groendak_page.intensief_desc')}
+                badge={t('groendak_page.intensief_badge')}
+                specs={[
+                  { label: t('groendak_page.spec_dikte'), value: t('groendak_page.intensief_dikte') },
+                  { label: t('groendak_page.spec_gewicht'), value: t('groendak_page.intensief_gewicht') },
+                  { label: t('groendak_page.spec_onderhoud'), value: t('groendak_page.intensief_onderhoud') },
+                  { label: t('groendak_page.spec_toegankelijk'), value: t('groendak_page.intensief_toegankelijk') },
+                  { label: t('groendak_page.spec_beplanting'), value: t('groendak_page.intensief_beplanting') },
+                ]}
+              />
+            </div>
+          </div>
+        </section>
+
+        <BenefitsSection
+          title={t('groendak_page.benefits_title')}
+          subtitle={t('groendak_page.benefits_subtitle')}
+          benefits={[
+            { icon: <TickCircle size={24} color="#FFFFFF" variant="Linear" />, title: t('groendak_page.benefit_1_title'), description: t('groendak_page.benefit_1_desc') },
+            { icon: <Cloud size={24} color="#FFFFFF" variant="Linear" />, title: t('groendak_page.benefit_2_title'), description: t('groendak_page.benefit_2_desc') },
+            { icon: <Heart size={24} color="#FFFFFF" variant="Linear" />, title: t('groendak_page.benefit_3_title'), description: t('groendak_page.benefit_3_desc') },
+            { icon: <DollarCircle size={24} color="#FFFFFF" variant="Linear" />, title: t('groendak_page.benefit_4_title'), description: t('groendak_page.benefit_4_desc') },
+          ]}
+        />
+
+        <FaqSection
+          title={t('groendak_page.faq_title')}
+          faqs={localeFaqs}
+        />
+
+        <LeadFormSection
+          title={t('groendak_page.lead_title')}
+          subtitle={t('groendak_page.lead_subtitle')}
+          locale={validLocale}
+          backgroundColor="#EDE9E0"
+          formBackgroundColor="#FFFFFF"
+          translations={translations}
+        />
+      </main>
+
+      {/* Related Articles */}
+      <RelatedArticles articles={localeArticles} title={t('groendak_page.related_articles_title')} />
     </>
   );
 }

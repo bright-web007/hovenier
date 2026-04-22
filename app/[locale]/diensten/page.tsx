@@ -305,7 +305,7 @@ export default async function ServicesPage({ params }: Props) {
             </section>
 
             {/* Quote Section */}
-            <section>
+            <section id="quote-form">
               <div style={{ 
                 background: 'var(--white)', 
                 borderRadius: '16px', 

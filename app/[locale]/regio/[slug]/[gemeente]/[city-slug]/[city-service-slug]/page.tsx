@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation';
 import { Cormorant_Garamond } from 'next/font/google';
 import LeadFormSection from "@/app/components/LeadFormSection";
 import { BreadcrumbSchema } from "@/app/components/StructuredData";
+import FaqSection from "@/app/components/FaqSection";
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['400', '600', '700'], display: 'swap' });
 
@@ -496,53 +497,13 @@ const Page = async ({ params }: Props) => {
             </div>
         </section>  
 
-        <section style={{ backgroundColor: 'var(--cream)', width: '100%' }}>
-            <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '80px 1rem', display: 'flex', flexDirection: 'column', gap: '48px' }}>
-              <h2 style={{
-                fontFamily: 'var(--heading-font)',
-                fontSize: '32px',
-                fontWeight: '700',
-                color: 'var(--forest-deep)',
-                margin: 0,
-                letterSpacing: '-0.44px',
-                textAlign: 'center',
-              }}>
-                {interpolate(t('city_service_page.faq_title'))}
-              </h2>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                {Array.from({ length: faqCount }, (_, i) => i + 1).map((n) => (
-                  <div key={n} style={{
-                    border: '1px solid #2A3E201F',
-                    padding: '25px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '12px',
-                    borderRadius: '12px',
-                    backgroundColor: '#FFFFFF',
-                  }}>
-                    <p style={{
-                      fontSize: '18px',
-                      fontWeight: '700',
-                      color: 'var(--forest)',
-                      margin: 0,
-                    }}>
-                      {ov(`faq_${n}_q`, `city_service_page.${serviceSlug}.faq_${n}_q`)}
-                    </p>
-                    <p style={{
-                      fontSize: '15px',
-                      lineHeight: '24px',
-                      color: 'var(--text-mid)',
-                      margin: 0,
-                      fontWeight: 400,
-                    }}>
-                      {ov(`faq_${n}_a`, `city_service_page.${serviceSlug}.faq_${n}_a`)}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-        </section>  
+        <FaqSection
+          title={interpolate(t('city_service_page.faq_title'))}
+          faqs={Array.from({ length: faqCount }, (_, i) => i + 1).map((n) => ({
+            question: ov(`faq_${n}_q`, `city_service_page.${serviceSlug}.faq_${n}_q`),
+            answer: ov(`faq_${n}_a`, `city_service_page.${serviceSlug}.faq_${n}_a`),
+          }))}
+        />
 
         <LeadFormSection
           title={interpolate(t('city_service_page.lead_title'))}

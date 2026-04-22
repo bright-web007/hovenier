@@ -8,6 +8,7 @@ import { createTranslator } from '@/i18n';
 import { regionHubs, standaloneRegions } from '@/lib/regions-hierarchy';
 import Link from 'next/link';
 import ImageComponent from '@/app/components/ImageComponent';
+import { Location, Book1, People } from 'iconsax-reactjs';
 
 function BulletItem({ children }: { children: React.ReactNode }) {
   return (
@@ -236,29 +237,17 @@ export default async function RegioLandingPage({ params }: Props) {
                 </h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
                   <FeatureCard
-                    icon={
-                      <svg style={{ width: '32px', height: '32px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                      </svg>
-                    }
+                    icon={<Location size={32} color="var(--white)" variant="Linear" />}
                     title={isEn ? 'Short Distance' : 'Korte Afstand'}
                     description={isEn ? 'Lower travel costs and faster service due to proximity' : 'Lagere reiskosten en snellere service door nabijheid'}
                   />
                   <FeatureCard
-                    icon={
-                      <svg style={{ width: '32px', height: '32px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9 12a1 1 0 102 0V6.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 6.414V12z" />
-                      </svg>
-                    }
+                    icon={<Book1 size={32} color="var(--white)" variant="Linear" />}
                     title={isEn ? 'Local Knowledge' : 'Lokale Kennis'}
                     description={isEn ? 'Familiar with soil type, climate, and local regulations' : 'Bekend met bodemsoort, klimaat en lokale voorschriften'}
                   />
                   <FeatureCard
-                    icon={
-                      <svg style={{ width: '32px', height: '32px', color: 'var(--white)' }} fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                      </svg>
-                    }
+                    icon={<People size={32} color="var(--white)" variant="Linear" />}
                     title={isEn ? 'Personal Service' : 'Persoonlijke Service'}
                     description={isEn ? 'Close relationship, better understanding of your needs' : 'Nabije relatie, beter begrip van uw wensen'}
                   />

@@ -14,6 +14,7 @@ export { locales, defaultLocale };
 
 // Helper to get city-specific content or fall back to generic
 type CityOverrideKeys = {
+  meta_title?: string;
   meta_description?: string;
   hero_title?: string;
   hero_intro_1?: string;
@@ -50,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const i = (s: string) => interpolate(s, cityName);
 
   const cityOverride = getCityOverride(t, citySlug);
-  const title = i(t('city_page.meta_title'));
+  const title = cityOverride?.meta_title || i(t('city_page.meta_title'));
   const description = cityOverride?.meta_description || i(t('city_page.meta_description'));
   const pageUrl = getAbsoluteUrl(`/regio/${slug}/${gemeente}/${citySlug}`, validLocale as SupportedLocale);
 

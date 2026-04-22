@@ -297,8 +297,51 @@ export default async function GemeentePage({ params }: Props) {
                   </div>
                 </div>
 
-                {/* Nearby Gemeenten */}
-                {gemeenteData.nearby.length > 0 && (
+                {/* Cities within this municipality */}
+                {gemeenteData.cities && gemeenteData.cities.length > 0 && (
+                  <div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>
+                      {isEn ? 'Cities in' : 'Steden in'} {gemeenteData.name}
+                    </h3>
+                    <div className="city-grid">
+                      {gemeenteData.cities.map((city) => (
+                        <Link
+                          style={{
+                            backgroundColor: 'white',
+                            borderRadius: '8px',
+                            padding: "24px 1rem",
+                            border: '1px solid #2A3E201F',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '100%',
+                            maxWidth: '252px'
+                          }}
+                          key={city.slug}
+                          href={localizePath(`/regio/${slug}/${gemeente}/${city.slug}`, validLocale)}
+                        >
+                          <div style={{ borderRadius: '50%', width: '48px', height: '48px', backgroundColor: 'var(--forest-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                              <path fillRule="evenodd" clipRule="evenodd" d="M6.05997 4.85984C7.63536 3.28446 9.77204 2.39941 12 2.39941C14.2279 2.39941 16.3646 3.28446 17.94 4.85984C19.5154 6.43523 20.4004 8.57191 20.4004 10.7998C20.4004 13.0278 19.5154 15.1645 17.94 16.7398L12 22.6798L6.05997 16.7398C5.27987 15.9598 4.66105 15.0338 4.23886 14.0146C3.81667 12.9954 3.59937 11.903 3.59937 10.7998C3.59937 9.69667 3.81667 8.6043 4.23886 7.5851C4.66105 6.56591 5.27987 5.63987 6.05997 4.85984ZM12 13.1998C12.6365 13.1998 13.2469 12.947 13.697 12.4969C14.1471 12.0468 14.4 11.4364 14.4 10.7998C14.4 10.1633 14.1471 9.55287 13.697 9.10279C13.2469 8.6527 12.6365 8.39984 12 8.39984C11.3635 8.39984 10.753 8.6527 10.3029 9.10279C9.85283 9.55287 9.59997 10.1633 9.59997 10.7998C9.59997 11.4364 9.85283 12.0468 10.3029 12.4969C10.753 12.947 11.3635 13.1998 12 13.1998Z" fill="white" />
+                            </svg>
+                          </div>
+                          <p style={{ color: '#1C3A12', fontSize: '15px', lineHeight: '19.5px', fontWeight: 600, marginBottom: '4px' }}>{city.name}</p>
+                          <p style={{ color: 'var(--forest-mid)', fontSize: '13px', lineHeight: '16px' }}>3 {isEn ? 'gardeners' : 'hoveniers'}</p>
+                        </Link>
+                      ))}
+                    </div>
+                    <p style={{ color: 'var(--forest-mid)', fontSize: '14px', marginTop: '1.5rem' }}>
+                      {isEn ? 'Your city not listed? ' : 'Staat uw stad er niet bij? '}
+                      <Link href={localizePath('/contact', validLocale)} style={{ color: 'var(--forest)', fontWeight: 600, textDecoration: 'none' }}>
+                        {isEn ? 'Contact us →' : 'Neem contact op →'}
+                      </Link>
+                    </p>
+                  </div>
+                )}
+
+                {/* Nearby Gemeenten (only show if no cities) */}
+                {(!gemeenteData.cities || gemeenteData.cities.length === 0) && gemeenteData.nearby.length > 0 && (
                   <div>
                     <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>
                       {isEn ? 'Near' : 'Nabij'} {gemeenteData.name}

@@ -2,7 +2,7 @@ import Navigation from "@/app/components/Navigation";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import { getLocaleAlternates, getAbsoluteUrl, SupportedLocale } from "@/lib/locale-utils";
 import { getRegionHubBySlug, getGemeenteBySlug } from "@/lib/regions-hierarchy";
-import { createTranslator } from '@/i18n';
+import { createTranslator, defaultLocale as _defaultLocale } from '@/i18n';
 import { Metadata } from 'next';
 import Link from "next/link";
 import { notFound } from 'next/navigation';
@@ -81,9 +81,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cityName = formatName(citySlug);
   const serviceName = formatName(serviceSlug);
 
-  const title = isEn
+  const t = createTranslator(validLocale);
+  const serviceOverride = t.raw(`city_service_overrides.${citySlug}.${serviceSlug}`) as Record<string, string> | null;
+  const title = serviceOverride?.meta_title || (isEn
     ? `${serviceName} in ${cityName} | Hovenier.frl`
-    : `${serviceName} in ${cityName} | Hovenier.frl`;
+    : `${serviceName} in ${cityName} | Hovenier.frl`);
   const description = isEn
     ? `Find a reliable specialist for ${serviceName.toLowerCase()} in ${cityName}. Via Hovenier.frl you can easily find experienced gardeners in ${cityName} and surroundings. Compare multiple quotes from local specialists.`
     : `Een betrouwbare specialist voor ${serviceName.toLowerCase()} in ${cityName} vinden hoeft niet ingewikkeld te zijn. Via Hovenier.frl wordt u eenvoudig gekoppeld aan ervaren hoveniers in ${cityName} en omgeving.`;

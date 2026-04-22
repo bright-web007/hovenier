@@ -1512,6 +1512,92 @@
         "tuinontwerp": { "desc": "Krijg hulp van ervaren tuinontwerpers die uw wensen vertalen naar een praktisch en stijlvol ontwerp dat past bij uw tuin en omgeving." },
         "groendak": { "desc": "Wij koppelen u aan specialisten in groendaken voor duurzame oplossingen met voordelen zoals isolatie, wateropvang en een langere levensduur van uw dak." }
       }
+    },
+    "leeuwarden": {
+      "meta_title": "Hovenier Leeuwarden | Lokale Tuinspecialisten via Hovenier FRL"
+    },
+    "bolsward": {
+      "meta_title": "Hovenier Bolsward | Lokale Tuinspecialisten in Súdwest-Fryslân",
+      "meta_description": "Op zoek naar een hovenier in Bolsward? Via Hovenier.frl vergelijkt u hoveniers in Súdwest-Fryslân. Tuinonderhoud, tuinontwerp en groendaken — ontvang gratis offertes van lokale vakmensen.",
+      "hero_intro_1": "Een betrouwbare hovenier in Bolsward vinden hoeft niet moeilijk te zijn. Via Hovenier FRL wordt u snel gekoppeld aan ervaren hoveniers in Bolsward en omgeving. Of het nu gaat om tuinonderhoud, een nieuw tuinontwerp of een groendak — u ontvangt meerdere offertes van vakmensen die passen bij uw project.",
+      "hero_intro_2": "Bolsward is een historische stad in Súdwest-Fryslân met karakteristieke stadstuinen en landelijke erven. De kleigrond en het Friese klimaat vragen om een gerichte aanpak. Hoveniers in ons netwerk begrijpen deze uitdagingen en leveren duurzame oplossingen.",
+      "services": {
+        "tuinonderhoud": { "desc": "Wij koppelen u aan hoveniers in Bolsward voor professioneel tuinonderhoud, afgestemd op de kleigrond en het Friese klimaat." },
+        "tuinontwerp": { "desc": "Krijg hulp van ervaren tuinontwerpers die uw wensen vertalen naar een ontwerp dat past bij de historische sfeer van Bolsward." },
+        "groendak": { "desc": "Wij koppelen u aan specialisten in groendaken voor duurzame oplossingen die isolatie verbeteren en wateroverlast tegengaan." }
+      }
+    },
+    "lemmer": {
+      "meta_title": "Hovenier Lemmer | Lokale Tuinspecialisten in De Friese Meren",
+      "meta_description": "Hovenier nodig in Lemmer? Vergelijk ervaren hoveniers in De Fryske Marren voor tuinonderhoud, tuinontwerp en groendaken. Vraag gratis offertes aan via Hovenier.frl.",
+      "hero_intro_1": "Een betrouwbare hovenier in Lemmer vinden hoeft niet ingewikkeld te zijn. Via Hovenier FRL wordt u eenvoudig gekoppeld aan ervaren hoveniers in Lemmer en omgeving. Of het nu gaat om tuinonderhoud, tuinontwerp of een groendak — u ontvangt snel meerdere offertes.",
+      "hero_intro_2": "Lemmer ligt aan het IJsselmeer in de gemeente De Fryske Marren. De waterrijke omgeving, kleigrond en het kustklimaat stellen specifieke eisen aan tuinen. Hoveniers in ons netwerk kennen deze omstandigheden en bieden passende oplossingen.",
+      "services": {
+        "tuinonderhoud": { "desc": "Wij koppelen u aan hoveniers in Lemmer voor professioneel tuinonderhoud, afgestemd op het waterrijke karakter van de omgeving." },
+        "tuinontwerp": { "desc": "Krijg hulp van ervaren tuinontwerpers die rekening houden met het IJsselmeerkust-klimaat en de lokale bodemgesteldheid." },
+        "groendak": { "desc": "Wij koppelen u aan specialisten in groendaken voor duurzame dakoplossingen in Lemmer en omgeving." }
+      }
+    },
+    "heerenveen": {
+      "meta_title": "Hovenier Heerenveen | Lokale Tuinspecialisten via Hovenier FRL"
+    },
+    "oosterwolde": {
+      "meta_title": "Hovenier Oosterwolde | Tuinspecialisten in Weststellingwerf",
+      "meta_description": "Zoekt u een hovenier in Oosterwolde? Ontdek hoveniers in Ooststellingwerf voor tuinonderhoud, tuinontwerp en groendaken. Vergelijk offertes gratis via Hovenier.frl.",
+      "hero_intro_1": "Een betrouwbare hovenier in Oosterwolde vinden hoeft niet moeilijk te zijn. Via Hovenier FRL wordt u snel gekoppeld aan ervaren hoveniers in Oosterwolde en omgeving. Of het nu gaat om tuinonderhoud, een nieuw tuinontwerp of een groendak — u ontvangt meerdere offertes.",
+      "hero_intro_2": "Oosterwolde ligt in de bosrijke gemeente Ooststellingwerf, grenzend aan Drenthe. De zandgrond en het bosrijke karakter bieden unieke tuinmogelijkheden. Hoveniers in ons netwerk zijn ervaren met natuurvriendelijk tuinieren in deze omgeving.",
+      "services": {
+        "tuinonderhoud": { "desc": "Wij koppelen u aan hoveniers in Oosterwolde voor professioneel tuinonderhoud, afgestemd op de zandgrond en het bosrijke karakter." },
+        "tuinontwerp": { "desc": "Krijg hulp van ervaren tuinontwerpers die uw wensen vertalen naar een ontwerp dat past bij de natuurlijke omgeving van Oosterwolde." },
+        "groendak": { "desc": "Wij koppelen u aan specialisten in groendaken voor duurzame oplossingen in Oosterwolde en de regio Stellingwerven." }
+      }
+    },
+    "gorredijk": {
+      "meta_title": "Hovenier Gorredijk | Tuinspecialisten in Opsterland",
+      "meta_description": "Hovenier gezocht in Gorredijk? Via Hovenier.frl vindt u vakmensen in Opsterland voor tuinonderhoud, tuinontwerp en groendaken. Ontvang gratis offertes van lokale hoveniers.",
+      "hero_intro_1": "Een betrouwbare hovenier in Gorredijk vinden hoeft niet ingewikkeld te zijn. Via Hovenier FRL wordt u eenvoudig gekoppeld aan ervaren hoveniers in Gorredijk en omgeving. Of het nu gaat om tuinonderhoud, tuinontwerp of een groendak — u ontvangt snel meerdere offertes.",
+      "hero_intro_2": "Gorredijk is het hart van de gemeente Opsterland, een bosrijke regio met veel natuurlijke tuinen. De combinatie van zand- en veengrond en het groene karakter bieden unieke uitdagingen. Hoveniers in ons netwerk zijn hier ervaren mee.",
+      "services": {
+        "tuinonderhoud": { "desc": "Wij koppelen u aan hoveniers in Gorredijk voor professioneel tuinonderhoud, afgestemd op de bosrijke omgeving van Opsterland." },
+        "tuinontwerp": { "desc": "Krijg hulp van ervaren tuinontwerpers die uw wensen vertalen naar een natuurlijk ontwerp dat past bij het groene karakter van Gorredijk." },
+        "groendak": { "desc": "Wij koppelen u aan specialisten in groendaken voor duurzame oplossingen in Gorredijk en omgeving." }
+      }
+    },
+    "franeker": {
+      "meta_title": "Hovenier Franeker | Lokale Tuinspecialisten in Súdwest-Fryslân",
+      "meta_description": "Op zoek naar een hovenier in Franeker? Via Hovenier.frl vergelijkt u hoveniers in Waadhoeke. Tuinonderhoud, tuinontwerp en groendaken — ontvang gratis offertes van lokale vakmensen.",
+      "hero_intro_1": "Een betrouwbare hovenier in Franeker vinden hoeft niet moeilijk te zijn. Via Hovenier FRL wordt u snel gekoppeld aan ervaren hoveniers in Franeker en omgeving. Of het nu gaat om tuinonderhoud, een nieuw tuinontwerp of een groendak — u ontvangt meerdere offertes.",
+      "hero_intro_2": "Franeker is een historische grachtenstad in de gemeente Waadhoeke. De compacte stadstuinen en monumentale erven vragen om vakmanschap. Hoveniers in ons netwerk zijn vertrouwd met de karakteristieke tuinen van deze historische stad.",
+      "services": {
+        "tuinonderhoud": { "desc": "Wij koppelen u aan hoveniers in Franeker voor professioneel tuinonderhoud, afgestemd op de historische stadstuinen en het kustklimaat." },
+        "tuinontwerp": { "desc": "Krijg hulp van ervaren tuinontwerpers die de charme van de Franeker grachtenstad vertalen naar uw droomtuin." },
+        "groendak": { "desc": "Wij koppelen u aan specialisten in groendaken voor duurzame dakoplossingen in Franeker en de regio Waadhoeke." }
+      }
+    },
+    "dokkum": {
+      "meta_title": "Hovenier Dokkum | Lokale Tuinspecialisten in Noardeast-Fryslân",
+      "meta_description": "Hovenier nodig in Dokkum? Vergelijk ervaren hoveniers in Noardeast-Fryslân voor tuinonderhoud, tuinontwerp en groendaken. Vraag gratis offertes aan via Hovenier.frl.",
+      "hero_intro_1": "Een betrouwbare hovenier in Dokkum vinden hoeft niet ingewikkeld te zijn. Via Hovenier FRL wordt u eenvoudig gekoppeld aan ervaren hoveniers in Dokkum en omgeving. Of het nu gaat om tuinonderhoud, tuinontwerp of een groendak — u ontvangt snel meerdere offertes.",
+      "hero_intro_2": "Dokkum is een historische vestingstad in Noardeast-Fryslân, bekend om haar bolwerken en karakteristieke stadstuinen. Het Friese klimaat en de kleigrond vragen om lokale expertise. Hoveniers in ons netwerk kennen deze omstandigheden.",
+      "services": {
+        "tuinonderhoud": { "desc": "Wij koppelen u aan hoveniers in Dokkum voor professioneel tuinonderhoud, afgestemd op het historische karakter van de vestingstad." },
+        "tuinontwerp": { "desc": "Krijg hulp van ervaren tuinontwerpers die de unieke sfeer van de vestingstad Dokkum vertalen naar uw tuinontwerp." },
+        "groendak": { "desc": "Wij koppelen u aan specialisten in groendaken voor duurzame oplossingen in Dokkum en de regio Noardeast-Fryslân." }
+      }
+    },
+    "harlingen": {
+      "meta_title": "Hovenier Harlingen | Kustbestendige Tuinen via Hovenier FRL"
+    },
+    "burgum": {
+      "meta_title": "Hovenier Burgum | Tuinspecialisten in Tytsjerksteradiel",
+      "meta_description": "Zoekt u een hovenier in Burgum? Via Hovenier.frl vergelijkt u hoveniers in Tietjerksteradeel. Tuinonderhoud, tuinontwerp en groendaken — ontvang gratis offertes van lokale vakmensen.",
+      "hero_intro_1": "Een betrouwbare hovenier in Burgum vinden hoeft niet moeilijk te zijn. Via Hovenier FRL wordt u snel gekoppeld aan ervaren hoveniers in Burgum en omgeving. Of het nu gaat om tuinonderhoud, een nieuw tuinontwerp of een groendak — u ontvangt meerdere offertes.",
+      "hero_intro_2": "Burgum ligt aan de Burgumermar in de groene gemeente Tietjerksteradeel. De ruime tuinen en het natuurrijke karakter bieden mooie mogelijkheden. Hoveniers in ons netwerk zijn ervaren met natuurvriendelijk tuinieren in deze omgeving.",
+      "services": {
+        "tuinonderhoud": { "desc": "Wij koppelen u aan hoveniers in Burgum voor professioneel tuinonderhoud, afgestemd op de groene omgeving van Tietjerksteradeel." },
+        "tuinontwerp": { "desc": "Krijg hulp van ervaren tuinontwerpers die uw wensen vertalen naar een ontwerp dat past bij de natuurlijke omgeving aan de Burgumermar." },
+        "groendak": { "desc": "Wij koppelen u aan specialisten in groendaken voor duurzame dakoplossingen in Burgum en omgeving." }
+      }
     }
   },
   "city_service_overrides": {
@@ -1926,6 +2012,55 @@
         "faq_5_q": "Hoe snel ontvang ik offertes?",
         "faq_5_a": "Meestal binnen 24 uur."
       }
+    },
+    "leeuwarden": {
+      "tuinonderhoud": { "meta_title": "Tuinonderhoud Leeuwarden | Professioneel Tuinonderhoud via Hovenier FRL" },
+      "tuinontwerp": { "meta_title": "Tuinontwerp Leeuwarden | Ervaren Tuinontwerpers via Hovenier FRL" },
+      "groendak": { "meta_title": "Groendak Leeuwarden | Groendak Specialisten via Hovenier FRL" }
+    },
+    "bolsward": {
+      "tuinonderhoud": { "meta_title": "Tuinonderhoud Bolsward | Professioneel Hoveniersbedrijf via Hovenier FRL" },
+      "tuinontwerp": { "meta_title": "Tuinontwerp Bolsward | Tuin Ontwerpen in Súdwest-Fryslân" },
+      "groendak": { "meta_title": "Groendak Bolsward | Duurzame Groendaken via Hovenier FRL" }
+    },
+    "lemmer": {
+      "tuinonderhoud": { "meta_title": "Tuinonderhoud Lemmer | Professioneel Tuinonderhoud Hovenier FRL" },
+      "tuinontwerp": { "meta_title": "Tuinontwerp Lemmer | Tuin Ontwerpen aan het IJsselmeer" },
+      "groendak": { "meta_title": "Groendak Lemmer | Groendak Aanleggen via Hovenier FRL" }
+    },
+    "heerenveen": {
+      "tuinonderhoud": { "meta_title": "Tuinonderhoud Heerenveen | Professioneel Tuinonderhoud Hovenier FRL" },
+      "tuinontwerp": { "meta_title": "Tuinontwerp Heerenveen | Ervaren Tuinontwerpers Hovenier FRL" },
+      "groendak": { "meta_title": "Groendak Heerenveen | Groendak Specialisten via Hovenier FRL" }
+    },
+    "oosterwolde": {
+      "tuinonderhoud": { "meta_title": "Tuinonderhoud Oosterwolde | Professioneel Tuinonderhoud Hovenier FRL" },
+      "tuinontwerp": { "meta_title": "Tuinontwerp Oosterwolde | Tuin Ontwerpen in Weststellingwerf" },
+      "groendak": { "meta_title": "Groendak Oosterwolde | Duurzame Groendaken Hovenier FRL" }
+    },
+    "gorredijk": {
+      "tuinonderhoud": { "meta_title": "Tuinonderhoud Gorredijk | Professioneel Tuinonderhoud Opsterland" },
+      "tuinontwerp": { "meta_title": "Tuinontwerp Gorredijk | Tuin Ontwerpen in Opsterland" },
+      "groendak": { "meta_title": "Groendak Gorredijk | Groendak Aanleggen via Hovenier FRL" }
+    },
+    "franeker": {
+      "tuinonderhoud": { "meta_title": "Tuinonderhoud Franeker | Professioneel Tuinonderhoud Hovenier FRL" },
+      "tuinontwerp": { "meta_title": "Tuinontwerp Franeker | Tuin Ontwerpen in de Grachtenstad" },
+      "groendak": { "meta_title": "Groendak Franeker | Duurzame Groendaken via Hovenier FRL" }
+    },
+    "dokkum": {
+      "tuinonderhoud": { "meta_title": "Tuinonderhoud Dokkum | Professioneel Tuinonderhoud Noardeast-Fryslân" },
+      "tuinontwerp": { "meta_title": "Tuinontwerp Dokkum | Tuin Ontwerpen in de Vestingstad" },
+      "groendak": { "meta_title": "Groendak Dokkum | Groendak Specialisten Noardeast-Fryslân" }
+    },
+    "harlingen": {
+      "tuinonderhoud": { "meta_title": "Tuinonderhoud Harlingen | Professioneel Tuinonderhoud Waddenkust" },
+      "tuinontwerp": { "meta_title": "Tuinontwerp Harlingen | Tuin Ontwerpen aan de Waddenzee" },
+      "groendak": { "meta_title": "Groendak Harlingen | Duurzame Groendaken aan de Waddenkust" }
+    },
+    "burgum": {
+      "tuinontwerp": { "meta_title": "Tuinontwerp Burgum | Tuin Ontwerpen aan de Burgumermar" },
+      "groendak": { "meta_title": "Groendak Burgum | Duurzame Groendaken in Tytsjerksteradiel" }
     }
   },
   "tuinonderhoud_page": {

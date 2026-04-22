@@ -199,7 +199,7 @@ export default async function TuinAanleggenPage({ params }: Props) {
       />
 
       <LocalBusinessSchema
-        serviceType="tuinonderhoud"
+        serviceType="tuin-aanleggen"
         url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/tuin-aanleggen', validLocale as SupportedLocale)}`}
       />
 

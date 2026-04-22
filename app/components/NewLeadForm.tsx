@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, lazy, useState } from "react";
+import { Suspense, lazy, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { trackLeadFormSubmission } from './GoogleAnalytics';
 import { submitLeadToPrometheus } from '../services/prometheus';
@@ -56,7 +56,8 @@ const TurnstileWidget = lazy(async () => {
 
 export default function NewLeadForm({ translations, locale, prefillMunicipality, serviceType }: LeadFormProps) {
   const t = createTranslator(locale);
-  const [isDevelopment] = useState(() => process.env.NODE_ENV === 'development' || (typeof window !== 'undefined' && window.location.hostname === 'localhost'));
+  const isDevelopment = process.env.NODE_ENV === 'development' ||
+    (typeof window !== 'undefined' && window.location.hostname === 'localhost');
 
   const services = [
     { value: "tuinonderhoud", label: translations.services.tuinonderhoud },
@@ -76,10 +77,13 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
   const [bedrijf, setBedrijf] = useState("");
   const [privacy, setPrivacy] = useState(false);
   const [honeypot, setHoneypot] = useState("");
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(
-    () => (process.env.NODE_ENV === 'development' || (typeof window !== 'undefined' && window.location.hostname === 'localhost')) ? 'dev-bypass' : null
-  );
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    if (isDevelopment) setTurnstileToken('dev-bypass');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 
 

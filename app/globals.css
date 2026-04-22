@@ -3879,6 +3879,15 @@ a { text-decoration: none; color: inherit; }
   color: var(--forest) !important;
 }
 
+.grid-responsive-3-sm {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-responsive-2-sm {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 @media (max-width: 649px) {
   .grid-responsive-3-sm {
     grid-template-columns: 1fr !important;

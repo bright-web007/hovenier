@@ -31,7 +31,7 @@ export default function BenefitsSection({
           </p>
         </div>
 
-        <div className="grid-responsive-2-sm" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '32px' }}>
+        <div className="grid-responsive-2-sm" style={{ gap: '32px' }}>
           {benefits.map((benefit, index) => (
             <div key={index} style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', border: '1px solid #2A3E201F', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ width: '48px', height: '48px', backgroundColor: 'var(--forest-light)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

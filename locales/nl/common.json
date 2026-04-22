@@ -2013,6 +2013,7 @@
     "meta_keywords": "tuinontwerp, landschapsarchitect, tuinarchitect, friesland, 3d visualisatie"
   },
   "groendak_page": {
+    "eyebrow": "Diensten",
     "title": "Groendaken in Friesland",
     "description": "Duurzame groendaken die uw leefomgeving verbeteren. Van extensieve sedum daken tot intensieve daktuinen — onze specialisten zorgen voor vakkundige aanleg met alle benodigde certificaten.",
     "stat_price": "€85+",
@@ -2043,7 +2044,7 @@
     "intensief_dikte": "15–100+ cm",
     "intensief_gewicht": "150–500+ kg/m²",
     "intensief_onderhoud": "Reguliere tuinverzorging",
-    "intensief_toegankelijk": "Ja, bemandelbaar",
+    "intensief_toegankelijk": "Ja, bewandelbaar",
     "intensief_beplanting": "Struiken, bomen, gazon",
     "spec_dikte": "Substraatdikte",
     "spec_gewicht": "Gewicht",
@@ -2051,7 +2052,7 @@
     "spec_toegankelijk": "Toegankelijk",
     "spec_beplanting": "Beplanting",
     "benefits_title": "Voordelen van groendaken",
-    "benefits_subtitle": "Ons complete ontwerpproces in 4 stappen",
+    "benefits_subtitle": "De meetbare voordelen van een groen dak",
     "benefit_1_title": "Betere isolatie",
     "benefit_1_desc": "Tot 30% minder energiekosten door natuurlijke isolatie zomer en winter.",
     "benefit_2_title": "Waterberging",

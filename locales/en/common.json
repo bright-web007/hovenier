@@ -2037,6 +2037,7 @@
     "meta_keywords": "garden design, landscape architect, garden architect, friesland, 3d visualisation"
   },
   "groendak_page": {
+    "eyebrow": "Services",
     "title": "Green Roofs in Friesland",
     "description": "Sustainable green roofs that improve your living environment. From extensive sedum roofs to intensive green roofs — our specialists ensure professional installation with all required certifications.",
     "stat_price": "€85+",
@@ -2075,7 +2076,7 @@
     "spec_toegankelijk": "Accessible",
     "spec_beplanting": "Planting",
     "benefits_title": "Benefits of green roofs",
-    "benefits_subtitle": "Our complete design process in 4 steps",
+    "benefits_subtitle": "The measurable benefits of a green roof",
     "benefit_1_title": "Better insulation",
     "benefit_1_desc": "Up to 30% lower energy costs through natural insulation in summer and winter.",
     "benefit_2_title": "Water retention",

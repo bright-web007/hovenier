@@ -40,14 +40,8 @@ function parseStoredPreferences(value: string | null): ConsentPreferences {
 
 const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) => {
   const [mounted, setMounted] = useState(false);
-  const [consentGiven, setConsentGiven] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return Boolean(localStorage.getItem('cookie_consent_given'));
-  });
-  const [storedPreferences, setStoredPreferences] = useState<ConsentPreferences>(() => {
-    if (typeof window === 'undefined') return defaultPreferences;
-    return parseStoredPreferences(localStorage.getItem('cookie_consent_preferences'));
-  });
+  const [consentGiven, setConsentGiven] = useState(false);
+  const [storedPreferences, setStoredPreferences] = useState<ConsentPreferences>(defaultPreferences);
   const [showDetails, setShowDetails] = useState(false);
   const [pendingPreferences, setPendingPreferences] = useState<ConsentPreferences | null>(null);
 

@@ -2,10 +2,9 @@ import Script from 'next/script';
 import { createTranslator } from '@/i18n';
 
 export default function TermsSchema({ locale = 'nl' }: { locale?: string }) {
-  const isEn = locale === 'en';
   const t = createTranslator(locale);
-  const lang = isEn ? 'en-US' : 'nl-NL';
-  const urlPrefix = isEn ? 'https://hovenier.frl/en' : 'https://hovenier.frl';
+  const lang = locale === 'en' ? 'en-US' : 'nl-NL';
+  const urlPrefix = locale === 'en' ? 'https://hovenier.frl/en' : 'https://hovenier.frl';
   const pageUrl = `${urlPrefix}/algemene-voorwaarden`;
 
   const termsSchema = {

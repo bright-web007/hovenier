@@ -2,13 +2,13 @@
 
 import styles from './Contact.module.css'
 import { createTranslator } from '@/i18n'
+import { localizePath, type SupportedLocale } from '@/lib/locale-utils'
 
 interface ContactFormProps {
   locale: string
 }
 
 export default function ContactForm({ locale }: ContactFormProps) {
-  const isEn = locale === 'en';
   const t = createTranslator(locale);
 
   return (
@@ -104,10 +104,8 @@ export default function ContactForm({ locale }: ContactFormProps) {
       </form>
 
       <p className="form-note">
-        {isEn
-          ? '* Required fields. We respect your privacy - see our '
-          : '* Verplichte velden. We respecteren je privacy - zie ons '}
-        <a href={isEn ? '/en/privacy-beleid' : '/privacy-beleid'}>
+        {t('contact_page.form_privacy_note')}{' '}
+        <a href={localizePath('/privacy-beleid', locale as SupportedLocale)}>
           {t('contact_page.privacy_link')}
         </a>.
       </p>

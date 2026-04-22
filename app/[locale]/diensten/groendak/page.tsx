@@ -21,7 +21,7 @@ type RoofTypeCardProps = {
   accentBar?: boolean;
 };
 
-function RoofTypeCard({ title, price, description, specs, badge, accentBar }: RoofTypeCardProps) {
+function RoofTypeCard({ title, price, description, specs, badge }: RoofTypeCardProps) {
   return (
     <div className="roof-type-card">
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '24px' }}>

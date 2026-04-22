@@ -5,6 +5,7 @@ import Breadcrumbs from '../../../components/Breadcrumbs'
 import RelatedArticles from '../../../components/RelatedArticles';
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
+import { env } from '@/lib/env';
 import { createTranslator } from '@/i18n'
 import Image from 'next/image';
 import BenefitsSection from '@/app/components/BenefitsSection';
@@ -88,14 +89,14 @@ export default async function StratenmakerPage({ params }: Props) {
     <>
       <LocalBusinessSchema
         serviceType="stratenmaker"
-        url={`https://hovenier.frl${localizePath('/diensten/stratenmaker', validLocale as SupportedLocale)}`}
+        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/stratenmaker', validLocale as SupportedLocale)}`}
       />
 
       <BreadcrumbSchema
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
-          url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl${localizePath('/diensten/stratenmaker', validLocale as SupportedLocale)}`
+          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/stratenmaker', validLocale as SupportedLocale)}`
         }))}
       />
 

@@ -1041,6 +1041,28 @@
         "question": "Do you consider maintenance-friendliness?",
         "answer": "Certainly. We always design with the desired maintenance level in mind and choose plants that match your available time and experience."
       }
+    ],
+    "tuin-aanleggen": [
+      {
+        "question": "What does garden installation cost per m\u00b2?",
+        "answer": "The costs for garden installation vary greatly depending on materials and complexity. On average, expect from \u20ac50 per m\u00b2 for a complete installation including planting and paving."
+      },
+      {
+        "question": "How long does it take to install a garden?",
+        "answer": "An average garden of 100-150 m\u00b2 is typically completed within 2 to 3 weeks. Larger or more complex projects may take slightly longer."
+      },
+      {
+        "question": "Is there a guarantee on garden installation?",
+        "answer": "Yes, we provide a 2-year guarantee on all our installation work. This applies to structural elements such as paving and constructions. For planting, a one-growing-season planting guarantee applies."
+      },
+      {
+        "question": "What season is best to have a garden installed?",
+        "answer": "Garden installation is possible year-round, but spring and autumn are the most favourable periods. During these seasons, plants root better and the soil is easier to work with."
+      },
+      {
+        "question": "Can I also have an existing garden renovated?",
+        "answer": "Absolutely. We not only create new gardens but also handle complete renovations of existing gardens, including removing old elements and redesigning the layout."
+      }
     ]
   },
   "related_articles": {
@@ -1158,6 +1180,35 @@
         "category": "Sustainability",
         "readTime": 7,
         "publishedAt": "2024-03-08"
+      }
+    ],
+    "tuin-aanleggen": [
+      {
+        "id": "1",
+        "title": "How much does professional garden installation cost?",
+        "excerpt": "Everything you need to know about the costs of professional garden installation in Friesland.",
+        "slug": "kosten-tuin-aanleggen",
+        "category": "Costs & Prices",
+        "readTime": 5,
+        "publishedAt": "2024-04-10"
+      },
+      {
+        "id": "2",
+        "title": "Step-by-step guide: from empty ground to dream garden",
+        "excerpt": "A practical guide to the installation process of your new garden, explained step by step.",
+        "slug": "stappenplan-tuin-aanleggen",
+        "category": "Tips & Advice",
+        "readTime": 7,
+        "publishedAt": "2024-03-15"
+      },
+      {
+        "id": "3",
+        "title": "Which plants thrive in Frisian soil?",
+        "excerpt": "Discover which planting does best in Friesland and how to make the right choices for your garden.",
+        "slug": "planten-friese-bodem",
+        "category": "Planting",
+        "readTime": 6,
+        "publishedAt": "2024-02-20"
       }
     ]
   },
@@ -1900,8 +1951,91 @@
       }
     }
   },
-  "groendak_page": {
+  "tuinonderhoud_page": {
     "eyebrow": "Services",
+    "title": "Garden Maintenance in Friesland",
+    "description": "Professional garden maintenance by experienced gardeners. From weekly lawn mowing to seasonal maintenance \u2014 we ensure your garden looks beautiful all year round.",
+    "stat_price": "\u20ac35+",
+    "stat_price_label": "Per hour",
+    "stat_gardeners": "28",
+    "stat_gardeners_label": "Gardeners",
+    "stat_rating": "4.8\u2605",
+    "stat_rating_label": "Average rating",
+    "benefits_title": "What we do for you",
+    "benefits_subtitle": "Complete garden care by skilled gardeners",
+    "benefit_1_title": "Lawn mowing & care",
+    "benefit_1_desc": "Regular mowing, edging and lawn care for a perfect green carpet throughout the season.",
+    "benefit_2_title": "Pruning & shaping",
+    "benefit_2_desc": "Professional pruning of trees, shrubs and hedges according to seasonal guidelines for optimal growth.",
+    "benefit_3_title": "Weed control",
+    "benefit_3_desc": "Effective and eco-friendly weed control for borders, lawns and paving.",
+    "benefit_4_title": "Seasonal maintenance",
+    "benefit_4_desc": "Leaf raking, winterizing, spring treatments and seasonal planting at exactly the right time.",
+    "faq_title": "Frequently asked questions about garden maintenance",
+    "lead_title": "Request a garden maintenance quote",
+    "lead_subtitle": "Receive responses from experienced gardeners in your municipality within 24 hours",
+    "related_articles_title": "Related articles about garden maintenance",
+    "breadcrumb_services": "Services",
+    "breadcrumb_maintenance": "Garden Maintenance",
+    "meta_title": "Garden Maintenance Friesland | Professional & Reliable | Hovenier.frl",
+    "meta_description": "Professional garden maintenance in Friesland by certified gardeners. Monthly subscriptions or one-time jobs. From \u20ac35/hour \u2014 request a free quote.",
+    "meta_keywords": "garden maintenance, garden maintenance friesland, garden maintenance subscription, garden maintenance businesses, garden maintenance private"
+  },
+  "tuin_aanleggen_page": {
+    "eyebrow": "Services",
+    "title": "Garden Installation in Friesland",
+    "description": "From bare ground to your dream garden \u2014 our gardeners guide you from the first design to final completion. Professional garden installation tailored to Frisian conditions.",
+    "process_title": "The Garden Installation Process",
+    "process_subtitle": "From first consultation to completion in 4 steps",
+    "process_step1_title": "Intake & Site Visit",
+    "process_step1_text": "Personal consultation about wishes and budget, site survey and soil analysis on location.",
+    "process_step2_title": "Design & Quote",
+    "process_step2_text": "Professional bespoke garden design with material advice and a transparent price proposal.",
+    "process_step3_title": "Groundwork & Installation",
+    "process_step3_text": "Excavation, drainage, hardscaping, planting and lawn work by experienced specialists.",
+    "process_step4_title": "Completion & Aftercare",
+    "process_step4_text": "Final finishing, clean-up and maintenance advice for your new garden with a guarantee on the work.",
+    "faq_title": "Frequently asked questions about garden installation",
+    "lead_title": "Free Quotes for Garden Installation",
+    "lead_subtitle": "Receive contact from up to 3 experienced gardeners in your municipality within 24 hours",
+    "related_articles_title": "Related articles about garden installation",
+    "breadcrumb_services": "Services",
+    "breadcrumb_installation": "Garden Installation",
+    "meta_title": "Garden Installation Friesland | Professional Garden Construction | Hovenier.frl",
+    "meta_description": "Have your garden professionally installed by experienced gardeners in Friesland. From design to realisation \u2014 free quotes from certified garden specialists.",
+    "meta_keywords": "garden installation, garden construction, gardener, friesland, garden design realisation"
+  },
+  "tuinontwerp_page": {
+    "eyebrow": "Services",
+    "title": "Garden Design in Friesland",
+    "description": "From concept sketch to 3D visualisation — our garden architects design your dream garden. Unique designs that perfectly match your wishes, lifestyle and the Frisian environment.",
+    "stat_price": "€750+",
+    "stat_price_label": "Starting price",
+    "stat_visual": "3D",
+    "stat_visual_label": "Visualisation",
+    "stat_designers": "15+",
+    "stat_designers_label": "Designers",
+    "process_title": "From idea to dream garden",
+    "process_subtitle": "Our complete design process in 4 steps",
+    "process_step1_title": "Intake & site visit",
+    "process_step1_text": "Getting acquainted, inventorying wishes and viewing the possibilities on location.",
+    "process_step2_title": "Concept design & sketches",
+    "process_step2_text": "Initial sketches and concepts based on your wishes and the site characteristics.",
+    "process_step3_title": "3D visualisation & plant selection",
+    "process_step3_text": "Realistic 3D images of your new garden plus detailed plant selection.",
+    "process_step4_title": "Final design & realisation",
+    "process_step4_text": "Technical drawings and guidance during construction by our partner gardener.",
+    "faq_title": "Frequently asked questions",
+    "lead_title": "Request a garden design quote",
+    "lead_subtitle": "Receive responses from garden designers in your region within 24 hours",
+    "related_articles_title": "Related articles about garden design",
+    "breadcrumb_services": "Services",
+    "breadcrumb_design": "Garden Design",
+    "meta_title": "Garden Design Friesland | Professional Landscape Architect | Hovenier.frl",
+    "meta_description": "Professional garden designs in Friesland. 3D visualisation, plant selection and complete realisation. From €750. Request a free quote.",
+    "meta_keywords": "garden design, landscape architect, garden architect, friesland, 3d visualisation"
+  },
+  "groendak_page": {
     "title": "Green Roofs in Friesland",
     "description": "Sustainable green roofs that improve your living environment. From extensive sedum roofs to intensive green roofs — our specialists ensure professional installation with all required certifications.",
     "stat_price": "€85+",

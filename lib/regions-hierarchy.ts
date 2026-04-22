@@ -266,6 +266,9 @@ export const gemeentesData: Gemeente[] = [
     nearby: ["sneek", "drachten", "franeker"],
     intro: "Leeuwarden is de bruisende hoofdstad van Friesland, bekend om haar historische binnenstad, groene parken en karakteristieke stadstuinen. Hier vind je hoveniers die gespecialiseerd zijn in zowel moderne stadstuinen als klassieke Friese tuinen.",
     introEn: "Leeuwarden is the vibrant capital of Friesland, known for its historic city center, green parks and characteristic city gardens. Here you will find gardeners who specialize in both modern city gardens and classic Frisian gardens.",
+    cities: [
+      { slug: "leeuwarden", name: "Leeuwarden" },
+    ],
   },
 ];
 

@@ -454,7 +454,7 @@ export default async function RegionHubPage({ params }: Props) {
                     : `Wij koppelen u aan hoveniers in ${standaloneRegion.name} voor professioneel tuinonderhoud, afgestemd op de lokale bodemgesteldheid en het Friese klimaat.`}
                   image="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80"
                   locale={validLocale}
-                  href={`/${validLocale}/diensten/tuinonderhoud`}
+                  href={`/${validLocale}/regio/${slug}/${slug}/${slug}/tuinonderhoud`}
                 />
                 <DienstCard
                   id="tuinontwerp"
@@ -465,7 +465,7 @@ export default async function RegionHubPage({ params }: Props) {
                     : `Krijg hulp van ervaren tuinontwerpers die uw wensen vertalen naar een praktisch en stijlvol ontwerp dat past bij de omgeving van ${standaloneRegion.name}.`}
                   image="https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?w=800&q=80"
                   locale={validLocale}
-                  href={`/${validLocale}/diensten/tuinontwerp`}
+                  href={`/${validLocale}/regio/${slug}/${slug}/${slug}/tuinontwerp`}
                 />
                 <DienstCard
                   id="groendak"
@@ -476,7 +476,7 @@ export default async function RegionHubPage({ params }: Props) {
                     : `Wij koppelen u aan specialisten in groendaken voor duurzame oplossingen met voordelen zoals isolatie, wateropvang en een langere levensduur van uw dak.`}
                   image="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80"
                   locale={validLocale}
-                  href={`/${validLocale}/diensten/groendak`}
+                  href={`/${validLocale}/regio/${slug}/${slug}/${slug}/groendak`}
                 />
               </div>
             </div>

@@ -880,6 +880,48 @@
     "not_found_title": "Regio niet gevonden | Hovenier.frl",
     "gemeente_not_found_title": "Gemeente niet gevonden | Hovenier.frl"
   },
+  "gemeente_page": {
+    "meta_title": "Hovenier in {gemeenteName} | {regionName} | Hovenier.frl",
+    "meta_description": "Vind lokale hoveniers in {gemeenteName}, {regionName}. {intro} Vergelijk lokale tuinspecialisten in deze gemeente.",
+    "meta_keywords": "hovenier {gemeenteNameLower}, {regionNameLower}, lokale tuinman, tuinonderhoud {gemeenteName}",
+    "schema_name_context": "Hoveniers in {gemeenteName}",
+    "hero_title": "Hovenier in {gemeenteName}",
+    "hero_subtitle": "{regionName} • {population} inwoners",
+    "stat_residents": "Inwoners",
+    "stat_nearby": "Naburige Gemeenten",
+    "stat_in_region": "In {regionName}",
+    "cities_title": "Steden in {gemeenteName}",
+    "cities_gardeners": "3 hoveniers",
+    "cities_not_listed": "Staat uw stad er niet bij?",
+    "cities_contact": "Neem contact op →",
+    "nearby_title": "Nabij {gemeenteName}",
+    "services_title": "Populaire Hovenierdiensten in {gemeenteName}",
+    "tuinonderhoud_title": "Tuinonderhoud",
+    "tuinonderhoud_subtitle": "Regulier onderhoud & verzorging",
+    "tuinonderhoud_desc": "Regelmatig onderhoud voor een mooie tuin het hele jaar door",
+    "tuinontwerp_title": "Tuinontwerp",
+    "tuinontwerp_subtitle": "Creatieve tuinconcepten",
+    "tuinontwerp_desc": "Professioneel ontwerp voor uw droomtuin",
+    "stratenmaker_title": "Bestrating",
+    "stratenmaker_subtitle": "Terrassen & tuinpaden",
+    "stratenmaker_desc": "Terrassen, opritten en tuinpaden professioneel aangelegd",
+    "lead_title": "Gratis offerte aanvragen in {gemeenteName}",
+    "lead_subtitle": "Ontvang binnen 24 uur reacties van lokale hovenier specialisten",
+    "nav_more_title": "Meer Hoveniers in {regionName}",
+    "nav_more_subtitle": "Bekijk alle {count} gemeenten in deze regio",
+    "all_regions": "Alle Regio's →",
+    "related_title": "Gerelateerde artikelen voor {gemeenteName}",
+    "article_1_title": "Tuinonderhoud in {gemeenteName}: Tips van lokale hoveniers",
+    "article_1_excerpt": "Praktische tips voor tuinonderhoud in {gemeenteName} van ervaren lokale specialisten.",
+    "article_1_category": "Tuinonderhoud",
+    "article_2_title": "Beste tijd voor tuinaanleg in {regionName}",
+    "article_2_excerpt": "Uitleg over de optimale timing voor tuinaanleg in de regio {regionName}.",
+    "article_2_category": "Tuinaanleg",
+    "article_3_title": "Kosten van hovenierdiensten in Friesland 2024",
+    "article_3_excerpt": "Overzicht van prijzen voor professionele hovenierdiensten in heel Friesland.",
+    "article_3_category": "Kosten",
+    "services_list": ["Tuinonderhoud", "Tuinontwerp", "Bestrating", "Boomverzorging", "Groendaken", "Tuinaanleg"]
+  },
   "kosten_page": {
     "breadcrumb_home": "Home",
     "breadcrumb_costs": "Kosten"
@@ -2059,6 +2101,7 @@
       "groendak": { "meta_title": "Groendak Harlingen | Duurzame Groendaken aan de Waddenkust" }
     },
     "burgum": {
+      "tuinonderhoud": { "meta_title": "Tuinonderhoud Burgum | Professioneel Tuinonderhoud Tytsjerksteradiel" },
       "tuinontwerp": { "meta_title": "Tuinontwerp Burgum | Tuin Ontwerpen aan de Burgumermar" },
       "groendak": { "meta_title": "Groendak Burgum | Duurzame Groendaken in Tytsjerksteradiel" }
     }

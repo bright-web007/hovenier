@@ -5,7 +5,7 @@ import TrustBar from '../components/TrustBar';
 import Navigation from '../components/Navigation';
 import ServiceCard from '../components/ServiceCard';
 import RegionStrip from '../components/RegionStrip';
-import { OrganizationSchema, WebsiteSchema } from '../components/StructuredData';
+import { OrganizationSchema, WebsiteSchema, HomepageSchemas } from '../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { createTranslator } from '@/lib/translator';
 
@@ -218,12 +218,8 @@ export default async function HomePage({ params }: Props) {
 
       {/* Structured Data for SEO */}
       <OrganizationSchema />
-      <WebsiteSchema
-        url="https://hovenier.frl"
-        name="Hovenier.frl"
-        description="Platform voor het vinden van betrouwbare hoveniers in Friesland"
-        publisher="Hovenier.frl"
-      />
+      <WebsiteSchema />
+      <HomepageSchemas />
     </>
   );
 }

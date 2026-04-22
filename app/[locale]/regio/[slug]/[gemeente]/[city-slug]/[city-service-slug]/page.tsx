@@ -2,7 +2,7 @@ import Navigation from "@/app/components/Navigation";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import { getLocaleAlternates, getAbsoluteUrl, SupportedLocale } from "@/lib/locale-utils";
 import { getRegionHubBySlug, getGemeenteBySlug } from "@/lib/regions-hierarchy";
-import { createTranslator, defaultLocale as _defaultLocale } from '@/i18n';
+import { createTranslator, locales, defaultLocale } from '@/i18n';
 import { Metadata } from 'next';
 import Link from "next/link";
 import { notFound } from 'next/navigation';
@@ -65,8 +65,9 @@ type Props = {
 };
 
 
-export const locales = ['en', 'nl'] as const;
-export const defaultLocale = 'nl';
+
+export { locales, defaultLocale };
+
 export const revalidate = 3600;
 
 const VALID_SERVICES = ['tuinonderhoud', 'tuinontwerp', 'groendak', 'stratenmaker', 'tuin-aanleggen'] as const;
@@ -80,6 +81,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const cityName = formatName(citySlug);
   const serviceName = formatName(serviceSlug);
+
 
   const t = createTranslator(validLocale);
   const serviceOverride = t.raw(`city_service_overrides.${citySlug}.${serviceSlug}`) as Record<string, string> | null;

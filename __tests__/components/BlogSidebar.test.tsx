@@ -213,11 +213,9 @@ describe('BlogSidebar', () => {
     });
 
     test('should render contact button with correct href', () => {
-      mockLocalizePath.mockReturnValueOnce('/en/#lead-form');
-      
       render(<BlogSidebar categories={mockCategories} locale="en" />);
       
-      const contactButton = screen.getByText('Gratis Advies →');
+      const contactButton = screen.getByText('Free Advice →');
       expect(contactButton.closest('a')).toHaveAttribute('href', '/en/#lead-form');
     });
   });

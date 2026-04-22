@@ -2,7 +2,6 @@ import styles from '../../styles/Terms.module.css';
 import { createTranslator } from '@/i18n';
 
 export default function TermsHero({ locale = 'nl' }: { locale?: string }) {
-  const isEn = locale === 'en';
   const t = createTranslator(locale);
 
   return (
@@ -15,7 +14,7 @@ export default function TermsHero({ locale = 'nl' }: { locale?: string }) {
           </p>
           <p className={styles.legalSubtitle}>
             {t('terms.hero_last_updated')}
-            {new Date().toLocaleDateString(isEn ? 'en-US' : 'nl-NL', { 
+            {new Date().toLocaleDateString(locale === 'en' ? 'en-US' : 'nl-NL', { 
               year: 'numeric', 
               month: 'long', 
               day: 'numeric' 

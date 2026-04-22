@@ -12,18 +12,17 @@ interface GardenerCardProps {
 }
 
 export default function GardenerCard({ gardener, locale }: GardenerCardProps) {
-  const isEn = locale === 'en'
   const t = createTranslator(locale);
 
-  const specialtyTranslations: Record<string, string> = {
-    'Tuinonderhoud': 'Garden Maintenance',
-    'Tuinontwerp': 'Garden Design',
-    'Groendak': 'Green Roof',
-    'Stratenmaker': 'Paving',
-    'Tuin Aanleggen': 'Garden Construction',
+  const specialtyKeyMap: Record<string, string> = {
+    'Tuinonderhoud': 'form.services.tuinonderhoud',
+    'Tuinontwerp': 'form.services.tuinontwerp',
+    'Groendak': 'form.services.groendak',
+    'Stratenmaker': 'form.services.stratenmaker',
+    'Tuin Aanleggen': 'form.services.tuin-aanleggen',
   }
 
-  const translateSpecialty = (s: string) => isEn ? (specialtyTranslations[s] || s) : s
+  const translateSpecialty = (s: string) => t(specialtyKeyMap[s] ?? s)
   return (
     <div className={styles.gardenerCard}>
       <div className={styles.cardHeader}>

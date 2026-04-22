@@ -5,6 +5,7 @@ import { getRegionHubBySlug, getGemeenteBySlug } from "@/lib/regions-hierarchy";
 import { createTranslator } from '@/i18n';
 import { Metadata } from 'next';
 import Link from "next/link";
+import { notFound } from 'next/navigation';
 import { Cormorant_Garamond } from 'next/font/google';
 import LeadFormSection from "@/app/components/LeadFormSection";
 import { BreadcrumbSchema } from "@/app/components/StructuredData";
@@ -65,14 +66,17 @@ type Props = {
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
+
+const VALID_SERVICES = ['tuinonderhoud', 'tuinontwerp', 'groendak', 'stratenmaker', 'tuin-aanleggen'] as const;
+
+const formatName = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug, gemeente, 'city-slug': citySlug, 'city-service-slug': serviceSlug } = await params;
   const validLocale = locale || defaultLocale;
   const isEn = validLocale === 'en';
 
-  const formatName = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   const cityName = formatName(citySlug);
   const serviceName = formatName(serviceSlug);
 
@@ -119,14 +123,15 @@ const Page = async ({ params }: Props) => {
     const { locale, slug, gemeente, 'city-slug': citySlug, 'city-service-slug': serviceSlug } = await params;
     const validLocale = locale || defaultLocale;
 
+    if (!VALID_SERVICES.includes(serviceSlug as typeof VALID_SERVICES[number])) notFound();
+
     const t = createTranslator(validLocale);
 
     const regionHub = getRegionHubBySlug(slug);
     const gemeenteData = getGemeenteBySlug(gemeente);
 
-    const formatLabel = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-    const cityName = formatLabel(citySlug);
-    const serviceName = formatLabel(serviceSlug);
+    const cityName = formatName(citySlug);
+    const serviceName = formatName(serviceSlug);
 
     // Navigation translations
     const navTranslations = {
@@ -169,8 +174,8 @@ const Page = async ({ params }: Props) => {
     const breadcrumbItems = [
         { label: t('breadcrumb_home'), href: `/${validLocale}` },
         { label: t('regio_page.breadcrumb_regions'), href: `/${validLocale}/regio` },
-        { label: regionHub?.name || formatLabel(slug), href: `/${validLocale}/regio/${slug}` },
-        { label: gemeenteData?.name || formatLabel(gemeente), href: `/${validLocale}/regio/${slug}/${gemeente}` },
+        { label: regionHub?.name || formatName(slug), href: `/${validLocale}/regio/${slug}` },
+        { label: gemeenteData?.name || formatName(gemeente), href: `/${validLocale}/regio/${slug}/${gemeente}` },
         { label: cityName, href: `/${validLocale}/regio/${slug}/${gemeente}/${citySlug}` },
         { label: serviceName },
     ];
@@ -279,7 +284,7 @@ const Page = async ({ params }: Props) => {
                 fontSize: '15px',
                 lineHeight: '25px',
                 margin: 0,
-                borderLeft: '2px solid var(--sage',
+                borderLeft: '2px solid var(--sage)',
                 padding: '16px 20px',
                 backgroundColor: '#FFFFFF0F'
               }}>
@@ -317,8 +322,6 @@ const Page = async ({ params }: Props) => {
               </div>
 
               <div className="grid-responsive-3-sm" style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
                 rowGap: '48px',
                 columnGap: '16px',
               }}>
@@ -367,6 +370,7 @@ const Page = async ({ params }: Props) => {
                     </svg>
                     <p
                       style={{ fontSize: '16px', lineHeight: '24px', color: 'var(--text-mid)', margin: 0 }}
+                      // Safe: content sourced exclusively from locale JSON files, not user input or external CMS.
                       dangerouslySetInnerHTML={{ __html: ov(`why_${n}`, `city_service_page.why_${n}`) }}
                     />
                   </div>
@@ -409,8 +413,6 @@ const Page = async ({ params }: Props) => {
                   {interpolate(t('city_service_page.cost_factors_title'))}
                 </p>
                 <div className="grid-responsive-2-sm" style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(2, 1fr)',
                   gap: '16px',
                 }}>
                   {[1, 2, 3, 4].map((n) => (

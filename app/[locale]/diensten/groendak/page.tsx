@@ -281,7 +281,7 @@ export default async function GroendakPage({ params }: Props) {
             </div>
 
             <div className="faq-grid">
-              {localeFaqs.map((faq, index) => (
+              {localeFaqs.map((faq: { question: string; answer: string }, index: number) => (
                 <div key={index} className="faq-item">
                   <h3 className="faq-question">{faq.question}</h3>
                   <p className="faq-answer">{faq.answer}</p>
@@ -319,7 +319,7 @@ export default async function GroendakPage({ params }: Props) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": localeFaqs.map(faq => ({
+            "mainEntity": localeFaqs.map((faq: { question: string; answer: string }) => ({
               "@type": "Question",
               "name": faq.question,
               "acceptedAnswer": {

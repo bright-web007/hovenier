@@ -334,7 +334,7 @@ export default async function StratenmakerPage({ params }: Props) {
               {t('stratenmaker.faq_title')}
             </h2>
             <div className={styles.faqSection}>
-              {localeFaqs.map((faq, index) => (
+              {localeFaqs.map((faq: { question: string; answer: string }, index: number) => (
                 <details key={index} className={styles.faqItem}>
                   <summary className={styles.faqQuestion}>
                     {faq.question}

@@ -116,6 +116,10 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
+      {/* Structured Data for SEO */}
+      <OrganizationSchema />
+      <WebsiteSchema />
+      <HomepageSchemas />
       <Navigation locale={validLocale} translations={navTranslations} />
 
       <main>
@@ -215,11 +219,6 @@ export default async function HomePage({ params }: Props) {
           }}
         />
       </main>
-
-      {/* Structured Data for SEO */}
-      <OrganizationSchema />
-      <WebsiteSchema />
-      <HomepageSchemas />
     </>
   );
 }

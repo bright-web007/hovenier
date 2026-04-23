@@ -2,7 +2,6 @@ import Navigation from "@/app/components/Navigation";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import { getLocaleAlternates, getAbsoluteUrl, SupportedLocale } from "@/lib/locale-utils";
 import { getRegionHubBySlug, getGemeenteBySlug } from "@/lib/regions-hierarchy";
-
 import { createTranslator, locales, defaultLocale } from '@/i18n';
 import { Metadata } from 'next';
 import Link from "next/link";

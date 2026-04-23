@@ -1,5 +1,6 @@
 import { getBusinessConfig, ServiceType } from '@/lib/business-config';
 import { env } from '@/lib/env';
+import { createTranslator } from '@/i18n';
 
 interface LocalBusinessSchemaProps {
   /** Service type to get specific config, omit for general business config */
@@ -111,8 +112,9 @@ export function LocalBusinessSchema({
   );
 }
 
-export function WebsiteSchema() {
+export function WebsiteSchema({ locale = 'nl' }: { locale?: string }) {
   const baseUrl = env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
+  const t = createTranslator(locale);
 
   const schema = {
     "@context": "https://schema.org",
@@ -120,11 +122,11 @@ export function WebsiteSchema() {
     "@id": `${baseUrl}/#website`,
     "url": baseUrl,
     "name": "Hovenier FRL",
-    "description": "Het lokale platform voor hoveniers in Friesland — tuinaanleg, tuinonderhoud, tuinontwerp en groendaken",
+    "description": t('schema.website_description'),
     "publisher": {
       "@id": `${baseUrl}/#organization`
     },
-    "inLanguage": "nl-NL",
+    "inLanguage": locale === 'en' ? "en-GB" : "nl-NL",
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
@@ -222,8 +224,9 @@ export function OrganizationSchema() {
   );
 }
 
-export function HomepageSchemas() {
+export function HomepageSchemas({ locale = 'nl' }: { locale?: string }) {
   const baseUrl = env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
+  const t = createTranslator(locale);
 
   const schema = {
     "@context": "https://schema.org",
@@ -233,7 +236,7 @@ export function HomepageSchemas() {
         "@id": `${baseUrl}/#business`,
         "name": "Hovenier FRL",
         "url": baseUrl,
-        "description": "Hovenier FRL verbindt huiseigenaren in Friesland met vakkundige lokale hoveniers voor tuinaanleg, tuinonderhoud, tuinontwerp en groendaken. Ontvang binnen 24 uur meerdere vrijblijvende offertes.",
+        "description": t('schema.business_description'),
         "email": "info@hovenier.frl",
         "priceRange": "€€",
         "currenciesAccepted": "EUR",
@@ -273,15 +276,15 @@ export function HomepageSchemas() {
         ],
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
-          "name": "Hovenier Diensten Friesland",
+          "name": t('schema.offer_catalog_name'),
           "itemListElement": [
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
                 "@id": `${baseUrl}/diensten#tuinaanleg`,
-                "name": "Tuinaanleg Friesland",
-                "description": "Professionele tuinaanleg door lokale hoveniers in Friesland. Van ontwerp tot realisatie.",
+                "name": t('schema.service_tuinaanleg_name'),
+                "description": t('schema.service_tuinaanleg_desc'),
                 "areaServed": { "@type": "State", "name": "Friesland" }
               }
             },
@@ -290,8 +293,8 @@ export function HomepageSchemas() {
               "itemOffered": {
                 "@type": "Service",
                 "@id": `${baseUrl}/diensten#tuinonderhoud`,
-                "name": "Tuinonderhoud Friesland",
-                "description": "Professioneel tuinonderhoud door lokale hoveniers in Friesland. Gazononderhoud, snoeien en meer.",
+                "name": t('schema.service_tuinonderhoud_name'),
+                "description": t('schema.service_tuinonderhoud_desc'),
                 "areaServed": { "@type": "State", "name": "Friesland" }
               }
             },
@@ -300,8 +303,8 @@ export function HomepageSchemas() {
               "itemOffered": {
                 "@type": "Service",
                 "@id": `${baseUrl}/diensten#tuinontwerp`,
-                "name": "Tuinontwerp Friesland",
-                "description": "Professioneel tuinontwerp door ervaren tuinontwerpers in Friesland. Van schets tot 3D visualisatie.",
+                "name": t('schema.service_tuinontwerp_name'),
+                "description": t('schema.service_tuinontwerp_desc'),
                 "areaServed": { "@type": "State", "name": "Friesland" }
               }
             },
@@ -310,8 +313,8 @@ export function HomepageSchemas() {
               "itemOffered": {
                 "@type": "Service",
                 "@id": `${baseUrl}/diensten#groendaken`,
-                "name": "Groendaken Friesland",
-                "description": "Duurzame groendaken door specialisten in Friesland. Sedum daken en extensieve begroeide daken.",
+                "name": t('schema.service_groendaken_name'),
+                "description": t('schema.service_groendaken_desc'),
                 "areaServed": { "@type": "State", "name": "Friesland" }
               }
             },
@@ -320,8 +323,8 @@ export function HomepageSchemas() {
               "itemOffered": {
                 "@type": "Service",
                 "@id": `${baseUrl}/diensten#bestrating`,
-                "name": "Bestrating Friesland",
-                "description": "Duurzame bestratingswerken in Friesland. Terrassen, opritten en tuinpaden door vakkundige stratenmakers.",
+                "name": t('schema.service_bestrating_name'),
+                "description": t('schema.service_bestrating_desc'),
                 "areaServed": { "@type": "State", "name": "Friesland" }
               }
             }
@@ -330,7 +333,6 @@ export function HomepageSchemas() {
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.8",
-          "reviewCount": "124",
           "bestRating": "5",
           "worstRating": "1"
         },
@@ -358,43 +360,28 @@ export function HomepageSchemas() {
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Wat doet Hovenier FRL?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Hovenier FRL is het lokale platform dat huiseigenaren in Friesland verbindt met vakkundige hoveniers voor tuinaanleg, tuinonderhoud, tuinontwerp en groendaken. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in uw regio."
-            }
+            "name": t('schema.faq_1_q'),
+            "acceptedAnswer": { "@type": "Answer", "text": t('schema.faq_1_a') }
           },
           {
             "@type": "Question",
-            "name": "In welke steden in Friesland is Hovenier FRL actief?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Hovenier FRL is actief in alle Friese gemeenten, waaronder Leeuwarden, Heerenveen, Drachten, Sneek, Harlingen, Dokkum, Franeker, Bolsward, Burgum, Lemmer, Gorredijk en Oosterwolde. Ook kleinere dorpen en gemeenten in Friesland worden bediend."
-            }
+            "name": t('schema.faq_2_q'),
+            "acceptedAnswer": { "@type": "Answer", "text": t('schema.faq_2_a') }
           },
           {
             "@type": "Question",
-            "name": "Hoe snel ontvang ik een offerte via Hovenier FRL?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in uw regio in Friesland. Het aanvragen van offertes is volledig gratis en vrijblijvend."
-            }
+            "name": t('schema.faq_3_q'),
+            "acceptedAnswer": { "@type": "Answer", "text": t('schema.faq_3_a') }
           },
           {
             "@type": "Question",
-            "name": "Wat kost een hovenier in Friesland?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "De kosten van een hovenier in Friesland variëren afhankelijk van het type werk. Tuinonderhoud kost gemiddeld €40 tot €65 per uur. Tuinaanleg start vanaf €500 voor kleinere projecten. Via Hovenier FRL vergelijkt u eenvoudig meerdere offertes om de beste prijs-kwaliteitverhouding te vinden."
-            }
+            "name": t('schema.faq_4_q'),
+            "acceptedAnswer": { "@type": "Answer", "text": t('schema.faq_4_a') }
           },
           {
             "@type": "Question",
-            "name": "Welke tuindiensten zijn beschikbaar via Hovenier FRL?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Via Hovenier FRL zijn de volgende tuindiensten beschikbaar in Friesland: tuinaanleg, tuinonderhoud, tuinontwerp, groendaken en bestrating. Alle hoveniers in het netwerk hebben specifieke kennis van de Friese bodemomstandigheden en het lokale klimaat."
-            }
+            "name": t('schema.faq_5_q'),
+            "acceptedAnswer": { "@type": "Answer", "text": t('schema.faq_5_a') }
           }
         ]
       },

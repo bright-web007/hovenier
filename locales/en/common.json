@@ -890,7 +890,7 @@
     "stat_nearby": "Nearby Municipalities",
     "stat_in_region": "In {regionName}",
     "cities_title": "Cities in {gemeenteName}",
-    "cities_gardeners": "3 gardeners",
+    "cities_gardeners": "Local gardeners",
     "cities_not_listed": "Your city not listed?",
     "cities_contact": "Contact us →",
     "nearby_title": "Near {gemeenteName}",
@@ -916,7 +916,7 @@
     "article_2_title": "Best time for garden installation in {regionName}",
     "article_2_excerpt": "Explanation of the optimal timing for garden installation in the {regionName} region.",
     "article_2_category": "Garden Installation",
-    "article_3_title": "Costs of gardening services in Friesland 2024",
+    "article_3_title": "Costs of gardening services in Friesland",
     "article_3_excerpt": "Overview of prices for professional gardening services throughout Friesland.",
     "article_3_category": "Costs",
     "services_list": ["Garden Maintenance", "Garden Design", "Paving", "Tree Care", "Green Roofs", "Garden Installation"]
@@ -2131,5 +2131,30 @@
     "meta_title": "Green Roof Installation Friesland | Sedum & Extensive Green Roof | Hovenier.frl",
     "meta_description": "Professional green roofs in Friesland. Extensive sedum roof or intensive green roof — including subsidy advice. From €40/m² — request a free quote from a specialist.",
     "meta_keywords": "green roof,green roof installation,extensive green roof,green roof subsidy,green roof solar panels,green roof friesland,sedum roof"
+  },
+  "schema": {
+    "website_description": "The local platform for gardeners in Friesland — garden installation, maintenance, design and green roofs",
+    "business_description": "Hovenier FRL connects homeowners in Friesland with skilled local gardeners for garden installation, maintenance, design and green roofs. Receive multiple no-obligation quotes within 24 hours.",
+    "offer_catalog_name": "Gardening Services Friesland",
+    "service_tuinaanleg_name": "Garden Installation Friesland",
+    "service_tuinaanleg_desc": "Professional garden installation by local gardeners in Friesland. From design to realisation.",
+    "service_tuinonderhoud_name": "Garden Maintenance Friesland",
+    "service_tuinonderhoud_desc": "Professional garden maintenance by local gardeners in Friesland. Lawn care, pruning and more.",
+    "service_tuinontwerp_name": "Garden Design Friesland",
+    "service_tuinontwerp_desc": "Professional garden design by experienced designers in Friesland. From sketch to 3D visualisation.",
+    "service_groendaken_name": "Green Roofs Friesland",
+    "service_groendaken_desc": "Sustainable green roofs by specialists in Friesland. Sedum roofs and extensive planted roofs.",
+    "service_bestrating_name": "Paving Friesland",
+    "service_bestrating_desc": "Durable paving works in Friesland. Patios, driveways and garden paths by skilled pavers.",
+    "faq_1_q": "What does Hovenier FRL do?",
+    "faq_1_a": "Hovenier FRL is the local platform connecting homeowners in Friesland with skilled gardeners for garden installation, maintenance, design and green roofs. Via Hovenier FRL you receive multiple no-obligation quotes from local gardeners in your area within 24 hours.",
+    "faq_2_q": "Which cities in Friesland does Hovenier FRL serve?",
+    "faq_2_a": "Hovenier FRL is active across all Frisian municipalities, including Leeuwarden, Heerenveen, Drachten, Sneek, Harlingen, Dokkum, Franeker, Bolsward, Burgum, Lemmer, Gorredijk and Oosterwolde. Smaller villages and municipalities in Friesland are also served.",
+    "faq_3_q": "How quickly will I receive a quote via Hovenier FRL?",
+    "faq_3_a": "Via Hovenier FRL you receive multiple no-obligation quotes from local gardeners in your region in Friesland within 24 hours. Requesting quotes is completely free and non-binding.",
+    "faq_4_q": "How much does a gardener in Friesland cost?",
+    "faq_4_a": "The cost of a gardener in Friesland varies depending on the type of work. Garden maintenance averages €40 to €65 per hour. Garden installation starts from €500 for smaller projects. Via Hovenier FRL you can easily compare multiple quotes to find the best value for money.",
+    "faq_5_q": "Which garden services are available via Hovenier FRL?",
+    "faq_5_a": "The following garden services are available via Hovenier FRL in Friesland: garden installation, garden maintenance, garden design, green roofs and paving. All gardeners in the network have specific knowledge of Frisian soil conditions and the local climate."
   }
 }

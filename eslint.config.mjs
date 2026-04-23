@@ -6,14 +6,17 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   {
-    // Enhanced rules to catch Server Component violations
     rules: {
-      // Warn about potential hydration issues
       "react/no-unknown-property": ["error", { 
         "ignore": ["suppressHydrationWarning"] 
-      }],
-      
-      // Custom rule to warn about onClick in page.tsx files (potential Server Components)
+      }]
+    }
+  },
+  {
+    files: ["app/**/page.tsx", "app/**/layout.tsx", "app/**/template.tsx"],
+    ignores: ["app/offline/page.tsx", "app/test-ga4/page.tsx"],
+    rules: {
+      // Warn about event handlers in App Router entry files, which default to server components.
       "no-restricted-syntax": [
         "warn",
         {
@@ -21,7 +24,7 @@ const eslintConfig = defineConfig([
           "message": "⚠️  onClick handlers in Server Components cause runtime errors. Add 'use client' directive if this component needs interactivity."
         },
         {
-          "selector": "JSXAttribute[name.name='onSubmit'][name.type='JSXIdentifier']", 
+          "selector": "JSXAttribute[name.name='onSubmit'][name.type='JSXIdentifier']",
           "message": "⚠️  onSubmit handlers in Server Components cause runtime errors. Add 'use client' directive if this component needs interactivity."
         }
       ]
@@ -34,6 +37,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Node.js CJS scripts and test infrastructure (not part of the app bundle):
+    "scripts/**",
+    "jest.config.js",
+    "jest.setup.js",
+    "debug_archive/**",
+    "public/sw.js",
   ]),
 ]);
 

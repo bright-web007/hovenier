@@ -1,4 +1,6 @@
-import { getBusinessConfig, ServiceType, type LocalBusinessConfig } from '@/lib/business-config';
+import { getBusinessConfig, ServiceType } from '@/lib/business-config';
+import { env } from '@/lib/env';
+import { createTranslator } from '@/i18n';
 
 interface LocalBusinessSchemaProps {
   /** Service type to get specific config, omit for general business config */
@@ -9,13 +11,6 @@ interface LocalBusinessSchemaProps {
   services?: string[];
   /** Additional context for the business name (optional) */
   nameContext?: string;
-}
-
-interface WebsiteSchemaProps {
-  url: string;
-  name: string;
-  description: string;
-  publisher: string;
 }
 
 interface BreadcrumbSchemaProps {
@@ -117,27 +112,26 @@ export function LocalBusinessSchema({
   );
 }
 
-export function WebsiteSchema({
-  url,
-  name,
-  description,
-  publisher
-}: WebsiteSchemaProps) {
+export function WebsiteSchema({ locale = 'nl' }: { locale?: string }) {
+  const baseUrl = env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
+  const t = createTranslator(locale);
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": name,
-    "description": description,
-    "url": url,
+    "@id": `${baseUrl}/#website`,
+    "url": baseUrl,
+    "name": "Hovenier FRL",
+    "description": t('schema.website_description'),
     "publisher": {
-      "@type": "Organization",
-      "name": publisher
+      "@id": `${baseUrl}/#organization`
     },
+    "inLanguage": locale === 'en' ? "en-GB" : "nl-NL",
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": `${url}/?s={search_term_string}`
+        "urlTemplate": `${baseUrl}/search?q={search_term_string}`
       },
       "query-input": "required name=search_term_string"
     }
@@ -157,7 +151,7 @@ export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": items.map((item, index) => ({
+    "itemListElement": items.map((item) => ({
       "@type": "ListItem",
       "position": item.position,
       "name": item.name,
@@ -176,30 +170,232 @@ export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
 }
 
 export function OrganizationSchema() {
+  const baseUrl = env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Hovenier.frl",
-    "description": "Platform voor het vergelijken van betrouwbare hoveniers in Friesland",
-    "url": "https://hovenier.frl",
-    "logo": "https://hovenier.frl/assets/logo-light.svg",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "email": "info@hovenier.frl",
-      "contactType": "Customer Service",
-      "availableLanguage": ["Dutch", "English"],
-      "areaServed": "NL"
+    "@id": `${baseUrl}/#organization`,
+    "name": "Hovenier FRL",
+    "url": baseUrl,
+    "logo": {
+      "@type": "ImageObject",
+      "@id": `${baseUrl}/#logo`,
+      "url": `${baseUrl}/logo.png`,
+      "contentUrl": `${baseUrl}/logo.png`,
+      "caption": "Hovenier FRL"
     },
+    "image": {
+      "@type": "ImageObject",
+      "url": `${baseUrl}/images/homepage.jpg`
+    },
+    "description": "Hovenier FRL is het lokale platform dat huiseigenaren in Friesland verbindt met ervaren hoveniers voor tuinaanleg, tuinonderhoud, tuinontwerp en groendaken.",
+    "email": "info@hovenier.frl",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Heliconweg 60",
       "addressLocality": "Leeuwarden",
-      "addressRegion": "Friesland", 
+      "postalCode": "8914 AT",
+      "addressRegion": "Friesland",
       "addressCountry": "NL"
     },
+    "areaServed": [
+      {
+        "@type": "State",
+        "name": "Friesland",
+        "sameAs": "https://en.wikipedia.org/wiki/Friesland"
+      }
+    ],
+    "foundingDate": "2026",
     "sameAs": [
-      "https://facebook.com/hovenier.frl",
-      "https://instagram.com/hovenier.frl",
-      "https://twitter.com/hovenier_frl"
+      "https://www.facebook.com/hovenierfrl",
+      "https://www.linkedin.com/company/hovenierfrl",
+      "https://www.instagram.com/hovenierfrl"
+    ]
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(schema),
+      }}
+    />
+  );
+}
+
+export function HomepageSchemas({ locale = 'nl' }: { locale?: string }) {
+  const baseUrl = env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
+  const t = createTranslator(locale);
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": `${baseUrl}/#business`,
+        "name": "Hovenier FRL",
+        "url": baseUrl,
+        "description": t('schema.business_description'),
+        "email": "info@hovenier.frl",
+        "priceRange": "€€",
+        "currenciesAccepted": "EUR",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${baseUrl}/logo.png`
+        },
+        "image": `${baseUrl}/images/homepage.jpg`,
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Heliconweg 60",
+          "addressLocality": "Leeuwarden",
+          "postalCode": "8914 AT",
+          "addressRegion": "Friesland",
+          "addressCountry": "NL"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "53.2014",
+          "longitude": "5.7998"
+        },
+        "areaServed": [
+          { "@type": "State", "name": "Friesland", "sameAs": "https://en.wikipedia.org/wiki/Friesland" },
+          { "@type": "City", "name": "Leeuwarden", "sameAs": "https://en.wikipedia.org/wiki/Leeuwarden" },
+          { "@type": "City", "name": "Heerenveen", "sameAs": "https://en.wikipedia.org/wiki/Heerenveen" },
+          { "@type": "City", "name": "Drachten", "sameAs": "https://en.wikipedia.org/wiki/Drachten" },
+          { "@type": "City", "name": "Sneek", "sameAs": "https://en.wikipedia.org/wiki/Sneek" },
+          { "@type": "City", "name": "Harlingen", "sameAs": "https://en.wikipedia.org/wiki/Harlingen,_Friesland" },
+          { "@type": "City", "name": "Dokkum", "sameAs": "https://en.wikipedia.org/wiki/Dokkum" },
+          { "@type": "City", "name": "Franeker", "sameAs": "https://en.wikipedia.org/wiki/Franeker" },
+          { "@type": "City", "name": "Bolsward", "sameAs": "https://en.wikipedia.org/wiki/Bolsward" },
+          { "@type": "City", "name": "Burgum", "sameAs": "https://en.wikipedia.org/wiki/Burgum" },
+          { "@type": "City", "name": "Lemmer", "sameAs": "https://en.wikipedia.org/wiki/Lemmer" },
+          { "@type": "City", "name": "Gorredijk", "sameAs": "https://en.wikipedia.org/wiki/Gorredijk" },
+          { "@type": "City", "name": "Oosterwolde", "sameAs": "https://en.wikipedia.org/wiki/Oosterwolde,_Friesland" }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": t('schema.offer_catalog_name'),
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "@id": `${baseUrl}/diensten#tuinaanleg`,
+                "name": t('schema.service_tuinaanleg_name'),
+                "description": t('schema.service_tuinaanleg_desc'),
+                "areaServed": { "@type": "State", "name": "Friesland" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "@id": `${baseUrl}/diensten#tuinonderhoud`,
+                "name": t('schema.service_tuinonderhoud_name'),
+                "description": t('schema.service_tuinonderhoud_desc'),
+                "areaServed": { "@type": "State", "name": "Friesland" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "@id": `${baseUrl}/diensten#tuinontwerp`,
+                "name": t('schema.service_tuinontwerp_name'),
+                "description": t('schema.service_tuinontwerp_desc'),
+                "areaServed": { "@type": "State", "name": "Friesland" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "@id": `${baseUrl}/diensten#groendaken`,
+                "name": t('schema.service_groendaken_name'),
+                "description": t('schema.service_groendaken_desc'),
+                "areaServed": { "@type": "State", "name": "Friesland" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "@id": `${baseUrl}/diensten#bestrating`,
+                "name": t('schema.service_bestrating_name'),
+                "description": t('schema.service_bestrating_desc'),
+                "areaServed": { "@type": "State", "name": "Friesland" }
+              }
+            }
+          ]
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "08:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "09:00",
+            "closes": "14:00"
+          }
+        ],
+        "sameAs": [
+          "https://www.facebook.com/hovenierfrl",
+          "https://www.linkedin.com/company/hovenierfrl"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": t('schema.faq_1_q'),
+            "acceptedAnswer": { "@type": "Answer", "text": t('schema.faq_1_a') }
+          },
+          {
+            "@type": "Question",
+            "name": t('schema.faq_2_q'),
+            "acceptedAnswer": { "@type": "Answer", "text": t('schema.faq_2_a') }
+          },
+          {
+            "@type": "Question",
+            "name": t('schema.faq_3_q'),
+            "acceptedAnswer": { "@type": "Answer", "text": t('schema.faq_3_a') }
+          },
+          {
+            "@type": "Question",
+            "name": t('schema.faq_4_q'),
+            "acceptedAnswer": { "@type": "Answer", "text": t('schema.faq_4_a') }
+          },
+          {
+            "@type": "Question",
+            "name": t('schema.faq_5_q'),
+            "acceptedAnswer": { "@type": "Answer", "text": t('schema.faq_5_a') }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": baseUrl
+          }
+        ]
+      }
     ]
   };
 

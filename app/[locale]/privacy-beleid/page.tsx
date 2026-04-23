@@ -20,11 +20,16 @@ import PrivacyChanges from '../../components/privacy/PrivacyChanges';
 import PrivacyContact from '../../components/privacy/PrivacyContact';
 import PrivacySchema from '../../components/privacy/PrivacySchema';
 import { getLocaleAlternates, getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator } from '@/i18n';
 
 import styles from '../../styles/Privacy.module.css';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
+
+function isSupportedPageLocale(locale: string): locale is (typeof locales)[number] {
+  return locales.includes(locale as (typeof locales)[number]);
+}
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -49,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
       alternates: getLocaleAlternates('/privacy-beleid', validLocale as SupportedLocale)
     };
-  } catch (error) {
+  } catch {
     return {
       title: 'Privacybeleid - Hovenier.frl',
       description: 'Privacybeleid en gegevensbescherming informatie.'
@@ -63,7 +68,7 @@ export default async function PrivacyPolicyPage({ params }: Props) {
   try {
     const { locale } = await params;
     validLocale = locale || defaultLocale;
-    if (!locales.includes(validLocale as any)) {
+    if (!isSupportedPageLocale(validLocale)) {
       validLocale = defaultLocale;
     }
   } catch (error) {
@@ -71,9 +76,10 @@ export default async function PrivacyPolicyPage({ params }: Props) {
   }
 
   const isEnglish = validLocale === 'en';
+  const t = createTranslator(validLocale);
   
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb_home'), href: '/' },
     { label: isEnglish ? 'Privacy Policy' : 'Privacybeleid' }
   ];
 

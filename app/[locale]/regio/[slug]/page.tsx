@@ -5,8 +5,11 @@ import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
-import { regionHubs, getRegionHubBySlug, type RegionHub, standaloneRegions, getGemeenteBySlug, type Gemeente } from '@/lib/regions-hierarchy'
+import { env } from '@/lib/env';
+import { createTranslator } from '@/i18n'
+import { regionHubs, getRegionHubBySlug, standaloneRegions, getGemeenteBySlug } from '@/lib/regions-hierarchy'
 import Link from 'next/link'
+import DienstCard from '../../../components/DienstCard'
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>
@@ -23,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!regionHub && !standaloneRegion) {
     return {
-      title: locale === 'en' ? 'Region not found | Hovenier.frl' : 'Regio niet gevonden | Hovenier.frl'
+      title: createTranslator(locale)('regio_page.not_found_title')
     };
   }
 
@@ -90,7 +93,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   // Fallback if neither found
   return {
-    title: locale === 'en' ? 'Region not found | Hovenier.frl' : 'Regio niet gevonden | Hovenier.frl'
+    title: createTranslator(locale)('regio_page.not_found_title')
   };
 }
 
@@ -129,6 +132,7 @@ export default async function RegionHubPage({ params }: Props) {
 
   const validLocale = locale as SupportedLocale;
   const isEn = locale === 'en';
+  const t = createTranslator(locale);
 
   const regionNameEn: Record<string, string> = {
     'noordwest-friesland': 'Northwest Friesland',
@@ -139,18 +143,17 @@ export default async function RegionHubPage({ params }: Props) {
 
   // Set up data based on type
   const displayName = regionHub ? (isEn ? (regionNameEn[regionHub.slug] || regionHub.name) : regionHub.name) : standaloneRegion!.name;
-  const isStandalone = !regionHub && standaloneRegion;
 
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
-    { label: isEn ? 'Regions' : 'Regio\'s', href: '/regio' },
-    { label: displayName, href: `/regio/${slug}` }
+    { label: t('breadcrumb_home'), href: '/' },
+    { label: isEn ? 'Regions' : 'Regio\'s', href: localizePath('/regio', locale as SupportedLocale) },
+    { label: displayName, href: localizePath(`/regio/${slug}`, locale as SupportedLocale) }
   ];
 
   return (
     <div className="page-container">
       <LocalBusinessSchema
-        url={`https://hovenier.frl${localizePath(`/regio/${slug}`, validLocale)}`}
+        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}`, validLocale)}`}
         nameContext={isEn ? `Gardeners in ${displayName}` : `Hoveniers in ${displayName}`}
         services={isEn ? [
           "Garden Maintenance",
@@ -173,7 +176,7 @@ export default async function RegionHubPage({ params }: Props) {
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
-          url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl${localizePath(`/regio/${slug}`, validLocale)}`
+          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}`, validLocale)}`
         }))}
       />
 
@@ -414,6 +417,68 @@ export default async function RegionHubPage({ params }: Props) {
               <p style={{ color: 'var(--forest-mid)', fontSize: '1.125rem', lineHeight: '1.6', maxWidth: '600px', margin: '0 auto' }}>
                 {isEn ? (standaloneRegion.introEn || standaloneRegion.intro) : standaloneRegion.intro}
               </p>
+            </div>
+          </section>
+        )}
+
+        {/* Services Section - Only for standalone regions like Leeuwarden */}
+        {standaloneRegion && (
+          <section style={{ backgroundColor: '#EDE9E0', width: '100%' }}>
+            <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '4rem 1rem 112px 1rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
+              <div style={{ textAlign: 'center' }}>
+                <h2 style={{
+                  fontFamily: 'var(--heading-font)',
+                  fontSize: '2rem',
+                  fontWeight: '700',
+                  color: 'var(--forest)',
+                  marginBottom: '0.5rem',
+                }}>
+                  {isEn ? `Our services in ${standaloneRegion.name}` : `Onze diensten in ${standaloneRegion.name}`}
+                </h2>
+                <p style={{
+                  color: 'var(--text-muted)',
+                  fontSize: '15px',
+                  lineHeight: '100%',
+                }}>
+                  {isEn ? `Professional garden services tailored to the ${standaloneRegion.name} area` : `Professionele tuindiensten afgestemd op de ${standaloneRegion.name}er omgeving`}
+                </p>
+              </div>
+
+              <div className="grid-responsive-3" style={{ gap: '1rem' }}>
+                <DienstCard
+                  id="tuinonderhoud"
+                  title={isEn ? `Garden maintenance in ${standaloneRegion.name}` : `Tuinonderhoud in ${standaloneRegion.name}`}
+                  subtitle={isEn ? 'Regular maintenance & care' : 'Regulier onderhoud & verzorging'}
+                  description={isEn
+                    ? `We connect you with landscapers in ${standaloneRegion.name} for professional garden maintenance, adapted to the local soil and Frisian climate.`
+                    : `Wij koppelen u aan hoveniers in ${standaloneRegion.name} voor professioneel tuinonderhoud, afgestemd op de lokale bodemgesteldheid en het Friese klimaat.`}
+                  image="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80"
+                  locale={validLocale}
+                  href={`/${validLocale}/regio/${slug}/${slug}/${slug}/tuinonderhoud`}
+                />
+                <DienstCard
+                  id="tuinontwerp"
+                  title={isEn ? `Garden design in ${standaloneRegion.name}` : `Tuinontwerp in ${standaloneRegion.name}`}
+                  subtitle={isEn ? 'Creative garden concepts' : 'Creatieve tuinconcepten'}
+                  description={isEn
+                    ? `Get help from experienced garden designers who translate your wishes into a practical and stylish design that suits the ${standaloneRegion.name} area.`
+                    : `Krijg hulp van ervaren tuinontwerpers die uw wensen vertalen naar een praktisch en stijlvol ontwerp dat past bij de omgeving van ${standaloneRegion.name}.`}
+                  image="https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?w=800&q=80"
+                  locale={validLocale}
+                  href={`/${validLocale}/regio/${slug}/${slug}/${slug}/tuinontwerp`}
+                />
+                <DienstCard
+                  id="groendak"
+                  title={isEn ? `Green roofs in ${standaloneRegion.name}` : `Groendaken in ${standaloneRegion.name}`}
+                  subtitle={isEn ? 'Sustainable roof covering' : 'Duurzame dakoverdekking'}
+                  description={isEn
+                    ? `We connect you with green roof specialists for sustainable solutions with benefits such as insulation, water retention, and extended roof lifespan.`
+                    : `Wij koppelen u aan specialisten in groendaken voor duurzame oplossingen met voordelen zoals isolatie, wateropvang en een langere levensduur van uw dak.`}
+                  image="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80"
+                  locale={validLocale}
+                  href={`/${validLocale}/regio/${slug}/${slug}/${slug}/groendak`}
+                />
+              </div>
             </div>
           </section>
         )}

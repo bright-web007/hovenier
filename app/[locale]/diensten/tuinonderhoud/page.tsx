@@ -1,15 +1,23 @@
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Navigation from '../../../components/Navigation';
 import Breadcrumbs from '../../../components/Breadcrumbs';
-import NewLeadForm from "@/app/components/NewLeadForm"
-import RelatedArticles from '../../../components/RelatedArticles';
+import RelatedArticles, { type Article } from '../../../components/RelatedArticles';
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { env } from '@/lib/env';
 import { createTranslator } from '@/lib/translator';
+import Image from 'next/image';
+import FaqSection from '@/app/components/FaqSection';
+import LeadFormSection from '@/app/components/LeadFormSection';
+import BenefitsSection from '@/app/components/BenefitsSection';
+import { Sun, Scissor, Drop, Calendar } from 'iconsax-reactjs';
 
 export const locales = ['en', 'nl'] as const;
 export const defaultLocale = 'nl';
+
+function isSupportedPageLocale(locale: string): locale is (typeof locales)[number] {
+  return locales.includes(locale as (typeof locales)[number]);
+}
 
 export const revalidate = false;
 
@@ -21,27 +29,42 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
+type FaqItem = {
+  question: string;
+  answer: string;
+};
 
+function isFaqItem(value: unknown): value is FaqItem {
+  return typeof value === 'object' && value !== null && 'question' in value && 'answer' in value;
+}
+
+function isRelatedArticle(value: unknown): value is Article {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'id' in value &&
+    'title' in value &&
+    'excerpt' in value &&
+    'slug' in value &&
+    'category' in value &&
+    'readTime' in value &&
+    'publishedAt' in value
+  );
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { locale } = await params;
     const validLocale = locale || defaultLocale;
-    const isEn = validLocale === 'en';
+    const t = createTranslator(validLocale);
 
     return {
-      title: isEn
-        ? 'Garden Maintenance Friesland | Professional & Reliable | Hovenier.frl'
-        : 'Tuinonderhoud Friesland | Professioneel & Betrouwbaar | Hovenier.frl',
-      description: isEn
-        ? 'Professional garden maintenance in Friesland by certified gardeners. Monthly subscriptions or one-time jobs. From €35/hour — request a free quote.'
-        : 'Professioneel tuinonderhoud in Friesland door gecertificeerde hoveniers. Maandelijkse abonnementen of eenmalige klussen. Vanaf €35/uur — gratis offerte aanvragen.',
-      keywords: isEn
-        ? ['garden maintenance', 'garden maintenance friesland', 'garden maintenance subscription', 'garden maintenance businesses', 'garden maintenance private']
-        : ['tuinonderhoud', 'tuinonderhoud friesland', 'tuinonderhoud abonnement', 'abonnement tuinonderhoud', 'tuinonderhoud bedrijven', 'tuinonderhoud particulier'],
+      title: t('tuinonderhoud_page.meta_title'),
+      description: t('tuinonderhoud_page.meta_description'),
+      keywords: t('tuinonderhoud_page.meta_keywords').split(','),
       alternates: getLocaleAlternates('/diensten/tuinonderhoud', validLocale as SupportedLocale),
     };
-  } catch (error) {
+  } catch {
     return {
       title: 'Tuinonderhoud - Hovenier.frl',
       description: 'Professional garden maintenance services in Friesland.'
@@ -55,7 +78,7 @@ export default async function TuinonderhoudPage({ params }: Props) {
   try {
     const { locale } = await params;
     validLocale = locale || defaultLocale;
-    if (!locales.includes(validLocale as any)) {
+    if (!isSupportedPageLocale(validLocale)) {
       validLocale = defaultLocale;
     }
   } catch (error) {
@@ -64,10 +87,11 @@ export default async function TuinonderhoudPage({ params }: Props) {
 
   const t = createTranslator(validLocale);
   const isEn = validLocale === 'en';
-  const localeFaqs = t.raw('faqs.tuinonderhoud') || [];
-  const localeArticles = t.raw('related_articles.tuinonderhoud') || [];
+  const rawFaqs = t.raw('faqs.tuinonderhoud');
+  const rawArticles = t.raw('related_articles.tuinonderhoud');
+  const localeFaqs: FaqItem[] = Array.isArray(rawFaqs) ? rawFaqs.filter(isFaqItem) : [];
+  const localeArticles: Article[] = Array.isArray(rawArticles) ? rawArticles.filter(isRelatedArticle) : [];
 
-  // Navigation translations
   const navTranslations = {
     gardeners: t('gardeners'),
     services: t('services'),
@@ -76,7 +100,6 @@ export default async function TuinonderhoudPage({ params }: Props) {
     request_quote: t('request_quote')
   };
 
-  // Prepare translations for the lead form
   const translations = {
     form_eyebrow: t('form_eyebrow'),
     form_title: t('form_title'),
@@ -104,170 +127,14 @@ export default async function TuinonderhoudPage({ params }: Props) {
     }
   };
 
-  // Breadcrumb items
   const breadcrumbItems = [
-    { label: validLocale === 'nl' ? 'Home' : 'Home', href: '/' },
-    { label: validLocale === 'nl' ? 'Diensten' : 'Services', href: localizePath('/services', validLocale as SupportedLocale) },
-    { label: validLocale === 'nl' ? 'Tuinonderhoud' : 'Garden Maintenance' }
+    { label: t('breadcrumb_home'), href: localizePath('/', validLocale as SupportedLocale) },
+    { label: t('tuinonderhoud_page.breadcrumb_services'), href: localizePath('/diensten', validLocale as SupportedLocale) },
+    { label: t('tuinonderhoud_page.breadcrumb_maintenance') }
   ];
 
   return (
     <>
-      <LocalBusinessSchema
-        serviceType="tuinonderhoud"
-        url={`https://hovenier.frl${localizePath('/diensten/tuinonderhoud', validLocale as SupportedLocale)}`}
-      />
-
-      <BreadcrumbSchema
-        items={breadcrumbItems.map((item, index) => ({
-          position: index + 1,
-          name: item.label,
-          url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl${localizePath('/diensten/tuinonderhoud', validLocale as SupportedLocale)}`
-        }))}
-      />
-
-      <Navigation locale={validLocale} translations={navTranslations} />
-      <Breadcrumbs items={breadcrumbItems} />
-
-      <main>
-        {/* Hero Section */}
-        <section className="section">
-          <div className="section-inner">
-            <div className="service-hero">
-              <div className="service-hero-content">
-                <div className="service-hero-image">
-                  <div className="service-hero-image-placeholder">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="service-hero-icon">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="service-hero-text">
-                  <h1 className="service-hero-title">{isEn ? 'Garden Maintenance in Friesland' : 'Tuinonderhoud in Friesland'}</h1>
-                  <p className="service-hero-description">
-                    {isEn
-                      ? 'Professional garden maintenance by experienced gardeners. From weekly lawn mowing to seasonal maintenance — we ensure your garden looks beautiful all year round.'
-                      : 'Professioneel tuinonderhoud door ervaren hoveniers. Van wekelijks gras maaien tot seizoensonderhoud - wij zorgen ervoor dat uw tuin er het hele jaar door prachtig uitziet.'}
-                  </p>
-                  <div className="service-hero-stats">
-                    <div className="service-stat">
-                      <span className="service-stat-number">€35+</span>
-                      <span className="service-stat-label">{isEn ? 'per hour' : 'per uur'}</span>
-                    </div>
-                    <div className="service-stat">
-                      <span className="service-stat-number">28</span>
-                      <span className="service-stat-label">{isEn ? 'gardeners' : 'hoveniers'}</span>
-                    </div>
-                    <div className="service-stat">
-                      <span className="service-stat-number">4.8★</span>
-                      <span className="service-stat-label">{isEn ? 'average' : 'gemiddeld'}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Services Offered */}
-        <section className="section section-alt">
-          <div className="section-inner">
-            <div className="section-header-row section-centered">
-              <h2 className="section-title">{isEn ? 'What we do for you' : 'Wat wij voor u doen'}</h2>
-              <p className="section-sub">{isEn ? 'Complete garden care by skilled gardeners' : 'Complete tuinverzorging door vakkundige hoveniers'}</p>
-            </div>
-
-            <div className="service-features-grid">
-              <div className="service-feature">
-                <div className="service-feature-icon">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                  </svg>
-                </div>
-                <h3 className="service-feature-title">{isEn ? 'Lawn mowing & care' : 'Gras maaien & verzorging'}</h3>
-                <p className="service-feature-description">
-                  {isEn ? 'Regular mowing, edging and lawn care for a perfect green carpet.' : 'Regelmatig maaien, randjes steken en gazonverzorging voor een perfect groen tapijt.'}
-                </p>
-              </div>
-
-              <div className="service-feature">
-                <div className="service-feature-icon">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM7 21h10a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a4 4 0 01-4-4z" />
-                  </svg>
-                </div>
-                <h3 className="service-feature-title">{isEn ? 'Pruning & shaping' : 'Snoeien & vormgeven'}</h3>
-                <p className="service-feature-description">
-                  {isEn ? 'Professional pruning of trees, shrubs and hedges according to seasonal guidelines.' : 'Professioneel snoeien van bomen, struiken en hagen volgens seizoensrichtlijnen.'}
-                </p>
-              </div>
-
-              <div className="service-feature">
-                <div className="service-feature-icon">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
-                  </svg>
-                </div>
-                <h3 className="service-feature-title">{isEn ? 'Weed control' : 'Onkruidbestrijding'}</h3>
-                <p className="service-feature-description">
-                  {isEn ? 'Effective and eco-friendly weed control for borders and lawns.' : 'Effectieve en milieuvriendelijke onkruidbestrijding voor borders en gazons.'}
-                </p>
-              </div>
-
-              <div className="service-feature">
-                <div className="service-feature-icon">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                  </svg>
-                </div>
-                <h3 className="service-feature-title">{isEn ? 'Seasonal maintenance' : 'Seizoensonderhoud'}</h3>
-                <p className="service-feature-description">
-                  {isEn ? 'Leaf raking, winterizing, spring treatments and seasonal planting.' : 'Bladeren harken, winterklaar maken, voorjaarsbeurten en seizoensbeplanting.'}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="section">
-          <div className="section-inner">
-            <div className="section-header-row section-centered">
-              <h2 className="section-title">{isEn ? 'Frequently asked questions' : 'Veelgestelde vragen'}</h2>
-            </div>
-
-            <div className="faq-grid">
-              {localeFaqs.map((faq, index) => (
-                <div key={index} className="faq-item">
-                  <h3 className="faq-question">{faq.question}</h3>
-                  <p className="faq-answer">{faq.answer}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Lead Form Section */}
-        <section className="section section-alt">
-          <div className="section-inner">
-            <div className="service-form-container">
-              <div className="service-form-header">
-                <h2 className="section-title section-title-centered">{isEn ? 'Request a quote' : 'Vraag een offerte aan'}</h2>
-                <p className="section-sub section-sub-centered">
-                  {isEn ? 'Receive responses from experienced gardeners in your municipality within 24 hours' : 'Ontvang binnen 24 uur reacties van ervaren hoveniers in uw gemeente'}
-                </p>
-              </div>
-              <div className="service-form-content">
-                <NewLeadForm translations={translations} locale={validLocale} />
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* Related Articles */}
-      <RelatedArticles articles={localeArticles} title={isEn ? 'Related articles about garden maintenance' : 'Gerelateerde artikelen over tuinonderhoud'} />
-
       {/* FAQ Schema */}
       <script
         type="application/ld+json"
@@ -275,7 +142,7 @@ export default async function TuinonderhoudPage({ params }: Props) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": localeFaqs.map(faq => ({
+            "mainEntity": localeFaqs.map((faq) => ({
               "@type": "Question",
               "name": faq.question,
               "acceptedAnswer": {
@@ -324,12 +191,96 @@ export default async function TuinonderhoudPage({ params }: Props) {
                 "@type": "UnitPriceSpecification",
                 "price": "35",
                 "priceCurrency": "EUR",
-                "unitText": "per hour"
+                "unitText": isEn ? "per hour" : "per uur"
               }
             }
           }),
         }}
       />
+
+      <LocalBusinessSchema
+        serviceType="tuinonderhoud"
+        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/tuinonderhoud', validLocale as SupportedLocale)}`}
+      />
+
+      <BreadcrumbSchema
+        items={breadcrumbItems.map((item, index) => ({
+          position: index + 1,
+          name: item.label,
+          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/tuinonderhoud', validLocale as SupportedLocale)}`
+        }))}
+      />
+
+      <Navigation locale={validLocale} translations={navTranslations} />
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <main>
+        <section style={{ backgroundColor: '#2A3E20EB', width: '100%', position: 'relative' }}>
+          <Image sizes="100vw" style={{ objectFit: 'cover' }} loading='eager' alt="Garden maintenance background image" src="/images/garden-maintenance.png" fill />
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: '#2A3E20E5', zIndex: 10 }}></div>
+          <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '50.5px 1rem', display: 'flex', flexDirection: 'column', gap: '15.4px', position: 'relative', zIndex: 20 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ width: '22px', height: '.5px', backgroundColor: 'var(--sage)' }} />
+              <span style={{ fontSize: '10px', fontWeight: '500', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--sage)' }}>
+                {t('tuinonderhoud_page.eyebrow')}
+              </span>
+            </div>
+            <h1 style={{ color: '#F4F0E8', fontSize: '48px', fontWeight: 500, lineHeight: '51.84px', margin: 0 }}>
+              {t('tuinonderhoud_page.title')}
+            </h1>
+            <p style={{ borderLeft: '2px solid var(--sage)', padding: '16px 20px', backgroundColor: '#FFFFFF0F', color: '#C8DFC0', fontSize: '15px', lineHeight: '24.75px', fontWeight: 300, margin: 0 }}>
+              {t('tuinonderhoud_page.description')}
+            </p>
+            <div style={{ display: 'flex', gap: '2rem', marginTop: '8.6px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <p style={{ color: '#FFFFFF', fontSize: '24px', fontWeight: 700, margin: 0 }}>{t('tuinonderhoud_page.stat_price')}</p>
+                <p style={{ color: '#B8C4B0', fontSize: '14px', fontWeight: 400, letterSpacing: '0.5px', textTransform: 'uppercase', margin: 0 }}>
+                  {t('tuinonderhoud_page.stat_price_label')}
+                </p>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <p style={{ color: '#FFFFFF', fontSize: '24px', fontWeight: 700, margin: 0 }}>{t('tuinonderhoud_page.stat_gardeners')}</p>
+                <p style={{ color: '#B8C4B0', fontSize: '14px', fontWeight: 400, letterSpacing: '0.5px', textTransform: 'uppercase', margin: 0 }}>
+                  {t('tuinonderhoud_page.stat_gardeners_label')}
+                </p>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <p style={{ color: '#FFFFFF', fontSize: '24px', fontWeight: 700, margin: 0 }}>{t('tuinonderhoud_page.stat_rating')}</p>
+                <p style={{ color: '#B8C4B0', fontSize: '14px', fontWeight: 400, letterSpacing: '0.5px', textTransform: 'uppercase', margin: 0 }}>
+                  {t('tuinonderhoud_page.stat_rating_label')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <BenefitsSection
+          title={t('tuinonderhoud_page.benefits_title')}
+          subtitle={t('tuinonderhoud_page.benefits_subtitle')}
+          benefits={[
+            { icon: <Sun size={24} color="#FFFFFF" variant="Linear" />, title: t('tuinonderhoud_page.benefit_1_title'), description: t('tuinonderhoud_page.benefit_1_desc') },
+            { icon: <Scissor size={24} color="#FFFFFF" variant="Linear" />, title: t('tuinonderhoud_page.benefit_2_title'), description: t('tuinonderhoud_page.benefit_2_desc') },
+            { icon: <Drop size={24} color="#FFFFFF" variant="Linear" />, title: t('tuinonderhoud_page.benefit_3_title'), description: t('tuinonderhoud_page.benefit_3_desc') },
+            { icon: <Calendar size={24} color="#FFFFFF" variant="Linear" />, title: t('tuinonderhoud_page.benefit_4_title'), description: t('tuinonderhoud_page.benefit_4_desc') },
+          ]}
+        />
+
+        <FaqSection
+          title={t('tuinonderhoud_page.faq_title')}
+          faqs={localeFaqs}
+        />
+
+        <LeadFormSection
+          title={t('tuinonderhoud_page.lead_title')}
+          subtitle={t('tuinonderhoud_page.lead_subtitle')}
+          locale={validLocale}
+          backgroundColor="#EDE9E0"
+          formBackgroundColor="#FFFFFF"
+          translations={translations}
+        />
+      </main>
+
+      <RelatedArticles articles={localeArticles} title={t('tuinonderhoud_page.related_articles_title')} />
     </>
   );
 }

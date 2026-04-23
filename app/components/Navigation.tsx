@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import LocaleLink from './LocaleLink';
 import MobileMenu from './MobileMenu';
@@ -48,7 +49,7 @@ export default function Navigation({ locale, translations = {} }: NavigationProp
     <nav className="nav" role="navigation" aria-label="Hoofdnavigatie">
       <div className="nav-inner">
         <Link href={localizePath('/', currentLocale)} className="nav-logo" aria-label="Hovenier.frl homepage">
-          <img src="/assets/logo-light.svg" alt="Hovenier.frl - Vind de beste hovenier in Friesland" width="180" height="40" className="nav-logo-image" />
+          <Image src="/assets/logo-light.svg" alt="Hovenier.frl - Vind de beste hovenier in Friesland" width={180} height={40} className="nav-logo-image" />
         </Link>
         <div className="nav-links">
           {navLinks.map((link) => (

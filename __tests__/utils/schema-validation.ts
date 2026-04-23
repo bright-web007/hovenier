@@ -230,6 +230,37 @@ export const LOCAL_BUSINESS_SCHEMA = {
   ]
 };
 
+type StructuredData = Record<string, unknown>;
+
+type OfferCatalogItem = {
+  itemOffered?: {
+    name?: string;
+  };
+};
+
+type BusinessSchema = StructuredData & {
+  '@id'?: string;
+  '@type'?: string;
+  name?: string;
+  legalName?: string;
+  address?: {
+    addressRegion?: string;
+    addressCountry?: string;
+  };
+  areaServed?: {
+    name?: string;
+  };
+  currenciesAccepted?: string;
+  priceRange?: string;
+  hasOfferCatalog?: {
+    itemListElement?: OfferCatalogItem[];
+  };
+};
+
+function isStructuredData(value: unknown): value is StructuredData {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
 // Initialize AJV validator
 const ajv = new Ajv({ 
   allErrors: true,
@@ -243,15 +274,19 @@ export const validateLocalBusinessSchema = ajv.compile(LOCAL_BUSINESS_SCHEMA);
 /**
  * Extract structured data from HTML string
  */
-export function extractStructuredData(html: string): any[] {
+export function extractStructuredData(html: string): StructuredData[] {
   const structuredDataRegex = /<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs;
-  const matches = [];
+  const matches: StructuredData[] = [];
   let match;
 
   while ((match = structuredDataRegex.exec(html)) !== null) {
     try {
-      const data = JSON.parse(match[1].trim());
-      matches.push(data);
+      const data: unknown = JSON.parse(match[1].trim());
+      if (Array.isArray(data)) {
+        matches.push(...data.filter(isStructuredData));
+      } else if (isStructuredData(data)) {
+        matches.push(data);
+      }
     } catch (error) {
       console.warn('Failed to parse structured data:', error);
     }
@@ -263,14 +298,14 @@ export function extractStructuredData(html: string): any[] {
 /**
  * Find LocalBusiness schema in structured data array
  */
-export function findLocalBusinessSchema(structuredData: any[]): any | null {
-  return structuredData.find(data => data['@type'] === 'LocalBusiness') || null;
+export function findLocalBusinessSchema(structuredData: StructuredData[]): StructuredData | null {
+  return structuredData.find((data) => data['@type'] === 'LocalBusiness') || null;
 }
 
 /**
  * Validate business config consistency
  */
-export function validateBusinessConfigConsistency(schema: any) {
+export function validateBusinessConfigConsistency(schema: BusinessSchema) {
   const errors = [];
 
   // Check required business information consistency
@@ -346,7 +381,7 @@ export const SERVICE_VALIDATION = {
 /**
  * Test helper to validate service-specific schema
  */
-export function validateServiceSpecificSchema(schema: any, serviceType: keyof typeof SERVICE_VALIDATION) {
+export function validateServiceSpecificSchema(schema: BusinessSchema, serviceType: keyof typeof SERVICE_VALIDATION) {
   const errors = [];
   const validation = SERVICE_VALIDATION[serviceType];
 
@@ -360,7 +395,7 @@ export function validateServiceSpecificSchema(schema: any, serviceType: keyof ty
   }
 
   // Check required services
-  const schemaServices = schema.hasOfferCatalog?.itemListElement?.map((item: any) => item.itemOffered?.name) || [];
+  const schemaServices = schema.hasOfferCatalog?.itemListElement?.map((item: OfferCatalogItem) => item.itemOffered?.name) || [];
   
   for (const requiredService of validation.requiredServices) {
     if (!schemaServices.includes(requiredService)) {

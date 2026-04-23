@@ -1,9 +1,10 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
-import NewLeadForm from "@/app/components/NewLeadForm"
-import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
+import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -31,6 +32,7 @@ export async function generateStaticParams() {
 export default async function HovenierPerUurPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
+  const t = createTranslator(locale)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -65,8 +67,8 @@ export default async function HovenierPerUurPage({ params }: Props) {
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
-    { label: 'Kosten', href: '/kosten' },
+    { label: t('breadcrumb_home'), href: '/' },
+    { label: 'Kosten', href: localizePath('/kosten', locale as SupportedLocale) },
     { label: 'Wat kost een hovenier per uur?' }
   ];
 
@@ -268,34 +270,34 @@ export default async function HovenierPerUurPage({ params }: Props) {
               <div className="mt-16 pt-10 border-t border-sage-light">
                 <h3 className="text-sm font-semibold text-forest-deep mb-6">Gerelateerde kostengidsen</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <a href="/kosten/tuinonderhoud" className="bg-white border border-sage-light rounded-lg p-4 hover:shadow-md transition-all group">
+                  <Link href="/kosten/tuinonderhoud" className="bg-white border border-sage-light rounded-lg p-4 hover:shadow-md transition-all group">
                     <div className="flex items-center mb-2">
                       <div className="w-2 h-2 rounded-full bg-forest mr-3 group-hover:bg-sage transition-colors"></div>
                       <span className="text-sm font-medium text-forest group-hover:text-sage transition-colors">Tuinonderhoud kosten</span>
                     </div>
                     <p className="text-xs text-text-mid leading-relaxed">Wat kost tuinonderhoud per maand?</p>
-                  </a>
-                  <a href="/kosten/tuin-aanleggen" className="bg-white border border-sage-light rounded-lg p-4 hover:shadow-md transition-all group">
+                  </Link>
+                  <Link href="/kosten/tuin-aanleggen" className="bg-white border border-sage-light rounded-lg p-4 hover:shadow-md transition-all group">
                     <div className="flex items-center mb-2">
                       <div className="w-2 h-2 rounded-full bg-forest mr-3 group-hover:bg-sage transition-colors"></div>
                       <span className="text-sm font-medium text-forest group-hover:text-sage transition-colors">Tuin aanleggen</span>
                     </div>
                     <p className="text-xs text-text-mid leading-relaxed">Wat kost een complete tuinaanleg?</p>
-                  </a>
-                  <a href="/kosten/groendak" className="bg-white border border-sage-light rounded-lg p-4 hover:shadow-md transition-all group">
+                  </Link>
+                  <Link href="/kosten/groendak" className="bg-white border border-sage-light rounded-lg p-4 hover:shadow-md transition-all group">
                     <div className="flex items-center mb-2">
                       <div className="w-2 h-2 rounded-full bg-forest mr-3 group-hover:bg-sage transition-colors"></div>
                       <span className="text-sm font-medium text-forest group-hover:text-sage transition-colors">Groendak kosten</span>
                     </div>
                     <p className="text-xs text-text-mid leading-relaxed">Wat kost een groendak in Friesland?</p>
-                  </a>
-                  <a href="/hoveniers/leeuwarden" className="bg-white border border-sage-light rounded-lg p-4 hover:shadow-md transition-all group">
+                  </Link>
+                  <Link href="/hoveniers/leeuwarden" className="bg-white border border-sage-light rounded-lg p-4 hover:shadow-md transition-all group">
                     <div className="flex items-center mb-2">
                       <div className="w-2 h-2 rounded-full bg-forest mr-3 group-hover:bg-sage transition-colors"></div>
                       <span className="text-sm font-medium text-forest group-hover:text-sage transition-colors">Hovenier Leeuwarden</span>
                     </div>
                     <p className="text-xs text-text-mid leading-relaxed">Tarieven en aanbieders in de regio</p>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

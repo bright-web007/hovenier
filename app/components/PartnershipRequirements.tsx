@@ -1,5 +1,6 @@
 'use client'
 
+import { createTranslator } from '@/i18n'
 import styles from './Partnership.module.css'
 
 interface PartnershipRequirementsProps {
@@ -8,14 +9,14 @@ interface PartnershipRequirementsProps {
 }
 
 export default function PartnershipRequirements({ requirements, locale = 'nl' }: PartnershipRequirementsProps) {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale);
   return (
     <section className="section section-alt">
       <div className="section-inner">
         <div className={styles.requirements}>
-          <h2 className={styles.requirementsTitle}>{isEn ? 'Partner requirements' : 'Partner vereisten'}</h2>
+          <h2 className={styles.requirementsTitle}>{t('partnership.requirements_title')}</h2>
           <p className={styles.requirementsDescription}>
-            {isEn ? 'We only work with professional gardeners who meet our quality standards.' : 'Wij werken alleen samen met professionele hoveniers die voldoen aan onze kwaliteitseisen.'}
+            {t('partnership.requirements_subtitle')}
           </p>
           
           <div className={styles.requirementsList}>

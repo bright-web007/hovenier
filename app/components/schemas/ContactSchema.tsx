@@ -81,7 +81,7 @@ export default function ContactSchema({ locale, url }: ContactSchemaProps) {
   const webPageSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "name": locale === 'en' ? 'Contact - Hovenier.frl' : 'Contact - Hovenier.frl',
+    "name": "Contact - Hovenier.frl",
     "description": "Contact Hovenier.frl for partnerships, press inquiries, technical support, or general questions about our gardener matching platform.",
     "url": url,
     "mainEntity": {

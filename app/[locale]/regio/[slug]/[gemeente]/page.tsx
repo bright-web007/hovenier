@@ -7,40 +7,51 @@ import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../../components/RelatedArticles'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../../components/StructuredData'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
-import { regionHubs, getRegionHubBySlug, getGemeenteBySlug, getRegionSlugByGemeenteSlug, type RegionHub, type Gemeente } from '@/lib/regions-hierarchy'
+import { env } from '@/lib/env';
+import { createTranslator } from '@/i18n'
+import { regionHubs, getRegionHubBySlug, getGemeenteBySlug, getRegionSlugByGemeenteSlug } from '@/lib/regions-hierarchy'
 import DienstCard from '../../../../components/DienstCard'
 import Link from 'next/link'
-import { createTranslator } from '@/lib/translator'
 
 type Props = {
   params: Promise<{ locale: string; slug: string; gemeente: string }>
+}
+
+/** Simple interpolation: replaces {key} tokens in a translated string */
+function interp(template: string, vars: Record<string, string | number>): string {
+  return Object.entries(vars).reduce(
+    (s, [k, v]) => s.replaceAll(`{${k}}`, String(v)),
+    template
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug, gemeente } = await params;
   const regionHub = getRegionHubBySlug(slug);
   const gemeenteData = getGemeenteBySlug(gemeente);
+  const t = createTranslator(locale);
 
   if (!regionHub || !gemeenteData) {
     return {
-      title: locale === 'en' ? 'Municipality not found | Hovenier.frl' : 'Gemeente niet gevonden | Hovenier.frl'
+      title: t('regio_page.gemeente_not_found_title')
     };
   }
 
-  const isEn = locale === 'en';
-  const title = isEn
-    ? `Gardener in ${gemeenteData.name} | ${regionHub.name} | Hovenier.frl`
-    : `Hovenier in ${gemeenteData.name} | ${regionHub.name} | Hovenier.frl`;
-  const description = isEn
-    ? `Find local gardeners in ${gemeenteData.name}, ${regionHub.name}. ${gemeenteData.introEn || gemeenteData.intro} Compare local garden specialists in this municipality.`
-    : `Vind lokale hoveniers in ${gemeenteData.name}, ${regionHub.name}. ${gemeenteData.intro} Vergelijk lokale tuinspecialisten in deze gemeente.`;
+  const vars = {
+    gemeenteName: gemeenteData.name,
+    gemeenteNameLower: gemeenteData.name.toLowerCase(),
+    regionName: regionHub.name,
+    regionNameLower: regionHub.name.toLowerCase(),
+    intro: (locale === 'en' ? (gemeenteData.introEn || gemeenteData.intro) : gemeenteData.intro),
+  };
+
+  const title = interp(t('gemeente_page.meta_title'), vars);
+  const description = interp(t('gemeente_page.meta_description'), vars);
 
   return {
     title,
     description,
-    keywords: isEn
-      ? `gardener ${gemeenteData.name.toLowerCase()}, ${regionHub.name.toLowerCase()}, local gardener, garden maintenance ${gemeenteData.name}`
-      : `hovenier ${gemeenteData.name.toLowerCase()}, ${regionHub.name.toLowerCase()}, lokale tuinman, tuinonderhoud ${gemeenteData.name}`,
+    keywords: interp(t('gemeente_page.meta_keywords'), vars),
     alternates: getLocaleAlternates(`/regio/${slug}/${gemeente}`, locale as SupportedLocale),
     openGraph: {
       title,
@@ -92,10 +103,17 @@ export default async function GemeentePage({ params }: Props) {
   }
 
   const validLocale = locale as SupportedLocale;
-  const isEn = validLocale === 'en';
 
   // Create translator function
   const t = createTranslator(validLocale);
+
+  // Common interpolation variables
+  const vars = {
+    gemeenteName: gemeenteData.name,
+    regionName: regionHub.name,
+    population: gemeenteData.population.toLocaleString(),
+    count: String(regionHub.gemeentes.length),
+  };
 
   // Navigation translations
   const navTranslations = {
@@ -117,116 +135,74 @@ export default async function GemeentePage({ params }: Props) {
     phone_number: t('phone_number'),
     send_request: t('send_request'),
     form_note: t('form_note'),
-    select_municipality: validLocale === 'en' ? 'Select municipality' : 'Selecteer gemeente',
-    what_do_you_need: validLocale === 'en' ? 'What do you need?' : 'Wat heeft u nodig?',
-    your_company: validLocale === 'en' ? 'Your company' : 'Uw bedrijf',
-    loading: validLocale === 'en' ? 'Loading...' : 'Versturen...',
-    privacy_agreement: validLocale === 'en' ? 'I agree to the' : 'Ik ga akkoord met het',
-    privacy_link: validLocale === 'en' ? 'privacy policy' : 'privacybeleid',
-    privacy_consent: validLocale === 'en' ? 'and consent to processing my data.' : 'en geef toestemming voor het verwerken van mijn gegevens.',
+    select_municipality: t('form.select_municipality'),
+    what_do_you_need: t('form.what_do_you_need'),
+    your_company: t('form.your_company'),
+    loading: t('form.loading'),
+    privacy_agreement: t('form.privacy_agreement'),
+    privacy_link: t('form.privacy_link'),
+    privacy_consent: t('form.privacy_consent'),
     services: {
-      tuinonderhoud: validLocale === 'en' ? 'Garden Maintenance' : 'Tuinonderhoud',
-      tuinontwerp: validLocale === 'en' ? 'Garden Design' : 'Tuinontwerp',
-      'tuin-aanleggen': validLocale === 'en' ? 'Garden Installation' : 'Tuin Aanleggen',
-      stratenmaker: validLocale === 'en' ? 'Paving' : 'Bestrating',
-      groendak: validLocale === 'en' ? 'Green Roof' : 'Groendak',
-      overig: validLocale === 'en' ? 'Other' : 'Overig'
+      tuinonderhoud: t('form.services.tuinonderhoud'),
+      tuinontwerp: t('form.services.tuinontwerp'),
+      'tuin-aanleggen': t('form.services.tuin-aanleggen'),
+      stratenmaker: t('form.services.stratenmaker'),
+      groendak: t('form.services.groendak'),
+      overig: t('form.services.overig')
     }
   };
 
   // Sample related articles data
-  const relatedArticles = isEn ? [
+  const relatedArticles = [
     {
       id: "1",
-      title: `Garden maintenance in ${gemeenteData.name}: Tips from local gardeners`,
-      excerpt: `Practical tips for garden maintenance in ${gemeenteData.name} from experienced local specialists.`,
+      title: interp(t('gemeente_page.article_1_title'), vars),
+      excerpt: interp(t('gemeente_page.article_1_excerpt'), vars),
       slug: `tuinonderhoud-${gemeente}`,
-      category: "Garden Maintenance",
+      category: t('gemeente_page.article_1_category'),
       readTime: 5,
       publishedAt: "2024-03-20",
     },
     {
       id: "2",
-      title: `Best time for garden installation in ${regionHub.name}`,
-      excerpt: `Explanation of the optimal timing for garden installation in the ${regionHub.name} region.`,
+      title: interp(t('gemeente_page.article_2_title'), vars),
+      excerpt: interp(t('gemeente_page.article_2_excerpt'), vars),
       slug: `tuinaanleg-timing-${slug}`,
-      category: "Garden Installation",
+      category: t('gemeente_page.article_2_category'),
       readTime: 7,
       publishedAt: "2024-03-15",
     },
     {
       id: "3",
-      title: `Costs of gardening services in Friesland 2024`,
-      excerpt: `Overview of prices for professional gardening services throughout Friesland.`,
+      title: t('gemeente_page.article_3_title'),
+      excerpt: t('gemeente_page.article_3_excerpt'),
       slug: "kosten-hovenierdiensten-friesland-2024",
-      category: "Costs",
-      readTime: 6,
-      publishedAt: "2024-03-10",
-    }
-  ] : [
-    {
-      id: "1",
-      title: `Tuinonderhoud in ${gemeenteData.name}: Tips van lokale hoveniers`,
-      excerpt: `Praktische tips voor tuinonderhoud in ${gemeenteData.name} van ervaren lokale specialisten.`,
-      slug: `tuinonderhoud-${gemeente}`,
-      category: "Tuinonderhoud",
-      readTime: 5,
-      publishedAt: "2024-03-20",
-    },
-    {
-      id: "2",
-      title: `Beste tijd voor tuinaanleg in ${regionHub.name}`,
-      excerpt: `Uitleg over de optimale timing voor tuinaanleg in de regio ${regionHub.name}.`,
-      slug: `tuinaanleg-timing-${slug}`,
-      category: "Tuinaanleg",
-      readTime: 7,
-      publishedAt: "2024-03-15",
-    },
-    {
-      id: "3",
-      title: `Kosten van hovenierdiensten in Friesland 2024`,
-      excerpt: `Overzicht van prijzen voor professionele hovenierdiensten in heel Friesland.`,
-      slug: "kosten-hovenierdiensten-friesland-2024",
-      category: "Kosten",
+      category: t('gemeente_page.article_3_category'),
       readTime: 6,
       publishedAt: "2024-03-10",
     }
   ];
 
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
-    { label: isEn ? 'Regions' : 'Regio\'s', href: '/regio' },
-    { label: regionHub.name, href: `/regio/${slug}` },
-    { label: gemeenteData.name, href: `/regio/${slug}/${gemeente}` }
+    { label: t('breadcrumb_home'), href: '/' },
+    { label: t('regio_page.breadcrumb_regions'), href: localizePath('/regio', locale as SupportedLocale) },
+    { label: regionHub.name, href: localizePath(`/regio/${slug}`, locale as SupportedLocale) },
+    { label: gemeenteData.name, href: localizePath(`/regio/${slug}/${gemeente}`, locale as SupportedLocale) }
   ];
 
   return (
     <div className="page-container">
       <LocalBusinessSchema
-        url={`https://hovenier.frl${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`}
-        nameContext={isEn ? `Gardeners in ${gemeenteData.name}` : `Hoveniers in ${gemeenteData.name}`}
-        services={isEn ? [
-          "Garden Maintenance",
-          "Garden Design",
-          "Paving",
-          "Tree Care",
-          "Green Roofs",
-          "Garden Installation"
-        ] : [
-          "Tuinonderhoud",
-          "Tuinontwerp",
-          "Bestrating",
-          "Boomverzorging",
-          "Groendaken",
-          "Tuinaanleg"
-        ]}
+        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`}
+        nameContext={interp(t('gemeente_page.schema_name_context'), vars)}
+        services={t.raw('gemeente_page.services_list') as string[]}
       />
 
       <BreadcrumbSchema
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
-          url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`
+          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`
         }))}
       />
 
@@ -245,12 +221,12 @@ export default async function GemeentePage({ params }: Props) {
           <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
             <div className='region-hero'>
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem', gap: '1rem' }}>
+                <div className="gemeente-hero-header" style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem', gap: '1rem' }}>
                   <div style={{
                     background: 'var(--forest-light)',
                     width: '64px',
                     height: '64px',
-                    borderRadius: '50%',
+                    borderRadius: '24px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -262,63 +238,78 @@ export default async function GemeentePage({ params }: Props) {
                   </div>
                   <div>
                     <h1 style={{ fontSize: '3rem', fontFamily: 'var(--heading-font)', fontWeight: '600', color: 'var(--forest)', marginBottom: '0.5rem', lineHeight: '1.1' }}>
-                      {isEn ? 'Gardener in' : 'Hovenier in'} {gemeenteData.name}
+                      {interp(t('gemeente_page.hero_title'), vars)}
                     </h1>
                     <p style={{ fontSize: '1.25rem', color: 'var(--forest-mid)', margin: '0' }}>
-                      {regionHub.name} • {gemeenteData.population.toLocaleString()} {isEn ? 'residents' : 'inwoners'}
+                      {interp(t('gemeente_page.hero_subtitle'), vars)}
                     </p>
                   </div>
                 </div>
 
                 <p style={{ fontSize: '1.25rem', color: 'var(--forest-mid)', marginBottom: '2rem', lineHeight: '1.6' }}>
-                  {isEn ? (gemeenteData.introEn || gemeenteData.intro) : gemeenteData.intro}
+                  {validLocale === 'en' ? (gemeenteData.introEn || gemeenteData.intro) : gemeenteData.intro}
                 </p>
 
                 {/* Municipality Stats */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', marginBottom: '2rem' }}>
+                <div className="gemeente-stats" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', marginBottom: '2rem' }}>
                   <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', fontFamily: 'var(--heading-font)', fontWeight: '600', color: 'var(--forest)', marginBottom: '0.5rem' }}>
                       {gemeenteData.population.toLocaleString()}
                     </div>
-                    <p style={{ fontSize: '14px', color: 'var(--forest-mid)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{isEn ? 'Residents' : 'Inwoners'}</p>
+                    <p style={{ fontSize: '14px', color: 'var(--forest-mid)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{t('gemeente_page.stat_residents')}</p>
                   </div>
                   <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', fontFamily: 'var(--heading-font)', fontWeight: '600', color: 'var(--forest)', marginBottom: '0.5rem' }}>
                       {gemeenteData.nearby.length}
                     </div>
-                    <p style={{ fontSize: '14px', color: 'var(--forest-mid)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{isEn ? 'Nearby Municipalities' : 'Naburige Gemeenten'}</p>
+                    <p style={{ fontSize: '14px', color: 'var(--forest-mid)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{t('gemeente_page.stat_nearby')}</p>
                   </div>
                   <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '2rem', fontFamily: 'var(--heading-font)', fontWeight: '600', color: 'var(--forest)', marginBottom: '0.5rem' }}>
                       {regionHub.gemeentes.length}
                     </div>
-                    <p style={{ fontSize: '14px', color: 'var(--forest-mid)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{isEn ? 'In' : 'In'} {regionHub.name}</p>
+                    <p style={{ fontSize: '14px', color: 'var(--forest-mid)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{interp(t('gemeente_page.stat_in_region'), vars)}</p>
                   </div>
                 </div>
 
-                {/* Nearby Gemeenten */}
-                {gemeenteData.nearby.length > 0 && (
+                {/* Cities within this municipality */}
+                {gemeenteData.cities && gemeenteData.cities.length > 0 && (
                   <div>
                     <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>
-                      {isEn ? 'Near' : 'Nabij'} {gemeenteData.name}
+                      {interp(t('gemeente_page.cities_title'), vars)}
                     </h3>
-                    <div className="city-grid">
-                      {gemeenteData.nearby.map((nearbySlug) => {
-                        const nearbyGemeente = getGemeenteBySlug(nearbySlug);
-                        const nearbyRegionSlug = getRegionSlugByGemeenteSlug(nearbySlug);
-                        if (!nearbyGemeente || !nearbyRegionSlug) return null;
-                        return (
-                          <Link style={{ backgroundColor: 'white', borderRadius: '8px', padding: "24px 1rem", border: '1px solid #2A3E201F', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: '252px' }} key={nearbySlug} href={localizePath(`/regio/${nearbyRegionSlug}/${nearbySlug}`, validLocale)}>
-                            <div style={{ borderRadius: '50%', width: '48px', height: '48px', backgroundColor: 'var(--forest-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" clipRule="evenodd" d="M6.05997 4.85984C7.63536 3.28446 9.77204 2.39941 12 2.39941C14.2279 2.39941 16.3646 3.28446 17.94 4.85984C19.5154 6.43523 20.4004 8.57191 20.4004 10.7998C20.4004 13.0278 19.5154 15.1645 17.94 16.7398L12 22.6798L6.05997 16.7398C5.27987 15.9598 4.66105 15.0338 4.23886 14.0146C3.81667 12.9954 3.59937 11.903 3.59937 10.7998C3.59937 9.69667 3.81667 8.6043 4.23886 7.5851C4.66105 6.56591 5.27987 5.63987 6.05997 4.85984ZM12 13.1998C12.6365 13.1998 13.2469 12.947 13.697 12.4969C14.1471 12.0468 14.4 11.4364 14.4 10.7998C14.4 10.1633 14.1471 9.55287 13.697 9.10279C13.2469 8.6527 12.6365 8.39984 12 8.39984C11.3635 8.39984 10.753 8.6527 10.3029 9.10279C9.85283 9.55287 9.59997 10.1633 9.59997 10.7998C9.59997 11.4364 9.85283 12.0468 10.3029 12.4969C10.753 12.947 11.3635 13.1998 12 13.1998Z" fill="white" />
-                              </svg>
-                            </div>
-                            <p style={{ color: '#1C3A12', fontSize: '15px', lineHeight: '19.5px' }}>{nearbyGemeente.name}</p>
-                          </Link>
-                        );
-                      })}
+                    <div style={{ marginBottom: '2rem' }} className="city-grid">
+                      {gemeenteData.cities.map((city) => (
+                        <Link
+                          style={{
+                            backgroundColor: 'white',
+                            borderRadius: '8px',
+                            padding: "24px 1rem",
+                            border: '1px solid #2A3E201F',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '100%',
+                            maxWidth: '252px'
+                          }}
+                          key={city.slug}
+                          href={localizePath(`/regio/${slug}/${gemeente}/${city.slug}`, validLocale)}
+                        >
+                          <div style={{ borderRadius: '50%', width: '48px', height: '48px', backgroundColor: 'var(--forest-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                              <path fillRule="evenodd" clipRule="evenodd" d="M6.05997 4.85984C7.63536 3.28446 9.77204 2.39941 12 2.39941C14.2279 2.39941 16.3646 3.28446 17.94 4.85984C19.5154 6.43523 20.4004 8.57191 20.4004 10.7998C20.4004 13.0278 19.5154 15.1645 17.94 16.7398L12 22.6798L6.05997 16.7398C5.27987 15.9598 4.66105 15.0338 4.23886 14.0146C3.81667 12.9954 3.59937 11.903 3.59937 10.7998C3.59937 9.69667 3.81667 8.6043 4.23886 7.5851C4.66105 6.56591 5.27987 5.63987 6.05997 4.85984ZM12 13.1998C12.6365 13.1998 13.2469 12.947 13.697 12.4969C14.1471 12.0468 14.4 11.4364 14.4 10.7998C14.4 10.1633 14.1471 9.55287 13.697 9.10279C13.2469 8.6527 12.6365 8.39984 12 8.39984C11.3635 8.39984 10.753 8.6527 10.3029 9.10279C9.85283 9.55287 9.59997 10.1633 9.59997 10.7998C9.59997 11.4364 9.85283 12.0468 10.3029 12.4969C10.753 12.947 11.3635 13.1998 12 13.1998Z" fill="white" />
+                            </svg>
+                          </div>
+                          <p style={{ color: '#1C3A12', fontSize: '15px', lineHeight: '19.5px', fontWeight: 600, marginBottom: '4px' }}>{city.name}</p>
+                          <p style={{ color: 'var(--forest-mid)', fontSize: '13px', lineHeight: '16px' }}>{t('gemeente_page.cities_gardeners')}</p>
+                        </Link>
+                      ))}
                     </div>
+                    <Link href={localizePath('/contact', validLocale)} className="contact-link" style={{ color: '#16423C', fontWeight: 600, textDecoration: 'none', fontSize: '14px' }}>
+                      {t('gemeente_page.cities_not_listed')}{' '}
+                      {t('gemeente_page.cities_contact')}
+                    </Link>
                   </div>
                 )}
               </div>
@@ -339,31 +330,31 @@ export default async function GemeentePage({ params }: Props) {
         <section style={{ background: 'var(--cream-dark)', padding: '4rem 1.5rem' }}>
           <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
             <h2 style={{ fontSize: '2rem', fontFamily: 'var(--heading-font)', fontWeight: '600', color: 'var(--forest)', marginBottom: '2rem', textAlign: 'center' }}>
-              {isEn ? `Popular Gardening Services in ${gemeenteData.name}` : `Populaire Hovenierdiensten in ${gemeenteData.name}`}
+              {interp(t('gemeente_page.services_title'), vars)}
             </h2>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
+            <div className="gemeente-services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', marginBottom: '3rem' }}>
               <DienstCard
                 id="tuinonderhoud"
-                title={isEn ? 'Garden Maintenance' : 'Tuinonderhoud'}
-                subtitle={isEn ? 'Regular maintenance & care' : 'Regulier onderhoud & verzorging'}
-                description={isEn ? 'Regular maintenance for a beautiful garden all year round' : 'Regelmatig onderhoud voor een mooie tuin het hele jaar door'}
+                title={t('gemeente_page.tuinonderhoud_title')}
+                subtitle={t('gemeente_page.tuinonderhoud_subtitle')}
+                description={t('gemeente_page.tuinonderhoud_desc')}
                 image="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80"
                 locale={validLocale}
               />
               <DienstCard
                 id="tuinontwerp"
-                title={isEn ? 'Garden Design' : 'Tuinontwerp'}
-                subtitle={isEn ? 'Creative garden concepts' : 'Creatieve tuinconcepten'}
-                description={isEn ? 'Professional design for your dream garden' : 'Professioneel ontwerp voor uw droomtuin'}
+                title={t('gemeente_page.tuinontwerp_title')}
+                subtitle={t('gemeente_page.tuinontwerp_subtitle')}
+                description={t('gemeente_page.tuinontwerp_desc')}
                 image="https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?w=800&q=80"
                 locale={validLocale}
               />
               <DienstCard
                 id="stratenmaker"
-                title={isEn ? 'Paving' : 'Bestrating'}
-                subtitle={isEn ? 'Terraces & garden paths' : 'Terrassen & tuinpaden'}
-                description={isEn ? 'Terraces, driveways and garden paths professionally installed' : 'Terrassen, opritten en tuinpaden professioneel aangelegd'}
+                title={t('gemeente_page.stratenmaker_title')}
+                subtitle={t('gemeente_page.stratenmaker_subtitle')}
+                description={t('gemeente_page.stratenmaker_desc')}
                 image="https://images.unsplash.com/photo-1722953529218-7ade56b81293?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 locale={validLocale}
               />
@@ -376,10 +367,10 @@ export default async function GemeentePage({ params }: Props) {
           <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '4rem 1rem' }}>
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
               <h2 style={{ fontSize: '2rem', fontFamily: 'var(--heading-font)', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>
-                {isEn ? `Request a free quote in ${gemeenteData.name}` : `Gratis offerte aanvragen in ${gemeenteData.name}`}
+                {interp(t('gemeente_page.lead_title'), vars)}
               </h2>
               <p style={{ color: 'var(--forest-mid)', fontSize: '1.125rem' }}>
-                {isEn ? 'Receive responses from local gardening specialists within 24 hours' : 'Ontvang binnen 24 uur reacties van lokale hovenier specialisten'}
+                {t('gemeente_page.lead_subtitle')}
               </p>
             </div>
 
@@ -398,10 +389,10 @@ export default async function GemeentePage({ params }: Props) {
         <section style={{ background: 'var(--cream-light)', padding: '3rem 1.5rem' }}>
           <div style={{ maxWidth: '64rem', margin: '0 auto', textAlign: 'center' }}>
             <h2 style={{ fontSize: '1.5rem', fontFamily: 'var(--heading-font)', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>
-              {isEn ? `More Gardeners in ${regionHub.name}` : `Meer Hoveniers in ${regionHub.name}`}
+              {interp(t('gemeente_page.nav_more_title'), vars)}
             </h2>
             <p style={{ color: 'var(--forest-mid)', marginBottom: '2rem', fontSize: '1.125rem' }}>
-              {isEn ? `View all ${regionHub.gemeentes.length} municipalities in this region` : `Bekijk alle ${regionHub.gemeentes.length} gemeenten in deze regio`}
+              {interp(t('gemeente_page.nav_more_subtitle'), vars)}
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <a href={localizePath(`/regio/${slug}`, validLocale)} style={{
@@ -433,7 +424,7 @@ export default async function GemeentePage({ params }: Props) {
                 textDecoration: 'none',
                 transition: 'all 0.2s ease'
               }}>
-                {isEn ? 'All Regions →' : 'Alle Regio\'s →'}
+                {t('gemeente_page.all_regions')}
               </a>
             </div>
           </div>
@@ -442,7 +433,7 @@ export default async function GemeentePage({ params }: Props) {
         {/* Related Articles */}
         <RelatedArticles
           articles={relatedArticles}
-          title={isEn ? `Related articles for ${gemeenteData.name}` : `Gerelateerde artikelen voor ${gemeenteData.name}`}
+          title={interp(t('gemeente_page.related_title'), vars)}
         />
       </main>
     </div>

@@ -17,12 +17,45 @@ interface AuthResponse {
   expires_at: string;
 }
 
-interface GraphQLResponse<T = any> {
+interface GraphQLResponse<T = unknown> {
   data?: T;
   errors?: Array<{
     message: string;
-    extensions?: any;
+    extensions?: Record<string, unknown>;
   }>;
+}
+
+interface SchemaTypeRef {
+  name: string | null;
+  kind: string;
+  ofType?: SchemaTypeRef | null;
+}
+
+interface SchemaArgument {
+  name: string;
+  type: SchemaTypeRef;
+}
+
+interface SchemaField {
+  name: string;
+  description: string | null;
+  args: SchemaArgument[];
+  type: SchemaTypeRef;
+}
+
+interface SchemaType {
+  name: string;
+  kind: string;
+  description: string | null;
+  fields?: SchemaField[] | null;
+}
+
+interface IntrospectionResult {
+  __schema: {
+    mutationType?: { name: string } | null;
+    queryType?: { name: string } | null;
+    types: SchemaType[];
+  };
 }
 
 export class PrometheusClient {
@@ -97,7 +130,7 @@ export class PrometheusClient {
   /**
    * Execute a GraphQL query/mutation against Prometheus
    */
-  async execute<T = any>(query: string, variables?: any): Promise<T> {
+  async execute<T = unknown>(query: string, variables?: Record<string, unknown>): Promise<T> {
     const token = await this.authenticate();
 
     try {
@@ -139,7 +172,7 @@ export class PrometheusClient {
   /**
    * Introspect the GraphQL schema (for development/investigation)
    */
-  async introspectSchema() {
+  async introspectSchema(): Promise<IntrospectionResult> {
     const introspectionQuery = `
       query IntrospectionQuery {
         __schema {
@@ -171,7 +204,7 @@ export class PrometheusClient {
       }
     `;
 
-    return this.execute(introspectionQuery);
+    return this.execute<IntrospectionResult>(introspectionQuery);
   }
 
   /**
@@ -180,7 +213,7 @@ export class PrometheusClient {
   async getAvailableMutations() {
     const schema = await this.introspectSchema();
     const mutationType = schema.__schema.types.find(
-      (type: any) => type.name === schema.__schema.mutationType?.name
+      (type: { name: string }) => type.name === schema.__schema.mutationType?.name
     );
     
     return mutationType?.fields || [];
@@ -191,7 +224,7 @@ export class PrometheusClient {
    */
   async getLeadTypes() {
     const schema = await this.introspectSchema();
-    return schema.__schema.types.filter((type: any) =>
+    return schema.__schema.types.filter((type: { name: string }) =>
       type.name.toLowerCase().includes('lead') ||
       type.name.toLowerCase().includes('form') ||
       type.name.toLowerCase().includes('submission') ||

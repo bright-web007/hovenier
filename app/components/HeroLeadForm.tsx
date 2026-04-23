@@ -1,6 +1,6 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+import NewLeadForm from './NewLeadForm';
 
 interface HeroLeadFormProps {
   translations: {
@@ -33,16 +33,5 @@ interface HeroLeadFormProps {
 }
 
 export default function HeroLeadForm({ translations, locale }: HeroLeadFormProps) {
-  const DeferredLeadForm = dynamic(() => import('./NewLeadForm'), {
-    ssr: false,
-    loading: () => (
-      <div aria-hidden="true">
-        <p className="form-eyebrow">{translations.form_eyebrow}</p>
-        <h2 className="form-title">{translations.form_title}</h2>
-        <p className="form-sub">{translations.form_subtitle}</p>
-      </div>
-    ),
-  });
-
-  return <DeferredLeadForm translations={translations} locale={locale} />;
+  return <NewLeadForm translations={translations} locale={locale} />;
 }

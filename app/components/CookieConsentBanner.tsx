@@ -16,29 +16,61 @@ interface ConsentPreferences {
   preferences: boolean;
 }
 
+const defaultPreferences: ConsentPreferences = {
+  necessary: true,
+  analytics: false,
+  marketing: false,
+  preferences: false,
+};
+
+function parseStoredPreferences(value: string | null): ConsentPreferences {
+  if (!value) return defaultPreferences;
+  try {
+    const parsed = JSON.parse(value) as Partial<ConsentPreferences>;
+    return {
+      necessary: true,
+      analytics: parsed.analytics ?? false,
+      marketing: parsed.marketing ?? false,
+      preferences: parsed.preferences ?? false,
+    };
+  } catch {
+    return defaultPreferences;
+  }
+}
+
 const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) => {
-  const [showBanner, setShowBanner] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [consentGiven, setConsentGiven] = useState(false);
+  const [storedPreferences, setStoredPreferences] = useState<ConsentPreferences>(defaultPreferences);
   const [showDetails, setShowDetails] = useState(false);
-  const [preferences, setPreferences] = useState<ConsentPreferences>({
-    necessary: true, // Always required
-    analytics: false,
-    marketing: false,
-    preferences: false,
-  });
+  const [pendingPreferences, setPendingPreferences] = useState<ConsentPreferences | null>(null);
 
   useEffect(() => {
-    // Check if user has already given consent
-    const consentGiven = localStorage.getItem('cookie_consent_given');
-    if (!consentGiven) {
-      setShowBanner(true);
-    } else {
-      // Load saved preferences
-      const savedPreferences = localStorage.getItem('cookie_consent_preferences');
-      if (savedPreferences) {
-        setPreferences(JSON.parse(savedPreferences));
+    const readStorage = () => {
+      setConsentGiven(Boolean(localStorage.getItem('cookie_consent_given')));
+      setStoredPreferences(parseStoredPreferences(localStorage.getItem('cookie_consent_preferences')));
+      setMounted(true);
+    };
+
+    readStorage();
+
+    const handleConsentChange = () => readStorage();
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === null || e.key === 'cookie_consent_given' || e.key === 'cookie_consent_preferences') {
+        readStorage();
       }
-    }
+    };
+
+    window.addEventListener('cookie-consent-changed', handleConsentChange);
+    window.addEventListener('storage', handleStorage);
+
+    return () => {
+      window.removeEventListener('cookie-consent-changed', handleConsentChange);
+      window.removeEventListener('storage', handleStorage);
+    };
   }, []);
+
+  const preferences = pendingPreferences ?? storedPreferences;
 
   const handleAcceptAll = () => {
     const allAccepted: ConsentPreferences = {
@@ -47,10 +79,8 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
       marketing: true,
       preferences: true,
     };
-    
     saveConsent(allAccepted);
     initializeServices(allAccepted);
-    setShowBanner(false);
   };
 
   const handleDeclineAll = () => {
@@ -60,16 +90,13 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
       marketing: false,
       preferences: false,
     };
-    
     saveConsent(onlyNecessary);
     initializeServices(onlyNecessary);
-    setShowBanner(false);
   };
 
   const handleSavePreferences = () => {
     saveConsent(preferences);
     initializeServices(preferences);
-    setShowBanner(false);
   };
 
   const saveConsent = (prefs: ConsentPreferences) => {
@@ -79,6 +106,7 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
     
     // Set consent cookie for server-side access
     document.cookie = `cookie_consent=${JSON.stringify(prefs)}; path=/; max-age=31536000; SameSite=Lax`;
+    window.dispatchEvent(new Event('cookie-consent-changed'));
   };
 
   const initializeServices = (prefs: ConsentPreferences) => {
@@ -94,8 +122,9 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
 
   const handlePreferenceChange = (type: keyof ConsentPreferences, value: boolean) => {
     if (type === 'necessary') return; // Cannot disable necessary cookies
-    setPreferences(prev => ({
+    setPendingPreferences((prev) => ({
       ...prev,
+      ...(prev ?? preferences),
       [type]: value
     }));
   };
@@ -143,7 +172,7 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
 
   const t = translations[locale as keyof typeof translations] || translations.nl;
 
-  if (!showBanner) return null;
+  if (!mounted || consentGiven) return null;
 
   return (
     <div className={styles.cookieConsentOverlay}>

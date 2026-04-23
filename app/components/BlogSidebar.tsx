@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import styles from './Blog.module.css'
 import { localizePath, type SupportedLocale } from '@/lib/locale-utils'
+import { createTranslator } from '@/i18n'
 
 interface Category {
   name: string
@@ -29,14 +30,14 @@ const popularArticles = {
 }
 
 export default function BlogSidebar({ categories, locale }: BlogSidebarProps) {
-  const isEn = locale === 'en';
-  const articles = popularArticles[isEn ? 'en' : 'nl'];
+  const t = createTranslator(locale);
+  const articles = popularArticles[locale as 'en' | 'nl'] || popularArticles['nl'];
 
   return (
     <div className={styles.sidebar}>
       {/* Categories Widget */}
       <div className={styles.widget}>
-        <h3 className={styles.widgetTitle}>{isEn ? 'Categories' : 'Categorieën'}</h3>
+        <h3 className={styles.widgetTitle}>{t('blog.categories_title')}</h3>
         <div className={styles.categoryList}>
           {categories.map(category => (
             <Link
@@ -55,25 +56,25 @@ export default function BlogSidebar({ categories, locale }: BlogSidebarProps) {
 
       {/* Newsletter Widget */}
       <div className={`${styles.widget} ${styles.newsletterWidget}`}>
-        <h3 className={styles.widgetTitle}>{isEn ? 'Garden Newsletter' : 'Tuinnieuwsbrief'}</h3>
+        <h3 className={styles.widgetTitle}>{t('blog.newsletter_title')}</h3>
         <p className={styles.newsletterDescription}>
-          {isEn ? 'Receive the best garden tips and seasonal advice in your inbox monthly.' : 'Ontvang maandelijks de beste tuintips en seizoensadvies in je inbox.'}
+          {t('blog.newsletter_text')}
         </p>
         <div className={styles.newsletterForm}>
           <input 
             type="email" 
-            placeholder={isEn ? 'Your email address' : 'Je email adres'}
+            placeholder={t('blog.newsletter_placeholder')}
             className={styles.newsletterInput}
           />
           <button className={styles.newsletterButton}>
-            {isEn ? 'Subscribe' : 'Aanmelden'}
+            {t('blog.newsletter_button')}
           </button>
         </div>
       </div>
 
       {/* Popular Articles Widget */}
       <div className={styles.widget}>
-        <h3 className={styles.widgetTitle}>{isEn ? 'Popular Articles' : 'Populaire Artikelen'}</h3>
+        <h3 className={styles.widgetTitle}>{t('blog.popular_title')}</h3>
         <div className={styles.popularList}>
           {articles.map((article, index) => (
             <a key={index} href="#" className={styles.popularItem}>
@@ -88,15 +89,15 @@ export default function BlogSidebar({ categories, locale }: BlogSidebarProps) {
 
       {/* Quick Contact Widget */}
       <div className={`${styles.widget} ${styles.contactWidget}`}>
-        <h3 className={styles.widgetTitle}>{isEn ? 'Need Advice?' : 'Advies Nodig?'}</h3>
+        <h3 className={styles.widgetTitle}>{t('blog.advice_title')}</h3>
         <p className={styles.contactDescription}>
-          {isEn ? 'Get direct answers to your garden questions from local experts.' : 'Krijg direct antwoord op je tuinvragen van lokale experts.'}
+          {t('blog.advice_text')}
         </p>
         <Link
           href={localizePath('/#lead-form', locale as SupportedLocale)}
           className={styles.contactButton}
         >
-          {isEn ? 'Free Advice →' : 'Gratis Advies →'}
+          {t('blog.advice_link')}
         </Link>
       </div>
     </div>

@@ -8,8 +8,12 @@
 import { execSync } from 'child_process';
 import fetch from 'node-fetch';
 
+type KillableProcess = {
+  kill(): void;
+};
+
 describe('Next.js App Router Integration Tests', () => {
-  let serverProcess: any;
+  let serverProcess: KillableProcess | undefined;
   const baseURL = 'http://localhost:3000';
   
   beforeAll(async () => {

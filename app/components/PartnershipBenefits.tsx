@@ -1,5 +1,6 @@
 'use client'
 
+import { createTranslator } from '@/i18n'
 import styles from './Partnership.module.css'
 
 interface Benefit {
@@ -14,13 +15,13 @@ interface PartnershipBenefitsProps {
 }
 
 export default function PartnershipBenefits({ benefits, locale = 'nl' }: PartnershipBenefitsProps) {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale);
   return (
     <section className="section section-alt">
       <div className="section-inner">
         <div className="section-header-row section-centered">
-          <h2 className="section-title">{isEn ? 'Why become a partner?' : 'Waarom partner worden?'}</h2>
-          <p className="section-sub">{isEn ? 'The benefits of partnering with Hovenier.frl' : 'De voordelen van samenwerken met Hovenier.frl'}</p>
+          <h2 className="section-title">{t('partnership.benefits_title')}</h2>
+          <p className="section-sub">{t('partnership.benefits_subtitle')}</p>
         </div>
         
         <div className={styles.benefitsGrid}>

@@ -1,14 +1,13 @@
 import styles from '../../styles/Privacy.module.css';
+import { createTranslator } from '@/i18n';
 
 const PrivacyResponsibilities = ({ locale = 'nl' }: { locale?: string }) => {
-  const isEn = locale === 'en';
+  const t = createTranslator(locale);
   return (
     <section className={styles.legalSection}>
-      <h2 className={styles.legalSectionTitle}>{isEn ? '2. Responsibilities' : '2. Verantwoordelijkheden'}</h2>
+      <h2 className={styles.legalSectionTitle}>{t('privacy_page.responsibilities_title')}</h2>
       <p className={styles.legalText}>
-        {isEn
-          ? 'Hovenier.frl is the data controller for the processing of your personal data. Our contact details are:'
-          : 'Hovenier.frl is de verwerkingsverantwoordelijke voor de verwerking van uw persoonlijke gegevens. Onze contactgegevens zijn:'}
+        {t('privacy_page.responsibilities_text')}
       </p>
       <address className={styles.legalContact}>
         <strong>Hovenier.frl</strong><br />

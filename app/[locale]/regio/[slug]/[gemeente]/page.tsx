@@ -6,6 +6,7 @@ import Breadcrumbs from '../../../../components/Breadcrumbs'
 import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../../components/RelatedArticles'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../../components/StructuredData'
+import { CityPageSchema } from '@/app/components/CityPageSchema'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 import { env } from '@/lib/env';
 import { createTranslator } from '@/i18n'
@@ -190,13 +191,26 @@ export default async function GemeentePage({ params }: Props) {
     { label: gemeenteData.name, href: localizePath(`/regio/${slug}/${gemeente}`, locale as SupportedLocale) }
   ];
 
+  const isLeafMunicipality = !gemeenteData.cities ||
+    gemeenteData.cities.length === 0 ||
+    (gemeenteData.cities.length === 1 && gemeenteData.cities[0].slug === gemeente);
+
   return (
     <div className="page-container">
-      <LocalBusinessSchema
-        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`}
-        nameContext={interp(t('gemeente_page.schema_name_context'), vars)}
-        services={t.raw('gemeente_page.services_list') as string[]}
-      />
+      {isLeafMunicipality ? (
+        <CityPageSchema
+          locale={validLocale}
+          slug={slug}
+          gemeente={gemeente}
+          citySlug={gemeente}
+        />
+      ) : (
+        <LocalBusinessSchema
+          url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`}
+          nameContext={interp(t('gemeente_page.schema_name_context'), vars)}
+          services={t.raw('gemeente_page.services_list') as string[]}
+        />
+      )}
 
       <BreadcrumbSchema
         items={breadcrumbItems.map((item, index) => ({

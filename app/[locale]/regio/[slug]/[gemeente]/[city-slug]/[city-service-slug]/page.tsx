@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation';
 import { Cormorant_Garamond } from 'next/font/google';
 import LeadFormSection from "@/app/components/LeadFormSection";
 import { BreadcrumbSchema } from "@/app/components/StructuredData";
+import { CityServiceSchema } from "@/app/components/CityServiceSchema";
 import FaqSection from "@/app/components/FaqSection";
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['400', '600', '700'], display: 'swap' });
@@ -235,8 +236,11 @@ const Page = async ({ params }: Props) => {
 
     const serviceDesc = ov('description', `city_service_page.${serviceSlug}.description`);
 
+    const hasCustomServiceSchema = !!t.raw(`schema_data.services.${citySlug}.${serviceSlug}`);
+
     return (
         <>
+        <CityServiceSchema locale={validLocale as SupportedLocale} slug={slug} gemeente={gemeente} citySlug={citySlug} serviceSlug={serviceSlug} />
         <Navigation locale={validLocale} translations={navTranslations} />
         <BreadcrumbSchema
           items={breadcrumbItems.map((item, idx) => ({
@@ -247,21 +251,23 @@ const Page = async ({ params }: Props) => {
               : getAbsoluteUrl(`/regio/${slug}/${gemeente}/${citySlug}/${serviceSlug}`, validLocale as SupportedLocale),
           }))}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": Array.from({ length: faqCount }, (_, i) => i + 1).map((n) => ({
-              "@type": "Question",
-              "name": ov(`faq_${n}_q`, `city_service_page.${serviceSlug}.faq_${n}_q`),
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": ov(`faq_${n}_a`, `city_service_page.${serviceSlug}.faq_${n}_a`),
-              },
-            })),
-          }) }}
-        />
+        {!hasCustomServiceSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": Array.from({ length: faqCount }, (_, i) => i + 1).map((n) => ({
+                "@type": "Question",
+                "name": ov(`faq_${n}_q`, `city_service_page.${serviceSlug}.faq_${n}_q`),
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": ov(`faq_${n}_a`, `city_service_page.${serviceSlug}.faq_${n}_a`),
+                },
+              })),
+            }) }}
+          />
+        )}
         <Breadcrumbs items={breadcrumbItems} />
 
         <section style={{ backgroundColor: '#2A3E20EB', width: '100%' }}>

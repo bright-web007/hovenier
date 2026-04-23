@@ -7,6 +7,7 @@ import NewLeadForm from "@/app/components/NewLeadForm"
 import RelatedArticles from '../../../../components/RelatedArticles'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../../components/StructuredData'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
+import { env } from '@/lib/env';
 import { createTranslator } from '@/i18n'
 import { regionHubs, getRegionHubBySlug, getGemeenteBySlug, getRegionSlugByGemeenteSlug } from '@/lib/regions-hierarchy'
 import DienstCard from '../../../../components/DienstCard'
@@ -195,15 +196,15 @@ export default async function GemeentePage({ params }: Props) {
 
   const breadcrumbItems = [
     { label: t('breadcrumb_home'), href: '/' },
-    { label: isEn ? 'Regions' : 'Regio\'s', href: '/regio' },
-    { label: regionHub.name, href: `/regio/${slug}` },
-    { label: gemeenteData.name, href: `/regio/${slug}/${gemeente}` }
+    { label: isEn ? 'Regions' : 'Regio\'s', href: localizePath('/regio', locale as SupportedLocale) },
+    { label: regionHub.name, href: localizePath(`/regio/${slug}`, locale as SupportedLocale) },
+    { label: gemeenteData.name, href: localizePath(`/regio/${slug}/${gemeente}`, locale as SupportedLocale) }
   ];
 
   return (
     <div className="page-container">
       <LocalBusinessSchema
-        url={`https://hovenier.frl${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`}
+        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`}
         nameContext={isEn ? `Gardeners in ${gemeenteData.name}` : `Hoveniers in ${gemeenteData.name}`}
         services={isEn ? [
           "Garden Maintenance",
@@ -226,7 +227,7 @@ export default async function GemeentePage({ params }: Props) {
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
-          url: item.href ? `https://hovenier.frl${item.href}` : `https://hovenier.frl${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`
+          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`
         }))}
       />
 

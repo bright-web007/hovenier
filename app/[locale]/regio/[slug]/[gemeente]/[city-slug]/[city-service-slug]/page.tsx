@@ -2,6 +2,7 @@ import Navigation from "@/app/components/Navigation";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import { getLocaleAlternates, getAbsoluteUrl, SupportedLocale } from "@/lib/locale-utils";
 import { getRegionHubBySlug, getGemeenteBySlug } from "@/lib/regions-hierarchy";
+
 import { createTranslator, locales, defaultLocale } from '@/i18n';
 import { Metadata } from 'next';
 import Link from "next/link";
@@ -65,6 +66,7 @@ type Props = {
 };
 
 
+
 export { locales, defaultLocale };
 
 export const revalidate = 3600;
@@ -80,6 +82,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const cityName = formatName(citySlug);
   const serviceName = formatName(serviceSlug);
+
 
   const t = createTranslator(validLocale);
   const serviceOverride = t.raw(`city_service_overrides.${citySlug}.${serviceSlug}`) as Record<string, string> | null;

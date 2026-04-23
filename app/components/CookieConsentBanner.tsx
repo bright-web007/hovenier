@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useSyncExternalStore } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { updateAnalyticsConsent } from './GoogleAnalytics';
 import styles from './CookieConsentBanner.module.css';
@@ -23,75 +23,8 @@ const defaultPreferences: ConsentPreferences = {
   preferences: false,
 };
 
-type ConsentSnapshot = {
-  consentGiven: boolean;
-  preferences: ConsentPreferences;
-};
-
-const SERVER_CONSENT_SNAPSHOT: ConsentSnapshot = {
-  consentGiven: false,
-  preferences: defaultPreferences,
-};
-
-let currentConsentSnapshot: ConsentSnapshot = SERVER_CONSENT_SNAPSHOT;
-
-function arePreferencesEqual(left: ConsentPreferences, right: ConsentPreferences) {
-  return (
-    left.necessary === right.necessary &&
-    left.analytics === right.analytics &&
-    left.marketing === right.marketing &&
-    left.preferences === right.preferences
-  );
-}
-
-function getCurrentConsentSnapshot(): ConsentSnapshot {
-  const nextSnapshot: ConsentSnapshot = {
-    consentGiven: Boolean(localStorage.getItem('cookie_consent_given')),
-    preferences: parseStoredPreferences(localStorage.getItem('cookie_consent_preferences')),
-  };
-
-  if (
-    currentConsentSnapshot.consentGiven === nextSnapshot.consentGiven &&
-    arePreferencesEqual(currentConsentSnapshot.preferences, nextSnapshot.preferences)
-  ) {
-    return currentConsentSnapshot;
-  }
-
-  currentConsentSnapshot = nextSnapshot;
-  return currentConsentSnapshot;
-}
-
-function subscribeToConsentStore(onStoreChange: () => void) {
-  const handleStorage = (event: StorageEvent) => {
-    if (
-      event.key === null ||
-      event.key === 'cookie_consent_given' ||
-      event.key === 'cookie_consent_preferences'
-    ) {
-      currentConsentSnapshot = getCurrentConsentSnapshot();
-      onStoreChange();
-    }
-  };
-
-  const handleConsentChange = () => {
-    currentConsentSnapshot = getCurrentConsentSnapshot();
-    onStoreChange();
-  };
-
-  window.addEventListener('storage', handleStorage);
-  window.addEventListener('cookie-consent-changed', handleConsentChange);
-
-  return () => {
-    window.removeEventListener('storage', handleStorage);
-    window.removeEventListener('cookie-consent-changed', handleConsentChange);
-  };
-}
-
 function parseStoredPreferences(value: string | null): ConsentPreferences {
-  if (!value) {
-    return defaultPreferences;
-  }
-
+  if (!value) return defaultPreferences;
   try {
     const parsed = JSON.parse(value) as Partial<ConsentPreferences>;
     return {
@@ -106,18 +39,38 @@ function parseStoredPreferences(value: string | null): ConsentPreferences {
 }
 
 const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) => {
+  const [mounted, setMounted] = useState(false);
+  const [consentGiven, setConsentGiven] = useState(false);
+  const [storedPreferences, setStoredPreferences] = useState<ConsentPreferences>(defaultPreferences);
   const [showDetails, setShowDetails] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
   const [pendingPreferences, setPendingPreferences] = useState<ConsentPreferences | null>(null);
 
-  const storedConsent = useSyncExternalStore(
-    subscribeToConsentStore,
-    getCurrentConsentSnapshot,
-    () => SERVER_CONSENT_SNAPSHOT
-  );
+  useEffect(() => {
+    const readStorage = () => {
+      setConsentGiven(Boolean(localStorage.getItem('cookie_consent_given')));
+      setStoredPreferences(parseStoredPreferences(localStorage.getItem('cookie_consent_preferences')));
+      setMounted(true);
+    };
 
-  const preferences = pendingPreferences ?? storedConsent.preferences;
-  const showBanner = !dismissed && !storedConsent.consentGiven;
+    readStorage();
+
+    const handleConsentChange = () => readStorage();
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === null || e.key === 'cookie_consent_given' || e.key === 'cookie_consent_preferences') {
+        readStorage();
+      }
+    };
+
+    window.addEventListener('cookie-consent-changed', handleConsentChange);
+    window.addEventListener('storage', handleStorage);
+
+    return () => {
+      window.removeEventListener('cookie-consent-changed', handleConsentChange);
+      window.removeEventListener('storage', handleStorage);
+    };
+  }, []);
+
+  const preferences = pendingPreferences ?? storedPreferences;
 
   const handleAcceptAll = () => {
     const allAccepted: ConsentPreferences = {
@@ -126,10 +79,8 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
       marketing: true,
       preferences: true,
     };
-    
     saveConsent(allAccepted);
     initializeServices(allAccepted);
-    setDismissed(true);
   };
 
   const handleDeclineAll = () => {
@@ -139,16 +90,13 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
       marketing: false,
       preferences: false,
     };
-    
     saveConsent(onlyNecessary);
     initializeServices(onlyNecessary);
-    setDismissed(true);
   };
 
   const handleSavePreferences = () => {
     saveConsent(preferences);
     initializeServices(preferences);
-    setDismissed(true);
   };
 
   const saveConsent = (prefs: ConsentPreferences) => {
@@ -224,7 +172,7 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
 
   const t = translations[locale as keyof typeof translations] || translations.nl;
 
-  if (!showBanner) return null;
+  if (!mounted || consentGiven) return null;
 
   return (
     <div className={styles.cookieConsentOverlay}>

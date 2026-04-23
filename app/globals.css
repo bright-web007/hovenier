@@ -1113,6 +1113,22 @@ a { text-decoration: none; color: inherit; }
   box-shadow: 0 4px 12px rgba(42, 62, 32, 0.08);
 }
 
+.roof-type-card {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid #2A3E201F;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.roof-type-card:hover {
+  border-color: #8AB87A99;
+  box-shadow: 0px 8px 32px 0px #8AB87A1F;
+}
+
 .step-number {
   width: 48px;
   height: 48px;
@@ -3856,5 +3872,33 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 480px) {
   .grid-responsive-3 {
     grid-template-columns: 1fr;
+  }
+}
+
+.crosslink-text:hover {
+  color: var(--forest) !important;
+}
+
+.grid-responsive-3-sm {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-responsive-2-sm {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 649px) {
+  .grid-responsive-3-sm {
+    grid-template-columns: 1fr !important;
+  }
+  .grid-responsive-2-sm {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (min-width: 650px) and (max-width: 1023px) {
+  .grid-responsive-3-sm {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }

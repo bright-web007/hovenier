@@ -10,23 +10,46 @@ interface FaqSectionProps {
 
 export default function FaqSection({ title, faqs }: FaqSectionProps) {
   return (
-    <section className="section section-alt">
-      <div className="section-inner">
-        <div className="section-header-row section-centered">
-          <h2 className="section-title section-title-centered">{title}</h2>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '800px', margin: '0 auto' }}>
-          {faqs.map((faq, index) => (
-            <div key={index} style={{
-              backgroundColor: '#FFFFFF',
-              borderRadius: '12px',
+    <section style={{ backgroundColor: 'var(--cream)', width: '100%' }}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '80px 1rem', display: 'flex', flexDirection: 'column', gap: '48px' }}>
+        <h2 style={{
+          fontFamily: 'var(--heading-font)',
+          fontSize: '32px',
+          fontWeight: '700',
+          color: 'var(--forest-deep)',
+          margin: 0,
+          letterSpacing: '-0.44px',
+          textAlign: 'center',
+        }}>
+          {title}
+        </h2>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {faqs.map((faq, i) => (
+            <div key={i} style={{
               border: '1px solid #2A3E201F',
-              padding: '24px',
+              padding: '25px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px',
+              borderRadius: '12px',
+              backgroundColor: '#FFFFFF',
             }}>
-              <h3 style={{ fontFamily: 'var(--heading-font)', fontSize: '18px', fontWeight: '700', color: 'var(--forest)', margin: '0 0 12px 0' }}>
+              <p style={{
+                fontSize: '18px',
+                fontWeight: '700',
+                color: 'var(--forest)',
+                margin: 0,
+              }}>
                 {faq.question}
-              </h3>
-              <p style={{ fontSize: '15px', lineHeight: '23px', color: 'var(--text-mid)', margin: 0 }}>
+              </p>
+              <p style={{
+                fontSize: '15px',
+                lineHeight: '24px',
+                color: 'var(--text-mid)',
+                margin: 0,
+                fontWeight: 400,
+              }}>
                 {faq.answer}
               </p>
             </div>

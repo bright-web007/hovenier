@@ -3,7 +3,7 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import NewLeadForm from '@/app/components/NewLeadForm'
-import { getLocaleAlternates, type SupportedLocale } from '@/lib/locale-utils'
+import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 import { createTranslator } from '@/i18n'
 
 type Props = {
@@ -68,7 +68,7 @@ export default async function TuinontwerpKostenPage({ params }: Props) {
   // Breadcrumb items
   const breadcrumbItems = [
     { label: t('breadcrumb_home'), href: '/' },
-    { label: 'Kosten', href: '/kosten' },
+    { label: 'Kosten', href: localizePath('/kosten', locale as SupportedLocale) },
     { label: 'Tuinontwerp' }
   ];
 

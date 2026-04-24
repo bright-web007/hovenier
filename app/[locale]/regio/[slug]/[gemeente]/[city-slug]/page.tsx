@@ -8,6 +8,7 @@ import { getRegionHubBySlug, getGemeenteBySlug } from "@/lib/regions-hierarchy";
 import { createTranslator, locales, defaultLocale } from '@/i18n';
 import { Metadata } from 'next';
 import { BreadcrumbSchema } from "@/app/components/StructuredData";
+import { CityPageSchema } from "@/app/components/CityPageSchema";
 import { notFound } from 'next/navigation';
 
 export { locales, defaultLocale };
@@ -147,6 +148,7 @@ const Page = async ({ params }: Props) => {
 
     return (
         <>
+        <CityPageSchema locale={validLocale as SupportedLocale} slug={slug} gemeente={gemeente} citySlug={citySlug} />
         <Navigation locale={validLocale} translations={navTranslations} />
         <BreadcrumbSchema
           items={breadcrumbItems.map((item, idx) => ({

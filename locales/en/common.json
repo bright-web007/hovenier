@@ -2157,4 +2157,2780 @@
     "faq_5_q": "Which garden services are available via Hovenier FRL?",
     "faq_5_a": "The following garden services are available via Hovenier FRL in Friesland: garden installation, garden maintenance, garden design, green roofs and paving. All gardeners in the network have specific knowledge of Frisian soil conditions and the local climate."
   }
+,
+  "schema_data": {
+  "cities": {
+    "appelscha": {
+      "name": "Hovenier FRL Appelscha",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Appelscha voor tuinonderhoud, tuinontwerp, groendaken en bestrating nabij het Drents-Friese Wold.",
+      "latitude": "52.9500",
+      "longitude": "6.3670",
+      "ratingValue": "4.7",
+      "reviewCount": "9",
+      "areaServedName": "Appelscha",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Appelscha?",
+          "answer": "Tuinonderhoud in Appelscha kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur vrijblijvende offertes van lokale hoveniers."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Appelscha?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Appelscha."
+        },
+        {
+          "question": "Hoe snel kan een hovenier in Appelscha komen?",
+          "answer": "Via Hovenier FRL ontvangt u binnen 24 uur offertes van hoveniers in Appelscha. De meeste hoveniers kunnen binnen enkele dagen langskomen."
+        }
+      ]
+    },
+    "beetsterzwaag": {
+      "name": "Hovenier FRL Beetsterzwaag",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Beetsterzwaag voor tuinonderhoud, tuinontwerp, groendaken en bestrating in de gemeente Opsterland.",
+      "latitude": "53.0500",
+      "longitude": "6.0830",
+      "ratingValue": "4.7",
+      "reviewCount": "8",
+      "areaServedName": "Beetsterzwaag",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Beetsterzwaag?",
+          "answer": "Tuinonderhoud in Beetsterzwaag kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur vrijblijvende offertes van lokale hoveniers."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Beetsterzwaag?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Beetsterzwaag."
+        },
+        {
+          "question": "Hoe snel kan een hovenier in Beetsterzwaag komen?",
+          "answer": "Via Hovenier FRL ontvangt u binnen 24 uur offertes van hoveniers in Beetsterzwaag. De meeste hoveniers kunnen binnen enkele dagen langskomen."
+        }
+      ]
+    },
+    "bolsward": {
+      "name": "Hovenier FRL Bolsward",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Bolsward voor tuinonderhoud, tuinontwerp, groendaken en bestrating in de historische Hanzestad.",
+      "latitude": "53.0672",
+      "longitude": "5.5278",
+      "ratingValue": "4.8",
+      "reviewCount": "23",
+      "areaServedName": "Bolsward",
+      "areaServedSameAs": "https://en.wikipedia.org/wiki/Bolsward",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Bolsward?",
+          "answer": "Tuinonderhoud in Bolsward kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in Bolsward."
+        },
+        {
+          "question": "Hebben hoveniers in Bolsward ervaring met historische tuinen?",
+          "answer": "Ja, hoveniers in het Hovenier FRL netwerk hebben ervaring met zowel historische tuinen in de binnenstad van Bolsward als moderne woningtuinen in de uitbreidingswijken."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Bolsward?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Bolsward."
+        }
+      ]
+    },
+    "burgum": {
+      "name": "Hovenier FRL Burgum",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Burgum voor tuinonderhoud, tuinontwerp, groendaken en bestrating aan de Burgumermar.",
+      "latitude": "53.1939",
+      "longitude": "5.9931",
+      "ratingValue": "4.7",
+      "reviewCount": "15",
+      "areaServedName": "Burgum",
+      "areaServedSameAs": "https://en.wikipedia.org/wiki/Burgum",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Burgum?",
+          "answer": "Tuinonderhoud in Burgum kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in Burgum."
+        },
+        {
+          "question": "Hebben hoveniers in Burgum ervaring met waterrijke tuinen?",
+          "answer": "Ja, hoveniers in het Hovenier FRL netwerk in Burgum hebben ervaring met de gemengde klei- en veengrond en de nabijheid van de Burgumermar."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Burgum?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Burgum en omliggende plaatsen in Tytsjerksteradiel."
+        }
+      ]
+    },
+    "damwald": {
+      "name": "Hovenier FRL Damwald",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Damwald voor tuinonderhoud, tuinontwerp, groendaken en bestrating in de gemeente Dantumadiel.",
+      "latitude": "53.2830",
+      "longitude": "6.0000",
+      "ratingValue": "4.7",
+      "reviewCount": "9",
+      "areaServedName": "Damwald",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Damwald?",
+          "answer": "Tuinonderhoud in Damwald kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur vrijblijvende offertes van lokale hoveniers in de gemeente Dantumadiel."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Damwald?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Damwald in de gemeente Dantumadiel."
+        },
+        {
+          "question": "Hoe snel kan een hovenier in Damwald komen?",
+          "answer": "Via Hovenier FRL ontvangt u binnen 24 uur offertes van hoveniers in Damwald. De meeste hoveniers kunnen binnen enkele dagen langskomen."
+        }
+      ]
+    },
+    "dokkum": {
+      "name": "Hovenier FRL Dokkum",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Dokkum voor tuinonderhoud, tuinontwerp, groendaken en bestrating in de historische vestingstad.",
+      "latitude": "53.3261",
+      "longitude": "5.9964",
+      "ratingValue": "4.7",
+      "reviewCount": "19",
+      "areaServedName": "Dokkum",
+      "areaServedSameAs": "https://en.wikipedia.org/wiki/Dokkum",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Dokkum?",
+          "answer": "Tuinonderhoud in Dokkum kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in Dokkum."
+        },
+        {
+          "question": "Hebben hoveniers in Dokkum ervaring met tuinen in de vestingstad?",
+          "answer": "Ja, hoveniers in het Hovenier FRL netwerk hebben ervaring met de compacte historische tuinen binnen de vestingring van Dokkum en de grotere woontuinen in de omliggende wijken."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Dokkum?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Dokkum en omliggende plaatsen in Noardeast-Fryslan."
+        }
+      ]
+    },
+    "drachten": {
+      "name": "Hovenier FRL Drachten",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Drachten voor tuinonderhoud, tuinontwerp, groendaken en bestrating in de gemeente Smallingerland.",
+      "latitude": "53.1000",
+      "longitude": "6.1000",
+      "ratingValue": "4.8",
+      "reviewCount": "29",
+      "areaServedName": "Drachten",
+      "areaServedSameAs": "https://en.wikipedia.org/wiki/Drachten",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Drachten?",
+          "answer": "Tuinonderhoud in Drachten kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in Drachten."
+        },
+        {
+          "question": "Welke wijken in Drachten worden bediend?",
+          "answer": "Hovenier FRL bedient alle wijken in Drachten, waaronder Drachten-Oost, Drachten-West, De Drait en De Trisken. Ook omliggende dorpen in Smallingerland worden bediend."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Drachten?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Drachten."
+        }
+      ]
+    },
+    "franeker": {
+      "name": "Hovenier FRL Franeker",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Franeker voor tuinonderhoud, tuinontwerp, groendaken en bestrating in de historische grachtenstad.",
+      "latitude": "53.1872",
+      "longitude": "5.5419",
+      "ratingValue": "4.8",
+      "reviewCount": "16",
+      "areaServedName": "Franeker",
+      "areaServedSameAs": "https://en.wikipedia.org/wiki/Franeker",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Franeker?",
+          "answer": "Tuinonderhoud in Franeker kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in Franeker."
+        },
+        {
+          "question": "Hebben hoveniers in Franeker ervaring met historische tuinen?",
+          "answer": "Ja, hoveniers in het Hovenier FRL netwerk hebben ervaring met zowel historische grachtentuin-stijlen in het centrum van Franeker als moderne tuinen in de uitbreidingswijken."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Franeker?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Franeker."
+        }
+      ]
+    },
+    "gorredijk": {
+      "name": "Hovenier FRL Gorredijk",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Gorredijk voor tuinonderhoud, tuinontwerp, groendaken en bestrating in het Opsterland bosgebied.",
+      "latitude": "53.0061",
+      "longitude": "6.0639",
+      "ratingValue": "4.8",
+      "reviewCount": "12",
+      "areaServedName": "Gorredijk",
+      "areaServedSameAs": "https://en.wikipedia.org/wiki/Gorredijk",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Gorredijk?",
+          "answer": "Tuinonderhoud in Gorredijk kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in Gorredijk."
+        },
+        {
+          "question": "Hebben hoveniers in Gorredijk ervaring met bosrijke tuinen?",
+          "answer": "Ja, hoveniers in het Hovenier FRL netwerk hebben specifieke ervaring met de veen- en gemengde grond van Opsterland en de bosrijke omgeving rond Gorredijk."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Gorredijk?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Gorredijk en omliggende plaatsen zoals Lippenhuizen en Beetsterzwaag."
+        }
+      ]
+    },
+    "harlingen": {
+      "name": "Hovenier FRL Harlingen",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Harlingen voor kustbestendige tuinonderhoud, tuinontwerp, groendaken en bestrating aan de Waddenzee.",
+      "latitude": "53.1742",
+      "longitude": "5.4242",
+      "ratingValue": "4.8",
+      "reviewCount": "21",
+      "areaServedName": "Harlingen",
+      "areaServedSameAs": "https://en.wikipedia.org/wiki/Harlingen,_Friesland",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Harlingen?",
+          "answer": "Tuinonderhoud in Harlingen kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in Harlingen."
+        },
+        {
+          "question": "Hebben hoveniers in Harlingen ervaring met kusttuinen?",
+          "answer": "Ja, hoveniers in het Hovenier FRL netwerk hebben specifieke ervaring met de uitdagingen van tuinieren aan de Waddenkust, waaronder zoutbestendige beplanting en windschermen."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Harlingen?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Harlingen. De hoveniers zijn gespecialiseerd in kustbestendige tuinen."
+        }
+      ]
+    },
+    "heerenveen": {
+      "name": "Hovenier FRL Heerenveen",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Heerenveen voor tuinonderhoud, tuinontwerp, groendaken en bestrating in de gemeente Heerenveen.",
+      "latitude": "52.9603",
+      "longitude": "5.9222",
+      "ratingValue": "4.8",
+      "reviewCount": "35",
+      "areaServedName": "Heerenveen",
+      "areaServedSameAs": "https://en.wikipedia.org/wiki/Heerenveen",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Heerenveen?",
+          "answer": "Tuinonderhoud in Heerenveen kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in Heerenveen."
+        },
+        {
+          "question": "Welke wijken in Heerenveen worden bediend?",
+          "answer": "Hovenier FRL bedient alle wijken in Heerenveen, waaronder Oranjewoud, De Greiden, Skoatterwald en het stadscentrum. Ook omliggende dorpen zoals Jubbega en Katlijk worden bediend."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Heerenveen?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Heerenveen. De hoveniers hebben ervaring met de veengrond en zandondergrond in de gemeente."
+        }
+      ]
+    },
+    "joure": {
+      "name": "Hovenier FRL Joure",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Joure voor tuinonderhoud, tuinontwerp, groendaken en bestrating in De Fryske Marren.",
+      "latitude": "52.9670",
+      "longitude": "5.7830",
+      "ratingValue": "4.7",
+      "reviewCount": "13",
+      "areaServedName": "Joure",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Joure?",
+          "answer": "Tuinonderhoud in Joure kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in Joure."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Joure?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Joure."
+        },
+        {
+          "question": "Hoe snel kan een hovenier in Joure komen?",
+          "answer": "Via Hovenier FRL ontvangt u binnen 24 uur offertes van hoveniers in Joure. De meeste hoveniers kunnen binnen enkele dagen langskomen."
+        }
+      ]
+    },
+    "kollum": {
+      "name": "Hovenier FRL Kollum",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Kollum voor tuinonderhoud, tuinontwerp, groendaken en bestrating in Noardeast-Fryslan.",
+      "latitude": "53.2830",
+      "longitude": "6.1500",
+      "ratingValue": "4.7",
+      "reviewCount": "8",
+      "areaServedName": "Kollum",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Kollum?",
+          "answer": "Tuinonderhoud in Kollum kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur vrijblijvende offertes van lokale hoveniers."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Kollum?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Kollum."
+        },
+        {
+          "question": "Hoe snel kan een hovenier in Kollum komen?",
+          "answer": "Via Hovenier FRL ontvangt u binnen 24 uur offertes van hoveniers in Kollum. De meeste hoveniers kunnen binnen enkele dagen langskomen."
+        }
+      ]
+    },
+    "leeuwarden": {
+      "name": "Hovenier FRL Leeuwarden",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Leeuwarden voor tuinonderhoud, tuinontwerp, groendaken en bestrating. Ontvang binnen 24 uur vrijblijvende offertes van lokale hoveniers in Leeuwarden.",
+      "latitude": "53.2014",
+      "longitude": "5.7998",
+      "ratingValue": "4.8",
+      "reviewCount": "47",
+      "areaServedName": "Leeuwarden",
+      "areaServedSameAs": "https://en.wikipedia.org/wiki/Leeuwarden",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Leeuwarden?",
+          "answer": "Tuinonderhoud in Leeuwarden kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in Leeuwarden."
+        },
+        {
+          "question": "Hebben hoveniers in Leeuwarden ervaring met kleigrond?",
+          "answer": "Ja, alle hoveniers in het Hovenier FRL netwerk in Leeuwarden hebben specifieke ervaring met de zware kleigrond en waterhuishouding in de regio Leeuwarden."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Leeuwarden?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Leeuwarden."
+        }
+      ]
+    },
+    "lemmer": {
+      "name": "Hovenier FRL Lemmer",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Lemmer voor tuinonderhoud, tuinontwerp, groendaken en bestrating aan het IJsselmeer.",
+      "latitude": "52.8436",
+      "longitude": "5.7097",
+      "ratingValue": "4.7",
+      "reviewCount": "18",
+      "areaServedName": "Lemmer",
+      "areaServedSameAs": "https://en.wikipedia.org/wiki/Lemmer",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Lemmer?",
+          "answer": "Tuinonderhoud in Lemmer kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in Lemmer."
+        },
+        {
+          "question": "Hebben hoveniers in Lemmer ervaring met waterrijke tuinen?",
+          "answer": "Ja, hoveniers in het Hovenier FRL netwerk hebben specifieke ervaring met de veen- en kleigrond en de waterrijke omgeving rond Lemmer en het IJsselmeer."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Lemmer?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Lemmer. Alle hoveniers kennen de specifieke bodemomstandigheden in De Fryske Marren."
+        }
+      ]
+    },
+    "noordwolde": {
+      "name": "Hovenier FRL Noordwolde",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Noordwolde voor tuinonderhoud, tuinontwerp, groendaken en bestrating in de gemeente Weststellingwerf.",
+      "latitude": "52.9000",
+      "longitude": "6.1500",
+      "ratingValue": "4.7",
+      "reviewCount": "6",
+      "areaServedName": "Noordwolde",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Noordwolde?",
+          "answer": "Tuinonderhoud in Noordwolde kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur vrijblijvende offertes van lokale hoveniers."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Noordwolde?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Noordwolde."
+        },
+        {
+          "question": "Hoe snel kan een hovenier in Noordwolde komen?",
+          "answer": "Via Hovenier FRL ontvangt u binnen 24 uur offertes van hoveniers in Noordwolde. De meeste hoveniers kunnen binnen enkele dagen langskomen."
+        }
+      ]
+    },
+    "oosterwolde": {
+      "name": "Hovenier FRL Oosterwolde",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Oosterwolde voor tuinonderhoud, tuinontwerp, groendaken en bestrating in Weststellingwerf.",
+      "latitude": "52.9983",
+      "longitude": "6.2942",
+      "ratingValue": "4.7",
+      "reviewCount": "14",
+      "areaServedName": "Oosterwolde",
+      "areaServedSameAs": "https://en.wikipedia.org/wiki/Oosterwolde,_Friesland",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Oosterwolde?",
+          "answer": "Tuinonderhoud in Oosterwolde kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers."
+        },
+        {
+          "question": "Hebben hoveniers in Oosterwolde ervaring met bosrijke tuinen?",
+          "answer": "Ja, hoveniers in het Hovenier FRL netwerk hebben ervaring met de zand- en veengrond van de Stellingwerven en de bosrijke omgeving rond het Drents-Friese Wold."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Oosterwolde?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Oosterwolde en omliggende plaatsen zoals Appelscha en Wolvega."
+        }
+      ]
+    },
+    "opeinde": {
+      "name": "Hovenier FRL Opeinde",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Opeinde voor tuinonderhoud, tuinontwerp, groendaken en bestrating in de gemeente Smallingerland.",
+      "latitude": "53.1330",
+      "longitude": "6.0670",
+      "ratingValue": "4.7",
+      "reviewCount": "8",
+      "areaServedName": "Opeinde",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Opeinde?",
+          "answer": "Tuinonderhoud in Opeinde kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur vrijblijvende offertes van lokale hoveniers."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Opeinde?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Opeinde."
+        },
+        {
+          "question": "Hoe snel kan een hovenier in Opeinde komen?",
+          "answer": "Via Hovenier FRL ontvangt u binnen 24 uur offertes van hoveniers in Opeinde. De meeste hoveniers kunnen binnen enkele dagen langskomen."
+        }
+      ]
+    },
+    "sint-annaparochie": {
+      "name": "Hovenier FRL Sint Annaparochie",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Sint Annaparochie voor tuinonderhoud, tuinontwerp, groendaken en bestrating in Waadhoeke.",
+      "latitude": "53.2833",
+      "longitude": "5.6670",
+      "ratingValue": "4.7",
+      "reviewCount": "8",
+      "areaServedName": "Sint Annaparochie",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Sint Annaparochie?",
+          "answer": "Tuinonderhoud in Sint Annaparochie kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Sint Annaparochie?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Sint Annaparochie."
+        },
+        {
+          "question": "Hoe snel kan een hovenier in Sint Annaparochie komen?",
+          "answer": "Via Hovenier FRL ontvangt u binnen 24 uur offertes van hoveniers in Sint Annaparochie. De meeste hoveniers kunnen binnen enkele dagen langskomen."
+        }
+      ]
+    },
+    "sneek": {
+      "name": "Hovenier FRL Sneek",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Sneek voor tuinonderhoud, tuinontwerp, groendaken en bestrating in de historische waterstad van Friesland.",
+      "latitude": "53.0328",
+      "longitude": "5.6603",
+      "ratingValue": "4.8",
+      "reviewCount": "31",
+      "areaServedName": "Sneek",
+      "areaServedSameAs": "https://en.wikipedia.org/wiki/Sneek",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Sneek?",
+          "answer": "Tuinonderhoud in Sneek kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in Sneek."
+        },
+        {
+          "question": "Hebben hoveniers in Sneek ervaring met kleigrond?",
+          "answer": "Ja, alle hoveniers in het Hovenier FRL netwerk in Sneek hebben specifieke ervaring met de kleigrond en waterhuishouding die kenmerkend zijn voor de regio Sudwest-Fryslan."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Sneek?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Sneek."
+        }
+      ]
+    },
+    "wolvega": {
+      "name": "Hovenier FRL Wolvega",
+      "description": "Hovenier FRL verbindt u met vakkundige hoveniers in Wolvega voor tuinonderhoud, tuinontwerp, groendaken en bestrating in de gemeente Weststellingwerf.",
+      "latitude": "52.8764",
+      "longitude": "5.9986",
+      "ratingValue": "4.7",
+      "reviewCount": "11",
+      "areaServedName": "Wolvega",
+      "faqs": [
+        {
+          "question": "Wat kost een hovenier in Wolvega?",
+          "answer": "Tuinonderhoud in Wolvega kost gemiddeld 40 tot 65 euro per uur. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale hoveniers in Wolvega."
+        },
+        {
+          "question": "Welke tuindiensten zijn beschikbaar in Wolvega?",
+          "answer": "Via Hovenier FRL zijn tuinonderhoud, tuinontwerp, groendaken en bestrating beschikbaar in Wolvega."
+        },
+        {
+          "question": "Hoe snel kan een hovenier in Wolvega komen?",
+          "answer": "Via Hovenier FRL ontvangt u binnen 24 uur offertes van hoveniers in Wolvega. De meeste hoveniers kunnen binnen enkele dagen langskomen."
+        }
+      ]
+    }
+  },
+  "services": {
+    "appelscha": {
+      "groendak": {
+        "serviceName": "Groendaken Appelscha",
+        "description": "Professionele groendak installatie in Appelscha door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor het bosrijke dorp bij het Drents-Friese Wold.",
+        "latitude": "52.9500",
+        "longitude": "6.3670",
+        "ratingValue": "4.7",
+        "reviewCount": "9",
+        "areaServedName": "Appelscha",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Appelscha?",
+            "answer": "Een groendak in Appelscha kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Appelscha?",
+            "answer": "Een groendak in Appelscha verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in het bosrijke dorp bij het Drents-Friese Wold."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Appelscha?",
+            "answer": "Voor de meeste woningen in Appelscha is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in het bosrijke dorp bij het Drents-Friese Wold."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Appelscha",
+        "description": "Professionele bestratingswerken in Appelscha door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor het bosrijke dorp bij het Drents-Friese Wold.",
+        "latitude": "52.9500",
+        "longitude": "6.3670",
+        "ratingValue": "4.7",
+        "reviewCount": "9",
+        "areaServedName": "Appelscha",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Appelscha?",
+            "answer": "Bestrating aanleggen in Appelscha kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Appelscha?",
+            "answer": "Voor bestrating in Appelscha worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de zandgrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Appelscha?",
+            "answer": "Het aanleggen van bestrating in Appelscha duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in het bosrijke dorp bij het Drents-Friese Wold."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Appelscha",
+        "description": "Professioneel tuinonderhoud in Appelscha door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in het bosrijke dorp bij het Drents-Friese Wold.",
+        "latitude": "52.9500",
+        "longitude": "6.3670",
+        "ratingValue": "4.7",
+        "reviewCount": "9",
+        "areaServedName": "Appelscha",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Appelscha?",
+            "answer": "Tuinonderhoud in Appelscha kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Appelscha?",
+            "answer": "De meeste tuinen in Appelscha hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Appelscha?",
+            "answer": "Tuinonderhoud in Appelscha omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de zandgrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Appelscha",
+        "description": "Professioneel tuinontwerp in Appelscha door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor het bosrijke dorp bij het Drents-Friese Wold.",
+        "latitude": "52.9500",
+        "longitude": "6.3670",
+        "ratingValue": "4.7",
+        "reviewCount": "9",
+        "areaServedName": "Appelscha",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Appelscha?",
+            "answer": "Tuinontwerp in Appelscha kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Appelscha?",
+            "answer": "Een tuinontwerp in Appelscha duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in het bosrijke dorp bij het Drents-Friese Wold."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Appelscha?",
+            "answer": "Tuinontwerp in Appelscha omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de zandgrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "beetsterzwaag": {
+      "groendak": {
+        "serviceName": "Groendaken Beetsterzwaag",
+        "description": "Professionele groendak installatie in Beetsterzwaag door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor het bosrijke dorp in Opsterland.",
+        "latitude": "53.0500",
+        "longitude": "6.0830",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Beetsterzwaag",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Beetsterzwaag?",
+            "answer": "Een groendak in Beetsterzwaag kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Beetsterzwaag?",
+            "answer": "Een groendak in Beetsterzwaag verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in het bosrijke dorp in Opsterland."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Beetsterzwaag?",
+            "answer": "Voor de meeste woningen in Beetsterzwaag is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in het bosrijke dorp in Opsterland."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Beetsterzwaag",
+        "description": "Professionele bestratingswerken in Beetsterzwaag door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor het bosrijke dorp in Opsterland.",
+        "latitude": "53.0500",
+        "longitude": "6.0830",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Beetsterzwaag",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Beetsterzwaag?",
+            "answer": "Bestrating aanleggen in Beetsterzwaag kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Beetsterzwaag?",
+            "answer": "Voor bestrating in Beetsterzwaag worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de veengrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Beetsterzwaag?",
+            "answer": "Het aanleggen van bestrating in Beetsterzwaag duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in het bosrijke dorp in Opsterland."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Beetsterzwaag",
+        "description": "Professioneel tuinonderhoud in Beetsterzwaag door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in het bosrijke dorp in Opsterland.",
+        "latitude": "53.0500",
+        "longitude": "6.0830",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Beetsterzwaag",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Beetsterzwaag?",
+            "answer": "Tuinonderhoud in Beetsterzwaag kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Beetsterzwaag?",
+            "answer": "De meeste tuinen in Beetsterzwaag hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Beetsterzwaag?",
+            "answer": "Tuinonderhoud in Beetsterzwaag omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de veengrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Beetsterzwaag",
+        "description": "Professioneel tuinontwerp in Beetsterzwaag door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor het bosrijke dorp in Opsterland.",
+        "latitude": "53.0500",
+        "longitude": "6.0830",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Beetsterzwaag",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Beetsterzwaag?",
+            "answer": "Tuinontwerp in Beetsterzwaag kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Beetsterzwaag?",
+            "answer": "Een tuinontwerp in Beetsterzwaag duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in het bosrijke dorp in Opsterland."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Beetsterzwaag?",
+            "answer": "Tuinontwerp in Beetsterzwaag omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de veengrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "bolsward": {
+      "groendak": {
+        "serviceName": "Groendaken Bolsward",
+        "description": "Professionele groendak installatie in Bolsward door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor de historische Hanzestad.",
+        "latitude": "53.0672",
+        "longitude": "5.5278",
+        "ratingValue": "4.8",
+        "reviewCount": "23",
+        "areaServedName": "Bolsward",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Bolsward",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Bolsward?",
+            "answer": "Een groendak in Bolsward kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Bolsward?",
+            "answer": "Een groendak in Bolsward verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in de historische Hanzestad."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Bolsward?",
+            "answer": "Voor de meeste woningen in Bolsward is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in de historische Hanzestad."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Bolsward",
+        "description": "Professionele bestratingswerken in Bolsward door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor de historische Hanzestad.",
+        "latitude": "53.0672",
+        "longitude": "5.5278",
+        "ratingValue": "4.8",
+        "reviewCount": "23",
+        "areaServedName": "Bolsward",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Bolsward",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Bolsward?",
+            "answer": "Bestrating aanleggen in Bolsward kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Bolsward?",
+            "answer": "Voor bestrating in Bolsward worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de kleigrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Bolsward?",
+            "answer": "Het aanleggen van bestrating in Bolsward duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in de historische Hanzestad."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Bolsward",
+        "description": "Professioneel tuinonderhoud in Bolsward door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in de historische Hanzestad.",
+        "latitude": "53.0672",
+        "longitude": "5.5278",
+        "ratingValue": "4.8",
+        "reviewCount": "23",
+        "areaServedName": "Bolsward",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Bolsward",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Bolsward?",
+            "answer": "Tuinonderhoud in Bolsward kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Bolsward?",
+            "answer": "De meeste tuinen in Bolsward hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Bolsward?",
+            "answer": "Tuinonderhoud in Bolsward omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de kleigrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Bolsward",
+        "description": "Professioneel tuinontwerp in Bolsward door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor de historische Hanzestad.",
+        "latitude": "53.0672",
+        "longitude": "5.5278",
+        "ratingValue": "4.8",
+        "reviewCount": "23",
+        "areaServedName": "Bolsward",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Bolsward",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Bolsward?",
+            "answer": "Tuinontwerp in Bolsward kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Bolsward?",
+            "answer": "Een tuinontwerp in Bolsward duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in de historische Hanzestad."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Bolsward?",
+            "answer": "Tuinontwerp in Bolsward omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de kleigrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "burgum": {
+      "groendak": {
+        "serviceName": "Groendaken Burgum",
+        "description": "Professionele groendak installatie in Burgum door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor het hoofddorp aan de Burgumermar.",
+        "latitude": "53.1939",
+        "longitude": "5.9931",
+        "ratingValue": "4.7",
+        "reviewCount": "15",
+        "areaServedName": "Burgum",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Burgum",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Burgum?",
+            "answer": "Een groendak in Burgum kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Burgum?",
+            "answer": "Een groendak in Burgum verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in het hoofddorp aan de Burgumermar."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Burgum?",
+            "answer": "Voor de meeste woningen in Burgum is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in het hoofddorp aan de Burgumermar."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Burgum",
+        "description": "Professionele bestratingswerken in Burgum door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor het hoofddorp aan de Burgumermar.",
+        "latitude": "53.1939",
+        "longitude": "5.9931",
+        "ratingValue": "4.7",
+        "reviewCount": "15",
+        "areaServedName": "Burgum",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Burgum",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Burgum?",
+            "answer": "Bestrating aanleggen in Burgum kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Burgum?",
+            "answer": "Voor bestrating in Burgum worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de klei- en veengrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Burgum?",
+            "answer": "Het aanleggen van bestrating in Burgum duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in het hoofddorp aan de Burgumermar."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Burgum",
+        "description": "Professioneel tuinonderhoud in Burgum door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in het hoofddorp aan de Burgumermar.",
+        "latitude": "53.1939",
+        "longitude": "5.9931",
+        "ratingValue": "4.7",
+        "reviewCount": "15",
+        "areaServedName": "Burgum",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Burgum",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Burgum?",
+            "answer": "Tuinonderhoud in Burgum kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Burgum?",
+            "answer": "De meeste tuinen in Burgum hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Burgum?",
+            "answer": "Tuinonderhoud in Burgum omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de klei- en veengrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Burgum",
+        "description": "Professioneel tuinontwerp in Burgum door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor het hoofddorp aan de Burgumermar.",
+        "latitude": "53.1939",
+        "longitude": "5.9931",
+        "ratingValue": "4.7",
+        "reviewCount": "15",
+        "areaServedName": "Burgum",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Burgum",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Burgum?",
+            "answer": "Tuinontwerp in Burgum kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Burgum?",
+            "answer": "Een tuinontwerp in Burgum duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in het hoofddorp aan de Burgumermar."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Burgum?",
+            "answer": "Tuinontwerp in Burgum omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de klei- en veengrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "damwald": {
+      "groendak": {
+        "serviceName": "Groendaken Damwald",
+        "description": "Professionele groendak installatie in Damwald door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor het hoofddorp van Dantumadiel.",
+        "latitude": "53.2830",
+        "longitude": "6.0000",
+        "ratingValue": "4.7",
+        "reviewCount": "9",
+        "areaServedName": "Damwald",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Damwald?",
+            "answer": "Een groendak in Damwald kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Damwald?",
+            "answer": "Een groendak in Damwald verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in het hoofddorp van Dantumadiel."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Damwald?",
+            "answer": "Voor de meeste woningen in Damwald is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in het hoofddorp van Dantumadiel."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Damwald",
+        "description": "Professionele bestratingswerken in Damwald door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor het hoofddorp van Dantumadiel.",
+        "latitude": "53.2830",
+        "longitude": "6.0000",
+        "ratingValue": "4.7",
+        "reviewCount": "9",
+        "areaServedName": "Damwald",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Damwald?",
+            "answer": "Bestrating aanleggen in Damwald kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Damwald?",
+            "answer": "Voor bestrating in Damwald worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de kleigrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Damwald?",
+            "answer": "Het aanleggen van bestrating in Damwald duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in het hoofddorp van Dantumadiel."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Damwald",
+        "description": "Professioneel tuinonderhoud in Damwald door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in het hoofddorp van Dantumadiel.",
+        "latitude": "53.2830",
+        "longitude": "6.0000",
+        "ratingValue": "4.7",
+        "reviewCount": "9",
+        "areaServedName": "Damwald",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Damwald?",
+            "answer": "Tuinonderhoud in Damwald kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Damwald?",
+            "answer": "De meeste tuinen in Damwald hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Damwald?",
+            "answer": "Tuinonderhoud in Damwald omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de kleigrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Damwald",
+        "description": "Professioneel tuinontwerp in Damwald door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor het hoofddorp van Dantumadiel.",
+        "latitude": "53.2830",
+        "longitude": "6.0000",
+        "ratingValue": "4.7",
+        "reviewCount": "9",
+        "areaServedName": "Damwald",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Damwald?",
+            "answer": "Tuinontwerp in Damwald kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Damwald?",
+            "answer": "Een tuinontwerp in Damwald duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in het hoofddorp van Dantumadiel."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Damwald?",
+            "answer": "Tuinontwerp in Damwald omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de kleigrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "dokkum": {
+      "groendak": {
+        "serviceName": "Groendaken Dokkum",
+        "description": "Professionele groendak installatie in Dokkum door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor de historische vestingstad.",
+        "latitude": "53.3261",
+        "longitude": "5.9964",
+        "ratingValue": "4.7",
+        "reviewCount": "19",
+        "areaServedName": "Dokkum",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Dokkum",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Dokkum?",
+            "answer": "Een groendak in Dokkum kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Dokkum?",
+            "answer": "Een groendak in Dokkum verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in de historische vestingstad."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Dokkum?",
+            "answer": "Voor de meeste woningen in Dokkum is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in de historische vestingstad."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Dokkum",
+        "description": "Professionele bestratingswerken in Dokkum door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor de historische vestingstad.",
+        "latitude": "53.3261",
+        "longitude": "5.9964",
+        "ratingValue": "4.7",
+        "reviewCount": "19",
+        "areaServedName": "Dokkum",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Dokkum",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Dokkum?",
+            "answer": "Bestrating aanleggen in Dokkum kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Dokkum?",
+            "answer": "Voor bestrating in Dokkum worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de kleigrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Dokkum?",
+            "answer": "Het aanleggen van bestrating in Dokkum duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in de historische vestingstad."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Dokkum",
+        "description": "Professioneel tuinonderhoud in Dokkum door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in de historische vestingstad.",
+        "latitude": "53.3261",
+        "longitude": "5.9964",
+        "ratingValue": "4.7",
+        "reviewCount": "19",
+        "areaServedName": "Dokkum",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Dokkum",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Dokkum?",
+            "answer": "Tuinonderhoud in Dokkum kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Dokkum?",
+            "answer": "De meeste tuinen in Dokkum hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Dokkum?",
+            "answer": "Tuinonderhoud in Dokkum omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de kleigrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Dokkum",
+        "description": "Professioneel tuinontwerp in Dokkum door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor de historische vestingstad.",
+        "latitude": "53.3261",
+        "longitude": "5.9964",
+        "ratingValue": "4.7",
+        "reviewCount": "19",
+        "areaServedName": "Dokkum",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Dokkum",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Dokkum?",
+            "answer": "Tuinontwerp in Dokkum kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Dokkum?",
+            "answer": "Een tuinontwerp in Dokkum duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in de historische vestingstad."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Dokkum?",
+            "answer": "Tuinontwerp in Dokkum omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de kleigrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "drachten": {
+      "groendak": {
+        "serviceName": "Groendaken Drachten",
+        "description": "Professionele groendak installatie in Drachten door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor de grootste stad van Smallingerland.",
+        "latitude": "53.1000",
+        "longitude": "6.1000",
+        "ratingValue": "4.8",
+        "reviewCount": "29",
+        "areaServedName": "Drachten",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Drachten",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Drachten?",
+            "answer": "Een groendak in Drachten kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Drachten?",
+            "answer": "Een groendak in Drachten verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in de grootste stad van Smallingerland."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Drachten?",
+            "answer": "Voor de meeste woningen in Drachten is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in de grootste stad van Smallingerland."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Drachten",
+        "description": "Professionele bestratingswerken in Drachten door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor de grootste stad van Smallingerland.",
+        "latitude": "53.1000",
+        "longitude": "6.1000",
+        "ratingValue": "4.8",
+        "reviewCount": "29",
+        "areaServedName": "Drachten",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Drachten",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Drachten?",
+            "answer": "Bestrating aanleggen in Drachten kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Drachten?",
+            "answer": "Voor bestrating in Drachten worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de veengrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Drachten?",
+            "answer": "Het aanleggen van bestrating in Drachten duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in de grootste stad van Smallingerland."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Drachten",
+        "description": "Professioneel tuinonderhoud in Drachten door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in de grootste stad van Smallingerland.",
+        "latitude": "53.1000",
+        "longitude": "6.1000",
+        "ratingValue": "4.8",
+        "reviewCount": "29",
+        "areaServedName": "Drachten",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Drachten",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Drachten?",
+            "answer": "Tuinonderhoud in Drachten kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Drachten?",
+            "answer": "De meeste tuinen in Drachten hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Drachten?",
+            "answer": "Tuinonderhoud in Drachten omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de veengrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Drachten",
+        "description": "Professioneel tuinontwerp in Drachten door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor de grootste stad van Smallingerland.",
+        "latitude": "53.1000",
+        "longitude": "6.1000",
+        "ratingValue": "4.8",
+        "reviewCount": "29",
+        "areaServedName": "Drachten",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Drachten",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Drachten?",
+            "answer": "Tuinontwerp in Drachten kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Drachten?",
+            "answer": "Een tuinontwerp in Drachten duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in de grootste stad van Smallingerland."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Drachten?",
+            "answer": "Tuinontwerp in Drachten omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de veengrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "franeker": {
+      "groendak": {
+        "serviceName": "Groendaken Franeker",
+        "description": "Professionele groendak installatie in Franeker door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor de historische grachtenstad.",
+        "latitude": "53.1872",
+        "longitude": "5.5419",
+        "ratingValue": "4.8",
+        "reviewCount": "16",
+        "areaServedName": "Franeker",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Franeker",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Franeker?",
+            "answer": "Een groendak in Franeker kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Franeker?",
+            "answer": "Een groendak in Franeker verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in de historische grachtenstad."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Franeker?",
+            "answer": "Voor de meeste woningen in Franeker is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in de historische grachtenstad."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Franeker",
+        "description": "Professionele bestratingswerken in Franeker door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor de historische grachtenstad.",
+        "latitude": "53.1872",
+        "longitude": "5.5419",
+        "ratingValue": "4.8",
+        "reviewCount": "16",
+        "areaServedName": "Franeker",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Franeker",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Franeker?",
+            "answer": "Bestrating aanleggen in Franeker kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Franeker?",
+            "answer": "Voor bestrating in Franeker worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de kleigrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Franeker?",
+            "answer": "Het aanleggen van bestrating in Franeker duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in de historische grachtenstad."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Franeker",
+        "description": "Professioneel tuinonderhoud in Franeker door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in de historische grachtenstad.",
+        "latitude": "53.1872",
+        "longitude": "5.5419",
+        "ratingValue": "4.8",
+        "reviewCount": "16",
+        "areaServedName": "Franeker",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Franeker",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Franeker?",
+            "answer": "Tuinonderhoud in Franeker kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Franeker?",
+            "answer": "De meeste tuinen in Franeker hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Franeker?",
+            "answer": "Tuinonderhoud in Franeker omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de kleigrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Franeker",
+        "description": "Professioneel tuinontwerp in Franeker door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor de historische grachtenstad.",
+        "latitude": "53.1872",
+        "longitude": "5.5419",
+        "ratingValue": "4.8",
+        "reviewCount": "16",
+        "areaServedName": "Franeker",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Franeker",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Franeker?",
+            "answer": "Tuinontwerp in Franeker kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Franeker?",
+            "answer": "Een tuinontwerp in Franeker duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in de historische grachtenstad."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Franeker?",
+            "answer": "Tuinontwerp in Franeker omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de kleigrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "gorredijk": {
+      "groendak": {
+        "serviceName": "Groendaken Gorredijk",
+        "description": "Professionele groendak installatie in Gorredijk door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor het dorp in het Opsterland bosgebied.",
+        "latitude": "53.0061",
+        "longitude": "6.0639",
+        "ratingValue": "4.8",
+        "reviewCount": "12",
+        "areaServedName": "Gorredijk",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Gorredijk",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Gorredijk?",
+            "answer": "Een groendak in Gorredijk kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Gorredijk?",
+            "answer": "Een groendak in Gorredijk verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in het dorp in het Opsterland bosgebied."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Gorredijk?",
+            "answer": "Voor de meeste woningen in Gorredijk is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in het dorp in het Opsterland bosgebied."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Gorredijk",
+        "description": "Professionele bestratingswerken in Gorredijk door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor het dorp in het Opsterland bosgebied.",
+        "latitude": "53.0061",
+        "longitude": "6.0639",
+        "ratingValue": "4.8",
+        "reviewCount": "12",
+        "areaServedName": "Gorredijk",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Gorredijk",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Gorredijk?",
+            "answer": "Bestrating aanleggen in Gorredijk kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Gorredijk?",
+            "answer": "Voor bestrating in Gorredijk worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de veengrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Gorredijk?",
+            "answer": "Het aanleggen van bestrating in Gorredijk duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in het dorp in het Opsterland bosgebied."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Gorredijk",
+        "description": "Professioneel tuinonderhoud in Gorredijk door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in het dorp in het Opsterland bosgebied.",
+        "latitude": "53.0061",
+        "longitude": "6.0639",
+        "ratingValue": "4.8",
+        "reviewCount": "12",
+        "areaServedName": "Gorredijk",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Gorredijk",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Gorredijk?",
+            "answer": "Tuinonderhoud in Gorredijk kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Gorredijk?",
+            "answer": "De meeste tuinen in Gorredijk hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Gorredijk?",
+            "answer": "Tuinonderhoud in Gorredijk omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de veengrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Gorredijk",
+        "description": "Professioneel tuinontwerp in Gorredijk door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor het dorp in het Opsterland bosgebied.",
+        "latitude": "53.0061",
+        "longitude": "6.0639",
+        "ratingValue": "4.8",
+        "reviewCount": "12",
+        "areaServedName": "Gorredijk",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Gorredijk",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Gorredijk?",
+            "answer": "Tuinontwerp in Gorredijk kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Gorredijk?",
+            "answer": "Een tuinontwerp in Gorredijk duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in het dorp in het Opsterland bosgebied."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Gorredijk?",
+            "answer": "Tuinontwerp in Gorredijk omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de veengrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "harlingen": {
+      "groendak": {
+        "serviceName": "Groendaken Harlingen",
+        "description": "Professionele groendak installatie in Harlingen door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor de Waddenhaven aan de Waddenzee.",
+        "latitude": "53.1742",
+        "longitude": "5.4242",
+        "ratingValue": "4.8",
+        "reviewCount": "21",
+        "areaServedName": "Harlingen",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Harlingen,_Friesland",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Harlingen?",
+            "answer": "Een groendak in Harlingen kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Harlingen?",
+            "answer": "Een groendak in Harlingen verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in de Waddenhaven aan de Waddenzee."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Harlingen?",
+            "answer": "Voor de meeste woningen in Harlingen is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in de Waddenhaven aan de Waddenzee."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Harlingen",
+        "description": "Professionele bestratingswerken in Harlingen door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor de Waddenhaven aan de Waddenzee.",
+        "latitude": "53.1742",
+        "longitude": "5.4242",
+        "ratingValue": "4.8",
+        "reviewCount": "21",
+        "areaServedName": "Harlingen",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Harlingen,_Friesland",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Harlingen?",
+            "answer": "Bestrating aanleggen in Harlingen kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Harlingen?",
+            "answer": "Voor bestrating in Harlingen worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de maritieme kleigrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Harlingen?",
+            "answer": "Het aanleggen van bestrating in Harlingen duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in de Waddenhaven aan de Waddenzee."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Harlingen",
+        "description": "Professioneel tuinonderhoud in Harlingen door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in de Waddenhaven aan de Waddenzee.",
+        "latitude": "53.1742",
+        "longitude": "5.4242",
+        "ratingValue": "4.8",
+        "reviewCount": "21",
+        "areaServedName": "Harlingen",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Harlingen,_Friesland",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Harlingen?",
+            "answer": "Tuinonderhoud in Harlingen kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Harlingen?",
+            "answer": "De meeste tuinen in Harlingen hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Harlingen?",
+            "answer": "Tuinonderhoud in Harlingen omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de maritieme kleigrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Harlingen",
+        "description": "Professioneel tuinontwerp in Harlingen door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor de Waddenhaven aan de Waddenzee.",
+        "latitude": "53.1742",
+        "longitude": "5.4242",
+        "ratingValue": "4.8",
+        "reviewCount": "21",
+        "areaServedName": "Harlingen",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Harlingen,_Friesland",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Harlingen?",
+            "answer": "Tuinontwerp in Harlingen kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Harlingen?",
+            "answer": "Een tuinontwerp in Harlingen duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in de Waddenhaven aan de Waddenzee."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Harlingen?",
+            "answer": "Tuinontwerp in Harlingen omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de maritieme kleigrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "heerenveen": {
+      "groendak": {
+        "serviceName": "Groendaken Heerenveen",
+        "description": "Professionele groendak installatie in Heerenveen door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor de sportstad van Friesland.",
+        "latitude": "52.9603",
+        "longitude": "5.9222",
+        "ratingValue": "4.8",
+        "reviewCount": "35",
+        "areaServedName": "Heerenveen",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Heerenveen",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Heerenveen?",
+            "answer": "Een groendak in Heerenveen kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Heerenveen?",
+            "answer": "Een groendak in Heerenveen verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in de sportstad van Friesland."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Heerenveen?",
+            "answer": "Voor de meeste woningen in Heerenveen is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in de sportstad van Friesland."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Heerenveen",
+        "description": "Professionele bestratingswerken in Heerenveen door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor de sportstad van Friesland.",
+        "latitude": "52.9603",
+        "longitude": "5.9222",
+        "ratingValue": "4.8",
+        "reviewCount": "35",
+        "areaServedName": "Heerenveen",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Heerenveen",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Heerenveen?",
+            "answer": "Bestrating aanleggen in Heerenveen kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Heerenveen?",
+            "answer": "Voor bestrating in Heerenveen worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de veen- en zandgrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Heerenveen?",
+            "answer": "Het aanleggen van bestrating in Heerenveen duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in de sportstad van Friesland."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Heerenveen",
+        "description": "Professioneel tuinonderhoud in Heerenveen door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in de sportstad van Friesland.",
+        "latitude": "52.9603",
+        "longitude": "5.9222",
+        "ratingValue": "4.8",
+        "reviewCount": "35",
+        "areaServedName": "Heerenveen",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Heerenveen",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Heerenveen?",
+            "answer": "Tuinonderhoud in Heerenveen kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Heerenveen?",
+            "answer": "De meeste tuinen in Heerenveen hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Heerenveen?",
+            "answer": "Tuinonderhoud in Heerenveen omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de veen- en zandgrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Heerenveen",
+        "description": "Professioneel tuinontwerp in Heerenveen door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor de sportstad van Friesland.",
+        "latitude": "52.9603",
+        "longitude": "5.9222",
+        "ratingValue": "4.8",
+        "reviewCount": "35",
+        "areaServedName": "Heerenveen",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Heerenveen",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Heerenveen?",
+            "answer": "Tuinontwerp in Heerenveen kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Heerenveen?",
+            "answer": "Een tuinontwerp in Heerenveen duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in de sportstad van Friesland."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Heerenveen?",
+            "answer": "Tuinontwerp in Heerenveen omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de veen- en zandgrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "joure": {
+      "groendak": {
+        "serviceName": "Groendaken Joure",
+        "description": "Professionele groendak installatie in Joure door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor het dorp aan het Friese merengebied.",
+        "latitude": "52.9670",
+        "longitude": "5.7830",
+        "ratingValue": "4.7",
+        "reviewCount": "13",
+        "areaServedName": "Joure",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Joure?",
+            "answer": "Een groendak in Joure kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Joure?",
+            "answer": "Een groendak in Joure verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in het dorp aan het Friese merengebied."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Joure?",
+            "answer": "Voor de meeste woningen in Joure is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in het dorp aan het Friese merengebied."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Joure",
+        "description": "Professionele bestratingswerken in Joure door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor het dorp aan het Friese merengebied.",
+        "latitude": "52.9670",
+        "longitude": "5.7830",
+        "ratingValue": "4.7",
+        "reviewCount": "13",
+        "areaServedName": "Joure",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Joure?",
+            "answer": "Bestrating aanleggen in Joure kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Joure?",
+            "answer": "Voor bestrating in Joure worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de veengrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Joure?",
+            "answer": "Het aanleggen van bestrating in Joure duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in het dorp aan het Friese merengebied."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Joure",
+        "description": "Professioneel tuinonderhoud in Joure door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in het dorp aan het Friese merengebied.",
+        "latitude": "52.9670",
+        "longitude": "5.7830",
+        "ratingValue": "4.7",
+        "reviewCount": "13",
+        "areaServedName": "Joure",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Joure?",
+            "answer": "Tuinonderhoud in Joure kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Joure?",
+            "answer": "De meeste tuinen in Joure hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Joure?",
+            "answer": "Tuinonderhoud in Joure omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de veengrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Joure",
+        "description": "Professioneel tuinontwerp in Joure door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor het dorp aan het Friese merengebied.",
+        "latitude": "52.9670",
+        "longitude": "5.7830",
+        "ratingValue": "4.7",
+        "reviewCount": "13",
+        "areaServedName": "Joure",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Joure?",
+            "answer": "Tuinontwerp in Joure kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Joure?",
+            "answer": "Een tuinontwerp in Joure duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in het dorp aan het Friese merengebied."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Joure?",
+            "answer": "Tuinontwerp in Joure omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de veengrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "kollum": {
+      "groendak": {
+        "serviceName": "Groendaken Kollum",
+        "description": "Professionele groendak installatie in Kollum door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor het dorp aan de Lauwers.",
+        "latitude": "53.2830",
+        "longitude": "6.1500",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Kollum",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Kollum?",
+            "answer": "Een groendak in Kollum kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Kollum?",
+            "answer": "Een groendak in Kollum verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in het dorp aan de Lauwers."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Kollum?",
+            "answer": "Voor de meeste woningen in Kollum is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in het dorp aan de Lauwers."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Kollum",
+        "description": "Professionele bestratingswerken in Kollum door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor het dorp aan de Lauwers.",
+        "latitude": "53.2830",
+        "longitude": "6.1500",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Kollum",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Kollum?",
+            "answer": "Bestrating aanleggen in Kollum kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Kollum?",
+            "answer": "Voor bestrating in Kollum worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de kleigrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Kollum?",
+            "answer": "Het aanleggen van bestrating in Kollum duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in het dorp aan de Lauwers."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Kollum",
+        "description": "Professioneel tuinonderhoud in Kollum door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in het dorp aan de Lauwers.",
+        "latitude": "53.2830",
+        "longitude": "6.1500",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Kollum",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Kollum?",
+            "answer": "Tuinonderhoud in Kollum kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Kollum?",
+            "answer": "De meeste tuinen in Kollum hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Kollum?",
+            "answer": "Tuinonderhoud in Kollum omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de kleigrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Kollum",
+        "description": "Professioneel tuinontwerp in Kollum door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor het dorp aan de Lauwers.",
+        "latitude": "53.2830",
+        "longitude": "6.1500",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Kollum",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Kollum?",
+            "answer": "Tuinontwerp in Kollum kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Kollum?",
+            "answer": "Een tuinontwerp in Kollum duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in het dorp aan de Lauwers."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Kollum?",
+            "answer": "Tuinontwerp in Kollum omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de kleigrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "leeuwarden": {
+      "groendak": {
+        "serviceName": "Groendaken Leeuwarden",
+        "description": "Professionele groendak installatie in Leeuwarden door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor de hoofdstad van Friesland.",
+        "latitude": "53.2014",
+        "longitude": "5.7998",
+        "ratingValue": "4.8",
+        "reviewCount": "47",
+        "areaServedName": "Leeuwarden",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Leeuwarden",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Leeuwarden?",
+            "answer": "Een groendak in Leeuwarden kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Leeuwarden?",
+            "answer": "Een groendak in Leeuwarden verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in de hoofdstad van Friesland."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Leeuwarden?",
+            "answer": "Voor de meeste woningen in Leeuwarden is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in de hoofdstad van Friesland."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Leeuwarden",
+        "description": "Professionele bestratingswerken in Leeuwarden door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor de hoofdstad van Friesland.",
+        "latitude": "53.2014",
+        "longitude": "5.7998",
+        "ratingValue": "4.8",
+        "reviewCount": "47",
+        "areaServedName": "Leeuwarden",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Leeuwarden",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Leeuwarden?",
+            "answer": "Bestrating aanleggen in Leeuwarden kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Leeuwarden?",
+            "answer": "Voor bestrating in Leeuwarden worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de kleigrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Leeuwarden?",
+            "answer": "Het aanleggen van bestrating in Leeuwarden duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in de hoofdstad van Friesland."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Leeuwarden",
+        "description": "Professioneel tuinonderhoud in Leeuwarden door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in de hoofdstad van Friesland.",
+        "latitude": "53.2014",
+        "longitude": "5.7998",
+        "ratingValue": "4.8",
+        "reviewCount": "47",
+        "areaServedName": "Leeuwarden",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Leeuwarden",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Leeuwarden?",
+            "answer": "Tuinonderhoud in Leeuwarden kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Leeuwarden?",
+            "answer": "De meeste tuinen in Leeuwarden hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Leeuwarden?",
+            "answer": "Tuinonderhoud in Leeuwarden omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de kleigrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Leeuwarden",
+        "description": "Professioneel tuinontwerp in Leeuwarden door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor de hoofdstad van Friesland.",
+        "latitude": "53.2014",
+        "longitude": "5.7998",
+        "ratingValue": "4.8",
+        "reviewCount": "47",
+        "areaServedName": "Leeuwarden",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Leeuwarden",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Leeuwarden?",
+            "answer": "Tuinontwerp in Leeuwarden kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Leeuwarden?",
+            "answer": "Een tuinontwerp in Leeuwarden duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in de hoofdstad van Friesland."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Leeuwarden?",
+            "answer": "Tuinontwerp in Leeuwarden omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de kleigrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "lemmer": {
+      "groendak": {
+        "serviceName": "Groendaken Lemmer",
+        "description": "Professionele groendak installatie in Lemmer door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor het havenplaatsje aan het IJsselmeer.",
+        "latitude": "52.8436",
+        "longitude": "5.7097",
+        "ratingValue": "4.7",
+        "reviewCount": "18",
+        "areaServedName": "Lemmer",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Lemmer",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Lemmer?",
+            "answer": "Een groendak in Lemmer kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Lemmer?",
+            "answer": "Een groendak in Lemmer verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in het havenplaatsje aan het IJsselmeer."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Lemmer?",
+            "answer": "Voor de meeste woningen in Lemmer is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in het havenplaatsje aan het IJsselmeer."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Lemmer",
+        "description": "Professionele bestratingswerken in Lemmer door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor het havenplaatsje aan het IJsselmeer.",
+        "latitude": "52.8436",
+        "longitude": "5.7097",
+        "ratingValue": "4.7",
+        "reviewCount": "18",
+        "areaServedName": "Lemmer",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Lemmer",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Lemmer?",
+            "answer": "Bestrating aanleggen in Lemmer kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Lemmer?",
+            "answer": "Voor bestrating in Lemmer worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de veen- en kleigrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Lemmer?",
+            "answer": "Het aanleggen van bestrating in Lemmer duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in het havenplaatsje aan het IJsselmeer."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Lemmer",
+        "description": "Professioneel tuinonderhoud in Lemmer door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in het havenplaatsje aan het IJsselmeer.",
+        "latitude": "52.8436",
+        "longitude": "5.7097",
+        "ratingValue": "4.7",
+        "reviewCount": "18",
+        "areaServedName": "Lemmer",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Lemmer",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Lemmer?",
+            "answer": "Tuinonderhoud in Lemmer kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Lemmer?",
+            "answer": "De meeste tuinen in Lemmer hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Lemmer?",
+            "answer": "Tuinonderhoud in Lemmer omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de veen- en kleigrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Lemmer",
+        "description": "Professioneel tuinontwerp in Lemmer door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor het havenplaatsje aan het IJsselmeer.",
+        "latitude": "52.8436",
+        "longitude": "5.7097",
+        "ratingValue": "4.7",
+        "reviewCount": "18",
+        "areaServedName": "Lemmer",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Lemmer",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Lemmer?",
+            "answer": "Tuinontwerp in Lemmer kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Lemmer?",
+            "answer": "Een tuinontwerp in Lemmer duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in het havenplaatsje aan het IJsselmeer."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Lemmer?",
+            "answer": "Tuinontwerp in Lemmer omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de veen- en kleigrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "noordwolde": {
+      "groendak": {
+        "serviceName": "Groendaken Noordwolde",
+        "description": "Professionele groendak installatie in Noordwolde door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor het dorp in Weststellingwerf.",
+        "latitude": "52.9000",
+        "longitude": "6.1500",
+        "ratingValue": "4.7",
+        "reviewCount": "6",
+        "areaServedName": "Noordwolde",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Noordwolde?",
+            "answer": "Een groendak in Noordwolde kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Noordwolde?",
+            "answer": "Een groendak in Noordwolde verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in het dorp in Weststellingwerf."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Noordwolde?",
+            "answer": "Voor de meeste woningen in Noordwolde is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in het dorp in Weststellingwerf."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Noordwolde",
+        "description": "Professionele bestratingswerken in Noordwolde door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor het dorp in Weststellingwerf.",
+        "latitude": "52.9000",
+        "longitude": "6.1500",
+        "ratingValue": "4.7",
+        "reviewCount": "6",
+        "areaServedName": "Noordwolde",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Noordwolde?",
+            "answer": "Bestrating aanleggen in Noordwolde kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Noordwolde?",
+            "answer": "Voor bestrating in Noordwolde worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de veengrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Noordwolde?",
+            "answer": "Het aanleggen van bestrating in Noordwolde duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in het dorp in Weststellingwerf."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Noordwolde",
+        "description": "Professioneel tuinonderhoud in Noordwolde door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in het dorp in Weststellingwerf.",
+        "latitude": "52.9000",
+        "longitude": "6.1500",
+        "ratingValue": "4.7",
+        "reviewCount": "6",
+        "areaServedName": "Noordwolde",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Noordwolde?",
+            "answer": "Tuinonderhoud in Noordwolde kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Noordwolde?",
+            "answer": "De meeste tuinen in Noordwolde hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Noordwolde?",
+            "answer": "Tuinonderhoud in Noordwolde omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de veengrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Noordwolde",
+        "description": "Professioneel tuinontwerp in Noordwolde door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor het dorp in Weststellingwerf.",
+        "latitude": "52.9000",
+        "longitude": "6.1500",
+        "ratingValue": "4.7",
+        "reviewCount": "6",
+        "areaServedName": "Noordwolde",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Noordwolde?",
+            "answer": "Tuinontwerp in Noordwolde kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Noordwolde?",
+            "answer": "Een tuinontwerp in Noordwolde duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in het dorp in Weststellingwerf."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Noordwolde?",
+            "answer": "Tuinontwerp in Noordwolde omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de veengrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "oosterwolde": {
+      "groendak": {
+        "serviceName": "Groendaken Oosterwolde",
+        "description": "Professionele groendak installatie in Oosterwolde door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor het hoofddorp van de Stellingwerven.",
+        "latitude": "52.9983",
+        "longitude": "6.2942",
+        "ratingValue": "4.7",
+        "reviewCount": "14",
+        "areaServedName": "Oosterwolde",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Oosterwolde,_Friesland",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Oosterwolde?",
+            "answer": "Een groendak in Oosterwolde kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Oosterwolde?",
+            "answer": "Een groendak in Oosterwolde verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in het hoofddorp van de Stellingwerven."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Oosterwolde?",
+            "answer": "Voor de meeste woningen in Oosterwolde is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in het hoofddorp van de Stellingwerven."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Oosterwolde",
+        "description": "Professionele bestratingswerken in Oosterwolde door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor het hoofddorp van de Stellingwerven.",
+        "latitude": "52.9983",
+        "longitude": "6.2942",
+        "ratingValue": "4.7",
+        "reviewCount": "14",
+        "areaServedName": "Oosterwolde",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Oosterwolde,_Friesland",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Oosterwolde?",
+            "answer": "Bestrating aanleggen in Oosterwolde kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Oosterwolde?",
+            "answer": "Voor bestrating in Oosterwolde worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de zand- en veengrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Oosterwolde?",
+            "answer": "Het aanleggen van bestrating in Oosterwolde duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in het hoofddorp van de Stellingwerven."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Oosterwolde",
+        "description": "Professioneel tuinonderhoud in Oosterwolde door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in het hoofddorp van de Stellingwerven.",
+        "latitude": "52.9983",
+        "longitude": "6.2942",
+        "ratingValue": "4.7",
+        "reviewCount": "14",
+        "areaServedName": "Oosterwolde",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Oosterwolde,_Friesland",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Oosterwolde?",
+            "answer": "Tuinonderhoud in Oosterwolde kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Oosterwolde?",
+            "answer": "De meeste tuinen in Oosterwolde hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Oosterwolde?",
+            "answer": "Tuinonderhoud in Oosterwolde omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de zand- en veengrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Oosterwolde",
+        "description": "Professioneel tuinontwerp in Oosterwolde door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor het hoofddorp van de Stellingwerven.",
+        "latitude": "52.9983",
+        "longitude": "6.2942",
+        "ratingValue": "4.7",
+        "reviewCount": "14",
+        "areaServedName": "Oosterwolde",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Oosterwolde,_Friesland",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Oosterwolde?",
+            "answer": "Tuinontwerp in Oosterwolde kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Oosterwolde?",
+            "answer": "Een tuinontwerp in Oosterwolde duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in het hoofddorp van de Stellingwerven."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Oosterwolde?",
+            "answer": "Tuinontwerp in Oosterwolde omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de zand- en veengrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "opeinde": {
+      "groendak": {
+        "serviceName": "Groendaken Opeinde",
+        "description": "Professionele groendak installatie in Opeinde door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor het dorp in Smallingerland.",
+        "latitude": "53.1330",
+        "longitude": "6.0670",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Opeinde",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Opeinde?",
+            "answer": "Een groendak in Opeinde kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Opeinde?",
+            "answer": "Een groendak in Opeinde verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in het dorp in Smallingerland."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Opeinde?",
+            "answer": "Voor de meeste woningen in Opeinde is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in het dorp in Smallingerland."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Opeinde",
+        "description": "Professionele bestratingswerken in Opeinde door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor het dorp in Smallingerland.",
+        "latitude": "53.1330",
+        "longitude": "6.0670",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Opeinde",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Opeinde?",
+            "answer": "Bestrating aanleggen in Opeinde kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Opeinde?",
+            "answer": "Voor bestrating in Opeinde worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de veengrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Opeinde?",
+            "answer": "Het aanleggen van bestrating in Opeinde duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in het dorp in Smallingerland."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Opeinde",
+        "description": "Professioneel tuinonderhoud in Opeinde door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in het dorp in Smallingerland.",
+        "latitude": "53.1330",
+        "longitude": "6.0670",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Opeinde",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Opeinde?",
+            "answer": "Tuinonderhoud in Opeinde kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Opeinde?",
+            "answer": "De meeste tuinen in Opeinde hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Opeinde?",
+            "answer": "Tuinonderhoud in Opeinde omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de veengrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Opeinde",
+        "description": "Professioneel tuinontwerp in Opeinde door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor het dorp in Smallingerland.",
+        "latitude": "53.1330",
+        "longitude": "6.0670",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Opeinde",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Opeinde?",
+            "answer": "Tuinontwerp in Opeinde kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Opeinde?",
+            "answer": "Een tuinontwerp in Opeinde duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in het dorp in Smallingerland."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Opeinde?",
+            "answer": "Tuinontwerp in Opeinde omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de veengrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "sint-annaparochie": {
+      "groendak": {
+        "serviceName": "Groendaken Sint Annaparochie",
+        "description": "Professionele groendak installatie in Sint Annaparochie door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor het Bildtse dorp.",
+        "latitude": "53.2833",
+        "longitude": "5.6670",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Sint Annaparochie",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Sint Annaparochie?",
+            "answer": "Een groendak in Sint Annaparochie kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Sint Annaparochie?",
+            "answer": "Een groendak in Sint Annaparochie verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in het Bildtse dorp."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Sint Annaparochie?",
+            "answer": "Voor de meeste woningen in Sint Annaparochie is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in het Bildtse dorp."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Sint Annaparochie",
+        "description": "Professionele bestratingswerken in Sint Annaparochie door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor het Bildtse dorp.",
+        "latitude": "53.2833",
+        "longitude": "5.6670",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Sint Annaparochie",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Sint Annaparochie?",
+            "answer": "Bestrating aanleggen in Sint Annaparochie kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Sint Annaparochie?",
+            "answer": "Voor bestrating in Sint Annaparochie worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de kleigrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Sint Annaparochie?",
+            "answer": "Het aanleggen van bestrating in Sint Annaparochie duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in het Bildtse dorp."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Sint Annaparochie",
+        "description": "Professioneel tuinonderhoud in Sint Annaparochie door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in het Bildtse dorp.",
+        "latitude": "53.2833",
+        "longitude": "5.6670",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Sint Annaparochie",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Sint Annaparochie?",
+            "answer": "Tuinonderhoud in Sint Annaparochie kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Sint Annaparochie?",
+            "answer": "De meeste tuinen in Sint Annaparochie hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Sint Annaparochie?",
+            "answer": "Tuinonderhoud in Sint Annaparochie omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de kleigrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Sint Annaparochie",
+        "description": "Professioneel tuinontwerp in Sint Annaparochie door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor het Bildtse dorp.",
+        "latitude": "53.2833",
+        "longitude": "5.6670",
+        "ratingValue": "4.7",
+        "reviewCount": "8",
+        "areaServedName": "Sint Annaparochie",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Sint Annaparochie?",
+            "answer": "Tuinontwerp in Sint Annaparochie kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Sint Annaparochie?",
+            "answer": "Een tuinontwerp in Sint Annaparochie duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in het Bildtse dorp."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Sint Annaparochie?",
+            "answer": "Tuinontwerp in Sint Annaparochie omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de kleigrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "sneek": {
+      "groendak": {
+        "serviceName": "Groendaken Sneek",
+        "description": "Professionele groendak installatie in Sneek door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor de historische waterstad van Friesland.",
+        "latitude": "53.0328",
+        "longitude": "5.6603",
+        "ratingValue": "4.8",
+        "reviewCount": "31",
+        "areaServedName": "Sneek",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Sneek",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Sneek?",
+            "answer": "Een groendak in Sneek kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Sneek?",
+            "answer": "Een groendak in Sneek verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in de historische waterstad van Friesland."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Sneek?",
+            "answer": "Voor de meeste woningen in Sneek is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in de historische waterstad van Friesland."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Sneek",
+        "description": "Professionele bestratingswerken in Sneek door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor de historische waterstad van Friesland.",
+        "latitude": "53.0328",
+        "longitude": "5.6603",
+        "ratingValue": "4.8",
+        "reviewCount": "31",
+        "areaServedName": "Sneek",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Sneek",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Sneek?",
+            "answer": "Bestrating aanleggen in Sneek kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Sneek?",
+            "answer": "Voor bestrating in Sneek worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de kleigrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Sneek?",
+            "answer": "Het aanleggen van bestrating in Sneek duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in de historische waterstad van Friesland."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Sneek",
+        "description": "Professioneel tuinonderhoud in Sneek door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in de historische waterstad van Friesland.",
+        "latitude": "53.0328",
+        "longitude": "5.6603",
+        "ratingValue": "4.8",
+        "reviewCount": "31",
+        "areaServedName": "Sneek",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Sneek",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Sneek?",
+            "answer": "Tuinonderhoud in Sneek kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Sneek?",
+            "answer": "De meeste tuinen in Sneek hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Sneek?",
+            "answer": "Tuinonderhoud in Sneek omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de kleigrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Sneek",
+        "description": "Professioneel tuinontwerp in Sneek door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor de historische waterstad van Friesland.",
+        "latitude": "53.0328",
+        "longitude": "5.6603",
+        "ratingValue": "4.8",
+        "reviewCount": "31",
+        "areaServedName": "Sneek",
+        "areaServedSameAs": "https://en.wikipedia.org/wiki/Sneek",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Sneek?",
+            "answer": "Tuinontwerp in Sneek kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Sneek?",
+            "answer": "Een tuinontwerp in Sneek duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in de historische waterstad van Friesland."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Sneek?",
+            "answer": "Tuinontwerp in Sneek omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de kleigrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    },
+    "wolvega": {
+      "groendak": {
+        "serviceName": "Groendaken Wolvega",
+        "description": "Professionele groendak installatie in Wolvega door gespecialiseerde hoveniers. Sedum daken en extensieve begroeide daken voor het hoofddorp van Weststellingwerf.",
+        "latitude": "52.8764",
+        "longitude": "5.9986",
+        "ratingValue": "4.7",
+        "reviewCount": "11",
+        "areaServedName": "Wolvega",
+        "lowPrice": "45",
+        "highPrice": "120",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost een groendak in Wolvega?",
+            "answer": "Een groendak in Wolvega kost gemiddeld 45 tot 120 euro per m2 afhankelijk van het type begroeiing en de dakconstructie. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van groendak specialisten."
+          },
+          {
+            "question": "Wat zijn de voordelen van een groendak in Wolvega?",
+            "answer": "Een groendak in Wolvega verbetert de isolatie, verlengt de levensduur van het dak, verbetert de waterhuishouding en verhoogt de biodiversiteit. Groendaken zijn ideaal voor het Friese klimaat in het hoofddorp van Weststellingwerf."
+          },
+          {
+            "question": "Welk type groendak past bij mijn woning in Wolvega?",
+            "answer": "Voor de meeste woningen in Wolvega is een extensief sedum dak het meest geschikt. Dit vereist minimaal onderhoud en is licht van gewicht. De specialisten in het Hovenier FRL netwerk adviseren u graag over de beste optie voor uw situatie in het hoofddorp van Weststellingwerf."
+          }
+        ]
+      },
+      "stratenmaker": {
+        "serviceName": "Bestrating Wolvega",
+        "description": "Professionele bestratingswerken in Wolvega door vakkundige stratenmakers. Terrassen, opritten en tuinpaden met keramische tegels, natuursteen en betonstraat voor het hoofddorp van Weststellingwerf.",
+        "latitude": "52.8764",
+        "longitude": "5.9986",
+        "ratingValue": "4.7",
+        "reviewCount": "11",
+        "areaServedName": "Wolvega",
+        "lowPrice": "45",
+        "highPrice": "85",
+        "unitText": "per m2",
+        "faqs": [
+          {
+            "question": "Wat kost bestrating aanleggen in Wolvega?",
+            "answer": "Bestrating aanleggen in Wolvega kost gemiddeld 45 tot 85 euro per m2 afhankelijk van het materiaal en de ondergrond. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale stratenmakers."
+          },
+          {
+            "question": "Welke materialen worden gebruikt voor bestrating in Wolvega?",
+            "answer": "Voor bestrating in Wolvega worden keramische tegels, natuursteen, betonstraat en klinkers gebruikt. De stratenmakers adviseren het beste materiaal voor de veen- en zandgrond en het gebruik van uw terras, oprit of tuinpad."
+          },
+          {
+            "question": "Hoe lang duurt het aanleggen van bestrating in Wolvega?",
+            "answer": "Het aanleggen van bestrating in Wolvega duurt gemiddeld 1 tot 3 dagen afhankelijk van de oppervlakte. De stratenmakers in het Hovenier FRL netwerk werken efficiënt en leveren kwaliteitswerk in het hoofddorp van Weststellingwerf."
+          }
+        ]
+      },
+      "tuinonderhoud": {
+        "serviceName": "Tuinonderhoud Wolvega",
+        "description": "Professioneel tuinonderhoud in Wolvega door vakkundige lokale hoveniers. Gazononderhoud, snoeien, onkruid verwijderen en seizoensonderhoud in het hoofddorp van Weststellingwerf.",
+        "latitude": "52.8764",
+        "longitude": "5.9986",
+        "ratingValue": "4.7",
+        "reviewCount": "11",
+        "areaServedName": "Wolvega",
+        "lowPrice": "40",
+        "highPrice": "65",
+        "unitText": "per uur",
+        "faqs": [
+          {
+            "question": "Wat kost tuinonderhoud in Wolvega?",
+            "answer": "Tuinonderhoud in Wolvega kost gemiddeld 40 tot 65 euro per uur. De exacte kosten hangen af van de grootte van uw tuin en de werkzaamheden. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes."
+          },
+          {
+            "question": "Hoe vaak moet ik tuinonderhoud laten doen in Wolvega?",
+            "answer": "De meeste tuinen in Wolvega hebben onderhoud nodig elke 2 tot 4 weken in het groeiseizoen van april tot oktober. In de winter volstaat maandelijks onderhoud. Via Hovenier FRL kunt u een onderhoudscontract op maat aanvragen."
+          },
+          {
+            "question": "Wat valt onder tuinonderhoud in Wolvega?",
+            "answer": "Tuinonderhoud in Wolvega omvat gazononderhoud, snoeien van struiken en heggen, onkruid verwijderen, blad ruimen en seizoensgebonden werkzaamheden. Alle hoveniers kennen de veen- en zandgrond en het lokale klimaat."
+          }
+        ]
+      },
+      "tuinontwerp": {
+        "serviceName": "Tuinontwerp Wolvega",
+        "description": "Professioneel tuinontwerp in Wolvega door ervaren tuinontwerpers. Van eerste schets tot 3D visualisatie en beplantingsplan op maat voor het hoofddorp van Weststellingwerf.",
+        "latitude": "52.8764",
+        "longitude": "5.9986",
+        "ratingValue": "4.7",
+        "reviewCount": "11",
+        "areaServedName": "Wolvega",
+        "lowPrice": "750",
+        "highPrice": "2500",
+        "unitText": "per ontwerp",
+        "faqs": [
+          {
+            "question": "Wat kost tuinontwerp in Wolvega?",
+            "answer": "Tuinontwerp in Wolvega kost gemiddeld 750 tot 2500 euro afhankelijk van de complexiteit en grootte van het ontwerp. Via Hovenier FRL ontvangt u binnen 24 uur meerdere vrijblijvende offertes van lokale tuinontwerpers."
+          },
+          {
+            "question": "Hoe lang duurt een tuinontwerp in Wolvega?",
+            "answer": "Een tuinontwerp in Wolvega duurt gemiddeld 2 tot 4 weken van eerste gesprek tot definitief ontwerp. De tuinontwerpers in het Hovenier FRL netwerk kennen de lokale omstandigheden in het hoofddorp van Weststellingwerf."
+          },
+          {
+            "question": "Wat is inbegrepen bij tuinontwerp in Wolvega?",
+            "answer": "Tuinontwerp in Wolvega omvat een intakegesprek, schetsontwerp, definitief beplantingsplan en een 2D of 3D visualisatie. De ontwerpers houden rekening met de veen- en zandgrond en de specifieke wensen van uw tuin."
+          }
+        ]
+      }
+    }
+  }
+}
 }

@@ -51,12 +51,12 @@ const nextConfig: NextConfig = {
             value: [
               "default-src 'self'",
               // GA4 scripts and tag manager
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.googletagmanager.com https://*.google-analytics.com https://challenges.cloudflare.com",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.googletagmanager.com https://*.google-analytics.com https://challenges.cloudflare.com https://*.clarity.ms",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https://*.hivedeck.com https://*.unsplash.com https://*.google-analytics.com https://*.googletagmanager.com https://*.gstatic.com",
               // GA4 collect endpoints - explicit regional coverage for all possible domains
-              "connect-src 'self' https://*.google-analytics.com https://region1.google-analytics.com https://region1.analytics.google.com https://www.google-analytics.com https://analytics.google.com https://ssl.google-analytics.com https://*.googletagmanager.com https://*.analytics.google.com https://*.doubleclick.net https://stats.g.doubleclick.net https://www.google.com https://www.google.nl https://challenges.cloudflare.com https://vitals.vercel-analytics.com",
+              "connect-src 'self' https://*.google-analytics.com https://region1.google-analytics.com https://region1.analytics.google.com https://www.google-analytics.com https://analytics.google.com https://ssl.google-analytics.com https://*.googletagmanager.com https://*.analytics.google.com https://*.doubleclick.net https://stats.g.doubleclick.net https://www.google.com https://www.google.nl https://challenges.cloudflare.com https://vitals.vercel-analytics.com https://*.clarity.ms",
               "frame-src 'self' https://challenges.cloudflare.com",
             ].join('; ')
           }

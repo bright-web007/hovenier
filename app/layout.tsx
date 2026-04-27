@@ -11,7 +11,7 @@ import { env } from "@/lib/env";
 const sansFont = DM_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
-  display: "swap",
+  display: "block",
 });
 
 export const metadata: Metadata = {

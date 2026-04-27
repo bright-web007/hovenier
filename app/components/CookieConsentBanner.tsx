@@ -172,7 +172,17 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
 
   const t = translations[locale as keyof typeof translations] || translations.nl;
 
-  if (!mounted || consentGiven) return null;
+  if (consentGiven) return null;
+
+  if (!mounted) {
+    return (
+      <div
+        className={styles.cookieConsentOverlay}
+        style={{ visibility: 'hidden', pointerEvents: 'none' }}
+        aria-hidden="true"
+      />
+    );
+  }
 
   return (
     <div className={styles.cookieConsentOverlay}>

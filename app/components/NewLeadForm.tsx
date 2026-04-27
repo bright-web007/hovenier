@@ -1,12 +1,8 @@
 "use client";
-import { Suspense, lazy, useState, useEffect } from "react";
+import { Suspense, lazy, useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { trackLeadFormSubmission } from './GoogleAnalytics';
-import { submitLeadToPrometheus } from '../services/prometheus';
 import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { createTranslator } from '@/i18n';
-import { newLeadFormSchema, type NewLeadFormData } from '@/lib/validation';
-import { useFormValidation } from '@/lib/hooks/useFormValidation';
 import { FormField, FormErrorSummary, FormLoadingSpinner } from './FormValidation';
 import CustomSelect from './CustomSelect';
 import { securityKeys } from '@/lib/env';
@@ -80,58 +76,36 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const router = useRouter();
 
+  // Lightweight form state — heavy validation modules loaded only on submit
+  const [errors, setErrors] = useState<Record<string, { _errors: string[] }> | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     if (isDevelopment) setTurnstileToken('dev-bypass');
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const getError = useCallback((fieldName: string): string | undefined => {
+    return errors?.[fieldName]?._errors?.[0];
+  }, [errors]);
 
+  const hasError = useCallback((fieldName: string): boolean => {
+    return !!getError(fieldName);
+  }, [getError]);
 
-  const {
-    handleSubmit,
-    handleFieldChange,
-    getError,
-    hasError,
-    isValidating,
-    errors
-  } = useFormValidation<NewLeadFormData>({
-    schema: newLeadFormSchema,
-    validateOnChange: false,
-    onSuccess: async (validatedData) => {
-      try {
-        // Track form submission immediately
-        trackLeadFormSubmission(validatedData.gemeente, validatedData.dienst);
-
-        // Submit to Prometheus service
-        const leadData = {
-          ...validatedData,
-          locale,
-          timestamp: new Date().toISOString(),
-          source: 'website_form'
-        };
-
-        const result = await submitLeadToPrometheus(leadData);
-
-        if (result.success) {
-          console.log('Lead submitted successfully:', result.leadId);
-          router.push(localizePath('/bedankt', locale as SupportedLocale));
-        } else {
-          console.warn('Lead submission had issues:', result.error);
-          router.push(localizePath('/bedankt', locale as SupportedLocale));
-        }
-
-      } catch (error) {
-        console.error('Form submission error:', error);
-        router.push(localizePath('/bedankt', locale as SupportedLocale));
-      }
-    },
-    onError: (errors) => {
-      console.error('Validation errors:', errors);
-    }
-  });
+  const clearFieldError = useCallback((fieldName: string) => {
+    setErrors(prev => {
+      if (!prev) return null;
+      const next = { ...prev };
+      delete next[fieldName];
+      return Object.keys(next).length > 0 ? next : null;
+    });
+  }, []);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setErrors(null);
 
     const formData = {
       naam,
@@ -146,12 +120,54 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
       turnstileToken: turnstileToken || (isDevelopment ? 'dev-bypass' : ''),
     };
 
-    await handleSubmit(formData);
+    try {
+      // Lazy load validation + submission modules only when user submits
+      const [{ newLeadFormSchema }, { submitLeadToPrometheus }, { trackLeadFormSubmission }] = await Promise.all([
+        import('@/lib/validation'),
+        import('../services/prometheus'),
+        import('./GoogleAnalytics')
+      ]);
+
+      const result = newLeadFormSchema.safeParse(formData);
+
+      if (!result.success) {
+        const formatted = result.error.format();
+        setErrors(formatted as unknown as Record<string, { _errors: string[] }>);
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Track form submission
+      trackLeadFormSubmission(result.data.gemeente, result.data.dienst);
+
+      // Submit to Prometheus service
+      const leadData = {
+        ...result.data,
+        locale,
+        timestamp: new Date().toISOString(),
+        source: 'website_form'
+      };
+
+      const submitResult = await submitLeadToPrometheus(leadData);
+
+      if (submitResult.success) {
+        console.log('Lead submitted successfully:', submitResult.leadId);
+        router.push(localizePath('/bedankt', locale as SupportedLocale));
+      } else {
+        console.warn('Lead submission had issues:', submitResult.error);
+        router.push(localizePath('/bedankt', locale as SupportedLocale));
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      router.push(localizePath('/bedankt', locale as SupportedLocale));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  // Update field change handlers to include validation
+  // Update field change handlers to clear errors
   const updateField = (field: string, value: string | boolean) => {
-    handleFieldChange(field, value);
+    clearFieldError(field);
     switch (field) {
       case 'naam': setNaam(String(value)); break;
       case 'gemeente': setGemeente(String(value)); break;
@@ -364,7 +380,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
           error={getError('turnstileToken')}
         >
           {isDevelopment ? null : (
-            <Suspense fallback={<div className="form-note">{t('lead_form.security_loading')}</div>}>
+            <Suspense fallback={<div className="form-note" style={{ minHeight: '65px' }}>{t('lead_form.security_loading')}</div>}>
               <TurnstileWidget
                 siteKey={securityKeys.turnstile.siteKey}
                 onSuccess={setTurnstileToken}
@@ -378,9 +394,9 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
         <button
           type="submit"
           className="form-btn"
-          disabled={isValidating || (!turnstileToken && !isDevelopment)}
+          disabled={isSubmitting || (!turnstileToken && !isDevelopment)}
         >
-          {isValidating ? (
+          {isSubmitting ? (
             <span className="flex items-center justify-center gap-2">
               <FormLoadingSpinner size="sm" />
               {translations.loading}

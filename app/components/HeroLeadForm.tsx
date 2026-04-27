@@ -1,10 +1,6 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-
-const NewLeadForm = dynamic(() => import('./NewLeadForm'), {
-  ssr: false,
-});
+import NewLeadForm from "./NewLeadForm";
 
 interface HeroLeadFormProps {
   translations: {

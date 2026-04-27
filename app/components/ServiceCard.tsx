@@ -61,7 +61,7 @@ export default function ServiceCard({
             src={imageUrl}
             alt={title}
             fill
-            sizes="(max-width: 767px) calc(100vw - 3rem), (max-width: 1200px) calc(50vw - 3rem), 380px"
+            sizes="(max-width: 768px) 95vw, (max-width: 1200px) 45vw, 380px"
           />
         </div>
       ) : (

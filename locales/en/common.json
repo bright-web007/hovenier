@@ -1655,19 +1655,50 @@
     "leeuwarden": {
       "meta_title": "Gardener Leeuwarden | Expert Garden Services via Hovenier FRL",
       "meta_description": "Looking for a gardener in Leeuwarden? Compare gardeners in the capital of Friesland via Hovenier.frl. Garden maintenance, garden design and green roofs — receive free quotes from local specialists.",
-      "hero_intro_1": "Finding a reliable gardener in Leeuwarden doesn't have to be difficult. Via Hovenier FRL you are quickly connected with experienced gardeners in Leeuwarden and the surrounding area. Whether it's garden maintenance, a new garden design, or a green roof — you receive multiple quotes from specialists who match your project.",
-      "hero_intro_2": "Leeuwarden is the capital of Friesland, with a mix of historic canal gardens in the city centre and modern gardens in the newer districts. Gardeners in our network understand the specific soil conditions and urban environment of this beautiful Frisian city.",
+      "hero_title": "Gardener Leeuwarden",
+      "hero_intro_1": "Leeuwarden is not just any city. It is the capital of Fryslân — a city built on ancient terpen, surrounded by water, shaped by centuries of clay soil and Frisian weather. Your garden reflects that. Whether you live in a classic townhouse in the Binnenstad, a family home in Camminghaburen or a brand new property in De Zuidlanden — your garden is dealing with conditions that most gardeners from outside the region simply do not understand. Heavy clay soil that stays wet long after the rain has stopped. New-build ground that was backfilled during construction and never properly prepared. Frisian winters that expose every shortcut a gardener took the previous summer.",
+      "hero_intro_2": "Through Hovenier FRL you are connected with gardeners who actually live and work in Leeuwarden. Not someone driving in from another province with no knowledge of your neighbourhood. A local professional who has worked in your street, knows your soil and understands what a Leeuwarden garden needs in every season. Garden construction in Leeuwarden requires an approach that starts with the soil. Many gardens in Leeuwarden have been laid out on clay soil that was insufficiently prepared after construction. Terraces sink because the foundation is too shallow. Lawns become waterlogged year after year because no drainage has been installed. Borders grow poorly because the clay soil is too compact for the roots of the chosen plants. A gardener in Leeuwarden through Hovenier FRL always begins with an assessment of your soil and drainage before a single tile is laid or a single plant goes into the ground. This prevents hundreds of euros in repair work later. Via Hovenier FRL you can request quotes from multiple local garden construction specialists in Leeuwarden, compare their approach and prices, and choose the professional who best matches your project.",
+      "hero_cta": "👉 Request free quotes from gardeners in Leeuwarden within 24 hours. ✔ No obligation ✔ Multiple quotes ✔ Local professionals",
       "services": {
         "tuinonderhoud": {
-          "desc": "We connect you with gardeners in Leeuwarden for professional garden maintenance tailored to the urban environment and local soil conditions."
+          "title": "Garden Maintenance Leeuwarden",
+          "desc": "We connect you with gardeners in Leeuwarden for professional garden maintenance, adapted to the local clay soil conditions and Frisian seasonal patterns. → More about garden maintenance in Leeuwarden: https://hovenier.frl/en/regio/leeuwarden/leeuwarden/tuinonderhoud"
         },
         "tuinontwerp": {
-          "desc": "Get help from experienced garden designers who translate your wishes into a design that suits both historic and modern Leeuwarden."
+          "title": "Garden Design Leeuwarden",
+          "desc": "Work with experienced designers in Leeuwarden who understand both your vision and the local soil conditions — from compact front gardens in Huizum to larger new-build gardens in De Zuidlanden. → More about garden design in Leeuwarden: https://hovenier.frl/en/regio/leeuwarden/leeuwarden/tuinontwerp"
         },
         "groendak": {
-          "desc": "We connect you with green roof specialists for sustainable solutions that improve insulation and suit the urban environment of Leeuwarden."
+          "title": "Green Roofs Leeuwarden",
+          "desc": "Get connected with green roof specialists in Leeuwarden. In neighbourhoods such as Camminghaburen and De Zuidlanden with many flat roofs, green roofs are particularly well suited for insulation and water management. → More about green roofs in Leeuwarden: https://hovenier.frl/en/regio/leeuwarden/leeuwarden/groendaken"
         }
-      }
+      },
+      "faq": [
+        {
+          "q": "What does a gardener in Leeuwarden cost?",
+          "a": "A gardener in Leeuwarden charges an average of €42 to €58 per hour for garden maintenance. For garden construction costs are between €50 and €100 per m² depending on materials and soil conditions. Leeuwarden has the largest supply of gardeners in Friesland which keeps rates competitive. Via Hovenier FRL you request multiple free quotes to compare side by side."
+        },
+        {
+          "q": "How do I find a reliable gardener in Leeuwarden?",
+          "a": "Via Hovenier FRL you submit a request for Leeuwarden in less than two minutes. Within 24 hours you receive quotes from local gardeners with reviews from previous customers in the city. You compare, choose and have no obligation whatsoever. All gardeners in the network are verified and active in the municipality of Leeuwarden."
+        },
+        {
+          "q": "Do gardeners in Leeuwarden have experience with clay soil?",
+          "a": "Yes. All gardeners in the Hovenier FRL network in Leeuwarden have specific experience with the heavy clay soil that is characteristic of the municipality. They know the drainage challenges of new-build neighbourhoods such as De Zuidlanden and Camminghaburen and the soil conditions of older neighbourhoods such as Huizum and Aldlân."
+        },
+        {
+          "q": "Which neighbourhoods in Leeuwarden are served?",
+          "a": "Hovenier FRL serves all 22 neighbourhoods of Leeuwarden including Camminghaburen, Huizum, De Zuidlanden, Middelsee, Aldlân, Bilgaard, Vrijheidswijk, Sonnenborgh, the Binnenstad, Westeinde and Goutum. The surrounding villages in the municipality such as Stiens, Grou and Wergea are also served."
+        },
+        {
+          "q": "Can I also request a maintenance contract in Leeuwarden?",
+          "a": "Yes. Via Hovenier FRL you can request a fixed maintenance contract from gardeners in Leeuwarden in addition to individual jobs. A monthly contract costs an average of €60 to €200 per month depending on garden size and frequency. This is almost always more cost-effective than individual jobs."
+        },
+        {
+          "q": "How quickly can a gardener start in Leeuwarden?",
+          "a": "After your request via Hovenier FRL you receive responses from local gardeners in Leeuwarden within 24 hours. Most gardeners can schedule a first visit within one to two weeks depending on the season. In quieter periods such as autumn and winter, earlier scheduling is often possible."
+        }
+      ]
     },
     "bolsward": {
       "meta_title": "Gardener Bolsward | Historic Gardens via Hovenier FRL",
@@ -1704,21 +1735,52 @@
       }
     },
     "heerenveen": {
-      "meta_title": "Gardener Heerenveen | Professional Garden Services via Hovenier FRL",
-      "meta_description": "Looking for a gardener in Heerenveen? Compare gardeners in this dynamic Frisian municipality via Hovenier.frl. Garden maintenance, garden design and green roofs — receive free quotes.",
-      "hero_intro_1": "Via Hovenier FRL you quickly find a reliable gardener in Heerenveen. We connect you with experienced professionals for all your garden work.",
-      "hero_intro_2": "Heerenveen is a dynamic municipality in the heart of Friesland, with a varied landscape of peat and clay soil. Our gardeners are specialists in local conditions.",
+      "meta_title": "Gardener Heerenveen | Local Gardeners via Hovenier FRL",
+      "meta_description": "Looking for a gardener in Heerenveen? Compare free quotes from local gardeners for garden maintenance, construction, design and paving. Response within 24 hours.",
+      "hero_title": "Gardener Heerenveen",
+      "hero_intro_1": "Heerenveen was literally built on peat. The city exists because of the Schoterlandse Veencompagnie — the peat company that dug up the ground beneath this part of Friesland from the 16th century onwards and left behind the soil conditions, the waterways and the landscape that garden owners in Heerenveen deal with today. From the water-rich northern parts of Skoatterwâld to the sandy edges near Oranjewoud, from the established family gardens in De Greiden to the modern new-build plots in Nijehaske — every part of this city has different ground and different gardening challenges. Through Hovenier FRL you are connected with gardeners who already work in Heerenveen and know what your garden needs. Gardeners in the Hovenier FRL network in Heerenveen are also active in the surrounding villages of Akkrum, Jubbega, Oranjewoud, Oudeschoot, Nieuweschoot, Katlijk and De Knipe. Submit your request with your location and receive quotes from gardeners who know your area.",
+      "hero_intro_2": "Heerenveen sits on a boundary between two completely different soil types — and that boundary runs right through the city. The northern parts of the city, including Skoatterwâld, sit on peat soil left behind by centuries of peat extraction. Peat is soft, compressible and water-retentive. It shifts seasonally. Foundations that work on sand or clay will fail on peat. Lawns on unmanaged peat become waterlogged. Terraces laid without proper drainage planning will sink within a season. The southern areas of Heerenveen — near Oranjewoud and the Drents Plateau — sit on a sand ridge. Sandy soil is completely different. It drains quickly, sometimes too quickly. It dries out in summer. Plants that thrive on the moist peat areas of the north struggle in the dry sandy south. A gardener who knows Skoatterwâld does not automatically know what to do in a garden near Oranjewoud. This is what makes garden construction in Heerenveen genuinely complex — and why a local gardener who knows the specific part of the city where you live is so important. Gardeners in the Hovenier FRL network who work in Heerenveen understand both soil types. They know which parts of the city sit on peat and which sit on sand. They plan drainage accordingly. They choose plants that perform in your specific conditions. Whether you want a new garden in Skoatterwâld, a redesigned garden in De Greiden or a renovation project near the centre — via Hovenier FRL you request quotes from multiple local garden construction specialists in Heerenveen, compare their approach and choose without obligation.",
+      "hero_cta": "👉 Request free quotes from gardeners in Heerenveen within 24 hours. ✔ No obligation ✔ Multiple quotes ✔ Local professionals",
       "services": {
         "tuinonderhoud": {
-          "desc": "Professional garden maintenance in Heerenveen tailored to the local peat and clay soil."
+          "title": "Garden Maintenance Heerenveen",
+          "desc": "We connect you with gardeners in Heerenveen for professional garden maintenance adapted to the local peat and sand soil conditions and the Frisian seasons. From regular lawn mowing and hedge trimming in De Greiden to seasonal pruning in Skoatterwâld — all maintenance is tailored to the specific conditions of your garden in Heerenveen. → /en/regio/heerenveen/heerenveen/tuinonderhoud"
         },
         "tuinontwerp": {
-          "desc": "Experienced garden designers in Heerenveen who understand the Frisian landscape."
+          "title": "Garden Design Heerenveen",
+          "desc": "Work with experienced designers who understand both the character of Heerenveen and the variety of local soil conditions. Whether you have a compact garden in the city centre, a spacious property in Skoatterwâld or a plot near the woodland edges of Oranjewoud — a designer from the Hovenier FRL network creates a plan that fits your space, your budget and the local environment. → /en/regio/heerenveen/heerenveen/tuinontwerp"
         },
         "groendak": {
-          "desc": "Green roof specialists in Heerenveen for sustainable and durable solutions."
+          "title": "Green Roofs Heerenveen",
+          "desc": "Get connected with green roof Heerenveen specialists for sustainable insulation and water management solutions suited to properties in this part of Friesland. In the water-rich northern areas of Heerenveen, a green roof reduces drainage pressure, improves insulation and extends roof lifespan. Specialists assess your roof before recommending the right system for your property. → /en/regio/heerenveen/heerenveen/groendaken"
         }
-      }
+      },
+      "faq": [
+        {
+          "q": "What does a gardener in Heerenveen cost?",
+          "a": "A gardener in Heerenveen charges an average of €40 to €58 per hour for garden maintenance. For garden construction costs are between €50 and €100 per m² depending on materials and soil conditions. Because Heerenveen has two distinct soil types — peat in the north and sand in the south — soil assessment at the start of any project is essential. Via Hovenier FRL you receive multiple free quotes from local gardeners in Heerenveen to compare side by side."
+        },
+        {
+          "q": "Do gardeners in Heerenveen have experience with peat soil?",
+          "a": "Yes. All gardeners in the Hovenier FRL network active in Heerenveen have specific experience with both the peat soil in areas like Skoatterwâld and the sandy soil near Oranjewoud. They understand the drainage requirements, foundation depths and planting conditions that each soil type demands and will advise you accordingly at the first visit."
+        },
+        {
+          "q": "Do you also serve villages around Heerenveen?",
+          "a": "Yes. Gardeners active in Heerenveen also serve Akkrum, Jubbega, Oranjewoud, Oudeschoot, Nieuweschoot, Katlijk and De Knipe. Submit your request with your location and receive quotes from gardeners who know your specific area and its soil conditions."
+        },
+        {
+          "q": "How do I find a reliable gardener in Heerenveen?",
+          "a": "Via Hovenier FRL you submit a request for Heerenveen in less than two minutes. Within 24 hours you receive quotes from local gardeners with reviews from previous customers in the city and surrounding area. You compare the quotes, check their reviews and choose without any obligation."
+        },
+        {
+          "q": "Can I also request a maintenance contract in Heerenveen?",
+          "a": "Yes. Via Hovenier FRL you can request a fixed monthly maintenance contract from gardeners in Heerenveen. A monthly contract costs an average of €60 to €200 per month depending on garden size and frequency. This is almost always more cost-effective than individual visits and gives you the certainty that your garden is well maintained throughout the year."
+        },
+        {
+          "q": "How quickly can a gardener start in Heerenveen?",
+          "a": "After your request via Hovenier FRL you receive responses from local gardeners in Heerenveen within 24 hours. Most gardeners can schedule a first inspection or start date within one to two weeks depending on the season and type of work. In quieter periods such as autumn and winter, earlier scheduling is often possible."
+        }
+      ]
     },
     "oosterwolde": {
       "meta_title": "Gardener Oosterwolde | Expert Garden Services via Hovenier FRL",
@@ -1925,38 +1987,100 @@
       }
     },
     "stiens": {
-      "meta_title": "Gardener Stiens | Gardens near Leeuwarden via Hovenier FRL",
-      "meta_description": "Looking for a gardener in Stiens? Via Hovenier.frl you find experienced gardeners near Leeuwarden. Garden maintenance, garden design and green roofs — free quotes.",
-      "hero_intro_1": "Via Hovenier FRL you quickly find a reliable gardener in Stiens. We connect you with experienced professionals for all your garden work in this village near Leeuwarden.",
-      "hero_intro_2": "Stiens is a village in the municipality of Leeuwarden, with a combination of modern residential gardens and rural Frisian plots. The clay soil here requires specific expertise.",
+      "meta_title": "Gardener Stiens | Local Gardeners via Hovenier FRL",
+      "meta_description": "Looking for a gardener in Stiens? Compare free quotes from local gardeners for garden maintenance, construction, design and paving. Response within 24 hours.",
+      "hero_title": "Gardener Stiens",
+      "hero_intro_1": "Stiens is a village with deep roots — literally. Built on a terp, surrounded by open Frisian clay land, with a historic centre along the Hegebuorren and newer homes in Aldlân and Steenslân. Every part of the village has different gardens and different soil — from the established mature gardens in the old centre to the newer plots in Aldlân that were laid on disturbed construction ground. Through Hovenier FRL you are connected with gardeners who already work in Stiens and know exactly what your garden needs in every season. Gardeners in the Hovenier FRL network in Stiens are also active in the surrounding hamlets of Hijum, Feinsum, Alde Leie, Horne and Bartlehiem. Submit your request with your location and receive quotes from gardeners who know your area within 24 hours.",
+      "hero_intro_2": "The soil around Stiens is heavy Frisian clay. It holds water long after rain has stopped. It compacts easily under foot traffic. It becomes waterlogged in winter if drainage has not been properly considered. Lawns on unmanaged clay develop moss within a season. Terraces shift and tilt after the first winter frost if the foundation is too shallow for the soil beneath. New-build areas like Aldlân and Steenslân II add another layer of complexity. Soil in these areas has been disturbed, compacted and mixed during construction. Even though the houses are new, the ground underneath often needs significant improvement before any planting, paving or garden construction in Stiens can deliver lasting results. Gardeners in the Hovenier FRL network who work in Stiens know both situations well. They check your drainage before laying a terrace. They assess your soil before planting a lawn. They understand the difference between the mature clay garden in the old village centre and the fresh construction ground on the new-build edges of Stiens. That knowledge is what separates a garden that looks good for one season from one that performs well for years. Whether you want a new garden in Steenslân, a redesigned front garden along the Langebuorren or a complete renovation of your back garden in Stiens-Zuid — via Hovenier FRL you request quotes from multiple local garden construction specialists in Stiens. Compare their approach and prices, read their reviews from previous customers in the village, and choose without any obligation.",
+      "hero_cta": "👉 Request free quotes from gardeners in Stiens within 24 hours. ✔ No obligation ✔ Multiple quotes ✔ Local professionals",
       "services": {
         "tuinonderhoud": {
-          "desc": "Professional garden maintenance in Stiens tailored to the clay soil and environment near Leeuwarden."
+          "title": "Garden Maintenance Stiens",
+          "desc": "We connect you with gardeners in Stiens for professional garden maintenance adapted to the local clay soil conditions and the Frisian seasons. From regular lawn mowing and hedge trimming to seasonal pruning and weed control — all maintenance is tailored to the specific conditions of your garden in Stiens."
         },
         "tuinontwerp": {
-          "desc": "Garden designers in Stiens with expertise in both residential and rural Frisian garden styles."
+          "title": "Garden Design Stiens",
+          "desc": "Work with experienced designers who understand both the character of Stiens and the local soil conditions. Whether you have a compact garden in the historic centre near the Sint-Vituskerk or a larger plot in Aldlân or Steenslân, a designer from the Hovenier FRL network will create a plan that works for your space, your budget and the local environment."
         },
         "groendak": {
-          "desc": "Green roof specialists for homes in Stiens and the surrounding Leeuwarden municipality."
+          "title": "Green Roofs Stiens",
+          "desc": "Get connected with green roof Stiens specialists for sustainable insulation and water management solutions suited to properties in this part of Friesland. A green roof helps absorb the high rainfall typical of the Frisian clay region, reduces heating costs and extends the lifespan of your roof. Specialists assess your roof structure before recommending the right system for your property."
         }
-      }
+      },
+      "faq": [
+        {
+          "q": "What does a gardener in Stiens cost?",
+          "a": "A gardener in Stiens charges an average of €40 to €55 per hour for garden maintenance. For garden construction costs are between €50 and €95 per m² depending on materials and soil conditions. Stiens has fewer active gardeners than Leeuwarden so comparing multiple quotes via Hovenier FRL is particularly important to make sure you are getting a fair local rate."
+        },
+        {
+          "q": "Do gardeners in Stiens have experience with clay soil?",
+          "a": "Yes. All gardeners in the Hovenier FRL network active in Stiens have specific experience with the heavy clay soil of this part of Friesland. They understand the drainage requirements of both the established gardens in the historic centre and the new-build plots in Aldlân and Steenslân."
+        },
+        {
+          "q": "Do you also serve villages around Stiens?",
+          "a": "Yes. Gardeners active in Stiens also serve Hijum, Feinsum, Alde Leie, Horne and Bartlehiem. Submit your request with your location and receive quotes from gardeners who are familiar with your specific area and its soil conditions."
+        },
+        {
+          "q": "How do I find a reliable gardener in Stiens?",
+          "a": "Via Hovenier FRL you submit a request for Stiens in less than two minutes. Within 24 hours you receive quotes from local gardeners with reviews from previous customers in the village and surrounding area. You compare the quotes, check their reviews and choose without any obligation."
+        },
+        {
+          "q": "Can I also request a maintenance contract in Stiens?",
+          "a": "Yes. Via Hovenier FRL you can request a fixed monthly maintenance contract from gardeners in Stiens. A monthly contract costs an average of €60 to €180 per month depending on garden size and frequency. This is almost always more cost-effective than individual visits and gives you the certainty that your garden is well maintained throughout the year."
+        },
+        {
+          "q": "How quickly can a gardener start in Stiens?",
+          "a": "After your request via Hovenier FRL you receive responses from local gardeners in Stiens within 24 hours. Most gardeners can schedule a first inspection or start date within one to two weeks depending on the season and the type of work required. In quieter periods such as autumn and winter, earlier scheduling is often possible."
+        }
+      ]
     },
     "grou": {
-      "meta_title": "Gardener Grou | Lakeside Gardens near Leeuwarden via Hovenier FRL",
-      "meta_description": "Looking for a gardener in Grou? Via Hovenier.frl you find experienced gardeners near Leeuwarden. Garden maintenance, garden design and green roofs — free quotes.",
-      "hero_intro_1": "Via Hovenier FRL you quickly find a reliable gardener in Grou. We connect you with experienced professionals for all your garden work in this beautiful lakeside town.",
-      "hero_intro_2": "Grou is a charming town in the municipality of Leeuwarden, known for its beautiful waterfront and sailing culture. Gardens here are often influenced by the nearby Frisian lakes.",
+      "meta_title": "Gardener Grou | Local Gardeners via Hovenier FRL",
+      "meta_description": "Looking for a gardener in Grou? Compare free quotes from local gardeners for garden maintenance, construction, design and paving. Response within 24 hours.",
+      "hero_title": "Gardener Grou",
+      "hero_intro_1": "Grou is unlike any other village in Friesland. It sits almost entirely surrounded by water — the Pikmeer on one side, the Frisian lakes on the other, with canals and vaarten cutting through the village centre itself. For centuries it could only be reached by boat. That relationship with water is not just history — it defines every garden in Grou today. Through Hovenier FRL you are connected with gardeners who understand what it means to maintain and design a garden in this unique waterside environment. Gardeners in the Hovenier FRL network in Grou are also active in the surrounding villages of Wartena, Friens, Wergea, Idaard and Jirnsum. Submit your request with your location and receive quotes from gardeners who know your area.",
+      "hero_intro_2": "Grou sits in the Frisian greidestreek — a low-lying, marshy landscape where the relationship between land and water has always been complicated. The soil around Grou is a mix of peat and clay, high in moisture and slow to drain. This is not the same as the heavy clay you find around Leeuwarden or Stiens. Peat soil is softer, more compressible and more unpredictable. It shifts seasonally. Foundations that work elsewhere fail here. Plants that thrive in drier Frisian soil struggle in the permanently wet conditions around the Pikmeer. For garden owners in Grou this means one thing above all others — drainage is not optional. A terrace laid without proper water management will begin to sink and tilt within a year or two. A lawn without aeration will become waterlogged and mossy every winter. A garden construction project in Grou that does not start with a proper drainage assessment will cause expensive problems later. Gardeners in the Hovenier FRL network who work in Grou understand these conditions. They know the difference between peat soil near the waterfront and the firmer clay ground on the edges of the village. They plan drainage before they plan planting. They recommend the right plants for a permanently moist environment. Whether you want a new garden in Grou, a redesigned front garden near the old centre or a complete renovation of your back garden near the water — via Hovenier FRL you request quotes from multiple local garden construction specialists in Grou, compare their approach and prices, and choose without obligation.",
+      "hero_cta": "👉 Request free quotes from gardeners in Grou within 24 hours. ✔ No obligation ✔ Multiple quotes ✔ Local professionals",
       "services": {
         "tuinonderhoud": {
-          "desc": "Professional garden maintenance in Grou tailored to the waterside environment and Frisian lakes landscape."
+          "title": "Garden Maintenance Grou",
+          "desc": "We connect you with gardeners in Grou for professional garden maintenance adapted to the waterside conditions, peat and clay soil and the Frisian seasons. From lawn care and hedge trimming to seasonal pruning and weed control — all tailored to the specific conditions of your garden in Grou."
         },
         "tuinontwerp": {
-          "desc": "Garden designers in Grou with expertise in waterside gardens and the unique setting of the Frisian lakes."
+          "title": "Garden Design Grou",
+          "desc": "Work with experienced designers who understand the unique waterside character of Grou and the challenges of designing on peat and clay soil. Whether you have a compact garden in the historic centre near the Sint-Pieterkerk or a larger property on the outskirts, a designer from the Hovenier FRL network creates a plan that fits your space and the local environment."
         },
         "groendak": {
-          "desc": "Green roof specialists for homes in Grou and the surrounding Leeuwarden municipality."
+          "title": "Green Roofs Grou",
+          "desc": "Get connected with green roof Grou specialists for sustainable insulation and water management solutions suited to properties in this part of Friesland. In a village surrounded by water, a green roof absorbs rainfall, reduces drainage pressure and contributes to a greener Grou. Specialists assess your roof structure before recommending the right system for your property."
         }
-      }
+      },
+      "faq": [
+        {
+          "q": "What does a gardener in Grou cost?",
+          "a": "A gardener in Grou charges an average of €40 to €55 per hour for garden maintenance. For garden construction costs are between €50 and €95 per m² depending on materials and soil conditions. Because peat soil in Grou sometimes requires additional drainage work and soil preparation, costs can be slightly higher than in villages on firmer clay ground. Via Hovenier FRL you receive multiple free quotes to compare side by side."
+        },
+        {
+          "q": "Do gardeners in Grou have experience with peat and clay soil?",
+          "a": "Yes. All gardeners in the Hovenier FRL network active in Grou have specific experience with the peat and clay soil conditions of this water-rich part of Friesland. They understand drainage requirements, know which plants perform well in permanently moist conditions and are experienced in laying foundations that stay stable on soft ground."
+        },
+        {
+          "q": "Do you also serve villages around Grou?",
+          "a": "Yes. Gardeners active in Grou also serve Wartena, Friens, Wergea, Idaard and Jirnsum. Submit your request with your location and receive quotes from gardeners who are familiar with your specific area and its soil conditions."
+        },
+        {
+          "q": "How do I find a reliable gardener in Grou?",
+          "a": "Via Hovenier FRL you submit a request for Grou in less than two minutes. Within 24 hours you receive quotes from local gardeners with reviews from previous customers in the village and surrounding area. You compare the quotes, check their reviews and choose without any obligation."
+        },
+        {
+          "q": "Can I also request a maintenance contract in Grou?",
+          "a": "Yes. Via Hovenier FRL you can request a fixed monthly maintenance contract from gardeners in Grou. A monthly contract costs an average of €60 to €180 per month depending on garden size and frequency. This is almost always more cost-effective than individual visits and gives you certainty that your garden is well maintained throughout the year."
+        },
+        {
+          "q": "How quickly can a gardener start in Grou?",
+          "a": "After your request via Hovenier FRL you receive responses from local gardeners in Grou within 24 hours. Most gardeners can schedule a first inspection or start date within one to two weeks depending on the season and type of work. In quieter periods such as autumn and winter, earlier scheduling is often possible."
+        }
+      ]
     },
     "ameland": {
       "meta_title": "Gardener Ameland | Island Gardens via Hovenier FRL",

@@ -30,15 +30,9 @@ async function main() {
 
   console.log('Submitting sitemap:', sitemapUrl);
 
-  const googlePing = `https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`;
+  // Google removed/soft-deprecated the public ping endpoint; pinging Google may
+  // either fail or return an error. We'll skip Google and only ping Bing here.
   const bingPing = `https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`;
-
-  try {
-    const gRes = await ping(googlePing);
-    console.log('Google response status:', gRes.statusCode);
-  } catch (err) {
-    console.error('Google ping failed:', err.message || err);
-  }
 
   try {
     const bRes = await ping(bingPing);

@@ -7,7 +7,6 @@
  */
 
 import { render } from '@testing-library/react';
-// import type { NextRequest } from 'next/server';
 
 // Mock Next.js modules
 jest.mock('next/navigation', () => ({

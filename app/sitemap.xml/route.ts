@@ -6,7 +6,7 @@ import { services as serviceList } from '@/lib/services'
 import { getAllRegionHubs, getAllGemeentes, regionHubs } from '@/lib/regions-hierarchy'
 import { getAbsoluteUrl } from '@/lib/locale-utils'
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+async function generateSitemap(): Promise<MetadataRoute.Sitemap> {
   const allPages: MetadataRoute.Sitemap = []
 
   // Use configured base URL via `NEXT_PUBLIC_BASE_URL` when needed elsewhere.
@@ -138,7 +138,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Standalone municipalities (e.g., leeuwarden)
     for (const g of gemeentes) {
-      // If gemeente appears under a hub, it will already be covered. Add nonetheless to be safe.
+      // Only add standalone gemeente pages if they are NOT present under any hub.
+      const isInHub = hubs.some(h => (h.gemeentes || []).some(gg => gg.slug === g.slug))
+      if (isInHub) continue
+
       allPages.push({
         url: getAbsoluteUrl(`/regio/${g.slug}`, localeCode),
         lastModified: new Date(),
@@ -195,7 +198,7 @@ function buildSitemapXml(items: MetadataRoute.Sitemap) {
 }
 
 export async function GET() {
-  const items = await sitemap()
+  const items = await generateSitemap()
   const xml = buildSitemapXml(items)
 
   return new Response(xml, {

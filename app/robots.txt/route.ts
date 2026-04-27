@@ -1,20 +1,9 @@
 export async function GET() {
   const base = (process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl').replace(/\/$/, '')
 
-  let host = ''
-  try {
-    host = new URL(base).host
-  } catch {
-    host = base.replace(/^https?:\/\//, '')
-  }
-
   const lines = [
-    'User-agent: *',
-    'Allow: /',
-    '',
     '# Sitemap - adjust if your production URL differs',
     `Sitemap: ${base}/sitemap.xml`,
-    `Host: ${host}`,
     '# General crawler rules',
     'User-agent: *',
     'Allow: /',
@@ -105,7 +94,6 @@ export async function GET() {
     'Disallow: /api/',
     'Disallow: /_next/data/',
     '',
-    `Sitemap: ${base}/sitemap.xml`,
   ]
 
   return new Response(lines.join('\n'), {

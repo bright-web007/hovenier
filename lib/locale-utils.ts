@@ -2,9 +2,10 @@ export const LOCALE_COOKIE_NAME = 'hovenier-language-preference';
 export const SUPPORTED_LOCALES = ['nl', 'en'] as const;  
 export type SupportedLocale = typeof SUPPORTED_LOCALES[number];
 export const DEFAULT_LOCALE: SupportedLocale = 'nl';
-const BASE_URL = (() => {
+export const BASE_URL = (() => {
   const configuredBaseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl';
-  return configuredBaseUrl.startsWith('http') ? configuredBaseUrl : `https://${configuredBaseUrl}`;
+  const withProtocol = configuredBaseUrl.startsWith('http') ? configuredBaseUrl : `https://${configuredBaseUrl}`;
+  return withProtocol.replace(/\/$/, '');
 })();
 
 const LOCALIZED_ROUTE_PREFIXES = [

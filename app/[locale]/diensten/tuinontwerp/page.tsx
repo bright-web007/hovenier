@@ -3,8 +3,7 @@ import Navigation from '../../../components/Navigation';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import RelatedArticles, { type Article } from '../../../components/RelatedArticles';
 import { LocalBusinessSchema, BreadcrumbSchema, ServicePageSchema } from '../../../components/StructuredData';
-import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
-import { env } from '@/lib/env';
+import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { createTranslator } from '@/lib/translator';
 import Image from 'next/image';
 import FaqSection from '@/app/components/FaqSection';
@@ -205,11 +204,11 @@ export default async function TuinontwerpPage({ params }: Props) {
 
       <LocalBusinessSchema
         serviceType="tuinontwerp"
-        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/tuinontwerp', validLocale as SupportedLocale)}`}
+        url={getAbsoluteUrl('/diensten/tuinontwerp', validLocale as SupportedLocale)}
       />
       <ServicePageSchema
         serviceType="tuinontwerp"
-        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/tuinontwerp', validLocale as SupportedLocale)}`}
+        url={getAbsoluteUrl('/diensten/tuinontwerp', validLocale as SupportedLocale)}
         locale={validLocale}
       />
 
@@ -217,7 +216,7 @@ export default async function TuinontwerpPage({ params }: Props) {
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
-          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/tuinontwerp', validLocale as SupportedLocale)}`
+          url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/tuinontwerp', validLocale as SupportedLocale)
         }))}
       />
 

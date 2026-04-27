@@ -4,8 +4,7 @@ import Navigation from '../../../components/Navigation';
 import RelatedArticles from '../../../components/RelatedArticles';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import { LocalBusinessSchema, BreadcrumbSchema, ServicePageSchema } from '../../../components/StructuredData';
-import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
-import { env } from '@/lib/env';
+import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { createTranslator } from '@/lib/translator';
 import { TickCircle, Cloud, Heart, DollarCircle } from 'iconsax-reactjs';
 import FaqSection from '@/app/components/FaqSection';
@@ -225,20 +224,20 @@ export default async function GroendakPage({ params }: Props) {
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
-          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`
+          url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/groendak', validLocale as SupportedLocale)
         }))}
       />
 
       {/* Local Business Schema for Green Roof Services */}
       <LocalBusinessSchema
         serviceType="groendak"
-        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`}
+        url={getAbsoluteUrl('/diensten/groendak', validLocale as SupportedLocale)}
       />
 
       {/* Standalone Service Schema for Green Roof Services */}
       <ServicePageSchema
         serviceType="groendak"
-        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`}
+        url={getAbsoluteUrl('/diensten/groendak', validLocale as SupportedLocale)}
         locale={validLocale}
       />
 

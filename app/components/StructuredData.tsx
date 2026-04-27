@@ -1,4 +1,5 @@
 import { getBusinessConfig, ServiceType } from '@/lib/business-config';
+import { BASE_URL } from '@/lib/locale-utils';
 import { env } from '@/lib/env';
 import { createTranslator } from '@/i18n';
 
@@ -148,7 +149,7 @@ export function ServicePageSchema({ serviceType, url, locale = 'nl' }: ServiceSc
       url: config.contactInfo.website,
       logo: {
         '@type': 'ImageObject',
-        url: 'https://hovenier.frl/assets/logo-light.svg',
+        url: `${BASE_URL}/assets/logo-light.svg`,
       },
       email: config.contactInfo.email || 'info@hovenier.frl',
       priceRange: config.priceRange,

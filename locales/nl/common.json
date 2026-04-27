@@ -725,6 +725,8 @@
     "rights_objection_desc": "Bezwaar maken tegen verwerking",
     "contact_intro": "Voor vragen over dit privacybeleid kunt u contact met ons opnemen:",
     "contact_email_label": "E-mail",
+    "backlink_prefix": "Hovenier.frl is tevens vermeld op ",
+    "backlink_suffix": ", een overzicht van lokale ondernemers in de regio.",
     "retention_title": "8. Bewaartermijnen",
     "retention_contact_label": "Contactaanvragen:",
     "retention_contact_value": "2 jaar na laatste contact",

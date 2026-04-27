@@ -18,6 +18,12 @@ const PrivacyContact = ({ locale = 'nl' }: { locale?: string }) => {
           Website: <a href="https://hovenier.frl">https://hovenier.frl</a>
         </address>
       </div>
+
+      <p className={styles.legalText} style={{ marginTop: '1.5rem', fontSize: '0.9rem', color: 'var(--text-muted, #666)' }}>
+        {locale === 'en'
+          ? <>Hovenier.frl is also listed on <a href="https://bedrijveninfriesland.allepaginas.nl" target="_blank" rel="noopener noreferrer">{t('footer.backlink_text')}</a>, an overview of local businesses in the region.</>
+          : <>Hovenier.frl is tevens vermeld op <a href="https://bedrijveninfriesland.allepaginas.nl" target="_blank" rel="noopener noreferrer">{t('footer.backlink_text')}</a>, een overzicht van lokale ondernemers in de regio.</>}
+      </p>
     </section>
   );
 };

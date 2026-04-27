@@ -340,16 +340,6 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
                 info@hovenier.frl
               </a>
             </div>
-            <div className="footer-contact-item">
-              <a
-                href="https://bedrijveninfriesland.allepaginas.nl"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-contact-link"
-              >
-                {tCommon('footer.backlink_text')}
-              </a>
-            </div>
           </div>
 
           <div className="footer-social">

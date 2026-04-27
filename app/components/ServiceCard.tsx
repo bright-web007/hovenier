@@ -1,8 +1,5 @@
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
-import { createTranslator } from '@/i18n';
 
 interface ServiceCardProps {
   title: string;
@@ -17,6 +14,14 @@ interface ServiceCardProps {
   popular?: boolean;
   className?: string;
   locale?: string;
+  labels?: {
+    popular?: string;
+    moreFeatures?: string;
+    from?: string;
+    onRequest?: string;
+    moreInfo?: string;
+    moreInfoAbout?: string;
+  };
 }
 
 export default function ServiceCard({
@@ -28,16 +33,24 @@ export default function ServiceCard({
   features = [],
   popular = false,
   className = '',
-  locale = 'nl'
+  locale = 'nl',
+  labels = {}
 }: ServiceCardProps) {
-  const t = createTranslator(locale);
+  const l = {
+    popular: labels.popular || 'Populair',
+    moreFeatures: labels.moreFeatures || 'meer',
+    from: labels.from || 'Vanaf',
+    onRequest: labels.onRequest || 'Op aanvraag',
+    moreInfo: labels.moreInfo || 'Meer info',
+    moreInfoAbout: labels.moreInfoAbout || 'Meer informatie over',
+  };
 
   return (
     <div className={`service-card ${className}`}>
       {/* Popular Badge */}
       {popular && (
         <div className="service-card-popular">
-          {t('service_card.popular')}
+          {l.popular}
         </div>
       )}
       
@@ -74,7 +87,7 @@ export default function ServiceCard({
             ))}
             {features.length > 4 && (
               <li className="service-card-features-more">
-                +{features.length - 4} {t('service_card.more_features')}
+                +{features.length - 4} {l.moreFeatures}
               </li>
             )}
           </ul>
@@ -84,7 +97,7 @@ export default function ServiceCard({
         <div className="service-card-footer">
           {price ? (
             <div className="service-card-price">
-              {t('service_card.from')}
+              {l.from}
               <span className="service-card-price-amount">
                 €{price.from}
               </span>
@@ -92,17 +105,17 @@ export default function ServiceCard({
             </div>
           ) : (
             <div className="service-card-price">
-              {t('service_card.on_request')}
+              {l.onRequest}
             </div>
           )}
           
           <Link
             href={href}
             className="service-card-link"
-            aria-label={`${t('service_card.more_info_about')} ${title}`}
+            aria-label={`${l.moreInfoAbout} ${title}`}
             prefetch={false}
           >
-            {t('service_card.more_info')}
+            {l.moreInfo}
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

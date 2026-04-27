@@ -1,10 +1,19 @@
 import type { NextConfig } from "next";
+import bundleAnalyzer from '@next/bundle-analyzer';
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 const nextConfig: NextConfig = {
   // Allow external dev access — comma-separated IPs/hostnames via ALLOWED_DEV_ORIGINS env var
   ...(process.env.ALLOWED_DEV_ORIGINS && {
     allowedDevOrigins: process.env.ALLOWED_DEV_ORIGINS.split(',').map(o => o.trim()),
   }),
+
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
   
   // Performance optimizations
   compress: true,
@@ -135,9 +144,42 @@ const nextConfig: NextConfig = {
   
   // Image optimization
   images: {
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // loader: 'custom',
+    // loaderFile: './lib/imageLoader.ts',
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [
+      120,
+      250,
+      320, // legacy / very small phones
+      360, // very common width (≈10%+ of mobile devices) :contentReference[oaicite:0]{index=0}
+      375, // common iPhone standard width
+      390, // newer phones (e.g., 390×844 has ~6.7%) :contentReference[oaicite:1]{index=1}
+      400,
+      412, // large Android phones (~4.2% share) :contentReference[oaicite:2]{index=2}
+      430, // very large phones / max widths
+
+      // Bridge sizes / larger phones / tablets
+      480, // catch-all larger phone width
+      600, // smaller tablets / phablets transition
+
+      // Tablet & Desktop (less granular)
+      768, // tablet portrait
+      1024, // tablet landscape
+      1366, // laptop / common desktop width :contentReference[oaicite:3]{index=3}
+      1920, // full HD desktop baseline
+      2560, // large desktop / high resolution screens
+    ],
+    imageSizes: [
+      16, // Tiny icons
+      24, // Small icons
+      36, // Standard icons
+      48, // Larger icons
+      55, // Avatar sizes
+      96, // Medium thumbnails
+      128, // Large thumbnails
+      256, // Small product images
+      384, // Medium images
+    ],
     remotePatterns: [
       {
         protocol: 'https',
@@ -150,15 +192,21 @@ const nextConfig: NextConfig = {
   // Experimental features for performance
   experimental: {
     optimizePackageImports: ['@sentry/nextjs'],
+    inlineCss: true,
+    cssChunking: true,
   },
 
   // Production optimization
   output: 'standalone',
 
-  // Bundle analyzer (uncomment for analysis)
-  // bundleAnalyzer: {
-  //   enabled: process.env.ANALYZE === 'true',
-  // },
+  turbopack: {
+    // Replace Next.js polyfills with empty file for modern browsers (saves ~14KB)
+    resolveAlias: {
+      '../build/polyfills/polyfill-module': './lib/modern-polyfill.js',
+      'next/dist/build/polyfills/polyfill-module':
+        './lib/modern-polyfill.js',
+    },
+  },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

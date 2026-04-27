@@ -4,8 +4,8 @@ FROM node:22 AS base
 FROM base AS deps
 
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci --legacy-peer-deps
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
 # Builder
 FROM base AS builder
@@ -13,7 +13,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build
+RUN yarn build
 
 # Runner
 FROM base AS runner

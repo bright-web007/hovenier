@@ -111,7 +111,28 @@ export default async function HomePage({ params }: Props) {
     sections_services_title: t('sections.services_title'),
     sections_services_subtitle: t('sections.services_subtitle'),
     regions_homepage_title: t('regions_content.homepage_title'),
-    contact_us: t('cta.contact_us')
+    contact_us: t('cta.contact_us'),
+    // ServiceCard labels
+    service_card_popular: t('service_card.popular'),
+    service_card_more_features: t('service_card.more_features'),
+    service_card_from: t('service_card.from'),
+    service_card_on_request: t('service_card.on_request'),
+    service_card_more_info: t('service_card.more_info'),
+    service_card_more_info_about: t('service_card.more_info_about'),
+    // RegionStrip labels
+    region_strip_all_municipalities: t('region_strip.all_municipalities'),
+    region_strip_subtitle: t('region_strip.subtitle'),
+    region_strip_gardeners: t('region_strip.gardeners'),
+    region_strip_not_listed: t('region_strip.not_listed'),
+  };
+
+  const serviceCardLabels = {
+    popular: translations.service_card_popular,
+    moreFeatures: translations.service_card_more_features,
+    from: translations.service_card_from,
+    onRequest: translations.service_card_on_request,
+    moreInfo: translations.service_card_more_info,
+    moreInfoAbout: translations.service_card_more_info_about,
   };
 
   return (
@@ -169,6 +190,7 @@ export default async function HomePage({ params }: Props) {
                 ]}
                 popular={true}
                 locale={validLocale}
+                labels={serviceCardLabels}
               />
 
               <ServiceCard
@@ -183,6 +205,7 @@ export default async function HomePage({ params }: Props) {
                   t('services_data.tuinontwerp.features.3'),
                 ]}
                 locale={validLocale}
+                labels={serviceCardLabels}
               />
 
               <ServiceCard
@@ -197,6 +220,7 @@ export default async function HomePage({ params }: Props) {
                   t('services_data.groendak.features.3'),
                 ]}
                 locale={validLocale}
+                labels={serviceCardLabels}
               />
             </div>
 
@@ -215,7 +239,11 @@ export default async function HomePage({ params }: Props) {
           title={translations.regions_homepage_title}
           locale={validLocale}
           translations={{
-            contact_us: translations.contact_us
+            contact_us: translations.contact_us,
+            all_municipalities: translations.region_strip_all_municipalities,
+            subtitle: translations.region_strip_subtitle,
+            gardeners: translations.region_strip_gardeners,
+            not_listed: translations.region_strip_not_listed,
           }}
         />
       </main>

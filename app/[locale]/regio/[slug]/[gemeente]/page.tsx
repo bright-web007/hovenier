@@ -10,20 +10,13 @@ import { CityPageSchema } from '@/app/components/CityPageSchema'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 import { env } from '@/lib/env';
 import { createTranslator } from '@/i18n'
+import { interp } from '@/lib/translator'
 import { regionHubs, getRegionHubBySlug, getGemeenteBySlug, getRegionSlugByGemeenteSlug } from '@/lib/regions-hierarchy'
 import DienstCard from '../../../../components/DienstCard'
 import Link from 'next/link'
 
 type Props = {
   params: Promise<{ locale: string; slug: string; gemeente: string }>
-}
-
-/** Simple interpolation: replaces {key} tokens in a translated string */
-function interp(template: string, vars: Record<string, string | number>): string {
-  return Object.entries(vars).reduce(
-    (s, [k, v]) => s.replaceAll(`{${k}}`, String(v)),
-    template
-  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

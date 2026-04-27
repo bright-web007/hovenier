@@ -1,5 +1,3 @@
-'use client';
-
 interface TrustBarProps {
   trustBarTranslations?: {
     gardeners: string;

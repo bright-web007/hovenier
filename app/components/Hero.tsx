@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import HeroLeadForm from './HeroLeadForm';
 import Image from 'next/image';
 
@@ -44,7 +45,7 @@ export default function Hero({ translations, locale }: HeroProps) {
     <section className="hero" aria-label="Hovenier vinden in Friesland">
       <div className="hero-left">
         <div className="hero-overlay" style={{ position: 'absolute', width: '100%', height: '100%', backgroundColor: 'black', opacity: 0.6, zIndex: 5, inset: 0 }} />
-        <Image sizes="(max-width: 768px) 100vw, 1280px" src="/images/bg.jpg" alt="A beautiful garden with greenery" fill style={{ objectFit: 'cover' }} />
+        <Image loading='eager' sizes="(max-width: 768px) 100vw, 1280px" src="/images/bg.jpg" alt="A beautiful garden with greenery" fill style={{ objectFit: 'cover' }} />
         <div style={{ zIndex: 10, position: 'relative' }}>
           <p className="hero-eyebrow">{translations.hero_eyebrow}</p>
           <h1 className="hero-h1">
@@ -78,7 +79,18 @@ export default function Hero({ translations, locale }: HeroProps) {
       </div>
 
       <div className="hero-right" id="quote-form">
-        <HeroLeadForm translations={translations} locale={locale} />
+        <Suspense fallback={
+          <div className="lead-form" style={{ minHeight: '480px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ textAlign: 'center', color: 'var(--forest-mid)' }}>
+              <p style={{ fontFamily: 'var(--heading-font)', fontWeight: 600, fontSize: '1.25rem', marginBottom: '0.5rem' }}>
+                {translations.form_title}
+              </p>
+              <p style={{ fontSize: '0.875rem' }}>{translations.loading || 'Laden...'}</p>
+            </div>
+          </div>
+        }>
+          <HeroLeadForm translations={translations} locale={locale} />
+        </Suspense>
       </div>
     </section>
   );

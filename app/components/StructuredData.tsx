@@ -1,6 +1,5 @@
 import { getBusinessConfig, ServiceType } from '@/lib/business-config';
 import { BASE_URL } from '@/lib/locale-utils';
-import { env } from '@/lib/env';
 import { createTranslator } from '@/i18n';
 
 interface LocalBusinessSchemaProps {
@@ -202,7 +201,7 @@ export function ServicePageSchema({ serviceType, url, locale = 'nl' }: ServiceSc
 }
 
 export function WebsiteSchema({ locale = 'nl' }: { locale?: string }) {
-  const baseUrl = env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
+  const baseUrl = BASE_URL;
   const t = createTranslator(locale);
 
   const schema = {
@@ -259,7 +258,7 @@ export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
 }
 
 export function OrganizationSchema() {
-  const baseUrl = env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
+  const baseUrl = BASE_URL;
 
   const schema = {
     "@context": "https://schema.org",
@@ -314,7 +313,7 @@ export function OrganizationSchema() {
 }
 
 export function HomepageSchemas({ locale = 'nl' }: { locale?: string }) {
-  const baseUrl = env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
+  const baseUrl = BASE_URL;
   const t = createTranslator(locale);
 
   const schema = {

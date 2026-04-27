@@ -19,7 +19,7 @@ const PrivacyContact = ({ locale = 'nl' }: { locale?: string }) => {
         </address>
       </div>
 
-      <p className={styles.legalText} style={{ marginTop: '1.5rem', fontSize: '0.9rem', color: 'var(--text-muted, #666)' }}>
+      <p className={`${styles.legalText} ${styles.backlinkText}`}>
         {t('privacy_page.backlink_prefix')} <a href="https://bedrijveninfriesland.allepaginas.nl" target="_blank" rel="noopener noreferrer">{t('footer.backlink_text')}</a>{t('privacy_page.backlink_suffix')}
       </p>
     </section>

@@ -39,6 +39,12 @@ export interface LocalBusinessConfig {
     closes: string;
     dayOfWeek: readonly string[];
   };
+  aggregateRating?: {
+    ratingValue: string;
+    reviewCount: string;
+    bestRating: string;
+    worstRating: string;
+  };
   coreServices: readonly string[];
   priceRange: string;
   lowPrice: number;
@@ -90,7 +96,13 @@ export const HOVENIER_BUSINESS_CONFIG: LocalBusinessConfig = {
   lowPrice: 35,
   highPrice: 250,
   currenciesAccepted: "EUR",
-  paymentAccepted: ["Cash", "Credit Card", "Bank Transfer"]
+  paymentAccepted: ["Cash", "Credit Card", "Bank Transfer"],
+  aggregateRating: {
+    ratingValue: "4.8",
+    reviewCount: "47",
+    bestRating: "5",
+    worstRating: "1"
+  }
 };
 
 // Service-specific variations while maintaining consistent business info

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Navigation from '../../../components/Navigation';
 import RelatedArticles from '../../../components/RelatedArticles';
 import Breadcrumbs from '../../../components/Breadcrumbs';
-import { LocalBusinessSchema, BreadcrumbSchema, ServicePageSchema } from '../../../components/StructuredData';
+import { ServicePageSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { createTranslator } from '@/lib/translator';
 import { TickCircle, Cloud, Heart, DollarCircle } from 'iconsax-reactjs';
@@ -156,89 +156,15 @@ export default async function GroendakPage({ params }: Props) {
 
   return (
     <>
-      {/* FAQ Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": localeFaqs.map((faq: { question: string; answer: string }) => ({
-              "@type": "Question",
-              "name": faq.question,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.answer
-              }
-            }))
-          }),
-        }}
-      />
-
-      {/* Service Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": isEn ? "Green Roofs" : "Groendaken",
-            "description": isEn ? "Professional green roof installation in Friesland by certified specialists" : "Professionele groendak aanleg in Friesland door gecertificeerde specialisten",
-            "provider": {
-              "@type": "LocalBusiness",
-              "name": "Hovenier.frl",
-              "url": "https://hovenier.frl",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Leeuwarden",
-                "postalCode": "8900",
-                "addressRegion": "Friesland",
-                "addressCountry": "NL"
-              }
-            },
-            "areaServed": {
-              "@type": "State",
-              "name": "Friesland",
-              "containedInPlace": {
-                "@type": "Country",
-                "name": "Nederland"
-              }
-            },
-            "offers": {
-              "@type": "Offer",
-              "price": "85",
-              "priceCurrency": "EUR",
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "85",
-                "priceCurrency": "EUR",
-                "unitText": "per square meter"
-              }
-            }
-          }),
-        }}
-      />
-
-      {/* Breadcrumb Schema */}
-      <BreadcrumbSchema
-        items={breadcrumbItems.map((item, index) => ({
-          position: index + 1,
-          name: item.label,
-          url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/groendak', validLocale as SupportedLocale)
-        }))}
-      />
-
-      {/* Local Business Schema for Green Roof Services */}
-      <LocalBusinessSchema
-        serviceType="groendak"
-        url={getAbsoluteUrl('/diensten/groendak', validLocale as SupportedLocale)}
-      />
-
-      {/* Standalone Service Schema for Green Roof Services */}
       <ServicePageSchema
         serviceType="groendak"
         url={getAbsoluteUrl('/diensten/groendak', validLocale as SupportedLocale)}
         locale={validLocale}
+        faqs={localeFaqs}
+        breadcrumbItems={breadcrumbItems.map((item) => ({
+          name: item.label,
+          url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/groendak', validLocale as SupportedLocale)
+        }))}
       />
 
       <Navigation locale={validLocale} translations={navTranslations} />

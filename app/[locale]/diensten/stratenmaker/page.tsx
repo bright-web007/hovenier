@@ -3,7 +3,7 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import RelatedArticles from '../../../components/RelatedArticles';
-import { LocalBusinessSchema, BreadcrumbSchema, ServicePageSchema } from '../../../components/StructuredData';
+import { ServicePageSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 import { createTranslator } from '@/i18n'
 import Image from 'next/image';
@@ -86,19 +86,12 @@ export default async function StratenmakerPage({ params }: Props) {
 
   return (
     <>
-      <LocalBusinessSchema
-        serviceType="stratenmaker"
-        url={getAbsoluteUrl('/diensten/stratenmaker', validLocale as SupportedLocale)}
-      />
       <ServicePageSchema
         serviceType="stratenmaker"
         url={getAbsoluteUrl('/diensten/stratenmaker', validLocale as SupportedLocale)}
         locale={validLocale}
-      />
-
-      <BreadcrumbSchema
-        items={breadcrumbItems.map((item, index) => ({
-          position: index + 1,
+        faqs={localeFaqs}
+        breadcrumbItems={breadcrumbItems.map((item) => ({
           name: item.label,
           url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/stratenmaker', validLocale as SupportedLocale)
         }))}

@@ -1,5 +1,5 @@
 import { getBusinessConfig, ServiceType } from '@/lib/business-config';
-import { BASE_URL } from '@/lib/locale-utils';
+import { BASE_URL, getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
 import { createTranslator } from '@/i18n';
 
 interface LocalBusinessSchemaProps {
@@ -116,6 +116,8 @@ interface ServiceSchemaProps {
   serviceType: ServiceType;
   url: string;
   locale?: string;
+  faqs?: Array<{ question: string; answer: string }>;
+  breadcrumbItems?: Array<{ name: string; url: string }>;
 }
 
 const SERVICE_TYPE_TO_TRANSLATION_KEY: Record<string, string> = {
@@ -126,57 +128,91 @@ const SERVICE_TYPE_TO_TRANSLATION_KEY: Record<string, string> = {
   'tuin-aanleggen': 'tuinaanleg',
 };
 
-export function ServicePageSchema({ serviceType, url, locale = 'nl' }: ServiceSchemaProps) {
+export function ServicePageSchema({ serviceType, url, locale = 'nl', faqs, breadcrumbItems }: ServiceSchemaProps) {
   const t = createTranslator(locale);
   const config = getBusinessConfig(serviceType);
   const translationKey = SERVICE_TYPE_TO_TRANSLATION_KEY[serviceType] || serviceType;
 
   const name = t(`schema.service_${translationKey}_name`);
   const description = t(`schema.service_${translationKey}_desc`);
+  const category = t(`schema.service_${translationKey}_category`);
+  const serviceTypeLabel = t(`schema.service_${translationKey}_serviceType`);
+  const unitText = t(`schema.service_${translationKey}_unit`);
 
-  const schema = {
-    '@context': 'https://schema.org',
+  const businessUrl = getAbsoluteUrl('/', locale as SupportedLocale);
+  const graph: Array<Record<string, unknown>> = [];
+
+  // 1. LocalBusiness
+  graph.push({
+    '@type': 'LocalBusiness',
+    '@id': `${config.contactInfo.website}#business`,
+    name: config.legalName,
+    url: businessUrl,
+    description: config.description,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${BASE_URL}/assets/logo-light.svg`,
+    },
+    email: config.contactInfo.email || 'info@hovenier.frl',
+    priceRange: config.priceRange,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: config.address.addressLocality,
+      postalCode: config.address.postalCode,
+      addressRegion: config.address.addressRegion,
+      addressCountry: config.address.addressCountry,
+      ...(config.address.streetAddress && { streetAddress: config.address.streetAddress }),
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: config.location.latitude,
+      longitude: config.location.longitude,
+    },
+    areaServed: {
+      '@type': 'AdministrativeArea',
+      name: config.serviceArea.name,
+      sameAs: locale === 'en'
+        ? 'https://en.wikipedia.org/wiki/Friesland'
+        : 'https://nl.wikipedia.org/wiki/Friesland',
+      containedInPlace: {
+        '@type': 'Country',
+        name: 'Nederland',
+      },
+    },
+    ...(config.businessHours && {
+      openingHoursSpecification: config.businessHours.dayOfWeek.map(day => ({
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: day,
+        opens: config.businessHours!.opens,
+        closes: config.businessHours!.closes,
+      })),
+    }),
+    ...(config.aggregateRating && {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ...config.aggregateRating,
+      },
+    }),
+  });
+
+  // 2. Service
+  graph.push({
     '@type': 'Service',
     '@id': `${url}#service`,
     name,
     url,
     description,
+    category,
+    serviceType: serviceTypeLabel,
     provider: {
-      '@type': 'LocalBusiness',
       '@id': `${config.contactInfo.website}#business`,
-      name: config.legalName,
-      url: config.contactInfo.website,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${BASE_URL}/assets/logo-light.svg`,
-      },
-      email: config.contactInfo.email || 'info@hovenier.frl',
-      priceRange: config.priceRange,
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: config.address.addressLocality,
-        postalCode: config.address.postalCode,
-        addressRegion: config.address.addressRegion,
-        addressCountry: config.address.addressCountry,
-        ...(config.address.streetAddress && { streetAddress: config.address.streetAddress }),
-      },
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: config.location.latitude,
-        longitude: config.location.longitude,
-      },
-      areaServed: {
-        '@type': 'State',
-        name: config.serviceArea.name,
-        containedInPlace: {
-          '@type': 'Country',
-          name: 'Nederland',
-        },
-      },
     },
     areaServed: {
-      '@type': 'State',
+      '@type': 'AdministrativeArea',
       name: config.serviceArea.name,
+      sameAs: locale === 'en'
+        ? 'https://en.wikipedia.org/wiki/Friesland'
+        : 'https://nl.wikipedia.org/wiki/Friesland',
       containedInPlace: {
         '@type': 'Country',
         name: 'Nederland',
@@ -184,10 +220,55 @@ export function ServicePageSchema({ serviceType, url, locale = 'nl' }: ServiceSc
     },
     offers: {
       '@type': 'AggregateOffer',
-      lowPrice: config.lowPrice,
-      highPrice: config.highPrice,
+      lowPrice: config.lowPrice.toString(),
+      highPrice: config.highPrice.toString(),
       priceCurrency: config.currenciesAccepted,
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: config.lowPrice.toString(),
+        priceCurrency: config.currenciesAccepted,
+        unitText,
+      },
+      validFrom: '2026-01-01',
     },
+  });
+
+  // 3. FAQPage
+  if (faqs && faqs.length > 0) {
+    graph.push({
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
+        },
+      })),
+    });
+  }
+
+  // 4. BreadcrumbList
+  if (breadcrumbItems && breadcrumbItems.length > 0) {
+    graph.push({
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbItems.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        '@id': item.url,
+        item: {
+          '@type': 'WebPage',
+          '@id': item.url,
+          name: item.name,
+        },
+      })),
+    });
+  }
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@graph': graph,
   };
 
   return (

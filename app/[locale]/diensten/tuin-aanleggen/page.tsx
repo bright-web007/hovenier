@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Navigation from '../../../components/Navigation';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import RelatedArticles, { type Article } from '../../../components/RelatedArticles';
-import { LocalBusinessSchema, BreadcrumbSchema, ServicePageSchema } from '../../../components/StructuredData';
+import { ServicePageSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { createTranslator } from '@/lib/translator';
 import Image from 'next/image';
@@ -134,82 +134,12 @@ export default async function TuinAanleggenPage({ params }: Props) {
 
   return (
     <>
-      {/* FAQ Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": localeFaqs.map((faq) => ({
-              "@type": "Question",
-              "name": faq.question,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.answer
-              }
-            }))
-          }),
-        }}
-      />
-
-      {/* Service Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": isEn ? "Garden Installation" : "Tuin Aanleggen",
-            "description": isEn ? "Professional garden installation services in Friesland by certified gardeners" : "Professionele tuinaanleg diensten in Friesland door gecertificeerde hoveniers",
-            "provider": {
-              "@type": "LocalBusiness",
-              "name": "Hovenier.frl",
-              "url": "https://hovenier.frl",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Leeuwarden",
-                "postalCode": "8900",
-                "addressRegion": "Friesland",
-                "addressCountry": "NL"
-              }
-            },
-            "areaServed": {
-              "@type": "State",
-              "name": "Friesland",
-              "containedInPlace": {
-                "@type": "Country",
-                "name": "Nederland"
-              }
-            },
-            "offers": {
-              "@type": "Offer",
-              "price": "50",
-              "priceCurrency": "EUR",
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "50",
-                "priceCurrency": "EUR",
-                "unitText": isEn ? "per m²" : "per m²"
-              }
-            }
-          }),
-        }}
-      />
-
-      <LocalBusinessSchema
-        serviceType="tuin-aanleggen"
-        url={getAbsoluteUrl('/diensten/tuin-aanleggen', validLocale as SupportedLocale)}
-      />
       <ServicePageSchema
         serviceType="tuin-aanleggen"
         url={getAbsoluteUrl('/diensten/tuin-aanleggen', validLocale as SupportedLocale)}
         locale={validLocale}
-      />
-
-      <BreadcrumbSchema
-        items={breadcrumbItems.map((item, index) => ({
-          position: index + 1,
+        faqs={localeFaqs}
+        breadcrumbItems={breadcrumbItems.map((item) => ({
           name: item.label,
           url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/tuin-aanleggen', validLocale as SupportedLocale)
         }))}

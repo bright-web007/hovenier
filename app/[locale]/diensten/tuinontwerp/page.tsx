@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Navigation from '../../../components/Navigation';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import RelatedArticles, { type Article } from '../../../components/RelatedArticles';
-import { LocalBusinessSchema, BreadcrumbSchema, ServicePageSchema } from '../../../components/StructuredData';
+import { ServicePageSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { createTranslator } from '@/lib/translator';
 import Image from 'next/image';
@@ -139,82 +139,12 @@ export default async function TuinontwerpPage({ params }: Props) {
 
   return (
     <>
-      {/* FAQ Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": localeFaqs.map((faq) => ({
-              "@type": "Question",
-              "name": faq.question,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.answer
-              }
-            }))
-          }),
-        }}
-      />
-
-      {/* Service Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": isEn ? "Garden Design" : "Tuinontwerp",
-            "description": isEn ? "Professional garden design services in Friesland by certified garden architects" : "Professionele tuinontwerp diensten in Friesland door gecertificeerde tuinarchitecten",
-            "provider": {
-              "@type": "LocalBusiness",
-              "name": "Hovenier.frl",
-              "url": "https://hovenier.frl",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Leeuwarden",
-                "postalCode": "8900",
-                "addressRegion": "Friesland",
-                "addressCountry": "NL"
-              }
-            },
-            "areaServed": {
-              "@type": "State",
-              "name": "Friesland",
-              "containedInPlace": {
-                "@type": "Country",
-                "name": "Nederland"
-              }
-            },
-            "offers": {
-              "@type": "Offer",
-              "price": "750",
-              "priceCurrency": "EUR",
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "750",
-                "priceCurrency": "EUR",
-                "unitText": "per project"
-              }
-            }
-          }),
-        }}
-      />
-
-      <LocalBusinessSchema
-        serviceType="tuinontwerp"
-        url={getAbsoluteUrl('/diensten/tuinontwerp', validLocale as SupportedLocale)}
-      />
       <ServicePageSchema
         serviceType="tuinontwerp"
         url={getAbsoluteUrl('/diensten/tuinontwerp', validLocale as SupportedLocale)}
         locale={validLocale}
-      />
-
-      <BreadcrumbSchema
-        items={breadcrumbItems.map((item, index) => ({
-          position: index + 1,
+        faqs={localeFaqs}
+        breadcrumbItems={breadcrumbItems.map((item) => ({
           name: item.label,
           url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/tuinontwerp', validLocale as SupportedLocale)
         }))}

@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Navigation from '../../../components/Navigation';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import RelatedArticles, { type Article } from '../../../components/RelatedArticles';
-import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
+import { LocalBusinessSchema, BreadcrumbSchema, ServicePageSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { env } from '@/lib/env';
 import { createTranslator } from '@/lib/translator';
@@ -201,6 +201,11 @@ export default async function TuinonderhoudPage({ params }: Props) {
       <LocalBusinessSchema
         serviceType="tuinonderhoud"
         url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/tuinonderhoud', validLocale as SupportedLocale)}`}
+      />
+      <ServicePageSchema
+        serviceType="tuinonderhoud"
+        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/tuinonderhoud', validLocale as SupportedLocale)}`}
+        locale={validLocale}
       />
 
       <BreadcrumbSchema

@@ -112,6 +112,94 @@ export function LocalBusinessSchema({
   );
 }
 
+interface ServiceSchemaProps {
+  serviceType: ServiceType;
+  url: string;
+  locale?: string;
+}
+
+const SERVICE_TYPE_TO_TRANSLATION_KEY: Record<string, string> = {
+  groendak: 'groendaken',
+  tuinonderhoud: 'tuinonderhoud',
+  tuinontwerp: 'tuinontwerp',
+  stratenmaker: 'bestrating',
+  'tuin-aanleggen': 'tuinaanleg',
+};
+
+export function ServicePageSchema({ serviceType, url, locale = 'nl' }: ServiceSchemaProps) {
+  const t = createTranslator(locale);
+  const config = getBusinessConfig(serviceType);
+  const translationKey = SERVICE_TYPE_TO_TRANSLATION_KEY[serviceType] || serviceType;
+
+  const name = t(`schema.service_${translationKey}_name`);
+  const description = t(`schema.service_${translationKey}_desc`);
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${url}#service`,
+    name,
+    url,
+    description,
+    provider: {
+      '@type': 'LocalBusiness',
+      '@id': `${config.contactInfo.website}#business`,
+      name: config.legalName,
+      url: config.contactInfo.website,
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://hovenier.frl/assets/logo-light.svg',
+      },
+      email: config.contactInfo.email || 'info@hovenier.frl',
+      priceRange: config.priceRange,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: config.address.addressLocality,
+        postalCode: config.address.postalCode,
+        addressRegion: config.address.addressRegion,
+        addressCountry: config.address.addressCountry,
+        ...(config.address.streetAddress && { streetAddress: config.address.streetAddress }),
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: config.location.latitude,
+        longitude: config.location.longitude,
+      },
+      areaServed: {
+        '@type': 'State',
+        name: config.serviceArea.name,
+        containedInPlace: {
+          '@type': 'Country',
+          name: 'Nederland',
+        },
+      },
+    },
+    areaServed: {
+      '@type': 'State',
+      name: config.serviceArea.name,
+      containedInPlace: {
+        '@type': 'Country',
+        name: 'Nederland',
+      },
+    },
+    offers: {
+      '@type': 'AggregateOffer',
+      lowPrice: config.lowPrice,
+      highPrice: config.highPrice,
+      priceCurrency: config.currenciesAccepted,
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(schema, null, 2),
+      }}
+    />
+  );
+}
+
 export function WebsiteSchema({ locale = 'nl' }: { locale?: string }) {
   const baseUrl = env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
   const t = createTranslator(locale);

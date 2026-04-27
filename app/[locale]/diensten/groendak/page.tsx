@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Navigation from '../../../components/Navigation';
 import RelatedArticles from '../../../components/RelatedArticles';
 import Breadcrumbs from '../../../components/Breadcrumbs';
-import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
+import { LocalBusinessSchema, BreadcrumbSchema, ServicePageSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { env } from '@/lib/env';
 import { createTranslator } from '@/lib/translator';
@@ -233,6 +233,13 @@ export default async function GroendakPage({ params }: Props) {
       <LocalBusinessSchema
         serviceType="groendak"
         url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`}
+      />
+
+      {/* Standalone Service Schema for Green Roof Services */}
+      <ServicePageSchema
+        serviceType="groendak"
+        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`}
+        locale={validLocale}
       />
 
       <Navigation locale={validLocale} translations={navTranslations} />

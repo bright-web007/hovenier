@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { regionHubs, standaloneRegions } from '@/lib/regions-hierarchy';
+import { createTranslator } from '@/i18n';
 
 interface FooterProps {
   locale?: string;
@@ -8,6 +9,7 @@ interface FooterProps {
 
 export default function Footer({ locale = 'nl' }: FooterProps) {
   const currentLocale = locale as SupportedLocale;
+  const tCommon = createTranslator(currentLocale);
 
   // Simple translation function
   function t(key: string): string {
@@ -336,6 +338,16 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 info@hovenier.frl
+              </a>
+            </div>
+            <div className="footer-contact-item">
+              <a
+                href="https://bedrijveninfriesland.allepaginas.nl"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-contact-link"
+              >
+                {tCommon('footer.backlink_text')}
               </a>
             </div>
           </div>

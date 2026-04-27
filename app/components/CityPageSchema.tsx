@@ -1,5 +1,5 @@
 import { createTranslator } from '@/i18n';
-import { getAbsoluteUrl, SupportedLocale } from '@/lib/locale-utils';
+import { BASE_URL, getAbsoluteUrl, SupportedLocale } from '@/lib/locale-utils';
 
 interface CitySchemaFAQ {
   question: string;
@@ -55,9 +55,9 @@ export function CityPageSchema({ locale, slug, gemeente, citySlug }: CityPageSch
         paymentAccepted: 'Cash, Credit Card, Bank Transfer',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://hovenier.frl/assets/logo-light.svg',
+          url: `${BASE_URL}/assets/logo-light.svg`,
         },
-        image: `https://hovenier.frl/images/${citySlug}.jpg`,
+        image: `${BASE_URL}/images/${citySlug}.jpg`,
         address: {
           '@type': 'PostalAddress',
           addressLocality: data.areaServedName,

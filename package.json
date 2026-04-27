@@ -24,6 +24,7 @@
     "validate:server-components": "npm run lint -- --no-ignore app/\\*\\*/page.tsx",
     "indexnow": "node scripts/indexnow-submit.js",
     "env:check": "node scripts/validate-env.js",
+    "sitemap:submit": "node scripts/submit-sitemap.js",
     "env:setup": "cp .env.example .env.local && echo 'Created .env.local from template. Please fill in your values.'",
     "postinstall": "npm run env:check || echo 'Warning: Environment validation failed. Run npm run env:setup to get started.'"
   },

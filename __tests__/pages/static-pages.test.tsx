@@ -170,7 +170,6 @@ describe('Static Pages Integration Tests', () => {
 
       const { container } = renderWithIntl(<HomePage params={mockParams} />);
 
-      const html = container.innerHTML;
       // Async Server Components may render empty in jsdom;
       // verify the page renders without error
       expect(container).toBeTruthy();

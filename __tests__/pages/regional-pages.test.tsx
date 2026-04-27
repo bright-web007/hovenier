@@ -194,14 +194,9 @@ describe('Regional Pages Integration Tests', () => {
 
       const { container } = renderWithIntl(<RegionPage params={mockParams} />);
 
-      const html = container.innerHTML;
-      const hasStructuredData = html.includes('application/ld+json') ||
-                               html.includes('@type') ||
-                               html.includes('LocalBusiness');
-
-      const hasLocationData = html.includes('Friesland') ||
-                             html.includes('noordwest') ||
-                             html.includes(testRegion);
+      // Structured data and location checks are intentionally not asserted here
+      // because Server Components may render empty in jsdom. Presence of
+      // structured data is validated in dedicated schema tests.
 
       // Async Server Components may render empty in jsdom;
       // verify the page renders without error

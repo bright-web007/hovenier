@@ -10,7 +10,7 @@ import { CityPageSchema } from '@/app/components/CityPageSchema'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 import { env } from '@/lib/env';
 import { createTranslator } from '@/i18n'
-import { regionHubs, getRegionHubBySlug, getGemeenteBySlug, getRegionSlugByGemeenteSlug } from '@/lib/regions-hierarchy'
+import { regionHubs, getRegionHubBySlug, getGemeenteBySlug } from '@/lib/regions-hierarchy'
 import DienstCard from '../../../../components/DienstCard'
 import Link from 'next/link'
 

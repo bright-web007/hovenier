@@ -38,7 +38,7 @@ export function CityPageSchema({ locale, slug, gemeente, citySlug }: CityPageSch
   if (!data) return null;
 
   const pageUrl = getAbsoluteUrl(`/regio/${slug}/${gemeente}/${citySlug}`, locale);
-  const municipalityUrl = getAbsoluteUrl(`/regio/${slug}/${gemeente}`, locale);
+  // municipalityUrl previously computed but not used; remove to satisfy linter
 
   const schema = {
     '@context': 'https://schema.org',

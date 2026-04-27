@@ -4,7 +4,7 @@ export async function GET() {
   let host = ''
   try {
     host = new URL(base).host
-  } catch (e) {
+  } catch {
     host = base.replace(/^https?:\/\//, '')
   }
 

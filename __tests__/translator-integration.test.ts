@@ -105,7 +105,7 @@ describe('Real translator integration (lib/translator.ts)', () => {
       expect(typeof sub).toBe('object');
       expect(Object.keys(sub).length).toBeGreaterThan(0);
       // Every value should be a non-empty string
-      for (const [k, v] of Object.entries(sub)) {
+      for (const [, v] of Object.entries(sub)) {
         expect(typeof v).toBe('string');
         expect(v.length).toBeGreaterThan(0);
       }

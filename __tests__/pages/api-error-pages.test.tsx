@@ -7,7 +7,7 @@
  */
 
 import { render } from '@testing-library/react';
-import type { NextRequest } from 'next/server';
+// import type { NextRequest } from 'next/server';
 
 // Mock Next.js modules
 jest.mock('next/navigation', () => ({
@@ -30,16 +30,7 @@ jest.mock('@sentry/nextjs', () => ({
   captureMessage: jest.fn(),
 }));
 
-// Mock Next.js Request for API testing
-const mockNextRequest = (url: string) => ({
-  nextUrl: new URL(url),
-  url,
-  method: 'GET',
-  headers: new Map(),
-  query: {},
-  body: null,
-  json: () => Promise.resolve({}),
-}) as unknown as Pick<NextRequest, 'url' | 'nextUrl' | 'method' | 'headers' | 'json'>;
+// (helper removed) Mock Next.js Request helper was unused in tests
 
 describe('API Routes Integration Tests', () => {
   describe('Articles API (/api/articles)', () => {

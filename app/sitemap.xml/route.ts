@@ -9,7 +9,7 @@ import { getAbsoluteUrl } from '@/lib/locale-utils'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const allPages: MetadataRoute.Sitemap = []
 
-  const baseUrl = (process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl').replace(/\/$/, '')
+  // Use configured base URL via `NEXT_PUBLIC_BASE_URL` when needed elsewhere.
 
   // Resolve dynamic sources
   const articles = await getArticles()
@@ -182,7 +182,7 @@ function buildSitemapXml(items: MetadataRoute.Sitemap) {
     lines.push('  <url>')
     lines.push(`    <loc>${escapeXml(it.url)}</loc>`)
     if (it.lastModified) {
-      const d = new Date(it.lastModified as any)
+      const d = new Date(it.lastModified)
       lines.push(`    <lastmod>${d.toISOString()}</lastmod>`)
     }
     if (it.changeFrequency) lines.push(`    <changefreq>${escapeXml(it.changeFrequency)}</changefreq>`)

@@ -34,8 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const validLocale = locale || defaultLocale;
 
     return {
-      title: 'Betrouwbare Hoveniers in Friesland Vinden | Gratis Offertes | Hovenier.frl',
-      description: 'Vind een gecertificeerde hovenier in Friesland. Vergelijk gratis offertes voor tuinonderhoud, tuinaanleg en groendaken. 150+ geverifieerde hoveniers — reactie binnen 24 uur.',
+      title: 'Hovenier Friesland | Gratis Offertes | Hovenier FRL',
+      description: 'Vind een betrouwbare lokale hovenier in Friesland. Vergelijk gratis offertes voor tuinonderhoud, tuinaanleg, tuinontwerp en groendaken. Reactie binnen 24 uur.',
       keywords: ['hovenier friesland', 'hoveniers in friesland', 'hoveniers friesland', 'hovenier in friesland', 'tuinaanleg friesland', 'hovenier gezocht friesland'],
       alternates: getLocaleAlternates('/', validLocale as SupportedLocale),
     };

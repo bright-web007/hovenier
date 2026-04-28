@@ -1019,6 +1019,11 @@
   "schema.service_bestrating_category": "Paving",
   "schema.service_bestrating_serviceType": "Professional Paving Installation Services",
   "schema.service_bestrating_unit": "per m2",
+  "schema.service_tuinaanleg_name": "Garden Construction Friesland",
+  "schema.service_tuinaanleg_desc": "Professional garden construction in Friesland. From complete new garden layouts to full garden renovations. Quality materials and craftsmanship adapted to Frisian clay and peat soil conditions. Available across all Frisian municipalities.",
+  "schema.service_tuinaanleg_category": "Garden Construction",
+  "schema.service_tuinaanleg_serviceType": "Professional Garden Construction Services",
+  "schema.service_tuinaanleg_unit": "per project",
   "faqs": {
     "groendak": [
       {

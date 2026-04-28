@@ -1020,6 +1020,11 @@
   "schema.service_bestrating_category": "Bestrating",
   "schema.service_bestrating_serviceType": "Professionele Bestrating Installatie Diensten",
   "schema.service_bestrating_unit": "per m2",
+  "schema.service_tuinaanleg_name": "Tuinaanleg Friesland",
+  "schema.service_tuinaanleg_desc": "Professionele tuinaanleg in Friesland. Van complete nieuwe tuinontwerpen tot volledige tuinrenovaties. Kwalitatieve materialen en vakmanschap aangepast aan de Friese klei- en veengrond. Beschikbaar in alle Friese gemeenten.",
+  "schema.service_tuinaanleg_category": "Tuinaanleg",
+  "schema.service_tuinaanleg_serviceType": "Professionele Tuinaanleg Diensten",
+  "schema.service_tuinaanleg_unit": "per project",
   "faqs": {
     "groendak": [
       {

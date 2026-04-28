@@ -1,0 +1,156 @@
+/* THANK YOU PAGE STYLES */
+.thank-you-content {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.thank-you-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.success-icon {
+  color: var(--sage);
+  width: 64px;
+  height: 64px;
+}
+
+.thank-you-title {
+  color: var(--forest);
+  margin-bottom: 1rem;
+}
+
+.thank-you-subtitle {
+  font-size: 18px;
+  color: var(--text-mid);
+  margin-bottom: 0;
+}
+
+.thank-you-steps {
+  margin: 4rem 0;
+  text-align: center;
+}
+
+.steps-title {
+  font-family: var(--heading-font);
+  font-size: 28px;
+  color: var(--forest);
+  margin-bottom: 2.5rem;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.step-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.step-card:hover {
+  border-color: var(--sage);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(42, 62, 32, 0.08);
+}
+
+.roof-type-card {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid #2A3E201F;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.roof-type-card:hover {
+  border-color: #8AB87A99;
+  box-shadow: 0px 8px 32px 0px #8AB87A1F;
+}
+
+.step-number {
+  width: 48px;
+  height: 48px;
+  background: var(--sage);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 1rem;
+}
+
+.step-text {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+.thank-you-actions {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-cta-outline {
+  background: transparent;
+  border: 2px solid var(--sage);
+  color: var(--sage);
+  padding: 12px 24px;
+  font-weight: 500;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.nav-cta-outline:hover {
+  background: var(--sage);
+  color: var(--white);
+}
+
+.nav-cta-outline svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Thank you page responsive design */
+/* Thank you page responsive design */
+@media (min-width: 768px) {
+  .steps-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .thank-you-actions {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  .steps-title {
+    font-size: 32px;
+  }
+}
+
+/* WHATSAPP FLOATING BUTTON */

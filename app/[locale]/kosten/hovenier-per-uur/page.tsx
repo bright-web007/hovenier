@@ -1,3 +1,4 @@
+import "../../../styles/rate-cards.css";
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { setRequestLocale } from 'next-intl/server'

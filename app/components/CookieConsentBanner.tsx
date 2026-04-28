@@ -172,7 +172,17 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
 
   const t = translations[locale as keyof typeof translations] || translations.nl;
 
-  if (!mounted || consentGiven) return null;
+  if (consentGiven) return null;
+
+  if (!mounted) {
+    return (
+      <div
+        className={styles.cookieConsentOverlay}
+        style={{ visibility: 'hidden', pointerEvents: 'none' }}
+        aria-hidden="true"
+      />
+    );
+  }
 
   return (
     <div className={styles.cookieConsentOverlay}>
@@ -224,62 +234,62 @@ const CookieConsentBanner: React.FC<CookieConsentProps> = ({ locale = 'nl' }) =>
                 </button>
               </div>
               <div className={styles.cookieConsentCategories}>
-                <div className="cookie-category">
-                  <div className="cookie-category-header">
-                    <label className="cookie-category-label">
-                      <input 
-                        type="checkbox" 
+                <div className={styles.cookieCategory}>
+                  <div className={styles.cookieCategoryHeader}>
+                    <label className={styles.cookieCategoryLabel}>
+                      <input
+                        type="checkbox"
                         checked={preferences.necessary}
                         disabled={true}
-                        className="cookie-category-checkbox"
+                        className={styles.cookieCategoryCheckbox}
                       />
-                      <span className="cookie-category-name">{t.necessary}</span>
-                      <span className="cookie-category-required">(Vereist)</span>
+                      <span className={styles.cookieCategoryName}>{t.necessary}</span>
+                      <span className={styles.cookieCategoryRequired}>(Vereist)</span>
                     </label>
                   </div>
-                  <p className="cookie-category-description">{t.necessaryDesc}</p>
+                  <p className={styles.cookieCategoryDescription}>{t.necessaryDesc}</p>
                 </div>
-                <div className="cookie-category">
-                  <div className="cookie-category-header">
-                    <label className="cookie-category-label">
-                      <input 
-                        type="checkbox" 
+                <div className={styles.cookieCategory}>
+                  <div className={styles.cookieCategoryHeader}>
+                    <label className={styles.cookieCategoryLabel}>
+                      <input
+                        type="checkbox"
                         checked={preferences.analytics}
                         onChange={(e) => handlePreferenceChange('analytics', e.target.checked)}
-                        className="cookie-category-checkbox"
+                        className={styles.cookieCategoryCheckbox}
                       />
-                      <span className="cookie-category-name">{t.analytics}</span>
+                      <span className={styles.cookieCategoryName}>{t.analytics}</span>
                     </label>
                   </div>
-                  <p className="cookie-category-description">{t.analyticsDesc}</p>
+                  <p className={styles.cookieCategoryDescription}>{t.analyticsDesc}</p>
                 </div>
-                <div className="cookie-category">
-                  <div className="cookie-category-header">
-                    <label className="cookie-category-label">
-                      <input 
-                        type="checkbox" 
+                <div className={styles.cookieCategory}>
+                  <div className={styles.cookieCategoryHeader}>
+                    <label className={styles.cookieCategoryLabel}>
+                      <input
+                        type="checkbox"
                         checked={preferences.marketing}
                         onChange={(e) => handlePreferenceChange('marketing', e.target.checked)}
-                        className="cookie-category-checkbox"
+                        className={styles.cookieCategoryCheckbox}
                       />
-                      <span className="cookie-category-name">{t.marketing}</span>
+                      <span className={styles.cookieCategoryName}>{t.marketing}</span>
                     </label>
                   </div>
-                  <p className="cookie-category-description">{t.marketingDesc}</p>
+                  <p className={styles.cookieCategoryDescription}>{t.marketingDesc}</p>
                 </div>
-                <div className="cookie-category">
-                  <div className="cookie-category-header">
-                    <label className="cookie-category-label">
-                      <input 
-                        type="checkbox" 
+                <div className={styles.cookieCategory}>
+                  <div className={styles.cookieCategoryHeader}>
+                    <label className={styles.cookieCategoryLabel}>
+                      <input
+                        type="checkbox"
                         checked={preferences.preferences}
                         onChange={(e) => handlePreferenceChange('preferences', e.target.checked)}
-                        className="cookie-category-checkbox"
+                        className={styles.cookieCategoryCheckbox}
                       />
-                      <span className="cookie-category-name">{t.preferences}</span>
+                      <span className={styles.cookieCategoryName}>{t.preferences}</span>
                     </label>
                   </div>
-                  <p className="cookie-category-description">{t.preferencesDesc}</p>
+                  <p className={styles.cookieCategoryDescription}>{t.preferencesDesc}</p>
                 </div>
               </div>
               <div className={styles.cookieConsentActions}>

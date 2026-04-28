@@ -78,7 +78,24 @@ export default async function HoveniersDirectoryPage({ params }: Props) {
                   : 'Vind de perfecte tuinspecialist voor uw project. Alle hoveniers zijn geverifieerd en beoordeeld door echte klanten.'}
               </p>
 
-              <GardenerDirectoryClient gardeners={gardeners} locale={locale} />
+              <GardenerDirectoryClient
+                gardeners={gardeners}
+                locale={locale}
+                translations={{
+                  verified: t('gardener_card.verified'),
+                  available: t('gardener_card.available'),
+                  busy: t('gardener_card.busy'),
+                  per_hour: t('gardener_card.per_hour'),
+                  specialties: t('gardener_card.specialties'),
+                  view_profile: t('gardener_card.view_profile'),
+                  direct_contact: t('gardener_card.direct_contact'),
+                  service_tuinonderhoud: t('form.services.tuinonderhoud'),
+                  service_tuinontwerp: t('form.services.tuinontwerp'),
+                  service_groendak: t('form.services.groendak'),
+                  service_stratenmaker: t('form.services.stratenmaker'),
+                  service_tuin_aanleggen: t('form.services.tuin-aanleggen'),
+                }}
+              />
             </div>
           </div>
         </div>

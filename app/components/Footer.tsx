@@ -85,7 +85,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
           {/* Brand Section */}
           <div className="footer-brand">
             <div className="footer-logo">
-              <Link href={localizePath('/', currentLocale)} className="footer-logo-link">
+              <Link href={localizePath('/', currentLocale)} className="footer-logo-link" aria-label="Hovenier home">
               <svg width="140" height="40" viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_243_78)">
                 <path d="M20 38C29.9411 38 38 29.9411 38 20C38 10.0589 29.9411 2 20 2C10.0589 2 2 10.0589 2 20C2 29.9411 10.0589 38 20 38Z" fill="white"/>

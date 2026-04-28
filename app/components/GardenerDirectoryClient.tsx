@@ -9,6 +9,20 @@ import type { Gardener } from '../../lib/gardeners-data'
 interface GardenerDirectoryClientProps {
   gardeners: Gardener[]
   locale: string
+  translations: {
+    verified: string
+    available: string
+    busy: string
+    per_hour: string
+    specialties: string
+    view_profile: string
+    direct_contact: string
+    service_tuinonderhoud: string
+    service_tuinontwerp: string
+    service_groendak: string
+    service_stratenmaker: string
+    service_tuin_aanleggen: string
+  }
 }
 
 function getResponseTimeMinutes(responseTime: string): number {
@@ -30,6 +44,7 @@ function getResponseTimeMinutes(responseTime: string): number {
 export default function GardenerDirectoryClient({
   gardeners,
   locale,
+  translations,
 }: GardenerDirectoryClientProps) {
   const isEnglish = locale === 'en'
   const [query, setQuery] = useState('')
@@ -204,7 +219,7 @@ export default function GardenerDirectoryClient({
       {filteredGardeners.length > 0 ? (
         <div className={styles.gardenersGrid}>
           {filteredGardeners.map((gardener) => (
-            <GardenerCard key={gardener.slug} gardener={gardener} locale={locale} />
+            <GardenerCard key={gardener.slug} gardener={gardener} locale={locale} translations={translations} />
           ))}
         </div>
       ) : (

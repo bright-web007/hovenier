@@ -13,6 +13,8 @@ export function resolveImageSrc(
 export function getImageUrl(src: string, options?: { width?: number; quality?: number }): string {
   if (!src) return src
 
+  if (src.endsWith('.svg')) return src
+
   try {
     const q = options?.quality ?? 70
     const baseUrl = env.NEXT_PUBLIC_IMAGE_BASE_URL
@@ -52,9 +54,16 @@ export function getImageUrl(src: string, options?: { width?: number; quality?: n
       return options?.width ? `${src}${sep}w=${options.width}&q=${q}` : src
     }
 
-    // Relative/internal paths: strip any accidental protocol and prepend baseUrl
-    cleanSrc = cleanSrc.replace(/^https?:\/\//, '')
-    return `${baseUrl}${cleanSrc}?tr=${params}`
+    // Relative/internal paths: prepend site origin for CDN proxying
+    const siteOrigin = env.NEXT_PUBLIC_BASE_URL || ''
+    if (siteOrigin) {
+      cleanSrc = cleanSrc.startsWith('/') ? cleanSrc : `/${cleanSrc}`
+      const trimmedBaseUrl = baseUrl.replace(/\/+$/, '')
+      const trimmedSiteOrigin = siteOrigin.replace(/\/+$/, '')
+      return `${trimmedBaseUrl}/${trimmedSiteOrigin}${cleanSrc}?tr=${params}`
+    } else {
+      return src
+    }
   } catch {
     return src || ''
   }

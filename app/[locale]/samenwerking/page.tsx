@@ -1,3 +1,4 @@
+import "../../styles/partnership.css";
 import { Metadata } from 'next';
 import Navigation from '../../components/Navigation';
 import Breadcrumbs from '../../components/Breadcrumbs';

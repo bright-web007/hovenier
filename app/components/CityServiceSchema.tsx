@@ -32,7 +32,7 @@ interface CityServiceSchemaProps {
 export function CityServiceSchema({ locale, slug, gemeente, citySlug, serviceSlug }: CityServiceSchemaProps) {
   const t = createTranslator(locale);
   const data = t.raw(`schema_data.services.${citySlug}.${serviceSlug}`) as CityServiceSchemaData | undefined;
-  if (!data) return null;
+  if (!data || !Array.isArray(data.faqs)) return null;
 
   const pageUrl = getAbsoluteUrl(`/regio/${slug}/${gemeente}/${citySlug}/${serviceSlug}`, locale);
   const cityUrl = getAbsoluteUrl(`/regio/${slug}/${gemeente}/${citySlug}`, locale);

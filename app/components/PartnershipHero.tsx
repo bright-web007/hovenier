@@ -1,4 +1,3 @@
-'use client'
 
 import { createTranslator } from '@/i18n'
 import styles from './Partnership.module.css'

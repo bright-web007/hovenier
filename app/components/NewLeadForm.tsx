@@ -29,6 +29,7 @@ interface LeadFormProps {
     postcode?: string;
     company?: string;
     security_loading?: string;
+    submit_error?: string;
     services: {
       tuinonderhoud: string;
       tuinontwerp: string;
@@ -82,6 +83,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
   // Lightweight form state — heavy validation modules loaded only on submit
   const [errors, setErrors] = useState<Record<string, { _errors: string[] }> | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     if (isDevelopment) setTurnstileToken('dev-bypass');
@@ -109,6 +111,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
     e.preventDefault();
     setIsSubmitting(true);
     setErrors(null);
+    setSubmitError(null);
 
     const formData = {
       naam,
@@ -162,7 +165,9 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
       }
     } catch (error) {
       console.error('Form submission error:', error);
-      router.push(localizePath('/bedankt', locale as SupportedLocale));
+      setSubmitError(translations.submit_error ?? (locale === 'en'
+        ? 'Something went wrong. Please try again or contact us directly.'
+        : 'Er is iets misgegaan. Probeer het opnieuw of neem direct contact met ons op.'));
     } finally {
       setIsSubmitting(false);
     }
@@ -393,6 +398,12 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
             </Suspense>
           )}
         </FormField>
+
+        {submitError && (
+          <p style={{ color: '#b91c1c', fontSize: '13px', marginBottom: '10px', padding: '10px 12px', background: '#fef2f2', borderRadius: '3px', border: '0.5px solid #fca5a5' }}>
+            {submitError}
+          </p>
+        )}
 
         <button
           type="submit"

@@ -329,7 +329,7 @@ export default async function RegioLandingPage({ params }: Props) {
                       <div style={{ padding: '20px 24px 24px 24px', gap: '8px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
                         <p style={{ fontWeight: 700, fontSize: '20px', lineHeight: '100%', color: '#1F2937' }}>{gemeente.name}</p>
                         <p style={{ fontSize: '14px', lineHeight: '100%', color: '#6B7280', marginBottom: '0.5rem' }}>
-                          {(gemeente.cities?.length ?? 1)} {isEn ? t.municipalities : t.municipalities}
+                          {(gemeente.cities?.length ?? 1)} {t.municipalities}
                         </p>
                         <p style={{ color: '#6B7280', fontSize: '15px', marginBottom: '0.5rem', lineHeight: '1.6' }}>
                           {isEn ? (gemeenteTranslations[gemeente.slug]?.intro || gemeente.introEn || gemeente.intro) : gemeente.intro}

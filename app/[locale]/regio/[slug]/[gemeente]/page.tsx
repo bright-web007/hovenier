@@ -12,7 +12,7 @@ import { CityPageSchema } from '@/app/components/CityPageSchema'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 import { createTranslator } from '@/i18n'
 import { interp } from '@/lib/translator'
-import { regionHubs, getRegionHubBySlug, getGemeenteBySlug, getRegionSlugByGemeenteSlug } from '@/lib/regions-hierarchy'
+import { regionHubs, getRegionHubBySlug, getGemeenteBySlug } from '@/lib/regions-hierarchy'
 import DienstCard from '../../../../components/DienstCard'
 import Link from 'next/link'
 
@@ -137,6 +137,7 @@ export default async function GemeentePage({ params }: Props) {
     privacy_agreement: t('form.privacy_agreement'),
     privacy_link: t('form.privacy_link'),
     privacy_consent: t('form.privacy_consent'),
+    submit_error: t('form_submit_error'),
     services: {
       tuinonderhoud: t('form.services.tuinonderhoud'),
       tuinontwerp: t('form.services.tuinontwerp'),

@@ -137,7 +137,6 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
-      <link rel="preload" as="image" href="/images/bg-768.jpg" />
       {/* Structured Data for SEO */}
       <OrganizationSchema />
       <WebsiteSchema locale={validLocale} />

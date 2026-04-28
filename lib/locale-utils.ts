@@ -3,7 +3,7 @@ export const SUPPORTED_LOCALES = ['nl', 'en'] as const;
 export type SupportedLocale = typeof SUPPORTED_LOCALES[number];
 export const DEFAULT_LOCALE: SupportedLocale = 'nl';
 const BASE_URL = (() => {
-  const configuredBaseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl';
+  const configuredBaseUrl = (process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl').replace(/\/$/, '');
   return configuredBaseUrl.startsWith('http') ? configuredBaseUrl : `https://${configuredBaseUrl}`;
 })();
 

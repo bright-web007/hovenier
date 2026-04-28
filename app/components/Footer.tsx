@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { regionHubs, standaloneRegions } from '@/lib/regions-hierarchy';
+import { createTranslator } from '@/i18n';
 
 interface FooterProps {
   locale?: string;
@@ -8,118 +9,15 @@ interface FooterProps {
 
 export default function Footer({ locale = 'nl' }: FooterProps) {
   const currentLocale = locale as SupportedLocale;
-
-  // Simple translation function
-  function t(key: string): string {
-    const translations: Record<string, Record<string, string>> = {
-      nl: {
-        'footer.description': 'Dé plek om betrouwbare hoveniers in Friesland te vinden. Vergelijk offertes, lees reviews en kies met vertrouwen voor de beste hovenier in jouw gemeente.',
-        'footer.newsletter_title': 'Tuintips & updates',
-        'footer.newsletter_placeholder': 'Je e-mailadres',
-        'footer.newsletter_button': 'Aanmelden',
-        'footer.newsletter_privacy': 'Maandelijkse tuintips en geen spam. Je kunt altijd uitschrijven.',
-        'footer.services_title': 'Diensten',
-        'footer.regions_title': 'Regio\'s',
-        'footer.links.regions.noordwest_friesland': 'Noordwest-Friesland',
-        'footer.links.regions.noordoost_friesland': 'Noordoost-Friesland',
-        'footer.links.regions.centraal_friesland': 'Centraal-Friesland',
-        'footer.links.regions.zuidwest_friesland': 'Zuidwest-Friesland',
-        'footer.standalone_title': 'Stad',
-        'footer.gemeenten_title': 'Gemeenten',
-        'footer.links.gemeenten.leeuwarden': 'Leeuwarden',
-        'footer.links.gemeenten.heerenveen': 'Heerenveen',
-        'footer.links.gemeenten.smallingerland': 'Smallingerland',
-        'footer.links.gemeenten.sudwest_fryslan': 'Súdwest-Fryslân',
-        'footer.links.gemeenten.waadhoeke': 'Waadhoeke',
-        'footer.links.gemeenten.harlingen': 'Harlingen',
-        'footer.links.gemeenten.vlieland': 'Vlieland',
-        'footer.links.gemeenten.terschelling': 'Terschelling',
-        'footer.links.gemeenten.noardeast_fryslan': 'Noardeast-Fryslân',
-        'footer.links.gemeenten.achtkarspelen': 'Achtkarspelen',
-        'footer.links.gemeenten.dantumadeel': 'Dantumadeel',
-        'footer.links.gemeenten.ameland': 'Ameland',
-        'footer.links.gemeenten.schiermonnikoog': 'Schiermonnikoog',
-        'footer.links.gemeenten.opsterland': 'Opsterland',
-        'footer.links.gemeenten.ooststellingwerf': 'Ooststellingwerf',
-        'footer.links.gemeenten.weststellingwerf': 'Weststellingwerf',
-        'footer.links.gemeenten.de_fryske_marren': 'De Fryske Marren',
-        'footer.links.gemeenten.tietjerksteradeel': 'Tietjerksteradeel',
-        'footer.company_title': 'Bedrijf',
-        'footer.copyright': 'Alle rechten voorbehouden.',
-        'footer.newsletter_success': 'Bedankt voor je aanmelding! We nemen contact met je op.',
-        'footer.links.services.tuinonderhoud': 'Tuinonderhoud',
-        'footer.links.services.tuinontwerp': 'Tuinontwerp',
-        'footer.links.services.groendak': 'Groendaken',
-        'footer.links.services.bestrating': 'Bestrating',
-        'footer.links.company.over_ons': 'Over ons',
-        'footer.links.company.samenwerking': 'Samenwerking',
-        'footer.links.company.contact': 'Contact',
-        'footer.links.company.nieuws': 'Blog',
-        'footer.links.legal.privacy_beleid': 'Privacybeleid',
-        'footer.links.legal.algemene_voorwaarden': 'Algemene voorwaarden',
-        'footer.links.legal.cookie_beleid': 'Cookiebeleid',
-        'footer.links.legal.aansprakelijkheid': 'Aansprakelijkheid'
-      },
-      en: {
-        'footer.description': 'The place to find reliable gardeners in Friesland. Compare quotes, read reviews and choose with confidence for the best gardener in your municipality.',
-        'footer.newsletter_title': 'Garden tips & updates',
-        'footer.newsletter_placeholder': 'Your email address',
-        'footer.newsletter_button': 'Subscribe',
-        'footer.newsletter_privacy': 'Monthly garden tips and no spam. You can always unsubscribe.',
-        'footer.services_title': 'Services',
-        'footer.regions_title': 'Regions',
-        'footer.links.regions.noordwest_friesland': 'Northwest Friesland',
-        'footer.links.regions.noordoost_friesland': 'Northeast Friesland',
-        'footer.links.regions.centraal_friesland': 'Central Friesland',
-        'footer.links.regions.zuidwest_friesland': 'Southwest Friesland',
-        'footer.standalone_title': 'Major Cities',
-        'footer.gemeenten_title': 'Municipalities',
-        'footer.links.gemeenten.leeuwarden': 'Leeuwarden',
-        'footer.links.gemeenten.heerenveen': 'Heerenveen',
-        'footer.links.gemeenten.smallingerland': 'Smallingerland',
-        'footer.links.gemeenten.sudwest_fryslan': 'Súdwest-Fryslân',
-        'footer.links.gemeenten.waadhoeke': 'Waadhoeke',
-        'footer.links.gemeenten.harlingen': 'Harlingen',
-        'footer.links.gemeenten.vlieland': 'Vlieland',
-        'footer.links.gemeenten.terschelling': 'Terschelling',
-        'footer.links.gemeenten.noardeast_fryslan': 'Noardeast-Fryslân',
-        'footer.links.gemeenten.achtkarspelen': 'Achtkarspelen',
-        'footer.links.gemeenten.dantumadeel': 'Dantumadeel',
-        'footer.links.gemeenten.ameland': 'Ameland',
-        'footer.links.gemeenten.schiermonnikoog': 'Schiermonnikoog',
-        'footer.links.gemeenten.opsterland': 'Opsterland',
-        'footer.links.gemeenten.ooststellingwerf': 'Ooststellingwerf',
-        'footer.links.gemeenten.weststellingwerf': 'Weststellingwerf',
-        'footer.links.gemeenten.de_fryske_marren': 'De Fryske Marren',
-        'footer.links.gemeenten.tietjerksteradeel': 'Tietjerksteradeel',
-        'footer.company_title': 'Company',
-        'footer.copyright': 'All rights reserved.',
-        'footer.newsletter_success': 'Thank you for signing up! We will contact you.',
-        'footer.links.services.tuinonderhoud': 'Garden Maintenance',
-        'footer.links.services.tuinontwerp': 'Garden Design',
-        'footer.links.services.groendak': 'Green Roofs',
-        'footer.links.services.bestrating': 'Paving',
-        'footer.links.company.over_ons': 'About Us',
-        'footer.links.company.samenwerking': 'Partnership',
-        'footer.links.company.contact': 'Contact',
-        'footer.links.company.nieuws': 'Blog',
-        'footer.links.legal.privacy_beleid': 'Privacy Policy',
-        'footer.links.legal.algemene_voorwaarden': 'Terms & Conditions',
-        'footer.links.legal.cookie_beleid': 'Cookie Policy',
-        'footer.links.legal.aansprakelijkheid': 'Liability'
-      }
-    };
-
-    return translations[locale as keyof typeof translations]?.[key] || translations.nl[key] || key;
-  }
+  const tCommon = createTranslator(currentLocale);
 
   const currentYear = new Date().getFullYear();
 
   const serviceLinks = [
-    { href: localizePath('/diensten/tuinonderhoud', currentLocale), label: t('footer.links.services.tuinonderhoud') },
-    { href: localizePath('/diensten/tuinontwerp', currentLocale), label: t('footer.links.services.tuinontwerp') },
-    { href: localizePath('/diensten/groendak', currentLocale), label: t('footer.links.services.groendak') },
-    { href: localizePath('/diensten/stratenmaker', currentLocale), label: t('footer.links.services.bestrating') }
+    { href: localizePath('/diensten/tuinonderhoud', currentLocale), label: tCommon('footer.links.services.tuinonderhoud') },
+    { href: localizePath('/diensten/tuinontwerp', currentLocale), label: tCommon('footer.links.services.tuinontwerp') },
+    { href: localizePath('/diensten/groendak', currentLocale), label: tCommon('footer.links.services.groendak') },
+    { href: localizePath('/diensten/stratenmaker', currentLocale), label: tCommon('footer.links.services.bestrating') }
   ];
 
   // Create gemeente translation key mapping
@@ -153,7 +51,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
       .filter(gemeente => gemeente.slug !== 'leeuwarden') // Exclude leeuwarden from hub gemeentes to avoid duplicates
       .map(gemeente => ({
         href: localizePath(`/regio/${hub.slug}/${gemeente.slug}`, currentLocale),
-        label: t(gemeenteTranslationKeys[gemeente.slug] || gemeente.name)
+        label: tCommon(gemeenteTranslationKeys[gemeente.slug] || gemeente.name)
       }))
   }));
 
@@ -162,21 +60,21 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
     .filter(gemeente => gemeente.slug === 'leeuwarden') // Explicitly filter for leeuwarden only
     .map(gemeente => ({
       href: localizePath(`/regio/${gemeente.slug}`, currentLocale),
-      label: t(gemeenteTranslationKeys[gemeente.slug] || gemeente.name)
+      label: tCommon(gemeenteTranslationKeys[gemeente.slug] || gemeente.name)
     }));
 
   const companyLinks = [
-    { href: localizePath('/over-ons', currentLocale), label: t('footer.links.company.over_ons') },
-    { href: localizePath('/samenwerking', currentLocale), label: t('footer.links.company.samenwerking') },
-    { href: localizePath('/contact', currentLocale), label: t('footer.links.company.contact') },
-    { href: localizePath('/nieuws', currentLocale), label: t('footer.links.company.nieuws') }
+    { href: localizePath('/over-ons', currentLocale), label: tCommon('footer.links.company.over_ons') },
+    { href: localizePath('/samenwerking', currentLocale), label: tCommon('footer.links.company.samenwerking') },
+    { href: localizePath('/contact', currentLocale), label: tCommon('footer.links.company.contact') },
+    { href: localizePath('/nieuws', currentLocale), label: tCommon('footer.links.company.nieuws') }
   ];
 
   const legalLinks = [
-    { href: localizePath('/privacy-beleid', currentLocale), label: t('footer.links.legal.privacy_beleid') },
-    { href: localizePath('/algemene-voorwaarden', currentLocale), label: t('footer.links.legal.algemene_voorwaarden') },
-    { href: localizePath('/cookie-beleid', currentLocale), label: t('footer.links.legal.cookie_beleid') },
-    { href: localizePath('/aansprakelijkheid', currentLocale), label: t('footer.links.legal.aansprakelijkheid') }
+    { href: localizePath('/privacy-beleid', currentLocale), label: tCommon('footer.links.legal.privacy_beleid') },
+    { href: localizePath('/algemene-voorwaarden', currentLocale), label: tCommon('footer.links.legal.algemene_voorwaarden') },
+    { href: localizePath('/cookie-beleid', currentLocale), label: tCommon('footer.links.legal.cookie_beleid') },
+    { href: localizePath('/aansprakelijkheid', currentLocale), label: tCommon('footer.links.legal.aansprakelijkheid') }
   ];
 
   return (
@@ -213,19 +111,19 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
 
               </Link>
               <p className="footer-description">
-                {t('footer.description')}
+                {tCommon('footer.description')}
               </p>
             </div>
 
             {/* Newsletter Signup */}
             <div className="footer-newsletter">
               <h4 className="footer-section-title">
-                {t('footer.newsletter_title')}
+                {tCommon('footer.newsletter_title')}
               </h4>
               <div className="newsletter-form">
                 <input
                   type="email"
-                  placeholder={t('footer.newsletter_placeholder')}
+                  placeholder={tCommon('footer.newsletter_placeholder')}
                   className="newsletter-input"
                   disabled
                 />
@@ -234,11 +132,11 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
                   className="newsletter-button"
                   disabled
                 >
-                  {t('footer.newsletter_button')}
+                  {tCommon('footer.newsletter_button')}
                 </button>
               </div>
               <p className="newsletter-privacy">
-                {t('footer.newsletter_privacy')}
+                {tCommon('footer.newsletter_privacy')}
               </p>
             </div>
           </div>
@@ -246,7 +144,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
           {/* Services Column */}
           <div className="footer-column">
             <h4 className="footer-section-title">
-              {t('footer.services_title')}
+              {tCommon('footer.services_title')}
             </h4>
             <ul className="footer-links">
               {serviceLinks.map((link) => (
@@ -265,14 +163,14 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
           {/* Regions Column */}
           <div className="footer-regions">
             <h4 className="footer-section-title">
-              {t('footer.regions_title')}
+              {tCommon('footer.regions_title')}
             </h4>
             <div className="footer-regions-grid">
               {regionLinks.map((region) => (
                 <div key={region.href} className="footer-region-group">
                   <h5 className="footer-region-title">
                     <Link href={region.href} className="footer-region-link">
-                      {t(region.translationKey)}
+                      {tCommon(region.translationKey)}
                     </Link>
                   </h5>
                   <ul className="footer-region-links">
@@ -291,7 +189,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
               {standaloneLinks.length > 0 && (
                 <div className="footer-region-group">
                   <h5 className="footer-region-title">
-                    {t('footer.standalone_title')}
+                    {tCommon('footer.standalone_title')}
                   </h5>
                   <ul className="footer-region-links">
                     {standaloneLinks.map((gemeente) => (
@@ -310,7 +208,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
           {/* Company Column */}
           <div className="footer-column">
             <h4 className="footer-section-title">
-              {t('footer.company_title')}
+              {tCommon('footer.company_title')}
             </h4>
             <ul className="footer-links">
               {companyLinks.map((link) => (
@@ -363,7 +261,7 @@ export default function Footer({ locale = 'nl' }: FooterProps) {
         <div className="footer-bottom">
           <div className="footer-bottom-content">
             <div className="footer-copyright">
-              © {currentYear} Hovenier.frl. {t('footer.copyright')}
+              © {currentYear} Hovenier.frl. {tCommon('footer.copyright')}
             </div>
 
             <div className="footer-legal">

@@ -18,6 +18,10 @@ const PrivacyContact = ({ locale = 'nl' }: { locale?: string }) => {
           Website: <a href="https://hovenier.frl">https://hovenier.frl</a>
         </address>
       </div>
+
+      <p className={`${styles.legalText} ${styles.backlinkText}`}>
+        {t('privacy_page.backlink_prefix')} <a href="https://bedrijveninfriesland.allepaginas.nl" target="_blank" rel="noopener noreferrer">{t('footer.backlink_text')}</a>{t('privacy_page.backlink_suffix')}
+      </p>
     </section>
   );
 };

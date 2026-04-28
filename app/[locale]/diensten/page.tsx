@@ -1,3 +1,4 @@
+import "../../styles/dienst-card.css";
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Navigation from '../../components/Navigation';
@@ -231,11 +232,7 @@ export default async function ServicesPage({ params }: Props) {
 
             {/* Services Grid */}
             <section style={{ maxWidth: '80rem', margin: '0 auto', marginBottom: '4rem' }}>
-              <div style={{ 
-                display: 'grid', 
-                gridTemplateColumns: 'repeat(3, 1fr)', 
-                gap: '1rem' 
-              }}>
+              <div className="diensten-grid">
                 {services.map((service) => (
                   <DienstCard
                     key={service.id}

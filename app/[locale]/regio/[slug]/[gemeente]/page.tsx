@@ -1,3 +1,5 @@
+import "../../../../styles/related-articles.css";
+import "../../../../styles/dienst-card.css";
 import { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
@@ -282,9 +284,9 @@ export default async function GemeentePage({ params }: Props) {
                 {/* Cities within this municipality */}
                 {gemeenteData.cities && gemeenteData.cities.length > 0 && (
                   <div>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>
+                    <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>
                       {interp(t('gemeente_page.cities_title'), vars)}
-                    </h3>
+                    </h2>
                     <div style={{ marginBottom: '2rem' }} className="city-grid">
                       {gemeenteData.cities.map((city) => (
                         <Link

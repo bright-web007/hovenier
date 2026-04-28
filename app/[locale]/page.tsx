@@ -137,14 +137,7 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
-      {/* Preload hero LCP image — eliminates the 620ms resource load delay */}
-      <link
-        rel="preload"
-        as="image"
-        href="/_next/image?url=%2Fimages%2Fbg.jpg&w=768&q=50"
-        imageSrcSet="/_next/image?url=%2Fimages%2Fbg.jpg&w=412&q=50 412w, /_next/image?url=%2Fimages%2Fbg.jpg&w=768&q=50 768w, /_next/image?url=%2Fimages%2Fbg.jpg&w=1280&q=50 1280w"
-        imageSizes="(max-width: 768px) 100vw, 1280px"
-      />
+      <link rel="preload" as="image" href="/images/bg-768.jpg" />
       {/* Structured Data for SEO */}
       <OrganizationSchema />
       <WebsiteSchema locale={validLocale} />

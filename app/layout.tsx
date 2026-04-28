@@ -11,7 +11,7 @@ import { env } from "@/lib/env";
 const sansFont = DM_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
-  display: "block",
+  display: "fallback",
 });
 
 export const metadata: Metadata = {
@@ -126,7 +126,7 @@ export default async function RootLayout({
         {env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID && (
           <Script
             id="microsoft-clarity"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
             dangerouslySetInnerHTML={{
               __html: `
                 (function(c,l,a,r,i,t,y){

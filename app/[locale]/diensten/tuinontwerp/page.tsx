@@ -1,3 +1,5 @@
+import "../../../styles/related-articles.css";
+import "../../../styles/dienst-card.css";
 import { Metadata } from 'next';
 import Navigation from '../../../components/Navigation';
 import Breadcrumbs from '../../../components/Breadcrumbs';
@@ -221,7 +223,7 @@ export default async function TuinontwerpPage({ params }: Props) {
 
       <main>
         <section style={{ backgroundColor: '#2A3E20EB', width: '100%', position: 'relative' }}>
-          <Image sizes="100vw" style={{ objectFit: 'cover' }} loading='eager' alt="Garden design background image" src="/images/garden_design_bg.jpg" fill />
+          <Image fetchPriority="high" sizes="100vw" style={{ objectFit: 'cover' }} loading='eager' alt="Garden design background image" src="/images/garden_design_bg.jpg" fill />
           <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: '#2A3E20E5', zIndex: 10 }}></div>
           <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '50.5px 1rem', display: 'flex', flexDirection: 'column', gap: '15.4px', position: 'relative', zIndex: 20 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>

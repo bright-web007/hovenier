@@ -1,3 +1,4 @@
+import "../../../../../styles/dienst-card.css";
 import Navigation from "@/app/components/Navigation";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import DienstCard from "@/app/components/DienstCard";

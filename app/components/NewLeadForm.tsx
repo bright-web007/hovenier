@@ -2,7 +2,6 @@
 import { Suspense, lazy, useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { localizePath, type SupportedLocale } from '@/lib/locale-utils';
-import { createTranslator } from '@/i18n';
 import { FormField, FormErrorSummary, FormLoadingSpinner } from './FormValidation';
 import CustomSelect from './CustomSelect';
 import { securityKeys } from '@/lib/env';
@@ -25,6 +24,11 @@ interface LeadFormProps {
     privacy_agreement: string;
     privacy_link: string;
     privacy_consent: string;
+    describe_wishes?: string;
+    wishes_placeholder?: string;
+    postcode?: string;
+    company?: string;
+    security_loading?: string;
     services: {
       tuinonderhoud: string;
       tuinontwerp: string;
@@ -51,7 +55,6 @@ const TurnstileWidget = lazy(async () => {
 });
 
 export default function NewLeadForm({ translations, locale, prefillMunicipality, serviceType }: LeadFormProps) {
-  const t = createTranslator(locale);
   const isDevelopment = process.env.NODE_ENV === 'development' ||
     (typeof window !== 'undefined' && window.location.hostname === 'localhost');
 
@@ -275,7 +278,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
 
         <FormField
           fieldName="bericht"
-          label={t('lead_form.describe_wishes')}
+          label={translations.describe_wishes ?? 'Beschrijf uw wensen'}
           error={getError('bericht')}
           required
         >
@@ -283,7 +286,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
             className={`form-input ${hasError('bericht') ? 'border-red-500' : ''}`}
             id="bericht"
             name="bericht"
-            placeholder={t('lead_form.wishes_placeholder')}
+            placeholder={translations.wishes_placeholder}
             value={bericht}
             onChange={(e) => updateField('bericht', e.target.value)}
             rows={4}
@@ -296,7 +299,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
         <div className="form-row">
           <FormField
             fieldName="postcode"
-            label={t('lead_form.postcode')}
+            label={translations.postcode}
             error={getError('postcode')}
             className="flex-1"
           >
@@ -316,7 +319,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
 
           <FormField
             fieldName="bedrijf"
-            label={t('lead_form.company')}
+            label={translations.company}
             error={getError('bedrijf')}
             className="flex-1"
           >
@@ -380,7 +383,7 @@ export default function NewLeadForm({ translations, locale, prefillMunicipality,
           error={getError('turnstileToken')}
         >
           {isDevelopment ? null : (
-            <Suspense fallback={<div className="form-note" style={{ minHeight: '65px' }}>{t('lead_form.security_loading')}</div>}>
+            <Suspense fallback={<div className="form-note" style={{ minHeight: '65px' }}>{translations.security_loading}</div>}>
               <TurnstileWidget
                 siteKey={securityKeys.turnstile.siteKey}
                 onSuccess={setTurnstileToken}

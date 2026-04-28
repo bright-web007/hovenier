@@ -147,6 +147,7 @@ const nextConfig: NextConfig = {
     // loader: 'custom',
     // loaderFile: './lib/imageLoader.ts',
     formats: ['image/avif', 'image/webp'],
+    qualities: [50],
     deviceSizes: [
       120,
       250,
@@ -163,7 +164,7 @@ const nextConfig: NextConfig = {
       600, // smaller tablets / phablets transition
 
       // Tablet & Desktop (less granular)
-      768, // tablet portrait
+      665, // tablet portrait
       1024, // tablet landscape
       1366, // laptop / common desktop width :contentReference[oaicite:3]{index=3}
       1920, // full HD desktop baseline

@@ -45,7 +45,7 @@ export default function Hero({ translations, locale }: HeroProps) {
     <section className="hero" aria-label="Hovenier vinden in Friesland">
       <div className="hero-left">
         <div className="hero-overlay" style={{ position: 'absolute', width: '100%', height: '100%', backgroundColor: 'black', opacity: 0.6, zIndex: 5, inset: 0 }} />
-        <Image fetchPriority="high" loading="eager" sizes="(max-width: 768px) 100vw, 1280px" src="/images/bg.jpg" alt="A beautiful garden with greenery" fill quality={50} style={{ objectFit: 'cover' }} />
+        <Image fetchPriority="high" loading="eager" sizes="(max-width: 768px) 100vw, 1280px" src="/images/bg.jpg" alt="A beautiful garden with greenery" fill style={{ objectFit: 'cover' }} />
         <div style={{ zIndex: 10, position: 'relative' }}>
           <p className="hero-eyebrow">{translations.hero_eyebrow}</p>
           <h1 className="hero-h1">

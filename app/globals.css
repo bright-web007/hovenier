@@ -1758,44 +1758,4 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* Cookie consent detail categories */
-.cookie-category {
-  background: #f9faf8;
-  border: 1px solid #e5ead7;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-}
 
-.cookie-category-header {
-  margin-bottom: 0.75rem;
-}
-
-.cookie-category-label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  font-weight: 500;
-  color: #2d5016;
-}
-
-.cookie-category-checkbox {
-  margin-right: 0.75rem;
-  transform: scale(1.2);
-}
-
-.cookie-category-name {
-  flex: 1;
-}
-
-.cookie-category-required {
-  font-size: 0.8rem;
-  color: #666;
-  font-weight: normal;
-}
-
-.cookie-category-description {
-  font-size: 0.9rem;
-  color: #666;
-  line-height: 1.5;
-  margin-left: 2rem;
-}

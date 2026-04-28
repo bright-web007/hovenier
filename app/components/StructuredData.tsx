@@ -154,7 +154,7 @@ const FRISIAN_CITIES = [
   { name: 'Kollum', sameAs: null },
 ];
 
-function getProviderAreaServed(locale: string) {
+function getFrisianAreaServed(locale: string, includeSameAs: boolean) {
   const wikiBase = locale === 'en' ? 'https://en.wikipedia.org/wiki/' : 'https://nl.wikipedia.org/wiki/';
   return [
     {
@@ -165,22 +165,7 @@ function getProviderAreaServed(locale: string) {
     ...FRISIAN_CITIES.map((city) => ({
       '@type': 'City' as const,
       name: city.name,
-      ...(city.sameAs ? { sameAs: `${wikiBase}${city.sameAs}` } : {}),
-    })),
-  ];
-}
-
-function getServiceAreaServed(locale: string) {
-  const wikiBase = locale === 'en' ? 'https://en.wikipedia.org/wiki/' : 'https://nl.wikipedia.org/wiki/';
-  return [
-    {
-      '@type': 'AdministrativeArea',
-      name: 'Friesland',
-      sameAs: `${wikiBase}Friesland`,
-    },
-    ...FRISIAN_CITIES.map((city) => ({
-      '@type': 'City' as const,
-      name: city.name,
+      ...(includeSameAs && city.sameAs ? { sameAs: `${wikiBase}${city.sameAs}` } : {}),
     })),
   ];
 }
@@ -228,7 +213,7 @@ export function ServicePageSchema({ serviceType, url, locale = 'nl', faqs, bread
         addressRegion: 'Friesland',
         addressCountry: 'NL',
       },
-      areaServed: getProviderAreaServed(locale),
+      areaServed: getFrisianAreaServed(locale, true),
       openingHoursSpecification: [
         {
           '@type': 'OpeningHoursSpecification',
@@ -244,7 +229,7 @@ export function ServicePageSchema({ serviceType, url, locale = 'nl', faqs, bread
         },
       ],
     },
-    areaServed: getServiceAreaServed(locale),
+    areaServed: getFrisianAreaServed(locale, false),
     offers: {
       '@type': 'AggregateOffer',
       lowPrice,

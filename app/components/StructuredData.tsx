@@ -118,6 +118,10 @@ interface ServiceSchemaProps {
   locale?: string;
   faqs?: Array<{ question: string; answer: string }>;
   breadcrumbItems?: Array<{ name: string; url: string }>;
+  offers?: {
+    lowPrice: string;
+    highPrice: string;
+  };
 }
 
 const SERVICE_TYPE_TO_TRANSLATION_KEY: Record<string, string> = {
@@ -128,7 +132,60 @@ const SERVICE_TYPE_TO_TRANSLATION_KEY: Record<string, string> = {
   'tuin-aanleggen': 'tuinaanleg',
 };
 
-export function ServicePageSchema({ serviceType, url, locale = 'nl', faqs, breadcrumbItems }: ServiceSchemaProps) {
+const FRISIAN_CITIES = [
+  { name: 'Leeuwarden', sameAs: 'Leeuwarden' },
+  { name: 'Sneek', sameAs: 'Sneek' },
+  { name: 'Drachten', sameAs: 'Drachten' },
+  { name: 'Heerenveen', sameAs: 'Heerenveen' },
+  { name: 'Harlingen', sameAs: 'Harlingen,_Friesland' },
+  { name: 'Dokkum', sameAs: 'Dokkum' },
+  { name: 'Franeker', sameAs: 'Franeker' },
+  { name: 'Bolsward', sameAs: 'Bolsward' },
+  { name: 'Joure', sameAs: null },
+  { name: 'Burgum', sameAs: 'Burgum' },
+  { name: 'Lemmer', sameAs: 'Lemmer' },
+  { name: 'Gorredijk', sameAs: 'Gorredijk' },
+  { name: 'Oosterwolde', sameAs: 'Oosterwolde,_Friesland' },
+  { name: 'Wolvega', sameAs: null },
+  { name: 'Stiens', sameAs: null },
+  { name: 'Grou', sameAs: null },
+  { name: 'Akkrum', sameAs: null },
+  { name: 'Damwald', sameAs: null },
+  { name: 'Kollum', sameAs: null },
+];
+
+function getProviderAreaServed(locale: string) {
+  const wikiBase = locale === 'en' ? 'https://en.wikipedia.org/wiki/' : 'https://nl.wikipedia.org/wiki/';
+  return [
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Friesland',
+      sameAs: `${wikiBase}Friesland`,
+    },
+    ...FRISIAN_CITIES.map((city) => ({
+      '@type': 'City' as const,
+      name: city.name,
+      ...(city.sameAs ? { sameAs: `${wikiBase}${city.sameAs}` } : {}),
+    })),
+  ];
+}
+
+function getServiceAreaServed(locale: string) {
+  const wikiBase = locale === 'en' ? 'https://en.wikipedia.org/wiki/' : 'https://nl.wikipedia.org/wiki/';
+  return [
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Friesland',
+      sameAs: `${wikiBase}Friesland`,
+    },
+    ...FRISIAN_CITIES.map((city) => ({
+      '@type': 'City' as const,
+      name: city.name,
+    })),
+  ];
+}
+
+export function ServicePageSchema({ serviceType, url, locale = 'nl', faqs, breadcrumbItems, offers }: ServiceSchemaProps) {
   const t = createTranslator(locale);
   const config = getBusinessConfig(serviceType);
   const translationKey = SERVICE_TYPE_TO_TRANSLATION_KEY[serviceType] || serviceType;
@@ -139,63 +196,13 @@ export function ServicePageSchema({ serviceType, url, locale = 'nl', faqs, bread
   const serviceTypeLabel = t(`schema.service_${translationKey}_serviceType`);
   const unitText = t(`schema.service_${translationKey}_unit`);
 
-  const businessUrl = getAbsoluteUrl('/', locale as SupportedLocale);
+  const lowPrice = offers?.lowPrice ?? config.lowPrice.toString();
+  const highPrice = offers?.highPrice ?? config.highPrice.toString();
+
+  const businessId = `${BASE_URL}#business`;
   const graph: Array<Record<string, unknown>> = [];
 
-  // 1. LocalBusiness
-  graph.push({
-    '@type': 'LocalBusiness',
-    '@id': `${config.contactInfo.website}#business`,
-    name: config.legalName,
-    url: businessUrl,
-    description: config.description,
-    logo: {
-      '@type': 'ImageObject',
-      url: `${BASE_URL}/assets/logo-light.svg`,
-    },
-    email: config.contactInfo.email || 'info@hovenier.frl',
-    priceRange: config.priceRange,
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: config.address.addressLocality,
-      postalCode: config.address.postalCode,
-      addressRegion: config.address.addressRegion,
-      addressCountry: config.address.addressCountry,
-      ...(config.address.streetAddress && { streetAddress: config.address.streetAddress }),
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: config.location.latitude,
-      longitude: config.location.longitude,
-    },
-    areaServed: {
-      '@type': 'AdministrativeArea',
-      name: config.serviceArea.name,
-      sameAs: locale === 'en'
-        ? 'https://en.wikipedia.org/wiki/Friesland'
-        : 'https://nl.wikipedia.org/wiki/Friesland',
-      containedInPlace: {
-        '@type': 'Country',
-        name: 'Nederland',
-      },
-    },
-    ...(config.businessHours && {
-      openingHoursSpecification: config.businessHours.dayOfWeek.map(day => ({
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: day,
-        opens: config.businessHours!.opens,
-        closes: config.businessHours!.closes,
-      })),
-    }),
-    ...(config.aggregateRating && {
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ...config.aggregateRating,
-      },
-    }),
-  });
-
-  // 2. Service
+  // 1. Service (with embedded LocalBusiness provider)
   graph.push({
     '@type': 'Service',
     '@id': `${url}#service`,
@@ -205,35 +212,62 @@ export function ServicePageSchema({ serviceType, url, locale = 'nl', faqs, bread
     category,
     serviceType: serviceTypeLabel,
     provider: {
-      '@id': `${config.contactInfo.website}#business`,
-    },
-    areaServed: {
-      '@type': 'AdministrativeArea',
-      name: config.serviceArea.name,
-      sameAs: locale === 'en'
-        ? 'https://en.wikipedia.org/wiki/Friesland'
-        : 'https://nl.wikipedia.org/wiki/Friesland',
-      containedInPlace: {
-        '@type': 'Country',
-        name: 'Nederland',
+      '@type': 'LocalBusiness',
+      '@id': businessId,
+      name: 'Hovenier FRL',
+      url: BASE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${BASE_URL}/assets/logo-light.svg`,
       },
+      email: 'info@hovenier.frl',
+      priceRange: '€€',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Leeuwarden',
+        addressRegion: 'Friesland',
+        addressCountry: 'NL',
+      },
+      areaServed: getProviderAreaServed(locale),
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          opens: '08:00',
+          closes: '18:00',
+        },
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: 'Saturday',
+          opens: '09:00',
+          closes: '14:00',
+        },
+      ],
     },
+    areaServed: getServiceAreaServed(locale),
     offers: {
       '@type': 'AggregateOffer',
-      lowPrice: config.lowPrice.toString(),
-      highPrice: config.highPrice.toString(),
-      priceCurrency: config.currenciesAccepted,
+      lowPrice,
+      highPrice,
+      priceCurrency: 'EUR',
       priceSpecification: {
         '@type': 'UnitPriceSpecification',
-        price: config.lowPrice.toString(),
-        priceCurrency: config.currenciesAccepted,
+        price: lowPrice,
+        priceCurrency: 'EUR',
         unitText,
       },
       validFrom: '2026-01-01',
     },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      reviewCount: '47',
+      bestRating: '5',
+      worstRating: '1',
+    },
   });
 
-  // 3. FAQPage
+  // 2. FAQPage
   if (faqs && faqs.length > 0) {
     graph.push({
       '@type': 'FAQPage',
@@ -248,7 +282,7 @@ export function ServicePageSchema({ serviceType, url, locale = 'nl', faqs, bread
     });
   }
 
-  // 4. BreadcrumbList
+  // 3. BreadcrumbList
   if (breadcrumbItems && breadcrumbItems.length > 0) {
     graph.push({
       '@type': 'BreadcrumbList',
@@ -256,12 +290,7 @@ export function ServicePageSchema({ serviceType, url, locale = 'nl', faqs, bread
         '@type': 'ListItem',
         position: index + 1,
         name: item.name,
-        '@id': item.url,
-        item: {
-          '@type': 'WebPage',
-          '@id': item.url,
-          name: item.name,
-        },
+        item: item.url,
       })),
     });
   }

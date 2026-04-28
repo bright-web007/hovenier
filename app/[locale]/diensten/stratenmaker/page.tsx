@@ -93,6 +93,7 @@ export default async function StratenmakerPage({ params }: Props) {
         url={getAbsoluteUrl('/diensten/stratenmaker', validLocale as SupportedLocale)}
         locale={validLocale}
         faqs={localeFaqs}
+        offers={{ lowPrice: '45', highPrice: '85' }}
         breadcrumbItems={breadcrumbItems.map((item) => ({
           name: item.label,
           url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/stratenmaker', validLocale as SupportedLocale)

@@ -146,6 +146,7 @@ export default async function TuinontwerpPage({ params }: Props) {
         url={getAbsoluteUrl('/diensten/tuinontwerp', validLocale as SupportedLocale)}
         locale={validLocale}
         faqs={localeFaqs}
+        offers={{ lowPrice: '750', highPrice: '2500' }}
         breadcrumbItems={breadcrumbItems.map((item) => ({
           name: item.label,
           url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/tuinontwerp', validLocale as SupportedLocale)

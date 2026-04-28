@@ -163,6 +163,7 @@ export default async function GroendakPage({ params }: Props) {
         url={getAbsoluteUrl('/diensten/groendak', validLocale as SupportedLocale)}
         locale={validLocale}
         faqs={localeFaqs}
+        offers={{ lowPrice: '45', highPrice: '120' }}
         breadcrumbItems={breadcrumbItems.map((item) => ({
           name: item.label,
           url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/groendak', validLocale as SupportedLocale)

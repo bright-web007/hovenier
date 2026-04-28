@@ -5,9 +5,8 @@ import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import RelatedArticles from '../../../components/RelatedArticles';
-import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
-import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
-import { env } from '@/lib/env';
+import { ServicePageSchema } from '../../../components/StructuredData';
+import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 import { createTranslator } from '@/i18n'
 import Image from 'next/image';
 import BenefitsSection from '@/app/components/BenefitsSection';
@@ -89,16 +88,14 @@ export default async function StratenmakerPage({ params }: Props) {
 
   return (
     <>
-      <LocalBusinessSchema
+      <ServicePageSchema
         serviceType="stratenmaker"
-        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/stratenmaker', validLocale as SupportedLocale)}`}
-      />
-
-      <BreadcrumbSchema
-        items={breadcrumbItems.map((item, index) => ({
-          position: index + 1,
+        url={getAbsoluteUrl('/diensten/stratenmaker', validLocale as SupportedLocale)}
+        locale={validLocale}
+        faqs={localeFaqs}
+        breadcrumbItems={breadcrumbItems.map((item) => ({
           name: item.label,
-          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/stratenmaker', validLocale as SupportedLocale)}`
+          url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/stratenmaker', validLocale as SupportedLocale)
         }))}
       />
 

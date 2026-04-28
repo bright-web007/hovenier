@@ -4,8 +4,7 @@ import { notFound } from 'next/navigation'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData'
-import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
-import { env } from '@/lib/env';
+import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
 import { createTranslator } from '@/i18n'
 import { interp } from '@/lib/translator'
 import { regionHubs, getRegionHubBySlug, standaloneRegions } from '@/lib/regions-hierarchy'
@@ -111,15 +110,15 @@ export default async function RegionHubPage({ params }: Props) {
   return (
     <div className="page-container">
       <LocalBusinessSchema
-        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}`, validLocale)}`}
+        url={getAbsoluteUrl(`/regio/${slug}`, validLocale)}
         nameContext={interp(t('regio_page.schema_name_context'), { displayName })}
         services={[
-          t('city_page.tuinonderhoud_title') || 'Tuinonderhoud',
-          t('city_page.tuinontwerp_title') || 'Tuinontwerp',
-          t('gemeente_page.stratenmaker_title') || 'Bestrating',
-          'Boomverzorging',
-          t('city_page.groendak_title') || 'Groendaken',
-          'Tuinaanleg',
+          t('city_page.tuinonderhoud_title') || (isEn ? 'Garden Maintenance' : 'Tuinonderhoud'),
+          t('city_page.tuinontwerp_title') || (isEn ? 'Garden Design' : 'Tuinontwerp'),
+          t('gemeente_page.stratenmaker_title') || (isEn ? 'Paving' : 'Bestrating'),
+          isEn ? 'Tree Care' : 'Boomverzorging',
+          t('city_page.groendak_title') || (isEn ? 'Green Roofs' : 'Groendaken'),
+          isEn ? 'Garden Installation' : 'Tuinaanleg',
         ]}
       />
 
@@ -127,7 +126,7 @@ export default async function RegionHubPage({ params }: Props) {
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
-          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}`, validLocale)}`
+          url: item.href ? getAbsoluteUrl(item.href, validLocale) : getAbsoluteUrl(`/regio/${slug}`, validLocale)
         }))}
       />
 

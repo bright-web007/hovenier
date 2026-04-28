@@ -1,5 +1,5 @@
 import { createTranslator } from '@/i18n';
-import { getAbsoluteUrl, SupportedLocale } from '@/lib/locale-utils';
+import { BASE_URL, getAbsoluteUrl, SupportedLocale } from '@/lib/locale-utils';
 
 interface CityServiceSchemaFAQ {
   question: string;
@@ -53,7 +53,7 @@ export function CityServiceSchema({ locale, slug, gemeente, citySlug, serviceSlu
           url: cityUrl,
           logo: {
             '@type': 'ImageObject',
-            url: 'https://hovenier.frl/assets/logo-light.svg',
+            url: `${BASE_URL}/assets/logo-light.svg`,
           },
           email: 'info@hovenier.frl',
           priceRange: '€€',

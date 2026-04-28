@@ -70,6 +70,7 @@ export const envSchema = z.object({
   SENTRY_DSN: sentryDsnSchema.optional().default(""),
   NEXT_PUBLIC_SENTRY_DSN: sentryDsnSchema.optional().default(""),
   NEXT_PUBLIC_GA4_MEASUREMENT_ID: ga4IdSchema,
+  NEXT_PUBLIC_GTM_ID: z.string().regex(/^GTM-[A-Z0-9]{4,12}$/, 'Invalid GTM ID format (should be GTM-XXXXXX)').optional(),
   NEXT_PUBLIC_MICROSOFT_CLARITY_ID: z.string().min(1).optional(),
   NEXT_PUBLIC_ADSENSE_CLIENT_ID: z.string().min(1).optional(),
   
@@ -114,6 +115,7 @@ export const clientEnvSchema = z.object({
   NEXT_PUBLIC_BASE_URL: urlSchema,
   NEXT_PUBLIC_SENTRY_DSN: sentryDsnSchema.optional(),
   NEXT_PUBLIC_GA4_MEASUREMENT_ID: ga4IdSchema.optional(),
+  NEXT_PUBLIC_GTM_ID: z.string().optional(),
   NEXT_PUBLIC_MICROSOFT_CLARITY_ID: z.string().optional(),
   NEXT_PUBLIC_ADSENSE_CLIENT_ID: z.string().optional(),
   NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY: turnstileSiteKeySchema.optional(),
@@ -177,6 +179,7 @@ function createFallbackEnv(): Env {
     SENTRY_DSN: process.env.SENTRY_DSN || '',
     NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN || '',
     NEXT_PUBLIC_GA4_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || '',
+    NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
     NEXT_PUBLIC_MICROSOFT_CLARITY_ID: process.env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID,
     NEXT_PUBLIC_ADSENSE_CLIENT_ID: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID,
     MUSE_GRAPHQL_URL: process.env.MUSE_GRAPHQL_URL || '',
@@ -240,6 +243,9 @@ export const analytics = {
   },
   ga4: {
     measurementId: env.NEXT_PUBLIC_GA4_MEASUREMENT_ID,
+  },
+  gtm: {
+    id: env.NEXT_PUBLIC_GTM_ID,
   },
   clarity: {
     projectId: env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID,

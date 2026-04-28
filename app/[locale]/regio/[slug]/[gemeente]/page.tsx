@@ -10,7 +10,6 @@ import RelatedArticles from '../../../../components/RelatedArticles'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../../components/StructuredData'
 import { CityPageSchema } from '@/app/components/CityPageSchema'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
-import { env } from '@/lib/env';
 import { createTranslator } from '@/i18n'
 import { interp } from '@/lib/translator'
 import { regionHubs, getRegionHubBySlug, getGemeenteBySlug, getRegionSlugByGemeenteSlug } from '@/lib/regions-hierarchy'
@@ -201,7 +200,7 @@ export default async function GemeentePage({ params }: Props) {
         />
       ) : (
         <LocalBusinessSchema
-          url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`}
+          url={getAbsoluteUrl(`/regio/${slug}/${gemeente}`, validLocale)}
           nameContext={interp(t('gemeente_page.schema_name_context'), vars)}
           services={t.raw('gemeente_page.services_list') as string[]}
         />
@@ -211,7 +210,7 @@ export default async function GemeentePage({ params }: Props) {
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
-          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`
+          url: item.href ? getAbsoluteUrl(item.href, validLocale) : getAbsoluteUrl(`/regio/${slug}/${gemeente}`, validLocale)
         }))}
       />
 

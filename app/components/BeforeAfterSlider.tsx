@@ -166,7 +166,7 @@ export default function BeforeAfterSlider({
             backgroundColor: '#fff',
             borderRadius: '50%',
             transform: 'translate(-50%, -50%)',
-            boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
+            boxShadow: '0 0 0 3px var(--sage-light), 0 4px 16px rgba(0,0,0,0.2)',
             cursor: 'ew-resize',
             display: 'flex',
             alignItems: 'center',

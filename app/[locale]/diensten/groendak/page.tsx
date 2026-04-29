@@ -7,11 +7,12 @@ import RelatedArticles from '../../../components/RelatedArticles';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import { ServicePageSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils';
-import { createTranslator } from '@/lib/translator';
+import { createTranslator, interp } from '@/lib/translator';
 import { TickCircle, Cloud, Heart, DollarCircle } from 'iconsax-reactjs';
 import FaqSection from '@/app/components/FaqSection';
 import LeadFormSection from '@/app/components/LeadFormSection';
 import BenefitsSection from '@/app/components/BenefitsSection';
+import BeforeAfterSection from '@/app/components/BeforeAfterSection';
 
 type RoofTypeCardProps = {
   title: string;
@@ -263,6 +264,22 @@ export default async function GroendakPage({ params }: Props) {
             { icon: <Cloud size={24} color="#FFFFFF" variant="Linear" />, title: t('groendak_page.benefit_2_title'), description: t('groendak_page.benefit_2_desc') },
             { icon: <Heart size={24} color="#FFFFFF" variant="Linear" />, title: t('groendak_page.benefit_3_title'), description: t('groendak_page.benefit_3_desc') },
             { icon: <DollarCircle size={24} color="#FFFFFF" variant="Linear" />, title: t('groendak_page.benefit_4_title'), description: t('groendak_page.benefit_4_desc') },
+          ]}
+        />
+
+        <BeforeAfterSection
+          eyebrow={t('before_after.eyebrow')}
+          title={t('before_after.title')}
+          description={interp(t('before_after.description'), { location: isEn ? 'Leeuwarden' : 'Leeuwarden' })
+          beforeImage="/images/before-after/groendak-before.png"
+          afterImage="/images/before-after/groendak-after.png"
+          beforeLabel={t('before_after.before_label')}
+          afterLabel={t('before_after.after_label')}
+          metadata={[
+            { label: t('before_after.location_label'), value: isEn ? 'Leeuwarden' : 'Leeuwarden' },
+            { label: t('before_after.surface_label'), value: isEn ? '78 m²' : '78 m²' },
+            { label: t('before_after.duration_label'), value: isEn ? '11 days' : '11 dagen' },
+            { label: t('before_after.completion_label'), value: '2024' },
           ]}
         />
 

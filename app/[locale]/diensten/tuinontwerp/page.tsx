@@ -6,11 +6,12 @@ import Breadcrumbs from '../../../components/Breadcrumbs';
 import RelatedArticles, { type Article } from '../../../components/RelatedArticles';
 import { ServicePageSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils';
-import { createTranslator } from '@/lib/translator';
+import { createTranslator, interp } from '@/lib/translator';
 import Image from 'next/image';
 import FaqSection from '@/app/components/FaqSection';
 import LeadFormSection from '@/app/components/LeadFormSection';
 import BenefitsSection from '@/app/components/BenefitsSection';
+import BeforeAfterSection from '@/app/components/BeforeAfterSection';
 import { MessageEdit, Brush, Eye, ClipboardText } from 'iconsax-reactjs';
 
 export const locales = ['en', 'nl'] as const;
@@ -204,6 +205,22 @@ export default async function TuinontwerpPage({ params }: Props) {
             { icon: <Brush size={24} color="#FFFFFF" variant="Linear" />, title: t('tuinontwerp_page.process_step2_title'), description: t('tuinontwerp_page.process_step2_text') },
             { icon: <Eye size={24} color="#FFFFFF" variant="Linear" />, title: t('tuinontwerp_page.process_step3_title'), description: t('tuinontwerp_page.process_step3_text') },
             { icon: <ClipboardText size={24} color="#FFFFFF" variant="Linear" />, title: t('tuinontwerp_page.process_step4_title'), description: t('tuinontwerp_page.process_step4_text') },
+          ]}
+        />
+
+        <BeforeAfterSection
+          eyebrow={t('before_after.eyebrow')}
+          title={t('before_after.title')}
+          description={interp(t('before_after.description'), { location: isEn ? 'Sneek' : 'Sneek' })}
+          beforeImage="/images/before-after/tuinontwerp-before.png"
+          afterImage="/images/before-after/tuinontwerp-after.png"
+          beforeLabel={t('before_after.before_label')}
+          afterLabel={t('before_after.after_label')}
+          metadata={[
+            { label: t('before_after.location_label'), value: isEn ? 'Sneek' : 'Sneek' },
+            { label: t('before_after.surface_label'), value: isEn ? '64 m²' : '64 m²' },
+            { label: t('before_after.duration_label'), value: isEn ? '14 days' : '14 dagen' },
+            { label: t('before_after.completion_label'), value: '2023' },
           ]}
         />
 

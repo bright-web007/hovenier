@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useCallback, useEffect } from 'react';
+import Image from 'next/image';
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
@@ -80,12 +81,13 @@ export default function BeforeAfterSlider({
         position: 'relative',
         width: '100%',
         maxWidth: '1280px',
-        paddingBottom: '56.25%', // 16:9 aspect ratio (9/16 = 0.5625)
+        paddingBottom: '56.25%',
         borderRadius: '16px',
         boxShadow: '0px 30px 60px -20px rgba(28, 58, 18, 0.35)',
         cursor: isDragging ? 'ew-resize' : 'default',
         overflow: 'hidden',
         userSelect: 'none',
+        alignSelf: 'stretch',
       }}
       onMouseMove={handleMouseMove}
       onMouseUp={handleEnd}
@@ -96,20 +98,13 @@ export default function BeforeAfterSlider({
       onTouchStart={handleTouchStart}
     >
       {/* After image (full background) */}
-      <img
+      <Image
         src={afterImage}
         alt="After"
+        fill
+        sizes="(max-width: 1280px) 100vw, 1280px"
+        style={{ objectFit: 'cover' }}
         draggable={false}
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          userSelect: 'none',
-          pointerEvents: 'none',
-        }}
       />
 
       {/* Before image - clipped to show only left portion */}
@@ -123,20 +118,13 @@ export default function BeforeAfterSlider({
           clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
         }}
       >
-        <img
+        <Image
           src={beforeImage}
           alt="Before"
+          fill
+          sizes="(max-width: 1280px) 100vw, 1280px"
+          style={{ objectFit: 'cover' }}
           draggable={false}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            userSelect: 'none',
-            pointerEvents: 'none',
-          }}
         />
       </div>
 

@@ -4,7 +4,7 @@ export const revalidate = 60
 
 export async function GET() {
   const items = await generateAllPages()
-  // Cities: either /regio/{hub}/{city} or standalone /regio/{city}
+  // Municipalities: either /regio/{hub}/{municipalities} or standalone /regio/{municipalities}
   const filtered = items.filter(i => {
     try {
       const p = new URL(i.url).pathname

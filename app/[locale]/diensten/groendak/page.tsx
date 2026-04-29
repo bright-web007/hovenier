@@ -270,7 +270,7 @@ export default async function GroendakPage({ params }: Props) {
         <BeforeAfterSection
           eyebrow={t('before_after.eyebrow')}
           title={t('before_after.title')}
-          description={interp(t('before_after.description'), { location: isEn ? 'Leeuwarden' : 'Leeuwarden' })
+          description={interp(t('before_after.description'), { location: isEn ? 'Leeuwarden' : 'Leeuwarden' })}
           beforeImage="/images/before-after/groendak-before.png"
           afterImage="/images/before-after/groendak-after.png"
           beforeLabel={t('before_after.before_label')}

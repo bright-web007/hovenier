@@ -3922,7 +3922,9 @@
     "location_label": "Locatie:",
     "surface_label": "Oppervlak:",
     "duration_label": "Doorlooptijd:",
-    "completion_label": "Oplevering:"
+    "completion_label": "Oplevering:",
+    "duration_14": "14 dagen",
+    "duration_11": "11 dagen"
   },
   "groendak_page": {
     "eyebrow": "Diensten",

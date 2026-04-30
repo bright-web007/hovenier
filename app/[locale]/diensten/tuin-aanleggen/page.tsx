@@ -88,7 +88,6 @@ export default async function TuinAanleggenPage({ params }: Props) {
   }
 
   const t = createTranslator(validLocale);
-  const isEn = validLocale === 'en';
   const rawFaqs = t.raw('faqs.tuin-aanleggen');
   const rawArticles = t.raw('related_articles.tuin-aanleggen');
   const localeFaqs: FaqItem[] = Array.isArray(rawFaqs) ? rawFaqs.filter(isFaqItem) : [];
@@ -187,15 +186,15 @@ export default async function TuinAanleggenPage({ params }: Props) {
         <BeforeAfterSection
           eyebrow={t('before_after.eyebrow')}
           title={t('before_after.title')}
-          description={interp(t('before_after.description'), { location: isEn ? 'Leeuwarden' : 'Leeuwarden' })}
+          description={interp(t('before_after.description'), { location: 'Leeuwarden' })}
           beforeImage="/images/before-after/tuin-aanleggen-before.png"
           afterImage="/images/before-after/tuin-aanleggen-after.png"
           beforeLabel={t('before_after.before_label')}
           afterLabel={t('before_after.after_label')}
           metadata={[
-            { label: t('before_after.location_label'), value: isEn ? 'Leeuwarden' : 'Leeuwarden' },
-            { label: t('before_after.surface_label'), value: isEn ? '78 m²' : '78 m²' },
-            { label: t('before_after.duration_label'), value: isEn ? '11 days' : '11 dagen' },
+            { label: t('before_after.location_label'), value: 'Leeuwarden' },
+            { label: t('before_after.surface_label'), value: '78 m²' },
+            { label: t('before_after.duration_label'), value: t('before_after.duration_11') },
             { label: t('before_after.completion_label'), value: '2024' },
           ]}
         />

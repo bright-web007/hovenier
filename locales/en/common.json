@@ -4314,7 +4314,9 @@
     "location_label": "Location:",
     "surface_label": "Surface area:",
     "duration_label": "Duration:",
-    "completion_label": "Completion:"
+    "completion_label": "Completion:",
+    "duration_14": "14 days",
+    "duration_11": "11 days"
   },
   "groendak_page": {
     "eyebrow": "Services",

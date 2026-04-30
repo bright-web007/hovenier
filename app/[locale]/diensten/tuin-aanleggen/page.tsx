@@ -6,11 +6,12 @@ import Breadcrumbs from '../../../components/Breadcrumbs';
 import RelatedArticles, { type Article } from '../../../components/RelatedArticles';
 import { ServicePageSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils';
-import { createTranslator } from '@/lib/translator';
+import { createTranslator, interp } from '@/lib/translator';
 import Image from 'next/image';
 import FaqSection from '@/app/components/FaqSection';
 import LeadFormSection from '@/app/components/LeadFormSection';
 import BenefitsSection from '@/app/components/BenefitsSection';
+import BeforeAfterSection from '@/app/components/BeforeAfterSection';
 import { MessageEdit, Brush, Tree, ClipboardText } from 'iconsax-reactjs';
 
 export const locales = ['en', 'nl'] as const;
@@ -87,7 +88,6 @@ export default async function TuinAanleggenPage({ params }: Props) {
   }
 
   const t = createTranslator(validLocale);
-  const isEn = validLocale === 'en';
   const rawFaqs = t.raw('faqs.tuin-aanleggen');
   const rawArticles = t.raw('related_articles.tuin-aanleggen');
   const localeFaqs: FaqItem[] = Array.isArray(rawFaqs) ? rawFaqs.filter(isFaqItem) : [];
@@ -180,6 +180,22 @@ export default async function TuinAanleggenPage({ params }: Props) {
             { icon: <Brush size={24} color="#FFFFFF" variant="Linear" />, title: t('tuin_aanleggen_page.process_step2_title'), description: t('tuin_aanleggen_page.process_step2_text') },
             { icon: <Tree size={24} color="#FFFFFF" variant="Linear" />, title: t('tuin_aanleggen_page.process_step3_title'), description: t('tuin_aanleggen_page.process_step3_text') },
             { icon: <ClipboardText size={24} color="#FFFFFF" variant="Linear" />, title: t('tuin_aanleggen_page.process_step4_title'), description: t('tuin_aanleggen_page.process_step4_text') },
+          ]}
+        />
+
+        <BeforeAfterSection
+          eyebrow={t('before_after.eyebrow')}
+          title={t('before_after.title')}
+          description={interp(t('before_after.description'), { location: 'Leeuwarden' })}
+          beforeImage="/images/before-after/tuin-aanleggen-before.png"
+          afterImage="/images/before-after/tuin-aanleggen-after.png"
+          beforeLabel={t('before_after.before_label')}
+          afterLabel={t('before_after.after_label')}
+          metadata={[
+            { label: t('before_after.location_label'), value: 'Leeuwarden' },
+            { label: t('before_after.surface_label'), value: '78 m²' },
+            { label: t('before_after.duration_label'), value: t('before_after.duration_11') },
+            { label: t('before_after.completion_label'), value: '2024' },
           ]}
         />
 

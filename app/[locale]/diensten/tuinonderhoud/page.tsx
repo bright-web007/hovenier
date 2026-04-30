@@ -6,11 +6,12 @@ import Breadcrumbs from '../../../components/Breadcrumbs';
 import RelatedArticles, { type Article } from '../../../components/RelatedArticles';
 import { ServicePageSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils';
-import { createTranslator } from '@/lib/translator';
+import { createTranslator, interp } from '@/lib/translator';
 import Image from 'next/image';
 import FaqSection from '@/app/components/FaqSection';
 import LeadFormSection from '@/app/components/LeadFormSection';
 import BenefitsSection from '@/app/components/BenefitsSection';
+import BeforeAfterSection from '@/app/components/BeforeAfterSection';
 import { Sun, Scissor, Drop, Calendar } from 'iconsax-reactjs';
 
 export const locales = ['en', 'nl'] as const;
@@ -87,7 +88,6 @@ export default async function TuinonderhoudPage({ params }: Props) {
   }
 
   const t = createTranslator(validLocale);
-  const isEn = validLocale === 'en';
   const rawFaqs = t.raw('faqs.tuinonderhoud');
   const rawArticles = t.raw('related_articles.tuinonderhoud');
   const localeFaqs: FaqItem[] = Array.isArray(rawFaqs) ? rawFaqs.filter(isFaqItem) : [];
@@ -199,6 +199,22 @@ export default async function TuinonderhoudPage({ params }: Props) {
             { icon: <Scissor size={24} color="#FFFFFF" variant="Linear" />, title: t('tuinonderhoud_page.benefit_2_title'), description: t('tuinonderhoud_page.benefit_2_desc') },
             { icon: <Drop size={24} color="#FFFFFF" variant="Linear" />, title: t('tuinonderhoud_page.benefit_3_title'), description: t('tuinonderhoud_page.benefit_3_desc') },
             { icon: <Calendar size={24} color="#FFFFFF" variant="Linear" />, title: t('tuinonderhoud_page.benefit_4_title'), description: t('tuinonderhoud_page.benefit_4_desc') },
+          ]}
+        />
+
+        <BeforeAfterSection
+          eyebrow={t('before_after.eyebrow')}
+          title={t('before_after.title')}
+          description={interp(t('before_after.description'), { location: 'Sneek' })}
+          beforeImage="/images/before-after/tuinonderhoud-before.png"
+          afterImage="/images/before-after/tuinonderhoud-after.png"
+          beforeLabel={t('before_after.before_label')}
+          afterLabel={t('before_after.after_label')}
+          metadata={[
+            { label: t('before_after.location_label'), value: 'Sneek' },
+            { label: t('before_after.surface_label'), value: '64 m²' },
+            { label: t('before_after.duration_label'), value: t('before_after.duration_14') },
+            { label: t('before_after.completion_label'), value: '2025' },
           ]}
         />
 

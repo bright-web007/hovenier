@@ -3913,6 +3913,19 @@
     "meta_description": "Professionele tuinontwerpen in Friesland. 3D visualisatie, plantenkeuze en complete realisatie. Vanaf €750. Vraag gratis offerte.",
     "meta_keywords": "tuinontwerp, landschapsarchitect, tuinarchitect, friesland, 3d visualisatie"
   },
+  "before_after": {
+    "eyebrow": "Het verschil",
+    "title": "Voor & na de hovenier",
+    "description": "Sleep de schuif om te zien hoe een verwaarloosde tuin in {location} werd getransformeerd tot een groen daktuin door onze specialisten.",
+    "before_label": "Voor",
+    "after_label": "Na",
+    "location_label": "Locatie:",
+    "surface_label": "Oppervlak:",
+    "duration_label": "Doorlooptijd:",
+    "completion_label": "Oplevering:",
+    "duration_14": "14 dagen",
+    "duration_11": "11 dagen"
+  },
   "groendak_page": {
     "eyebrow": "Diensten",
     "title": "Groendaken in Friesland",

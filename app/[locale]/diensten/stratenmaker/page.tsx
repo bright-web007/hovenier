@@ -8,8 +8,10 @@ import RelatedArticles from '../../../components/RelatedArticles';
 import { ServicePageSchema } from '../../../components/StructuredData';
 import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 import { createTranslator } from '@/i18n'
+import { interp } from '@/lib/translator'
 import Image from 'next/image';
 import BenefitsSection from '@/app/components/BenefitsSection';
+import BeforeAfterSection from '@/app/components/BeforeAfterSection';
 import FaqSection from '@/app/components/FaqSection';
 import LeadFormSection from '@/app/components/LeadFormSection';
 import { Award, Drop, Designtools, Home } from 'iconsax-reactjs';
@@ -131,6 +133,22 @@ export default async function StratenmakerPage({ params }: Props) {
             { icon: <Drop size={24} color="#FFFFFF" variant="Linear" />, title: t('stratenmaker.process_step2_title'), description: t('stratenmaker.process_step2_text') },
             { icon: <Designtools size={24} color="#FFFFFF" variant="Linear" />, title: t('stratenmaker.process_step3_title'), description: t('stratenmaker.process_step3_text') },
             { icon: <Home size={24} color="#FFFFFF" variant="Linear" />, title: t('stratenmaker.process_step4_title'), description: t('stratenmaker.process_step4_text') },
+          ]}
+        />
+
+        <BeforeAfterSection
+          eyebrow={t('before_after.eyebrow')}
+          title={t('before_after.title')}
+          description={interp(t('before_after.description'), { location: 'Leeuwarden' })}
+          beforeImage="/images/before-after/stratenmaker-before.png"
+          afterImage="/images/before-after/stratenmaker-after.png"
+          beforeLabel={t('before_after.before_label')}
+          afterLabel={t('before_after.after_label')}
+          metadata={[
+            { label: t('before_after.location_label'), value: 'Leeuwarden' },
+            { label: t('before_after.surface_label'), value: '78 m²' },
+            { label: t('before_after.duration_label'), value: t('before_after.duration_11') },
+            { label: t('before_after.completion_label'), value: '2024' },
           ]}
         />
 

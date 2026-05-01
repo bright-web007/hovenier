@@ -1,15 +1,17 @@
+import "../../../styles/related-articles.css";
+import "../../../styles/dienst-card.css";
 import { Metadata } from 'next';
 import Navigation from '../../../components/Navigation';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import RelatedArticles, { type Article } from '../../../components/RelatedArticles';
-import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
-import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
-import { env } from '@/lib/env';
-import { createTranslator } from '@/lib/translator';
+import { ServicePageSchema } from '../../../components/StructuredData';
+import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator, interp } from '@/lib/translator';
 import Image from 'next/image';
 import FaqSection from '@/app/components/FaqSection';
 import LeadFormSection from '@/app/components/LeadFormSection';
 import BenefitsSection from '@/app/components/BenefitsSection';
+import BeforeAfterSection from '@/app/components/BeforeAfterSection';
 import { MessageEdit, Brush, Tree, ClipboardText } from 'iconsax-reactjs';
 
 export const locales = ['en', 'nl'] as const;
@@ -86,7 +88,6 @@ export default async function TuinAanleggenPage({ params }: Props) {
   }
 
   const t = createTranslator(validLocale);
-  const isEn = validLocale === 'en';
   const rawFaqs = t.raw('faqs.tuin-aanleggen');
   const rawArticles = t.raw('related_articles.tuin-aanleggen');
   const localeFaqs: FaqItem[] = Array.isArray(rawFaqs) ? rawFaqs.filter(isFaqItem) : [];
@@ -135,79 +136,15 @@ export default async function TuinAanleggenPage({ params }: Props) {
 
   return (
     <>
-      {/* FAQ Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": localeFaqs.map((faq) => ({
-              "@type": "Question",
-              "name": faq.question,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.answer
-              }
-            }))
-          }),
-        }}
-      />
-
-      {/* Service Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": isEn ? "Garden Installation" : "Tuin Aanleggen",
-            "description": isEn ? "Professional garden installation services in Friesland by certified gardeners" : "Professionele tuinaanleg diensten in Friesland door gecertificeerde hoveniers",
-            "provider": {
-              "@type": "LocalBusiness",
-              "name": "Hovenier.frl",
-              "url": "https://hovenier.frl",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Leeuwarden",
-                "postalCode": "8900",
-                "addressRegion": "Friesland",
-                "addressCountry": "NL"
-              }
-            },
-            "areaServed": {
-              "@type": "State",
-              "name": "Friesland",
-              "containedInPlace": {
-                "@type": "Country",
-                "name": "Nederland"
-              }
-            },
-            "offers": {
-              "@type": "Offer",
-              "price": "50",
-              "priceCurrency": "EUR",
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "50",
-                "priceCurrency": "EUR",
-                "unitText": isEn ? "per m²" : "per m²"
-              }
-            }
-          }),
-        }}
-      />
-
-      <LocalBusinessSchema
+      <ServicePageSchema
         serviceType="tuin-aanleggen"
-        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/tuin-aanleggen', validLocale as SupportedLocale)}`}
-      />
-
-      <BreadcrumbSchema
-        items={breadcrumbItems.map((item, index) => ({
-          position: index + 1,
+        url={getAbsoluteUrl('/diensten/tuin-aanleggen', validLocale as SupportedLocale)}
+        locale={validLocale}
+        faqs={localeFaqs}
+        offers={{ lowPrice: '500', highPrice: '15000' }}
+        breadcrumbItems={breadcrumbItems.map((item) => ({
           name: item.label,
-          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/tuin-aanleggen', validLocale as SupportedLocale)}`
+          url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/tuin-aanleggen', validLocale as SupportedLocale)
         }))}
       />
 
@@ -216,7 +153,7 @@ export default async function TuinAanleggenPage({ params }: Props) {
 
       <main>
         <section style={{ backgroundColor: '#2A3E20EB', width: '100%', position: 'relative' }}>
-          <Image sizes="100vw" style={{ objectFit: 'cover' }} loading='eager' alt="Garden installation background image" src="/images/tuinontwerp-hero.jpg" fill />
+          <Image fetchPriority="high" sizes="100vw" style={{ objectFit: 'cover' }} loading='eager' alt="Garden installation background image" src="/images/tuinontwerp-hero.jpg" fill />
           <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: '#2A3E20E5', zIndex: 10 }}></div>
           <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '50.5px 1rem', display: 'flex', flexDirection: 'column', gap: '15.4px', position: 'relative', zIndex: 20 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -243,6 +180,22 @@ export default async function TuinAanleggenPage({ params }: Props) {
             { icon: <Brush size={24} color="#FFFFFF" variant="Linear" />, title: t('tuin_aanleggen_page.process_step2_title'), description: t('tuin_aanleggen_page.process_step2_text') },
             { icon: <Tree size={24} color="#FFFFFF" variant="Linear" />, title: t('tuin_aanleggen_page.process_step3_title'), description: t('tuin_aanleggen_page.process_step3_text') },
             { icon: <ClipboardText size={24} color="#FFFFFF" variant="Linear" />, title: t('tuin_aanleggen_page.process_step4_title'), description: t('tuin_aanleggen_page.process_step4_text') },
+          ]}
+        />
+
+        <BeforeAfterSection
+          eyebrow={t('before_after.eyebrow')}
+          title={t('before_after.title')}
+          description={interp(t('before_after.description'), { location: 'Leeuwarden' })}
+          beforeImage="/images/before-after/tuin-aanleggen-before.png"
+          afterImage="/images/before-after/tuin-aanleggen-after.png"
+          beforeLabel={t('before_after.before_label')}
+          afterLabel={t('before_after.after_label')}
+          metadata={[
+            { label: t('before_after.location_label'), value: 'Leeuwarden' },
+            { label: t('before_after.surface_label'), value: '78 m²' },
+            { label: t('before_after.duration_label'), value: t('before_after.duration_11') },
+            { label: t('before_after.completion_label'), value: '2024' },
           ]}
         />
 

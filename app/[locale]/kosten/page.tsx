@@ -1,3 +1,4 @@
+import "../../styles/rate-cards.css";
 import Link from 'next/link';
 import { Metadata } from 'next';
 import Navigation from '../../components/Navigation';
@@ -80,7 +81,26 @@ export default async function KostenPage({ params }: Props) {
               <h2 className={layoutStyles.sectionTitle}>{isEn ? <>Calculate your <em>costs</em></> : <>Bereken uw <em>kosten</em></>}</h2>
               <p className={layoutStyles.sectionSubtitle}>{isEn ? 'Select the type of work and your garden size for a cost estimate.' : 'Selecteer het type werkzaamheden en uw tuingrootte voor een indicatie van de kosten.'}</p>
 
-              <KostenCalculator locale={validLocale} />
+              <KostenCalculator
+                locale={validLocale}
+                translations={{
+                  work_type: t('calculator.work_type'),
+                  garden_maintenance: t('calculator.garden_maintenance'),
+                  garden_construction: t('calculator.garden_construction'),
+                  garden_design: t('calculator.garden_design'),
+                  pruning: t('calculator.pruning'),
+                  green_roof: t('calculator.green_roof'),
+                  paving: t('calculator.paving'),
+                  garden_size: t('calculator.garden_size'),
+                  small: t('calculator.small'),
+                  medium: t('calculator.medium'),
+                  large: t('calculator.large'),
+                  xlarge: t('calculator.xlarge'),
+                  estimated_costs: t('calculator.estimated_costs'),
+                  request_quote: t('calculator.request_quote'),
+                }}
+                notes={(t.raw('calculator_notes') || {}) as Record<string, string>}
+              />
             </div>
           </div>
 

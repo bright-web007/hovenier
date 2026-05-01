@@ -1,3 +1,5 @@
+import "../../../../styles/related-articles.css";
+import "../../../../styles/dienst-card.css";
 import { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
@@ -8,22 +10,14 @@ import RelatedArticles from '../../../../components/RelatedArticles'
 import { LocalBusinessSchema, BreadcrumbSchema } from '../../../../components/StructuredData'
 import { CityPageSchema } from '@/app/components/CityPageSchema'
 import { getAbsoluteUrl, getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
-import { env } from '@/lib/env';
 import { createTranslator } from '@/i18n'
+import { interp } from '@/lib/translator'
 import { regionHubs, getRegionHubBySlug, getGemeenteBySlug } from '@/lib/regions-hierarchy'
 import DienstCard from '../../../../components/DienstCard'
 import Link from 'next/link'
 
 type Props = {
   params: Promise<{ locale: string; slug: string; gemeente: string }>
-}
-
-/** Simple interpolation: replaces {key} tokens in a translated string */
-function interp(template: string, vars: Record<string, string | number>): string {
-  return Object.entries(vars).reduce(
-    (s, [k, v]) => s.replaceAll(`{${k}}`, String(v)),
-    template
-  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -143,6 +137,7 @@ export default async function GemeentePage({ params }: Props) {
     privacy_agreement: t('form.privacy_agreement'),
     privacy_link: t('form.privacy_link'),
     privacy_consent: t('form.privacy_consent'),
+    submit_error: t('form_submit_error'),
     services: {
       tuinonderhoud: t('form.services.tuinonderhoud'),
       tuinontwerp: t('form.services.tuinontwerp'),
@@ -206,7 +201,7 @@ export default async function GemeentePage({ params }: Props) {
         />
       ) : (
         <LocalBusinessSchema
-          url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`}
+          url={getAbsoluteUrl(`/regio/${slug}/${gemeente}`, validLocale)}
           nameContext={interp(t('gemeente_page.schema_name_context'), vars)}
           services={t.raw('gemeente_page.services_list') as string[]}
         />
@@ -216,7 +211,7 @@ export default async function GemeentePage({ params }: Props) {
         items={breadcrumbItems.map((item, index) => ({
           position: index + 1,
           name: item.label,
-          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath(`/regio/${slug}/${gemeente}`, validLocale)}`
+          url: item.href ? getAbsoluteUrl(item.href, validLocale) : getAbsoluteUrl(`/regio/${slug}/${gemeente}`, validLocale)
         }))}
       />
 
@@ -289,9 +284,9 @@ export default async function GemeentePage({ params }: Props) {
                 {/* Cities within this municipality */}
                 {gemeenteData.cities && gemeenteData.cities.length > 0 && (
                   <div>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>
+                    <h2 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--forest)', marginBottom: '1rem' }}>
                       {interp(t('gemeente_page.cities_title'), vars)}
-                    </h3>
+                    </h2>
                     <div style={{ marginBottom: '2rem' }} className="city-grid">
                       {gemeenteData.cities.map((city) => (
                         <Link

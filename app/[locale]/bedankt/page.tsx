@@ -1,3 +1,4 @@
+import "../../styles/thank-you.css";
 import Link from 'next/link';
 import { Metadata } from 'next';
 import Navigation from '../../components/Navigation';

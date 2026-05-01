@@ -1,4 +1,3 @@
-'use client'
 
 import styles from './Blog.module.css'
 import { createTranslator } from '@/i18n'

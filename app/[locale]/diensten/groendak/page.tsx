@@ -1,16 +1,18 @@
+import "../../../styles/related-articles.css";
+import "../../../styles/dienst-card.css";
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Navigation from '../../../components/Navigation';
 import RelatedArticles from '../../../components/RelatedArticles';
 import Breadcrumbs from '../../../components/Breadcrumbs';
-import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
-import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils';
-import { env } from '@/lib/env';
-import { createTranslator } from '@/lib/translator';
+import { ServicePageSchema } from '../../../components/StructuredData';
+import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils';
+import { createTranslator, interp } from '@/lib/translator';
 import { TickCircle, Cloud, Heart, DollarCircle } from 'iconsax-reactjs';
 import FaqSection from '@/app/components/FaqSection';
 import LeadFormSection from '@/app/components/LeadFormSection';
 import BenefitsSection from '@/app/components/BenefitsSection';
+import BeforeAfterSection from '@/app/components/BeforeAfterSection';
 
 type RoofTypeCardProps = {
   title: string;
@@ -107,7 +109,6 @@ export default async function GroendakPage({ params }: Props) {
   }
 
   const t = createTranslator(validLocale);
-  const isEn = validLocale === 'en';
   const localeFaqs = (t.raw('faqs.groendak') || []) as Array<{ question: string; answer: string }>;
   const localeArticles = (t.raw('related_articles.groendak') || []) as Array<{ id: string; title: string; excerpt: string; slug: string; category: string; readTime: number; publishedAt: string }>;
 
@@ -157,82 +158,16 @@ export default async function GroendakPage({ params }: Props) {
 
   return (
     <>
-      {/* FAQ Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": localeFaqs.map((faq: { question: string; answer: string }) => ({
-              "@type": "Question",
-              "name": faq.question,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.answer
-              }
-            }))
-          }),
-        }}
-      />
-
-      {/* Service Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": isEn ? "Green Roofs" : "Groendaken",
-            "description": isEn ? "Professional green roof installation in Friesland by certified specialists" : "Professionele groendak aanleg in Friesland door gecertificeerde specialisten",
-            "provider": {
-              "@type": "LocalBusiness",
-              "name": "Hovenier.frl",
-              "url": "https://hovenier.frl",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Leeuwarden",
-                "postalCode": "8900",
-                "addressRegion": "Friesland",
-                "addressCountry": "NL"
-              }
-            },
-            "areaServed": {
-              "@type": "State",
-              "name": "Friesland",
-              "containedInPlace": {
-                "@type": "Country",
-                "name": "Nederland"
-              }
-            },
-            "offers": {
-              "@type": "Offer",
-              "price": "85",
-              "priceCurrency": "EUR",
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "85",
-                "priceCurrency": "EUR",
-                "unitText": "per square meter"
-              }
-            }
-          }),
-        }}
-      />
-
-      {/* Breadcrumb Schema */}
-      <BreadcrumbSchema
-        items={breadcrumbItems.map((item, index) => ({
-          position: index + 1,
-          name: item.label,
-          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`
-        }))}
-      />
-
-      {/* Local Business Schema for Green Roof Services */}
-      <LocalBusinessSchema
+      <ServicePageSchema
         serviceType="groendak"
-        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/groendak', validLocale as SupportedLocale)}`}
+        url={getAbsoluteUrl('/diensten/groendak', validLocale as SupportedLocale)}
+        locale={validLocale}
+        faqs={localeFaqs}
+        offers={{ lowPrice: '45', highPrice: '120' }}
+        breadcrumbItems={breadcrumbItems.map((item) => ({
+          name: item.label,
+          url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/groendak', validLocale as SupportedLocale)
+        }))}
       />
 
       <Navigation locale={validLocale} translations={navTranslations} />
@@ -240,7 +175,7 @@ export default async function GroendakPage({ params }: Props) {
 
       <main>
         <section style={{ backgroundColor: '#2A3E20EB', width: '100%', position: 'relative' }}>
-          <Image sizes="100vw" style={{ objectFit: 'cover' }} loading='eager' alt="Green Roof background image" src="/images/green_roof_bg.jpg" fill />
+          <Image fetchPriority="high" sizes="100vw" style={{ objectFit: 'cover' }} loading='eager' alt="Green Roof background image" src="/images/green_roof_bg.jpg" fill />
           <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: '#2A3E20E5', zIndex: 10 }}></div>
           <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '50.5px 1rem', display: 'flex', flexDirection: 'column', gap: '15.4px', position: 'relative', zIndex: 20 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -328,6 +263,22 @@ export default async function GroendakPage({ params }: Props) {
             { icon: <Cloud size={24} color="#FFFFFF" variant="Linear" />, title: t('groendak_page.benefit_2_title'), description: t('groendak_page.benefit_2_desc') },
             { icon: <Heart size={24} color="#FFFFFF" variant="Linear" />, title: t('groendak_page.benefit_3_title'), description: t('groendak_page.benefit_3_desc') },
             { icon: <DollarCircle size={24} color="#FFFFFF" variant="Linear" />, title: t('groendak_page.benefit_4_title'), description: t('groendak_page.benefit_4_desc') },
+          ]}
+        />
+
+        <BeforeAfterSection
+          eyebrow={t('before_after.eyebrow')}
+          title={t('before_after.title')}
+          description={interp(t('before_after.description'), { location: 'Leeuwarden' })}
+          beforeImage="/images/before-after/groendak-before.png"
+          afterImage="/images/before-after/groendak-after.png"
+          beforeLabel={t('before_after.before_label')}
+          afterLabel={t('before_after.after_label')}
+          metadata={[
+            { label: t('before_after.location_label'), value: 'Leeuwarden' },
+            { label: t('before_after.surface_label'), value: '78 m²' },
+            { label: t('before_after.duration_label'), value: t('before_after.duration_11') },
+            { label: t('before_after.completion_label'), value: '2024' },
           ]}
         />
 

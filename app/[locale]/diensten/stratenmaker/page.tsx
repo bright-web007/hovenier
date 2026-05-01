@@ -1,14 +1,17 @@
+import "../../../styles/related-articles.css";
+import "../../../styles/dienst-card.css";
 import { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import RelatedArticles from '../../../components/RelatedArticles';
-import { LocalBusinessSchema, BreadcrumbSchema } from '../../../components/StructuredData';
-import { getLocaleAlternates, localizePath, type SupportedLocale } from '@/lib/locale-utils'
-import { env } from '@/lib/env';
+import { ServicePageSchema } from '../../../components/StructuredData';
+import { getLocaleAlternates, getAbsoluteUrl, localizePath, type SupportedLocale } from '@/lib/locale-utils'
 import { createTranslator } from '@/i18n'
+import { interp } from '@/lib/translator'
 import Image from 'next/image';
 import BenefitsSection from '@/app/components/BenefitsSection';
+import BeforeAfterSection from '@/app/components/BeforeAfterSection';
 import FaqSection from '@/app/components/FaqSection';
 import LeadFormSection from '@/app/components/LeadFormSection';
 import { Award, Drop, Designtools, Home } from 'iconsax-reactjs';
@@ -87,16 +90,15 @@ export default async function StratenmakerPage({ params }: Props) {
 
   return (
     <>
-      <LocalBusinessSchema
+      <ServicePageSchema
         serviceType="stratenmaker"
-        url={`${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/stratenmaker', validLocale as SupportedLocale)}`}
-      />
-
-      <BreadcrumbSchema
-        items={breadcrumbItems.map((item, index) => ({
-          position: index + 1,
+        url={getAbsoluteUrl('/diensten/stratenmaker', validLocale as SupportedLocale)}
+        locale={validLocale}
+        faqs={localeFaqs}
+        offers={{ lowPrice: '45', highPrice: '85' }}
+        breadcrumbItems={breadcrumbItems.map((item) => ({
           name: item.label,
-          url: item.href ? `${env.NEXT_PUBLIC_BASE_URL}${item.href}` : `${env.NEXT_PUBLIC_BASE_URL}${localizePath('/diensten/stratenmaker', validLocale as SupportedLocale)}`
+          url: item.href ? getAbsoluteUrl(item.href, validLocale as SupportedLocale) : getAbsoluteUrl('/diensten/stratenmaker', validLocale as SupportedLocale)
         }))}
       />
 
@@ -105,7 +107,7 @@ export default async function StratenmakerPage({ params }: Props) {
 
       <main>
         <section style={{ backgroundColor: '#2A3E20EB', width: '100%', position: 'relative' }}>
-          <Image sizes="100vw" style={{ objectFit: 'cover' }} loading='eager' alt="Stratenmaker background image" src="/images/paving_bg.jpg" fill />
+          <Image fetchPriority="high" sizes="100vw" style={{ objectFit: 'cover' }} loading='eager' alt="Stratenmaker background image" src="/images/paving_bg.jpg" fill />
           <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: '#2A3E20E5', zIndex: 10 }}></div>
           <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '50.5px 1rem', display: 'flex', flexDirection: 'column', gap: '15.4px', position: 'relative', zIndex: 20 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -131,6 +133,22 @@ export default async function StratenmakerPage({ params }: Props) {
             { icon: <Drop size={24} color="#FFFFFF" variant="Linear" />, title: t('stratenmaker.process_step2_title'), description: t('stratenmaker.process_step2_text') },
             { icon: <Designtools size={24} color="#FFFFFF" variant="Linear" />, title: t('stratenmaker.process_step3_title'), description: t('stratenmaker.process_step3_text') },
             { icon: <Home size={24} color="#FFFFFF" variant="Linear" />, title: t('stratenmaker.process_step4_title'), description: t('stratenmaker.process_step4_text') },
+          ]}
+        />
+
+        <BeforeAfterSection
+          eyebrow={t('before_after.eyebrow')}
+          title={t('before_after.title')}
+          description={interp(t('before_after.description'), { location: 'Leeuwarden' })}
+          beforeImage="/images/before-after/stratenmaker-before.png"
+          afterImage="/images/before-after/stratenmaker-after.png"
+          beforeLabel={t('before_after.before_label')}
+          afterLabel={t('before_after.after_label')}
+          metadata={[
+            { label: t('before_after.location_label'), value: 'Leeuwarden' },
+            { label: t('before_after.surface_label'), value: '78 m²' },
+            { label: t('before_after.duration_label'), value: t('before_after.duration_11') },
+            { label: t('before_after.completion_label'), value: '2024' },
           ]}
         />
 

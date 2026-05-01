@@ -1,5 +1,5 @@
 import { createTranslator } from '@/i18n';
-import { getAbsoluteUrl, SupportedLocale } from '@/lib/locale-utils';
+import { BASE_URL, getAbsoluteUrl, SupportedLocale } from '@/lib/locale-utils';
 
 interface CityServiceSchemaFAQ {
   question: string;
@@ -32,7 +32,7 @@ interface CityServiceSchemaProps {
 export function CityServiceSchema({ locale, slug, gemeente, citySlug, serviceSlug }: CityServiceSchemaProps) {
   const t = createTranslator(locale);
   const data = t.raw(`schema_data.services.${citySlug}.${serviceSlug}`) as CityServiceSchemaData | undefined;
-  if (!data) return null;
+  if (!data || !Array.isArray(data.faqs)) return null;
 
   const pageUrl = getAbsoluteUrl(`/regio/${slug}/${gemeente}/${citySlug}/${serviceSlug}`, locale);
   const cityUrl = getAbsoluteUrl(`/regio/${slug}/${gemeente}/${citySlug}`, locale);
@@ -53,7 +53,7 @@ export function CityServiceSchema({ locale, slug, gemeente, citySlug, serviceSlu
           url: cityUrl,
           logo: {
             '@type': 'ImageObject',
-            url: 'https://hovenier.frl/assets/logo-light.svg',
+            url: `${BASE_URL}/assets/logo-light.svg`,
           },
           email: 'info@hovenier.frl',
           priceRange: '€€',

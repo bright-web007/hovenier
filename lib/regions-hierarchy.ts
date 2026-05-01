@@ -52,6 +52,11 @@ export const gemeentesData: Gemeente[] = [
     nearby: ["franeker", "leeuwarden", "makkum"],
     intro: "Harlingen is een historische havenstad aan de Waddenzee, bekend om haar maritieme sfeer en karakteristieke stadstuinen. Hoveniers in Harlingen zijn vertrouwd met de unieke omstandigheden van kusttuinen en stadsgroen.",
     introEn: "Harlingen is a historic port city on the Wadden Sea, known for its maritime atmosphere and characteristic city gardens. Gardeners in Harlingen are familiar with the unique conditions of coastal and urban gardens.",
+    cities: [
+      { slug: "harlingen", name: "Harlingen" },
+      { slug: "midlum", name: "Midlum" },
+      { slug: "almenum", name: "Almenum" },
+    ],
   },
   {
     slug: "vlieland",
@@ -62,6 +67,9 @@ export const gemeentesData: Gemeente[] = [
     nearby: ["terschelling", "harlingen"],
     intro: "Vlieland is een uniek Waddeneiland met bijzondere tuinuitdagingen door zout, wind en zand. Hoveniers hier zijn gespecialiseerd in kustresistente beplanting en eilandtuinen.",
     introEn: "Vlieland is a unique Wadden Island with special gardening challenges due to salt, wind and sand. Gardeners here specialize in coast-resistant planting and island gardens.",
+    cities: [
+      { slug: "vlieland", name: "Vlieland" },
+    ],
   },
   {
     slug: "terschelling",
@@ -72,6 +80,9 @@ export const gemeentesData: Gemeente[] = [
     nearby: ["vlieland", "ameland"],
     intro: "Terschelling biedt unieke tuinmogelijkheden op het Waddeneiland. Hoveniers zijn ervaren met zoutbestendige planten en de uitdagingen van eilandtuinieren.",
     introEn: "Terschelling offers unique gardening opportunities on the Wadden Island. Gardeners are experienced with salt-resistant plants and the challenges of island gardening.",
+    cities: [
+      { slug: "terschelling", name: "Terschelling" },
+    ],
   },
 
   // Noordoost-Friesland
@@ -99,6 +110,11 @@ export const gemeentesData: Gemeente[] = [
     nearby: ["drachten", "tietjerksteradeel", "noardeast-fryslan"],
     intro: "Achtkarspelen is een landelijke gemeente met veel boerderijen en grote tuinen. Hoveniers hier zijn vertrouwd met erfbeplanting en landelijke tuinen.",
     introEn: "Achtkarspelen is a rural municipality with many farms and large gardens. Gardeners here are familiar with farmyard planting and rural gardens.",
+    cities: [
+      { slug: "buitenpost", name: "Buitenpost" },
+      { slug: "surhuisterveen", name: "Surhuisterveen" },
+      { slug: "drogeham", name: "Drogeham" },
+    ],
   },
   {
     slug: "dantumadeel",
@@ -124,6 +140,9 @@ export const gemeentesData: Gemeente[] = [
     nearby: ["terschelling", "schiermonnikoog"],
     intro: "Ameland is een prachtig Waddeneiland met unieke tuinuitdagingen. Hoveniers zijn gespecialiseerd in eilandtuinen en zoutbestendige beplanting.",
     introEn: "Ameland is a beautiful Wadden Island with unique gardening challenges. Gardeners specialize in island gardens and salt-resistant planting.",
+    cities: [
+      { slug: "ameland", name: "Ameland" },
+    ],
   },
   {
     slug: "schiermonnikoog",
@@ -134,6 +153,9 @@ export const gemeentesData: Gemeente[] = [
     nearby: ["ameland"],
     intro: "Schiermonnikoog is het kleinste bewoonde Waddeneiland met unieke natuurrijke tuinen. Hoveniers hier werken met respect voor de bijzondere eilandnatuur.",
     introEn: "Schiermonnikoog is the smallest inhabited Wadden Island with unique nature-rich gardens. Gardeners here work with respect for the special island nature.",
+    cities: [
+      { slug: "schiermonnikoog", name: "Schiermonnikoog" },
+    ],
   },
 
   // Centraal-Friesland
@@ -223,6 +245,11 @@ export const gemeentesData: Gemeente[] = [
     nearby: ["joure", "sneek", "drachten"],
     intro: "Heerenveen staat bekend als sportstad, maar ook om haar groene woonwijken en fraaie tuinen. Hoveniers in Heerenveen bieden maatwerk voor zowel stadstuinen als landelijke erven.",
     introEn: "Heerenveen is known as a sports city, but also for its green residential areas and beautiful gardens. Gardeners in Heerenveen offer custom solutions for both city gardens and rural farmsteads.",
+    cities: [
+      { slug: "heerenveen", name: "Heerenveen" },
+      { slug: "akkrum", name: "Akkrum" },
+      { slug: "jubbega", name: "Jubbega" },
+    ],
   },
   {
     slug: "de-fryske-marren",
@@ -268,6 +295,8 @@ export const gemeentesData: Gemeente[] = [
     introEn: "Leeuwarden is the vibrant capital of Friesland, known for its historic city center, green parks and characteristic city gardens. Here you will find gardeners who specialize in both modern city gardens and classic Frisian gardens.",
     cities: [
       { slug: "leeuwarden", name: "Leeuwarden" },
+      { slug: "stiens", name: "Stiens" },
+      { slug: "grou", name: "Grou" },
     ],
   },
 ];
@@ -328,7 +357,28 @@ export function getGemeenteBySlug(slug: string): Gemeente | undefined {
 }
 
 export function getRegionHubBySlug(slug: string): RegionHub | undefined {
-  return regionHubs.find(r => r.slug === slug);
+  const hub = regionHubs.find(r => r.slug === slug);
+  if (hub) return hub;
+
+  // Special case: Leeuwarden acts as its own standalone region hub
+  if (slug === "leeuwarden") {
+    const leeuwarden = gemeentesData.find(g => g.slug === "leeuwarden");
+    if (leeuwarden) {
+      return {
+        slug: "leeuwarden",
+        name: "Leeuwarden",
+        description: "Hoofdstad van Friesland met karakteristieke stadstuinen",
+        descriptionEn: "Capital of Friesland with characteristic city gardens",
+        gemeentes: [leeuwarden],
+        totalPopulation: leeuwarden.population,
+        intro: leeuwarden.intro,
+        introEn: leeuwarden.introEn || leeuwarden.intro,
+        image: leeuwarden.image || "",
+      };
+    }
+  }
+
+  return undefined;
 }
 
 export function getGemeentesByRegionSlug(regionSlug: string): Gemeente[] {

@@ -1,4 +1,3 @@
-'use client'
 
 import type { ComponentProps } from 'react'
 import { createTranslator } from '@/i18n'

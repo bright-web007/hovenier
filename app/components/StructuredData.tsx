@@ -1,5 +1,5 @@
 import { getBusinessConfig, ServiceType } from '@/lib/business-config';
-import { env } from '@/lib/env';
+import { BASE_URL, getAbsoluteUrl, type SupportedLocale } from '@/lib/locale-utils';
 import { createTranslator } from '@/i18n';
 
 interface LocalBusinessSchemaProps {
@@ -112,8 +112,191 @@ export function LocalBusinessSchema({
   );
 }
 
+interface ServiceSchemaProps {
+  serviceType: ServiceType;
+  url: string;
+  locale?: string;
+  faqs?: Array<{ question: string; answer: string }>;
+  breadcrumbItems?: Array<{ name: string; url: string }>;
+  offers?: {
+    lowPrice: string;
+    highPrice: string;
+  };
+}
+
+const SERVICE_TYPE_TO_TRANSLATION_KEY: Record<string, string> = {
+  groendak: 'groendaken',
+  tuinonderhoud: 'tuinonderhoud',
+  tuinontwerp: 'tuinontwerp',
+  stratenmaker: 'bestrating',
+  'tuin-aanleggen': 'tuinaanleg',
+};
+
+const FRISIAN_CITIES = [
+  { name: 'Leeuwarden', sameAs: 'Leeuwarden' },
+  { name: 'Sneek', sameAs: 'Sneek' },
+  { name: 'Drachten', sameAs: 'Drachten' },
+  { name: 'Heerenveen', sameAs: 'Heerenveen' },
+  { name: 'Harlingen', sameAs: 'Harlingen,_Friesland' },
+  { name: 'Dokkum', sameAs: 'Dokkum' },
+  { name: 'Franeker', sameAs: 'Franeker' },
+  { name: 'Bolsward', sameAs: 'Bolsward' },
+  { name: 'Joure', sameAs: null },
+  { name: 'Burgum', sameAs: 'Burgum' },
+  { name: 'Lemmer', sameAs: 'Lemmer' },
+  { name: 'Gorredijk', sameAs: 'Gorredijk' },
+  { name: 'Oosterwolde', sameAs: 'Oosterwolde,_Friesland' },
+  { name: 'Wolvega', sameAs: null },
+  { name: 'Stiens', sameAs: null },
+  { name: 'Grou', sameAs: null },
+  { name: 'Akkrum', sameAs: null },
+  { name: 'Damwald', sameAs: null },
+  { name: 'Kollum', sameAs: null },
+];
+
+function getFrisianAreaServed(locale: string, includeSameAs: boolean) {
+  const wikiBase = locale === 'en' ? 'https://en.wikipedia.org/wiki/' : 'https://nl.wikipedia.org/wiki/';
+  return [
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Friesland',
+      sameAs: `${wikiBase}Friesland`,
+    },
+    ...FRISIAN_CITIES.map((city) => ({
+      '@type': 'City' as const,
+      name: city.name,
+      ...(includeSameAs && city.sameAs ? { sameAs: `${wikiBase}${city.sameAs}` } : {}),
+    })),
+  ];
+}
+
+export function ServicePageSchema({ serviceType, url, locale = 'nl', faqs, breadcrumbItems, offers }: ServiceSchemaProps) {
+  const t = createTranslator(locale);
+  const config = getBusinessConfig(serviceType);
+  const translationKey = SERVICE_TYPE_TO_TRANSLATION_KEY[serviceType] || serviceType;
+
+  const name = t(`schema.service_${translationKey}_name`);
+  const description = t(`schema.service_${translationKey}_desc`);
+  const category = t(`schema.service_${translationKey}_category`);
+  const serviceTypeLabel = t(`schema.service_${translationKey}_serviceType`);
+  const unitText = t(`schema.service_${translationKey}_unit`);
+
+  const lowPrice = offers?.lowPrice ?? config.lowPrice.toString();
+  const highPrice = offers?.highPrice ?? config.highPrice.toString();
+
+  const businessId = `${BASE_URL}#business`;
+  const graph: Array<Record<string, unknown>> = [];
+
+  // 1. Service (with embedded LocalBusiness provider)
+  graph.push({
+    '@type': 'Service',
+    '@id': `${url}#service`,
+    name,
+    url,
+    description,
+    category,
+    serviceType: serviceTypeLabel,
+    provider: {
+      '@type': 'LocalBusiness',
+      '@id': businessId,
+      name: 'Hovenier FRL',
+      url: BASE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${BASE_URL}/assets/logo-light.svg`,
+      },
+      email: 'info@hovenier.frl',
+      priceRange: '€€',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Leeuwarden',
+        addressRegion: 'Friesland',
+        addressCountry: 'NL',
+      },
+      areaServed: getFrisianAreaServed(locale, true),
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          opens: '08:00',
+          closes: '18:00',
+        },
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: 'Saturday',
+          opens: '09:00',
+          closes: '14:00',
+        },
+      ],
+    },
+    areaServed: getFrisianAreaServed(locale, false),
+    offers: {
+      '@type': 'AggregateOffer',
+      lowPrice,
+      highPrice,
+      priceCurrency: 'EUR',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: lowPrice,
+        priceCurrency: 'EUR',
+        unitText,
+      },
+      validFrom: '2026-01-01',
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      reviewCount: '47',
+      bestRating: '5',
+      worstRating: '1',
+    },
+  });
+
+  // 2. FAQPage
+  if (faqs && faqs.length > 0) {
+    graph.push({
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
+        },
+      })),
+    });
+  }
+
+  // 3. BreadcrumbList
+  if (breadcrumbItems && breadcrumbItems.length > 0) {
+    graph.push({
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbItems.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        item: item.url,
+      })),
+    });
+  }
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@graph': graph,
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(schema, null, 2),
+      }}
+    />
+  );
+}
+
 export function WebsiteSchema({ locale = 'nl' }: { locale?: string }) {
-  const baseUrl = env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
+  const baseUrl = BASE_URL;
   const t = createTranslator(locale);
 
   const schema = {
@@ -170,7 +353,7 @@ export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
 }
 
 export function OrganizationSchema() {
-  const baseUrl = env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
+  const baseUrl = BASE_URL;
 
   const schema = {
     "@context": "https://schema.org",
@@ -225,7 +408,7 @@ export function OrganizationSchema() {
 }
 
 export function HomepageSchemas({ locale = 'nl' }: { locale?: string }) {
-  const baseUrl = env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
+  const baseUrl = BASE_URL;
   const t = createTranslator(locale);
 
   const schema = {

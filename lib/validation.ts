@@ -46,7 +46,7 @@ export const baseSchemas = {
 // New Lead Form Schema
 export const newLeadFormSchema = z.object({
   naam: baseSchemas.name,
-  email: baseSchemas.email,
+  email: baseSchemas.email.optional(),
   telefoon: baseSchemas.phone,
   gemeente: baseSchemas.gemeente,
   dienst: baseSchemas.dienst,

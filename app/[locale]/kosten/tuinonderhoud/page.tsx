@@ -1,3 +1,4 @@
+import "../../../styles/rate-cards.css";
 import { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import Navigation from '../../../components/Navigation'

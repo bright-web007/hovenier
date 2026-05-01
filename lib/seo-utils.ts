@@ -1,7 +1,7 @@
 import { getAbsoluteUrl, type SupportedLocale } from './locale-utils';
 import { createTranslator } from './translator';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl';
+const BASE_URL = (process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl').replace(/\/$/, '');
 
 // Create translator function for SEO utilities
 

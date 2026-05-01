@@ -1,6 +1,6 @@
 'use client';
 
-import NewLeadForm from './NewLeadForm';
+import NewLeadForm from "./NewLeadForm";
 
 interface HeroLeadFormProps {
   translations: {

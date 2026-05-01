@@ -118,8 +118,38 @@ export async function generateAllPages(): Promise<MetadataRoute.Sitemap> {
           changeFrequency: 'monthly',
           priority: 0.7 * (locale === 'nl' ? 1 : 0.8),
         })
+
+        // ✅ FIX: CITY LOOP MUST BE HERE
+        if (g.cities && Array.isArray(g.cities)) {
+          for (const city of g.cities) {
+            // City page
+            allPages.push({
+              url: getAbsoluteUrl(
+                `/regio/${hub.slug}/${g.slug}/${city.slug}`,
+                localeCode
+              ),
+              lastModified: new Date(),
+              changeFrequency: 'monthly',
+              priority: 0.6 * (locale === 'nl' ? 1 : 0.8),
+            })
+
+            // ✅ CITY + SERVICE PAGES
+            for (const serviceSlug of canonicalServiceSlugs) {
+              allPages.push({
+                url: getAbsoluteUrl(
+                  `/regio/${hub.slug}/${g.slug}/${city.slug}/${serviceSlug}`,
+                  localeCode
+                ),
+                lastModified: new Date(),
+                changeFrequency: 'monthly',
+                priority: 0.5 * (locale === 'nl' ? 1 : 0.8),
+              })
+            }
+          }
+        }
       }
     }
+
 
     for (const g of gemeentes) {
       const isInHub = hubs.some(h => (h.gemeentes || []).some(gg => gg.slug === g.slug))

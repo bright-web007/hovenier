@@ -319,18 +319,37 @@ export default async function RegioLandingPage({ params }: Props) {
                   </Link>
                 ))}
 
-                {/* Standalone Leeuwarden */}
+                {/* Leeuwarden — rendered with the same hub card layout */}
                 {standaloneRegions.map((gemeente) => (
                   <Link key={gemeente.slug} href={localizePath(`/regio/leeuwarden`, locale as SupportedLocale)}>
-                    <div className="region-standalone-card">
+                    <div className="region-hub-card">
                       <div style={{ width: '100%', height: '180px', position: 'relative' }}>
-                        <ImageComponent fill src={gemeente.image ?? ""} alt={isEn ? `${gemeente.name} image` : `${gemeente.name} image`} style={{ objectFit: 'cover' }} />
+                        <ImageComponent fill src={gemeente.image ?? "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"} alt={`${gemeente.name} image`} style={{ objectFit: 'cover' }} />
                       </div>
-                      <div style={{ padding: '20px 24px 24px 24px', gap: '8px', display: 'flex', flexDirection: 'column' }}>
+                      <div style={{ padding: '20px 24px 24px 24px', gap: '8px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
                         <p style={{ fontWeight: 700, fontSize: '20px', lineHeight: '100%', color: '#1F2937' }}>{gemeente.name}</p>
-                        <p style={{ fontWeight: 400, fontSize: '14px', lineHeight: '100%', color: '#000000', marginBottom: '0.5rem' }}>{isEn ? '📍Capital of Friesland' : '📍Hoofdstad van Friesland'}</p>
-                        <p style={{ color: '#6B7280', fontSize: '15px', marginBottom: '0.5rem', lineHeight: '1.6' }}>{isEn ? (gemeenteTranslations[gemeente.slug]?.intro || gemeente.introEn || gemeente.intro) : gemeente.intro}</p>
-                        <div style={{
+                        <p style={{ fontSize: '14px', lineHeight: '100%', color: '#6B7280', marginBottom: '0.5rem' }}>
+                          {(gemeente.cities?.length ?? 1)} {t.municipalities}
+                        </p>
+                        <p style={{ color: '#6B7280', fontSize: '15px', marginBottom: '0.5rem', lineHeight: '1.6' }}>
+                          {isEn ? (gemeenteTranslations[gemeente.slug]?.intro || gemeente.introEn || gemeente.intro) : gemeente.intro}
+                        </p>
+                        <p style={{ fontSize: '14px', lineHeight: '100%', color: '#6B7280', fontWeight: '600' }}>{t.municipalitiesInRegion}</p>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                          {(gemeente.cities ?? [{ slug: gemeente.slug, name: gemeente.name }]).map((city) => (
+                            <span key={city.slug} style={{
+                              background: '#F5F0E8',
+                              color: '#5C4033',
+                              padding: '3px 8px',
+                              borderRadius: '4px',
+                              fontSize: '11px',
+                              fontWeight: '500'
+                            }}>
+                              {city.name}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="diensten-btn" style={{
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'space-between',
@@ -341,7 +360,7 @@ export default async function RegioLandingPage({ params }: Props) {
                           textAlign: 'center'
                         }}>
                           <p style={{ color: 'white', fontWeight: '600', fontSize: '13px' }}>
-                            {isEn ? 'View gardeners →' : 'Bekijk hoveniers →'}
+                            {isEn ? 'Discover gardeners →' : 'Ontdek hoveniers →'}
                           </p>
                           <p style={{ fontSize: '13px', color: 'white', fontWeight: '600' }}>
                             {gemeente.population.toLocaleString()} {isEn ? 'residents' : 'inwoners'}

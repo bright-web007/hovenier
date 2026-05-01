@@ -10,9 +10,11 @@ export async function GET() {
     `${BASE}/sitemap-static.xml`,
     `${BASE}/sitemap-services.xml`,
     `${BASE}/sitemap-hoveniers.xml`,
-    `${BASE}/sitemap-articles.xml`,
     `${BASE}/sitemap-regions.xml`,
+    `${BASE}/sitemap-municipalities.xml`,
     `${BASE}/sitemap-cities.xml`,
+    `${BASE}/sitemap-cityservices.xml`,
+
   ]
 
   const xml = buildSitemapIndex(urls)

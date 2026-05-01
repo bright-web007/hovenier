@@ -161,6 +161,12 @@
   font-weight: 600;
 }
 
+.backlinkText {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted, #666);
+}
+
 .contactHighlight a {
   color: var(--white);
   text-decoration: underline;

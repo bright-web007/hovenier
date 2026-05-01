@@ -3,43 +3,42 @@ import { generateAllPages, buildSitemapXml } from '@/lib/sitemap'
 export const revalidate = 60
 
 export async function GET() {
-  const items = await generateAllPages()
+    const items = await generateAllPages()
 
-  const filtered = []
+    const filtered = []
 
-  for (const i of items) {
-    try {
-      const pathname = i.url.replace('https://hovenier.frl', '')
-      const parts = pathname.split('/').filter(Boolean)
+    for (const i of items) {
+        try {
+            const pathname = i.url.replace('https://hovenier.frl', '')
+            const parts = pathname.split('/').filter(Boolean)
 
-      const isLocale = parts[0] === 'nl' || parts[0] === 'en'
-      const isRegio = parts[1] === 'regio'
+            const isLocale = parts[0] === 'nl' || parts[0] === 'en'
+            const isRegio = parts[1] === 'regio'
 
-      // ✅ STRICT STRUCTURE CHECK
-      const isRegionPage = parts.length === 3
-      const isMunicipalityPage = parts.length === 4
-      const isCityPage = parts.length === 5
+            const isRegionPage = parts.length === 3
+            const isMunicipalityPage = parts.length === 4
+            const isCityPage = parts.length === 5
 
-      // 🔥 INCLUDE ALL REGIO LEVELS (including city)
-      const isValid =
-        isLocale &&
-        isRegio &&
-        (isRegionPage || isMunicipalityPage || isCityPage)
 
-      if (isValid) {
-        filtered.push(i)
-      }
-    } catch (e) {
-      console.log('ERROR:', i.url)
+            const isValid =
+                isLocale &&
+                isRegio &&
+                (isRegionPage || isMunicipalityPage || isCityPage)
+
+            if (isValid) {
+                filtered.push(i)
+            }
+        } catch (e) {
+            console.log('ERROR:', i.url)
+        }
     }
-  }
 
 
-  const xml = buildSitemapXml(filtered)
+    const xml = buildSitemapXml(filtered)
 
-  return new Response(xml, {
-    headers: {
-      'Content-Type': 'application/xml',
-    },
-  })
+    return new Response(xml, {
+        headers: {
+            'Content-Type': 'application/xml',
+        },
+    })
 }

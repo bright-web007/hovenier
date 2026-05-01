@@ -5,7 +5,6 @@ export const revalidate = 60
 export async function GET() {
     const items = await generateAllPages()
 
-    // 🔍 DEBUG LOG (THIS SHOWS IN TERMINAL, NOT BROWSER)
     console.log('ALL PATHS:')
     items.forEach((i) => {
         try {

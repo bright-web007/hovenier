@@ -29,7 +29,6 @@ export async function GET() {
                 filtered.push(i)
             }
         } catch (e) {
-            console.log('ERROR:', i.url)
         }
     }
 

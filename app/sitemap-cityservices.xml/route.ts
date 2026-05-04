@@ -5,15 +5,6 @@ export const revalidate = 60
 export async function GET() {
     const items = await generateAllPages()
 
-    console.log('ALL PATHS:')
-    items.forEach((i) => {
-        try {
-            console.log(new URL(i.url).pathname)
-        } catch {
-            console.log('invalid-url')
-        }
-    })
-
     const filtered = items.filter(i => {
         try {
             const p = new URL(i.url).pathname

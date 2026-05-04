@@ -1,6 +1,6 @@
 import { buildSitemapIndex } from '@/lib/sitemap'
 
-const BASE = (process.env.NEXT_PUBLIC_BASE_URL || 'https://hovenier.frl').replace(/\/$/, '')
+const BASE = (process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000').replace(/\/$/, '')
 
 // Regenerate sitemap index at most every 60 seconds
 export const revalidate = 60
